@@ -1,0 +1,26 @@
+{
+  "name": "aurelia-docs",
+  "version": "1.0.0",
+  "description": "A static documentation site generator for open source projects.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EisenbergEffect/aurelia-docs.git"
+  },
+  "keywords": [
+    "documentation"
+  ],
+  "bin": {
+    "aurelia-docs": "bin/aurelia-docs.js"
+  },
+  "license": "MIT",
+  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "main": "lib/index.js",
+  "bugs": {
+    "url": "https://github.com/EisenbergEffect/aurelia-docs/issues"
+  },
+  "homepage": "https://github.com/EisenbergEffect/aurelia-docs#readme",
+  "dependencies": {}
+}
