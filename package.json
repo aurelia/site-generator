@@ -22,5 +22,7 @@
     "url": "https://github.com/EisenbergEffect/aurelia-docs/issues"
   },
   "homepage": "https://github.com/EisenbergEffect/aurelia-docs#readme",
-  "dependencies": {}
+  "dependencies": {
+    "commonmark": "^0.27.0"
+  }
 }
