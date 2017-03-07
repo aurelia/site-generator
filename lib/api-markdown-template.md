@@ -18,9 +18,9 @@
 
 {{#each methods}}
 
-* `{{name}}({{#each signatures.0.parameters}}{{name}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
+* `{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available{{/if}}
+  * `{{name}}{{#if flags.isOptional}}?{{/if}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available{{/if}}
   {{/each}}
 
 {{/each}}
@@ -45,9 +45,9 @@
 
 {{#each methods}}
 
-* `{{name}}({{#each signatures.0.parameters}}{{name}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
+* `{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
+  * `{{name}}{{#if flags.isOptional}}?{{/if}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
   {{/each}}
 
 {{/each}}
@@ -64,9 +64,9 @@
 
 {{#each functions}}
 
-* `{{name}}({{#each signatures.0.parameters}}{{name}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
+* `{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
+  * `{{name}}{{#if flags.isOptional}}?{{/if}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
   {{/each}}
 
 {{/each}}
