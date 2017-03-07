@@ -52,6 +52,8 @@
 
 {{comment.shortText}}
 
+**Parameters**
+
 {{#each signatures.0.parameters}}
 * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
 {{/each}}
@@ -73,6 +75,8 @@
 ##### `{{name}}({{#each signatures.0.parameters}}{{name}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}`
 
 {{comment.shortText}}
+
+**Parameters**
 
 {{#each signatures.0.parameters}}
 * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
