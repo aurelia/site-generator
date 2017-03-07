@@ -6,12 +6,12 @@
 
 ### {{name}}
 
-{{comment.shortText}}
+{{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 
 #### Properties
 
 {{#each properties}}
-* `{{name}}:{{type.name}}` - {{comment.shortText}}
+* `{{name}}:{{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 {{/each}}
 
 #### Methods
@@ -33,12 +33,12 @@
 
 ### {{name}}
 
-{{comment.shortText}}
+{{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 
 #### Properties
 
 {{#each properties}}
-* `{{name}}:{{type.name}}` - {{comment.shortText}}
+* `{{name}}:{{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 {{/each}}
 
 #### Methods
@@ -47,7 +47,7 @@
 
 * `{{name}}({{#each signatures.0.parameters}}{{name}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available{{/if}}
+  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
   {{/each}}
 
 {{/each}}
@@ -66,7 +66,7 @@
 
 * `{{name}}({{#each signatures.0.parameters}}{{name}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available{{/if}}
+  * `{{name}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
   {{/each}}
 
 {{/each}}
