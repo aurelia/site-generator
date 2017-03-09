@@ -3,14 +3,15 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Aurelia Hub</title>
-  <link rel="stylesheet" href="./styles/aurelia-docs.css">
+  <title>{{title}} | Aurelia Hub</title>
+  {{{baseTag}}}
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <h1>${message}</h1>
+  {{{content}}}
 
-  <script src="./scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
 </body>
 
 </html>
