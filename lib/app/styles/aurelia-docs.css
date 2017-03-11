@@ -223,7 +223,8 @@ textarea {
   /* 2 */ }
 
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
@@ -252,17 +253,35 @@ nav {
   background-color: #1e1e1e;
   box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1), inset -1px 0px 0 #afafaf; }
   nav ul li {
-    padding: 13px;
+    padding: 8px 0 20px 13px;
     margin-right: 1px;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative;
+    transition: background .2s; }
+    nav ul li.articles, nav ul li.apis, nav ul li.discuss, nav ul li.blog {
+      padding-left: 18px; }
     nav ul li svg {
-      fill: #c6c6c6; }
-      nav ul li svg:hover {
-        fill: white; }
+      fill: #c6c6c6;
+      transition: fill .2s; }
+    nav ul li .label {
+      position: absolute;
+      bottom: 6px;
+      left: 0px;
+      right: 0px;
+      text-align: center;
+      color: #c6c6c6;
+      font-size: 12px;
+      transition: color .2s; }
+    nav ul li:hover svg {
+      fill: white; }
+    nav ul li:hover .label {
+      color: white; }
     nav ul li.active {
-      background: #252526; }
+      background: #2e2e30; }
       nav ul li.active svg {
         fill: #EC2685; }
+      nav ul li.active .label {
+        color: #EC2685; }
 
 main {
   position: absolute;
@@ -272,5 +291,16 @@ main {
   right: 0;
   overflow-y: auto;
   overflow-x: hidden; }
+
+side-bar {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  bottom: 0;
+  width: 250px;
+  background-color: #ECECED;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+  transition: all .2s;
+  transform: translateX(-100%); }
 
 /*# sourceMappingURL=aurelia-docs.css.map */

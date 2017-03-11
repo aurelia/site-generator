@@ -4,7 +4,11 @@ import {App} from './app';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
-  .basicConfiguration();
+    .basicConfiguration()
+    .history()
+    .globalResources([
+      './side-bar'
+    ]);
 
   if (environment.debug) {
     aurelia.use.developmentLogging();
@@ -12,7 +16,6 @@ export function configure(aurelia: Aurelia) {
   
   aurelia.start().then(() => {
     let app = <App>aurelia.container.get(App);
-    aurelia.enhance(app, 'app-host');
+    aurelia.enhance(app, 'app-host').then(() => app.activate());
   });
 }
-
