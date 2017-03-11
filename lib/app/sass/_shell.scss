@@ -21,7 +21,7 @@ header {
   box-shadow: -20px 0 14px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.1);
 
   svg {
-    margin-left: 8px;
+    margin-left: 10px;
   }
 }
 
@@ -31,8 +31,32 @@ nav {
   left: 0;
   bottom: 0;
   width: $nav-width;
-  background-color: #333;
+  background-color: #1e1e1e;
   box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1), inset -1px 0px 0 rgb(175, 175, 175);
+
+  ul {
+    li {
+      padding: 13px;
+      margin-right: 1px;
+      cursor: pointer;
+
+      svg {
+        fill: #c6c6c6;
+
+        &:hover {
+          fill: white;
+        }
+      }
+
+      &.active {
+        background: #252526;
+        
+        svg {
+          fill: #EC2685;
+        }
+      }
+    }
+  }
 }
 
 main {

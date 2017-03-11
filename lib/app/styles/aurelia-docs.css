@@ -241,7 +241,7 @@ header {
   background-color: #f4f4f4;
   box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
   header svg {
-    margin-left: 8px; }
+    margin-left: 10px; }
 
 nav {
   position: absolute;
@@ -249,8 +249,20 @@ nav {
   left: 0;
   bottom: 0;
   width: 60px;
-  background-color: #333;
+  background-color: #1e1e1e;
   box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1), inset -1px 0px 0 #afafaf; }
+  nav ul li {
+    padding: 13px;
+    margin-right: 1px;
+    cursor: pointer; }
+    nav ul li svg {
+      fill: #c6c6c6; }
+      nav ul li svg:hover {
+        fill: white; }
+    nav ul li.active {
+      background: #252526; }
+      nav ul li.active svg {
+        fill: #EC2685; }
 
 main {
   position: absolute;
