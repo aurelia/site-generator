@@ -258,7 +258,7 @@ main {
   left: 60px;
   bottom: 0;
   right: 0;
-  overflow-y: hidden;
-  overflow-x: auto; }
+  overflow-y: auto;
+  overflow-x: hidden; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */

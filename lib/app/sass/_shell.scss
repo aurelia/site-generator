@@ -41,6 +41,6 @@ main {
   left: $nav-width;
   bottom: 0;
   right: 0;
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
