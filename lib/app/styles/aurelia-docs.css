@@ -254,7 +254,7 @@ nav {
   box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1), inset -1px 0px 0 #afafaf; }
   nav ul li {
     padding: 8px 0 20px 13px;
-    margin-right: 1px;
+    margin: 0 1px 8px 0;
     cursor: pointer;
     position: relative;
     transition: background .2s; }
@@ -297,10 +297,29 @@ side-bar {
   top: 60px;
   left: 60px;
   bottom: 0;
-  width: 250px;
-  background-color: #ECECED;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+  width: 275px;
+  background-color: #f4f4f4;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 8px 8px 0 rgba(0, 0, 0, 0.12);
   transition: all .2s;
-  transform: translateX(-100%); }
+  transform: translateX(-100%);
+  overflow-x: hidden;
+  overflow-y: auto; }
+  side-bar li {
+    line-height: 44px;
+    color: #777;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: all .1s; }
+    side-bar li:hover {
+      background: rgba(255, 255, 255, 0.5); }
+    side-bar li.active {
+      background: #ffffff;
+      color: #EC2685; }
+    side-bar li a {
+      width: 100%;
+      padding: 0 0 0 1rem;
+      display: inline-block; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */

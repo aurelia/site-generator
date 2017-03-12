@@ -18,7 +18,7 @@ header {
   left: 0;
   right: 0;
   height: $header-height;
-  background-color: #f4f4f4;
+  background-color: $panel-color;
   box-shadow: -20px 0 14px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.1);
 
   svg {
@@ -38,7 +38,7 @@ nav {
   ul {
     li {
       padding: 8px 0 20px 13px;
-      margin-right: 1px;
+      margin: 0 1px 8px 0;
       cursor: pointer;
       position: relative;
       transition: background .2s;
@@ -103,9 +103,36 @@ side-bar {
   top: $header-height;
   left: $nav-width;
   bottom: 0;
-  width: 250px;
-  background-color: #ECECED;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 1px 8px 0 rgba(0,0,0,.12);
+  width: 275px;
+  background-color: $panel-color;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.12);
   transition: all .2s;
   transform: translateX(-100%);
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  li {
+    line-height: 44px;
+    color: #777;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: all .1s;
+
+    &:hover {
+      background: rgba(255,255,255,.5);
+    }
+
+    &.active {
+      background: #ffffff;
+      color: #EC2685;
+    }
+
+    a {
+      width: 100%;
+      padding: 0 0 0 1rem;
+      display: inline-block;
+    }
+  }
 }

@@ -287,6 +287,519 @@
     </ul>
   </nav>
 
+  <script>
+    window.aureliaDocConfiguration = {
+  "outDir": "./hub/",
+  "baseUrl": "/aurelia-docs-test/hub/",
+  "documentation": {
+    "articles": [
+      {
+        "name": "What is Aurelia?",
+        "src": "../framework/doc/article/en-US/what-is-aurelia.md",
+        "dest": "docs/framework/article/what-is-aurelia",
+        "personas": [
+          "developer",
+          "new-developer",
+          "architect",
+          "manager"
+        ]
+      },
+      {
+        "name": "Getting Started",
+        "items": [
+          {
+            "name": "Quick Start",
+            "src": "../framework/doc/article/en-US/quick-start.md",
+            "dest": "docs/framework/article/quick-start",
+            "personas": [
+              "developer",
+              "new-developer"
+            ]
+          },
+          {
+            "name": "Contact Manager Tutorial",
+            "src": "../framework/doc/article/en-US/contact-manager-tutorial.md",
+            "dest": "docs/framework/article/contact-manager-tutorial",
+            "personas": [
+              "developer",
+              "new-developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Build Systems",
+        "items": [
+          {
+            "name": "The Aurelia CLI",
+            "src": "../framework/doc/article/en-US/the-aurelia-cli.md",
+            "dest": "docs/framework/article/the-aurelia-cli",
+            "personas": [
+              "developer",
+              "new-developer"
+            ]
+          },
+          {
+            "name": "Webpack",
+            "items": [
+              {
+                "name": "Setup",
+                "src": "../framework/doc/article/en-US/setup-webpack.md",
+                "dest": "docs/framework/article/setup-webpack",
+                "personas": [
+                  "developer"
+                ]
+              },
+              {
+                "name": "Bundling",
+                "src": "../framework/doc/article/en-US/bundling-webpack.md",
+                "dest": "docs/framework/article/bundling-webpack",
+                "personas": [
+                  "developer",
+                  "new-developer"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "JSPM",
+            "items": [
+              {
+                "name": "Setup",
+                "src": "../framework/doc/article/en-US/setup-jspm.md",
+                "dest": "docs/framework/article/setup-jspm",
+                "personas": [
+                  "developer"
+                ]
+              },
+              {
+                "name": "Bundling",
+                "src": "../framework/doc/article/en-US/bundling-jspm.md",
+                "dest": "docs/framework/article/bundling-jspm",
+                "personas": [
+                  "developer"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Creating Components",
+        "src": "../framework/doc/article/en-US/creating-components.md",
+        "dest": "docs/framework/article/creating-components",
+        "personas": [
+          "developer"
+        ]
+      },
+      {
+        "name": "App Configuration and Startup",
+        "src": "../framework/doc/article/en-US/app-configuration-and-startup.md",
+        "dest": "docs/framework/article/app-configuration-and-startup",
+        "personas": [
+          "developer"
+        ]
+      },
+      {
+        "name": "Dependency Injection: Basics",
+        "src": "../dependency-injection/doc/article/en-US/dependency-injection-basics.md",
+        "dest": "docs/dependency-injection/article/dependency-injection-basics",
+        "personas": [
+          "developer"
+        ]
+      },
+      {
+        "name": "Binding",
+        "items": [
+          {
+            "name": "Binding Basics",
+            "src": "../binding/doc/article/en-US/binding-basics.md",
+            "dest": "docs/binding/article/binding-basics",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Class and Style",
+            "src": "../binding/doc/article/en-US/binding-class-and-style.md",
+            "dest": "docs/binding/article/binding-class-and-style",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Binding Checkboxes",
+            "src": "../binding/doc/article/en-US/binding-checkboxes.md",
+            "dest": "docs/binding/article/binding-checkboxes",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Binding Radios",
+            "src": "../binding/doc/article/en-US/binding-radios.md",
+            "dest": "docs/binding/article/binding-radios",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Binding Selects",
+            "src": "../binding/doc/article/en-US/binding-selects.md",
+            "dest": "docs/binding/article/binding-selects",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Delegate vs. Trigger",
+            "src": "../binding/doc/article/en-US/binding-delegate-vs-trigger.md",
+            "dest": "docs/binding/article/binding-delegate-vs-trigger",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Computed Properties",
+            "src": "../binding/doc/article/en-US/binding-computed-properties.md",
+            "dest": "docs/binding/article/binding-computed-properties",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Value Converters",
+            "src": "../binding/doc/article/en-US/binding-value-converters.md",
+            "dest": "docs/binding/article/binding-value-converters",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Binding Behaviors",
+            "src": "../binding/doc/article/en-US/binding-binding-behaviors.md",
+            "dest": "docs/binding/article/binding-binding-behaviors",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "How it Works",
+            "src": "../binding/doc/article/en-US/binding-how-it-works.md",
+            "dest": "docs/binding/article/binding-how-it-works",
+            "personas": [
+              "developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Templating",
+        "items": [
+          {
+            "name": "Templating Basics",
+            "src": "../templating/doc/article/en-US/templating-basics.md",
+            "dest": "docs/templating/article/templating-basics",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "HTML Behaviors Introduction",
+            "src": "../templating/doc/article/en-US/templating-html-behaviors-introduction.md",
+            "dest": "docs/templating/article/templating-html-behaviors-introduction",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Custom Attributes",
+            "src": "../templating/doc/article/en-US/templating-custom-attributes.md",
+            "dest": "docs/templating/article/templating-custom-attributes",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Custom Elements",
+            "src": "../templating/doc/article/en-US/templating-custom-elements.md",
+            "dest": "docs/templating/article/templating-custom-elements",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Content Projection",
+            "src": "../templating/doc/article/en-US/templating-content-projection.md",
+            "dest": "docs/templating/article/templating-content-projection",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "Dynamic UI Composition",
+            "src": "../templating/doc/article/en-US/templating-dynamic-ui-composition.md",
+            "dest": "docs/templating/article/templating-dynamic-ui-composition",
+            "personas": [
+              "developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Routing",
+        "items": [
+          {
+            "name": "Router Configuration",
+            "src": "../router/doc/article/en-US/router-configuration.md",
+            "dest": "docs/router/article/router-configuration",
+            "personas": [
+              "developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "HTTP Services",
+        "src": "../fetch-client/doc/article/en-US/http-services.md",
+        "dest": "docs/fetch-client/article/http-services",
+        "personas": [
+          "developer"
+        ]
+      },
+      {
+        "name": "Plugins",
+        "items": [
+          {
+            "name": "Validation",
+            "src": "../validation/doc/article/en-US/validation-basics.md",
+            "dest": "docs/validation/article/validation-basics",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "I18N",
+            "src": "../i18n/doc/article/en-US/i18n-with-aurelia.md",
+            "dest": "docs/i18n/article/i18n-with-aurelia",
+            "personas": [
+              "developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Securing Your App",
+        "src": "../framework/doc/article/en-US/securing-your-app.md",
+        "dest": "docs/framework/article/securing-your-app",
+        "personas": [
+          "developer"
+        ]
+      },
+      {
+        "name": "Integrating Other Technology",
+        "items": [
+          {
+            "name": "Integrating with Polymer",
+            "src": "../framework/doc/article/en-US/integrating-with-polymer.md",
+            "dest": "docs/framework/article/integrating-with-polymer",
+            "personas": [
+              "developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Testing",
+        "items": [
+          {
+            "name": "Testing Components",
+            "src": "../testing/doc/article/en-US/testing-components.md",
+            "dest": "docs/testing/article/testing-components",
+            "personas": [
+              "developer"
+            ]
+          },
+          {
+            "name": "End-to-End Testing",
+            "src": "../testing/doc/article/en-US/end-to-end-testing.md",
+            "dest": "docs/testing/article/end-to-end-testing",
+            "personas": [
+              "developer"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Cheat Sheet",
+        "src": "../framework/doc/article/en-US/cheat-sheet.md",
+        "dest": "docs/framework/article/cheat-sheet",
+        "personas": [
+          "developer",
+          "new-developer"
+        ]
+      },
+      {
+        "name": "Getting Help",
+        "src": "../framework/doc/article/en-US/getting-help.md",
+        "dest": "docs/framework/article/getting-help",
+        "personas": [
+          "developer",
+          "new-developer"
+        ]
+      },
+      {
+        "name": "Technical Benefits",
+        "src": "../framework/doc/article/en-US/technical-benefits.md",
+        "dest": "docs/framework/article/technical-benefits",
+        "personas": [
+          "developer",
+          "architect",
+          "manager"
+        ]
+      },
+      {
+        "name": "Business Advantages",
+        "src": "../framework/doc/article/en-US/business-advantages.md",
+        "dest": "docs/framework/article/business-advantages",
+        "personas": [
+          "developer",
+          "architect",
+          "manager"
+        ]
+      }
+    ],
+    "api": [
+      {
+        "name": "Binding",
+        "src": "../binding/dist/aurelia-binding.d.ts",
+        "dest": "docs/binding/api"
+      },
+      {
+        "name": "Bootstrapper",
+        "src": "../bootstrapper/dist/aurelia-bootstrapper.d.ts",
+        "dest": "docs/bootstrapper/api"
+      },
+      {
+        "name": "Dependency Injection",
+        "src": "../dependency-injection/dist/aurelia-dependency-injection.d.ts",
+        "dest": "docs/dependency-injection/api"
+      },
+      {
+        "name": "Event Aggregator",
+        "src": "../event-aggregator/dist/aurelia-event-aggregator.d.ts",
+        "dest": "docs/event-aggregator/api"
+      },
+      {
+        "name": "Fetch",
+        "src": [
+          "../fetch-client/dist/aurelia-fetch-client.d.ts",
+          "../fetch-client/doc/whatwg-fetch.d.ts",
+          "../fetch-client/doc/url.d.ts"
+        ],
+        "dest": "docs/fetch-client/api"
+      },
+      {
+        "name": "Framework",
+        "src": "../framework/dist/aurelia-framework.d.ts",
+        "dest": "docs/framework/api"
+      },
+      {
+        "name": "History",
+        "src": "../history/dist/aurelia-history.d.ts",
+        "dest": "docs/history/api"
+      },
+      {
+        "name": "History-Browser",
+        "src": "../history-browser/dist/aurelia-history-browser.d.ts",
+        "dest": "docs/history-browser/api"
+      },
+      {
+        "name": "I18N",
+        "src": "../i18n/dist/aurelia-i18n.d.ts",
+        "dest": "docs/i18n/api"
+      },
+      {
+        "name": "Loader",
+        "src": "../loader/dist/aurelia-loader.d.ts",
+        "dest": "docs/loader/api"
+      },
+      {
+        "name": "Loader-Default",
+        "src": "../loader-default/dist/aurelia-loader-default.d.ts",
+        "dest": "docs/loader-default/api"
+      },
+      {
+        "name": "Logging",
+        "src": "../logging/dist/aurelia-logging.d.ts",
+        "dest": "docs/logging/api"
+      },
+      {
+        "name": "Logging-Console",
+        "src": "../logging-console/dist/aurelia-logging-console.d.ts",
+        "dest": "docs/logging-console/api"
+      },
+      {
+        "name": "Metadata",
+        "src": "../metadata/dist/aurelia-metadata.d.ts",
+        "dest": "docs/metadata/api"
+      },
+      {
+        "name": "Platform Abstraction Layer (PAL)",
+        "src": "../pal/dist/aurelia-pal.d.ts",
+        "dest": "docs/pal/api"
+      },
+      {
+        "name": "PAL-Browser",
+        "src": "../pal-browser/dist/aurelia-pal-browser.d.ts",
+        "dest": "docs/pal-browser/api"
+      },
+      {
+        "name": "Path",
+        "src": "../path/dist/aurelia-path.d.ts",
+        "dest": "docs/path/api"
+      },
+      {
+        "name": "Router",
+        "src": "../router/dist/aurelia-router.d.ts",
+        "dest": "docs/router/api"
+      },
+      {
+        "name": "Task Queue",
+        "src": "../task-queue/dist/aurelia-task-queue.d.ts",
+        "dest": "docs/task-queue/api"
+      },
+      {
+        "name": "Templating",
+        "src": "../templating/dist/aurelia-templating.d.ts",
+        "dest": "docs/templating/api"
+      },
+      {
+        "name": "Templating-Binding",
+        "src": "../templating-binding/dist/aurelia-templating-binding.d.ts",
+        "dest": "docs/templating-binding/api"
+      },
+      {
+        "name": "Templating-Resources",
+        "src": "../templating-resources/dist/aurelia-templating-resources.d.ts",
+        "dest": "docs/templating-resources/api"
+      },
+      {
+        "name": "Templating-Router",
+        "src": "../templating-router/dist/aurelia-templating-router.d.ts",
+        "dest": "docs/templating-router/api"
+      },
+      {
+        "name": "Testing",
+        "src": "../testing/dist/aurelia-testing.d.ts",
+        "dest": "docs/testing/api"
+      }
+    ]
+  }
+};
+
+  </script>
+
   <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
 </body>
 
