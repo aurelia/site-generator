@@ -1,0 +1,104 @@
+<section class="article">
+  <header>
+    <h1>Setup with JSPM</h1>
+    <h2>If you&#x27;re interested in getting setup with JSPM to build projects, this article will take you through setting up both your machine and a production quality starter project.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Configuring Your Environment"><p>Let's start by getting you set up with a great set of tools that you can use to build modern ${context.language.name} applications. All our tooling is built on 
+<a href="http://nodejs.org/" target="_blank">Node.js</a>
+. If you have that installed already, great! If not, you should go to 
+<a href="http://nodejs.org/" target="_blank">the official web site</a>
+, download and install it. Everything else we need will be installed via Node's package manager (
+<a href="https://docs.npmjs.com/getting-started/what-is-npm" target="_blank">npm</a>
+). If you already have npm installed, make sure you've got the 
+<a href="https://github.com/npm/npm/wiki/Troubleshooting#try-the-latest-stable-version-of-node" target="_blank">latest version</a>
+ to avoid any issues with the other tools.</p>
+<au-alert type="info"><p>
+For command-line operations, we recommend Windows users to use Git Bash or Git Shell.</p>
+</au-alert>
+<p>First, let's begin by installing 
+<a href="http://gulpjs.com/" target="_blank">Gulp</a>
+ which we'll be using for build automation. If you don't have it already, you can use npm to set it up like this (in some environments you may need to use <code>sudo</code>):</p>
+<pre><code class="language-shell">npm install -g gulp
+</code></pre>
+<p>Next, we need to install 
+<a href="http://jspm.io/" target="_blank">jspm</a>
+. This will serve as our client-side package manager. You can do that like this:</p>
+<pre><code class="language-shell">npm install -g jspm
+</code></pre>
+</au-doc-section>
+<au-doc-section uid="2" version="1.0.0" heading="Setting up the Project Structure and Build"><p>With the tooling installed, we can now turn our attention to setting up a basic structure for your app. We'll begin by downloading a skeleton. We've got several versions available for you based on your language and tooling preferences. Please download the latest skeletons now.</p>
+<div style="text-align: center;">
+  <a class="au-button" href="https://github.com/aurelia/skeleton-navigation/releases/latest" style="text-decoration: none; margin: 32px 8px 42px 8px;" target="_blank">Download the Skeletons</a>
+</div>
+<p>Once the download has completed, unzip it and look inside. The readme file contained therein will explain the various options available to you. Please select one of the skeletons and copy it to the location on your file system that you wish your code to reside. Be sure to rename the folder to appropriately represent the app you want to build.</p>
+<p>You will now find everything you need inside the folder, including a basic build, package configuration, styles and more. With all this in place, let's run some commands.</p>
+<ol>
+<li>Open a console and change directory into your app's directory.</li>
+<li>Execute the following command to install the dependencies listed in the <em>devDependencies</em> section of the package manifest:</li>
+</ol>
+<pre><code class="language-shell">npm install
+</code></pre>
+<ol start="3">
+<li>Next, execute the following command to install the Aurelia libraries, bootstrap and font-awesome, listed in the <em>jspm.dependencies</em> section of the package manifest:</li>
+</ol>
+<pre><code class="language-shell">jspm install -y
+</code></pre>
+<p>Everything we've done so far is standard Node.js build and package management procedures. It doesn't have anything specific to do with Aurelia itself. We're just walking you through setting up a modern ${context.language.name} project and build configuration from scratch.</p>
+<au-alert type="info"><p>
+Bootstrap and Font-Awesome are <strong>not</strong> dependencies of Aurelia. We only leverage them as part of the starter kit in order to help you quickly achieve a decent look out-of-the-box. You can easily replace them with whatever your favorite CSS framework and/or icon library is.</p>
+</au-alert>
+</au-doc-section>
+<au-doc-section uid="3" version="1.0.0" heading="Running The App"><p>If you've followed along this far, you now have all the libraries, build configuration and tools you need to create amazing ${context.language.name} apps with Aurelia. The next thing to do is run the sample app. To see this in action, on your console, use the following command to build and launch the server:</p>
+<pre><code class="language-shell">gulp watch
+</code></pre>
+<p>You can now browse to 
+<a href="http://localhost:9000/" target="_blank">http://localhost:9000/</a>
+ to see the app.</p>
+<au-alert type="warning"><p>
+The Skeleton App uses 
+<a href="http://www.browsersync.io/" target="_blank">BrowserSync</a>
+ for automated page refreshes on code/markup changes concurrently across multiple browsers. If you prefer to disable the mirroring feature, set the 
+<a href="http://www.browsersync.io/docs/options/#option-ghostMode" target="_blank">ghostMode option</a>
+ to <code>false</code> in your build config.</p>
+</au-alert>
+</au-doc-section>
+<au-doc-section uid="4" version="1.0.0" heading="Running The Unit Tests"><p>To run the unit tests, first ensure that you have followed the steps above in order to install all dependencies and successfully build the library. Once you have done that, proceed with these additional steps:</p>
+<ol>
+<li>Ensure that the 
+<a href="http://karma-runner.github.io/" target="_blank">Karma</a>
+ CLI is installed. If you need to install it, use the following command:</li>
+</ol>
+<pre><code class="language-shell">npm install -g karma-cli
+</code></pre>
+<ol start="2">
+<li>You can now run the tests with this command:</li>
+</ol>
+<pre><code class="language-shell">gulp test
+</code></pre>
+</au-doc-section>
+<au-doc-section uid="5" version="1.0.0" heading="Running The E2E Tests"><p>Integration tests are performed with 
+<a href="http://angular.github.io/protractor/#/" target="_blank">Protractor</a>
+.</p>
+<ol>
+<li>Place your E2E-Tests into the folder <code>test/e2e/src</code>.</li>
+<li>Install the necessary webdriver:</li>
+</ol>
+<pre><code class="language-shell">gulp webdriver-update
+</code></pre>
+<ol start="3">
+<li>Configure the path to the webdriver by opening the file <code>protractor.conf.js</code> and adjusting the <code>seleniumServerJar</code> property. Typically it's only needed to adjust the version number.</li>
+<li>Make sure your app runs and is accessible:</li>
+</ol>
+<pre><code class="language-shell">gulp watch
+</code></pre>
+<ol start="5">
+<li>In another console run the E2E-Tests:</li>
+</ol>
+<pre><code class="language-shell">gulp e2e
+</code></pre>
+</au-doc-section>
+
+  </article>
+</section>

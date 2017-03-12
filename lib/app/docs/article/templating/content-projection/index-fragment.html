@@ -1,0 +1,87 @@
+<section class="article">
+  <header>
+    <h1>Templating: Content Projection</h1>
+    <h2>An overview of the Aurelia templating engine&#x27;s custom element content projection functionality.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Most of the standard HTML elements allow for content inside them. Custom Elements would be of limited use if we couldn't put content inside them. Thus, we need a way to take this content and place it inside our custom element's template. The Shadow DOM spec provides the <code>slot</code> processing instruction for doing this. Let's explore the various strategies available for utilizing content projection.</p>
+</au-doc-section>
+<au-doc-section uid="2" version="1.0.0" heading="Basic Content Projection"><p>Let's create a name tag custom element. When the <code>name-tag</code> element is used, it will take the name it will display as content in the element.</p>
+<code-listing heading="Name Tag Element Usage">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cname-tag%3E%0A%20%20%20%20%20%20Ralphie%0A%20%20%20%20%3C/name-tag%3E%0A%20%20</source-code>
+</code-listing>
+<p>Aurelia custom elements utilize the &quot;slot based&quot; content projection standard from the Web Component specifications. Let's look at how this will work with our <code>name-tag</code> element. This custom element utilizes a single slot, so we simply need to add a <code>&lt;slot&gt;&lt;/slot&gt;</code> element in our template where we would like content to be projected.</p>
+<code-listing heading="name-tag.html">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22header%22%3E%0A%20%20%20%20%20%20%20%20Hello%2C%20my%20name%20is%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22name%22%3E%0A%20%20%20%20%20%20%20%20%3Cslot%3E%3C/slot%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<p>Aurelia will project the element's content in to the template where the <code>&lt;slot&gt;&lt;/slot&gt;</code> element is located.</p>
+</au-doc-section>
+<au-doc-section uid="3" version="1.0.0" heading="Named Slots"><p>The scenario above uses a &quot;default&quot; slot because the <code>slot</code> has no <code>name</code> attribute. In Shadow DOM, you can create as many slots as you want, provided that you give them different names. Then, the content that gets projected into the Shadow DOM must specify which slot it wants using a <code>slot</code> attribute. If it indicates no particular slot (or is plain text) it will get projected into the default slot. Here's an example of named slots:</p>
+<code-listing heading="named-slot.html">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20The%20first%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot1%22%3E%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20second%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot2%22%3E%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="Usage">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cnamed-slot%3E%0A%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot1%22%3E%0A%20%20%20%20%20%20%20%20This%20Goes%20in%20Slot%201%0A%20%20%20%20%20%20%3C/div%3E%0A%0A%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot2%22%3E%0A%20%20%20%20%20%20%20%20This%20Goes%20in%20Slot%202%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/named-slot%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="The Composed Visual Tree">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cnamed-slot%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20The%20first%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot1%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20This%20Goes%20in%20Slot%201%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20second%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot2%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20This%20Goes%20in%20Slot%202%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/named-slot%3E%0A%20%20</source-code>
+</code-listing>
+</au-doc-section>
+<au-doc-section uid="4" version="1.0.0" heading="Fallback Slots"><p>A nice feature of slots is that they can have fallback content. If nothing gets projected into the slot, the slot will render its fallback content:</p>
+<code-listing heading="fallback-content.html">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20The%20first%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot1%22%3E%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20second%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot2%22%3EThis%20is%20some%20fallback%20content%20for%20slot%202...%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="Usage">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cfallback-content%3E%0A%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot1%22%3E%0A%20%20%20%20%20%20%20%20This%20Goes%20in%20Slot%201%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/fallback-content%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="The Composed Visual Tree">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cnamed-slot%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20The%20first%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot1%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20This%20Goes%20in%20Slot%201%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20second%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20This%20is%20some%20fallback%20content%20for%20slot%202...%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/named-slot%3E%0A%20%20</source-code>
+</code-listing>
+<p>Ok, now it's time to get crazy. What if the fallback content generates more slots!? Those fallback slots can be targeted by the content. Here's an example based on 
+<a href="https://webkit.org/blog/4096/introducing-shadow-dom-api/" target="_blank">a post from the WebKit team</a>
+:</p>
+<code-listing heading="contact-card.html">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cb%3EName%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cslot%20name%3D%22fullName%22%3E%0A%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22firstName%22%3E%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22lastName%22%3E%3C/slot%3E%0A%20%20%20%20%20%20%3C/slot%3E%3Cbr%3E%0A%0A%20%20%20%20%20%20%3Cb%3EEmail%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cslot%20name%3D%22email%22%3EUnknown%3C/slot%3E%3Cbr%3E%0A%0A%20%20%20%20%20%20%3Cb%3EAddress%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cslot%20name%3D%22address%22%3EUnknown%3C/slot%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="Usage">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ccontact-card%3E%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22fullName%22%3EJohn%20Doe%3C/span%3E%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22address%22%3E123%20Main%20Street%3C/span%3E%0A%20%20%20%20%3C/contact-card%3E%0A%0A%20%20%20%20%3Ccontact-card%3E%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22firstName%22%3EBilly%3C/span%3E%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22lastName%22%3EBob%3C/span%3E%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22email%22%3Ebilly@bob.com%3C/span%3E%0A%20%20%20%20%3C/contact-card%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="The Composed Visual Tree">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ccontact-card%3E%0A%20%20%20%20%20%20%3Cb%3EName%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22fullName%22%3EJohn%20Doe%3C/span%3E%3Cbr%3E%0A%0A%20%20%20%20%20%20%3Cb%3EEmail%3C/b%3E%3A%0A%20%20%20%20%20%20Unknown%3Cbr%3E%0A%0A%20%20%20%20%20%20%3Cb%3EAddress%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22address%22%3E123%20Main%20Street%3C/span%3E%0A%20%20%20%20%3C/contact-card%3E%0A%0A%20%20%20%20%3Ccontact-card%3E%0A%20%20%20%20%20%20%3Cb%3EName%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22firstName%22%3EBilly%3C/span%3E%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22lastName%22%3EBob%3C/span%3E%3Cbr%3E%0A%0A%20%20%20%20%20%20%3Cb%3EEmail%3C/b%3E%3A%0A%20%20%20%20%20%20%3Cspan%20slot%3D%22email%22%3Ebilly@bob.com%3C/span%3E%3Cbr%3E%0A%0A%20%20%20%20%20%20%3Cb%3EAddress%3C/b%3E%3A%0A%20%20%20%20%20%20Unknown%0A%20%20%20%20%3C/contact-card%3E%0A%20%20</source-code>
+</code-listing>
+<p>That was fun! But we can go deeper. What about slots, that target other slots with fallback content that generates slots...</p>
+<code-listing heading="mixed-slot.html">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20The%20first%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot1%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Default%20content%20for%20Slot%201%0A%20%20%20%20%20%20%20%20%20%20%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20default%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Default%20Content%20for%20the%20Default%20Slot%0A%20%20%20%20%20%20%20%20%20%20%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20second%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot2%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20The%20first%20fallback%20slot%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22fallbackSlot1%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Default%20Content%20for%20Fallback%20Slot%201%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/slot%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20The%20second%20fallback%20slot%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22fallbackSlot2%22%3E%3C/slot%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="slot-to-mixed-slot.html">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Crequire%20from%3D%22./mixed-slot%22%3E%3C/require%3E%0A%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Cmixed-slot%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot1%22%20slot%3D%22slot1%22%3EFallback%20Content%20for%20Projected%20Slot%201%3C/slot%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot2%22%20slot%3D%22fallbackSlot2%22%3EFallback%20Content%20for%20Projected%20Slot%202%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/mixed-slot%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="Usage">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cslot-to-mixed-slot%3E%0A%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot2%22%3EThis%20is%20user%20content%20for%20slot%202.%20%28should%20appear%20in%20fallbackSlot2%29%3C/div%3E%0A%20%20%20%20%3C/slot-to-mixed-slot%3E%0A%20%20</source-code>
+</code-listing>
+<code-listing heading="The Composed Visual Tree">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cslot-to-mixed-slot%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20The%20first%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20Fallback%20Content%20for%20Projected%20Slot%201%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20default%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20Default%20Content%20for%20the%20Default%20Slot%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20The%20second%20slot%3A%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cslot%20name%3D%22slot2%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20The%20first%20fallback%20slot%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20Default%20Content%20for%20Fallback%20Slot%201%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20The%20second%20fallback%20slot%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20slot%3D%22slot2%22%3EThis%20is%20user%20content%20for%20slot%202.%20%28appearing%20in%20fallbackSlot2%29%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/slot%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/slot-to-mixed-slot%3E%0A%20%20</source-code>
+</code-listing>
+</au-doc-section>
+<au-doc-section uid="5" version="1.0.0" heading="Slot Implementation Limitations"><p>At the time this document is written, no browser supports 
+<a href="https://w3c.github.io/webcomponents/spec/shadow/" target="_blank">Shadow DOM</a>
+ v1 slots. Thus, Aurelia has implemented the specification. We haven't attempted to create a &quot;generic&quot; polyfill designed to be used outside of Aurelia. Our slots implementation is baked into Aurelia's templating compiler and renderer so that it can provide maximum performance and meet the needs of our community. We haven't attempted to implement all the APIs of the spec, but rather to emulate the declarative rendering capabilities of slots. By programming against Aurelia in this way, you don't need to worry about whether or not your browser does or does not support slots natively. Aurelia will take care of it for you.</p>
+<p>Known limitations of our implementation are as follows:</p>
+<ul>
+<li>You cannot data-bind the slot's <code>name</code> attribute.</li>
+<li>You cannot data-bind the <code>slot</code> attribute.</li>
+<li>You cannot dynamically generate <code>slot</code> elements inside a component's view.</li>
+</ul>
+<p>For example, the following would fail because the slot cannot be dynamic, however <code>show.bind</code> would be okay as the slot is generated but show hides it using css. Using template parts would be another alternative or applying <code>if.bind</code> to the content inside the slot.</p>
+<code-listing heading="The Composed Visual Tree">
+  <template>
+    <div if.bind="something">
+      <slot></slot>
+    </div>
+  </template>
+</code-listing>
+</au-doc-section>
+
+  </article>
+</section>

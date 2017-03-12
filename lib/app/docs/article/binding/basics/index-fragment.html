@@ -1,0 +1,113 @@
+<section class="article">
+  <header>
+    <h1>Binding: Basics</h1>
+    <h2>The basics of data-binding with Aurelia.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>This article covers the basics of data-binding with Aurelia. You'll learn how to bind to HTML attributes, DOM Events and element content. You'll also see how to give your view-models references to DOM elements, making it easy work with elements directly.</p>
+</au-doc-section>
+<au-doc-section uid="2" version="1.0.0" heading="HTML and SVG Attributes"><p>Aurelia supports binding HTML and SVG attributes to JavaScript expressions. Attribute binding declarations have three parts: <code>attribute.command=&quot;expression&quot;</code>.</p>
+<ul>
+<li><code>attribute</code>:  an HTML or SVG attribute name.</li>
+<li><code>command</code>: one of Aurelia's attribute binding commands:
+<ul>
+<li><code>one-time</code>: flows data one direction: from the view-model to the view, <strong>once</strong>.</li>
+<li><code>one-way</code>: flows data one direction: from the view-model to the view.</li>
+<li><code>two-way</code>: flows data both ways: from view-model to view and from view to view-model.</li>
+<li><code>bind</code>: automically chooses the binding mode. Uses two-way binding for form controls and one-way binding for almost everything else.</li>
+</ul>
+</li>
+<li><code>expression</code>: a JavaScript expression.</li>
+</ul>
+<p>Typically you'll use the <code>bind</code> command since it does what you intend most of the time.  Consider using <code>one-time</code> in performance critical situations where the data never changes because it skips the overhead of observing the view-model for changes. Below are a few examples.</p>
+<code-listing heading="HTML Attribute Binding Examples">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20value.bind%3D%22firstName%22%3E%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20value.two-way%3D%22lastName%22%3E%0A%0A%20%20%20%20%3Ca%20class%3D%22external-link%22%20href.bind%3D%22profile.blogUrl%22%3EBlog%3C/a%3E%0A%20%20%20%20%3Ca%20class%3D%22external-link%22%20href.one-way%3D%22profile.twitterUrl%22%3ETwitter%3C/a%3E%0A%20%20%20%20%3Ca%20class%3D%22external-link%22%20href.one-time%3D%22profile.linkedInUrl%22%3ELinkedIn%3C/a%3E%0A%20%20</source-code>
+</code-listing>
+<p>The first input uses the <code>bind</code> command which will automatically create <code>two-way</code> bindings for input value attribute bindings.  The second input uses the <code>two-way</code> command which explicitly sets the binding mode. The first anchor element uses the <code>bind</code> command which will automatically create a <code>one-way</code> binding for anchor href attributes. The other two anchor elements use the <code>one-way</code> and <code>one-time</code> commands to explicitly set the binding's mode.</p>
+</au-doc-section>
+<au-doc-section uid="3" version="1.0.0" heading="DOM Events"><p>The binding system supports binding to DOM events.  A DOM event binding will execute a JavaScript expression whenever the specified DOM event occurs. Event binding declarations have three parts: <code>event.command=&quot;expression&quot;</code>.</p>
+<ul>
+<li><code>event</code>:  the name of a DOM event, without the &quot;on&quot; prefix.</li>
+<li><code>command</code>: one of Aurelia's event binding commands:
+<ul>
+<li><code>trigger</code>: attaches an event handler directly to the element. When the event fires, the expression will be invoked.</li>
+<li><code>delegate</code>: attaches a single event handler to the document (or nearest shadow DOM boundary) which handles all events of the specified type, properly dispatching them back to their original targets for invocation of the associated expression.</li>
+</ul>
+</li>
+<li><code>expression</code>: a JavaScript expression. Use the special <code>$event</code> property to access the DOM event in your binding expression.</li>
+</ul>
+<p>Below are a few examples.</p>
+<code-listing heading="DOM Event Binding Examples">
+  <source-code lang="HTML">%20%20%20%20%0A%20%20%20%20%3Cbutton%20type%3D%22button%22%20click.trigger%3D%22cancel%28%29%22%3ECancel%3C/button%3E%0A%0A%20%20%20%20%3Cbutton%20type%3D%22button%22%20click.delegate%3D%22select%28%27yes%27%29%22%3EYes%3C/button%3E%0A%20%20%20%20%3Cbutton%20type%3D%22button%22%20click.delegate%3D%22select%28%27no%27%29%22%3ENo%3C/button%3E%0A%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20blur.trigger%3D%22elementBlurred%28%24event.target%29%22%3E%20%20%20%20%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20change.delegate%3D%22lastName%20%3D%20%24event.target.value%22%3E%0A%20%20</source-code>
+</code-listing>
+<p>The cancel button uses the <code>trigger</code> command to attach an event listener to the button element that will call the view-model's cancel method.  The yes and no buttons use the <code>delegate</code> command which will use the event delegation pattern.  The input elements have binding expressions that use the special <code>$event</code> property to access the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" target="_blank">DOM event</a>
+.</p>
+<p>Aurelia will automatically call 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault" target="_blank">preventDefault()</a>
+ on events handled with <code>delegate</code> or <code>trigger</code> binding. Most of the time this is the behavior you want. To turn this off, return <code>true</code> from your event handler function.</p>
+</au-doc-section>
+<au-doc-section uid="4" version="1.0.0" heading="Function References"><p>While developing custom elements or custom attributes you may encounter a situation where you have a <code>@bindable</code> property that expects a reference to a function. Use the <code>call</code> binding command to declare and pass a function to the bindable property. The <code>call</code> command is superior to the <code>bind</code> command for this use-case because it will execute the function in the correct context, ensuring <code>this</code> is what you expect it to be.</p>
+<code-listing heading="Simple call binding">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cmy-element%20go.call%3D%22doSomething%28%29%22%3E%3C/my-element%3E%0A%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20value.bind%3D%22taskName%22%3E%0A%20%20%20%20%3Cmy-element%20go.call%3D%22doSomething%28taskName%29%22%3E%3C/my-element%3E%0A%20%20</source-code>
+</code-listing>
+<p>Your custom element or attribute can invoke the function that was passed to the <code>@bindable</code> property using standard call syntax: <code>this.go();</code>. If you need to invoke the function with arguments, create an object whose keys are the argument names and whose values are the argument values, then invoke the function with this &quot;arguments object&quot;. The object's properties will be available for data-binding in the <code>call</code> binding expression.  For example, invoking the function with <code>this.go({ x: 5, y: -22, z: 11})</code>) will make <code>x</code>, <code>y</code> and <code>z</code> available for binding:</p>
+<code-listing heading="Accessing the call argument properties">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cmy-element%20execute.call%3D%22doSomething%28x%2C%20y%29%22%3E%3C/my-element%3E%0A%20%20</source-code>
+</code-listing>
+</au-doc-section>
+<au-doc-section uid="5" version="1.0.0" heading="Referencing Elements"><p>Use the <code>ref</code> binding command to create a reference to a DOM element. The ref command's most basic syntax is <code>ref=&quot;expression&quot;</code>. When the view is data-bound the specified expression will be assigned the DOM element.</p>
+<code-listing heading="Simple ref example">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20ref%3D%22nameInput%22%3E%20%24%7BnameInput.value%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<p>The <code>ref</code> command has several qualifiers you can use in conjunction with custom elements and attributes:</p>
+<ul>
+<li><code>element.ref=&quot;expression&quot;</code>: create a reference to the DOM element (same as <code>ref=&quot;expression&quot;</code>).</li>
+<li><code>attribute-name.ref=&quot;expression&quot;</code>: create a reference to a custom attribute's view-model.</li>
+<li><code>view-model.ref=&quot;expression&quot;</code>: create a reference to a custom element's view-model.</li>
+<li><code>view.ref=&quot;expression&quot;</code>: create a reference to a custom element's view instance (not an HTML Element).</li>
+<li><code>controller.ref=&quot;expression&quot;</code>: create a reference to a custom element's controller instance.</li>
+</ul>
+</au-doc-section>
+<au-doc-section uid="6" version="1.0.0" heading="String Interpolation"><p>String interpolation expressions enable interpolating (surprise!) the result of an expression with text.  The best way to demonstrate this capability is with an example. Below are two span elements with data-bound textcontent:</p>
+<code-listing heading="String interpolation example">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cspan%20textcontent.bind%3D%22%27Hello%27%20+%20firstName%22%3E%3C/span%3E%0A%0A%20%20%20%20%3Cspan%3EHello%20%24%7BfirstName%7D%3C/span%3E%0A%20%20</source-code>
+</code-listing>
+<p>The first span uses the <code>bind</code> command. The second uses string interpolation.  The interpolated version is much easier to read and easy to remember because the syntax matches the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template literal</a>
+ syntax standardized in ES2015/ES6.</p>
+<p>String interpolation can be used within html attributes as an alternative to one-way binding. By default, the mode of an interpolation binding is <code>one-way</code> and the result of the expression is always coerced to a string. Results that are <code>null</code> or <code>undefined</code> will result in empty string.</p>
+</au-doc-section>
+<au-doc-section uid="7" version="1.0.0" heading="Element Content"><p>The previous example compared string interpolation binding with <code>textcontent.bind</code>. Interpolation is easier to read but <code>textcontent.bind</code> can come in handy when you need to two-bind a <code>contenteditable</code> element:</p>
+<code-listing heading="textContent example">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cdiv%20contenteditable%20textcontent.bind%3D%22firstName%22%3E%3C/div%3E%0A%20%20%20%20%3Cdiv%20contenteditable%20textcontent.bind%3D%22lastName%22%3E%3C/div%3E%0A%20%20</source-code>
+</code-listing>
+<p>You may also need to bind html text to an element's <code>innerHTML</code> property:</p>
+<code-listing heading="Binding innerHTML">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20innerhtml.bind%3D%22htmlProperty%20%7C%20sanitizeHTML%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20innerhtml%3D%22%24%7BhtmlProperty%20%7C%20sanitizeHTML%7D%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<au-alert type="danger"><p>
+Always use HTML sanitization. We provide a simple converter that can be used. You are encouraged to use a more complete HTML sanitizer such as 
+<a href="https://www.npmjs.com/package/sanitize-html" target="_blank">sanitize-html</a>
+.</p>
+</au-alert>
+<au-alert type="warning"><p>
+Binding using the <code>innerhtml</code> attribute simply sets the element's <code>innerHTML</code> property.  The markup does not pass through Aurelia's templating system.  Binding expressions and require elements will not be evaluated.</p>
+</au-alert>
+</au-doc-section>
+<au-doc-section uid="8" version="1.0.0" heading="Contextual Properties"><p>The binding system makes several properties available for binding in your templates, depending on the context.</p>
+<ul>
+<li><code>$this</code> - The binding context (the view-model).</li>
+<li><code>$parent</code> - Explicitly accesses the outer scope from within a compose or repeat template. You may need this when a property on the current scope masks a property on the outer scope. Chainable- eg <code>$parent.$parent.foo</code> is supported.</li>
+<li><code>$event</code> - The DOM Event in delegate or trigger bindings.</li>
+<li><code>$index</code> - In a repeat template, the index of the item in the collection.</li>
+<li><code>$first</code> - In a repeat template, is true if the item is the first item in the array.</li>
+<li><code>$last</code> - In a repeat template, is true if the item is the last item in the array.</li>
+<li><code>$even</code> - In a repeat template, is true if the item has an even numbered index.</li>
+<li><code>$odd</code> - In a repeat template, is true if the item has an odd numbered index.</li>
+</ul>
+</au-doc-section>
+
+  </article>
+</section>

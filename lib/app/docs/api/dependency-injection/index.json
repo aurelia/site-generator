@@ -1,0 +1,4519 @@
+{
+	"classes": [
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to resolve all matching dependencies as an array of instances.",
+								"returns": "Returns an array of all matching instances.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"isArray": true,
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 55,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "of",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "of",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates an All Resolver for the supplied key.",
+								"returns": "Returns an instance of All for the key.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to resolve all instances for."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "All",
+								"id": 593
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 61,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "All",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow functions/classes to specify resolution of all matches to a key."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 44,
+					"character": 24
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the All class."
+				},
+				"signatures": [
+					{
+						"name": "new All",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the All class."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The key to lazily resolve all matches for.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "All",
+							"id": 593
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 44,
+						"character": 26
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "parent",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The parent container in the DI hierarchy."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 376,
+							"character": 10
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Container",
+						"id": 732
+					}
+				},
+				{
+					"name": "root",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The root container in the DI hierarchy."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 380,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Container",
+						"id": 732
+					}
+				},
+				{
+					"name": "instance",
+					"kindString": "Property",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The global root Container instance. Available if makeGlobal() has been called. Aurelia Framework calls makeGlobal()."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 372,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Container",
+						"id": 732
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "_createInvocationHandler",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "_createInvocationHandler",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "unknown",
+										"name": "Function & { inject?: any; }"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "InvocationHandler",
+								"id": 713
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 493,
+							"character": 28
+						}
+					]
+				},
+				{
+					"name": "_get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "_get",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 472,
+							"character": 8
+						}
+					]
+				},
+				{
+					"name": "autoRegister",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "autoRegister",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers a type (constructor function) by inspecting its registration annotations. If none are found, then the default singleton registration is used."
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 442,
+							"character": 16
+						}
+					]
+				},
+				{
+					"name": "autoRegisterAll",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "autoRegisterAll",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers an array of types (constructor functions) by inspecting their registration annotations. If none are found, then the default singleton registration is used."
+							},
+							"parameters": [
+								{
+									"name": "fns",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The constructor function to use when the dependency needs to be instantiated.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 447,
+							"character": 19
+						}
+					]
+				},
+				{
+					"name": "createChild",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "createChild",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates a new dependency injection container whose parent is the current container.",
+								"returns": "Returns a new container instance parented to this.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "Container",
+								"id": 732
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 483,
+							"character": 15
+						}
+					]
+				},
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Resolves a single instance based on the provided key.",
+								"returns": "Returns the resolved instance.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the object to resolve."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 471,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "getAll",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getAll",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Resolves all instance registered under the provided key.",
+								"returns": "Returns an array of the resolved instances.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the objects to resolve."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"isArray": true,
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 478,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "getResolver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getResolver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets the resolver for the particular key, if it has been registered.",
+								"returns": "Returns the resolver, if registred, otherwise undefined.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 465,
+							"character": 15
+						}
+					]
+				},
+				{
+					"name": "hasResolver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "hasResolver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Inspects the container to determine if a particular key has been registred.",
+								"returns": "Returns true if the key has been registred; false otherwise.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "checkParent",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Indicates whether or not to check the parent container hierarchy."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 459,
+							"character": 15
+						}
+					]
+				},
+				{
+					"name": "invoke",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "invoke",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invokes a function, recursively resolving its dependencies.",
+								"returns": "Returns the instance resulting from calling the function.\n"
+							},
+							"parameters": [
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The function to invoke with the auto-resolved dependencies."
+									},
+									"type": {
+										"type": "unknown",
+										"name": "Function & { name?: string; }"
+									}
+								},
+								{
+									"name": "dynamicDependencies",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Additional function dependencies to use during invocation."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 490,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "makeGlobal",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "makeGlobal",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Makes this container instance globally reachable through Container.instance."
+							},
+							"type": {
+								"type": "reference",
+								"name": "Container",
+								"id": 732
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 389,
+							"character": 14
+						}
+					]
+				},
+				{
+					"name": "registerAlias",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerAlias",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers an additional key that serves as an alias to the original DI key.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "originalKey",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that originally identified the dependency; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "aliasKey",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "An alternate key which can also be used to resolve the same dependency  as the original."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 429,
+							"character": 17
+						}
+					]
+				},
+				{
+					"name": "registerHandler",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerHandler",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers a custom resolution function such that the container calls this function for each request to obtain the instance.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "handler",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The resolution function to use when the dependency is needed."
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 763,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 764,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 765,
+															"name": "container",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {
+																"isOptional": true
+															},
+															"type": {
+																"type": "reference",
+																"name": "Container",
+																"id": 732
+															}
+														},
+														{
+															"id": 766,
+															"name": "key",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {
+																"isOptional": true
+															},
+															"type": {
+																"type": "instrinct",
+																"name": "any"
+															}
+														},
+														{
+															"id": 767,
+															"name": "resolver",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {
+																"isOptional": true
+															},
+															"type": {
+																"type": "reference",
+																"name": "Resolver",
+																"id": 578
+															}
+														}
+													],
+													"type": {
+														"type": "instrinct",
+														"name": "any"
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "aurelia-dependency-injection.d.ts",
+													"line": 422,
+													"character": 38
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 422,
+							"character": 19
+						}
+					]
+				},
+				{
+					"name": "registerInstance",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerInstance",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers an existing object instance with the container.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "instance",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The instance that will be resolved when the key is matched. This defaults to the key value when instance is not supplied."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 401,
+							"character": 20
+						}
+					]
+				},
+				{
+					"name": "registerResolver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerResolver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers a custom resolution function such that the container calls this function for each request to obtain the instance.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "resolver",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The resolver to use when the dependency is needed."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Resolver",
+										"id": 578
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 436,
+							"character": 20
+						}
+					]
+				},
+				{
+					"name": "registerSingleton",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerSingleton",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers a type (constructor function) such that the container always returns the same instance for each request.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 408,
+							"character": 21
+						}
+					]
+				},
+				{
+					"name": "registerTransient",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerTransient",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Registers a type (constructor function) such that the container returns a new instance for each request.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 415,
+							"character": 21
+						}
+					]
+				},
+				{
+					"name": "setHandlerCreatedCallback",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "setHandlerCreatedCallback",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Sets an invocation handler creation callback that will be called when new InvocationsHandlers are created (called once per Function)."
+							},
+							"parameters": [
+								{
+									"name": "onHandlerCreated",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The callback to be called when an InvocationsHandler is created.\n"
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 744,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 745,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 746,
+															"name": "handler",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "reference",
+																"name": "InvocationHandler",
+																"id": 713
+															}
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "InvocationHandler",
+														"id": 713
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "aurelia-dependency-injection.d.ts",
+													"line": 394,
+													"character": 47
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 394,
+							"character": 29
+						}
+					]
+				},
+				{
+					"name": "unregister",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unregister",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Unregisters based on key."
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that identifies the dependency at resolution time; usually a constructor function.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 452,
+							"character": 14
+						}
+					]
+				}
+			],
+			"name": "Container",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A lightweight, extensible dependency injection container."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 368,
+					"character": 30
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of Container."
+				},
+				"signatures": [
+					{
+						"name": "new Container",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of Container."
+						},
+						"parameters": [
+							{
+								"name": "configuration",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "Provides some configuration for the new Container instance.\n"
+								},
+								"type": {
+									"type": "reference",
+									"name": "ContainerConfiguration",
+									"id": 726
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Container",
+							"id": 732
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 380,
+						"character": 20
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to pass the dependencies to the constructor.",
+								"returns": "Returns a function that can be invoked to resolve dependencies later, and the rest of the parameters.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to invoke the constructor with dependencies and other parameters."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 140,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "of",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "of",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates a Factory Resolver for the supplied key.",
+								"returns": "Returns an instance of Factory for the key.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to resolve."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Factory",
+								"id": 636
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 146,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "Factory",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow injecting dependencies but also passing data to the constructor."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 129,
+					"character": 28
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the Factory class."
+				},
+				"signatures": [
+					{
+						"name": "new Factory",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the Factory class."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The key to resolve from the parent container.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Factory",
+							"id": 636
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 129,
+						"character": 30
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "instance",
+					"kindString": "Property",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The singleton instance of the FactoryInvoker."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 243,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "FactoryInvoker",
+						"id": 675
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "invoke",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "invoke",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invokes the function with the provided dependencies.",
+								"returns": "The result of the function invocation.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The calling container."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The constructor or factory function."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								},
+								{
+									"name": "dependencies",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The dependencies of the function call."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 251,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "invokeWithDynamicDependencies",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "invokeWithDynamicDependencies",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invokes the function with the provided dependencies.",
+								"returns": "The result of the function invocation.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The calling container."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The constructor or factory function."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								},
+								{
+									"name": "staticDependencies",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The static dependencies of the function."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								},
+								{
+									"name": "dynamicDependencies",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "Additional dependencies to use during invocation."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 260,
+							"character": 33
+						}
+					]
+				}
+			],
+			"name": "FactoryInvoker",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "An Invoker that is used to invoke a factory method."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 239,
+					"character": 35
+				}
+			]
+		},
+		{
+			"properties": [
+				{
+					"name": "dependencies",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The statically known dependencies of this function invocation."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 339,
+							"character": 16
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"isArray": true,
+						"name": "any"
+					}
+				},
+				{
+					"name": "fn",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The function to be invoked by this handler."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 331,
+							"character": 6
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Function"
+					}
+				},
+				{
+					"name": "invoker",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The invoker implementation that will be used to actually invoke the function."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 335,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Invoker",
+						"id": 663
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "invoke",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "invoke",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invokes the function.",
+								"returns": "The result of the function invocation.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The calling container."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "dynamicDependencies",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Additional dependencies to use during invocation."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 353,
+							"character": 10
+						}
+					]
+				}
+			],
+			"name": "InvocationHandler",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Stores the information needed to invoke a function."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 327,
+					"character": 38
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Instantiates an InvocationDescription."
+				},
+				"signatures": [
+					{
+						"name": "new InvocationHandler",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Instantiates an InvocationDescription."
+						},
+						"parameters": [
+							{
+								"name": "fn",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The Function described by this description object."
+								},
+								"type": {
+									"type": "reference",
+									"name": "Function"
+								}
+							},
+							{
+								"name": "invoker",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The strategy for invoking the function."
+								},
+								"type": {
+									"type": "reference",
+									"name": "Invoker",
+									"id": 663
+								}
+							},
+							{
+								"name": "dependencies",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The static dependencies of the function call.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"isArray": true,
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "InvocationHandler",
+							"id": 713
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 339,
+						"character": 24
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to lazily resolve the dependency into a lazy locator function.",
+								"returns": "Returns a function which can be invoked at a later time to obtain the actual dependency.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 33,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "of",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "of",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates a Lazy Resolver for the supplied key.",
+								"returns": "Returns an instance of Lazy for the key.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to lazily resolve."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Lazy",
+								"id": 583
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 39,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "Lazy",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow functions/classes to specify lazy resolution logic."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 22,
+					"character": 25
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the Lazy class."
+				},
+				"signatures": [
+					{
+						"name": "new Lazy",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the Lazy class."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The key to lazily resolve.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Lazy",
+							"id": 583
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 22,
+						"character": 27
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "asKey",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 155,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "key",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 154,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "as",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "as",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Instructs the NewInstance resolver to register the resolved instance using the supplied key.",
+								"returns": "Returns the NewInstance resolver.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to register the instance with."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 174,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to instantiate the dependency and potentially register\nas another key if the `as` method was used.",
+								"returns": "Returns the matching instance from the parent container\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve the parent from."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 168,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "of",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "of",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates an NewInstance Resolver for the supplied key.",
+								"returns": "Returns an instance of NewInstance for the key.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to resolve/instantiate."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "dynamicDependencies",
+									"kindString": "Parameter",
+									"flags": {
+										"isRest": true
+									},
+									"comment": {
+										"text": "An optional list of dynamic dependencies."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "NewInstance",
+								"id": 646
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 181,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "NewInstance",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to inject a new instance of a dependency, without regard for existing\ninstances in the container. Instances can optionally be registered in the container\nunder a different key by supplying a key using the `as` method."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 153,
+					"character": 32
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the NewInstance class."
+				},
+				"signatures": [
+					{
+						"name": "new NewInstance",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the NewInstance class."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The key to resolve/instantiate."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "dynamicDependencies",
+								"kindString": "Parameter",
+								"flags": {
+									"isRest": true
+								},
+								"comment": {
+									"shortText": "An optional list of dynamic dependencies.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"isArray": true,
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "NewInstance",
+							"id": 646
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 155,
+						"character": 15
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to provide optional resolution of the key.",
+								"returns": "Returns the instance if found; otherwise null.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 78,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "of",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "of",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates an Optional Resolver for the supplied key.",
+								"returns": "Returns an instance of Optional for the key.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to optionally resolve for."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "checkParent",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Optional",
+								"id": 603
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 85,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "Optional",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow functions/classes to specify an optional dependency, which will be resolved only if already registred with the container."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 66,
+					"character": 29
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the Optional class."
+				},
+				"signatures": [
+					{
+						"name": "new Optional",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the Optional class."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The key to optionally resolve for."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "checkParent",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "Indicates whether or not the parent container hierarchy should be checked.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "boolean"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Optional",
+							"id": 603
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 66,
+						"character": 31
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to load the dependency from the parent container",
+								"returns": "Returns the matching instance from the parent container\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve the parent from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 101,
+							"character": 7
+						}
+					]
+				},
+				{
+					"name": "of",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "of",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Creates a Parent Resolver for the supplied key.",
+								"returns": "Returns an instance of Parent for the key.\n"
+							},
+							"parameters": [
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key to resolve."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Parent",
+								"id": 615
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 107,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "Parent",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to inject the dependency from the parent container instead of the current one."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 90,
+					"character": 27
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the Parent class."
+				},
+				"signatures": [
+					{
+						"name": "new Parent",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the Parent class."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The key to resolve from the parent container.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Parent",
+							"id": 615
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 90,
+						"character": 29
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "registerResolver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerResolver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to register the resolver.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container the resolver is being registered with."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key the resolver should be registered as."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The function to create the resolver for."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 321,
+							"character": 20
+						}
+					]
+				}
+			],
+			"name": "SingletonRegistration",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow functions/classes to indicate that they should be registered as singletons with the container."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 308,
+					"character": 42
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of SingletonRegistration."
+				},
+				"signatures": [
+					{
+						"name": "new SingletonRegistration",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of SingletonRegistration."
+						},
+						"parameters": [
+							{
+								"name": "keyOrRegisterInChild",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "registerInChild",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "boolean"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "SingletonRegistration",
+							"id": 703
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 308,
+						"character": 44
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "state",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 111,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "strategy",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 110,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "StrategyResolver",
+								"id": 625
+							},
+							{
+								"type": "instrinct",
+								"name": "number"
+							}
+						]
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to allow custom resolution of dependencies for a function/class.",
+								"returns": "Returns the resolved object.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that the resolver was registered as."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 124,
+							"character": 7
+						}
+					]
+				}
+			],
+			"name": "StrategyResolver",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 109,
+					"character": 37
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the StrategyResolver class."
+				},
+				"signatures": [
+					{
+						"name": "new StrategyResolver",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the StrategyResolver class."
+						},
+						"parameters": [
+							{
+								"name": "strategy",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The type of resolution strategy."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "state",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "The state associated with the resolution strategy.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "StrategyResolver",
+							"id": 625
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 111,
+						"character": 15
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "registerResolver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerResolver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to register the resolver.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container the resolver is being registered with."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key the resolver should be registered as."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The function to create the resolver for."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 303,
+							"character": 20
+						}
+					]
+				}
+			],
+			"name": "TransientRegistration",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow functions/classes to indicate that they should be registered as transients with the container."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 290,
+					"character": 42
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of TransientRegistration."
+				},
+				"signatures": [
+					{
+						"name": "new TransientRegistration",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of TransientRegistration."
+						},
+						"parameters": [
+							{
+								"name": "key",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The key to register as.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "TransientRegistration",
+							"id": 694
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-dependency-injection.d.ts",
+						"line": 290,
+						"character": 44
+					}
+				]
+			}
+		}
+	],
+	"interfaces": [
+		{
+			"properties": [
+				{
+					"name": "handlers",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 363,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Map",
+						"typeArguments": [
+							{
+								"type": "instrinct",
+								"name": "any"
+							},
+							{
+								"type": "instrinct",
+								"name": "any"
+							}
+						]
+					}
+				},
+				{
+					"name": "onHandlerCreated",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "An optional callback which will be called when any function needs an InvocationHandler created (called once per Function)."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 362,
+							"character": 20
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 728,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 729,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 730,
+											"name": "handler",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "InvocationHandler",
+												"id": 713
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "InvocationHandler",
+										"id": 713
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "aurelia-dependency-injection.d.ts",
+									"line": 362,
+									"character": 22
+								}
+							]
+						}
+					}
+				}
+			],
+			"events": [],
+			"methods": [],
+			"name": "ContainerConfiguration",
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to configure a Container instance."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 358,
+					"character": 39
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "invoke",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "invoke",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invokes the function with the provided dependencies.",
+								"returns": "The result of the function invocation.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The constructor or factory function."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								},
+								{
+									"name": "dependencies",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The dependencies of the function call."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 226,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "invokeWithDynamicDependencies",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "invokeWithDynamicDependencies",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invokes the function with the provided dependencies.",
+								"returns": "The result of the function invocation.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The constructor or factory function."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								},
+								{
+									"name": "staticDependencies",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The static dependencies of the function."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								},
+								{
+									"name": "dynamicDependencies",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "Additional dependencies to use during invocation."
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 234,
+							"character": 33
+						}
+					]
+				}
+			],
+			"name": "Invoker",
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy for invoking a function, resulting in an object instance."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 219,
+					"character": 24
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "registerResolver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "registerResolver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to register the resolver.",
+								"returns": "The resolver that was registered.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container the resolver is being registered with."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key the resolver should be registered as."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "fn",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The function to create the resolver for."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Function"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Resolver",
+								"id": 578
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 285,
+							"character": 20
+						}
+					]
+				}
+			],
+			"name": "Registration",
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Customizes how a particular function is resolved by the Container."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 277,
+					"character": 29
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "get",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "get",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Called by the container to allow custom resolution of dependencies for a function/class.",
+								"returns": "Returns the resolved object.\n"
+							},
+							"parameters": [
+								{
+									"name": "container",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The container to resolve from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Container",
+										"id": 732
+									}
+								},
+								{
+									"name": "key",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The key that the resolver was registered as."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-dependency-injection.d.ts",
+							"line": 17,
+							"character": 7
+						}
+					]
+				}
+			],
+			"name": "Resolver",
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to allow functions/classes to specify custom dependency resolution logic."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 10,
+					"character": 25
+				}
+			]
+		}
+	],
+	"variables": [
+		{
+			"name": "_emptyParameters",
+			"kindString": "Variable",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 323,
+					"character": 37
+				}
+			],
+			"type": {
+				"type": "instrinct",
+				"isArray": true,
+				"name": "any"
+			}
+		},
+		{
+			"name": "resolver",
+			"kindString": "Variable",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Decorator: Indicates that the decorated class/object is a custom resolver."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 4,
+					"character": 29
+				}
+			],
+			"type": {
+				"type": "unknown",
+				"name": "Function & { decorates?: any; }"
+			}
+		}
+	],
+	"functions": [
+		{
+			"name": "all",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "all",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependency should load all instances of the given key."
+					},
+					"parameters": [
+						{
+							"name": "keyValue",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 827,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 828,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 829,
+											"name": "target",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 830,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 831,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "aurelia-dependency-injection.d.ts",
+									"line": 191,
+									"character": 43
+								}
+							]
+						}
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 191,
+					"character": 27
+				}
+			]
+		},
+		{
+			"name": "autoinject",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "autoinject",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Directs the TypeScript transpiler to write-out type metadata for the decorated class."
+					},
+					"parameters": [
+						{
+							"name": "potentialTarget",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 500,
+					"character": 34
+				}
+			]
+		},
+		{
+			"name": "factory",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "factory",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependency to create a factory method, that can accept optional arguments"
+					},
+					"parameters": [
+						{
+							"name": "keyValue",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "asValue",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 849,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 850,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 851,
+											"name": "target",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 852,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 853,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "aurelia-dependency-injection.d.ts",
+									"line": 203,
+									"character": 62
+								}
+							]
+						}
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 203,
+					"character": 31
+				}
+			]
+		},
+		{
+			"name": "getDecoratorDependencies",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "getDecoratorDependencies",
+					"kindString": "Call signature",
+					"flags": {},
+					"parameters": [
+						{
+							"name": "target",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "name",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 183,
+					"character": 48
+				}
+			]
+		},
+		{
+			"name": "inject",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "inject",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependencies that should be injected by the DI Container into the decoratored class/function."
+					},
+					"parameters": [
+						{
+							"name": "rest",
+							"kindString": "Parameter",
+							"flags": {
+								"isRest": true
+							},
+							"type": {
+								"type": "instrinct",
+								"isArray": true,
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 504,
+					"character": 30
+				}
+			]
+		},
+		{
+			"name": "invokeAsFactory",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "invokeAsFactory",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies that the decorated item should be called as a factory function, rather than a constructor."
+					},
+					"parameters": [
+						{
+							"name": "potentialTarget",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 215,
+					"character": 39
+				}
+			]
+		},
+		{
+			"name": "invoker",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "invoker",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies a custom Invoker for the decorated item."
+					},
+					"parameters": [
+						{
+							"name": "value",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"name": "Invoker",
+								"id": 663
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 211,
+					"character": 31
+				}
+			]
+		},
+		{
+			"name": "lazy",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "lazy",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependency should be lazy loaded"
+					},
+					"parameters": [
+						{
+							"name": "keyValue",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 819,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 820,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 821,
+											"name": "target",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 822,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 823,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "aurelia-dependency-injection.d.ts",
+									"line": 187,
+									"character": 44
+								}
+							]
+						}
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 187,
+					"character": 28
+				}
+			]
+		},
+		{
+			"name": "newInstance",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "newInstance",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependency as a new instance"
+					},
+					"parameters": [
+						{
+							"name": "asKeyOrTarget",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "dynamicDependencies",
+							"kindString": "Parameter",
+							"flags": {
+								"isRest": true
+							},
+							"type": {
+								"type": "instrinct",
+								"isArray": true,
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 858,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 859,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 860,
+											"name": "target",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 861,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 862,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "aurelia-dependency-injection.d.ts",
+									"line": 207,
+									"character": 88
+								}
+							]
+						}
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 207,
+					"character": 35
+				}
+			]
+		},
+		{
+			"name": "optional",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "optional",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependency as optional"
+					},
+					"parameters": [
+						{
+							"name": "checkParentOrTarget",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							}
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 835,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"signatures": [
+								{
+									"id": 836,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 837,
+											"name": "target",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 838,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										},
+										{
+											"id": 839,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "instrinct",
+												"name": "any"
+											}
+										}
+									],
+									"type": {
+										"type": "instrinct",
+										"name": "void"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "aurelia-dependency-injection.d.ts",
+									"line": 195,
+									"character": 64
+								}
+							]
+						}
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 195,
+					"character": 32
+				}
+			]
+		},
+		{
+			"name": "parent",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "parent",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies the dependency to look at the parent container for resolution"
+					},
+					"parameters": [
+						{
+							"name": "target",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "key",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "index",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "void"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 199,
+					"character": 30
+				}
+			]
+		},
+		{
+			"name": "registration",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "registration",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies a custom registration strategy for the decorated class/function."
+					},
+					"parameters": [
+						{
+							"name": "value",
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"name": "Registration",
+								"id": 688
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 265,
+					"character": 36
+				}
+			]
+		},
+		{
+			"name": "singleton",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "singleton",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies to register the decorated item with a \"singleton\" lieftime."
+					},
+					"parameters": [
+						{
+							"name": "keyOrRegisterInChild",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "registerInChild",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 273,
+					"character": 33
+				}
+			]
+		},
+		{
+			"name": "transient",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "transient",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Decorator: Specifies to register the decorated item with a \"transient\" lifetime."
+					},
+					"parameters": [
+						{
+							"name": "key",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-dependency-injection.d.ts",
+					"line": 269,
+					"character": 33
+				}
+			]
+		}
+	],
+	"name": "Dependency Injection"
+}

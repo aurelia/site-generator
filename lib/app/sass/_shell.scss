@@ -103,7 +103,7 @@ side-bar {
   top: $header-height;
   left: $nav-width;
   bottom: 0;
-  width: 275px;
+  width: $sidebar-width;
   background-color: $panel-color;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.12);
   transition: all .2s;
@@ -126,7 +126,7 @@ side-bar {
 
     &.active {
       background: #ffffff;
-      color: #EC2685;
+      color: $accent-color;
     }
 
     a {

@@ -1,0 +1,80 @@
+<section class="article">
+  <header>
+    <h1>Securing Your App</h1>
+    <h2>It&#x27;s important to secure your application. This article will address a couple of simple things you can do to improve the security of your application.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>The first rule of securing client-side applications: the client cannot be trusted. Your backend should never trust the input coming from the front-end, under any circumstance. Malicious individuals often know how to use browser debug tools and manually craft HTTP requests to your backend. You may even find yourself in a situation where a disgruntled employee (or former employee), who is a developer with intimate knowledge of the system, is seeking revenge by attempting a malicious attack.</p>
+<p><strong>Your primary mechanism for securing any SPA application, Aurelia or otherwise, is to work hard on securing your backend services.</strong></p>
+<au-alert type="danger"heading="Security Advice"><p>
+This article, more or less, contains only a few quick warnings. It is in no way exhaustive, nor should it be your only resource on securing your application. The bulk of the work in security relates to your server-side technology. You should spend adequate time reading up on and understanding security best practices for whatever backend tech you have chosen.</p>
+</au-alert>
+</au-doc-section>
+<au-doc-section uid="2" version="1.0.0" heading="Authentication and Authorization"><p>When designing your application, consider which backend API calls can be made anonymously, which require a logged-in user and which roles or permissions are required for various authenticated requests. Ensure that your entire API surface area is explicitly covered in this way. Your front-end can facilitate the login process, but ultimately this is a backend task. Here are a few related recommendations:</p>
+<ul>
+<li>Make sure your server is configured to transmit sensitive resources over HTTPS. You may want to transmit all resources this way. It is more server-intensive, but it will be more secure. You must decide what is appropriate for your application.</li>
+<li>Don't transmit passwords in plain text.</li>
+<li>There are various ways to accomplish CORS. Prefer to use a technique based on server-supported CORS, rather than client-side hacks.</li>
+<li>Control cross-domain requests to your services. Either disallow them or configure your server based on a strict whitelist of allowed domains.</li>
+<li>Require strong passwords</li>
+<li>Never, ever store passwords in plain text.</li>
+<li>Do not allow an endless number of failed login attempts to the same account.</li>
+<li>Consider outsourcing your auth requirements to a cloud provider with greater expertise.</li>
+</ul>
+<p>You can improve the user-experience by plugging into Aurelia's router pipeline with your security specifics. Again, remember, this doesn't secure your app, but only provides a smooth user experience. The real security is on the backend. Here's a quick example of how you might use Aurelia's router to disallow client-side routes based on user role:</p>
+<code-listing heading="Customizing the Navigation Pipeline with Authorization">
+  <source-code lang="ES 2015/2016">%0A%20%20%20%20import%20%7BRedirect%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%29%20%7B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.addPipelineStep%28%27authorize%27%2C%20AuthorizeStep%29%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%5B%27welcome%27%5D%2C%20moduleId%3A%20%27welcome%27%2C%20title%3A%20%27Welcome%27%2C%20settings%3A%20%7B%20roles%3A%20%5B%5D%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27admin%27%2C%20moduleId%3A%20%27admin%27%2C%20title%3A%20%27Admin%27%20settings%3A%20%7B%20roles%3A%20%5B%27admin%27%5D%20%7D%20%7D%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20class%20AuthorizeStep%20%7B%0A%20%20%20%20%20%20run%28navigationInstruction%2C%20next%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28navigationInstruction.getAllInstructions%28%29.some%28i%20%3D%3E%20i.config.settings.roles.indexOf%28%27admin%27%29%20%21%3D%3D%20-1%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20var%20isAdmin%20%3D%20/*%20insert%20magic%20here%20*/false%3B%0A%20%20%20%20%20%20%20%20%20%20if%20%28%21isAdmin%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20next.cancel%28new%20Redirect%28%27welcome%27%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20return%20next%28%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BNavigationInstruction%2C%20Next%2C%20PipelineStep%2C%20Redirect%2C%20RouterConfiguration%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%3A%20RouterConfiguration%29%3A%20void%20%7B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.addAuthorizeStep%28AuthorizeStep%29%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%5B%27welcome%27%5D%2C%20moduleId%3A%20%27welcome%27%2C%20title%3A%20%27Welcome%27%2C%20settings%3A%20%7B%20roles%3A%20%5B%5D%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27admin%27%2C%20moduleId%3A%20%27admin%27%2C%20title%3A%20%27Admin%27%20settings%3A%20%7B%20roles%3A%20%5B%27admin%27%5D%20%7D%20%7D%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20class%20AuthorizeStep%20implements%20PipelineStep%20%7B%0A%20%20%20%20%20%20public%20run%28navigationInstruction%3A%20NavigationInstruction%2C%20next%3A%20Next%29%3A%20Promise%3Cany%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20%28navigationInstruction.getAllInstructions%28%29.some%28i%20%3D%3E%20i.config.settings.roles.indexOf%28%27admin%27%29%20%21%3D%3D%20-1%29%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20var%20isAdmin%20%3D%20/*%20insert%20magic%20here%20*/false%3B%0A%20%20%20%20%20%20%20%20%20%20if%20%28%21isAdmin%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20next.cancel%28new%20Redirect%28%27welcome%27%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20return%20next%28%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+</code-listing>
+<au-alert type="info"heading="Route Settings"><p>
+Developers can add a <code>settings</code> property to any route configuration object and use it to store any data they wish to associate with the route. The value of the <code>settings</code> property will be preserved by Aurelia's router and also copied to the navigation model.</p>
+</au-alert>
+</au-doc-section>
+<au-doc-section uid="3" version="1.0.0" heading="Validation and Sanitization"><p>The backend should always perform validation and sanitization of data. Do not rely on your client-side validation and sanitization code. In reality, your client-side validation/santization code should not be seen as anything more than a User Experience enhancement, designed to aid honest users. It will have no affect on anyone who is malicious.</p>
+<p>Here's a few things you should do though:</p>
+<ul>
+<li>Use client-side validation. This will make your users happy.</li>
+<li>Avoid data-binding to <code>innerHTML</code>. If you do, be sure to use a value converter to sanitize the input from the user.</li>
+<li>Be extra careful anytime you are dynamically creating and compiling client-side templates based on user input.</li>
+<li>Be extra careful anytime you are dynamically creating templates on the server based on user input, which will later be processed by Aurelia on the client.</li>
+</ul>
+<au-alert type="info"heading="We Are Trying To Help You"><p>
+Internally, Aurelia makes no use of <code>eval</code> or the <code>Function</code> constructor. Additionally, all binding expressions are parsed by our strict parser which does not make globals like <code>window</code> or <code>document</code> available in binding expressions. We've done this to help prevent some common abuses.</p>
+</au-alert>
+</au-doc-section>
+<au-doc-section uid="4" version="1.0.0" heading="Secret Data"><p>Do not embed private keys into your JavaScript code. While the average user may not be able to access them, anyone with true ill intent can simply download your client code, un-minifiy it and use basic regular expressions on the codebase to find things that <em>look like</em> sensitive data. Perhaps they've discovered what backend technology you are using or what cloud services your product is based on simply by studying your app's HTTP requests or looking at the page source. Using that information they may be able to refine their search based on certain patterns well-known to users of those technologies, making it easier to find your private keys.</p>
+<p>If you have a need to acquire any secret data on the client, it should be done with great care. Here is a (non-exhaustive) list of recommendations:</p>
+<ul>
+<li>Always use HTTPS to transmit this information.</li>
+<li>Restrict which users and roles can acquire this information to an absolute minimum.</li>
+<li>Always use time-outs on any secret keys so that, at most, if an attacker gains access, they can't use them for long.</li>
+<li>Be careful how you store these values in memory. Do not store these as class property values or on any object that is linked to the DOM through data-binding or otherwise. Doing so would allow an attacker to gain access to the information through the debug console. If you must store this information, keep it inside a private (non-exported) module-level variable.</li>
+<li>If you need to store this information anywhere, encrypt it first.</li>
+</ul>
+</au-doc-section>
+<au-doc-section uid="5" version="1.0.0" heading="Deployment"><p>When deploying your apps, there are a few things you can do to make it more difficult for attackers to figure out how your client works:</p>
+<ul>
+<li>Bundle your application and minify it. This is the most basic obfuscation you can do.</li>
+<li>Do not deploy the original client-side source files. Only deploy your bundled, minified app.</li>
+<li>For additional security or IP protection, you may want to look into products such as 
+<a href="https://jscrambler.com/en/" target="_blank">jscrambler</a>
+.</li>
+</ul>
+</au-doc-section>
+<au-doc-section uid="6" version="1.0.0" heading="Prepare for the Inevitable"><p>Even with the most skilled, security-proficient development team, your app will never be 100% protected. This is a fundamental assumption that you should have from the beginning. Expect to be attacked and expect someone to succeed at some point in time. What will you do if this happens? How will you respond? Will you be able to track down the culprit? Will you be able to identify the issue and quickly seal up the breach? You need a plan.</p>
+<p>Again, most of this come down to server-side implementation. Here are a few basic ideas:</p>
+<ul>
+<li>Configure server-side logging and make sure it will provide you with useful information. Such information can be very helpful in tracking down how an attack was performed. Make sure you have tools available to you to quickly search through your logs.</li>
+<li>Make sure that all logins are logged. If you are using an auth-token scheme, make sure that all requests log this information.</li>
+<li>Never log sensitive data.</li>
+<li>Consider timing out logins or auth tokens. You can provide refresh mechanisms in order to help the user experience.</li>
+<li>Configure server insight tooling so that threats can be detected earlier.</li>
+</ul>
+</au-doc-section>
+<au-doc-section uid="7" version="1.0.0" heading="Do Not Be Nice to Bad Guys"><p>Be careful what information you give out, especially when something goes wrong. For example, if there's a failed login attempt, do not tell the user whether they got their username or password incorrect. That's too much information. Just tell them they had an incorrect login. Furthermore, be careful with what error information you send to end-users. You should keep detailed, internal error logs, but most of that information should not be sent to the end user. Too much information can help an attacker take a step closer to causing real damage.</p>
+<p>Beyond this, you are under no obligation to provide nice messages of any kind when you know a user is doing something malicious. Just let the application crash. It's fitting for them.</p>
+</au-doc-section>
+
+  </article>
+</section>

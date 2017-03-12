@@ -1,0 +1,42 @@
+<section class="article">
+  <header>
+    <h1>Binding: Delegate vs Trigger</h1>
+    <h2>When to use delegate and when to use trigger.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Delegate vs Trigger"><p>A couple frequently asked questions are:</p>
+<ul>
+<li><em>What's the difference between delegate and trigger?</em></li>
+<li><em>When should I use delegate and when should I use trigger?</em></li>
+</ul>
+<p>The short answer is: <strong>Use <code>delegate</code> except when you cannot use <code>delegate</code>.</strong></p>
+<p>Event delegation is a technique used to improve application performance. It drastically reduces the number of event subscriptions by leveraging the &quot;bubbling&quot; characteristic of most DOM events. With event delegation, handlers are not attached to individual elements. Instead, a single event handler is attached to a top-level node such as the body element. When an event bubbles up to this shared top-level handler the event delegation logic calls the appropriate handler based on the event's 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/target" target="_blank">target</a>
+.</p>
+<p>To find out if 
+<a href="https://davidwalsh.name/event-delegate" target="_blank">event delegation</a>
+ can be used with a particular event, google <em><code>mdn [event name] event</code></em>. In fact, preceding any web platform related google search with <code>mdn</code> often returns a high quality result from the Mozilla Developer Network. Once you're on the event's MDN page, check whether the event <code>bubbles</code>. Only events that bubble can be used with Aurelia's <code>delegate</code> binding command. <strong>The <code>blur</code>, <code>focus</code>, <code>load</code> and <code>unload</code> events do not bubble so you'll need to use the <code>trigger</code> binding command to subscribe to these events.</strong></p>
+<p>Here's the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/blur" target="_blank">MDN page for blur</a>
+. It has further info on event delegation techniques for the blur and focus events.</p>
+<h3>Exceptions to the general guidance above:</h3>
+<h4>Use <code>trigger</code> on buttons when the following conditions are met:</h4>
+<ol>
+<li>You need to disable the button.</li>
+<li>The button's content is made up of other elements (as opposed to just text).</li>
+</ol>
+<p>This will ensure clicks on disabled button's children won't bubble up to the delegate event handler.  More info 
+<a href="https://github.com/aurelia/binding/issues/163" target="_blank">here</a>
+.</p>
+<h4>Use <code>trigger</code> for <code>click</code> in certain iOS use-cases:</h4>
+<p>iOS does not bubble click events on elements other than <code>a</code>, <code>button</code>, <code>input</code> and <code>select</code>. If you're subscribing to <code>click</code> on a non-input element like a <code>div</code> and are targeting iOS, use the <code>trigger</code> binding command.
+More info 
+<a href="http://www.quirksmode.org/blog/archives/2010/09/click_event_del.html" target="_blank">here</a>
+ and 
+<a href="https://github.com/aurelia/binding/issues/263" target="_blank">here</a>
+.</p>
+</au-doc-section>
+
+  </article>
+</section>

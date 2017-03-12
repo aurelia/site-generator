@@ -1,0 +1,797 @@
+{
+	"classes": [
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "attributeChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "attributeChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "value",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "previous",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 40,
+							"character": 18
+						}
+					]
+				},
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 38,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "processChange",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "processChange",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 41,
+							"character": 15
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 39,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "RouteHref",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-router.d.ts",
+					"line": 36,
+					"character": 30
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new RouteHref",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"parameters": [
+							{
+								"name": "router",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "element",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "RouteHref",
+							"id": 4151
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-router.d.ts",
+						"line": 36,
+						"character": 32
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "element",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 48,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "layoutModel",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 47,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "layoutView",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 45,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "layoutViewModel",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 46,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "swapOrder",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 44,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 51,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "created",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "created",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "owningView",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 50,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "process",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "process",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "viewPortInstruction",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "waitToSwap",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 52,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "swap",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "swap",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "viewPortInstruction",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 53,
+							"character": 6
+						}
+					]
+				}
+			],
+			"name": "RouterView",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-router.d.ts",
+					"line": 43,
+					"character": 31
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new RouterView",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"parameters": [
+							{
+								"name": "element",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "container",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewSlot",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "router",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewLocator",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "compositionTransaction",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "compositionEngine",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "RouterView",
+							"id": 4166
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-router.d.ts",
+						"line": 48,
+						"character": 15
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "findNearest",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "findNearest",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Finds the nearest RouterView instance.",
+								"returns": "A promise that will be resolved with the located RouterView instance.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "Promise",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "RouterView",
+										"id": 4166
+									}
+								]
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 70,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "RouterViewLocator",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Locator which finds the nearest RouterView, relative to the current dependency injection container."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-router.d.ts",
+					"line": 59,
+					"character": 38
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of the RouterViewLocator class."
+				},
+				"signatures": [
+					{
+						"name": "new RouterViewLocator",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of the RouterViewLocator class."
+						},
+						"type": {
+							"type": "reference",
+							"name": "RouterViewLocator",
+							"id": 4195
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-router.d.ts",
+						"line": 59,
+						"character": 40
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "loadRoute",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "loadRoute",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "router",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "config",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "RouteLoader.loadRoute"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-router.d.ts",
+							"line": 74,
+							"character": 11
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "RouteLoader.loadRoute"
+					}
+				}
+			],
+			"name": "TemplatingRouteLoader",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-router.d.ts",
+					"line": 72,
+					"character": 42
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"name": "RouteLoader"
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new TemplatingRouteLoader",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"parameters": [
+							{
+								"name": "compositionEngine",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "TemplatingRouteLoader",
+							"id": 4200
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-router.d.ts",
+						"line": 72,
+						"character": 64
+					}
+				]
+			}
+		}
+	],
+	"interfaces": [],
+	"variables": [],
+	"functions": [],
+	"name": "Templating-Router"
+}

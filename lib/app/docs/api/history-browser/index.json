@@ -1,0 +1,885 @@
+{
+	"classes": [
+		{
+			"properties": [
+				{
+					"name": "inject",
+					"kindString": "Property",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 109,
+							"character": 15
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "activate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "activate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Activates the history object.",
+								"returns": "Whether or not activation occurred.\n"
+							},
+							"parameters": [
+								{
+									"name": "options",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The set of options to activate history with."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Object"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "History.activate"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 122,
+							"character": 10
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "History.activate"
+					}
+				},
+				{
+					"name": "deactivate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "deactivate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Deactivates the history object."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "History.deactivate"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 127,
+							"character": 12
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "History.deactivate"
+					}
+				},
+				{
+					"name": "getAbsoluteRoot",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getAbsoluteRoot",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Returns the fully-qualified root of the current history object.",
+								"returns": "The absolute root of the application.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "string"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "History.getAbsoluteRoot"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 133,
+							"character": 17
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "History.getAbsoluteRoot"
+					}
+				},
+				{
+					"name": "navigate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "navigate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Causes a history navigation to occur.",
+								"returns": "True if navigation occurred/false otherwise.\n"
+							},
+							"parameters": [
+								{
+									"name": "fragment",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The history fragment to navigate to."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								},
+								{
+									"name": "undefined",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "History.navigate"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 142,
+							"character": 10
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "History.navigate"
+					}
+				},
+				{
+					"name": "navigateBack",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "navigateBack",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Causes the history state to navigate back."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "History.navigateBack"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 147,
+							"character": 14
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "History.navigateBack"
+					}
+				},
+				{
+					"name": "setTitle",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "setTitle",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Sets the document title."
+							},
+							"parameters": [
+								{
+									"name": "title",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "History.setTitle"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 152,
+							"character": 10
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "History.setTitle"
+					}
+				}
+			],
+			"name": "BrowserHistory",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "An implementation of the basic history API."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-history-browser.d.ts",
+					"line": 108,
+					"character": 35
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"name": "History"
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of BrowserHistory"
+				},
+				"signatures": [
+					{
+						"name": "new BrowserHistory",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of BrowserHistory"
+						},
+						"parameters": [
+							{
+								"name": "linkHandler",
+								"kindString": "Parameter",
+								"flags": {},
+								"comment": {
+									"shortText": "An instance of LinkHandler.\n"
+								},
+								"type": {
+									"type": "reference",
+									"name": "LinkHandler",
+									"id": 1267
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "BrowserHistory",
+							"id": 1290
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-history-browser.d.ts",
+						"line": 109,
+						"character": 21
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "activate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "activate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Activate the instance."
+							},
+							"parameters": [
+								{
+									"name": "history",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The BrowserHistory instance that navigations should be dispatched to.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "BrowserHistory",
+										"id": 1290
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "LinkHandler.activate",
+								"id": 1268
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 68,
+							"character": 10
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "LinkHandler.activate",
+						"id": 1268
+					}
+				},
+				{
+					"name": "deactivate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "deactivate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Deactivate the instance. Event handlers and other resources should be cleaned up here."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "LinkHandler.deactivate",
+								"id": 1271
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 73,
+							"character": 12
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "LinkHandler.deactivate",
+						"id": 1271
+					}
+				},
+				{
+					"name": "findClosestAnchor",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "findClosestAnchor",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Finds the closest ancestor that's an anchor element.",
+								"returns": "The link element that is the closest ancestor.\n"
+							},
+							"parameters": [
+								{
+									"name": "el",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The element to search upward from."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Element"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Element"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 88,
+							"character": 26
+						}
+					]
+				},
+				{
+					"name": "getEventInfo",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getEventInfo",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets the href and a \"should handle\" recommendation, given an Event."
+							},
+							"parameters": [
+								{
+									"name": "event",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The Event to inspect for target anchor and href.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "Event"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "AnchorEventInfo",
+								"id": 1263
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 80,
+							"character": 21
+						}
+					]
+				},
+				{
+					"name": "targetIsThisWindow",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "targetIsThisWindow",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets a value indicating whether or not an anchor targets the current window.",
+								"returns": "True if the target of the link element is this window; false otherwise.\n"
+							},
+							"parameters": [
+								{
+									"name": "target",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The anchor element whose target should be inspected."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Element"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "boolean"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 96,
+							"character": 27
+						}
+					]
+				}
+			],
+			"name": "DefaultLinkHandler",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "The default LinkHandler implementation. Navigations are triggered by click events on\nanchor elements with relative hrefs when the history instance is using pushstate."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-history-browser.d.ts",
+					"line": 56,
+					"character": 39
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"name": "LinkHandler",
+					"id": 1267
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of DefaultLinkHandler."
+				},
+				"signatures": [
+					{
+						"name": "new DefaultLinkHandler",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of DefaultLinkHandler."
+						},
+						"type": {
+							"type": "reference",
+							"name": "DefaultLinkHandler",
+							"id": 1273
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-history-browser.d.ts",
+						"line": 56,
+						"character": 61
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "activate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "activate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Activate the instance."
+							},
+							"parameters": [
+								{
+									"name": "history",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The BrowserHistory instance that navigations should be dispatched to.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "BrowserHistory",
+										"id": 1290
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 40,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "deactivate",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "deactivate",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Deactivate the instance. Event handlers and other resources should be cleaned up here."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 45,
+							"character": 12
+						}
+					]
+				}
+			],
+			"name": "LinkHandler",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Class responsible for handling interactions that should trigger browser history navigations."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-history-browser.d.ts",
+					"line": 33,
+					"character": 32
+				}
+			],
+			"extendedBy": [
+				{
+					"type": "reference",
+					"name": "DefaultLinkHandler",
+					"id": 1273
+				}
+			]
+		}
+	],
+	"interfaces": [
+		{
+			"properties": [
+				{
+					"name": "anchor",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The anchor element or null if not-applicable."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 27,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Element"
+					}
+				},
+				{
+					"name": "href",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The href of the link or null if not-applicable."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 22,
+							"character": 6
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "string"
+					}
+				},
+				{
+					"name": "shouldHandleEvent",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Indicates whether the event should be handled or not."
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-history-browser.d.ts",
+							"line": 17,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "boolean"
+					}
+				}
+			],
+			"events": [],
+			"methods": [],
+			"name": "AnchorEventInfo",
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Provides information about how to handle an anchor event."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-history-browser.d.ts",
+					"line": 12,
+					"character": 40
+				}
+			]
+		}
+	],
+	"variables": [],
+	"functions": [
+		{
+			"name": "configure",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "configure",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Configures the plugin by registering BrowserHistory as the implementation of History in the DI container."
+					},
+					"parameters": [
+						{
+							"name": "config",
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"text": "The FrameworkConfiguration object provided by Aurelia.\n"
+							},
+							"type": {
+								"type": "reference",
+								"name": "Object"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "void"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-history-browser.d.ts",
+					"line": 103,
+					"character": 33
+				}
+			]
+		}
+	],
+	"name": "History-Browser"
+}

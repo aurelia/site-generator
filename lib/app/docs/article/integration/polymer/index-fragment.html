@@ -1,0 +1,94 @@
+<section class="article">
+  <header>
+    <h1>Integrating with Polymer</h1>
+    <h2>Polymer is a library for creating reusable web components declaratively with extra features like data binding and property observation. In many ways, it is similar to Aurelia&#x27;s component support. However, Polymer also includes an extensive catalog of custom elements for everything from material design to credit card forms to embedding Google services like Google Maps and YouTube. With a bit of work, these components can be incorporated into Aurelia applications as well.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Setup"><p>The first step is obtaining Polymer, which is generally done with the 
+<a href="http://bower.io/" target="_blank">Bower</a>
+ package manager. The following <code>bower.json</code> will install Polymer's base and material design elements.</p>
+<code-listing heading="Bower Config">
+  <source-code lang="JSON">%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22name%22%3A%20%22my-aurelia-polymer-project%22%2C%0A%20%20%20%20%20%20%22private%22%3A%20true%2C%0A%20%20%20%20%20%20%22dependencies%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22polymer%22%3A%20%22Polymer/polymer%23%5E1.2.0%22%2C%0A%20%20%20%20%20%20%20%20%22paper-elements%22%3A%20%22PolymerElements/paper-elements%23%5E1.0.6%22%2C%0A%20%20%20%20%20%20%20%20%22iron-elements%22%3A%20%22PolymerElements/iron-elements%23%5E1.0.4%22%2C%0A%20%20%20%20%20%20%20%20%22webcomponentsjs%22%3A%20%22webcomponents/webcomponentsjs%23%5E0.7.20%22%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+</code-listing>
+<p>Make sure Bower is installed and then use Bower to install the packages for each of the Polymer elements.</p>
+<code-listing heading="Bower Package Installation">
+  <source-code lang="Shell">%0A%20%20%20%20%24%20npm%20install%20-g%20bower%0A%20%20%20%20%24%20bower%20install%0A%20%20</source-code>
+</code-listing>
+<p>Aurelia must also be configured to use the HTML Imports template loader and the <code>aurelia-polymer</code> plugin, both of which can be installed with JSPM.</p>
+<code-listing heading="Plugin Installation">
+  <source-code lang="Shell">%0A%20%20%20%20%24%20jspm%20install%20aurelia-html-import-template-loader%0A%20%20%20%20%24%20jspm%20install%20aurelia-polymer@%5E1.0.0-beta%0A%20%20</source-code>
+</code-listing>
+<p>In <code>index.html</code>, Polymer and the webcomponents.js polyfills need to be loaded before Aurelia is, so that the <code>aurelia-polymer</code> plugin can hook into Polymer's element registration system.</p>
+<code-listing heading="Loading Web Components and Polymer">
+  <source-code lang="HTML">%0A%20%20%20%20%3C%21DOCTYPE%20html%3E%0A%20%20%20%20%3Chtml%3E%0A%20%20%20%20%20%20%3Chead%3E%0A%20%20%20%20%20%20%20%20%20...%20%0A%20%20%20%20%20%20%20%20%3Cscript%20src%3D%22bower_components/webcomponentsjs/webcomponents-lite.js%22%3E%3C/script%3E%0A%20%20%20%20%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22bower_components/polymer/polymer.html%22%3E%0A%20%20%20%20%20%20%3C/head%3E%0A%20%20%20%20%20%20%20...%20%0A%20%20%20%20%3C/html%3E%0A%20%20</source-code>
+</code-listing>
+<p>It's also a good idea to wait until the web components polyfill has loaded Polymer to bootstrap Aurelia. Instead of directly importing <code>aurelia-bootstrapper</code>, wait until the <code>WebComponentsReady</code> event fires in <code>index.html</code>.</p>
+<code-listing heading="Bootstrapping Aurelia">
+  <source-code lang="HTML">%0A%20%20%20%20%3C%21DOCTYPE%20html%3E%0A%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20document.addEventListener%28%27WebComponentsReady%27%2C%20function%28%29%20%7B%0A%20%20%20%20%20%20%20%20System.import%28%27aurelia-bootstrapper%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%3C/script%3E%0A%20%20</source-code>
+</code-listing>
+<p>In <code>main.js</code>, the two Aurelia plugins installed before need to be loaded as well.</p>
+<code-listing heading="Configuring Aurelia">
+  <source-code lang="ES 2015/2016">%0A%20%20%20%20export%20function%20configure%28aurelia%29%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.use.plugin%28%27aurelia-polymer%27%29%3B%0A%20%20%20%20%20%20aurelia.use.plugin%28%27aurelia-html-import-template-loader%27%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28a%20%3D%3E%20a.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BAurelia%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%3A%20Aurelia%29%3A%20void%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.use.plugin%28%27aurelia-polymer%27%29%3B%0A%20%20%20%20%20%20aurelia.use.plugin%28%27aurelia-html-import-template-loader%27%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28a%20%3D%3E%20a.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+</code-listing>
+<p>At this point, Aurelia and Polymer are ready to go. The examples below incorporate various Polymer elements into the Aurelia skeleton navigation starter.</p>
+</au-doc-section>
+<au-doc-section uid="2" version="1.0.0" heading="Importing Elements"><p>With the normal Aurelia template loader, nothing is allowed outside the root <code>&lt;template&gt;</code> element. When using HTML imports, however, the import statements must be before the <code>&lt;template&gt;</code>.</p>
+<code-listing heading="Using HTML Imports">
+  <source-code lang="HTML">%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/paper-drawer-panel/paper-drawer-panel.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/paper-toolbar/paper-toolbar.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/paper-menu/paper-menu.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/paper-item/paper-item.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/paper-icon-button/paper-icon-button.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22/bower_components/iron-icons/iron-icons.html%22%3E%0A%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%20...%20%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+</au-doc-section>
+<au-doc-section uid="3" version="1.0.0" heading="Data Binding"><p>Given the imports above, this shows how to implement a basic layout in <code>app.html</code> with Polymer components.</p>
+<code-listing heading="Using Polymer Elements">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cpaper-drawer-panel%20force-narrow%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20drawer%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cpaper-toolbar%20class%3D%22paper-header%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%3EMenu%3C/span%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/paper-toolbar%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cpaper-menu%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpaper-item%20repeat.for%3D%22row%20of%20router.navigation%22%20active.bind%3D%22row.isActive%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20href.bind%3D%22row.href%22%3E%24%7Brow.title%7D%3C/a%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/paper-item%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/paper-menu%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20main%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cpaper-toolbar%20class%3D%22paper-header%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpaper-icon-button%20icon%3D%22menu%22%20tabindex%3D%221%22%20paper-drawer-toggle%3E%3C/paper-icon-button%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22title%22%3E%24%7Brouter.title%7D%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20if.bind%3D%22router.isNavigating%22%3E%3Ciron-icon%20icon%3D%22autorenew%22/%3E%3C/span%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/paper-toolbar%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crouter-view%3E%3C/router-view%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3C/paper-drawer-panel%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<p>Notice that Poylmer elements such as <code>&lt;paper-drawer-panel&gt;</code> or <code>&lt;paper-menu&gt;</code>, once imported, can be used just like
+normal HTML elements.</p>
+<p>All of the standard Aurelia binding syntax continues to work as well. For example,
+<code>repeat.for</code> is used to populate menu items from the Aurelia router. The <code>active.bind</code>
+binding on the <code>&lt;paper-item&gt;</code> elements in the navigation menu shows that attributes
+defined by Polymer are also supported by Aurelia.</p>
+</au-doc-section>
+<au-doc-section uid="4" version="1.0.0" heading="Forms and Two-Way Binding"><p>The updated <code>welcome.html</code> uses Polymer input elements to enhance its form.</p>
+<code-listing heading="Using Polymer in a Form">
+  <source-code lang="HTML">%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22../bower_components/paper-input/paper-input.html%22%3E%0A%20%20%20%20%3Clink%20rel%3D%22import%22%20href%3D%22../bower_components/iron-form/iron-form.html%22%3E%0A%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Csection%20class%3D%22au-animate%22%3E%0A%20%20%20%20%20%20%20%20%3Ch2%3E%24%7Bheading%7D%3C/h2%3E%0A%20%20%20%20%20%20%20%20%3Cform%20is%3D%22iron-form%22%20role%3D%22form%22%20submit.delegate%3D%22submit%28%29%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22form-group%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clabel%20for%3D%22fn%22%3EFirst%20Name%3C/label%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpaper-input%20id%3D%22fn%22%20value.two-way%3D%22firstName%22%20placeholder%3D%22first%20name%22%3E%3C/paper-input%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22form-group%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clabel%20for%3D%22ln%22%3ELast%20Name%3C/label%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpaper-input%20id%3D%22fn%22%20value.two-way%3D%22lastName%22%20placeholder%3D%22last%20name%22%3E%3C/paper-input%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22form-group%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clabel%3EFull%20Name%3C/label%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%20class%3D%22help-block%22%3E%24%7BfullName%20%7C%20upper%7D%3C/p%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cbutton%20type%3D%22submit%22%20class%3D%22btn%20btn-default%22%3ESubmit%3C/button%3E%0A%20%20%20%20%20%20%20%20%3C/form%3E%0A%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+</code-listing>
+<p>While not strictly necessary in this case, making the form an <code>&lt;iron-form&gt;</code> ensures
+that Polymer input elements are submitted along with native HTML elements.</p>
+<p>Note that the <code>&lt;paper-input&gt;</code> elements have <code>.two-way</code> bindings, not just <code>.bind</code>.
+With the exception of native HTML form elements, Aurelia defaults to one-way bindings,
+so two-way data binding must be specified explicitly.</p>
+<p>A normal <code>&lt;button&gt;</code> element is used with Aurelia's <code>submit.delegate</code> binding, since
+Polymer elements cannot submit forms.</p>
+<p>If form submission semantics were not needed, another option would be to
+use a <code>click.delegate</code> on a Polymer button instead.</p>
+<code-listing heading="Polymer Element with Event Delegation">
+  <source-code lang="HTML">%0A%20%20%20%20%3Cpaper-button%20raised%20click.delegate%3D%22submit%28%29%22%3ESubmit%3C/paper-button%3E%0A%20%20</source-code>
+</code-listing>
+</au-doc-section>
+<au-doc-section uid="5" version="1.0.0" heading="How the Plugin Works"><p>The <code>aurelia-polymer</code> plugin is fairly simple. For each Polymer element, it
+registers the element's properties and what events they support with the
+<code>EventManager</code> in Aurelia's binding component. The core of the plugin, the
+<a href="https://github.com/roguePanda/aurelia-polymer/blob/1.0.0-beta.1.0.1/src/index.js#L7" target="_blank">registerElement</a>
+
+function, loops over all properties of the element and any behavior it implements
+so that the Aurelia binding engine will register event listeners properly.</p>
+<code-listing heading="Element Registration">
+  <source-code lang="ES 2015/2016">%0A%20%20%20%20var%20propertyConfig%20%3D%20%7B%27bind-value%27%3A%20%5B%27change%27%2C%20%27input%27%5D%7D%3B%20//%20Not%20explicitly%20listed%20for%20all%20elements%20that%20use%20it%0A%0A%20%20%20%20function%20handleProp%28propName%2C%20prop%29%20%7B%0A%20%20%20%20%20%20if%20%28prop.notify%29%20%7B%0A%20%20%20%20%20%20%20%20propertyConfig%5BpropName%5D%20%3D%20%5B%27change%27%2C%20%27input%27%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20Object.keys%28prototype.properties%29.forEach%28propName%20%3D%3E%20handleProp%28propName%2C%20prototype.properties%5BpropName%5D%29%29%3B%0A%0A%20%20%20%20prototype.behaviors.forEach%28behavior%20%3D%3E%20%7B%0A%20%20%20%20%20%20if%20%28typeof%20behavior.properties%20%21%3D%20%27undefined%27%29%20%7B%0A%20%20%20%20%20%20%20%20Object.keys%28behavior.properties%29.forEach%28propName%20%3D%3E%20handleProp%28propName%2C%20behavior.properties%5BpropName%5D%29%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20eventManager.registerElementConfig%28%7B%0A%20%20%20%20%20%20tagName%3A%20prototype.is%2C%0A%20%20%20%20%20%20properties%3A%20propertyConfig%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+  <source-code lang="TypeScript">%0A%20%20%20%20var%20propertyConfig%20%3D%20%7B%27bind-value%27%3A%20%5B%27change%27%2C%20%27input%27%5D%7D%3B%20//%20Not%20explicitly%20listed%20for%20all%20elements%20that%20use%20it%0A%0A%20%20%20%20function%20handleProp%28propName%2C%20prop%29%20%7B%0A%20%20%20%20%20%20if%20%28prop.notify%29%20%7B%0A%20%20%20%20%20%20%20%20propertyConfig%5BpropName%5D%20%3D%20%5B%27change%27%2C%20%27input%27%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20Object.keys%28prototype.properties%29.forEach%28propName%20%3D%3E%20handleProp%28propName%2C%20prototype.properties%5BpropName%5D%29%29%3B%0A%0A%20%20%20%20prototype.behaviors.forEach%28behavior%20%3D%3E%20%7B%0A%20%20%20%20%20%20if%20%28typeof%20behavior.properties%20%21%3D%20%27undefined%27%29%20%7B%0A%20%20%20%20%20%20%20%20Object.keys%28behavior.properties%29.forEach%28propName%20%3D%3E%20handleProp%28propName%2C%20behavior.properties%5BpropName%5D%29%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20eventManager.registerElementConfig%28%7B%0A%20%20%20%20%20%20tagName%3A%20prototype.is%2C%0A%20%20%20%20%20%20properties%3A%20propertyConfig%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<p>Element properties marked with <code>notify</code> are eligible for Polymer's two-way data
+binding system and also trigger a <code>{property-name}-changed</code> event. This corresponds
+to the <code>input</code> and <code>change</code> events in Aurelia.</p>
+<p>Whenever a Polymer element is imported, it triggers a call to <code>Polymer.telemetry._registrate</code>,
+which adds the element prototype to a list of registered Polymer elements. The
+<code>aurelia-polymer</code> plugin replaces this registration function with one that also
+calls <code>registerElement</code> on the prototype so that it is configured with Aurelia
+as well. The need to override this function is why Polymer must be loaded before
+the plugin is.
+</button></paper-input></iron-form></paper-item></paper-menu></paper-drawer-panel></template></template></p>
+</au-doc-section>
+
+  </article>
+</section>

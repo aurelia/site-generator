@@ -1,0 +1,6583 @@
+{
+	"classes": [
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "addView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "addView",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Adds a view to the repeater, binding the view to the\nprovided contexts."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The binding context to bind the new view to."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "A secondary binding context that can override the primary context.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 396,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "insertView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "insertView",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Inserts a view to the repeater at a specific index, binding the view to the\nprovided contexts."
+							},
+							"parameters": [
+								{
+									"name": "index",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The index at which to create the new view at."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The binding context to bind the new view to."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "A secondary binding context that can override the primary context.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 406,
+							"character": 12
+						}
+					]
+				},
+				{
+					"name": "matcher",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "matcher",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Returns the matcher function to be used by the repeater, or null if strict matching is to be performed.",
+								"returns": "The requested matcher function.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 387,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "moveView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "moveView",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Moves a view across the repeater."
+							},
+							"parameters": [
+								{
+									"name": "sourceIndex",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"shortText": "The index where the view should be placed at.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "targetIndex",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 414,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "removeAllViews",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "removeAllViews",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Removes all views from the repeater.",
+								"returns": "\n"
+							},
+							"parameters": [
+								{
+									"name": "returnToCache",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Should the view be returned to the view cache?"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								},
+								{
+									"name": "skipAnimation",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Should the removal animation be skipped?"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 422,
+							"character": 16
+						}
+					]
+				},
+				{
+					"name": "removeView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "removeView",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Removes a view from the repeater at a specific index.",
+								"returns": "\n"
+							},
+							"parameters": [
+								{
+									"name": "index",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The index of the view to be removed."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "number"
+									}
+								},
+								{
+									"name": "returnToCache",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Should the view be returned to the view cache?"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								},
+								{
+									"name": "skipAnimation",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Should the removal animation be skipped?"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 442,
+							"character": 12
+						}
+					]
+				},
+				{
+					"name": "removeViews",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "removeViews",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Removes an array of Views from the repeater.",
+								"returns": "\n"
+							},
+							"parameters": [
+								{
+									"name": "viewsToRemove",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The array of views to be removed."
+									},
+									"type": {
+										"type": "reference",
+										"name": "Array",
+										"typeArguments": [
+											{
+												"type": "reference",
+												"name": "View"
+											}
+										]
+									}
+								},
+								{
+									"name": "returnToCache",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Should the view be returned to the view cache?"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								},
+								{
+									"name": "skipAnimation",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Should the removal animation be skipped?"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "boolean"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 432,
+							"character": 13
+						}
+					]
+				},
+				{
+					"name": "updateBindings",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "updateBindings",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Forces a particular view to update it's bindings, called as part of\nan in-place processing of items for better performance"
+							},
+							"parameters": [
+								{
+									"name": "view",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "the target view for bindings updates\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "View"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 450,
+							"character": 16
+						}
+					]
+				},
+				{
+					"name": "view",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "view",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Returns a single view from the repeater at the provided index.",
+								"returns": "The requested view.\n"
+							},
+							"parameters": [
+								{
+									"name": "index",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The index of the requested view."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 380,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "viewCount",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "viewCount",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Returns the number of views the repeater knows about.",
+								"returns": "the number of views.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 365,
+							"character": 11
+						}
+					]
+				},
+				{
+					"name": "views",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "views",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Returns all of the repeaters views as an array.",
+								"returns": "The repeater's array of views;\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 372,
+							"character": 7
+						}
+					]
+				}
+			],
+			"name": "AbstractRepeater",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "An abstract base class for elements and attributes that repeat\nviews."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 357,
+					"character": 37
+				}
+			],
+			"extendedBy": [
+				{
+					"type": "reference",
+					"name": "Repeat",
+					"id": 4026
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new AbstractRepeater",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"parameters": [
+							{
+								"name": "options",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "AbstractRepeater",
+							"id": 3871
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 357,
+						"character": 39
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "getCollectionObserver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getCollectionObserver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets an observer for the specified collection."
+							},
+							"parameters": [
+								{
+									"name": "observerLocator",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The observer locator instance."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The items to be observed.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 463,
+							"character": 23
+						}
+					]
+				},
+				{
+					"name": "instanceChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Handle the repeat's collection instance changing."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The repeater instance."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new array instance.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 470,
+							"character": 17
+						}
+					]
+				},
+				{
+					"name": "instanceMutated",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceMutated",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Handle the repeat's collection instance mutating."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The repeat instance."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "array",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The modified array."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "splices",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "Records of array changes.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 478,
+							"character": 17
+						}
+					]
+				}
+			],
+			"name": "ArrayRepeatStrategy",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy for repeating a template over an array."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 456,
+					"character": 40
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 342,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 343,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "AttrBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 341,
+					"character": 40
+				}
+			]
+		},
+		{
+			"properties": [
+				{
+					"name": "signals",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 326,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "signal",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "signal",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "name",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 327,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "BindingSignaler",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 325,
+					"character": 36
+				}
+			]
+		},
+		{
+			"properties": [
+				{
+					"name": "model",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 268,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "swapOrder",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 271,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "view",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 269,
+							"character": 6
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "viewModel",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 270,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Used to set the bindingContext."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The context in which the view model is executed in."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The context in which the view model is executed in.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 297,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "created",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "created",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the component has been created."
+							},
+							"parameters": [
+								{
+									"name": "owningView",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "The view that this component was created inside of.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "View"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 289,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "modelChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "modelChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound model changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "oldValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The old value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 309,
+							"character": 14
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Unbinds the Compose."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 302,
+							"character": 8
+						}
+					]
+				},
+				{
+					"name": "viewChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "viewChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound view changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "oldValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The old value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 316,
+							"character": 13
+						}
+					]
+				},
+				{
+					"name": "viewModelChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "viewModelChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound view model changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "oldValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The old value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 323,
+							"character": 18
+						}
+					]
+				}
+			],
+			"name": "Compose",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Used to compose a new view / view-model template or bind to an existing instance."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 267,
+					"character": 28
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of Compose."
+				},
+				"signatures": [
+					{
+						"name": "new Compose",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of Compose."
+						},
+						"parameters": [
+							{
+								"name": "element",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The Compose element."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "container",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The dependency injection container instance."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "compositionEngine",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "CompositionEngine instance to compose the element."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewSlot",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The slot the view is injected in to."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewResources",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "Collection of resources used to compile the the view."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "taskQueue",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The TaskQueue instance.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Compose",
+							"id": 3812
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 271,
+						"character": 17
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "delay",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 260,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 261,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "DebounceBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 259,
+					"character": 44
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "attached",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "attached",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the attribute is attached to the DOM."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 252,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "detached",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "detached",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the attribute is detached from the DOM."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 257,
+							"character": 10
+						}
+					]
+				},
+				{
+					"name": "valueChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "valueChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound value changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 247,
+							"character": 14
+						}
+					]
+				}
+			],
+			"name": "Focus",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "CustomAttribute that binds provided DOM element's focus attribute with a property on the viewmodel."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 234,
+					"character": 26
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of Focus.",
+					"tags": [
+						{
+							"tag": "paramelement",
+							"text": "Target element on where attribute is placed on."
+						}
+					]
+				},
+				"signatures": [
+					{
+						"name": "new Focus",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of Focus.",
+							"tags": [
+								{
+									"tag": "paramelement",
+									"text": "Target element on where attribute is placed on."
+								}
+							]
+						},
+						"parameters": [
+							{
+								"name": "element",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "taskQueue",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The TaskQueue instance.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Focus",
+							"id": 3790
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 234,
+						"character": 28
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "sanitize",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "sanitize",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Sanitizes the provided input."
+							},
+							"parameters": [
+								{
+									"name": "input",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The input to be sanitized.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 228,
+							"character": 10
+						}
+					]
+				}
+			],
+			"name": "HTMLSanitizer",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Default Html Sanitizer to prevent script injection."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 222,
+					"character": 34
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Binds the Hide attribute."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 603,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "created",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "created",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the behavior is created."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 592,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "valueChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "valueChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound value changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 598,
+							"character": 14
+						}
+					]
+				}
+			],
+			"name": "Hide",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Binding to conditionally show markup in the DOM based on the value.\n- different from \"if\" in that the markup is still added to the DOM, simply not shown."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 579,
+					"character": 25
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates a new instance of Hide."
+				},
+				"signatures": [
+					{
+						"name": "new Hide",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates a new instance of Hide."
+						},
+						"parameters": [
+							{
+								"name": "element",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "Target element to conditionally hide."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "animator",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The animator that conditionally adds or removes the aurelia-hide css class."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "domBoundary",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The DOM boundary. Used when the behavior appears within a component that utilizes the shadow DOM.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Hide",
+							"id": 3985
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 579,
+						"character": 27
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Binds the if to the binding context and override context"
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The binding context"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "An override context for binding.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 205,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Unbinds the if"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 216,
+							"character": 8
+						}
+					]
+				},
+				{
+					"name": "valueChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "valueChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime value property changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 211,
+							"character": 14
+						}
+					]
+				}
+			],
+			"name": "If",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Binding to conditionally include or not include template logic depending on returned result\n- value should be Boolean or will be treated as such (truthy / falsey)"
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 191,
+					"character": 23
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of If."
+				},
+				"signatures": [
+					{
+						"name": "new If",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of If."
+						},
+						"parameters": [
+							{
+								"name": "viewFactory",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The factory generating the view"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewSlot",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The slot the view is injected in to\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "If",
+							"id": 3772
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 191,
+						"character": 25
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "getCollectionObserver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getCollectionObserver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets a Map observer."
+							},
+							"parameters": [
+								{
+									"name": "observerLocator",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The items to be observed.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 490,
+							"character": 23
+						}
+					]
+				},
+				{
+					"name": "instanceChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Process the provided Map entries."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The entries to process.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 496,
+							"character": 17
+						}
+					]
+				},
+				{
+					"name": "instanceMutated",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceMutated",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Handle changes in a Map collection."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "map",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The underlying Map collection."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "records",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The change records.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 503,
+							"character": 17
+						}
+					]
+				}
+			],
+			"name": "MapRepeatStrategy",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy for repeating a template over a Map."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 484,
+					"character": 38
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "getCollectionObserver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getCollectionObserver",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "observerLocator",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 184,
+							"character": 23
+						}
+					]
+				},
+				{
+					"name": "instanceChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 183,
+							"character": 17
+						}
+					]
+				}
+			],
+			"name": "NullRepeatStrategy",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy for repeating a template over null or undefined (does nothing)"
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 182,
+					"character": 39
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "getCollectionObserver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getCollectionObserver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Return the strategies collection observer. In this case none."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 514,
+							"character": 23
+						}
+					]
+				},
+				{
+					"name": "instanceChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Process the provided Number."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "value",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The Number of how many time to iterate.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 520,
+							"character": 17
+						}
+					]
+				}
+			],
+			"name": "NumberRepeatStrategy",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy for repeating a template over a number."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 509,
+					"character": 41
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [],
+			"name": "OneTimeBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 329,
+					"character": 43
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new OneTimeBindingBehavior",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"type": {
+							"type": "reference",
+							"name": "OneTimeBindingBehavior",
+							"id": 3853
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 329,
+						"character": 45
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [],
+			"name": "OneWayBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 332,
+					"character": 42
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new OneWayBindingBehavior",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"type": {
+							"type": "reference",
+							"name": "OneWayBindingBehavior",
+							"id": 3856
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 332,
+						"character": 44
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "items",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 669,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "key",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 671,
+							"character": 5
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "local",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 670,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				},
+				{
+					"name": "value",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 672,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "addView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "addView",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.addView",
+								"id": 3884
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 718,
+							"character": 9
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.addView",
+						"id": 3884
+					}
+				},
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Binds the repeat to the binding context and override context."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The binding context."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "An override context for binding.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 691,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "call",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "call",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "context",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "changes",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 684,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "handleCollectionMutated",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "handleCollectionMutated",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the underlying collection changes."
+							},
+							"parameters": [
+								{
+									"name": "collection",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "changes",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 706,
+							"character": 25
+						}
+					]
+				},
+				{
+					"name": "handleInnerCollectionMutated",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "handleInnerCollectionMutated",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the underlying inner collection changes."
+							},
+							"parameters": [
+								{
+									"name": "collection",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "changes",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 711,
+							"character": 30
+						}
+					]
+				},
+				{
+					"name": "insertView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "insertView",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "index",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.insertView",
+								"id": 3888
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 719,
+							"character": 12
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.insertView",
+						"id": 3888
+					}
+				},
+				{
+					"name": "itemsChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "itemsChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the item property changes."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 701,
+							"character": 14
+						}
+					]
+				},
+				{
+					"name": "matcher",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "matcher",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.matcher",
+								"id": 3882
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 717,
+							"character": 9
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.matcher",
+						"id": 3882
+					}
+				},
+				{
+					"name": "moveView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "moveView",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "sourceIndex",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "targetIndex",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.moveView",
+								"id": 3893
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 720,
+							"character": 10
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.moveView",
+						"id": 3893
+					}
+				},
+				{
+					"name": "removeAllViews",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "removeAllViews",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "returnToCache",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "skipAnimation",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.removeAllViews",
+								"id": 3897
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 721,
+							"character": 16
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.removeAllViews",
+						"id": 3897
+					}
+				},
+				{
+					"name": "removeView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "removeView",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "index",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "returnToCache",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "skipAnimation",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.removeView",
+								"id": 3906
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 723,
+							"character": 12
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.removeView",
+						"id": 3906
+					}
+				},
+				{
+					"name": "removeViews",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "removeViews",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "viewsToRemove",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "returnToCache",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "skipAnimation",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.removeViews",
+								"id": 3901
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 722,
+							"character": 13
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.removeViews",
+						"id": 3901
+					}
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Unbinds the repeat"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 696,
+							"character": 8
+						}
+					]
+				},
+				{
+					"name": "updateBindings",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "updateBindings",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "view",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "View"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.updateBindings",
+								"id": 3911
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 724,
+							"character": 16
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.updateBindings",
+						"id": 3911
+					}
+				},
+				{
+					"name": "view",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "view",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "index",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.view",
+								"id": 3879
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 716,
+							"character": 6
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.view",
+						"id": 3879
+					}
+				},
+				{
+					"name": "viewCount",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "viewCount",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.viewCount",
+								"id": 3875
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 714,
+							"character": 11
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.viewCount",
+						"id": 3875
+					}
+				},
+				{
+					"name": "views",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "views",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							},
+							"overwrites": {
+								"type": "reference",
+								"name": "AbstractRepeater.views",
+								"id": 3877
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 715,
+							"character": 7
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"name": "AbstractRepeater.views",
+						"id": 3877
+					}
+				}
+			],
+			"name": "Repeat",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Binding to iterate over iterable objects (Array, Map and Number) to genereate a template for each iteration."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 668,
+					"character": 27
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"name": "AbstractRepeater",
+					"id": 3871
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of Repeat."
+				},
+				"signatures": [
+					{
+						"name": "new Repeat",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of Repeat."
+						},
+						"parameters": [
+							{
+								"name": "viewFactory",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The factory generating the view"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "instruction",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The instructions for how the element should be enhanced."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewSlot",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The slot the view is injected in to."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewResources",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "Collection of resources used to compile the the views."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "observerLocator",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The observer locator instance."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "strategyLocator",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Repeat",
+							"id": 4026
+						},
+						"overwrites": {
+							"type": "reference",
+							"name": "AbstractRepeater.__constructor",
+							"id": 3872
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 672,
+						"character": 13
+					}
+				],
+				"overwrites": {
+					"type": "reference",
+					"name": "AbstractRepeater.__constructor",
+					"id": 3872
+				}
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "addStrategy",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "addStrategy",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Adds a repeat strategy to be located when repeating a template over different collection types."
+							},
+							"parameters": [
+								{
+									"name": "matcher",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 4019,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 4020,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 4021,
+															"name": "items",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "instrinct",
+																"name": "any"
+															}
+														}
+													],
+													"type": {
+														"type": "instrinct",
+														"name": "boolean"
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "aurelia-templating-resources.d.ts",
+													"line": 656,
+													"character": 22
+												}
+											]
+										}
+									}
+								},
+								{
+									"name": "strategy",
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "A repeat strategy that can iterate a specific collection type.\n"
+									},
+									"type": {
+										"type": "reference",
+										"name": "RepeatStrategy",
+										"id": 3691
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 656,
+							"character": 13
+						}
+					]
+				},
+				{
+					"name": "getStrategy",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getStrategy",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets the best strategy to handle iteration."
+							},
+							"parameters": [
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "RepeatStrategy",
+								"id": 3691
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 661,
+							"character": 13
+						}
+					]
+				}
+			],
+			"name": "RepeatStrategyLocator",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Locates the best strategy to best repeating a template over different types of collections.\nCustom strategies can be plugged in as well."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 645,
+					"character": 42
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates a new RepeatStrategyLocator."
+				},
+				"signatures": [
+					{
+						"name": "new RepeatStrategyLocator",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates a new RepeatStrategyLocator."
+						},
+						"type": {
+							"type": "reference",
+							"name": "RepeatStrategyLocator",
+							"id": 4013
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 645,
+						"character": 44
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Binds the replaceable to the binding context and override context."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The binding context."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "An override context for binding.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 123,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Unbinds the replaceable."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 128,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "Replaceable",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Marks any part of a view to be replacable by the consumer."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 110,
+					"character": 32
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {},
+				"signatures": [
+					{
+						"name": "new Replaceable",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {},
+						"parameters": [
+							{
+								"name": "viewFactory",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "target The factory generating the view."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewSlot",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "viewSlot The slot the view is injected in to.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Replaceable",
+							"id": 3752
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 110,
+						"character": 34
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "toView",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "toView",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Process the provided markup that flows to the view."
+							},
+							"parameters": [
+								{
+									"name": "untrustedMarkup",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The untrusted markup to be sanitized.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 563,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "SanitizeHTMLValueConverter",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Simple html sanitization converter to preserve whitelisted elements and attributes on a bound property containing html."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 551,
+					"character": 47
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instanse of the value converter."
+				},
+				"signatures": [
+					{
+						"name": "new SanitizeHTMLValueConverter",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instanse of the value converter."
+						},
+						"parameters": [
+							{
+								"name": "sanitizer",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The html sanitizer.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "SanitizeHTMLValueConverter",
+							"id": 3963
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 551,
+						"character": 49
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 103,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 104,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "SelfBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 102,
+					"character": 40
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "getCollectionObserver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getCollectionObserver",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Gets a Set observer."
+							},
+							"parameters": [
+								{
+									"name": "observerLocator",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The items to be observed.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 532,
+							"character": 23
+						}
+					]
+				},
+				{
+					"name": "instanceChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Process the provided Set entries."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The entries to process.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 538,
+							"character": 17
+						}
+					]
+				},
+				{
+					"name": "instanceMutated",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceMutated",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Handle changes in a Set collection."
+							},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "set",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "records",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The change records.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 545,
+							"character": 17
+						}
+					]
+				}
+			],
+			"name": "SetRepeatStrategy",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy for repeating a template over a Set."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 526,
+					"character": 38
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Binds the Show attribute."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 634,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "created",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "created",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked when the behavior is created."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 623,
+							"character": 9
+						}
+					]
+				},
+				{
+					"name": "valueChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "valueChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound value changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 629,
+							"character": 14
+						}
+					]
+				}
+			],
+			"name": "Show",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Binding to conditionally show markup in the DOM based on the value.\n- different from \"if\" in that the markup is still added to the DOM, simply not shown."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 610,
+					"character": 25
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates a new instance of Show."
+				},
+				"signatures": [
+					{
+						"name": "new Show",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates a new instance of Show."
+						},
+						"parameters": [
+							{
+								"name": "element",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "Target element to conditionally show."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "animator",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The animator that conditionally adds or removes the aurelia-hide css class."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "domBoundary",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The DOM boundary. Used when the behavior appears within a component that utilizes the shadow DOM.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "Show",
+							"id": 3999
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 610,
+						"character": 27
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "signals",
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 569,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 571,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 572,
+							"character": 8
+						}
+					]
+				},
+				{
+					"name": "inject",
+					"kindString": "Method",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "inject",
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 568,
+							"character": 15
+						}
+					]
+				}
+			],
+			"name": "SignalBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 567,
+					"character": 42
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new SignalBindingBehavior",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"parameters": [
+							{
+								"name": "bindingSignaler",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "SignalBindingBehavior",
+							"id": 3970
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 569,
+						"character": 15
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "delay",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 99,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 100,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "ThrottleBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 98,
+					"character": 44
+				}
+			]
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [],
+			"name": "TwoWayBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 335,
+					"character": 42
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new TwoWayBindingBehavior",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"type": {
+							"type": "reference",
+							"name": "TwoWayBindingBehavior",
+							"id": 3859
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 335,
+						"character": 44
+					}
+				]
+			}
+		},
+		{
+			"properties": [
+				{
+					"name": "inject",
+					"kindString": "Property",
+					"flags": {
+						"isStatic": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 93,
+							"character": 15
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "events",
+									"kindString": "Parameter",
+									"flags": {
+										"isRest": true
+									},
+									"type": {
+										"type": "instrinct",
+										"isArray": true,
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 95,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "binding",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "source",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 96,
+							"character": 8
+						}
+					]
+				}
+			],
+			"name": "UpdateTriggerBindingBehavior",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 92,
+					"character": 49
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"signatures": [
+					{
+						"name": "new UpdateTriggerBindingBehavior",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"parameters": [
+							{
+								"name": "eventManager",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "UpdateTriggerBindingBehavior",
+							"id": 3719
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 93,
+						"character": 21
+					}
+				]
+			}
+		},
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "bind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "bind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Binds the With with provided binding context and override context."
+							},
+							"parameters": [
+								{
+									"name": "bindingContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The binding context."
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "overrideContext",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "An override context for binding.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 79,
+							"character": 6
+						}
+					]
+				},
+				{
+					"name": "unbind",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "unbind",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Unbinds With"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 90,
+							"character": 8
+						}
+					]
+				},
+				{
+					"name": "valueChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "valueChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Invoked everytime the bound value changes."
+							},
+							"parameters": [
+								{
+									"name": "newValue",
+									"kindString": "Parameter",
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"text": "The new value.\n"
+									},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 85,
+							"character": 14
+						}
+					]
+				}
+			],
+			"name": "With",
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Creates a binding context for decandant elements to bind to."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 65,
+					"character": 25
+				}
+			],
+			"constructorMethod": {
+				"name": "constructor",
+				"kindString": "Constructor",
+				"flags": {
+					"isExported": true
+				},
+				"comment": {
+					"shortText": "Creates an instance of With."
+				},
+				"signatures": [
+					{
+						"name": "new With",
+						"kindString": "Constructor signature",
+						"flags": {},
+						"comment": {
+							"shortText": "Creates an instance of With."
+						},
+						"parameters": [
+							{
+								"name": "viewFactory",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The factory generating the view."
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							},
+							{
+								"name": "viewSlot",
+								"kindString": "Parameter",
+								"flags": {
+									"isOptional": true
+								},
+								"comment": {
+									"shortText": "The slot the view is injected in to.\n"
+								},
+								"type": {
+									"type": "instrinct",
+									"name": "any"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"name": "With",
+							"id": 3705
+						}
+					}
+				],
+				"sources": [
+					{
+						"fileName": "aurelia-templating-resources.d.ts",
+						"line": 65,
+						"character": 27
+					}
+				]
+			}
+		}
+	],
+	"interfaces": [
+		{
+			"properties": [],
+			"events": [],
+			"methods": [
+				{
+					"name": "getCollectionObserver",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "getCollectionObserver",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "observerLocator",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 59,
+							"character": 23
+						}
+					]
+				},
+				{
+					"name": "instanceChanged",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceChanged",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Repeat",
+										"id": 4026
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 57,
+							"character": 17
+						}
+					]
+				},
+				{
+					"name": "instanceMutated",
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"name": "instanceMutated",
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"name": "repeat",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Repeat",
+										"id": 4026
+									}
+								},
+								{
+									"name": "items",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								},
+								{
+									"name": "changes",
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "instrinct",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "instrinct",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "aurelia-templating-resources.d.ts",
+							"line": 58,
+							"character": 17
+						}
+					]
+				}
+			],
+			"name": "RepeatStrategy",
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "A strategy is for repeating a template over an iterable or iterable-like object."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 56,
+					"character": 39
+				}
+			]
+		}
+	],
+	"variables": [
+		{
+			"name": "aureliaHideClassName",
+			"kindString": "Variable",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 338,
+					"character": 41
+				}
+			],
+			"type": {
+				"type": "instrinct",
+				"name": "any"
+			}
+		},
+		{
+			"name": "lifecycleOptionalBehaviors",
+			"kindString": "Variable",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Behaviors that do not require the composition lifecycle callbacks when replacing\ntheir binding context."
+			},
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 350,
+					"character": 47
+				}
+			],
+			"type": {
+				"type": "instrinct",
+				"name": "any"
+			}
+		}
+	],
+	"functions": [
+		{
+			"name": "configure",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "configure",
+					"kindString": "Call signature",
+					"flags": {},
+					"parameters": [
+						{
+							"name": "config",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 566,
+					"character": 33
+				}
+			]
+		},
+		{
+			"name": "createFullOverrideContext",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "createFullOverrideContext",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Creates a complete override context."
+					},
+					"parameters": [
+						{
+							"name": "repeat",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "data",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "The item's value."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "index",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "The item's index."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "length",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "The collections total length."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "key",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "The key in a key/value pair.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 144,
+					"character": 49
+				}
+			]
+		},
+		{
+			"name": "getElementName",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "getElementName",
+					"kindString": "Call signature",
+					"flags": {},
+					"parameters": [
+						{
+							"name": "address",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 565,
+					"character": 38
+				}
+			]
+		},
+		{
+			"name": "getItemsSourceExpression",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "getItemsSourceExpression",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Gets a repeat instruction's source expression."
+					},
+					"parameters": [
+						{
+							"name": "instruction",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "attrName",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 157,
+					"character": 48
+				}
+			]
+		},
+		{
+			"name": "indexOf",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "indexOf",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Returns the index of the element in an array, optionally using a matcher function."
+					},
+					"parameters": [
+						{
+							"name": "array",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "item",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "matcher",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "startIndex",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 177,
+					"character": 31
+				}
+			]
+		},
+		{
+			"name": "injectAureliaHideStyleAtBoundary",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "injectAureliaHideStyleAtBoundary",
+					"kindString": "Call signature",
+					"flags": {},
+					"parameters": [
+						{
+							"name": "domBoundary",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 340,
+					"character": 56
+				}
+			]
+		},
+		{
+			"name": "injectAureliaHideStyleAtHead",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "injectAureliaHideStyleAtHead",
+					"kindString": "Call signature",
+					"flags": {},
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 339,
+					"character": 52
+				}
+			]
+		},
+		{
+			"name": "isOneTime",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "isOneTime",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Returns whether an expression has the OneTimeBindingBehavior applied."
+					},
+					"parameters": [
+						{
+							"name": "expression",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 167,
+					"character": 33
+				}
+			]
+		},
+		{
+			"name": "unwrapExpression",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "unwrapExpression",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Unwraps an expression to expose the inner, pre-converted / behavior-free expression."
+					},
+					"parameters": [
+						{
+							"name": "expression",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 162,
+					"character": 40
+				}
+			]
+		},
+		{
+			"name": "updateOneTimeBinding",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "updateOneTimeBinding",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Forces a binding instance to reevaluate."
+					},
+					"parameters": [
+						{
+							"name": "binding",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 172,
+					"character": 44
+				}
+			]
+		},
+		{
+			"name": "updateOverrideContext",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "updateOverrideContext",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Updates the override context."
+					},
+					"parameters": [
+						{
+							"name": "overrideContext",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "index",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "The context's index."
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "length",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "The collection's length.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 152,
+					"character": 45
+				}
+			]
+		},
+		{
+			"name": "updateOverrideContexts",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "updateOverrideContexts",
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"shortText": "Update the override context."
+					},
+					"parameters": [
+						{
+							"name": "views",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						},
+						{
+							"name": "startIndex",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"text": "index in collection where to start updating.\n"
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 135,
+					"character": 46
+				}
+			]
+		},
+		{
+			"name": "viewsRequireLifecycle",
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"signatures": [
+				{
+					"name": "viewsRequireLifecycle",
+					"kindString": "Call signature",
+					"flags": {},
+					"parameters": [
+						{
+							"name": "viewFactory",
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"type": {
+								"type": "instrinct",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "instrinct",
+						"name": "any"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "aurelia-templating-resources.d.ts",
+					"line": 351,
+					"character": 45
+				}
+			]
+		}
+	],
+	"name": "Templating-Resources"
+}

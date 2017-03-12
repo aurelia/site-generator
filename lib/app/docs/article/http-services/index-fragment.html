@@ -1,0 +1,152 @@
+<section class="article">
+  <header>
+    <h1>HTTP Services</h1>
+    <h2>Usually JavaScript applications need to get their data from or communicate with various web services. In this article we&#x27;ll take a look at the options Aurelia makes available to you.</h2>
+  </header>
+
+  <article>
+    <au-doc-section uid="1" version="1.0.0" heading="Options"><p>When building front-end applications, it's often necessary to leverage HTTP services to acquire data or persist state. There are many ways to accomplish this. You could use an advanced data library that implements object-relational mapping, an opinionated restful client or just a simple HTTP library. All these options are provided by the global web community and all of them can be used in an Aurelia application.</p>
+<p>That said, the Aurelia team felt the need to provide a simple solution out of the box. We wanted our community to have a directly supported option while still keeping Aurelia open so that our own community could innovate or leverage any other library developed elsewhere.</p>
+<p>Along these lines, the Aurelia project provides two options:</p>
+<ul>
+<li><code>aurelia-http-client</code> - A basic HttpClient based on XMLHttpRequest. It supports all HTTP verbs, JSONP and request cancellation.</li>
+<li><code>aurelia-fetch-client</code> - A more forward-looking HttpClient based on the Fetch specification. It supports all HTTP verbs and integrates with Service Workers, including Request/Response caching.</li>
+</ul>
+<p>How should you choose between these two options? We recommend using <code>aurelia-fetch-client</code> if possible. It is based on the Fetch specification which will be the preferred way of handling all AJAX going forward. However, if you need request cancellation or download progress, the Fetch spec does not currently support these features. While these improvements to the spec are being considered for the future, it isn't available at present. So, if you need these capabilities, you may need to use <code>aurelia-http-client</code> instead.</p>
+</au-doc-section>
+<au-doc-section uid="2" version="1.0.0" heading="aurelia-fetch-client"><p>As previously stated, the <code>aurelia-fetch-client</code> library aims to embrace and expose the new 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API</a>
+, while providing features important in web applications: default configuration of request parameters, interceptors and centralized request tracking. The main method, <code>HttpClient#fetch()</code>, has the same signature as <code>window.fetch()</code>. The difference is that our <code>HttpClient</code> will apply default configuration values, execute any registered interceptors and track the number of active requests.</p>
+<au-alert type="info"heading="Learn About The Fetch Spec"><p>
+If you are looking for some information on the Fetch API specification, we recommend that you start with the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">MDN documentation</a>
+. You may also find 
+<a href="http://jakearchibald.com/2015/thats-so-fetch/" target="_blank">Jake Archibald</a>
+ useful.</p>
+</au-alert>
+<h3>Bring Your Own Polyfill</h3>
+<p>This library relies on the Fetch API, which is not yet supported by all popular browsers. <em>This library does not include a polyfill for Fetch.</em> If you need to support 
+<a href="http://caniuse.com/#feat=fetch" target="_blank">browsers that have not implemented Fetch</a>
+, you will need to install a polyfill like 
+<a href="https://github.com/github/fetch" target="_blank">GitHub</a>
+.</p>
+<p>First, install the polyfill using your package manager. Second, make sure to import the polyfill into your application code so that it's correctly initialized before you use our fetch client. The best place to load the polyfill is typically in your application's <code>main</code> module. That might look something like this:</p>
+<code-listing heading="Initializing the Fetch Polyfill">
+  <source-code lang="ES 2015/2016">%0A%20%20%20%20import%20%27fetch%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%29%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BAurelia%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%27fetch%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%3A%20Aurelia%29%3A%20void%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+</code-listing>
+<au-alert type="info"heading="Encapsulate HttpClient Use"><p>
+Generally, we recommend that you don't litter your application code with usage of the HttpClient. Instead, we reccommend that you create one or more service classes that encapsulate all HTTP access behind a friendly, application-specific API. If you do this, we also recommend that you import the <code>fetch</code> polyfill inside these service modules rather than in your application's main module. This helps to preserve the encapsulation.</p>
+</au-alert>
+<h3>Basic Use</h3>
+<p>Data requests are accomplished by calling the <code>fetch</code> method on an instance of <code>HttpClient</code>. By default, <code>fetch</code> makes <code>GET</code> requests. All calls to <code>fetch</code> return a <code>Promise</code> which will resolve to a <code>Response</code> object. Using this <code>Response</code> object, you can easily parse content, read headers and inspect status codes. See the Fetch API spec for more information.</p>
+<p>Below is a simple sample demonstrating a basic <code>GET</code> request to a JSON file, including parsing of the response content and writing data values out to the console.</p>
+<code-listing heading="GET JSON with Fetch">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20%7BHttpClient%7D%20from%20%27aurelia-fetch-client%27%3B%0A%0A%20%20%20%20let%20client%20%3D%20new%20HttpClient%28%29%3B%0A%0A%20%20%20%20client.fetch%28%27package.json%27%29%0A%20%20%20%20%20%20.then%28response%20%3D%3E%20response.json%28%29%29%0A%20%20%20%20%20%20.then%28data%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20console.log%28data.description%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<h3>Configuration</h3>
+<p>An <code>HttpClient</code> instance can be configured with several options, such as default headers and interceptors to be run on requests or responses.</p>
+<code-listing heading="Configuring Fetch Client">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20httpClient.configure%28config%20%3D%3E%20%7B%0A%20%20%20%20%20%20config%0A%20%20%20%20%20%20%20%20.withBaseUrl%28%27api/%27%29%0A%20%20%20%20%20%20%20%20.withDefaults%28%7B%0A%20%20%20%20%20%20%20%20%20%20credentials%3A%20%27same-origin%27%2C%0A%20%20%20%20%20%20%20%20%20%20headers%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27Accept%27%3A%20%27application/json%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27X-Requested-With%27%3A%20%27Fetch%27%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20.withInterceptor%28%7B%0A%20%20%20%20%20%20%20%20%20%20request%28request%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20console.log%28%60Requesting%20%24%7Brequest.method%7D%20%24%7Brequest.url%7D%60%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20request%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20response%28response%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20console.log%28%60Received%20%24%7Bresponse.status%7D%20%24%7Bresponse.url%7D%60%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20response%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<p>In the example above, <code>withBaseUrl()</code> is used to specify a base url that all fetches will be relative to.</p>
+<p><code>withDefaults()</code> allows passing an object that can include any properties described in the optional <code>init</code> parameter to the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/Request" target="_blank">Request constructor</a>
+, and will be merged into the new 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Request" target="_blank">Request</a>
+ before it is passed to the first request interceptor.</p>
+<p><code>withInterceptor()</code> enables passing an object which can provide any of these four optional methods: <code>request</code>, <code>requestError</code>, <code>response</code>, and <code>responseError</code>. Here's an explanation of how each of these methods work:</p>
+<ul>
+<li><code>request</code> takes the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Request" target="_blank">Request</a>
+ that will be passed to <code>window.fetch()</code> after interceptors run. It should return the same Request, or create a new one. It can also return a 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Response" target="_blank">Response</a>
+ to short-circuit the call to <code>fetch()</code> and complete the request immediately. Errors thrown in request interceptors will be handled by <code>requestError</code> interceptors.</li>
+<li><code>requestError</code> acts as a Promise rejection handler during Request creation and request interceptor execution. It will receive the rejection reason, and can either re-throw, or recover by returning a valid Request.</li>
+<li><code>response</code> will be run after <code>fetch()</code> completes, and will receive the resulting 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Response" target="_blank">Response</a>
+. As with <code>request</code>, it can either pass the Response along, return a modified response, or throw.</li>
+<li><code>responseError</code> is similar to <code>requestError</code>, and acts as a Promise rejection handler for response rejections.</li>
+</ul>
+<h3>Helpers</h3>
+<p>The Fetch API has a couple gotchas, documented by the 
+<a href="https://github.com/github/fetch#caveats" target="_blank">GitHub Fetch polyfill</a>
+ docs. <code>aurelia-fetch-client</code> provides configuration helpers to apply the changes suggested by the polyfill docs.</p>
+<ul>
+<li><code>config.rejectErrorResponses()</code> will add a response interceptor that causes responses with unsuccessful status codes to result in a rejected Promise.</li>
+<li><code>config.useStandardConfiguration()</code> will apply <code>rejectErrorResponses()</code>, and also configure <code>credentials: 'same-origin'</code> as a default on all requests.</li>
+<li>The Fetch API has no convenient way of sending JSON in the body of a request. Objects must be manually serialized to JSON, and the <code>Content-Type</code> header set appropriately. aurelia-fetch-client includes a helper called <code>json</code> for this.</li>
+</ul>
+<code-listing heading="POST JSON with Fetch">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20%7BHttpClient%2C%20json%7D%20from%20%27aurelia-fetch-client%27%3B%0A%0A%20%20%20%20let%20comment%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%27Awesome%21%27%2C%0A%20%20%20%20%20%20content%3A%20%27This%20Fetch%20client%20is%20pretty%20rad.%27%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20httpClient.fetch%28%27comments%27%2C%20%7B%0A%20%20%20%20%20%20method%3A%20%27post%27%2C%0A%20%20%20%20%20%20body%3A%20json%28comment%29%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<h3>A Complete Example</h3>
+<p>This example creates a new <code>HttpClient</code> and configures it for use with an imaginary JSON API for managing comments at <code>api/</code>. The client is then used to POST a new comment to the API and display an alert dialog with the assigned comment ID.</p>
+<code-listing heading="POST JSON with Fetch">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20%7BHttpClient%2C%20json%7D%20from%20%27aurelia-fetch-client%27%3B%0A%0A%20%20%20%20let%20httpClient%20%3D%20new%20HttpClient%28%29%3B%0A%0A%20%20%20%20httpClient.configure%28config%20%3D%3E%20%7B%0A%20%20%20%20%20%20config%0A%20%20%20%20%20%20%20%20.useStandardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.withBaseUrl%28%27api/%27%29%0A%20%20%20%20%20%20%20%20.withDefaults%28%7B%0A%20%20%20%20%20%20%20%20%20%20credentials%3A%20%27same-origin%27%2C%0A%20%20%20%20%20%20%20%20%20%20headers%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27X-Requested-With%27%3A%20%27Fetch%27%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20.withInterceptor%28%7B%0A%20%20%20%20%20%20%20%20%20%20request%28request%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20authHeader%20%3D%20fakeAuthService.getAuthHeaderValue%28request.url%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20request.headers.append%28%27Authorization%27%2C%20authHeader%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20request%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20let%20comment%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%27Awesome%21%27%2C%0A%20%20%20%20%20%20content%3A%20%27This%20Fetch%20client%20is%20pretty%20rad.%27%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20httpClient%0A%20%20%20%20%20%20.fetch%28%27comments%27%2C%20%7B%0A%20%20%20%20%20%20%20%20method%3A%20%27post%27%2C%0A%20%20%20%20%20%20%20%20body%3A%20json%28comment%29%0A%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20.then%28response%20%3D%3E%20response.json%28%29%29%0A%20%20%20%20%20%20.then%28savedComment%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20alert%28%60Saved%20comment%21%20ID%3A%20%24%7BsavedComment.id%7D%60%29%3B%0A%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20.catch%28error%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20alert%28%27Error%20saving%20comment%21%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<h3>Limitations</h3>
+<ul>
+<li>This library does not include a polyfill for Fetch. If you need to support 
+<a href="http://caniuse.com/#feat=fetch" target="_blank">browsers that have not implemented Fetch</a>
+, you will need to install a polyfill like 
+<a href="https://github.com/github/fetch" target="_blank">GitHub</a>
+.</li>
+<li>This library does not work around any of the existing limitations in the Fetch API, including:
+<ul>
+<li>Fetch does not currently support aborting requests or specifying request timeouts.</li>
+<li>Fetch does not currently support progress reporting.</li>
+</ul>
+</li>
+<li>JSONP support is not currently provided by this library.</li>
+<li>The 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/Request" target="_blank">Request constructor</a>
+ provides its own default values, so if a Request is created before invoking <code>HttpClient#fetch</code> (eg, the <code>HttpClient#fetch(request)</code> signature is used instead of the <code>HttpClient#fetch(url, params)</code> signature), there is no way for the client to know which default values to merge into the Request. The base URL and headers can be merged, but currently no other defaults will be applied in this case.</li>
+</ul>
+<p>If your application has requirements that don't fit within these limitations, then you may want to look into using <code>aurelia-http-client</code> instead.</p>
+</au-doc-section>
+<au-doc-section uid="3" version="1.0.0" heading="aurelia-http-client"><p>In addition to <code>aurelia-fetch-client</code>, Aurelia includes a basic <code>HttpClient</code> to provide a comfortable interface to the browser's <code>XMLHttpRequest</code> object. Like <code>aurelia-fetch-client</code>, <code>aurelia-http-client</code> is not included in the modules that Aurelia's bootstrapper installs, since it's completely optional and many apps may choose to use a different strategy for data retrieval. So, if you want to use it, first you must install it with your preferred package manager.</p>
+<h3>Basic Use</h3>
+<p>Once installed, you can use it like this:</p>
+<code-listing heading="GET JSON with Basic HTTP">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20%7BHttpClient%7D%20from%20%27aurelia-http-client%27%3B%0A%0A%20%20%20%20let%20client%20%3D%20new%20HttpClient%28%29%3B%0A%0A%20%20%20%20client.get%28%27package.json%27%29%0A%20%20%20%20%20%20.then%28data%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20console.log%28data.description%29%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<p>The <code>HttpClient</code> has a variety of methods. The following is a description of the APIs available.</p>
+<code-listing heading="HTTPClient API">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20export%20class%20HttpClient%20%7B%0A%20%20%20%20%20%20isRequesting%3A%20boolean%3B%0A%0A%20%20%20%20%20%20constructor%28%29%3B%0A%0A%20%20%20%20%20%20configure%28fn%3A%20%28%28builder%3A%20RequestBuilder%29%20%3D%3E%20void%29%29%3A%20HttpClient%3B%0A%20%20%20%20%20%20createRequest%28url%3A%20string%29%3A%20RequestBuilder%3B%0A%20%20%20%20%20%20send%28requestMessage%3A%20RequestMessage%2C%20transformers%3A%20Array%3CRequestTransformer%3E%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%0A%20%20%20%20%20%20delete%28url%3A%20string%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20get%28url%3A%20string%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20head%28url%3A%20string%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20jsonp%28url%3A%20string%2C%20callbackParameterName%3F%3A%20string%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20options%28url%3A%20string%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20put%28url%3A%20string%2C%20content%3A%20any%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20patch%28url%3A%20string%2C%20content%3A%20any%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%20%20post%28url%3A%20string%2C%20content%3A%20any%29%3A%20Promise%3CHttpResponseMessage%3E%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+</code-listing>
+<p>As you can see, the API provides convenience methods for all the standard verbs as well as <code>jsonp</code>. Each of these methods sends an <code>HttpRequestMessage</code> except <code>jsonp</code> which sends a <code>JSONPRequestMessage</code>. The result of sending a message is a <code>Promise</code> for an <code>HttpResponseMessage</code>.</p>
+<p>The <code>HttpResponseMessage</code> has the following properties:</p>
+<ul>
+<li><code>response</code> - Returns the raw content sent from the server.</li>
+<li><code>responseType</code> - The expected response type.</li>
+<li><code>content</code> - Formats the raw <code>response</code> content based on the <code>responseType</code> and returns it.</li>
+<li><code>headers</code> - Returns a <code>Headers</code> object with the parsed header data.</li>
+<li><code>statusCode</code> - The server's response status code.</li>
+<li><code>statusText</code> - The server's textual status message.</li>
+<li><code>isSuccess</code> - Indicates whether or not the status code falls within the success range.</li>
+<li><code>reviver</code> - A function used to transform the raw <code>response</code> content.</li>
+<li><code>requestMessage</code> - A reference to the original request message.</li>
+</ul>
+<au-alert type="info"heading="JSON By Default"><p>
+By default, the <code>HttpClient</code> assumes you are expecting a JSON responseType.</p>
+</au-alert>
+<h3>Configuration</h3>
+<p>You can use <code>configure</code> to access a fluent api for configuring all requests sent by the client. You can also use <code>createRequest</code> to custom configure individual requests. Here's an example of configuration:</p>
+<code-listing heading="Configuring Basic HTTP">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20let%20client%20%3D%20new%20HttpClient%28%29%0A%20%20%20%20%20%20.configure%28x%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20x.withBaseUrl%28%27http%3A//aurelia.io%27%29%3B%0A%20%20%20%20%20%20%20%20x.withHeader%28%27Authorization%27%2C%20%27bearer%20123%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20client.get%28%27some/cool/path%27%29%3B%0A%20%20</source-code>
+</code-listing>
+<p>In this case, all requests from the client will have the base url of 'http://aurelia.io' and will have the specified Authorization header. The same API is available via the <code>RequestBuilder</code>. So, you can accomplish the same thing on an individual request like this:</p>
+<code-listing heading="RequestBuilder API">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20let%20client%20%3D%20new%20HttpClient%28%29%3B%0A%0A%20%20%20%20client.createRequest%28%27some/cool/path%27%29%0A%20%20%20%20%20%20.asGet%28%29%0A%20%20%20%20%20%20.withBaseUrl%28%27http%3A//aurelia.io%27%29%0A%20%20%20%20%20%20.withHeader%28%27Authorization%27%2C%20%27bearer%20123%27%29%0A%20%20%20%20%20%20.withParams%28%7B%20abc%3A%20%27123%27%20%7D%29%0A%20%20%20%20%20%20.send%28%29%3B%0A%20%20</source-code>
+</code-listing>
+<p>The fluent API has the following chainable methods: <code>asDelete()</code>, <code>asGet()</code>, <code>asHead()</code>, <code>asOptions()</code>, <code>asPatch()</code>, <code>asPost()</code>, <code>asPut()</code>, <code>asJsonp()</code>, <code>withUrl()</code>, <code>withBaseUrl()</code>, <code>withContent()</code>, <code>withParams()</code>, <code>withResponseType()</code>, <code>withTimeout()</code>, <code>withHeader()</code>, <code>withCredentials()</code>, <code>withReviver()</code>, <code>withReplacer()</code>, <code>withProgressCallback()</code>, and <code>withCallbackParameterName()</code>.</p>
+<p>It is possible to hook into requests and responses with interceptors as well. Here's an example:</p>
+<code-listing heading="Basic HTTP Interceptors">
+  <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20let%20client%20%3D%20new%20HttpClient%28%29%3B%0A%20%20%20%20client.configure%28x%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20x.withInterceptor%28%7B%0A%20%20%20%20%20%20%20%20%20%20request%28message%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20message%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20requestError%28error%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20throw%20error%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20response%28message%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20message%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20responseError%28error%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20throw%20error%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+</code-listing>
+<p>All interceptors used with a client form a chain. The return value of an intercept method is passed on as the argument to the next. Interceptors are called in the order they were added. See the <code>aurelia-fetch-client</code> interceptor documentation for more information on interceptors.</p>
+</au-doc-section>
+
+  </article>
+</section>
