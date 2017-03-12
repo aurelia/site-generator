@@ -1,13 +1,15 @@
-import {autoinject} from 'aurelia-dependency-injection';
+import {Container, autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {ShowMenu, HideMenu} from './messages/menu';
+import {Article} from './screens/article';
 
 @autoinject
 export class App {
   activeTab = null;
+  currentScreen = null;
 
-  constructor(private history: History, private ea: EventAggregator) {}
+  constructor(private container: Container, private history: History, private ea: EventAggregator) {}
 
   activate() {
     this.history.activate({ 
@@ -32,6 +34,7 @@ export class App {
       this.ea.publish(new ShowMenu(url));
     } else if (url.indexOf('article') !== -1) {
       this.activeTab = 'article';
+      this.currentScreen = (<Article>this.container.get(Article)).withUrl(url);
       this.ea.publish(new ShowMenu(url));
     } else {
       this.activeTab = 'home';

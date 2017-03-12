@@ -147,7 +147,9 @@
   </header>
 
   <main>
-    {{{content}}}
+    <compose view-model.bind="currentScreen">
+      {{{content}}}
+    </compose>
   </main>
 
   <side-bar></side-bar>

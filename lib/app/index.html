@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -147,7 +147,9 @@
   </header>
 
   <main>
-    {{{content}}}
+    <compose view-model.bind="currentScreen">
+      {{{content}}}
+    </compose>
   </main>
 
   <side-bar></side-bar>
