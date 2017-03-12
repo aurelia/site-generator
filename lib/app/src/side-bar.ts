@@ -6,7 +6,7 @@ import {ShowMenu, HideMenu} from './messages/menu';
 @autoinject
 export class SideBar {
   isActive = false;
-  docs = window['aureliaDocConfiguration'].documentation;
+  docs = window['aureliaDocConfiguration'].docs;
   selectedItem:any = null;
   menu: any = null;
 
@@ -17,9 +17,23 @@ export class SideBar {
       if (api) {
         this.selectedItem = api;
         this.menu = this.docs.api;
+        this.isActive = true;
+      } else {
+        let articleOrGroup = findIn(this.docs.article, msg.path);
+
+        if (articleOrGroup) {
+          if (articleOrGroup.items) {
+            this.menu = articleOrGroup.items;
+          } else {
+            this.selectedItem = articleOrGroup;
+            //TODO: load up the headings
+          }
+
+          this.isActive = true;
+        } else {
+          this.isActive = false;
+        }
       }
-      
-      this.isActive = true;
     });
 
     ea.subscribe(HideMenu, (msg:HideMenu) => {
@@ -28,10 +42,25 @@ export class SideBar {
   }
 
   select(item) {
-    if (item.items) {
-      this.menu = item.items;
-    } else {
-      this.history.navigate(item.dest);
+    this.history.navigate(item.dest);
+  }
+}
+
+function findIn(items:any[], path: string): any {
+  let found = items.find(x => x.dest === path);
+
+  if (found) {
+    return found;
+  }
+
+  for (let i = 0, ii = items.length; i < ii; ++i) {
+    let current = items[i];
+
+    if (current.items) {
+      found = findIn(current.items, path);
+      if (found) {
+        return found;
+      }
     }
   }
 }

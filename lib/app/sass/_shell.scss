@@ -43,7 +43,7 @@ nav {
       position: relative;
       transition: background .2s;
 
-      &.articles, &.apis, &.discuss, &.blog {
+      &.article, &.api, &.discuss, &.blog {
         padding-left: 18px
       }
 

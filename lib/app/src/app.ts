@@ -28,10 +28,10 @@ export class App {
       this.activeTab = 'blog';
       this.ea.publish(new HideMenu());
     } else if (url.indexOf('api') !== -1) {
-      this.activeTab = 'apis';
+      this.activeTab = 'api';
       this.ea.publish(new ShowMenu(url));
     } else if (url.indexOf('article') !== -1) {
-      this.activeTab = 'articles';
+      this.activeTab = 'article';
       this.ea.publish(new ShowMenu(url));
     } else {
       this.activeTab = 'home';
