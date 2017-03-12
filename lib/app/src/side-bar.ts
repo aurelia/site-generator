@@ -2,6 +2,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
 import {ShowMenu, HideMenu} from './messages/menu';
+import {Configuration} from './configuration';
 
 @autoinject
 export class SideBar {
@@ -10,16 +11,16 @@ export class SideBar {
   selectedItem:any = null;
   menu: any = null;
 
-  constructor(private ea: EventAggregator, private history: History) {
+  constructor(private config: Configuration, private ea: EventAggregator, private history: History) {
     ea.subscribe(ShowMenu, (msg:ShowMenu) => {
-      let api = this.docs.api.find(x => x.dest === msg.path);
+      let api = this.config.findApiItem(msg.path);
 
       if (api) {
         this.selectedItem = api;
         this.menu = this.docs.api;
         this.isActive = true;
       } else {
-        let articleOrGroup = findIn(this.docs.article, msg.path);
+        let articleOrGroup = config.findToCItem(msg.path);
 
         if (articleOrGroup) {
           if (articleOrGroup.items) {
@@ -43,24 +44,5 @@ export class SideBar {
 
   select(item) {
     this.history.navigate(item.dest);
-  }
-}
-
-function findIn(items:any[], path: string): any {
-  let found = items.find(x => x.dest === path);
-
-  if (found) {
-    return found;
-  }
-
-  for (let i = 0, ii = items.length; i < ii; ++i) {
-    let current = items[i];
-
-    if (current.items) {
-      found = findIn(current.items, path);
-      if (found) {
-        return found;
-      }
-    }
   }
 }
