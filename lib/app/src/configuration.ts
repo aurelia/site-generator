@@ -11,10 +11,15 @@ export interface ToCItem extends DocItem {
 
 export class Configuration {
   private config = window['aureliaDocConfiguration'];
+  private apiRoot;
+  private articleRoot;
 
   constructor() {
-    associateParents({ items: this.config.docs.api }, this.config.docs.api);  
-    associateParents({ items: this.config.docs.article }, this.config.docs.article);
+    this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api' };
+    this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article' };
+
+    associateParents(this.apiRoot, this.config.docs.api);  
+    associateParents(this.articleRoot, this.config.docs.article);
   }
 
   public get API():DocItem[] {
@@ -22,10 +27,18 @@ export class Configuration {
   }
 
   findApiItem(path: string): DocItem | null {
+    if (path === 'docs/api') {
+      return this.apiRoot;
+    }
+
     return this.config.docs.api.find(x => x.dest === path);
   }
 
   findToCItem(path: string): ToCItem | null {
+    if (path === 'docs/article') {
+      return this.articleRoot;
+    }
+
     return findIn(this.config.docs.article, path);
   }
 }

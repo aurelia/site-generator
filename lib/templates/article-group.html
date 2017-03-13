@@ -1,0 +1,15 @@
+<section class="article">
+  <header>
+    <h1>{{name}}</h1>
+  </header>
+
+  <article>
+    <ul>
+      {{#each items}}
+      <li>
+        <a href="{{links.static}}"><strong>{{name}}</strong></a> - {{description}}
+      </li>
+      {{/each}}
+    </ul>
+  </article>
+</section>

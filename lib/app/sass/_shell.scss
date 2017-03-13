@@ -108,31 +108,59 @@ side-bar {
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.12);
   transition: all .2s;
   transform: translateX(-100%);
-  overflow-x: hidden;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 
-  li {
-    line-height: 44px;
-    color: #777;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer;
-    transition: all .1s;
+  .nav-button {
+    background: #dfdfe1;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    position: relative;
+    line-height: 36px;
+    font-size: 18px;
 
-    &:hover {
-      background: rgba(255,255,255,.5);
-    }
-
-    &.active {
-      background: #ffffff;
-      color: $accent-color;
+    .arrow {
+      position: absolute;
+      left: 4px;
+      top: 9px;
+      fill: #70509D;
     }
 
     a {
-      width: 100%;
-      padding: 0 0 0 1rem;
       display: inline-block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: #70509D;
+    }
+  }
+
+  ul {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    li {
+      line-height: 44px;
+      color: #777;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+      transition: all .1s;
+
+      &:hover {
+        background: rgba(255,255,255,.5);
+      }
+
+      &.active {
+        background: #ffffff;
+        color: $accent-color;
+      }
+
+      a {
+        width: 100%;
+        padding: 0 0 0 1rem;
+        display: inline-block;
+      }
     }
   }
 }
