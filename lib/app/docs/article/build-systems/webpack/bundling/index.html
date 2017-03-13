@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Bundling with Webpack</h1>
     <h2>Before deploying your app to production, you&#x27;ll want to bundle the assets for efficient use of the network.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Most of the current major browsers limit the number of simultaneous connections per hostname to six. This means that while six requests are being processed, additional requests for assets on a host will be queued by the browser. In the image below, the Chrome F12 developer tools network tab shows the timing for assets required by the <code>welcome view</code> of the unbundled, JSPM-based skeleton-navigation application.</p>
 <p><img src="img/unbundled-aurelia-application.jpg" alt="No of requests made by unbundled application" /></p>
 <p>As we can see, there are over 95 requests being made to load the first view. While the first few requests are being processed the others are waiting, ultimately taking almost 2.39s on a local machine.</p>
@@ -298,7 +297,6 @@ Example use-cases for this are: conditionally loading foreign language support b
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

@@ -1,0 +1,43 @@
+<section class="api">
+  <header>
+    <h1>Path</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Path API</h1>
+<h2>Classes</h2>
+<h2>Interfaces</h2>
+<h2>Variables</h2>
+<h2>Functions</h2>
+<ul>
+<li>
+<p><code>buildQueryString(params: Object, traditional?: Boolean): string</code> - Generate a query string from an object.</p>
+<ul>
+<li><code>params:Object</code> - Object containing the keys and values to be used.</li>
+<li><code>traditional?:Boolean</code> - Boolean Use the old URI template standard (RFC6570)</li>
+</ul>
+</li>
+<li>
+<p><code>join(path1: string, path2: string): string</code> - Joins two paths.</p>
+<ul>
+<li><code>path1:string</code> - The first path.</li>
+<li><code>path2:string</code> - The second path.</li>
+</ul>
+</li>
+<li>
+<p><code>parseQueryString(queryString: string): Object</code> - Parse a query string.</p>
+<ul>
+<li><code>queryString:string</code> - The query string to parse.</li>
+</ul>
+</li>
+<li>
+<p><code>relativeToFile(name: string, file: string): string</code> - Calculates a path relative to a file.</p>
+<ul>
+<li><code>name:string</code> - The relative path.</li>
+<li><code>file:string</code> - The file path.</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>

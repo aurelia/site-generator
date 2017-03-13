@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>HTTP Services</h1>
     <h2>Usually JavaScript applications need to get their data from or communicate with various web services. In this article we&#x27;ll take a look at the options Aurelia makes available to you.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Options"><p>When building front-end applications, it's often necessary to leverage HTTP services to acquire data or persist state. There are many ways to accomplish this. You could use an advanced data library that implements object-relational mapping, an opinionated restful client or just a simple HTTP library. All these options are provided by the global web community and all of them can be used in an Aurelia application.</p>
 <p>That said, the Aurelia team felt the need to provide a simple solution out of the box. We wanted our community to have a directly supported option while still keeping Aurelia open so that our own community could innovate or leverage any other library developed elsewhere.</p>
 <p>Along these lines, the Aurelia project provides two options:</p>
@@ -301,7 +300,6 @@ By default, the <code>HttpClient</code> assumes you are expecting a JSON respons
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

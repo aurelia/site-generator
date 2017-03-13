@@ -1,0 +1,251 @@
+<section class="api">
+  <header>
+    <h1>Platform Abstraction Layer (PAL)</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Platform Abstraction Layer (PAL) API</h1>
+<h2>Classes</h2>
+<h2>Interfaces</h2>
+<h3>Dom</h3>
+<p>Represents the core APIs of the DOM.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>Element:</code> - The global DOM Element type.</li>
+<li><code>SVGElement:</code> - The global DOM SVGElement type.</li>
+<li><code>activeElement:Element</code> - The document's active/focused element.</li>
+<li><code>boundary:string</code> - A key representing a DOM boundary.</li>
+<li><code>title:string</code> - The document title.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addEventListener(eventName: string, callback: Function, capture: boolean): void</code> - Add an event listener to the document.</p>
+<ul>
+<li><code>eventName:string</code> - A string representing the event type to listen for.</li>
+<li><code>callback:Function</code> - The function that receives a notification when an event of the specified type occurs.</li>
+<li><code>capture:boolean</code> - If true, useCapture indicates that the user wishes to initiate capture.</li>
+</ul>
+</li>
+<li>
+<p><code>adoptNode(node: Node): Node</code> - Adopts a node from an external document.</p>
+<ul>
+<li><code>node:Node</code> - The node to be adopted.</li>
+</ul>
+</li>
+<li>
+<p><code>appendNode(newNode: Node, parentNode?: Node): void</code> - Appends a node to the parent, if provided, or the document.body otherwise.</p>
+<ul>
+<li><code>newNode:Node</code> - The node to append.</li>
+<li><code>parentNode?:Node</code> - The node to append to, otherwise the document.body.</li>
+</ul>
+</li>
+<li>
+<p><code>createComment(text: string): Comment</code> - Creates a new Comment node.</p>
+<ul>
+<li><code>text:string</code> - A string to populate the new Comment node.</li>
+</ul>
+</li>
+<li>
+<p><code>createCustomEvent(eventType: string, options: Object): CustomEvent</code> - Creates a new CustomEvent.</p>
+<ul>
+<li><code>eventType:string</code> - A string representing the event type.</li>
+<li><code>options:Object</code> - An options object specifying bubbles:boolean, cancelable:boolean and/or detail:Object information.</li>
+</ul>
+</li>
+<li>
+<p><code>createDocumentFragment(): DocumentFragment</code> - Creates a new DocumentFragment.</p>
+</li>
+<li>
+<p><code>createElement(tagName: string): Element</code> - Creates the specified HTML element or an HTMLUnknownElement if the given element name isn't a known one.</p>
+<ul>
+<li><code>tagName:string</code> - A string that specifies the type of element to be created.</li>
+</ul>
+</li>
+<li>
+<p><code>createMutationObserver(callback: Function): MutationObserver</code> - Creates a new MutationObserver.</p>
+<ul>
+<li><code>callback:Function</code> - A callback that will recieve the change records with the mutations.</li>
+</ul>
+</li>
+<li>
+<p><code>createTemplateFromMarkup(markup: string): Element</code> - Creates an HTMLTemplateElement using the markup provided.</p>
+<ul>
+<li><code>markup:string</code> - A string containing the markup to turn into a template. Note: This string must contain the template element as well.</li>
+</ul>
+</li>
+<li>
+<p><code>createTextNode(text: string): Text</code> - Creates a new Text node.</p>
+<ul>
+<li><code>text:string</code> - A string to populate the new Text node.</li>
+</ul>
+</li>
+<li>
+<p><code>dispatchEvent(evt: Event): void</code> - Dispatches an event on the document.</p>
+<ul>
+<li><code>evt:Event</code> - The event to dispatch.</li>
+</ul>
+</li>
+<li>
+<p><code>getComputedStyle(element: Element): CSSStyleDeclaration</code> - Gives the values of all the CSS properties of an element after applying the active stylesheets and resolving any basic computation those values may contain.</p>
+<ul>
+<li><code>element:Element</code> - The Element for which to get the computed style.</li>
+</ul>
+</li>
+<li>
+<p><code>getElementById(id: string): Element</code> - Locates an element in the document according to its id.</p>
+<ul>
+<li><code>id:string</code> - The id to search the document for.</li>
+</ul>
+</li>
+<li>
+<p><code>injectStyles(styles: string, destination?: Element, prepend?: boolean): Node</code> - Injects styles into the destination element, or the document.head if no destination is provided.</p>
+<ul>
+<li><code>styles:string</code> - The css text to injext.</li>
+<li><code>destination?:Element</code> - The destination element to inject the css text into. If not specified it will default to the document.head.</li>
+<li><code>prepend?:boolean</code> - Indicates whether or not the styles should be prepended to the destination. By default they are appended.</li>
+</ul>
+</li>
+<li>
+<p><code>nextElementSibling(element: Node): Element</code> - Gets the element that is the next sibling of the provided element.</p>
+<ul>
+<li><code>element:Node</code> - The element whose next sibling is being located.</li>
+</ul>
+</li>
+<li>
+<p><code>querySelectorAll(query: string): NodeList</code> - Performs a query selector on the document and returns all located matches.</p>
+<ul>
+<li><code>query:string</code> - The query to use in searching the document.</li>
+</ul>
+</li>
+<li>
+<p><code>removeEventListener(eventName: string, callback: Function, capture: boolean): void</code> - Remove an event listener from the document.</p>
+<ul>
+<li><code>eventName:string</code> - A string representing the event type to listen for.</li>
+<li><code>callback:Function</code> - The function to remove from the event.</li>
+<li><code>capture:boolean</code> - Specifies whether the listener to be removed was registered as a capturing listener or not.</li>
+</ul>
+</li>
+<li>
+<p><code>removeNode(node: Node, parentNode?: Node): void</code> - Removes the specified node from the parent node.</p>
+<ul>
+<li><code>node:Node</code> - The node to remove.</li>
+<li><code>parentNode?:Node</code> - The parent node from which the node will be removed.</li>
+</ul>
+</li>
+<li>
+<p><code>replaceNode(newNode: Node, node: Node, parentNode?: Node): void</code> - Replaces a node in the parent with a new node.</p>
+<ul>
+<li><code>newNode:Node</code> - The node to replace the old node with.</li>
+<li><code>node:Node</code> - The node that is being replaced.</li>
+<li><code>parentNode?:Node</code> - The node that the current node is parented to.</li>
+</ul>
+</li>
+</ul>
+<h3>Feature</h3>
+<p>Enables discovery of what features the runtime environment supports.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>htmlTemplateElement:boolean</code> - Does the runtime environment support native HTMLTemplateElement?</li>
+<li><code>mutationObserver:boolean</code> - Does the runtime environment support native DOM mutation observers?</li>
+<li><code>scopedCSS:boolean</code> - Does the runtime environment support the css scoped attribute?</li>
+<li><code>shadowDOM:boolean</code> - Does the runtime environment support ShadowDOM?</li>
+</ul>
+<h4>Methods</h4>
+<h3>ModuleNameOptions</h3>
+<p>Options used during the static analysis that inform how to process a given module.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>chunk:string</code> - Add the module to a chunk by name</li>
+<li><code>exports:string</code> - Optionally declare which exports are used. This enables tree-shaking when only few out of many exports are used.</li>
+</ul>
+<h4>Methods</h4>
+<h3>Performance</h3>
+<p>The runtime's performance API.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>now(): number</code> - Gets a DOMHighResTimeStamp.</li>
+</ul>
+<h3>Platform</h3>
+<p>Represents the core APIs of the runtime environment.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>Loader:any</code> - Reference to the Loader Class (set after the loader has been first imported)</li>
+<li><code>XMLHttpRequest:</code> - The runtime's XMLHttpRequest API.</li>
+<li><code>global:any</code> - The runtime environment's global.</li>
+<li><code>history:History</code> - The runtime's history API.</li>
+<li><code>location:Location</code> - The runtime's location API.</li>
+<li><code>noop:Function</code> - A function wich does nothing.</li>
+<li><code>performance:Performance</code> - The runtime's performance API</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addEventListener(eventName: string, callback: Function, capture?: boolean): void</code> - Add a global event listener.</p>
+<ul>
+<li><code>eventName:string</code> - A string representing the event type to listen for.</li>
+<li><code>callback:Function</code> - The function that receives a notification when an event of the specified type occurs.</li>
+<li><code>capture?:boolean</code> - If true, useCapture indicates that the user wishes to initiate capture.</li>
+</ul>
+</li>
+<li>
+<p><code>eachModule(callback: ): void</code> - Iterate all modules loaded by the script loader.</p>
+<ul>
+<li><code>callback:</code> - A callback that will receive each module id along with the module object. Return true to end enumeration.</li>
+</ul>
+</li>
+<li>
+<p><code>moduleName(moduleName: string, options?: ModuleNameOptions): string</code> - Resolves a module name to a path resolvable by the loader. By default returns the first parameter.
+It is recommended to use this for all dynamic imports as it enables static analysis
+and optionally allows adding custom metadata used by the build step.</p>
+<ul>
+<li><code>moduleName:string</code> - Absolute or relative path to the module.</li>
+<li><code>options?:ModuleNameOptions</code> - Optional options used during the static analysis that inform how to process the module.</li>
+</ul>
+</li>
+<li>
+<p><code>removeEventListener(eventName: string, callback: Function, capture?: boolean): void</code> - Remove a global event listener.</p>
+<ul>
+<li><code>eventName:string</code> - A string representing the event type to listen for.</li>
+<li><code>callback:Function</code> - The function to remove from the event.</li>
+<li><code>capture?:boolean</code> - Specifies whether the listener to be removed was registered as a capturing listener or not.</li>
+</ul>
+</li>
+<li>
+<p><code>requestAnimationFrame(callback: ): number</code> - Registers a function to call when the system is ready to update (repaint) the display.</p>
+<ul>
+<li><code>callback:</code> - The function to call.</li>
+</ul>
+</li>
+</ul>
+<h2>Variables</h2>
+<ul>
+<li><code>DOM:Dom</code> - The singleton instance of the Dom API.</li>
+<li><code>FEATURE:Feature</code> - The singleton instance of the Feature discovery API.</li>
+<li><code>PLATFORM:Platform</code> - The singleton instance of the Platform API.</li>
+<li><code>isInitialized:any</code> - No description available.</li>
+</ul>
+<h2>Functions</h2>
+<ul>
+<li>
+<p><code>AggregateError(message: string, innerError?: Error, skipIfAlreadyAggregate?: boolean): Error</code> - Creates an instance of Error that aggregates and preserves an innerError.</p>
+<ul>
+<li><code>message:string</code> - The error message.</li>
+<li><code>innerError?:Error</code> - The inner error message to aggregate.</li>
+<li><code>skipIfAlreadyAggregate?:boolean</code> - Indicates to not wrap the inner error if it itself already has an innerError.</li>
+</ul>
+</li>
+<li>
+<p><code>initializePAL(callback: ): void</code> - Enables initializing a specific implementation of the Platform Abstraction Layer (PAL).</p>
+<ul>
+<li><code>callback:</code> - Allows providing a callback which configures the three PAL singletons with their platform-specific implementations.</li>
+</ul>
+</li>
+<li>
+<p><code>reset(): any</code> -</p>
+</li>
+</ul>
+
+  </article>
+</section>

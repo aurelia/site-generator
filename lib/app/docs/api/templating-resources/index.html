@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,9 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <h1>Templating-Resources API</h1>
+  <main active-screen.bind="activeScreen">
+    <section class="api">
+  <header>
+    <h1>Templating-Resources</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Templating-Resources API</h1>
 <h2>Classes</h2>
 <h3>AbstractRepeater</h3>
 <p>An abstract base class for elements and attributes that repeat
@@ -965,7 +970,9 @@ their binding context.</li>
 </li>
 </ul>
 
-    </compose>
+  </article>
+</section>
+
   </main>
 
   <side-bar></side-bar>

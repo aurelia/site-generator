@@ -1,0 +1,502 @@
+<section class="api">
+  <header>
+    <h1>Dependency Injection</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Dependency Injection API</h1>
+<h2>Classes</h2>
+<h3>All</h3>
+<p>Used to allow functions/classes to specify resolution of all matches to a key.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>get(container: Container): any</code> - Called by the container to resolve all matching dependencies as an array of instances.</p>
+<ul>
+<li><code>container:Container</code> - The container to resolve from.</li>
+</ul>
+</li>
+<li>
+<p><code>of(key: any): All</code> - Creates an All Resolver for the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to resolve all instances for.</li>
+</ul>
+</li>
+</ul>
+<h3>Container</h3>
+<p>A lightweight, extensible dependency injection container.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>parent:Container</code> - The parent container in the DI hierarchy.</li>
+<li><code>root:Container</code> - The root container in the DI hierarchy.</li>
+<li><code>instance:Container</code> - The global root Container instance. Available if makeGlobal() has been called. Aurelia Framework calls makeGlobal().</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>_createInvocationHandler(fn: Function &amp;amp; { inject?: any; }): InvocationHandler</code> -</p>
+<ul>
+<li><code>fn:Function &amp;amp; { inject?: any; }</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>_get(key: any): any</code> -</p>
+<ul>
+<li><code>key:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>autoRegister(key: any, fn?: Function): Resolver</code> - Registers a type (constructor function) by inspecting its registration annotations. If none are found, then the default singleton registration is used.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>fn?:Function</code> - The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied.</li>
+</ul>
+</li>
+<li>
+<p><code>autoRegisterAll(fns: any): void</code> - Registers an array of types (constructor functions) by inspecting their registration annotations. If none are found, then the default singleton registration is used.</p>
+<ul>
+<li><code>fns:any</code> - The constructor function to use when the dependency needs to be instantiated.</li>
+</ul>
+</li>
+<li>
+<p><code>createChild(): Container</code> - Creates a new dependency injection container whose parent is the current container.</p>
+</li>
+<li>
+<p><code>get(key: any): any</code> - Resolves a single instance based on the provided key.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the object to resolve.</li>
+</ul>
+</li>
+<li>
+<p><code>getAll(key: any): any</code> - Resolves all instance registered under the provided key.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the objects to resolve.</li>
+</ul>
+</li>
+<li>
+<p><code>getResolver(key: any): any</code> - Gets the resolver for the particular key, if it has been registered.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+</ul>
+</li>
+<li>
+<p><code>hasResolver(key: any, checkParent?: boolean): boolean</code> - Inspects the container to determine if a particular key has been registred.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>checkParent?:boolean</code> - Indicates whether or not to check the parent container hierarchy.</li>
+</ul>
+</li>
+<li>
+<p><code>invoke(fn: Function &amp;amp; { name?: string; }, dynamicDependencies?: any): any</code> - Invokes a function, recursively resolving its dependencies.</p>
+<ul>
+<li><code>fn:Function &amp;amp; { name?: string; }</code> - The function to invoke with the auto-resolved dependencies.</li>
+<li><code>dynamicDependencies?:any</code> - Additional function dependencies to use during invocation.</li>
+</ul>
+</li>
+<li>
+<p><code>makeGlobal(): Container</code> - Makes this container instance globally reachable through Container.instance.</p>
+</li>
+<li>
+<p><code>registerAlias(originalKey: any, aliasKey: any): Resolver</code> - Registers an additional key that serves as an alias to the original DI key.</p>
+<ul>
+<li><code>originalKey:any</code> - The key that originally identified the dependency; usually a constructor function.</li>
+<li><code>aliasKey:any</code> - An alternate key which can also be used to resolve the same dependency  as the original.</li>
+</ul>
+</li>
+<li>
+<p><code>registerHandler(key: any, handler: ): Resolver</code> - Registers a custom resolution function such that the container calls this function for each request to obtain the instance.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>handler:</code> - The resolution function to use when the dependency is needed.</li>
+</ul>
+</li>
+<li>
+<p><code>registerInstance(key: any, instance?: any): Resolver</code> - Registers an existing object instance with the container.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>instance?:any</code> - The instance that will be resolved when the key is matched. This defaults to the key value when instance is not supplied.</li>
+</ul>
+</li>
+<li>
+<p><code>registerResolver(key: any, resolver: Resolver): Resolver</code> - Registers a custom resolution function such that the container calls this function for each request to obtain the instance.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>resolver:Resolver</code> - The resolver to use when the dependency is needed.</li>
+</ul>
+</li>
+<li>
+<p><code>registerSingleton(key: any, fn?: Function): Resolver</code> - Registers a type (constructor function) such that the container always returns the same instance for each request.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>fn?:Function</code> - The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied.</li>
+</ul>
+</li>
+<li>
+<p><code>registerTransient(key: any, fn?: Function): Resolver</code> - Registers a type (constructor function) such that the container returns a new instance for each request.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+<li><code>fn?:Function</code> - The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied.</li>
+</ul>
+</li>
+<li>
+<p><code>setHandlerCreatedCallback(onHandlerCreated: ): void</code> - Sets an invocation handler creation callback that will be called when new InvocationsHandlers are created (called once per Function).</p>
+<ul>
+<li><code>onHandlerCreated:</code> - The callback to be called when an InvocationsHandler is created.</li>
+</ul>
+</li>
+<li>
+<p><code>unregister(key: any): void</code> - Unregisters based on key.</p>
+<ul>
+<li><code>key:any</code> - The key that identifies the dependency at resolution time; usually a constructor function.</li>
+</ul>
+</li>
+</ul>
+<h3>Factory</h3>
+<p>Used to allow injecting dependencies but also passing data to the constructor.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>get(container: Container): any</code> - Called by the container to pass the dependencies to the constructor.</p>
+<ul>
+<li><code>container:Container</code> - The container to invoke the constructor with dependencies and other parameters.</li>
+</ul>
+</li>
+<li>
+<p><code>of(key: any): Factory</code> - Creates a Factory Resolver for the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to resolve.</li>
+</ul>
+</li>
+</ul>
+<h3>FactoryInvoker</h3>
+<p>An Invoker that is used to invoke a factory method.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>instance:FactoryInvoker</code> - The singleton instance of the FactoryInvoker.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>invoke(container: Container, fn: Function, dependencies: any): any</code> - Invokes the function with the provided dependencies.</p>
+<ul>
+<li><code>container:Container</code> - The calling container.</li>
+<li><code>fn:Function</code> - The constructor or factory function.</li>
+<li><code>dependencies:any</code> - The dependencies of the function call.</li>
+</ul>
+</li>
+<li>
+<p><code>invokeWithDynamicDependencies(container: Container, fn: Function, staticDependencies: any, dynamicDependencies: any): any</code> - Invokes the function with the provided dependencies.</p>
+<ul>
+<li><code>container:Container</code> - The calling container.</li>
+<li><code>fn:Function</code> - The constructor or factory function.</li>
+<li><code>staticDependencies:any</code> - The static dependencies of the function.</li>
+<li><code>dynamicDependencies:any</code> - Additional dependencies to use during invocation.</li>
+</ul>
+</li>
+</ul>
+<h3>InvocationHandler</h3>
+<p>Stores the information needed to invoke a function.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>dependencies:any</code> - The statically known dependencies of this function invocation.</li>
+<li><code>fn:Function</code> - The function to be invoked by this handler.</li>
+<li><code>invoker:Invoker</code> - The invoker implementation that will be used to actually invoke the function.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li><code>invoke(container: Container, dynamicDependencies?: any): any</code> - Invokes the function.
+<ul>
+<li><code>container:Container</code> - The calling container.</li>
+<li><code>dynamicDependencies?:any</code> - Additional dependencies to use during invocation.</li>
+</ul>
+</li>
+</ul>
+<h3>Lazy</h3>
+<p>Used to allow functions/classes to specify lazy resolution logic.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>get(container: Container): any</code> - Called by the container to lazily resolve the dependency into a lazy locator function.</p>
+<ul>
+<li><code>container:Container</code> - The container to resolve from.</li>
+</ul>
+</li>
+<li>
+<p><code>of(key: any): Lazy</code> - Creates a Lazy Resolver for the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to lazily resolve.</li>
+</ul>
+</li>
+</ul>
+<h3>NewInstance</h3>
+<p>Used to inject a new instance of a dependency, without regard for existing
+instances in the container. Instances can optionally be registered in the container
+under a different key by supplying a key using the `as` method.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>asKey:any</code> - No description available.</li>
+<li><code>key:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>as(key: any):</code> - Instructs the NewInstance resolver to register the resolved instance using the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to register the instance with.</li>
+</ul>
+</li>
+<li>
+<p><code>get(container: any): any</code> - Called by the container to instantiate the dependency and potentially register
+as another key if the `as` method was used.</p>
+<ul>
+<li><code>container:any</code> - The container to resolve the parent from.</li>
+</ul>
+</li>
+<li>
+<p><code>of(key: any, dynamicDependencies: any): NewInstance</code> - Creates an NewInstance Resolver for the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to resolve/instantiate.</li>
+<li><code>dynamicDependencies:any</code> - An optional list of dynamic dependencies.</li>
+</ul>
+</li>
+</ul>
+<h3>Optional</h3>
+<p>Used to allow functions/classes to specify an optional dependency, which will be resolved only if already registred with the container.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>get(container: Container): any</code> - Called by the container to provide optional resolution of the key.</p>
+<ul>
+<li><code>container:Container</code> - The container to resolve from.</li>
+</ul>
+</li>
+<li>
+<p><code>of(key: any, checkParent?: boolean): Optional</code> - Creates an Optional Resolver for the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to optionally resolve for.</li>
+<li><code>checkParent?:boolean</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>Parent</h3>
+<p>Used to inject the dependency from the parent container instead of the current one.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>get(container: Container): any</code> - Called by the container to load the dependency from the parent container</p>
+<ul>
+<li><code>container:Container</code> - The container to resolve the parent from.</li>
+</ul>
+</li>
+<li>
+<p><code>of(key: any): Parent</code> - Creates a Parent Resolver for the supplied key.</p>
+<ul>
+<li><code>key:any</code> - The key to resolve.</li>
+</ul>
+</li>
+</ul>
+<h3>SingletonRegistration</h3>
+<p>Used to allow functions/classes to indicate that they should be registered as singletons with the container.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>registerResolver(container: Container, key: any, fn: Function): Resolver</code> - Called by the container to register the resolver.
+<ul>
+<li><code>container:Container</code> - The container the resolver is being registered with.</li>
+<li><code>key:any</code> - The key the resolver should be registered as.</li>
+<li><code>fn:Function</code> - The function to create the resolver for.</li>
+</ul>
+</li>
+</ul>
+<h3>StrategyResolver</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>state:any</code> - No description available.</li>
+<li><code>strategy:</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li><code>get(container: Container, key: any): any</code> - Called by the container to allow custom resolution of dependencies for a function/class.
+<ul>
+<li><code>container:Container</code> - The container to resolve from.</li>
+<li><code>key:any</code> - The key that the resolver was registered as.</li>
+</ul>
+</li>
+</ul>
+<h3>TransientRegistration</h3>
+<p>Used to allow functions/classes to indicate that they should be registered as transients with the container.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>registerResolver(container: Container, key: any, fn: Function): Resolver</code> - Called by the container to register the resolver.
+<ul>
+<li><code>container:Container</code> - The container the resolver is being registered with.</li>
+<li><code>key:any</code> - The key the resolver should be registered as.</li>
+<li><code>fn:Function</code> - The function to create the resolver for.</li>
+</ul>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>ContainerConfiguration</h3>
+<p>Used to configure a Container instance.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>handlers:Map</code> - No description available.</li>
+<li><code>onHandlerCreated:</code> - An optional callback which will be called when any function needs an InvocationHandler created (called once per Function).</li>
+</ul>
+<h4>Methods</h4>
+<h3>Invoker</h3>
+<p>A strategy for invoking a function, resulting in an object instance.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>invoke(container: Container, fn: Function, dependencies: any): any</code> - Invokes the function with the provided dependencies.</p>
+<ul>
+<li><code>container:Container</code> - No description available.</li>
+<li><code>fn:Function</code> - The constructor or factory function.</li>
+<li><code>dependencies:any</code> - The dependencies of the function call.</li>
+</ul>
+</li>
+<li>
+<p><code>invokeWithDynamicDependencies(container: Container, fn: Function, staticDependencies: any, dynamicDependencies: any): any</code> - Invokes the function with the provided dependencies.</p>
+<ul>
+<li><code>container:Container</code> - No description available.</li>
+<li><code>fn:Function</code> - The constructor or factory function.</li>
+<li><code>staticDependencies:any</code> - The static dependencies of the function.</li>
+<li><code>dynamicDependencies:any</code> - Additional dependencies to use during invocation.</li>
+</ul>
+</li>
+</ul>
+<h3>Registration</h3>
+<p>Customizes how a particular function is resolved by the Container.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>registerResolver(container: Container, key: any, fn: Function): Resolver</code> - Called by the container to register the resolver.
+<ul>
+<li><code>container:Container</code> - The container the resolver is being registered with.</li>
+<li><code>key:any</code> - The key the resolver should be registered as.</li>
+<li><code>fn:Function</code> - The function to create the resolver for.</li>
+</ul>
+</li>
+</ul>
+<h3>Resolver</h3>
+<p>Used to allow functions/classes to specify custom dependency resolution logic.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>get(container: Container, key: any): any</code> - Called by the container to allow custom resolution of dependencies for a function/class.
+<ul>
+<li><code>container:Container</code> - The container to resolve from.</li>
+<li><code>key:any</code> - The key that the resolver was registered as.</li>
+</ul>
+</li>
+</ul>
+<h2>Variables</h2>
+<ul>
+<li><code>_emptyParameters:any</code> - No description available.</li>
+<li><code>resolver:Function &amp;amp; { decorates?: any; }</code> - Decorator: Indicates that the decorated class/object is a custom resolver.</li>
+</ul>
+<h2>Functions</h2>
+<ul>
+<li>
+<p><code>all(keyValue: any):</code> - Decorator: Specifies the dependency should load all instances of the given key.</p>
+<ul>
+<li><code>keyValue:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>autoinject(potentialTarget?: any): any</code> - Decorator: Directs the TypeScript transpiler to write-out type metadata for the decorated class.</p>
+<ul>
+<li><code>potentialTarget?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>factory(keyValue: any, asValue?: any):</code> - Decorator: Specifies the dependency to create a factory method, that can accept optional arguments</p>
+<ul>
+<li><code>keyValue:any</code> - No description available.</li>
+<li><code>asValue?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>getDecoratorDependencies(target: any, name: any): any</code> -</p>
+<ul>
+<li><code>target:any</code> - No description available.</li>
+<li><code>name:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>inject(rest: any): any</code> - Decorator: Specifies the dependencies that should be injected by the DI Container into the decoratored class/function.</p>
+<ul>
+<li><code>rest:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>invokeAsFactory(potentialTarget?: any): any</code> - Decorator: Specifies that the decorated item should be called as a factory function, rather than a constructor.</p>
+<ul>
+<li><code>potentialTarget?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>invoker(value: Invoker): any</code> - Decorator: Specifies a custom Invoker for the decorated item.</p>
+<ul>
+<li><code>value:Invoker</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>lazy(keyValue: any):</code> - Decorator: Specifies the dependency should be lazy loaded</p>
+<ul>
+<li><code>keyValue:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>newInstance(asKeyOrTarget?: any, dynamicDependencies: any):</code> - Decorator: Specifies the dependency as a new instance</p>
+<ul>
+<li><code>asKeyOrTarget?:any</code> - No description available.</li>
+<li><code>dynamicDependencies:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>optional(checkParentOrTarget?: boolean):</code> - Decorator: Specifies the dependency as optional</p>
+<ul>
+<li><code>checkParentOrTarget?:boolean</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>parent(target: any, key: any, index: any): void</code> - Decorator: Specifies the dependency to look at the parent container for resolution</p>
+<ul>
+<li><code>target:any</code> - No description available.</li>
+<li><code>key:any</code> - No description available.</li>
+<li><code>index:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>registration(value: Registration): any</code> - Decorator: Specifies a custom registration strategy for the decorated class/function.</p>
+<ul>
+<li><code>value:Registration</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>singleton(keyOrRegisterInChild?: any, registerInChild?: boolean): any</code> - Decorator: Specifies to register the decorated item with a &quot;singleton&quot; lieftime.</p>
+<ul>
+<li><code>keyOrRegisterInChild?:any</code> - No description available.</li>
+<li><code>registerInChild?:boolean</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>transient(key?: any): any</code> - Decorator: Specifies to register the decorated item with a &quot;transient&quot; lifetime.</p>
+<ul>
+<li><code>key?:any</code> - No description available.</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>

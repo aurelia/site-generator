@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Binding: Radios</h1>
     <h2>Data-binding radio inputs with Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>A group of radio inputs is a type of &quot;single select&quot; interface. Aurelia supports two-way binding any type of property to a group of radio inputs. The examples below illustrate binding number, object, string and boolean properties to sets of radio inputs. In each of the examples there's a common set of steps:</p>
 <ol>
 <li>Group the radios via the <code>name</code> property. Radio buttons that have the same value for the name attribute are in the same &quot;radio button group&quot;; only one radio button in a group can be selected at a time.</li>
@@ -231,7 +230,6 @@
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

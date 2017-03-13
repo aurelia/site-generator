@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Binding: Binding Behaviors</h1>
     <h2>An overview of the Aurelia binding engine&#x27;s binding behavior functionality. Binding Behaviors are used to plug into a binding instance&#x27;s lifecycle and change the way it operates.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Binding behaviors are a category of view resource, just like value converters, custom attributes and custom elements.  Binding behaviors are most like 
 <a href="http://www.danyow.net/aurelia-value-converters/" target="_blank">value converters</a>
  in that you use them declaratively in binding expressions to affect the binding.</p>
@@ -281,7 +280,6 @@ you achieve the same goal without filling up your methods with unnecessary code:
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

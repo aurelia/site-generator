@@ -1,0 +1,125 @@
+<section class="api">
+  <header>
+    <h1>Loader</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Loader API</h1>
+<h2>Classes</h2>
+<h3>Loader</h3>
+<p>A generic resource loader, for loading modules, html, css and more.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addPlugin(pluginName: string, implementation: LoaderPlugin): void</code> - Registers a plugin with the loader.</p>
+<ul>
+<li><code>pluginName:string</code> - The name of the plugin.</li>
+<li><code>implementation:LoaderPlugin</code> - The plugin implementation.</li>
+</ul>
+</li>
+<li>
+<p><code>applyPluginToUrl(url: string, pluginName: string): string</code> - Alters a module id so that it includes a plugin loader.</p>
+<ul>
+<li><code>url:string</code> - The url of the module to load.</li>
+<li><code>pluginName:string</code> - The plugin to apply to the module id.</li>
+</ul>
+</li>
+<li>
+<p><code>getOrCreateTemplateRegistryEntry(address: string): TemplateRegistryEntry</code> - Gets or creates a TemplateRegistryEntry for the provided address.</p>
+<ul>
+<li><code>address:string</code> - The address of the template.</li>
+</ul>
+</li>
+<li>
+<p><code>loadAllModules(ids: string): Promise</code> - Loads a collection of modules.</p>
+<ul>
+<li><code>ids:string</code> - The set of module ids to load.</li>
+</ul>
+</li>
+<li>
+<p><code>loadModule(id: string): Promise</code> - Loads a module.</p>
+<ul>
+<li><code>id:string</code> - The module id to normalize.</li>
+</ul>
+</li>
+<li>
+<p><code>loadTemplate(url: string): Promise</code> - Loads a template.</p>
+<ul>
+<li><code>url:string</code> - The url of the template to load.</li>
+</ul>
+</li>
+<li>
+<p><code>loadText(url: string): Promise</code> - Loads a text-based resource.</p>
+<ul>
+<li><code>url:string</code> - The url of the text file to load.</li>
+</ul>
+</li>
+<li>
+<p><code>map(id: string, source: string): void</code> - Maps a module id to a source.</p>
+<ul>
+<li><code>id:string</code> - The module id.</li>
+<li><code>source:string</code> - The source to map the module to.</li>
+</ul>
+</li>
+<li>
+<p><code>normalize(moduleId: string, relativeTo: string): Promise</code> - Normalizes a module id.</p>
+<ul>
+<li><code>moduleId:string</code> - The module id to normalize.</li>
+<li><code>relativeTo:string</code> - What the module id should be normalized relative to.</li>
+</ul>
+</li>
+<li>
+<p><code>normalizeSync(moduleId: string, relativeTo: string): string</code> - Normalizes a module id.</p>
+<ul>
+<li><code>moduleId:string</code> - The module id to normalize.</li>
+<li><code>relativeTo:string</code> - What the module id should be normalized relative to.</li>
+</ul>
+</li>
+</ul>
+<h3>TemplateDependency</h3>
+<p>Represents a dependency of a template.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>name:string</code> - The local name of the src when used in the template.</li>
+<li><code>src:string</code> - The source of the dependency.</li>
+</ul>
+<h4>Methods</h4>
+<h3>TemplateRegistryEntry</h3>
+<p>Represents an entry in the template registry.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>address:string</code> - The address of the template that this entry represents.</li>
+<li><code>dependencies:TemplateDependency</code> - The dependencies of the associated template. Dependencies are not available until after the template is loaded.</li>
+<li><code>factory:any</code> - Gets the factory capable of creating instances of this template.</li>
+<li><code>factoryIsReady:boolean</code> - Indicates whether the factory is ready to be used to create instances of the associated template.</li>
+<li><code>resources:Object</code> - Sets the resources associated with this entry.</li>
+<li><code>template:Element</code> - Gets the template for this registry entry.</li>
+<li><code>templateIsLoaded:boolean</code> - Indicates whether or not the associated template is loaded .</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li><code>addDependency(src: , name?: string): void</code> - Adds a dependency to this template registry entry. Cannot be called until after the template is set.
+<ul>
+<li><code>src:</code> - The dependency instance or a relative path to its module.</li>
+<li><code>name?:string</code> - An optional local name by which this dependency is used in the template.</li>
+</ul>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>LoaderPlugin</h3>
+<p>Represents a plugin to the module loader.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>fetch(address: string): Promise</code> - Fetches the resource.
+<ul>
+<li><code>address:string</code> - The address of the resource.</li>
+</ul>
+</li>
+</ul>
+<h2>Variables</h2>
+<h2>Functions</h2>
+
+  </article>
+</section>

@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Validation: Basics</h1>
     <h2>The basics of validation with Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>This article covers the basics of validation with Aurelia's validation plugin. You'll learn how to add validation to your applications using a fluent rule API and minimal changes to your templates.</p>
 <p>To get started you'll need to install <code>aurelia-validation</code> using <code>jspm install aurelia-validation</code> or <code>npm install aurelia-validation --save</code>. Afterwards, add <code>.plugin('aurelia-validation')</code> to the configuration in your <code>main.js</code> to ensure the plugin is loaded at application startup.</p>
 <p>If you're using the <code>aurelia-cli</code>, add the following configuration to your <code>aurelia.json</code> after you've installed the package with npm.</p>
@@ -423,7 +422,6 @@ The renderer example uses <code>Element.closest</code>. You'll need to
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

@@ -4,7 +4,7 @@
     <h2>How data-binding works in Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="End to End"><p>This article explains how the binding system works. There is a lot to cover here, and to start we're actually going to look at a component outside of the binding system so you can gain a full understanding of the process. A good place to start is in the templating module, with a component called the 
 <a href="https://github.com/aurelia/templating/blob/master/src/view-compiler.js" target="_blank">ViewCompiler</a>
 . The ViewCompiler's job is to compile views into a <code>ViewFactory</code> which will be used to instantiate instances of your templates, called Views. Some view factories will be used to instantiate only one instance of a particular template. The ViewFactory that resulted from compiling your <code>app.html</code> template typically falls into this category. Other view factories for templates used with <code>repeat.for</code> may be used to instantiate tens, hundreds or even thousands of View instances.</p>

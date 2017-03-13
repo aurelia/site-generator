@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Binding: Computed Properties</h1>
     <h2>Data-binding computed properties with Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Sometimes it is desirable to return a dynamically computed value when accessing a property, or you may want to reflect the status of an internal variable without requiring the use of explicit method calls. In JavaScript, this can be accomplished with the use of a getter.</p>
 <p>Here's an example <code>Person</code> class that exposes a <code>fullName</code> property that computes it's value using the <code>firstName</code> and <code>lastName</code> properties.</p>
 <code-listing heading="Computed Properties">
@@ -176,7 +175,6 @@
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

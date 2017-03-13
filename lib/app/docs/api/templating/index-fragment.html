@@ -1,0 +1,1690 @@
+<section class="api">
+  <header>
+    <h1>Templating</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Templating API</h1>
+<h2>Classes</h2>
+<h3>Animator</h3>
+<p>An abstract class representing a mechanism for animating the DOM during various DOM state transitions.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addClass(element: HTMLElement, className: string): Promise</code> - Add a class to an element to trigger an animation.</p>
+<ul>
+<li><code>element:HTMLElement</code> - Element to animate</li>
+<li><code>className:string</code> - Properties to animate or name of the effect to use</li>
+</ul>
+</li>
+<li>
+<p><code>animate(element: , className: string): Promise</code> - Execute a single animation.</p>
+<ul>
+<li><code>element:</code> - Element to animate</li>
+<li><code>className:string</code> - Properties to animate or name of the effect to use. For css animators this represents the className to be added and removed right after the animation is done.</li>
+</ul>
+</li>
+<li>
+<p><code>enter(element: HTMLElement): Promise</code> - Execute an 'enter' animation on an element</p>
+<ul>
+<li><code>element:HTMLElement</code> - Element to animate</li>
+</ul>
+</li>
+<li>
+<p><code>leave(element: HTMLElement): Promise</code> - Execute a 'leave' animation on an element</p>
+<ul>
+<li><code>element:HTMLElement</code> - Element to animate</li>
+</ul>
+</li>
+<li>
+<p><code>registerEffect(effectName: string, properties: Object): void</code> - Register an effect (for JS based animators)</p>
+<ul>
+<li><code>effectName:string</code> - identifier of the effect</li>
+<li><code>properties:Object</code> - Object with properties for the effect</li>
+</ul>
+</li>
+<li>
+<p><code>removeClass(element: HTMLElement, className: string): Promise</code> - Add a class to an element to trigger an animation.</p>
+<ul>
+<li><code>element:HTMLElement</code> - Element to animate</li>
+<li><code>className:string</code> - Properties to animate or name of the effect to use</li>
+</ul>
+</li>
+<li>
+<p><code>runSequence(animations: Array): Promise</code> - Run a sequence of animations one after the other.
+for example: animator.runSequence(&quot;fadeIn&quot;,&quot;callout&quot;)</p>
+<ul>
+<li><code>animations:Array</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unregisterEffect(effectName: string): void</code> - Unregister an effect (for JS based animators)</p>
+<ul>
+<li><code>effectName:string</code> - identifier of the effect</li>
+</ul>
+</li>
+</ul>
+<h3>BehaviorInstruction</h3>
+<p>Indicates how a custom attribute or element should be instantiated in a view.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>anchorIsContainer:boolean</code> - No description available.</li>
+<li><code>attrName:string</code> - No description available.</li>
+<li><code>attributes:Object</code> - No description available.</li>
+<li><code>contentFactory:any</code> - No description available.</li>
+<li><code>enhance:boolean</code> - No description available.</li>
+<li><code>host:Element</code> - No description available.</li>
+<li><code>inheritBindingContext:boolean</code> - No description available.</li>
+<li><code>initiatedByBehavior:boolean</code> - No description available.</li>
+<li><code>originalAttrName:string</code> - No description available.</li>
+<li><code>partReplacements:any</code> - No description available.</li>
+<li><code>skipContentProcessing:boolean</code> - No description available.</li>
+<li><code>type:HtmlBehaviorResource</code> - No description available.</li>
+<li><code>viewFactory:ViewFactory</code> - No description available.</li>
+<li><code>viewModel:Object</code> - No description available.</li>
+<li><code>normal:BehaviorInstruction</code> - A default behavior used in scenarios where explicit configuration isn't available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>attribute(attrName: string, type?: HtmlBehaviorResource): BehaviorInstruction</code> - Creates a custom attribute instruction.</p>
+<ul>
+<li><code>attrName:string</code> - The name of the attribute.</li>
+<li><code>type?:HtmlBehaviorResource</code> - The HtmlBehaviorResource to create.</li>
+</ul>
+</li>
+<li>
+<p><code>dynamic(host: Element, viewModel: Object, viewFactory: ViewFactory): BehaviorInstruction</code> - Creates a dynamic component instruction.</p>
+<ul>
+<li><code>host:Element</code> - The element that will parent the dynamic component.</li>
+<li><code>viewModel:Object</code> - The dynamic component's view model instance.</li>
+<li><code>viewFactory:ViewFactory</code> - A view factory used in generating the component's view.</li>
+</ul>
+</li>
+<li>
+<p><code>element(node: Node, type: HtmlBehaviorResource): BehaviorInstruction</code> - Creates a custom element instruction.</p>
+<ul>
+<li><code>node:Node</code> - The node that represents the custom element.</li>
+<li><code>type:HtmlBehaviorResource</code> - The HtmlBehaviorResource to create.</li>
+</ul>
+</li>
+<li>
+<p><code>enhance(): BehaviorInstruction</code> - Creates an instruction for element enhancement.</p>
+</li>
+<li>
+<p><code>unitTest(type: HtmlBehaviorResource, attributes: Object): BehaviorInstruction</code> - Creates an instruction for unit testing.</p>
+<ul>
+<li><code>type:HtmlBehaviorResource</code> - The HtmlBehaviorResource to create.</li>
+<li><code>attributes:Object</code> - A key/value lookup of attributes for the behaior.</li>
+</ul>
+</li>
+</ul>
+<h3>BehaviorPropertyObserver</h3>
+<p>An implementation of Aurelia's Observer interface that is used to back bindable properties defined on a behavior.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>call(): void</code> - Invoked by the TaskQueue to publish changes to subscribers.</p>
+</li>
+<li>
+<p><code>getValue(): any</code> - Gets the property's value.</p>
+</li>
+<li>
+<p><code>setValue(newValue: any): void</code> - Sets the property's value.</p>
+<ul>
+<li><code>newValue:any</code> - The new value to set.</li>
+</ul>
+</li>
+<li>
+<p><code>subscribe(context: any, callable: Function): void</code> - Subscribes to the observerable.</p>
+<ul>
+<li><code>context:any</code> - A context object to pass along to the subscriber when it's called.</li>
+<li><code>callable:Function</code> - A function or object with a &quot;call&quot; method to be invoked for delivery of changes.</li>
+</ul>
+</li>
+<li>
+<p><code>unsubscribe(context: any, callable: Function): void</code> - Unsubscribes from the observerable.</p>
+<ul>
+<li><code>context:any</code> - The context object originally subscribed with.</li>
+<li><code>callable:Function</code> - The callable that was originally subscribed with.</li>
+</ul>
+</li>
+</ul>
+<h3>BindableProperty</h3>
+<p>Represents a bindable property on a behavior.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>createObserver(viewModel: Object): BehaviorPropertyObserver</code> - Creates an observer for this property.</p>
+<ul>
+<li><code>viewModel:Object</code> - The view model instance on which to create the observer.</li>
+</ul>
+</li>
+<li>
+<p><code>defineOn(target: Function, behavior: HtmlBehaviorResource): void</code> - Defines this property on the specified class and behavior.</p>
+<ul>
+<li><code>target:Function</code> - The class to define the property on.</li>
+<li><code>behavior:HtmlBehaviorResource</code> - The behavior to define the property on.</li>
+</ul>
+</li>
+<li>
+<p><code>registerWith(target: Function, behavior: HtmlBehaviorResource, descriptor?: Object): void</code> - Registers this bindable property with particular Class and Behavior instance.</p>
+<ul>
+<li><code>target:Function</code> - The class to register this behavior with.</li>
+<li><code>behavior:HtmlBehaviorResource</code> - The behavior instance to register this property with.</li>
+<li><code>descriptor?:Object</code> - The property descriptor for this property.</li>
+</ul>
+</li>
+</ul>
+<h3>BindingLanguage</h3>
+<p>An abstract base class for implementations of a binding language.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>createAttributeInstruction(resources: ViewResources, element: Element, info: Object, existingInstruction?: Object): BehaviorInstruction</code> - Creates an attribute behavior instruction.</p>
+<ul>
+<li><code>resources:ViewResources</code> - The ViewResources for the view being compiled.</li>
+<li><code>element:Element</code> - The element that the attribute is defined on.</li>
+<li><code>info:Object</code> - The info object previously returned from inspectAttribute.</li>
+<li><code>existingInstruction?:Object</code> - A previously created instruction for this attribute.</li>
+</ul>
+</li>
+<li>
+<p><code>inspectAttribute(resources: ViewResources, elementName: string, attrName: string, attrValue: string): Object</code> - Inspects an attribute for bindings.</p>
+<ul>
+<li><code>resources:ViewResources</code> - The ViewResources for the view being compiled.</li>
+<li><code>elementName:string</code> - The element name to inspect.</li>
+<li><code>attrName:string</code> - The attribute name to inspect.</li>
+<li><code>attrValue:string</code> - The attribute value to inspect.</li>
+</ul>
+</li>
+<li>
+<p><code>inspectTextContent(resources: ViewResources, value: string): Object</code> - Parses the text for bindings.</p>
+<ul>
+<li><code>resources:ViewResources</code> - The ViewResources for the view being compiled.</li>
+<li><code>value:string</code> - The value of the text to parse.</li>
+</ul>
+</li>
+</ul>
+<h3>BoundViewFactory</h3>
+<p>A factory capable of creating View instances, bound to a location within another view hierarchy.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>isCaching:any</code> - Indicates whether this factory is currently using caching.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>create(): View</code> - Creates a view or returns one from the internal cache, if available.</p>
+</li>
+<li>
+<p><code>getCachedView(): View</code> - Gets a cached view if available...</p>
+</li>
+<li>
+<p><code>returnViewToCache(view: View): void</code> - Returns a view to the cache.</p>
+<ul>
+<li><code>view:View</code> - The view to return to the cache if space is available.</li>
+</ul>
+</li>
+<li>
+<p><code>setCacheSize(size: , doNotOverrideIfAlreadySet: boolean): void</code> - Sets the cache size for this factory.</p>
+<ul>
+<li><code>size:</code> - The number of views to cache or &quot;*&quot; to cache all.</li>
+<li><code>doNotOverrideIfAlreadySet:boolean</code> - Indicates that setting the cache should not override the setting if previously set.</li>
+</ul>
+</li>
+</ul>
+<h3>CompositionEngine</h3>
+<p>Used to dynamically compose components.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>compose(context: CompositionContext): Promise</code> - Dynamically composes a component.</p>
+<ul>
+<li><code>context:CompositionContext</code> - The CompositionContext providing information on how the composition should occur.</li>
+</ul>
+</li>
+<li>
+<p><code>createController(context: CompositionContext): Promise</code> - Creates a controller instance for the component described in the context.</p>
+<ul>
+<li><code>context:CompositionContext</code> - The CompositionContext that describes the component.</li>
+</ul>
+</li>
+<li>
+<p><code>ensureViewModel(context: CompositionContext): Promise</code> - Ensures that the view model and its resource are loaded for this context.</p>
+<ul>
+<li><code>context:CompositionContext</code> - The CompositionContext to load the view model and its resource for.</li>
+</ul>
+</li>
+</ul>
+<h3>CompositionTransaction</h3>
+<p>Enables an initiator of a view composition to track any internal async rendering processes for completion.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>enlist(): CompositionTransactionNotifier</code> - Enlist an async render operation into the transaction.</p>
+</li>
+<li>
+<p><code>tryCapture(): CompositionTransactionOwnershipToken</code> - Attempt to take ownership of the composition transaction.</p>
+</li>
+</ul>
+<h3>CompositionTransactionNotifier</h3>
+<p>A mechanism by which an enlisted async render operation can notify the owning transaction when its work is done.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>done(): void</code> - Notifies the owning transaction that its work is done.</li>
+</ul>
+<h3>CompositionTransactionOwnershipToken</h3>
+<p>Referenced by the subsytem which wishes to control a composition transaction.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>resolve(): void</code> - Used internall to resolve the composition complete promise.</p>
+</li>
+<li>
+<p><code>waitForCompositionComplete(): Promise</code> - Allows the transaction owner to wait for the completion of all child compositions.</p>
+</li>
+</ul>
+<h3>Controller</h3>
+<p>Controls a view model (and optionally its view), according to a particular behavior and by following a set of instructions.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>behavior:HtmlBehaviorResource</code> - The HtmlBehaviorResource that provides the base behavior for this controller.</li>
+<li><code>view:View</code> - The view associated with the component being controlled by this controller.
+Note: Not all components will have a view, so the value may be null.</li>
+<li><code>viewModel:Object</code> - The developer's view model instance which provides the custom behavior for this controller.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>attached(): void</code> - Attaches the controller.</p>
+</li>
+<li>
+<p><code>automate(overrideContext?: Object, owningView?: View): void</code> - Used to automate the proper binding of this controller and its view. Used by the composition engine for dynamic component creation.
+This should be considered a semi-private API and is subject to change without notice, even across minor or patch releases.</p>
+<ul>
+<li><code>overrideContext?:Object</code> - An override context for binding.</li>
+<li><code>owningView?:View</code> - The view inside which this controller resides.</li>
+</ul>
+</li>
+<li>
+<p><code>bind(scope: Object): void</code> - Binds the controller to the scope.</p>
+<ul>
+<li><code>scope:Object</code> - The binding scope.</li>
+</ul>
+</li>
+<li>
+<p><code>created(owningView: View): void</code> - Invoked when the view which contains this controller is created.</p>
+<ul>
+<li><code>owningView:View</code> - The view inside which this controller resides.</li>
+</ul>
+</li>
+<li>
+<p><code>detached(): void</code> - Detaches the controller.</p>
+</li>
+<li>
+<p><code>unbind(): void</code> - Unbinds the controller.</p>
+</li>
+</ul>
+<h3>ConventionalViewStrategy</h3>
+<p>A view strategy based on naming conventions.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>loadViewFactory(viewEngine: ViewEngine, compileInstruction: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads a view factory.
+<ul>
+<li><code>viewEngine:ViewEngine</code> - The view engine to use during the load process.</li>
+<li><code>compileInstruction:ViewCompileInstruction</code> - Additional instructions to use during compilation of the view.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+</ul>
+<h3>ElementConfigResource</h3>
+<p>Identifies a class as a resource that configures the EventManager with information
+about how events relate to properties for the purpose of two-way data-binding
+to Web Components.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>initialize(container: Container, target: Function): void</code> - Provides an opportunity for the resource to initialize iteself.</p>
+<ul>
+<li><code>container:Container</code> - The dependency injection container from which the resource
+can aquire needed services.</li>
+<li><code>target:Function</code> - The class to which this resource metadata is attached.</li>
+</ul>
+</li>
+<li>
+<p><code>load(container: Container, target: Function): void</code> - Enables the resource to asynchronously load additional resources.</p>
+<ul>
+<li><code>container:Container</code> - The dependency injection container from which the resource
+can aquire needed services.</li>
+<li><code>target:Function</code> - The class to which this resource metadata is attached.</li>
+</ul>
+</li>
+<li>
+<p><code>register(registry: ViewResources, name?: string): void</code> - Allows the resource to be registered in the view resources for the particular
+view into which it was required.</p>
+<ul>
+<li><code>registry:ViewResources</code> - The view resource registry for the view that required this resource.</li>
+<li><code>name?:string</code> - The name provided by the end user for this resource, within the
+particular view it's being used.</li>
+</ul>
+</li>
+</ul>
+<h3>ElementEvents</h3>
+<p>Dispatches subscribets to and publishes events in the DOM.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>dispose(eventName: string): void</code> - Removes all events that are listening to the specified eventName.</p>
+<ul>
+<li><code>eventName:string</code> -</li>
+</ul>
+</li>
+<li>
+<p><code>disposeAll(): any</code> - Removes all event handlers.</p>
+</li>
+<li>
+<p><code>publish(eventName: string, detail?: Object, bubbles?: boolean, cancelable?: boolean): any</code> - Dispatches an Event on the context element.</p>
+<ul>
+<li><code>eventName:string</code> - No description available</li>
+<li><code>detail?:Object</code> - No description available</li>
+<li><code>bubbles?:boolean</code> - No description available</li>
+<li><code>cancelable?:boolean</code> -</li>
+</ul>
+</li>
+<li>
+<p><code>subscribe(eventName: string, handler: Function, bubbles?: boolean): EventHandler</code> - Adds and Event Listener on the context element.</p>
+<ul>
+<li><code>eventName:string</code> - No description available</li>
+<li><code>handler:Function</code> - No description available</li>
+<li><code>bubbles?:boolean</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>subscribeOnce(eventName: String, handler: Function, bubbles?: Boolean): EventHandler</code> - Adds an Event Listener on the context element, that will be disposed on the first trigger.</p>
+<ul>
+<li><code>eventName:String</code> - No description available</li>
+<li><code>handler:Function</code> - No description available</li>
+<li><code>bubbles?:Boolean</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>HtmlBehaviorResource</h3>
+<p>Identifies a class as a resource that implements custom element or custom
+attribute functionality.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addChildBinding(behavior: Object): void</code> - Adds a binding expression to the component created by this resource.</p>
+<ul>
+<li><code>behavior:Object</code> - The binding expression.</li>
+</ul>
+</li>
+<li>
+<p><code>compile(compiler: ViewCompiler, resources: ViewResources, node: Node, instruction: BehaviorInstruction, parentNode?: Node): Node</code> - Plugs into the compiler and enables custom processing of the node on which this behavior is located.</p>
+<ul>
+<li><code>compiler:ViewCompiler</code> - The compiler that is currently compiling the view that this behavior exists within.</li>
+<li><code>resources:ViewResources</code> - The resources for the view that this behavior exists within.</li>
+<li><code>node:Node</code> - The node on which this behavior exists.</li>
+<li><code>instruction:BehaviorInstruction</code> - The behavior instruction created for this behavior.</li>
+<li><code>parentNode?:Node</code> - The parent node of the current node.</li>
+</ul>
+</li>
+<li>
+<p><code>create(container: Container, instruction?: BehaviorInstruction, element?: Element, bindings?: Binding): Controller</code> - Creates an instance of this behavior.</p>
+<ul>
+<li><code>container:Container</code> - The DI container to create the instance in.</li>
+<li><code>instruction?:BehaviorInstruction</code> - The instruction for this behavior that was constructed during compilation.</li>
+<li><code>element?:Element</code> - The element on which this behavior exists.</li>
+<li><code>bindings?:Binding</code> - The bindings that are associated with the view in which this behavior exists.</li>
+</ul>
+</li>
+<li>
+<p><code>initialize(container: Container, target: Function): void</code> - Provides an opportunity for the resource to initialize iteself.</p>
+<ul>
+<li><code>container:Container</code> - The dependency injection container from which the resource
+can aquire needed services.</li>
+<li><code>target:Function</code> - The class to which this resource metadata is attached.</li>
+</ul>
+</li>
+<li>
+<p><code>load(container: Container, target: Function, loadContext?: ResourceLoadContext, viewStrategy?: ViewStrategy, transientView?: boolean): Promise</code> - Enables the resource to asynchronously load additional resources.</p>
+<ul>
+<li><code>container:Container</code> - The dependency injection container from which the resource
+can aquire needed services.</li>
+<li><code>target:Function</code> - The class to which this resource metadata is attached.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context object provided by the view engine.</li>
+<li><code>viewStrategy?:ViewStrategy</code> - A view strategy to overload the default strategy defined by the resource.</li>
+<li><code>transientView?:boolean</code> - Indicated whether the view strategy is transient or
+permanently tied to this component.</li>
+</ul>
+</li>
+<li>
+<p><code>register(registry: ViewResources, name?: string): void</code> - Allows the resource to be registered in the view resources for the particular
+view into which it was required.</p>
+<ul>
+<li><code>registry:ViewResources</code> - The view resource registry for the view that required this resource.</li>
+<li><code>name?:string</code> - The name provided by the end user for this resource, within the
+particular view it's being used.</li>
+</ul>
+</li>
+<li>
+<p><code>convention(name: string, existing?: HtmlBehaviorResource): HtmlBehaviorResource</code> - Checks whether the provided name matches any naming conventions for HtmlBehaviorResource.</p>
+<ul>
+<li><code>name:string</code> - The name of the potential resource.</li>
+<li><code>existing?:HtmlBehaviorResource</code> - An already existing resource that may need a convention name applied.</li>
+</ul>
+</li>
+</ul>
+<h3>InlineViewStrategy</h3>
+<p>A view strategy that allows the component authore to inline the html for the view.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>loadViewFactory(viewEngine: ViewEngine, compileInstruction: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads a view factory.
+<ul>
+<li><code>viewEngine:ViewEngine</code> - The view engine to use during the load process.</li>
+<li><code>compileInstruction:ViewCompileInstruction</code> - Additional instructions to use during compilation of the view.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+</ul>
+<h3>ModuleAnalyzer</h3>
+<p>Analyzes a module in order to discover the view resources that it exports.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>analyze(moduleId: string, moduleInstance: any, mainResourceKey?: string): ResourceModule</code> - Analyzes a module.</p>
+<ul>
+<li><code>moduleId:string</code> - The id of the module to analyze.</li>
+<li><code>moduleInstance:any</code> - The module instance to analyze.</li>
+<li><code>mainResourceKey?:string</code> - The name of the main resource.</li>
+</ul>
+</li>
+<li>
+<p><code>getAnalysis(moduleId: string): ResourceModule</code> - Retrieves the ResourceModule analysis for a previously analyzed module.</p>
+<ul>
+<li><code>moduleId:string</code> - The id of the module to lookup.</li>
+</ul>
+</li>
+</ul>
+<h3>NoViewStrategy</h3>
+<p>A view strategy that indicates that the component has no view that the templating engine needs to manage.
+Typically used when the component author wishes to take over fine-grained rendering control.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>loadViewFactory(viewEngine: ViewEngine, compileInstruction: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads a view factory.
+<ul>
+<li><code>viewEngine:ViewEngine</code> - The view engine to use during the load process.</li>
+<li><code>compileInstruction:ViewCompileInstruction</code> - Additional instructions to use during compilation of the view.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+</ul>
+<h3>PassThroughSlot</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>needsFallbackRendering:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addNode(view?: any, node?: any, projectionSource?: any, index?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>node?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+<li><code>index?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>attached(): any</code> -</p>
+</li>
+<li>
+<p><code>bind(view?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>created(ownerView?: any): any</code> -</p>
+<ul>
+<li><code>ownerView?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>detached(): any</code> -</p>
+</li>
+<li>
+<p><code>passThroughTo(destinationSlot?: any): any</code> -</p>
+<ul>
+<li><code>destinationSlot?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>projectFrom(view?: any, projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeAll(projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeView(view?: any, projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>renderFallbackContent(view?: any, nodes?: any, projectionSource?: any, index?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>nodes?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+<li><code>index?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(): any</code> -</p>
+</li>
+</ul>
+<h3>RelativeViewStrategy</h3>
+<p>A view strategy that loads a view relative to its associated view-model.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>loadViewFactory(viewEngine: ViewEngine, compileInstruction: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads a view factory.</p>
+<ul>
+<li><code>viewEngine:ViewEngine</code> - The view engine to use during the load process.</li>
+<li><code>compileInstruction:ViewCompileInstruction</code> - Additional instructions to use during compilation of the view.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+<li>
+<p><code>makeRelativeTo(file: string): void</code> - Makes the view loaded by this strategy relative to the provided file path.</p>
+<ul>
+<li><code>file:string</code> - The path to load the view relative to.</li>
+</ul>
+</li>
+</ul>
+<h3>ResourceDescription</h3>
+<p>Represents a single view resource with a ResourceModule.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>initialize(container: Container): void</code> - Initializes the resource.</p>
+<ul>
+<li><code>container:Container</code> - The dependency injection container usable during resource initialization.</li>
+</ul>
+</li>
+<li>
+<p><code>load(container: Container, loadContext?: ResourceLoadContext):</code> - Loads any dependencies of the resource.</p>
+<ul>
+<li><code>container:Container</code> - The DI container to use during dependency resolution.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+</ul>
+</li>
+<li>
+<p><code>register(registry: ViewResources, name?: string): void</code> - Registrers the resource with the view resources.</p>
+<ul>
+<li><code>registry:ViewResources</code> - The registry of view resources to regiser within.</li>
+<li><code>name?:string</code> - The name to use in registering the resource.</li>
+</ul>
+</li>
+</ul>
+<h3>ResourceLoadContext</h3>
+<p>A context that flows through the view resource load process.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>dependencies:Object</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addDependency(url: string): void</code> - Tracks a dependency that is being loaded.</p>
+<ul>
+<li><code>url:string</code> - The url of the dependency.</li>
+</ul>
+</li>
+<li>
+<p><code>hasDependency(url: string): boolean</code> - Checks if the current context includes a load of the specified url.</p>
+<ul>
+<li><code>url:string</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>ResourceModule</h3>
+<p>Represents a module with view resources.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>initialize(container: Container): void</code> - Initializes the resources within the module.</p>
+<ul>
+<li><code>container:Container</code> - The dependency injection container usable during resource initialization.</li>
+</ul>
+</li>
+<li>
+<p><code>load(container: Container, loadContext?: ResourceLoadContext): Promise</code> - Loads any dependencies of the resources within this module.</p>
+<ul>
+<li><code>container:Container</code> - The DI container to use during dependency resolution.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+</ul>
+</li>
+<li>
+<p><code>register(registry: ViewResources, name?: string): void</code> - Registers the resources in the module with the view resources.</p>
+<ul>
+<li><code>registry:ViewResources</code> - The registry of view resources to regiser within.</li>
+<li><code>name?:string</code> - The name to use in registering the default resource.</li>
+</ul>
+</li>
+</ul>
+<h3>ShadowDOM</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>defaultSlotKey:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>distributeNodes(view?: any, nodes?: any, slots?: any, projectionSource?: any, index?: any, destinationOverride?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>nodes?:any</code> - No description available</li>
+<li><code>slots?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+<li><code>index?:any</code> - No description available</li>
+<li><code>destinationOverride?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>distributeView(view?: any, slots?: any, projectionSource?: any, index?: any, destinationOverride?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>slots?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+<li><code>index?:any</code> - No description available</li>
+<li><code>destinationOverride?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>getSlotName(node?: any): any</code> -</p>
+<ul>
+<li><code>node?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>undistributeAll(slots?: any, projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>slots?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>undistributeView(view?: any, slots?: any, projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>slots?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>ShadowSlot</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>needsFallbackRendering:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addNode(view?: any, node?: any, projectionSource?: any, index?: any, destination?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>node?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+<li><code>index?:any</code> - No description available</li>
+<li><code>destination?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>attached(): any</code> -</p>
+</li>
+<li>
+<p><code>bind(view?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>created(ownerView?: any): any</code> -</p>
+<ul>
+<li><code>ownerView?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>detached(): any</code> -</p>
+</li>
+<li>
+<p><code>projectFrom(view?: any, projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>projectTo(slots?: any): any</code> -</p>
+<ul>
+<li><code>slots?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeAll(projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeView(view?: any, projectionSource?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>renderFallbackContent(view?: any, nodes?: any, projectionSource?: any, index?: any): any</code> -</p>
+<ul>
+<li><code>view?:any</code> - No description available</li>
+<li><code>nodes?:any</code> - No description available</li>
+<li><code>projectionSource?:any</code> - No description available</li>
+<li><code>index?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(): any</code> -</p>
+</li>
+</ul>
+<h3>SlotCustomAttribute</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>valueChanged(newValue?: any, oldValue?: any): any</code> -
+<ul>
+<li><code>newValue?:any</code> - No description available</li>
+<li><code>oldValue?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>TargetInstruction</h3>
+<p>Provides all the instructions for how a target element should be enhanced inside of a view.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>anchorIsContainer:boolean</code> - No description available.</li>
+<li><code>behaviorInstructions:Array</code> - No description available.</li>
+<li><code>contentExpression:any</code> - No description available.</li>
+<li><code>elementInstruction:BehaviorInstruction</code> - No description available.</li>
+<li><code>expressions:Array</code> - No description available.</li>
+<li><code>injectorId:number</code> - No description available.</li>
+<li><code>lifting:boolean</code> - No description available.</li>
+<li><code>parentInjectorId:number</code> - No description available.</li>
+<li><code>providers:Array</code> - No description available.</li>
+<li><code>shadowSlot:boolean</code> - No description available.</li>
+<li><code>slotFallbackFactory:any</code> - No description available.</li>
+<li><code>slotName:string</code> - No description available.</li>
+<li><code>values:Object</code> - No description available.</li>
+<li><code>viewFactory:ViewFactory</code> - No description available.</li>
+<li><code>noExpressions:any</code> - An empty array used to represent a target with no binding expressions.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>contentExpression(expression?: any): TargetInstruction</code> - Creates an instruction that represents a binding expression in the content of an element.</p>
+<ul>
+<li><code>expression?:any</code> - The binding expression.</li>
+</ul>
+</li>
+<li>
+<p><code>lifting(parentInjectorId: number, liftingInstruction: BehaviorInstruction): TargetInstruction</code> - Creates an instruction that represents content that was lifted out of the DOM and into a ViewFactory.</p>
+<ul>
+<li><code>parentInjectorId:number</code> - The id of the parent dependency injection container.</li>
+<li><code>liftingInstruction:BehaviorInstruction</code> - The behavior instruction of the lifting behavior.</li>
+</ul>
+</li>
+<li>
+<p><code>normal(injectorId: number, parentInjectorId: number, providers: Array, behaviorInstructions: Array, expressions: Array, elementInstruction: BehaviorInstruction): TargetInstruction</code> - Creates an instruction that represents an element with behaviors and bindings.</p>
+<ul>
+<li><code>injectorId:number</code> - The id of the dependency injection container.</li>
+<li><code>parentInjectorId:number</code> - The id of the parent dependency injection container.</li>
+<li><code>providers:Array</code> - The types which will provide behavior for this element.</li>
+<li><code>behaviorInstructions:Array</code> - The instructions for creating behaviors on this element.</li>
+<li><code>expressions:Array</code> - Bindings, listeners, triggers, etc.</li>
+<li><code>elementInstruction:BehaviorInstruction</code> - The element behavior for this element.</li>
+</ul>
+</li>
+<li>
+<p><code>shadowSlot(parentInjectorId: number): TargetInstruction</code> - Creates an instruction that represents a shadow dom slot.</p>
+<ul>
+<li><code>parentInjectorId:number</code> - The id of the parent dependency injection container.</li>
+</ul>
+</li>
+<li>
+<p><code>surrogate(providers: Array, behaviorInstructions: Array, expressions: Array, values: Object): TargetInstruction</code> - Creates an instruction that represents the surrogate behaviors and bindings for an element.</p>
+<ul>
+<li><code>providers:Array</code> - The types which will provide behavior for this element.</li>
+<li><code>behaviorInstructions:Array</code> - The instructions for creating behaviors on this element.</li>
+<li><code>expressions:Array</code> - Bindings, listeners, triggers, etc.</li>
+<li><code>values:Object</code> - A key/value lookup of attributes to transplant.</li>
+</ul>
+</li>
+</ul>
+<h3>TemplateRegistryViewStrategy</h3>
+<p>A view strategy created directly from the template registry entry.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>loadViewFactory(viewEngine: ViewEngine, compileInstruction: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads a view factory.
+<ul>
+<li><code>viewEngine:ViewEngine</code> - The view engine to use during the load process.</li>
+<li><code>compileInstruction:ViewCompileInstruction</code> - Additional instructions to use during compilation of the view.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+</ul>
+<h3>TemplatingEngine</h3>
+<p>A facade of the templating engine capabilties which provides a more user friendly API for common use cases.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>compose(context: CompositionContext): Promise</code> - Dynamically composes components and views.</p>
+<ul>
+<li><code>context:CompositionContext</code> - The composition context to use.</li>
+</ul>
+</li>
+<li>
+<p><code>configureAnimator(animator: Animator): void</code> - Configures the default animator.</p>
+<ul>
+<li><code>animator:Animator</code> - The animator instance.</li>
+</ul>
+</li>
+<li>
+<p><code>enhance(instruction: ): View</code> - Enhances existing DOM with behaviors and bindings.</p>
+<ul>
+<li><code>instruction:</code> - The element to enhance or a set of instructions for the enhancement process.</li>
+</ul>
+</li>
+</ul>
+<h3>View</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>bindingContext:Object</code> - The primary binding context that this view is data-bound to.</li>
+<li><code>container:Container</code> - The Dependency Injection Container that was used to create this View instance.</li>
+<li><code>fragment:</code> - Contains the DOM Nodes which represent this View. If the view was created via the &quot;enhance&quot; API, this will be an Element, otherwise it will be a DocumentFragment. If not created via &quot;enhance&quot; then the fragment will only contain nodes when the View is detached from the DOM.</li>
+<li><code>overrideContext:Object</code> - The override context which contains properties capable of overriding those found on the binding context.</li>
+<li><code>viewFactory:ViewFactory</code> - The ViewFactory that built this View instance.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addBinding(binding: Object): void</code> - Adds a binding instance to this view.</p>
+<ul>
+<li><code>binding:Object</code> - The binding instance.</li>
+</ul>
+</li>
+<li>
+<p><code>appendNodesTo(parent: Element): void</code> - Appends this view's to the specified DOM node.</p>
+<ul>
+<li><code>parent:Element</code> - The parent element to append this view's nodes to.</li>
+</ul>
+</li>
+<li>
+<p><code>attached(): void</code> - Triggers the attach for the view and its children.</p>
+</li>
+<li>
+<p><code>bind(bindingContext: Object, overrideContext?: Object, _systemUpdate?: boolean): void</code> - Binds the view and it's children.</p>
+<ul>
+<li>
+<p><code>bindingContext:Object</code> - The binding context to bind to.</p>
+</li>
+<li>
+<p><code>overrideContext?:Object</code> - A secondary binding context that can override the standard context.</p>
+</li>
+<li>
+<p><code>_systemUpdate?:boolean</code> - No description available</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>created(): void</code> - Triggers the created callback for this view and its children.</p>
+</li>
+<li>
+<p><code>detached(): void</code> - Triggers the detach for the view and its children.</p>
+</li>
+<li>
+<p><code>insertNodesBefore(refNode: Node): void</code> - Inserts this view's nodes before the specified DOM node.</p>
+<ul>
+<li><code>refNode:Node</code> - The node to insert this view's nodes before.</li>
+</ul>
+</li>
+<li>
+<p><code>removeNodes(): void</code> - Removes this view's nodes from the DOM.</p>
+</li>
+<li>
+<p><code>returnToCache(): void</code> - Returns this view to the appropriate view cache.</p>
+</li>
+<li>
+<p><code>unbind(): void</code> - Unbinds the view and its children.</p>
+</li>
+</ul>
+<h3>ViewCompileInstruction</h3>
+<p>Specifies how a view should be compiled.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>associatedModuleId:any</code> - No description available.</li>
+<li><code>compileSurrogate:boolean</code> - No description available.</li>
+<li><code>targetShadowDOM:boolean</code> - No description available.</li>
+<li><code>normal:ViewCompileInstruction</code> - The normal configuration for view compilation.</li>
+</ul>
+<h4>Methods</h4>
+<h3>ViewCompiler</h3>
+<p>Compiles html templates, dom fragments and strings into ViewFactory instances, capable of instantiating Views.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>compile(source: , resources?: ViewResources, compileInstruction?: ViewCompileInstruction): ViewFactory</code> - Compiles an html template, dom fragment or string into ViewFactory instances, capable of instantiating Views.
+<ul>
+<li><code>source:</code> - The template, fragment or string to compile.</li>
+<li><code>resources?:ViewResources</code> - The view resources used during compilation.</li>
+<li><code>compileInstruction?:ViewCompileInstruction</code> - A set of instructions that customize how compilation occurs.</li>
+</ul>
+</li>
+</ul>
+<h3>ViewEngine</h3>
+<p>Controls the view resource loading pipeline.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>viewModelRequireMetadataKey:any</code> - The metadata key for storing requires declared in a ViewModel.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addResourcePlugin(extension: string, implementation: Object): void</code> - Adds a resource plugin to the resource loading pipeline.</p>
+<ul>
+<li><code>extension:string</code> - The file extension to match in require elements.</li>
+<li><code>implementation:Object</code> - The plugin implementation that handles the resource type.</li>
+</ul>
+</li>
+<li>
+<p><code>importViewModelResource(moduleImport: string, moduleMember: string): Promise</code> - Loads a view model as a resource.</p>
+<ul>
+<li><code>moduleImport:string</code> - The module to import.</li>
+<li><code>moduleMember:string</code> - The export from the module to generate the resource for.</li>
+</ul>
+</li>
+<li>
+<p><code>importViewResources(moduleIds: string, names: string, resources: ViewResources, compileInstruction?: ViewCompileInstruction, loadContext?: ResourceLoadContext): Promise</code> - Imports the specified resources with the specified names into the view resources object.</p>
+<ul>
+<li><code>moduleIds:string</code> - The modules to load.</li>
+<li><code>names:string</code> - The names associated with resource modules to import.</li>
+<li><code>resources:ViewResources</code> - The resources lookup to add the loaded resources to.</li>
+<li><code>compileInstruction?:ViewCompileInstruction</code> - The compilation instruction associated with the resource imports.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>loadTemplateResources(registryEntry: TemplateRegistryEntry, compileInstruction?: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads all the resources specified by the registry entry.</p>
+<ul>
+<li><code>registryEntry:TemplateRegistryEntry</code> - The template registry entry to load the resources for.</li>
+<li><code>compileInstruction?:ViewCompileInstruction</code> - The compile instruction associated with the load.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The load context if this is happening within the context of a larger load operation.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+<li>
+<p><code>loadViewFactory(urlOrRegistryEntry: , compileInstruction?: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads and compiles a ViewFactory from a url or template registry entry.</p>
+<ul>
+<li><code>urlOrRegistryEntry:</code> - A url or template registry entry to generate the view factory for.</li>
+<li><code>compileInstruction?:ViewCompileInstruction</code> - Instructions detailing how the factory should be compiled.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The load context if this factory load is happening within the context of a larger load operation.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+</ul>
+<h3>ViewEngineHooksResource</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>initialize(container?: any, target?: any): any</code> -</p>
+<ul>
+<li><code>container?:any</code> - No description available</li>
+<li><code>target?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>load(container?: any, target?: any): any</code> -</p>
+<ul>
+<li><code>container?:any</code> - No description available</li>
+<li><code>target?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>register(registry?: any, name?: any): any</code> -</p>
+<ul>
+<li><code>registry?:any</code> - No description available</li>
+<li><code>name?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>convention(name?: any): any</code> -</p>
+<ul>
+<li><code>name?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>ViewFactory</h3>
+<p>A factory capable of creating View instances.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>isCaching:any</code> - Indicates whether this factory is currently using caching.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>create(container: Container, createInstruction?: ViewCreateInstruction, element?: Element): View</code> - Creates a view or returns one from the internal cache, if available.</p>
+<ul>
+<li><code>container:Container</code> - The container to create the view from.</li>
+<li><code>createInstruction?:ViewCreateInstruction</code> - The instruction used to customize view creation.</li>
+<li><code>element?:Element</code> - The custom element that hosts the view.</li>
+</ul>
+</li>
+<li>
+<p><code>getCachedView(): View</code> - Gets a cached view if available...</p>
+</li>
+<li>
+<p><code>returnViewToCache(view: View): void</code> - Returns a view to the cache.</p>
+<ul>
+<li><code>view:View</code> - The view to return to the cache if space is available.</li>
+</ul>
+</li>
+<li>
+<p><code>setCacheSize(size: , doNotOverrideIfAlreadySet: boolean): void</code> - Sets the cache size for this factory.</p>
+<ul>
+<li><code>size:</code> - The number of views to cache or &quot;*&quot; to cache all.</li>
+<li><code>doNotOverrideIfAlreadySet:boolean</code> - Indicates that setting the cache should not override the setting if previously set.</li>
+</ul>
+</li>
+</ul>
+<h3>ViewLocator</h3>
+<p>Locates a view for an object.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>viewStrategyMetadataKey:any</code> - The metadata key for storing/finding view strategies associated with an class/object.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>convertOriginToViewUrl(origin: Origin): string</code> - Conventionally converts a view model origin to a view url.
+Used by the ConventionalViewStrategy.</p>
+<ul>
+<li><code>origin:Origin</code> - The origin of the view model to convert.</li>
+</ul>
+</li>
+<li>
+<p><code>createFallbackViewStrategy(origin: Origin): ViewStrategy</code> - Creates a fallback View Strategy. Used when unable to locate a configured strategy.
+The default implementation returns and instance of ConventionalViewStrategy.</p>
+<ul>
+<li><code>origin:Origin</code> - The origin of the view model to return the strategy for.</li>
+</ul>
+</li>
+<li>
+<p><code>getViewStrategy(value: any): ViewStrategy</code> - Gets the view strategy for the value.</p>
+<ul>
+<li><code>value:any</code> - The value to locate the view strategy for.</li>
+</ul>
+</li>
+</ul>
+<h3>ViewResources</h3>
+<p>Represents a collection of resources used during the compilation of a view.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>bindingLanguage:any</code> - A custom binding language used in the view.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getAttribute(attribute: string): HtmlBehaviorResource</code> - Gets an HTML attribute behavior.</p>
+<ul>
+<li><code>attribute:string</code> - The name of the attribute to lookup.</li>
+</ul>
+</li>
+<li>
+<p><code>getBindingBehavior(name: string): Object</code> - Gets a binding behavior.</p>
+<ul>
+<li><code>name:string</code> - The name of the binding behavior.</li>
+</ul>
+</li>
+<li>
+<p><code>getBindingLanguage(bindingLanguageFallback: BindingLanguage): BindingLanguage</code> - Gets the binding language associated with these resources, or return the provided fallback implementation.</p>
+<ul>
+<li><code>bindingLanguageFallback:BindingLanguage</code> - The fallback binding language implementation to use if no binding language is configured locally.</li>
+</ul>
+</li>
+<li>
+<p><code>getElement(tagName: string): HtmlBehaviorResource</code> - Gets an HTML element behavior.</p>
+<ul>
+<li><code>tagName:string</code> - The tag name to search for.</li>
+</ul>
+</li>
+<li>
+<p><code>getValue(name: string): any</code> - Gets a value.</p>
+<ul>
+<li><code>name:string</code> - The name of the value.</li>
+</ul>
+</li>
+<li>
+<p><code>getValueConverter(name: string): Object</code> - Gets a value converter.</p>
+<ul>
+<li><code>name:string</code> - The name of the value converter.</li>
+</ul>
+</li>
+<li>
+<p><code>mapAttribute(attribute: string): string</code> - Gets the known attribute name based on the local attribute name.</p>
+<ul>
+<li><code>attribute:string</code> - The local attribute name to lookup.</li>
+</ul>
+</li>
+<li>
+<p><code>patchInParent(newParent: ViewResources): void</code> - Patches an immediate parent into the view resource resolution hierarchy.</p>
+<ul>
+<li><code>newParent:ViewResources</code> - The new parent resources to patch in.</li>
+</ul>
+</li>
+<li>
+<p><code>registerAttribute(attribute: string, behavior: HtmlBehaviorResource, knownAttribute: string): void</code> - Registers an HTML attribute.</p>
+<ul>
+<li><code>attribute:string</code> - The name of the attribute.</li>
+<li><code>behavior:HtmlBehaviorResource</code> - The behavior of the attribute.</li>
+<li><code>knownAttribute:string</code> - The well-known name of the attribute (in lieu of the local name).</li>
+</ul>
+</li>
+<li>
+<p><code>registerBindingBehavior(name: string, bindingBehavior: Object): void</code> - Registers a binding behavior.</p>
+<ul>
+<li><code>name:string</code> - The name of the binding behavior.</li>
+<li><code>bindingBehavior:Object</code> - The binding behavior instance.</li>
+</ul>
+</li>
+<li>
+<p><code>registerElement(tagName: string, behavior: HtmlBehaviorResource): void</code> - Registers an HTML element.</p>
+<ul>
+<li><code>tagName:string</code> - The name of the custom element.</li>
+<li><code>behavior:HtmlBehaviorResource</code> - The behavior of the element.</li>
+</ul>
+</li>
+<li>
+<p><code>registerValue(name: string, value: any): void</code> - Registers a value.</p>
+<ul>
+<li><code>name:string</code> - The name of the value.</li>
+<li><code>value:any</code> - The value.</li>
+</ul>
+</li>
+<li>
+<p><code>registerValueConverter(name: string, valueConverter: Object): void</code> - Registers a value converter.</p>
+<ul>
+<li><code>name:string</code> - The name of the value converter.</li>
+<li><code>valueConverter:Object</code> - The value converter instance.</li>
+</ul>
+</li>
+<li>
+<p><code>registerViewEngineHooks(hooks: ViewEngineHooks): void</code> - Registers view engine hooks for the view.</p>
+<ul>
+<li><code>hooks:ViewEngineHooks</code> - The hooks to register.</li>
+</ul>
+</li>
+<li>
+<p><code>relativeToView(path: string): string</code> - Maps a path relative to the associated view's origin.</p>
+<ul>
+<li><code>path:string</code> - The relative path.</li>
+</ul>
+</li>
+</ul>
+<h3>ViewSlot</h3>
+<p>Represents a slot or location within the DOM to which views can be added and removed.
+Manages the view lifecycle for its children.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>add(view: View):</code> - Adds a view to the slot.</p>
+<ul>
+<li><code>view:View</code> - The view to add.</li>
+</ul>
+</li>
+<li>
+<p><code>animateView(view: View, direction?: string):</code> -   Runs the animator against the first animatable element found within the view's fragment
+@param  view       The view to use when searching for the element.
+@param  direction  The animation direction enter|leave.
+@returns An animation complete Promise or undefined if no animation was run.</p>
+<ul>
+<li><code>view:View</code> - No description available</li>
+<li><code>direction?:string</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>attached(): void</code> - Triggers the attach for the slot and its children.</p>
+</li>
+<li>
+<p><code>bind(bindingContext: Object, overrideContext: Object): void</code> - Binds the slot and it's children.</p>
+<ul>
+<li><code>bindingContext:Object</code> - The binding context to bind to.</li>
+<li><code>overrideContext:Object</code> - A secondary binding context that can override the standard context.</li>
+</ul>
+</li>
+<li>
+<p><code>detached(): void</code> - Triggers the detach for the slot and its children.</p>
+</li>
+<li>
+<p><code>insert(index: number, view: View):</code> - Inserts a view into the slot.</p>
+<ul>
+<li><code>index:number</code> - The index to insert the view at.</li>
+<li><code>view:View</code> - The view to insert.</li>
+</ul>
+</li>
+<li>
+<p><code>move(sourceIndex?: any, targetIndex?: any): any</code> - Moves a view across the slot.</p>
+<ul>
+<li><code>sourceIndex?:any</code> - The index the view is currently at.</li>
+<li><code>targetIndex?:any</code> - The index to insert the view at.</li>
+</ul>
+</li>
+<li>
+<p><code>projectTo(slots: Object): void</code> -</p>
+<ul>
+<li><code>slots:Object</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>remove(view: View, returnToCache?: boolean, skipAnimation?: boolean):</code> - Removes a view from the slot.</p>
+<ul>
+<li><code>view:View</code> - The view to remove.</li>
+<li><code>returnToCache?:boolean</code> - Should the view be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>removeAll(returnToCache?: boolean, skipAnimation?: boolean):</code> - Removes all views from the slot.</p>
+<ul>
+<li><code>returnToCache?:boolean</code> - Should the view be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>removeAt(index: number, returnToCache?: boolean, skipAnimation?: boolean):</code> - Removes a view an a specified index from the slot.</p>
+<ul>
+<li><code>index:number</code> - The index to remove the view at.</li>
+<li><code>returnToCache?:boolean</code> - Should the view be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>removeMany(viewsToRemove: View, returnToCache?: boolean, skipAnimation?: boolean):</code> - Removes many views from the slot.</p>
+<ul>
+<li><code>viewsToRemove:View</code> - The array of views to remove.</li>
+<li><code>returnToCache?:boolean</code> - Should the views be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>transformChildNodesIntoView(): void</code> - Takes the child nodes of an existing element that has been converted into a ViewSlot
+and makes those nodes into a View within the slot.</p>
+</li>
+<li>
+<p><code>unbind(): void</code> - Unbinds the slot and its children.</p>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>ComponentAttached</h3>
+<p>An optional interface describing the attached convention.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>attached(): void</code> - Implement this hook if you want to perform custom logic when the component is attached to the DOM (in document).</li>
+</ul>
+<h3>ComponentBind</h3>
+<p>An optional interface describing the bind convention.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>bind(bindingContext: any, overrideContext: any): void</code> - Implement this hook if you want to perform custom logic when databinding is activated on the view and view-model.
+The &quot;binding context&quot; to which the component is being bound will be passed first.
+An &quot;override context&quot; will be passed second. The override context contains information used to traverse
+the parent hierarchy and can also be used to add any contextual properties that the component wants to add.
+<ul>
+<li><code>bindingContext:any</code> - No description available.</li>
+<li><code>overrideContext:any</code> - No description available.</li>
+</ul>
+</li>
+</ul>
+<h3>ComponentCreated</h3>
+<p>An optional interface describing the created convention.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>created(owningView: View, myView: View): void</code> - Implement this hook if you want to perform custom logic after the constructor has been called.
+At this point in time, the view has also been created and both the view-model and the view
+are connected to their controller. The hook will recieve the instance of the &quot;owningView&quot;.
+This is the view that the component is declared inside of. If the component itself has a view,
+this will be passed second.
+<ul>
+<li><code>owningView:View</code> - No description available.</li>
+<li><code>myView:View</code> - No description available.</li>
+</ul>
+</li>
+</ul>
+<h3>ComponentDetached</h3>
+<p>An optional interface describing the detached convention.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>detached(): void</code> - Implement this hook if you want to perform custom logic if/when the component is removed from the the DOM.</li>
+</ul>
+<h3>ComponentUnbind</h3>
+<p>An optional interface describing the unbind convention.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>unbind(): void</code> - Implement this hook if you want to perform custom logic after the component is detached and unbound.</li>
+</ul>
+<h3>CompositionContext</h3>
+<p>Instructs the composition engine how to dynamically compose a component.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>bindingContext:any</code> - The context in which the view model is executed in.</li>
+<li><code>childContainer:Container</code> - The child Container for the component creation. One will be created from the parent if not provided.</li>
+<li><code>container:Container</code> - The parent Container for the component creation.</li>
+<li><code>host:Element</code> - The element that will parent the dynamic component.
+It will be registered in the child container of this composition.</li>
+<li><code>model:any</code> - Data to be passed to the &quot;activate&quot; hook on the view model.</li>
+<li><code>overrideContext:any</code> - A secondary binding context that can override the standard context.</li>
+<li><code>owningView:View</code> - The view inside which this composition is happening.</li>
+<li><code>skipActivation:boolean</code> - Should the composition system skip calling the &quot;activate&quot; hook on the view model.</li>
+<li><code>view:</code> - The view url or view strategy to override the default view location convention.</li>
+<li><code>viewModel:any</code> - The view model url or instance for the component.</li>
+<li><code>viewModelResource:HtmlBehaviorResource</code> - The HtmlBehaviorResource for the component.</li>
+<li><code>viewResources:ViewResources</code> - The view resources for the view in which the component should be created.</li>
+<li><code>viewSlot:ViewSlot</code> - The slot to push the dynamically composed component into.</li>
+</ul>
+<h4>Methods</h4>
+<h3>DynamicComponentGetViewStrategy</h3>
+<p>An optional interface describing the getViewStrategy convention for dynamic components (used with the compose element or the router).</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>getViewStrategy():</code> - Implement this hook if you want to provide custom view strategy when this component is used with the compose element or the router.</li>
+</ul>
+<h3>EnhanceInstruction</h3>
+<p>Instructs the framework in how to enhance an existing DOM structure.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>bindingContext:Object</code> - A binding context for the enhancement.</li>
+<li><code>container:Container</code> - The DI container to use as the root for UI enhancement.</li>
+<li><code>element:Element</code> - The element to enhance.</li>
+<li><code>overrideContext:any</code> - A secondary binding context that can override the standard context.</li>
+<li><code>resources:ViewResources</code> - The resources available for enhancement.</li>
+</ul>
+<h4>Methods</h4>
+<h3>EventHandler</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>bubbles:boolean</code> - No description available.</li>
+<li><code>dispose:Function</code> - No description available.</li>
+<li><code>eventName:string</code> - No description available.</li>
+<li><code>handler:Function</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<h3>ViewCreateInstruction</h3>
+<p>Specifies how a view should be created.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>enhance:boolean</code> - Indicates that the view is being created by enhancing existing DOM.</li>
+<li><code>partReplacements:Object</code> - Specifies a key/value lookup of part replacements for the view being created.</li>
+</ul>
+<h4>Methods</h4>
+<h3>ViewEngineHooks</h3>
+<p>View engine hooks that enable a view resource to provide custom processing during the compilation or creation of a view.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>afterCompile:</code> - Invoked after a template is compiled.</li>
+<li><code>afterCreate:</code> - Invoked after a view is created.</li>
+<li><code>beforeBind:</code> - Invoked after the bindingContext and overrideContext are configured on the view but before the view is bound.</li>
+<li><code>beforeCompile:</code> - Invoked before a template is compiled.</li>
+<li><code>beforeCreate:</code> - Invoked before a view is created.</li>
+<li><code>beforeUnbind:</code> - Invoked before the view is unbind. The bindingContext and overrideContext are still available on the view.</li>
+</ul>
+<h4>Methods</h4>
+<h3>ViewNode</h3>
+<p>Represents a node in the view hierarchy.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>attached(): void</code> - Triggers the attach for the node and its children.</p>
+</li>
+<li>
+<p><code>bind(bindingContext: Object, overrideContext?: Object): void</code> - Binds the node and it's children.</p>
+<ul>
+<li><code>bindingContext:Object</code> - The binding context to bind to.</li>
+<li><code>overrideContext?:Object</code> - A secondary binding context that can override the standard context.</li>
+</ul>
+</li>
+<li>
+<p><code>detached(): void</code> - Triggers the detach for the node and its children.</p>
+</li>
+<li>
+<p><code>unbind(): void</code> - Unbinds the node and its children.</p>
+</li>
+</ul>
+<h3>ViewStrategy</h3>
+<p>Implemented by classes that describe how a view factory should be loaded.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>loadViewFactory(viewEngine: ViewEngine, compileInstruction: ViewCompileInstruction, loadContext?: ResourceLoadContext, target?: any): Promise</code> - Loads a view factory.
+<ul>
+<li><code>viewEngine:ViewEngine</code> - The view engine to use during the load process.</li>
+<li><code>compileInstruction:ViewCompileInstruction</code> - Additional instructions to use during compilation of the view.</li>
+<li><code>loadContext?:ResourceLoadContext</code> - The loading context used for loading all resources and dependencies.</li>
+<li><code>target?:any</code> - A class from which to extract metadata of additional resources to load.</li>
+</ul>
+</li>
+</ul>
+<h2>Variables</h2>
+<ul>
+<li><code>SwapStrategies:any</code> - No description available.</li>
+<li><code>animationEvent:any</code> - List the events that an Animator should raise.</li>
+<li><code>viewStrategy:Function</code> - Decorator: Indicates that the decorated class/object is a view strategy.</li>
+</ul>
+<h2>Functions</h2>
+<ul>
+<li>
+<p><code>behavior(override: ): any</code> - Decorator: Specifies a custom HtmlBehaviorResource instance or an object that overrides various implementation details of the default HtmlBehaviorResource.</p>
+<ul>
+<li><code>override:</code> - The customized HtmlBehaviorResource or an object to override the default with.</li>
+</ul>
+</li>
+<li>
+<p><code>bindable(nameOrConfigOrTarget?: , key?: any, descriptor?: any): any</code> - Decorator: Specifies that a property is bindable through HTML.</p>
+<ul>
+<li>
+<p><code>nameOrConfigOrTarget?:</code> - The name of the property, or a configuration object.</p>
+</li>
+<li>
+<p><code>key?:any</code> - No description available.</p>
+</li>
+<li>
+<p><code>descriptor?:any</code> - No description available.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>child(selectorOrConfig: ): any</code> - Creates a behavior property that references an immediate content child element that matches the provided selector.</p>
+<ul>
+<li><code>selectorOrConfig:</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>children(selectorOrConfig: ): any</code> - Creates a behavior property that references an array of immediate content child elements that matches the provided selector.</p>
+<ul>
+<li><code>selectorOrConfig:</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>containerless(target?: any): any</code> - Decorator: Indicates that the custom element should be rendered without its
+element container.</p>
+<ul>
+<li><code>target?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>customAttribute(name: string, defaultBindingMode?: number): any</code> - Decorator: Indicates that the decorated class is a custom attribute.</p>
+<ul>
+<li><code>name:string</code> - The name of the custom attribute.</li>
+<li><code>defaultBindingMode?:number</code> - The default binding mode to use when the attribute is bound wtih .bind.</li>
+</ul>
+</li>
+<li>
+<p><code>customElement(name: string): any</code> - Decorator: Indicates that the decorated class is a custom element.</p>
+<ul>
+<li><code>name:string</code> - The name of the custom element.</li>
+</ul>
+</li>
+<li>
+<p><code>dynamicOptions(target?: any): any</code> - Decorator: Specifies that the decorated custom attribute has options that
+are dynamic, based on their presence in HTML and not statically known.</p>
+<ul>
+<li><code>target?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>elementConfig(target?: any): any</code> - Decorator: Indicates that the decorated class provides element configuration
+to the EventManager for one or more Web Components.</p>
+<ul>
+<li><code>target?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>inlineView(markup: string, dependencies?: Array, dependencyBaseUrl?: string): any</code> - Decorator: Provides a view template, directly inline, for the component. Be
+sure to wrap the markup in a template element.</p>
+<ul>
+<li><code>markup:string</code> - The markup for the view.</li>
+<li><code>dependencies?:Array</code> - A list of dependencies that the template has.</li>
+<li><code>dependencyBaseUrl?:string</code> - A base url from which the dependencies will be loaded.</li>
+</ul>
+</li>
+<li>
+<p><code>noView(targetOrDependencies?: , dependencyBaseUrl?: string): any</code> - Decorator: Indicates that the component has no view.</p>
+<ul>
+<li><code>targetOrDependencies?:</code> - No description available.</li>
+<li><code>dependencyBaseUrl?:string</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>processAttributes(processor: Function): any</code> - Decorator: Enables custom processing of the attributes on an element before the framework inspects them.</p>
+<ul>
+<li><code>processor:Function</code> - Pass a function which can provide custom processing of the content.</li>
+</ul>
+</li>
+<li>
+<p><code>processContent(processor: ): any</code> - Decorator: Enables custom processing of the content that is places inside the
+custom element by its consumer.</p>
+<ul>
+<li><code>processor:</code> - Pass a boolean to direct the template compiler to not process
+the content placed inside this element. Alternatively, pass a function which
+can provide custom processing of the content. This function should then return
+a boolean indicating whether the compiler should also process the content.</li>
+</ul>
+</li>
+<li>
+<p><code>resource(instance: Object): any</code> - Decorator: Specifies a resource instance that describes the decorated class.</p>
+<ul>
+<li><code>instance:Object</code> - The resource instance.</li>
+</ul>
+</li>
+<li>
+<p><code>templateController(target?: any): any</code> - Decorator: Applied to custom attributes. Indicates that whatever element the
+attribute is placed on should be converted into a template and that this
+attribute controls the instantiation of the template.</p>
+<ul>
+<li><code>target?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>useShadowDOM(targetOrOptions?: any): any</code> - Decorator: Indicates that the custom element should render its view in Shadow
+DOM. This decorator may change slightly when Aurelia updates to Shadow DOM v1.</p>
+<ul>
+<li><code>targetOrOptions?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>useView(path: string): any</code> - Decorator: Provides a relative path to a view for the component.</p>
+<ul>
+<li><code>path:string</code> - The path to the view.</li>
+</ul>
+</li>
+<li>
+<p><code>useViewStrategy(strategy: Object): any</code> - Decorator: Associates a custom view strategy with the component.</p>
+<ul>
+<li><code>strategy:Object</code> - The view strategy instance.</li>
+</ul>
+</li>
+<li>
+<p><code>viewEngineHooks(target?: any): any</code> -</p>
+<ul>
+<li><code>target?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>viewResources(resources: any): any</code> - Decorator: Provides the ability to add resources to the related View
+Same as: &lt;require from=&quot;...&quot;&gt;&lt;/require&gt;</p>
+<ul>
+<li><code>resources:any</code> - Either: strings with moduleIds, Objects with 'src' and optionally 'as' properties or one of the classes of the module to be included.</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>

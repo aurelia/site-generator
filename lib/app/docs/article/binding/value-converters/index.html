@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Binding: Value Converters</h1>
     <h2>An overview of the Aurelia binding engine&#x27;s value converter functionality. Value converters are used to transform data during the data-binding process, both to and from the view.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>In Aurelia, user interface elements are composed of view and view-model pairs. The view is written with HTML and is rendered into the DOM. The view-model is written with JavaScript and provides data and behavior to the view. Aurelia's powerful data-binding links the two pieces together, allowing changes in your data to be reflected in the view and vice versa.</p>
 <p>Here's a simple data-binding example using the <strong>bind</strong> (<code>.bind=&quot;expression&quot;</code>) and <strong>interpolation</strong> (<code>\${expression}</code>) techniques:</p>
 <code-listing heading="simple-binding${context.language.fileExtension}">
@@ -331,7 +330,6 @@ The name that a resource is referenced by in a view derives from its export name
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

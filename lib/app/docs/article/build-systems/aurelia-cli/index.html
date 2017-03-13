@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>The Aurelia CLI</h1>
     <h2>Learn how to get setup with the Aurelia CLI and use its basic capabilities.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Machine Setup"><p>The CLI itself has a couple of prerequisites that you must install first:</p>
 <ul>
 <li>Install NodeJS version 4.x or above.
@@ -439,7 +438,6 @@ Steps:</p>
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Setup with JSPM</h1>
     <h2>If you&#x27;re interested in getting setup with JSPM to build projects, this article will take you through setting up both your machine and a production quality starter project.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Configuring Your Environment"><p>Let's start by getting you set up with a great set of tools that you can use to build modern ${context.language.name} applications. All our tooling is built on 
 <a href="http://nodejs.org/" target="_blank">Node.js</a>
 . If you have that installed already, great! If not, you should go to 
@@ -253,7 +252,6 @@ The Skeleton App uses
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

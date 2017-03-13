@@ -4,7 +4,7 @@
     <h2>An overview of the Aurelia templating engine&#x27;s custom element functionality basics. Custom Elements are used to add custom components to Aurelia applications.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Custom elements are the primary tool an Aurelia application developer will utilize for componentizing an application.</p>
 </au-doc-section>
 <au-doc-section uid="2" version="1.0.0" heading="HTML Only Custom Element"><p>The simplest way to create an Aurelia custom element is to create an Aurelia view template in an HTML file and then require it in to another Aurelia view template. HTML only custom elements are a highly useful strategy for dealing with functionality that has no need for ViewModel logic but is likely to be reused. The element name will be the same as the HTML file name, without the extension. When requiring an HTML only custom element in to a view, you must include the <code>.html</code> extension.  It is even possible to create bindable properties for an HTML only custom element by putting a comma separated list of property names on the <code>bindable</code> attribute of the <code>template</code> element. The Aurelia convention of converting camelCase bindable properties to dash-case applies to properties provided to the <code>bindable</code> attribute, as shown in the following example.</p>

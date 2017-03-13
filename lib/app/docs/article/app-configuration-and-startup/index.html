@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>App Configuration and Startup</h1>
     <h2>In this article you&#x27;ll learn the various ways to bootstrap and configure Aurelia, along with different mechanisms for controlling the initial render strategy.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Bootstrapping Aurelia"><p>Most platforms have a &quot;main&quot; or entry point for code execution. Aurelia is no different. If you've read the Quick Start, then you've seen the <code>aurelia-app</code> attribute. Simply place this on an HTML element and Aurelia's bootstrapper will load an <em>app${context.language.fileExtension}</em> and <em>app.html</em>, databind them together and inject them into the DOM element on which you placed that attribute.</p>
 <p>Often times you want to configure the framework or run some code prior to displaying anything to the user though. So chances are, as your project progresses, you will migrate towards needing some startup configuration. In order to do this, you can provide a value for the <code>aurelia-app</code> attribute that points to a configuration module. This module should export a single function named <code>configure</code>. Aurelia invokes your <code>configure</code> function, passing it the Aurelia object which you can then use to configure the framework yourself and decide what, when, and where to display your UI. Here's an example configuration file showing the standard configuration, the same configuration that is equivalent to what you would get when using <code>aurelia-app</code> without a value:</p>
 <code-listing heading="Standard Configuration">
@@ -296,7 +295,6 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Router Configuration</h1>
     <h2>This article covers Aurelia&#x27;s router configuration.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Basic Configuration"><p>To use Aurelia's router, your component view must have a <code>&lt;router-view&gt;&lt;/router-view&gt;</code> element. In order to configure the router, the component's view-model requires a <code>configureRouter()</code> function.</p>
 <code-listing heading="app.html">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Crouter-view%3E%3C/router-view%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
@@ -388,7 +387,6 @@ and the <code>AppRouter</code>'s <code>transformTitle</code> would be configured
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

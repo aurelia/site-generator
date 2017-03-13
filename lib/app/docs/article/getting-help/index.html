@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Getting Help</h1>
     <h2>As you begin to learn Aurelia and build applications, you may find that you need assistance from time to time. Sometimes it may only be an answer to a quick question or a clarification on the docs. Other times it may be a need for more extensive support, architectural advice or even consulting or training.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Channels"><p>When you join the Aurelia community, you have access to our entire ecosystem. If you need quick help or an answer clarifying documentation, we hope you'll engage with the community in our Gitter chat room. We have one of the most active Gitter channels in the world, with core team and community members present almost every hour of the day, no matter what part of the world you live in. You can join the channel and get help at 
 <a href="http://www.gitter.im/aurelia/discuss" target="_blank">http://www.gitter.im/aurelia/discuss</a>
 </p>
@@ -169,7 +168,6 @@
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

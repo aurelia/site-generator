@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Binding: Basics</h1>
     <h2>The basics of data-binding with Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>This article covers the basics of data-binding with Aurelia. You'll learn how to bind to HTML attributes, DOM Events and element content. You'll also see how to give your view-models references to DOM elements, making it easy work with elements directly.</p>
 </au-doc-section>
 <au-doc-section uid="2" version="1.0.0" heading="HTML and SVG Attributes"><p>Aurelia supports binding HTML and SVG attributes to JavaScript expressions. Attribute binding declarations have three parts: <code>attribute.command=&quot;expression&quot;</code>.</p>
@@ -262,7 +261,6 @@ Binding using the <code>innerhtml</code> attribute simply sets the element's <co
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

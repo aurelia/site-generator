@@ -1,0 +1,825 @@
+<section class="api">
+  <header>
+    <h1>Templating-Resources</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Templating-Resources API</h1>
+<h2>Classes</h2>
+<h3>AbstractRepeater</h3>
+<p>An abstract base class for elements and attributes that repeat
+views.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addView(bindingContext?: any, overrideContext?: any): any</code> - Adds a view to the repeater, binding the view to the
+provided contexts.</p>
+<ul>
+<li><code>bindingContext?:any</code> - The binding context to bind the new view to.</li>
+<li><code>overrideContext?:any</code> - A secondary binding context that can override the primary context.</li>
+</ul>
+</li>
+<li>
+<p><code>insertView(index?: any, bindingContext?: any, overrideContext?: any): any</code> - Inserts a view to the repeater at a specific index, binding the view to the
+provided contexts.</p>
+<ul>
+<li><code>index?:any</code> - The index at which to create the new view at.</li>
+<li><code>bindingContext?:any</code> - The binding context to bind the new view to.</li>
+<li><code>overrideContext?:any</code> - A secondary binding context that can override the primary context.</li>
+</ul>
+</li>
+<li>
+<p><code>matcher(): any</code> - Returns the matcher function to be used by the repeater, or null if strict matching is to be performed.</p>
+</li>
+<li>
+<p><code>moveView(sourceIndex?: any, targetIndex?: any): any</code> - Moves a view across the repeater.</p>
+<ul>
+<li><code>sourceIndex?:any</code> - No description available</li>
+<li><code>targetIndex?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeAllViews(returnToCache?: boolean, skipAnimation?: boolean): any</code> - Removes all views from the repeater.</p>
+<ul>
+<li><code>returnToCache?:boolean</code> - Should the view be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>removeView(index: number, returnToCache?: boolean, skipAnimation?: boolean): any</code> - Removes a view from the repeater at a specific index.</p>
+<ul>
+<li><code>index:number</code> - The index of the view to be removed.</li>
+<li><code>returnToCache?:boolean</code> - Should the view be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>removeViews(viewsToRemove: Array, returnToCache?: boolean, skipAnimation?: boolean): any</code> - Removes an array of Views from the repeater.</p>
+<ul>
+<li><code>viewsToRemove:Array</code> - The array of views to be removed.</li>
+<li><code>returnToCache?:boolean</code> - Should the view be returned to the view cache?</li>
+<li><code>skipAnimation?:boolean</code> - Should the removal animation be skipped?</li>
+</ul>
+</li>
+<li>
+<p><code>updateBindings(view: View): any</code> - Forces a particular view to update it's bindings, called as part of
+an in-place processing of items for better performance</p>
+<ul>
+<li><code>view:View</code> - the target view for bindings updates</li>
+</ul>
+</li>
+<li>
+<p><code>view(index?: any): any</code> - Returns a single view from the repeater at the provided index.</p>
+<ul>
+<li><code>index?:any</code> - The index of the requested view.</li>
+</ul>
+</li>
+<li>
+<p><code>viewCount(): any</code> - Returns the number of views the repeater knows about.</p>
+</li>
+<li>
+<p><code>views(): any</code> - Returns all of the repeaters views as an array.</p>
+</li>
+</ul>
+<h3>ArrayRepeatStrategy</h3>
+<p>A strategy for repeating a template over an array.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getCollectionObserver(observerLocator?: any, items?: any): any</code> - Gets an observer for the specified collection.</p>
+<ul>
+<li><code>observerLocator?:any</code> - The observer locator instance.</li>
+<li><code>items?:any</code> - The items to be observed.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceChanged(repeat?: any, items?: any): any</code> - Handle the repeat's collection instance changing.</p>
+<ul>
+<li><code>repeat?:any</code> - The repeater instance.</li>
+<li><code>items?:any</code> - The new array instance.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceMutated(repeat?: any, array?: any, splices?: any): any</code> - Handle the repeat's collection instance mutating.</p>
+<ul>
+<li><code>repeat?:any</code> - The repeat instance.</li>
+<li><code>array?:any</code> - The modified array.</li>
+<li><code>splices?:any</code> - Records of array changes.</li>
+</ul>
+</li>
+</ul>
+<h3>AttrBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>BindingSignaler</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>signals:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li><code>signal(name: string): void</code> -
+<ul>
+<li><code>name:string</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>Compose</h3>
+<p>Used to compose a new view / view-model template or bind to an existing instance.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>model:any</code> - No description available.</li>
+<li><code>swapOrder:any</code> - No description available.</li>
+<li><code>view:any</code> - No description available.</li>
+<li><code>viewModel:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(bindingContext?: any, overrideContext?: any): any</code> - Used to set the bindingContext.</p>
+<ul>
+<li><code>bindingContext?:any</code> - The context in which the view model is executed in.</li>
+<li><code>overrideContext?:any</code> - The context in which the view model is executed in.</li>
+</ul>
+</li>
+<li>
+<p><code>created(owningView: View): any</code> - Invoked when the component has been created.</p>
+<ul>
+<li><code>owningView:View</code> - The view that this component was created inside of.</li>
+</ul>
+</li>
+<li>
+<p><code>modelChanged(newValue?: any, oldValue?: any): any</code> - Invoked everytime the bound model changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+<li><code>oldValue?:any</code> - The old value.</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(bindingContext?: any, overrideContext?: any): any</code> - Unbinds the Compose.</p>
+<ul>
+<li><code>bindingContext?:any</code> - No description available</li>
+<li><code>overrideContext?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>viewChanged(newValue?: any, oldValue?: any): any</code> - Invoked everytime the bound view changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+<li><code>oldValue?:any</code> - The old value.</li>
+</ul>
+</li>
+<li>
+<p><code>viewModelChanged(newValue?: any, oldValue?: any): any</code> - Invoked everytime the bound view model changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+<li><code>oldValue?:any</code> - The old value.</li>
+</ul>
+</li>
+</ul>
+<h3>DebounceBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(binding?: any, source?: any, delay?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+<li><code>delay?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>Focus</h3>
+<p>CustomAttribute that binds provided DOM element's focus attribute with a property on the viewmodel.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>attached(): any</code> - Invoked when the attribute is attached to the DOM.</p>
+</li>
+<li>
+<p><code>detached(): any</code> - Invoked when the attribute is detached from the DOM.</p>
+</li>
+<li>
+<p><code>valueChanged(newValue?: any): any</code> - Invoked everytime the bound value changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+</ul>
+</li>
+</ul>
+<h3>HTMLSanitizer</h3>
+<p>Default Html Sanitizer to prevent script injection.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>sanitize(input?: any): any</code> - Sanitizes the provided input.
+<ul>
+<li><code>input?:any</code> - The input to be sanitized.</li>
+</ul>
+</li>
+</ul>
+<h3>Hide</h3>
+<p>Binding to conditionally show markup in the DOM based on the value.</p>
+<ul>
+<li>different from &quot;if&quot; in that the markup is still added to the DOM, simply not shown.</li>
+</ul>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(bindingContext?: any): any</code> - Binds the Hide attribute.</p>
+<ul>
+<li><code>bindingContext?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>created(): any</code> - Invoked when the behavior is created.</p>
+</li>
+<li>
+<p><code>valueChanged(newValue?: any): any</code> - Invoked everytime the bound value changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+</ul>
+</li>
+</ul>
+<h3>If</h3>
+<p>Binding to conditionally include or not include template logic depending on returned result</p>
+<ul>
+<li>value should be Boolean or will be treated as such (truthy / falsey)</li>
+</ul>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(bindingContext?: any, overrideContext?: any): any</code> - Binds the if to the binding context and override context</p>
+<ul>
+<li><code>bindingContext?:any</code> - The binding context</li>
+<li><code>overrideContext?:any</code> - An override context for binding.</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(): any</code> - Unbinds the if</p>
+</li>
+<li>
+<p><code>valueChanged(newValue?: any): any</code> - Invoked everytime value property changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value</li>
+</ul>
+</li>
+</ul>
+<h3>MapRepeatStrategy</h3>
+<p>A strategy for repeating a template over a Map.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getCollectionObserver(observerLocator?: any, items?: any): any</code> - Gets a Map observer.</p>
+<ul>
+<li><code>observerLocator?:any</code> - No description available</li>
+<li><code>items?:any</code> - The items to be observed.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceChanged(repeat?: any, items?: any): any</code> - Process the provided Map entries.</p>
+<ul>
+<li><code>repeat?:any</code> - No description available</li>
+<li><code>items?:any</code> - The entries to process.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceMutated(repeat?: any, map?: any, records?: any): any</code> - Handle changes in a Map collection.</p>
+<ul>
+<li><code>repeat?:any</code> - No description available</li>
+<li><code>map?:any</code> - The underlying Map collection.</li>
+<li><code>records?:any</code> - The change records.</li>
+</ul>
+</li>
+</ul>
+<h3>NullRepeatStrategy</h3>
+<p>A strategy for repeating a template over null or undefined (does nothing)</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getCollectionObserver(observerLocator?: any, items?: any): any</code> -</p>
+<ul>
+<li><code>observerLocator?:any</code> - No description available</li>
+<li><code>items?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>instanceChanged(repeat?: any, items?: any): any</code> -</p>
+<ul>
+<li><code>repeat?:any</code> - No description available</li>
+<li><code>items?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>NumberRepeatStrategy</h3>
+<p>A strategy for repeating a template over a number.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getCollectionObserver(): any</code> - Return the strategies collection observer. In this case none.</p>
+</li>
+<li>
+<p><code>instanceChanged(repeat?: any, value?: any): any</code> - Process the provided Number.</p>
+<ul>
+<li><code>repeat?:any</code> - No description available</li>
+<li><code>value?:any</code> - The Number of how many time to iterate.</li>
+</ul>
+</li>
+</ul>
+<h3>OneTimeBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<h3>OneWayBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<h3>Repeat</h3>
+<p>Binding to iterate over iterable objects (Array, Map and Number) to genereate a template for each iteration.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>items:any</code> - No description available.</li>
+<li><code>key:any</code> - No description available.</li>
+<li><code>local:any</code> - No description available.</li>
+<li><code>value:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addView(bindingContext?: any, overrideContext?: any): any</code> -</p>
+<ul>
+<li><code>bindingContext?:any</code> - No description available</li>
+<li><code>overrideContext?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>bind(bindingContext?: any, overrideContext?: any): any</code> - Binds the repeat to the binding context and override context.</p>
+<ul>
+<li><code>bindingContext?:any</code> - The binding context.</li>
+<li><code>overrideContext?:any</code> - An override context for binding.</li>
+</ul>
+</li>
+<li>
+<p><code>call(context?: any, changes?: any): any</code> -</p>
+<ul>
+<li><code>context?:any</code> - No description available</li>
+<li><code>changes?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>handleCollectionMutated(collection?: any, changes?: any): any</code> - Invoked when the underlying collection changes.</p>
+<ul>
+<li><code>collection?:any</code> - No description available</li>
+<li><code>changes?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>handleInnerCollectionMutated(collection?: any, changes?: any): any</code> - Invoked when the underlying inner collection changes.</p>
+<ul>
+<li><code>collection?:any</code> - No description available</li>
+<li><code>changes?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>insertView(index?: any, bindingContext?: any, overrideContext?: any): any</code> -</p>
+<ul>
+<li><code>index?:any</code> - No description available</li>
+<li><code>bindingContext?:any</code> - No description available</li>
+<li><code>overrideContext?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>itemsChanged(): any</code> - Invoked everytime the item property changes.</p>
+</li>
+<li>
+<p><code>matcher(): any</code> -</p>
+</li>
+<li>
+<p><code>moveView(sourceIndex?: any, targetIndex?: any): any</code> -</p>
+<ul>
+<li><code>sourceIndex?:any</code> - No description available</li>
+<li><code>targetIndex?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeAllViews(returnToCache?: any, skipAnimation?: any): any</code> -</p>
+<ul>
+<li><code>returnToCache?:any</code> - No description available</li>
+<li><code>skipAnimation?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeView(index?: any, returnToCache?: any, skipAnimation?: any): any</code> -</p>
+<ul>
+<li><code>index?:any</code> - No description available</li>
+<li><code>returnToCache?:any</code> - No description available</li>
+<li><code>skipAnimation?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>removeViews(viewsToRemove?: any, returnToCache?: any, skipAnimation?: any): any</code> -</p>
+<ul>
+<li><code>viewsToRemove?:any</code> - No description available</li>
+<li><code>returnToCache?:any</code> - No description available</li>
+<li><code>skipAnimation?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(): any</code> - Unbinds the repeat</p>
+</li>
+<li>
+<p><code>updateBindings(view: View): any</code> -</p>
+<ul>
+<li><code>view:View</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>view(index?: any): any</code> -</p>
+<ul>
+<li><code>index?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>viewCount(): any</code> -</p>
+</li>
+<li>
+<p><code>views(): any</code> -</p>
+</li>
+</ul>
+<h3>RepeatStrategyLocator</h3>
+<p>Locates the best strategy to best repeating a template over different types of collections.
+Custom strategies can be plugged in as well.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>addStrategy(matcher: , strategy: RepeatStrategy): any</code> - Adds a repeat strategy to be located when repeating a template over different collection types.</p>
+<ul>
+<li><code>matcher:</code> - No description available</li>
+<li><code>strategy:RepeatStrategy</code> - A repeat strategy that can iterate a specific collection type.</li>
+</ul>
+</li>
+<li>
+<p><code>getStrategy(items: any): RepeatStrategy</code> - Gets the best strategy to handle iteration.</p>
+<ul>
+<li><code>items:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>Replaceable</h3>
+<p>Marks any part of a view to be replacable by the consumer.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(bindingContext?: any, overrideContext?: any): any</code> - Binds the replaceable to the binding context and override context.</p>
+<ul>
+<li><code>bindingContext?:any</code> - The binding context.</li>
+<li><code>overrideContext?:any</code> - An override context for binding.</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(): any</code> - Unbinds the replaceable.</p>
+</li>
+</ul>
+<h3>SanitizeHTMLValueConverter</h3>
+<p>Simple html sanitization converter to preserve whitelisted elements and attributes on a bound property containing html.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>toView(untrustedMarkup?: any): any</code> - Process the provided markup that flows to the view.
+<ul>
+<li><code>untrustedMarkup?:any</code> - The untrusted markup to be sanitized.</li>
+</ul>
+</li>
+</ul>
+<h3>SelfBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>SetRepeatStrategy</h3>
+<p>A strategy for repeating a template over a Set.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getCollectionObserver(observerLocator?: any, items?: any): any</code> - Gets a Set observer.</p>
+<ul>
+<li><code>observerLocator?:any</code> - No description available</li>
+<li><code>items?:any</code> - The items to be observed.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceChanged(repeat?: any, items?: any): any</code> - Process the provided Set entries.</p>
+<ul>
+<li><code>repeat?:any</code> - No description available</li>
+<li><code>items?:any</code> - The entries to process.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceMutated(repeat?: any, set?: any, records?: any): any</code> - Handle changes in a Set collection.</p>
+<ul>
+<li><code>repeat?:any</code> - No description available</li>
+<li><code>set?:any</code> - No description available</li>
+<li><code>records?:any</code> - The change records.</li>
+</ul>
+</li>
+</ul>
+<h3>Show</h3>
+<p>Binding to conditionally show markup in the DOM based on the value.</p>
+<ul>
+<li>different from &quot;if&quot; in that the markup is still added to the DOM, simply not shown.</li>
+</ul>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(bindingContext?: any): any</code> - Binds the Show attribute.</p>
+<ul>
+<li><code>bindingContext?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>created(): any</code> - Invoked when the behavior is created.</p>
+</li>
+<li>
+<p><code>valueChanged(newValue?: any): any</code> - Invoked everytime the bound value changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+</ul>
+</li>
+</ul>
+<h3>SignalBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>signals:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>inject(): any</code> -</p>
+</li>
+</ul>
+<h3>ThrottleBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(binding?: any, source?: any, delay?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+<li><code>delay?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>TwoWayBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<h3>UpdateTriggerBindingBehavior</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>inject:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(binding?: any, source?: any, events: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+<li><code>events:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(binding?: any, source?: any): any</code> -</p>
+<ul>
+<li><code>binding?:any</code> - No description available</li>
+<li><code>source?:any</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>With</h3>
+<p>Creates a binding context for decandant elements to bind to.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bind(bindingContext?: any, overrideContext?: any): any</code> - Binds the With with provided binding context and override context.</p>
+<ul>
+<li><code>bindingContext?:any</code> - The binding context.</li>
+<li><code>overrideContext?:any</code> - An override context for binding.</li>
+</ul>
+</li>
+<li>
+<p><code>unbind(): any</code> - Unbinds With</p>
+</li>
+<li>
+<p><code>valueChanged(newValue?: any): any</code> - Invoked everytime the bound value changes.</p>
+<ul>
+<li><code>newValue?:any</code> - The new value.</li>
+</ul>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>RepeatStrategy</h3>
+<p>A strategy is for repeating a template over an iterable or iterable-like object.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>getCollectionObserver(observerLocator: any, items: any): any</code> -</p>
+<ul>
+<li><code>observerLocator:any</code> - No description available.</li>
+<li><code>items:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceChanged(repeat: Repeat, items: any): void</code> -</p>
+<ul>
+<li><code>repeat:Repeat</code> - No description available.</li>
+<li><code>items:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>instanceMutated(repeat: Repeat, items: any, changes: any): void</code> -</p>
+<ul>
+<li><code>repeat:Repeat</code> - No description available.</li>
+<li><code>items:any</code> - No description available.</li>
+<li><code>changes:any</code> - No description available.</li>
+</ul>
+</li>
+</ul>
+<h2>Variables</h2>
+<ul>
+<li><code>aureliaHideClassName:any</code> - No description available.</li>
+<li><code>lifecycleOptionalBehaviors:any</code> - Behaviors that do not require the composition lifecycle callbacks when replacing
+their binding context.</li>
+</ul>
+<h2>Functions</h2>
+<ul>
+<li>
+<p><code>configure(config?: any): any</code> -</p>
+<ul>
+<li><code>config?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>createFullOverrideContext(repeat?: any, data?: any, index?: any, length?: any, key?: any): any</code> - Creates a complete override context.</p>
+<ul>
+<li><code>repeat?:any</code> - No description available.</li>
+<li><code>data?:any</code> - The item's value.</li>
+<li><code>index?:any</code> - The item's index.</li>
+<li><code>length?:any</code> - The collections total length.</li>
+<li><code>key?:any</code> - The key in a key/value pair.</li>
+</ul>
+</li>
+<li>
+<p><code>getElementName(address?: any): any</code> -</p>
+<ul>
+<li><code>address?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>getItemsSourceExpression(instruction?: any, attrName?: any): any</code> - Gets a repeat instruction's source expression.</p>
+<ul>
+<li><code>instruction?:any</code> - No description available.</li>
+<li><code>attrName?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>indexOf(array?: any, item?: any, matcher?: any, startIndex?: any): any</code> - Returns the index of the element in an array, optionally using a matcher function.</p>
+<ul>
+<li><code>array?:any</code> - No description available.</li>
+<li><code>item?:any</code> - No description available.</li>
+<li><code>matcher?:any</code> - No description available.</li>
+<li><code>startIndex?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>injectAureliaHideStyleAtBoundary(domBoundary?: any): any</code> -</p>
+<ul>
+<li><code>domBoundary?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>injectAureliaHideStyleAtHead(): any</code> -</p>
+</li>
+<li>
+<p><code>isOneTime(expression?: any): any</code> - Returns whether an expression has the OneTimeBindingBehavior applied.</p>
+<ul>
+<li><code>expression?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>unwrapExpression(expression?: any): any</code> - Unwraps an expression to expose the inner, pre-converted / behavior-free expression.</p>
+<ul>
+<li><code>expression?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>updateOneTimeBinding(binding?: any): any</code> - Forces a binding instance to reevaluate.</p>
+<ul>
+<li><code>binding?:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>updateOverrideContext(overrideContext?: any, index?: any, length?: any): any</code> - Updates the override context.</p>
+<ul>
+<li><code>overrideContext?:any</code> - No description available.</li>
+<li><code>index?:any</code> - The context's index.</li>
+<li><code>length?:any</code> - The collection's length.</li>
+</ul>
+</li>
+<li>
+<p><code>updateOverrideContexts(views?: any, startIndex?: any): any</code> - Update the override context.</p>
+<ul>
+<li><code>views?:any</code> - No description available.</li>
+<li><code>startIndex?:any</code> - index in collection where to start updating.</li>
+</ul>
+</li>
+<li>
+<p><code>viewsRequireLifecycle(viewFactory?: any): any</code> -</p>
+<ul>
+<li><code>viewFactory?:any</code> - No description available.</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>

@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Templating: Basics</h1>
     <h2>A basic guide to using Aurelia&#x27;s templating engine.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Aurelia's templating system is simple to learn, and yet powerful enough to build even the most complex applications.
 This article will walk you through the construction of a static template, importing that template into parent
 templates, binding and manipulating data through the view-model, and the use of conditionals, repeaters, and events.</p>
@@ -353,7 +352,6 @@ inhabitants of the world at once.</p>
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

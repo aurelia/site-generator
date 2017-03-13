@@ -1,6 +1,6 @@
 <template css="transform: ${isActive ? 'translateX(0)' : 'translateX(-100%)'}">
   <ul>
-    <li repeat.for="item of menu" class="${item === selectedItem ? 'active' : ''}">
+    <li repeat.for="item of items" class="${item === activeItem ? 'active' : ''}">
       <a click.trigger="select(item)">${item.name}</a>
     </li>
   </ul>

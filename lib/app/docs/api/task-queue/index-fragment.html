@@ -1,0 +1,55 @@
+<section class="api">
+  <header>
+    <h1>Task Queue</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Task Queue API</h1>
+<h2>Classes</h2>
+<h3>TaskQueue</h3>
+<p>Implements an asynchronous task queue.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>flushing:any</code> - Whether the queue is in the process of flushing.</li>
+<li><code>longStacks:any</code> - Enables long stack traces for queued tasks.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>flushMicroTaskQueue(): void</code> - Immediately flushes the micro task queue.</p>
+</li>
+<li>
+<p><code>flushTaskQueue(): void</code> - Immediately flushes the task queue.</p>
+</li>
+<li>
+<p><code>prepareQueueStack(separator?: any): any</code> -</p>
+<ul>
+<li><code>separator?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>queueMicroTask(task: ): void</code> - Queues a task on the micro task queue for ASAP execution.</p>
+<ul>
+<li><code>task:</code> - The task to queue up for ASAP execution.</li>
+</ul>
+</li>
+<li>
+<p><code>queueTask(task: ): void</code> - Queues a task on the macro task queue for turn-based execution.</p>
+<ul>
+<li><code>task:</code> - The task to queue up for turn-based execution.</li>
+</ul>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>Task</h3>
+<p>Either a Function or a class with a call method that will do work when dequeued.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>call(): void</code> - Call it.</li>
+</ul>
+<h2>Variables</h2>
+<h2>Functions</h2>
+
+  </article>
+</section>

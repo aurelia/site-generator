@@ -1,0 +1,56 @@
+<section class="api">
+  <header>
+    <h1>History</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>History API</h1>
+<h2>Classes</h2>
+<h3>History</h3>
+<p>An abstract base class for implementors of the basic history api.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>activate(options: Object): boolean</code> - Activates the history object.</p>
+<ul>
+<li><code>options:Object</code> - The set of options to activate history with.</li>
+</ul>
+</li>
+<li>
+<p><code>deactivate(): void</code> - Deactivates the history object.</p>
+</li>
+<li>
+<p><code>getAbsoluteRoot(): string</code> - Returns the fully-qualified root of the current history object.</p>
+</li>
+<li>
+<p><code>navigate(fragment: string, options?: NavigationOptions): boolean</code> - Causes a history navigation to occur.</p>
+<ul>
+<li><code>fragment:string</code> - The history fragment to navigate to.</li>
+<li><code>options?:NavigationOptions</code> - The set of options that specify how the navigation should occur.</li>
+</ul>
+</li>
+<li>
+<p><code>navigateBack(): void</code> - Causes the history state to navigate back.</p>
+</li>
+<li>
+<p><code>setTitle(title: string): void</code> - Updates the title associated with the current location.</p>
+<ul>
+<li><code>title:string</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>NavigationOptions</h3>
+<p>The options that can be specified as part of a history navigation request.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>replace:boolean</code> - Replace the existing route.</li>
+<li><code>trigger:boolean</code> - Trigger the router.</li>
+</ul>
+<h4>Methods</h4>
+<h2>Variables</h2>
+<h2>Functions</h2>
+
+  </article>
+</section>

@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Securing Your App</h1>
     <h2>It&#x27;s important to secure your application. This article will address a couple of simple things you can do to improve the security of your application.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>The first rule of securing client-side applications: the client cannot be trusted. Your backend should never trust the input coming from the front-end, under any circumstance. Malicious individuals often know how to use browser debug tools and manually craft HTTP requests to your backend. You may even find yourself in a situation where a disgruntled employee (or former employee), who is a developer with intimate knowledge of the system, is seeking revenge by attempting a malicious attack.</p>
 <p><strong>Your primary mechanism for securing any SPA application, Aurelia or otherwise, is to work hard on securing your backend services.</strong></p>
 <au-alert type="danger"heading="Security Advice"><p>
@@ -229,7 +228,6 @@ Internally, Aurelia makes no use of <code>eval</code> or the <code>Function</cod
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

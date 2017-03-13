@@ -146,10 +146,8 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      {{{content}}}
-    </compose>
+  <main active-screen.bind="activeScreen">
+    {{{content}}}
   </main>
 
   <side-bar></side-bar>

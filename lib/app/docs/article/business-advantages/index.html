@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Business Advantages</h1>
     <h2>Aurelia is open source, but unlike much open source in the JavaScript space, Aurelia is an official product with commercial backing. If your business is going to spend significant money building software, you want to do it on a platform that&#x27;s committed to you as a customer. You want to be able to form a relationship with your technology provider to ensure that you and your developers have a solid platform upon which to build your business now and in the years to come. This article details a few important business advantages which you won&#x27;t find all together in any product besides Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Commercially Backed"><ul>
 <li>One of the only two main-stream, open-source SPA frameworks with official commercial backing (Ember is the other).</li>
 <li>The only SPA framework with commercial support options available.</li>
@@ -186,7 +185,6 @@
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

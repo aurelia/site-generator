@@ -1,0 +1,116 @@
+<section class="api">
+  <header>
+    <h1>History-Browser</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>History-Browser API</h1>
+<h2>Classes</h2>
+<h3>BrowserHistory</h3>
+<p>An implementation of the basic history API.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>inject:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>activate(options?: Object): boolean</code> - Activates the history object.</p>
+<ul>
+<li><code>options?:Object</code> - The set of options to activate history with.</li>
+</ul>
+</li>
+<li>
+<p><code>deactivate(): void</code> - Deactivates the history object.</p>
+</li>
+<li>
+<p><code>getAbsoluteRoot(): string</code> - Returns the fully-qualified root of the current history object.</p>
+</li>
+<li>
+<p><code>navigate(fragment?: string, undefined?: any): boolean</code> - Causes a history navigation to occur.</p>
+<ul>
+<li><code>fragment?:string</code> - The history fragment to navigate to.</li>
+<li><code>undefined?:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>navigateBack(): void</code> - Causes the history state to navigate back.</p>
+</li>
+<li>
+<p><code>setTitle(title: string): void</code> - Sets the document title.</p>
+<ul>
+<li><code>title:string</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>DefaultLinkHandler</h3>
+<p>The default LinkHandler implementation. Navigations are triggered by click events on
+anchor elements with relative hrefs when the history instance is using pushstate.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>activate(history: BrowserHistory): void</code> - Activate the instance.</p>
+<ul>
+<li><code>history:BrowserHistory</code> - The BrowserHistory instance that navigations should be dispatched to.</li>
+</ul>
+</li>
+<li>
+<p><code>deactivate(): void</code> - Deactivate the instance. Event handlers and other resources should be cleaned up here.</p>
+</li>
+<li>
+<p><code>findClosestAnchor(el: Element): Element</code> - Finds the closest ancestor that's an anchor element.</p>
+<ul>
+<li><code>el:Element</code> - The element to search upward from.</li>
+</ul>
+</li>
+<li>
+<p><code>getEventInfo(event: Event): AnchorEventInfo</code> - Gets the href and a &quot;should handle&quot; recommendation, given an Event.</p>
+<ul>
+<li><code>event:Event</code> - The Event to inspect for target anchor and href.</li>
+</ul>
+</li>
+<li>
+<p><code>targetIsThisWindow(target: Element): boolean</code> - Gets a value indicating whether or not an anchor targets the current window.</p>
+<ul>
+<li><code>target:Element</code> - The anchor element whose target should be inspected.</li>
+</ul>
+</li>
+</ul>
+<h3>LinkHandler</h3>
+<p>Class responsible for handling interactions that should trigger browser history navigations.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>activate(history: BrowserHistory): void</code> - Activate the instance.</p>
+<ul>
+<li><code>history:BrowserHistory</code> - The BrowserHistory instance that navigations should be dispatched to.</li>
+</ul>
+</li>
+<li>
+<p><code>deactivate(): void</code> - Deactivate the instance. Event handlers and other resources should be cleaned up here.</p>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h3>AnchorEventInfo</h3>
+<p>Provides information about how to handle an anchor event.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>anchor:Element</code> - The anchor element or null if not-applicable.</li>
+<li><code>href:string</code> - The href of the link or null if not-applicable.</li>
+<li><code>shouldHandleEvent:boolean</code> - Indicates whether the event should be handled or not.</li>
+</ul>
+<h4>Methods</h4>
+<h2>Variables</h2>
+<h2>Functions</h2>
+<ul>
+<li><code>configure(config: Object): void</code> - Configures the plugin by registering BrowserHistory as the implementation of History in the DI container.
+<ul>
+<li><code>config:Object</code> - The FrameworkConfiguration object provided by Aurelia.</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>

@@ -4,7 +4,7 @@
     <h2>Data-binding class and style attributes with Aurelia.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Class"><p>You can bind an element's <code>class</code> attribute using string interpolation or with <code>.bind</code>/<code>.one-time</code>.</p>
 <code-listing heading="Class Binding">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22foo%20%24%7BisActive%20%3F%20%27active%27%20%3A%20%27%27%7D%20bar%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class.bind%3D%22isActive%20%3F%20%27active%27%20%3A%20%27%27%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class.one-time%3D%22isActive%20%3F%20%27active%27%20%3A%20%27%27%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>

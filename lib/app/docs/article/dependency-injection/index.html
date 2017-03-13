@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Dependency Injection: Basics</h1>
     <h2>Learn about how to leverage Aurelia&#x27;s dependency injection container, the power behind all object creation in Aurelia applications.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>When building applications, it's often necessary to take a &quot;divide and conquer&quot; approach by breaking down complex problems into a series of simpler problems. In an object-oriented world, this translates to breaking down complex objects into a series of smaller objects, each focusing on a single concern, and collaborating with the others to form a complex system and model its behavior.</p>
 <p>A dependency injection container is a tool that can simplify the process of decomposing such a system. Often times, when developers go through the work of destructuring a system, they introduce a new complexity of &quot;re-assembling&quot; the smaller parts again at runtime. This is what a dependency injection container can do for you, using simple declarative hints.</p>
 </au-doc-section>
@@ -316,7 +315,6 @@ At present, the Decorators spec allows for decorators to use parens or not depen
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>

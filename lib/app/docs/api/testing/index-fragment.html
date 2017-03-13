@@ -1,0 +1,147 @@
+<section class="api">
+  <header>
+    <h1>Testing</h1>
+  </header>
+
+  <article class="markdown">
+    <h1>Testing API</h1>
+<h2>Classes</h2>
+<h3>CompileSpy</h3>
+<p>Attribute to be placed on any element to have it emit the View Compiler's
+TargetInstruction into the debug console, giving you insight into all the
+parsed bindings, behaviors and event handers for the targeted element.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<h3>ComponentTester</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<ul>
+<li><code>attached:</code> - No description available.</li>
+<li><code>bind:</code> - No description available.</li>
+<li><code>configure:any</code> - No description available.</li>
+<li><code>element:Element</code> - No description available.</li>
+<li><code>unbind:</code> - No description available.</li>
+<li><code>viewModel:any</code> - No description available.</li>
+</ul>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>bootstrap(configure: ): any</code> -</p>
+<ul>
+<li><code>configure:</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>boundTo(bindingContext: any): ComponentTester</code> -</p>
+<ul>
+<li><code>bindingContext:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>create(bootstrap: ): Promise</code> -</p>
+<ul>
+<li><code>bootstrap:</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>dispose(): any</code> -</p>
+</li>
+<li>
+<p><code>inView(html: string): ComponentTester</code> -</p>
+<ul>
+<li><code>html:string</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>manuallyHandleLifecycle(): ComponentTester</code> -</p>
+</li>
+<li>
+<p><code>waitForElement(selector: string, options: any): Promise</code> -</p>
+<ul>
+<li><code>selector:string</code> - No description available</li>
+<li><code>options:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>waitForElements(selector: string, options: any): Promise</code> -</p>
+<ul>
+<li><code>selector:string</code> - No description available</li>
+<li><code>options:any</code> - No description available</li>
+</ul>
+</li>
+<li>
+<p><code>withResources(resources: ): ComponentTester</code> -</p>
+<ul>
+<li><code>resources:</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>StageComponent</h3>
+<p>No description available.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li><code>withResources(resources: ): ComponentTester</code> -
+<ul>
+<li><code>resources:</code> - No description available</li>
+</ul>
+</li>
+</ul>
+<h3>ViewSpy</h3>
+<p>Attribute to be placed on any HTML element in a view to emit the View instance
+to the debug console, giving you insight into the live View instance, including
+all child views, live bindings, behaviors and more.</p>
+<h4>Properties</h4>
+<h4>Methods</h4>
+<ul>
+<li>
+<p><code>attached(): any</code> - Invoked when the target element is attached to the DOM.</p>
+</li>
+<li>
+<p><code>bind(bindingContext?: any): any</code> - Invoked when the target view is bound.</p>
+<ul>
+<li><code>bindingContext?:any</code> - The target view's binding context.</li>
+</ul>
+</li>
+<li>
+<p><code>created(view?: any): any</code> - Invoked when the target view is created.</p>
+<ul>
+<li><code>view?:any</code> - The target view.</li>
+</ul>
+</li>
+<li>
+<p><code>detached(): any</code> - Invoked when the target element is detached from the DOM.</p>
+</li>
+<li>
+<p><code>unbind(): any</code> - Invoked when the target element is unbound.</p>
+</li>
+</ul>
+<h2>Interfaces</h2>
+<h2>Variables</h2>
+<h2>Functions</h2>
+<ul>
+<li>
+<p><code>waitFor(getter: , options: any): Promise</code> - Generic function to wait for something to happen. Uses polling</p>
+<ul>
+<li><code>getter:</code> - No description available.</li>
+<li><code>options:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>waitForDocumentElement(selector: string, options: any): Promise</code> -</p>
+<ul>
+<li><code>selector:string</code> - No description available.</li>
+<li><code>options:any</code> - No description available.</li>
+</ul>
+</li>
+<li>
+<p><code>waitForDocumentElements(selector: string, options: any): Promise</code> -</p>
+<ul>
+<li><code>selector:string</code> - No description available.</li>
+<li><code>options:any</code> - No description available.</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>

@@ -4,7 +4,7 @@
     <h2>Forgot the syntax for bindings? Need to know how to create a custom attribute? This article contains answers to questions like those as well as a bunch of quick snippets for common tasks.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Configuration and Startup"><code-listing heading="Bootstrapping Older Browsers">
   <source-code lang="HTML">%0A%20%20%20%20%3Cscript%20src%3D%22jspm_packages/system.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%20src%3D%22config.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20SystemJS.import%28%27aurelia-polyfills%27%29.then%28function%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20SystemJS.import%28%27webcomponents/webcomponentsjs/MutationObserver%27%29%3B%0A%20%20%20%20%20%20%7D%29.then%28function%28%29%20%7B%0A%20%20%20%20%20%20%20%20SystemJS.import%28%27aurelia-bootstrapper%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%3C/script%3E%0A%20%20</source-code>
 </code-listing>

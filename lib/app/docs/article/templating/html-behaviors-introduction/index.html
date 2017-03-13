@@ -13,7 +13,7 @@
 </head>
 
 <body aurelia-app="main" id="app-host">
-  <header> 
+  <header class="app-header"> 
     <svg width="230px" height="60px" viewBox="315 19 230 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
         <desc>Created with Sketch.</desc>
@@ -146,15 +146,14 @@
     </svg>
   </header>
 
-  <main>
-    <compose view-model.bind="currentScreen">
-      <section class="article">
+  <main active-screen.bind="activeScreen">
+    <section class="article">
   <header>
     <h1>Templating: HTML Behaviors Introduction</h1>
     <h2>An overview of the Aurelia templating engine&#x27;s custom attribute and custom element functionality, including not only how to create basic versions, but how to use them both locally and globally in your application.</h2>
   </header>
 
-  <article>
+  <article class="markdown">
     <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>The term &quot;HTML Behavior&quot; in Aurelia encompasses two basic concepts: Custom Elements and Custom Attributes. HTML Behaviors are a fundamental part of nearly every Aurelia application. They help to create componentized applications with highly reusable code. In this introductory document, we will explore some basic topics to help you build an understanding of working with these concepts in an Aurelia application.</p>
 </au-doc-section>
 <au-doc-section uid="2" version="1.0.0" heading="What is an HTML Behavior?"><p>HTML Behaviors are how you extend HTML with Custom Elements and Custom Attributes in an Aurelia application. Custom Elements are, as their name suggests, their own element in your markup. They generally have a view with some markup that will be rendered as part of a page in your application. Custom Attributes, on the other hand, can be used on standard HTML elements (such as <code>div</code> or <code>button</code>) or Custom Elements to change the behavior of the element. Both Custom Elements and Custom Attributes support Aurelia's strong data-binding.</p>
@@ -274,7 +273,6 @@ Aurelia's <code>require</code> element was inspired by the <code>import</code> s
   </article>
 </section>
 
-    </compose>
   </main>
 
   <side-bar></side-bar>
