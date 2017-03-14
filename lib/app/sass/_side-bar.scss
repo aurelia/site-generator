@@ -54,8 +54,6 @@ side-bar {
     li {
       line-height: 44px;
       color: #777;
-      white-space: nowrap;
-      text-overflow: ellipsis;
       border-bottom: 1px solid #ccc;
       cursor: pointer;
       transition: all .1s;
@@ -70,9 +68,12 @@ side-bar {
       }
 
       a {
+        display: block;
         width: 100%;
         padding: 0 0 0 1rem;
-        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
