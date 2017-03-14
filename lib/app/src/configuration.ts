@@ -27,9 +27,10 @@ export class Configuration {
   public activePersona: Persona = this.availablePersonas[0];
 
   constructor() {
-    this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api' };
+    this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
     this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article', showPersonas: true };
  
+    associateParents(this.apiRoot, this.config.docs.api);
     associateParents(this.articleRoot, this.config.docs.article);
   }
 
