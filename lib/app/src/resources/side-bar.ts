@@ -7,17 +7,13 @@ import {Configuration, DocItem} from '../configuration';
 @autoinject
 export class SideBar {
   isActive = false;
-  items: DocItem[] = null;
   activeItem: DocItem = null;
+  items: DocItem[] = null;
 
   constructor(private config: Configuration, private ea: EventAggregator, private history: History) {
     ea.subscribe(ShowMenu, (msg:ShowMenu) => {
       this.activeItem = msg.item;
-
-      if (!msg.item.items && msg.item.parent) {
-        this.items = msg.item.parent.items;
-      }
-
+      this.items = this.activeItem.items || this.activeItem.parent.items;
       this.isActive = true;
     });
 
@@ -27,6 +23,10 @@ export class SideBar {
   }
 
   select(item: DocItem) {
-    this.history.navigate(item.dest);
+    if (item === this.activeItem) {
+      return;
+    } else if (item.dest) {
+      this.history.navigate(item.dest);
+    }
   }
 }

@@ -9,16 +9,27 @@ export interface ToCItem extends DocItem {
   personas?: string[];
 }
 
+export interface Persona {
+  hello: string;
+}
+
 export class Configuration {
   private config = window['aureliaDocConfiguration'];
   private apiRoot;
   private articleRoot;
 
+  public availablePersonas: Persona[] = [
+    {
+      hello: 'I am a web developer'
+    }
+  ];
+  
+  public activePersona: Persona = this.availablePersonas[0];
+
   constructor() {
     this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api' };
-    this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article' };
-
-    associateParents(this.apiRoot, this.config.docs.api);  
+    this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article', showPersonas: true };
+ 
     associateParents(this.articleRoot, this.config.docs.article);
   }
 

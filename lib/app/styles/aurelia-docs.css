@@ -312,7 +312,7 @@ side-bar {
     font-size: 18px; }
     side-bar .nav-button .arrow {
       position: absolute;
-      left: 4px;
+      left: 8px;
       top: 9px;
       fill: #70509D; }
     side-bar .nav-button a {
@@ -321,6 +321,13 @@ side-bar {
       text-align: center;
       text-decoration: none;
       color: #70509D; }
+  side-bar .nav-button.personas .arrow {
+    position: absolute;
+    right: 16px;
+    left: auto; }
+  side-bar .nav-button.personas a {
+    padding-left: 16px;
+    text-align: left; }
   side-bar ul {
     overflow-x: hidden;
     overflow-y: auto; }
