@@ -146,8 +146,10 @@
     </svg>
   </header>
 
-  <main active-screen.bind="activeScreen">
-    {{{content}}}
+  <main>
+    <screen-activator active-screen.bind="activeScreen">
+      {{{content}}}
+    </screen-activator>
   </main>
 
   <side-bar></side-bar>

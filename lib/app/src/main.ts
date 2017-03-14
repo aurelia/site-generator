@@ -8,7 +8,7 @@ export function configure(aurelia: Aurelia) {
     .history()
     .globalResources([
       './resources/side-bar',
-      './resources/active-screen'
+      './resources/screen-activator'
     ]);
 
   if (environment.debug) {
