@@ -2,25 +2,23 @@ section.article {
   margin-left: $sidebar-width;
 
   header {
-    background: rgb(109,80,162);
-    background: linear-gradient(135deg, rgba(109,80,162,1) 0%, $accent-color 100%);
-    
-    text-align: center;
-    color: white;
-    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
-    padding: 16px 0 24px 0;
-    letter-spacing: .15rem;
-
     h1 {
+      text-align: center;
+      letter-spacing: .15rem;
+      color: white;
+      text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
       font-size: 42px;
       font-weight: bold;
-      margin-bottom: 16px;
+      padding: 16px 0 16px 0;
+      background: linear-gradient(135deg, rgba(109,80,162,1) 0%, $accent-color 100%);
     }
 
     h2 {
-      font-size: 18px;
-      line-height: 24px;
-      padding: 0 64px;
+      font-size: 14px;
+      line-height: 16px;
+      padding: 16px;
+      background: #f4f4f4;
+      box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
   }
 
