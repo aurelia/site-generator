@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>In Aurelia, user interface elements are composed of view and view-model pairs. The view is written with HTML and is rendered into the DOM. The view-model is written with JavaScript and provides data and behavior to the view. Aurelia's powerful data-binding links the two pieces together, allowing changes in your data to be reflected in the view and vice versa.</p>
+    <section><h2>Introduction</h2><p>In Aurelia, user interface elements are composed of view and view-model pairs. The view is written with HTML and is rendered into the DOM. The view-model is written with JavaScript and provides data and behavior to the view. Aurelia's powerful data-binding links the two pieces together, allowing changes in your data to be reflected in the view and vice versa.</p>
 <p>Here's a simple data-binding example using the <strong>bind</strong> (<code>.bind=&quot;expression&quot;</code>) and <strong>interpolation</strong> (<code>\${expression}</code>) techniques:</p>
 <code-listing heading="simple-binding${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.name%20%3D%20%27Donald%20Draper%27%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -30,8 +30,8 @@
   <source-code src="example/binding-value-converters/date-and-number/app.js"></source-code>
 </au-demo>
 <p>Ideally, the date would be in a more readable format and the amount would be formatted as currency. One solution to this problem would be to compute the formatted values and expose them as properties of the view-model. This is certainly a valid approach; however, defining extra properties and methods in your models can get messy, especially when you need to keep the formatted values in sync when the original property value change. Fortunately, Aurelia has a feature that makes solving this problem quite easy.</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Value Converters"><blockquote>
+</section>
+<section><h2>Value Converters</h2><blockquote>
 <p>A value converter is a class whose responsibility is to convert view-model values into values that are appropriate to display in the view <em>and vice versa</em>.</p>
 </blockquote>
 <p>Most commonly you'll be creating value converters that translate model data to a format suitable for the view; however, there are situations where you'll need to convert data from the view to a format expected by the view-model, typically when using two-way binding with input elements.</p>
@@ -42,8 +42,8 @@
 <li>Aurelia value converter methods can accept multiple parameters.</li>
 <li>Multiple value converters can be composed using pipes (<code>|</code>).</li>
 </ol>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Simple Converters"><p>Before we get too far into the details, let's rework the previous example to use a couple of basic value converters.  Aurelia and the popular 
+</section>
+<section><h2>Simple Converters</h2><p>Before we get too far into the details, let's rework the previous example to use a couple of basic value converters.  Aurelia and the popular 
 <a href="http://momentjs.com/" target="_blank">Moment</a>
  and 
 <a href="http://numeraljs.com/" target="_blank">Numeral</a>
@@ -79,11 +79,11 @@
 <code-listing heading="Converter Syntax">
   <source-code lang="HTML">%0A%20%20%20%20%24%7BcurrentDate%20%7C%20dateFormat%7D%20%3Cbr/%3E%0A%20%20%20%20%24%7BnetWorth%20%7C%20currencyFormat%7D%0A%20%20</source-code>
 </code-listing>
-<au-alert type="info"heading="Conventional Names"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Conventional Names</h4><p>
 The name that a resource is referenced by in a view derives from its export name. For Value Converters and Binding Behaviors, the export name is converted to camel case (think of it as a variable name). For Custom Elements and Custom Attributes the export name is lower-cased and hyphenated (to comply with HTML element and attribute specifications).</p>
-</au-alert>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Converter Parameters"><p>The converters in the previous example worked great, but what if we needed to display dates and numbers in multiple formats?  It would be quite repetitive to define a converter for each format we needed to display.  A better approach would be to modify the converters to accept a <code>format</code> parameter.  Then we'd be able to specify the format in the binding and get maximum reuse out of our format converters.</p>
+</div>
+</section>
+<section><h2>Converter Parameters</h2><p>The converters in the previous example worked great, but what if we needed to display dates and numbers in multiple formats?  It would be quite repetitive to define a converter for each format we needed to display.  A better approach would be to modify the converters to accept a <code>format</code> parameter.  Then we'd be able to specify the format in the binding and get maximum reuse out of our format converters.</p>
 <code-listing heading="number-format${context.language.fileExtension}">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20numeral%20from%20%27numeral%27%3B%0A%0A%20%20%20%20export%20class%20NumberFormatValueConverter%20%7B%0A%20%20%20%20%20%20toView%28value%2C%20format%29%20%7B%0A%20%20%20%20%20%20%20%20return%20numeral%28value%29.format%28format%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
@@ -104,8 +104,8 @@ The name that a resource is referenced by in a view derives from its export name
 <code-listing heading="Converter Parameter Syntax">
   <source-code lang="HTML">%0A%20%20%20%20%24%7BcurrentDate%20%7C%20dateFormat%3A%27MMMM%20Mo%20YYYY%27%7D%20%3Cbr/%3E%0A%20%20%20%20%24%7BnetWorth%20%7C%20numberFormat%3A%27%240.0a%27%7D%20%3Cbr/%3E%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Binding Converter Parameters"><p>Converter parameters needn't be literal values.  You can bind parameter values to achieve dynamic results:</p>
+</section>
+<section><h2>Binding Converter Parameters</h2><p>Converter parameters needn't be literal values.  You can bind parameter values to achieve dynamic results:</p>
 <code-listing heading="number-format${context.language.fileExtension}">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20numeral%20from%20%27numeral%27%3B%0A%0A%20%20%20%20export%20class%20NumberFormatValueConverter%20%7B%0A%20%20%20%20%20%20toView%28value%2C%20format%29%20%7B%0A%20%20%20%20%20%20%20%20return%20numeral%28value%29.format%28format%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
@@ -119,8 +119,8 @@ The name that a resource is referenced by in a view derives from its export name
 <au-demo heading="Binding Converter Parameters Demo">
   <source-code src="example/binding-value-converters/binding-converter-parameters/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Multiple Parameters / Composing Converters"><p>Value converters can accept multiple parameters and multiple converters can be composed in the same binding expression, providing a lot of flexibility and opportunity for reuse.</p>
+</section>
+<section><h2>Multiple Parameters / Composing Converters</h2><p>Value converters can accept multiple parameters and multiple converters can be composed in the same binding expression, providing a lot of flexibility and opportunity for reuse.</p>
 <p>In the following example, we have a view-model exposing an array of Aurelia repos. The view uses a repeat binding to list the repos in a table. A <code>SortValueConverter</code> is used to sort the array based on two arguments: <code>propertyName</code> and <code>direction</code>.  A second converter, <code>TakeValueConverter</code> accepting a <code>count</code> argument is applied to limit the number of repositories listed:</p>
 <code-listing heading="Multiple Parameters and Converters">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ctr%20repeat.for%3D%22repo%20of%20repos%20%7C%20sort%3Acolumn.value%3Adirection.value%20%7C%20take%3A10%22%3E%0A%20%20%20%20%20%20%20%20...%0A%20%20%20%20%20%20%3C/tr%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
@@ -142,8 +142,8 @@ The name that a resource is referenced by in a view derives from its export name
 <au-demo heading="Multiple Parameters and Converters Demo">
   <source-code src="example/binding-value-converters/multiple-parameters-and-converters/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Object Parameters"><p>Aurelia supports object converter parameters. An alternate implementation of the <code>SortValueConverter</code> using a single <code>config</code> parameter would look like this:</p>
+</section>
+<section><h2>Object Parameters</h2><p>Aurelia supports object converter parameters. An alternate implementation of the <code>SortValueConverter</code> using a single <code>config</code> parameter would look like this:</p>
 <code-listing heading="sort${context.language.fileExtension}">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20export%20class%20SortValueConverter%20%7B%0A%20%20%20%20%20%20toView%28array%2C%20config%29%20%7B%0A%20%20%20%20%20%20%20%20let%20factor%20%3D%20%28config.direction%20%7C%7C%20%27ascending%27%29%20%3D%3D%3D%20%27ascending%27%20%3F%201%20%3A%20-1%3B%0A%20%20%20%20%20%20%20%20return%20array.sort%28%28a%2C%20b%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%28a%5Bconfig.propertyName%5D%20-%20b%5Bconfig.propertyName%5D%29%20*%20factor%3B%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
@@ -158,8 +158,8 @@ The name that a resource is referenced by in a view derives from its export name
   <source-code src="example/binding-value-converters/object-parameters/app.js"></source-code>
 </au-demo>
 <p>There are a couple of advantages to this approach: you don't need to remember the order of the converter parameter arguments, and anyone reading the markup can easily tell what each converter parameter represents.</p>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Bi-directional Value Converters"><p>So far we've been using converters with one-way bindings. The data flows in a single direction, from the model to the view.  When using a converter in an input element's <code>value</code> binding, we need a way to convert the user's data entry to the format expected by the view-model. This is where the value converter's <code>fromView</code> method comes into play, taking the element's value and converting it to the format expected by the view-model.</p>
+</section>
+<section><h2>Bi-directional Value Converters</h2><p>So far we've been using converters with one-way bindings. The data flows in a single direction, from the model to the view.  When using a converter in an input element's <code>value</code> binding, we need a way to convert the user's data entry to the format expected by the view-model. This is where the value converter's <code>fromView</code> method comes into play, taking the element's value and converting it to the format expected by the view-model.</p>
 <p>In the example below, we have a view-model that exposes colors in an object format, with properties for the red, green and blue components. In the view, we want to bind this color object to an HTML5 color input. The color input expects hex format text, so we'll use an <code>RgbToHexValueConverter</code> to facilitate the binding.</p>
 <code-listing heading="rgb-to-hex${context.language.fileExtension}">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20export%20class%20RgbToHexValueConverter%20%7B%0A%20%20%20%20%20%20toView%28rgb%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%22%23%22%20+%20%28%0A%20%20%20%20%20%20%20%20%20%20%281%20%3C%3C%2024%29%20+%20%28rgb.r%20%3C%3C%2016%29%20+%20%28rgb.g%20%3C%3C%208%29%20+%20rgb.b%0A%20%20%20%20%20%20%20%20%29.toString%2816%29.slice%281%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20fromView%28hex%29%20%7B%0A%20%20%20%20%20%20%20%20let%20exp%20%3D%20/%5E%23%3F%28%5Ba-f%5Cd%5D%7B2%7D%29%28%5Ba-f%5Cd%5D%7B2%7D%29%28%5Ba-f%5Cd%5D%7B2%7D%29%24/i%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20result%20%3D%20exp.exec%28hex%29%3B%0A%20%20%20%20%20%20%20%20return%20%7B%0A%20%20%20%20%20%20%20%20%20%20r%3A%20parseInt%28result%5B1%5D%2C%2016%29%2C%0A%20%20%20%20%20%20%20%20%20%20g%3A%20parseInt%28result%5B2%5D%2C%2016%29%2C%0A%20%20%20%20%20%20%20%20%20%20b%3A%20parseInt%28result%5B3%5D%2C%2016%29%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -174,9 +174,9 @@ The name that a resource is referenced by in a view derives from its export name
 <au-demo heading="Bi-directional Value Converters Demo">
   <source-code src="example/binding-value-converters/bi-directional-value-converters/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="9" version="1.0.0" heading="Globally Accessible Value Converters"><p>In all of our examples, we've been using the <code>require</code> element to import converters we need into our view.  There's an easier way.  If you have some commonly used value converters that you'd like to make globally available, use Aurelia's <code>globalResources</code> function to register them.  This will eliminate the need for <code>require</code> elements at the top of every view.</p>
-</au-doc-section>
+</section>
+<section><h2>Globally Accessible Value Converters</h2><p>In all of our examples, we've been using the <code>require</code> element to import converters we need into our view.  There's an easier way.  If you have some commonly used value converters that you'd like to make globally available, use Aurelia's <code>globalResources</code> function to register them.  This will eliminate the need for <code>require</code> elements at the top of every view.</p>
+</section>
 
   </article>
 </section>

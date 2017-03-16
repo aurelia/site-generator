@@ -5,9 +5,9 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Aurelia supports two-way binding a variety of data-types to checkbox input elements.</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Booleans"><p>Bind a boolean property to an input element's <code>checked</code> attribute using <code>checked.bind=&quot;myBooleanProperty&quot;</code>.</p>
+    <section><h2>Introduction</h2><p>Aurelia supports two-way binding a variety of data-types to checkbox input elements.</p>
+</section>
+<section><h2>Booleans</h2><p>Bind a boolean property to an input element's <code>checked</code> attribute using <code>checked.bind=&quot;myBooleanProperty&quot;</code>.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.motherboard%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20this.cpu%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20this.memory%20%3D%20false%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20motherboard%20%3D%20false%3B%0A%20%20%20%20%20%20cpu%20%3D%20false%3B%0A%20%20%20%20%20%20memory%20%3D%20false%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -19,8 +19,8 @@
 <au-demo heading="Boolean checkboxes demo">
   <source-code src="example/binding-checkboxes/booleans/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Array of Numbers"><p>A set of checkbox elements is a multiple selection interface. If you have an array that serves as the &quot;selected items&quot; list, you can bind the array to each input's <code>checked</code> attribute. The binding system will track the input's checked status, adding the input's value to the array when the input is checked and removing the input's value from the array when the input is unchecked.</p>
+</section>
+<section><h2>Array of Numbers</h2><p>A set of checkbox elements is a multiple selection interface. If you have an array that serves as the &quot;selected items&quot; list, you can bind the array to each input's <code>checked</code> attribute. The binding system will track the input's checked status, adding the input's value to the array when the input is checked and removing the input's value from the array when the input is unchecked.</p>
 <p>To define the input's &quot;value&quot;, bind the input's <code>model</code> attribute: <code>model.bind=&quot;product.id&quot;</code>.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProductIds%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -33,8 +33,8 @@
 <au-demo heading="Number array demo">
   <source-code src="example/binding-checkboxes/numbers/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Array of Objects"><p>Numbers aren't the only type of value you can store in a &quot;selected items&quot; array. The binding system supports all types, including objects.  Here's an example that adds and removes &quot;product&quot; objects from a <code>selectedProducts</code> array using the checkbox data-binding.</p>
+</section>
+<section><h2>Array of Objects</h2><p>Numbers aren't the only type of value you can store in a &quot;selected items&quot; array. The binding system supports all types, including objects.  Here's an example that adds and removes &quot;product&quot; objects from a <code>selectedProducts</code> array using the checkbox data-binding.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -46,8 +46,8 @@
 <au-demo heading="Object array demo">
   <source-code src="example/binding-checkboxes/objects/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Array of Objects with Matcher"><p>You may run into situations where the object your input element's model is bound to does not have reference equality to any of the objects in your checked array. The objects might match by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
+</section>
+<section><h2>Array of Objects with Matcher</h2><p>You may run into situations where the object your input element's model is bound to does not have reference equality to any of the objects in your checked array. The objects might match by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.selectedProducts%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -59,8 +59,8 @@
 <au-demo heading="Object array matcher demo">
   <source-code src="example/binding-checkboxes/objects-matcher/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Array of Strings"><p>Finally, here's an example that adds and removes strings from a <code>selectedProducts</code> array using the checkbox data-binding. This is example is unique because it does not use <code>model.bind</code> to assign each checkbox's value. Instead the input's standard <code>value</code> attribute is used. Normally we cannot use the standard <code>value</code> attribute in conjunction with checked binding because it coerces anything it's assigned to a string. This example uses an array of strings so everything works just fine.</p>
+</section>
+<section><h2>Array of Strings</h2><p>Finally, here's an example that adds and removes strings from a <code>selectedProducts</code> array using the checkbox data-binding. This is example is unique because it does not use <code>model.bind</code> to assign each checkbox's value. Instead the input's standard <code>value</code> attribute is used. Normally we cannot use the standard <code>value</code> attribute in conjunction with checked binding because it coerces anything it's assigned to a string. This example uses an array of strings so everything works just fine.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20%20%20this.selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -72,7 +72,7 @@
 <au-demo heading="String array demo">
   <source-code src="example/binding-checkboxes/strings/app.js"></source-code>
 </au-demo>
-</au-doc-section>
+</section>
 
   </article>
 </section>

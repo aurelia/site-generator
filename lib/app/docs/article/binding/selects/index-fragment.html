@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>A <code>&lt;select&gt;</code> element can serve as a single-select or multiple-select &quot;picker&quot; depending on whether the <code>multiple</code> attribute is present. The binding system supports both use cases. The samples below demonstrate a variety scenarios, all use a common series of steps to configure the select element:</p>
+    <section><h2>Introduction</h2><p>A <code>&lt;select&gt;</code> element can serve as a single-select or multiple-select &quot;picker&quot; depending on whether the <code>multiple</code> attribute is present. The binding system supports both use cases. The samples below demonstrate a variety scenarios, all use a common series of steps to configure the select element:</p>
 <ol>
 <li>Add a <code>&lt;select&gt;</code> element to the template and decide whether the <code>multiple</code> attribute should be applied.</li>
 <li>Bind the select element's <code>value</code> attribute to a property. In &quot;multiple&quot; mode, the property should be an array. In singular mode it can be any type.</li>
@@ -14,8 +14,8 @@
 <code>&lt;option model.bind=&quot;product.id&quot;&gt;${product.name}&lt;/option&gt;</code>
 <em>You can use the standard <code>value</code> attribute instead of <code>model</code>, just remember- it will coerce anything it's assigned to a string.</em></li>
 </ol>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Select Number"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Select Number</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProductId%20%3D%20null%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductId%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductId%3A%20number%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -26,8 +26,8 @@
 <au-demo heading="Select number demo">
   <source-code src="example/binding-selects/single/numbers/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Select Object"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Select Object</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProduct%20%3D%20null%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProduct%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProduct%3A%20IProduct%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -38,8 +38,8 @@
 <au-demo heading="Select object demo">
   <source-code src="example/binding-selects/single/objects/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Select Object with Matcher"><p>You may run into situations where the object your select element's value is bound does not have reference equality with any of the objects your option element model properties are bound to. The select's value object might &quot;match&quot; one of the option objects by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
+</section>
+<section><h2>Select Object with Matcher</h2><p>You may run into situations where the object your select element's value is bound does not have reference equality with any of the objects your option element model properties are bound to. The select's value object might &quot;match&quot; one of the option objects by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProduct%20%3D%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%0A%20%20%20%20%20%20selectedProduct%20%3D%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -51,8 +51,8 @@
 <au-demo heading="Select object matcher demo">
   <source-code src="example/binding-selects/single/objects-matcher/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Select Boolean"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Select Boolean</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20likesTacos%20%3D%20null%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20likesTacos%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20likesTacos%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -63,8 +63,8 @@
 <au-demo heading="Select boolean demo">
   <source-code src="example/binding-selects/single/booleans/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Select String"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Select String</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20%20%20this.selectedProduct%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProduct%20%3D%20%27%27%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20string%5B%5D%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProduct%3A%20string%20%3D%20%27%27%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -75,8 +75,8 @@
 <au-demo heading="Select string demo">
   <source-code src="example/binding-selects/single/strings/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Multiple Select Numbers"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Multiple Select Numbers</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProductIds%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductIds%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductIds%3A%20number%5B%5D%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -87,8 +87,8 @@
 <au-demo heading="Select multiple numbers demo">
   <source-code src="example/binding-selects/multiple/numbers/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Multiple Select Objects"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Multiple Select Objects</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProducts%3A%20IProduct%5B%5D%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -99,8 +99,8 @@
 <au-demo heading="Select multiple objects demo">
   <source-code src="example/binding-selects/multiple/objects/app.js"></source-code>
 </au-demo>
-</au-doc-section>
-<au-doc-section uid="9" version="1.0.0" heading="Multiple Select Strings"><code-listing heading="app${context.language.fileExtension}">
+</section>
+<section><h2>Multiple Select Strings</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20%20%20this.selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20string%5B%5D%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProducts%3A%20string%5B%5D%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -112,7 +112,7 @@
   <source-code src="example/binding-selects/multiple/strings/app.js"></source-code>
 </au-demo>
 </option></select></select>
-</au-doc-section>
+</section>
 
   </article>
 </section>

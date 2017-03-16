@@ -5,17 +5,17 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>With the Component Tester you can easily stage a custom element or custom attribute in isolation inside a mini Aurelia application, assert how it responds to data-binding and assert its behavior throughout the component's lifecycle (bind, attached etc).</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Getting Started"><p>If you are using JSPM:</p>
+    <section><h2>Introduction</h2><p>With the Component Tester you can easily stage a custom element or custom attribute in isolation inside a mini Aurelia application, assert how it responds to data-binding and assert its behavior throughout the component's lifecycle (bind, attached etc).</p>
+</section>
+<section><h2>Getting Started</h2><p>If you are using JSPM:</p>
 <pre><code class="language-shell">jspm install aurelia-testing
 </code></pre>
 <p>If you are using NPM:</p>
 <pre><code class="language-shell">npm install aurelia-testing
 </code></pre>
 <p>Once you've got the library installed, you can use it in a unit test. In the following examples we will be using Jasmine, but any testing framework would work.</p>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Testing a Custom Element"><p>Let's start with a simple custom element that we want to test:</p>
+</section>
+<section><h2>Testing a Custom Element</h2><p>Let's start with a simple custom element that we want to test:</p>
 <code-listing heading="A Custom Element's View">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22firstName%22%3E%24%7BfirstName%7D%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -40,14 +40,14 @@
 </blockquote>
 <p>Next, we come to the actual test where we call <code>create</code> on the <code>ComponentTester</code>. Create will kick everything off and bootstrap the mini Aurelia application, configure it with <code>standardConfiguration</code> (we will take a look later at how you can run with your own configuration), register provided resources as global resources, start the application and finally render your component so you can assert the expected behavior. In this case, we want to make sure our <code>firstName</code> property gets rendered correctly in the HTML by selecting the <code>div</code> tag via it's class name. We use <code>document.querySelector('.firstName');</code> to grab that and then check that its innerHTML is <code>Bob</code>. Next we call Jasmine's <code>done</code> function to tell Jasmine that the test is complete. Calling <code>done</code> is needed since the <code>create</code> method is asynchronous and returns a Promise.</p>
 <p>Finally, we call <code>dispose</code> on our <code>ComponentTester</code> instance. This will clean up the DOM so our next test will start out with a clean document. That's pretty much all there is to it. Easy right? Imagine doing the same assert with stand alone unit tests that run outside of Aurelia. It would be pretty difficult, especially for a more complex component.</p>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Manually handling lifecycle"><p>When testing a component sometimes you want to have tests run at certain points of the lifecycle.  To do this we can tell the component we created that we will manually handle the lifecycle methods -</p>
+</section>
+<section><h2>Manually handling lifecycle</h2><p>When testing a component sometimes you want to have tests run at certain points of the lifecycle.  To do this we can tell the component we created that we will manually handle the lifecycle methods -</p>
 <code-listing heading="Manually handling lifecycle">
   <source-code lang="JavaScript">%0A%20%20%20%20import%20%7BStageComponent%7D%20from%20%27aurelia-testing%27%3B%0A%20%20%20%20import%20%7Bbootstrap%7D%20from%20%27aurelia-bootstrapper%27%3B%0A%0A%20%20%20%20describe%28%27MyComponent%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20let%20component%3B%0A%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20component%20%3D%20StageComponent%0A%20%20%20%20%20%20%20%20%20%20.withResources%28%27src/my-component%27%29%0A%20%20%20%20%20%20%20%20%20%20.inView%28%27%3Cmy-component%20first-name.bind%3D%22firstName%22%3E%3C/my-component%3E%27%29%0A%20%20%20%20%20%20%20%20%20%20.boundTo%28%7B%20firstName%3A%20%27Bob%27%20%7D%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27can%20manually%20handle%20lifecycle%27%2C%20done%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20let%20nameElement%3B%0A%0A%20%20%20%20%20%20%20%20component.manuallyHandleLifecycle%28%29.create%28%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20nameElement%20%3D%20document.querySelector%28%27.name%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20expect%28nameElement.innerHTML%29.toBe%28%27%20%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20component.bind%28%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20expect%28nameElement.innerHTML%29.toBe%28%27Foo%20bind%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20component.attached%28%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20expect%28nameElement.innerHTML%29.toBe%28%27Foo%20attached%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20component.detached%28%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20component.unbind%28%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20expect%28component.viewModel.name%29.toBe%28null%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20component.bind%28%7B%20name%3A%20%27Bar%27%20%7D%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20expect%28nameElement.innerHTML%29.toBe%28%27Bar%20bind%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20component.attached%28%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20expect%28nameElement.innerHTML%29.toBe%28%27Bar%20attached%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%0A%20%20%20%20%20%20%20%20%20%20.then%28done%29%3B%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20afterEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20component.dispose%28%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>As you see, the test helper lets you easily push components through their lifecycle, testing various aspects of it at each point along the way.</p>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Testing a Custom Attribute"><p>Testing a Custom Attribute is not much different than testing a Custom Element. Let's look at how it's done by starting with a simple example custom attribute that lets you change the background color of the element it is placed on:</p>
+</section>
+<section><h2>Testing a Custom Attribute</h2><p>Testing a Custom Attribute is not much different than testing a Custom Element. Let's look at how it's done by starting with a simple example custom attribute that lets you change the background color of the element it is placed on:</p>
 <code-listing heading="A Custom Attribute">
   <source-code lang="JavaScript">%0A%20%20%20%20export%20class%20MyAttributeCustomAttribute%20%7B%0A%20%20%20%20%20%20static%20inject%20%3D%20%5BElement%5D%3B%0A%20%20%20%20%20%20constructor%28element%29%20%7B%0A%20%20%20%20%20%20%20%20this.element%20%3D%20element%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20valueChanged%28newValue%29%7B%0A%20%20%20%20%20%20%20%20this.element.style.backgroundColor%20%3D%20newValue%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
@@ -56,8 +56,8 @@
   <source-code lang="JavaScript">%0A%20%20%20%20import%20%7BStageComponent%7D%20from%20%27aurelia-testing%27%3B%0A%20%20%20%20import%20%7Bbootstrap%7D%20from%20%27aurelia-bootstrapper%27%3B%0A%0A%20%20%20%20describe%28%27MyAttribute%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20let%20component%3B%0A%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20component%20%3D%20StageComponent%0A%20%20%20%20%20%20%20%20%20%20%20%20.withResources%28%27src/my-attribute%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.inView%28%27%3Cdiv%20my-attribute.bind%3D%22color%22%3EBob%3C/div%3E%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.boundTo%28%7B%20color%3A%20%27blue%27%20%7D%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20set%20the%20background%20color%20to%20provided%20color%27%2C%20done%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20component.create%28bootstrap%29.then%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20expect%28component.element.style.backgroundColor%29.toBe%28%27blue%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20done%28%29%3B%0A%20%20%20%20%20%20%20%20%20%7D%29.catch%28e%20%3D%3E%20console.log%28e.toString%28%29%29%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20afterEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20component.dispose%28%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>As you can see, everything follows the same pattern we had for our custom element test. One exception is that we take advantage of the <code>element</code> property which gets provided by the <code>ComponentTester</code> instance. The <code>element</code> property is the actual HTML element that gets rendered. This can also be used when testing custom elements.</p>
-</au-doc-section>
-<au-doc-section uid="?" version="1.0.0" heading="Testing custom component with a real view-model"><p>If you want to test a custom component with a real view-model, mocking
+</section>
+<section><h2>Testing custom component with a real view-model</h2><p>If you want to test a custom component with a real view-model, mocking
 out all dependencies, you can do this as well.  A common scenario is
 to test the view/view-model, mocking out service calls to the backend.</p>
 <p>If the view model has a dependency on a class called Service for all backend communication:</p>
@@ -101,8 +101,8 @@ describe('MyComponent', () =&gt; {
   });
 });
 </code></pre>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Using a Real Parent View-model"><p>If you want to test using a custom element inside of a real parent view-model this can be done just as easily.  This can be really helpful when needing to test the state of a parent that is affected by the child custom element or attribute -</p>
+</section>
+<section><h2>Using a Real Parent View-model</h2><p>If you want to test using a custom element inside of a real parent view-model this can be done just as easily.  This can be really helpful when needing to test the state of a parent that is affected by the child custom element or attribute -</p>
 <code-listing heading="A Custom Attribute Test with Real Parent View-model">
   <source-code lang="JavaScript">%0A%20%20%20%20import%20%7BStageComponent%7D%20from%20%27aurelia-testing%27%3B%0A%20%20%20%20import%20%7Bbootstrap%7D%20from%20%27aurelia-bootstrapper%27%3B%0A%20%20%20%20import%20%7BMyComponent%7D%20from%20%27src/my-component%27%3B%0A%0A%20%20%20%20describe%28%27MyAttribute%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20let%20component%3B%0A%20%20%20%20%20%20let%20viewModel%3B%0A%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20viewModel%20%3D%20new%20MyComponent%28%29%3B%0A%20%20%20%20%20%20%20%20component%20%3D%20StageComponent%0A%20%20%20%20%20%20%20%20%20%20%20%20.withResources%28%27src/my-attribute%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.inView%28%27%3Cdiv%20my-attribute.bind%3D%22color%22%3EBob%3C/div%3E%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.boundTo%28viewModel%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20//...%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
@@ -112,13 +112,13 @@ describe('MyComponent', () =&gt; {
   <source-code lang="JavaScript">%0A%20%20%20%20import%20%7BStageComponent%7D%20from%20%27aurelia-testing%27%3B%0A%20%20%20%20import%20%7Bbootstrap%7D%20from%20%27aurelia-bootstrapper%27%3B%0A%20%20%20%20import%20%7BMyComponent%7D%20from%20%27src/my-component%27%3B%0A%20%20%20%20import%20%7BContainer%7D%20from%20%27aurelia-dependency-injection%27%3B%0A%20%20%20%20import%20%7BMyService%7D%20from%20%27src/my-service%27%3B%0A%0A%20%20%20%20describe%28%27MyAttribute%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20let%20component%3B%0A%20%20%20%20%20%20let%20container%3B%0A%20%20%20%20%20%20let%20viewModel%3B%0A%20%20%20%20%20%20let%20myService%3B%0A%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20container%20%3D%20new%20Container%28%29%3B%0A%20%20%20%20%20%20%20%20myService%20%3D%20container.get%28MyService%29%3B%0A%20%20%20%20%20%20%20%20viewModel%20%3D%20container.get%28MyComponent%29%3B%0A%20%20%20%20%20%20%20%20component%20%3D%20StageComponent%0A%20%20%20%20%20%20%20%20%20%20%20%20.withResources%28%27src/my-attribute%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.inView%28%27%3Cdiv%20my-attribute.bind%3D%22color%22%3EBob%3C/div%3E%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.boundTo%28viewModel%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20//...%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>Now the service dependency for <code>MyComponent</code> will be resolved through DI automatically.</p>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Improving Readability with Multi-line Strings"><p>You can improve the readability of your complex views by using template literals in your tests -</p>
+</section>
+<section><h2>Improving Readability with Multi-line Strings</h2><p>You can improve the readability of your complex views by using template literals in your tests -</p>
 <code-listing heading="Multi-line Strings for Views">
   <source-code lang="JavaScript">%0A%20%20%20%20import%20%7BStageComponent%7D%20from%20%27aurelia-testing%27%3B%0A%20%20%20%20import%20%7Bbootstrap%7D%20from%20%27aurelia-bootstrapper%27%3B%0A%0A%20%20%20%20describe%28%27MyAttribute%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20let%20component%3B%0A%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20let%20view%20%3D%20%60%0A%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22row%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22col-xs-12%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20my-attribute.bind%3D%22color%22%3EBob%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%60%3B%0A%20%20%20%20%20%20%20%20component%20%3D%20StageComponent%0A%20%20%20%20%20%20%20%20%20%20%20%20.withResources%28%27src/my-attribute%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.inView%28view%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.boundTo%28viewModel%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20//...%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Helpful Properties and Functions"><p>The <code>ComponentTester</code> exposes a set of properties that can be handy when doing asserts or to stage a component in a specific way. Here's a list of what is available:</p>
+</section>
+<section><h2>Helpful Properties and Functions</h2><p>The <code>ComponentTester</code> exposes a set of properties that can be handy when doing asserts or to stage a component in a specific way. Here's a list of what is available:</p>
 <ul>
 <li><code>element</code> - The HTML element that gets rendered.</li>
 <li><code>viewModel</code> - The view-model for the component.</li>
@@ -130,8 +130,8 @@ describe('MyComponent', () =&gt; {
 <li><code>detached</code> - Manually handles <code>detached</code>.</li>
 <li><code>waitForElement</code> and <code>waitForElements</code> - Waits until one or several elements are present / absent. See below.</li>
 </ul>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Testing complex components"><p>In some cases, the tested element is not rendered yet when the <code>component.create()</code> promise is resolved, and therefore when the actual test starts. For these situations, <code>aurelia-testing</code> and <code>ComponentTester</code> expose helper methods and functions to wait for tested elements to be present in the page.</p>
+</section>
+<section><h2>Testing complex components</h2><p>In some cases, the tested element is not rendered yet when the <code>component.create()</code> promise is resolved, and therefore when the actual test starts. For these situations, <code>aurelia-testing</code> and <code>ComponentTester</code> expose helper methods and functions to wait for tested elements to be present in the page.</p>
 <h3>Waiting for element(s)</h3>
 <p>If you want to wait for elements that can be looked up in the DOM using a query passed to <code>querySelector</code> or <code>querySelectorAll</code>, you can use one of the following:</p>
 <ul>
@@ -163,7 +163,7 @@ describe('MyComponent', () =&gt; {
 <code-listing heading="Waiting for the same element to be absent but timeout after 2s is as easy as:">
   <source-code lang="JavaScript">%0A%20%20%20%20component.waitForElement%28%27.firstName%27%2C%20%7Bpresent%3A%20false%2C%20timeout%3A%202000%7D%29.then%28done%29%3B%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
+</section>
 
   </article>
 </section>

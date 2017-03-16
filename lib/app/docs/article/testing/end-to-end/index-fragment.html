@@ -5,15 +5,15 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="What is E2E testing?"><p>End-To-End (E2E) testing is all about testing your application against specific <em>scenarios</em>. From a requirements-engineering-perspective you'd call those <em>User Stories</em>. Essentially, these stories describe a series of actions a user performs to achieve a certain goal. So by assembling a bunch of these - referred to as a <em>test suite</em> - you are able to verify that your web app acts as expected. The key to success, of course, lies in the amount and quality of tests written.</p>
+    <section><h2>What is E2E testing?</h2><p>End-To-End (E2E) testing is all about testing your application against specific <em>scenarios</em>. From a requirements-engineering-perspective you'd call those <em>User Stories</em>. Essentially, these stories describe a series of actions a user performs to achieve a certain goal. So by assembling a bunch of these - referred to as a <em>test suite</em> - you are able to verify that your web app acts as expected. The key to success, of course, lies in the amount and quality of tests written.</p>
 <p>With E2E testing you are not interacting with the app's code per se, but with the app's interface. This is different than unit tests, which take care of isolated parts of the application - called <em>units</em> - by verifying them through the removal or mocking of other parts. It's important to note that one method of testing does not replace the other, so don't take this article as an excuse to skip unit testing.</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="How are E2E tests different?"><p>One of the key differences when working with E2E tests is that all of your work is located in the browser, which naturally leads to writing a lot of <em>asynchronous code</em>. It doesn't matter whether you request a DOM Element, send some fake keystrokes or trigger a click, each of these actions needs to be automatically translated to understandable instructions and sent to the browser under test. So working with <code>Promises</code> becomes a major enabler when keeping track of deferred executions and responses.</p>
+</section>
+<section><h2>How are E2E tests different?</h2><p>One of the key differences when working with E2E tests is that all of your work is located in the browser, which naturally leads to writing a lot of <em>asynchronous code</em>. It doesn't matter whether you request a DOM Element, send some fake keystrokes or trigger a click, each of these actions needs to be automatically translated to understandable instructions and sent to the browser under test. So working with <code>Promises</code> becomes a major enabler when keeping track of deferred executions and responses.</p>
 <p>Another important aspect already noted is the necessity to translate programmatic actions into browser understandable ones. Needless to say, variations exist between the different browsers...</p>
 <p>When performing E2E tests you also need to take into consideration that you are actually testing a real web page. So, compared to unit tests, you will additionally need your web page up and accessible by the browser during test execution. Keep in mind that E2E tests, sometimes also referred to as <em>integration tests</em>, test your app's system as a whole. Thus, modifications which get persisted to databases or local storage will stay that way and may produce side effects for your next test run.</p>
 <p>Last but not least, there is a much higher test code maintenance cost, compared to unit tests. The reason is that now, not only one component is tested exclusively, but rather the whole system at once. Imagine trying to fill out an input element with the id <code>txtFirstname</code>, just to realize the next day your tests fail because your fellow front-end designer decided to change the name to <code>txtFirstName</code>. This makes it clear that you must treat your test code like general application logic and give it all the love it deserves.</p>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Protractor"><p>Although the previous section may sound depressing, there is hope for developers in 
+</section>
+<section><h2>Protractor</h2><p>Although the previous section may sound depressing, there is hope for developers in 
 <a href="http://angular.github.io/protractor/#/" target="_blank">Protractor</a>
 , an End-To-End testing framework. Under the hood it's actually a Node.js application, which supports a wide variety of assertion/test libraries like 
 <a href="http://jasmine.github.io/" target="_blank">Jasmine</a>
@@ -22,19 +22,19 @@
  or 
 <a href="https://github.com/cucumber/cucumber-js" target="_blank">Cucumber</a>
 .</p>
-<au-alert type="info"heading="Jasmine"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Jasmine</h4><p>
 The remainer of the article will use the BDD Testing Framework Jasmine. A nice tutorial on how to use Jasmine can be 
 <a href="http://code.tutsplus.com/tutorials/testing-your-javascript-with-jasmine--net-21229" target="_blank">found here</a>
 .</p>
-</au-alert>
+</div>
 <p>Protractor acts as a wrapper on top of the WebDriverJS-API, which is used to communicate with a Selenium Server, either local (standalone) or remote. The picture below depicts the whole process. Protractor communicates via the WebDriverJS-API (the way to talk to Selenium's WebDriver API) which is used to translate user interactions into browser understandable instructions.</p>
 <p><img src="img/protractor.png" alt="Protractor Diagram" /></p>
 <p>Now the interesting thing is that instead of manually testing your application in each of the major browsers, automated Protractor tests can run on multiple browsers at the same time, saving you valuable time and money. Support is wide-spread and even includes headless browsers like 
 <a href="http://phantomjs.org/" target="_blank">PhantomJS</a>
 .</p>
 <p>Besides that, being a wrapper, it offers additional convenience features, not present in the vanilla WebDriverJS-API. One feature, perhaps the most important, is that it allows you to write asynchronous tests in a synchronous style. This means that Protractor will automatically execute the next task, the moment the previous pending tasks finish.</p>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="A Basic Example"><p>To get a basic idea of how this works, take a look at the following example.</p>
+</section>
+<section><h2>A Basic Example</h2><p>To get a basic idea of how this works, take a look at the following example.</p>
 <code-listing heading="A Basic E2E Test">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20describe%28%27aurelia%20homepage%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20it%28%27should%20load%20page%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20browser.get%28%27http%3A//www.aurelia.io%27%29%3B%0A%20%20%20%20%20%20%20%20expect%28browser.getTitle%28%29%29.toEqual%28%27Home%20%7C%20Aurelia%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
@@ -43,26 +43,26 @@ The remainer of the article will use the BDD Testing Framework Jasmine. A nice t
 <code-listing heading="Waiting for an Action">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20describe%28%27aurelia%20homepage%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20it%28%27should%20navigate%20to%20a%20different%20subpage%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20//%20load%20page%0A%20%20%20%20%20%20%20%20//%20navigate%20to%20different%20subpage%0A%20%20%20%20%20%20%20%20//%20wait%20for%20X%20to%20happen%20after%202%20seconds%0A%20%20%20%20%20%20%20%20browser.sleep%282000%29%0A%20%20%20%20%20%20%20%20expect%28WHATEVER%29.toEqual%28SOMETHING%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Accessing DOM Elements"><p>Great! So we know how to load a page. But how do we find DOM Elements and see whether they are rendered properly? Protractor provides the global object <code>element</code>, an <code>ElementFinder</code>, which offers a <em>locator factory</em> <code>by</code> used to define a way to search for elements. Let's take a look at the following example.</p>
+</section>
+<section><h2>Accessing DOM Elements</h2><p>Great! So we know how to load a page. But how do we find DOM Elements and see whether they are rendered properly? Protractor provides the global object <code>element</code>, an <code>ElementFinder</code>, which offers a <em>locator factory</em> <code>by</code> used to define a way to search for elements. Let's take a look at the following example.</p>
 <code-listing heading="Searching for Elements">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20describe%28%27aurelia%20homepage%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20browser.get%28%27http%3A//www.aurelia.io%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20have%20proper%20header%20text%20set%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20expect%28element%28by.tagName%28%27h2%27%29%29.getText%28%29%29.toBe%28%27EXPECTED%20HEADER%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20find%20an%20about%20section%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20expect%28element%28by.id%28%27about%27%29%29.isPresent%28%29%29.toBe%28true%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>The first test is looking for an <code>&lt;h2&gt;</code> tag by utilizing the <code>tagName</code> <em>locator</em>. The second test looks for an element with the ID <code>about</code> and expects it to be rendered on the page. Here we use the <code>isPresent</code> method, provided by the <code>ElementFinder</code>.</p>
 <p>You may have noticed the method <code>beforeEach</code> at the top of the describe block. This is a setup method, which will get called before each test in the current describe block. To perform <em>tear down</em> operations, you'd simply define a function <code>afterEach</code>, which gets called after each test.</p>
-<au-alert type="info"heading="Protractor Locators"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Protractor Locators</h4><p>
 You can find a full list of <em>locators</em> 
 <a href="http://angular.github.io/protractor/#/locators" target="_blank">here</a>
 . Just keep in mind that everything specific to AngularJS, like <code>binding</code> or <code>model</code> won't work with Aurelia Apps. We have our own helpers for that.</p>
-</au-alert>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Interacting with Forms"><p>Now we know how to work with general elements, but what about inputs? Wouldn't it be nice to fake data entries in order to verify the logic of a form? To do so, let's look at the next example. Our test will navigate to the Google homepage, search for a specific keyword, trigger the search and expect to see an element containing the given value.</p>
+</div>
+</section>
+<section><h2>Interacting with Forms</h2><p>Now we know how to work with general elements, but what about inputs? Wouldn't it be nice to fake data entries in order to verify the logic of a form? To do so, let's look at the next example. Our test will navigate to the Google homepage, search for a specific keyword, trigger the search and expect to see an element containing the given value.</p>
 <code-listing heading="Providing Input">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20describe%28%27google%20homepage%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20browser.get%28%27http%3A//www.google.com%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20load%20page%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20element%28by.name%28%27q%27%29%29.sendKeys%28%27Aurelia%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20element%28by.name%28%27btnG%27%29%29.click%28%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20browser.sleep%282000%29%3B%0A%20%20%20%20%20%20%20%20%20%20expect%28element%28by.css%28%27h3%20a%27%29%29.getText%28%29%29.toContain%28%27Aurelia%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>First we navigate to the page using <code>browser.get</code> and look for an input with the name <code>q</code>. The <code>sendKeys</code> method now simulates the keystrokes for the keyword <em>Aurelia</em>. Afterwards we perform a search by clicking the button named <code>btnG</code>. Now we need to wait for Google to perform the search and render the result. We therefore leverage the <code>browser.sleep</code> method to give it some time. Finally we look for a link containing the word <em>Aurelia</em>.</p>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Protractor and Aurelia"><p>In order to work with Protractor, there is a little configuration that is necessary. This is done in a configuration file, e.g. protractor.conf.js, which sets up the basic information for Protractor so it can find our test files, start the standalone Selenium server and wire up the <code>JasmineOptions</code> for the console output. The Aurelia 
+</section>
+<section><h2>Protractor and Aurelia</h2><p>In order to work with Protractor, there is a little configuration that is necessary. This is done in a configuration file, e.g. protractor.conf.js, which sets up the basic information for Protractor so it can find our test files, start the standalone Selenium server and wire up the <code>JasmineOptions</code> for the console output. The Aurelia 
 <a href="https://github.com/aurelia/skeleton-navigation" target="_blank">Skeleton Navigation App</a>
  thankfully already shares a pre-configured setup. Let's take a look at it.</p>
 <code-listing heading="protractor.conf.js">
@@ -76,8 +76,8 @@ You can find a full list of <em>locators</em>
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20browser.loadAndWaitForAureliaPage%28%27http%3A//localhost%3A9000%27%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>This helper uses a Protractor feature to listen for a DOM event fired by Aurelia after initial view composition. By placing this in a <code>beforeEach</code> section, we ensure that none of the tests will be started before the async script successfully finishes.</p>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Testing the Aurelia Skeleton Navigation App"><p>Besides having the configuration file set up, the Skeleton Navigation App also defines a set of demo tests to help you get started with testing your own page. First you'd need to download the App directly from our 
+</section>
+<section><h2>Testing the Aurelia Skeleton Navigation App</h2><p>Besides having the configuration file set up, the Skeleton Navigation App also defines a set of demo tests to help you get started with testing your own page. First you'd need to download the App directly from our 
 <a href="https://github.com/aurelia/skeleton-navigation" target="_blank">Github-Repo</a>
  and follow the installation instructions. Afterwards, in order to start E2E testing, simply open up a console and run the following command to start up the built-in web server:</p>
 <code-listing heading="Starting the Web Server">
@@ -88,8 +88,8 @@ You can find a full list of <em>locators</em>
   <source-code lang="SH">%0A%20%20%20%20gulp%20e2e%0A%20%20</source-code>
 </code-listing>
 <p>You will find the demo spec in the folder <code>test/e2e/src/</code>.</p>
-</au-doc-section>
-<au-doc-section uid="9" version="1.0.0" heading="Page Objects"><p>To conclude this article we're going to quickly look at how to structure tests. We organize our test methods using a pattern called <em>Page Objects</em> (POs). What this means is that you try to group information about <em>how</em> you access parts of the application into a separate class. This makes it simple to access specific elements multiple times. Now instead of repeating the <code>element.by.xxx</code> code over and over across multiple tests, we unify the access, making it easier to maintain and modify.</p>
+</section>
+<section><h2>Page Objects</h2><p>To conclude this article we're going to quickly look at how to structure tests. We organize our test methods using a pattern called <em>Page Objects</em> (POs). What this means is that you try to group information about <em>how</em> you access parts of the application into a separate class. This makes it simple to access specific elements multiple times. Now instead of repeating the <code>element.by.xxx</code> code over and over across multiple tests, we unify the access, making it easier to maintain and modify.</p>
 <p>Since Aurelia promotes the use of ES6, our page objects are simple ES6 classes, exposing functionality through methods. These methods contain the logic for how to interact with Protractor. The following example shows our main Skeleton PO, which takes care of general application information like the page title and page navigation.</p>
 <code-listing heading="A Page Object">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20export%20class%20PageObjectSkeleton%20%7B%0A%20%20%20%20%20%20getCurrentPageTitle%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20browser.getTitle%28%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20navigateTo%28href%29%20%7B%0A%20%20%20%20%20%20%20%20element%28by.css%28%27a%5Bhref%3D%22%27%20+%20href%20+%20%27%22%5D%27%29%29.click%28%29%3B%0A%20%20%20%20%20%20%20%20return%20browser.waitForRouterComplete%28%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -99,16 +99,16 @@ You can find a full list of <em>locators</em>
 <code-listing heading="The Welcome Page Object">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20export%20class%20PageObjectWelcome%20%7B%0A%20%20%20%20%20%20getGreeting%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20element%28by.tagName%28%27h2%27%29%29.getText%28%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20setFirstname%28value%29%20%7B%0A%20%20%20%20%20%20%20%20return%20element%28by.valueBind%28%27firstName%27%29%29.clear%28%29.sendKeys%28value%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20setLastname%28value%29%20%7B%0A%20%20%20%20%20%20%20%20return%20element%28by.valueBind%28%27lastName%27%29%29.clear%28%29.sendKeys%28value%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20getFullname%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20element%28by.css%28%27.help-block%27%29%29.getText%28%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20pressSubmitButton%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20element%28by.css%28%27button%5Btype%3D%22submit%22%5D%27%29%29.click%28%29%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20openAlertDialog%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20browser.wait%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20this.pressSubmitButton%28%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20return%20browser.switchTo%28%29.alert%28%29.then%28%0A%20%20%20%20%20%20%20%20%20%20%20%20function%28alert%29%20%7B%20alert.accept%28%29%3B%20return%20true%3B%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function%28%29%20%7B%20return%20false%3B%20%7D%0A%20%20%20%20%20%20%20%20%20%20%29%3B%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="10" version="1.0.0" heading="Test Specification"><p>The previously defined page objects can now be imported into our test specification by leveraging the ES6 <code>import</code> syntax. Using <code>beforeEach</code> we can instantiate the POs, navigate to the Web app and wait for the previously mentioned <code>aurelia-composed</code> event to start testing.</p>
+</section>
+<section><h2>Test Specification</h2><p>The previously defined page objects can now be imported into our test specification by leveraging the ES6 <code>import</code> syntax. Using <code>beforeEach</code> we can instantiate the POs, navigate to the Web app and wait for the previously mentioned <code>aurelia-composed</code> event to start testing.</p>
 <p>Our page object methods, in combination with Jasmine's BDD style assertions, make each test become an easy to read English sentence.</p>
 <code-listing heading="The Welcome Page Object">
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20import%20%7BPageObjectWelcome%7D%20from%20%27./welcome.po.js%27%3B%0A%20%20%20%20import%20%7BPageObjectSkeleton%7D%20from%20%27./skeleton.po.js%27%3B%0A%0A%20%20%20%20describe%28%27aurelia%20skeleton%20app%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20let%20poWelcome%3B%0A%20%20%20%20%20%20let%20poSkeleton%3B%0A%0A%20%20%20%20%20%20beforeEach%28%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20poSkeleton%20%3D%20new%20PageObjectSkeleton%28%29%3B%0A%20%20%20%20%20%20%20%20poWelcome%20%3D%20new%20PageObjectWelcome%28%29%3B%0A%0A%20%20%20%20%20%20%20%20browser.loadAndWaitForAureliaPage%28%27http%3A//localhost%3A9000%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20load%20the%20page%20and%20display%20the%20initial%20page%20title%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20expect%28poSkeleton.getCurrentPageTitle%28%29%29.toBe%28%27Welcome%20%7C%20Aurelia%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20display%20greeting%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20expect%28poWelcome.getGreeting%28%29%29.toBe%28%27Welcome%20to%20the%20Aurelia%20Navigation%20App%21%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20automatically%20write%20down%20the%20fullname%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20poWelcome.setFirstname%28%27Rob%27%29%3B%0A%20%20%20%20%20%20%20%20poWelcome.setLastname%28%27Eisenberg%27%29%3B%0A%0A%20%20%20%20%20%20%20%20browser.sleep%28200%29%3B%20//%20wait%20for%20async%20bindings%20to%20complete%0A%20%20%20%20%20%20%20%20expect%28poWelcome.getFullname%28%29%29.toBe%28%27ROB%20EISENBERG%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20show%20alert%20message%20when%20clicking%20submit%20button%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20expect%28poWelcome.openAlertDialog%28%29%29.toBe%28true%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20it%28%27should%20navigate%20to%20users%20page%27%2C%20%28%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20poSkeleton.navigateTo%28%27%23/users%27%29%3B%0A%20%20%20%20%20%20%20%20expect%28poSkeleton.getCurrentPageTitle%28%29%29.toBe%28%27Github%20Users%20%7C%20Aurelia%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="11" version="1.0.0" heading="Summary"><p>We hope you enjoyed this introduction to E2E Testing with Protractor and the Aurelia Framework. Time to start writing some tests!</p>
+</section>
+<section><h2>Summary</h2><p>We hope you enjoyed this introduction to E2E Testing with Protractor and the Aurelia Framework. Time to start writing some tests!</p>
 </h2>
-</au-doc-section>
+</section>
 
   </article>
 </section>

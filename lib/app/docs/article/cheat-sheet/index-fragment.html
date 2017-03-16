@@ -5,14 +5,14 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Configuration and Startup"><code-listing heading="Bootstrapping Older Browsers">
+    <section><h2>Configuration and Startup</h2><code-listing heading="Bootstrapping Older Browsers">
   <source-code lang="HTML">%0A%20%20%20%20%3Cscript%20src%3D%22jspm_packages/system.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%20src%3D%22config.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20SystemJS.import%28%27aurelia-polyfills%27%29.then%28function%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20SystemJS.import%28%27webcomponents/webcomponentsjs/MutationObserver%27%29%3B%0A%20%20%20%20%20%20%7D%29.then%28function%28%29%20%7B%0A%20%20%20%20%20%20%20%20SystemJS.import%28%27aurelia-bootstrapper%27%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%3C/script%3E%0A%20%20</source-code>
 </code-listing>
-<au-alert type="warning"heading="Promises in Edge"><p>
+<div class="warning"><div class="icon"> <i></i> </div><h4>Promises in Edge</h4><p>
 Currently, the Edge browser has a serious performance problem with its Promise implementation. This deficiency can greatly increase startup time of your app. If you are targeting the Edge browser, it is highly recommended that you use the 
 <a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank">bluebird promise</a>
  library to replace Edge's native implementation. You can do this by simply referencing the library prior to loading system.js.</p>
-</au-alert>
+</div>
 <code-listing heading="Standard Startup Configuration">
   <source-code lang="ES 2015/2016">%0A%20%20%20%20export%20function%20configure%28aurelia%29%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BAurelia%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%3A%20Aurelia%29%3A%20void%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -29,8 +29,8 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   <source-code lang="ES 2015/2016">%0A%20%20%20%20export%20function%20configure%28aurelia%29%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%0A%20%20%20%20%20%20%20%20.plugin%28%27plugin-name%27%2C%20pluginConfiguration%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BAurelia%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%3A%20Aurelia%29%3A%20void%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%0A%20%20%20%20%20%20%20%20.plugin%28%27plugin-name%27%2C%20pluginConfiguration%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Creating Components"><p>UI components consist of two parts: a view-model and a view. Simply create each part in its own file. Use the same file name but different file extensions for the two parts. For example: <em>hello${context.language.fileExtension}</em> and <em>hello.html</em>.</p>
+</section>
+<section><h2>Creating Components</h2><p>UI components consist of two parts: a view-model and a view. Simply create each part in its own file. Use the same file name but different file extensions for the two parts. For example: <em>hello${context.language.fileExtension}</em> and <em>hello.html</em>.</p>
 <code-listing heading="Explicit Configuration">
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7BuseView%2C%20decorators%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20let%20Hello%20%3D%20decorators%28useView%28%27./hello.html%27%29%29.on%28class%20%7B%0A%20%20%20%20%20%20...%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7BuseView%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20@useView%28%27./hello.html%27%29%0A%20%20%20%20export%20class%20Hello%20%7B%0A%20%20%20%20%20%20...%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -46,8 +46,8 @@ Currently, the Edge browser has a serious performance problem with its Promise i
 <li><code>detached()</code> - At some point in the future, the component may be removed from the DOM. If/When this happens, and if the view-model has a <code>detached</code> callback, this is when it will be invoked.</li>
 <li><code>unbind()</code> - After a component is detached, it's usually unbound. If your view-model has the <code>unbind</code> callback, it will be invoked during this process.</li>
 </ol>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Dependency Injection"><code-listing heading="Declaring Dependencies">
+</section>
+<section><h2>Dependency Injection</h2><code-listing heading="Declaring Dependencies">
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7Binject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BDep1%7D%20from%20%27dep1%27%3B%0A%20%20%20%20import%20%7BDep2%7D%20from%20%27dep2%27%3B%0A%0A%20%20%20%20@inject%28Dep1%2C%20Dep2%29%0A%20%20%20%20export%20class%20CustomerDetail%20%7B%0A%20%20%20%20%20%20constructor%28dep1%2C%20dep2%29%20%7B%0A%20%20%20%20%20%20%20%20this.dep1%20%3D%20dep1%3B%0A%20%20%20%20%20%20%20%20this.dep2%20%3D%20dep2%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7BDep1%7D%20from%20%27dep1%27%3B%0A%20%20%20%20import%20%7BDep2%7D%20from%20%27dep2%27%3B%0A%0A%20%20%20%20export%20class%20CustomerDetail%20%7B%0A%20%20%20%20%20%20static%20inject%28%29%20%7B%20return%20%5BDep1%2C%20Dep2%5D%3B%20%7D%0A%0A%20%20%20%20%20%20constructor%28dep1%2C%20dep2%29%20%7B%0A%20%20%20%20%20%20%20%20this.dep1%20%3D%20dep1%3B%0A%20%20%20%20%20%20%20%20this.dep2%20%3D%20dep2%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7Bautoinject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BDep1%7D%20from%20%27dep1%27%3B%0A%20%20%20%20import%20%7BDep2%7D%20from%20%27dep2%27%3B%0A%0A%20%20%20%20@autoinject%0A%20%20%20%20export%20class%20CustomerDetail%20%7B%0A%20%20%20%20%20%20constructor%28private%20dep1%3A%20Dep1%2C%20private%20dep2%3A%20Dep2%29%7B%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -95,16 +95,16 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7Btransient%2C%20inject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BHttpClient%7D%20from%20%27aurelia-fetch-client%27%3B%0A%0A%20%20%20%20export%20let%20CustomDetail%20%3D%20decorators%28%0A%20%20%20%20%20%20transient%28%29%0A%20%20%20%20%20%20inject%28HttpClient%29%0A%20%20%20%20%29.on%28class%20%7B%0A%20%20%20%20%20%20constructor%28http%29%20%7B%0A%20%20%20%20%20%20%20%20this.http%20%3D%20http%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7Btransient%2C%20autoinject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BHttpClient%7D%20from%20%27aurelia-fetch-client%27%3B%0A%0A%20%20%20%20@transient%28%29%0A%20%20%20%20@autoinject%0A%20%20%20%20export%20class%20CustomerDetail%20%7B%0A%20%20%20%20%20%20constructor%28private%20http%3A%20HttpClient%29%20%7B%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Templating Basics"><code-listing heading="A Simple Template">
+</section>
+<section><h2>Templating Basics</h2><code-listing heading="A Simple Template">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%3EHello%20World%21%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
 <code-listing heading="Requiring Resources">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Crequire%20from%3D%27nav-bar%27%3E%3C/require%3E%0A%0A%20%20%20%20%20%20%3Cnav-bar%20router.bind%3D%22router%22%3E%3C/nav-bar%3E%0A%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22page-host%22%3E%0A%20%20%20%20%20%20%20%20%3Crouter-view%3E%3C/router-view%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-<au-alert type="info"heading="Invalid Table Structure When Dynamically Creating Tables"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Invalid Table Structure When Dynamically Creating Tables</h4><p>
 When the browser loads in the template it very helpfully validates the structure of the HTML, notices that you have an invalid tag inside your table definition, and very unhelpfully removes it for you before Aurelia even has a chance to examine your template.</p>
-</au-alert>
+</div>
 <p>Use of the <code>as-element</code> attribute ensures we have a valid HTML table structure at load time, yet we tell Aurelia to treat its contents as though it were a different tag.</p>
 <code-listing heading="Compose an existing object instance with a view.">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ctable%3E%0A%20%20%20%20%20%20%20%20%3Ctr%20repeat.for%3D%22r%20of%20%5B%27A%27%2C%27B%27%2C%27A%27%2C%27B%27%5D%22%20as-element%3D%22compose%22%20view%3D%27./template_%24%7Br%7D.html%27%3E%0A%20%20%20%20%20%20%3C/table%3E%0A%20%20%20%20%3Ctemplate%3E%0A%20%20</source-code>
@@ -129,8 +129,8 @@ When the browser loads in the template it very helpfully validates the structure
 <code-listing heading="Correct Select Code">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cselect%3E%0A%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22customer%20of%20customers%22%3E...%3C/option%3E%0A%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Databinding"><h3>bind, one-way, two-way &amp; one-time</h3>
+</section>
+<section><h2>Databinding</h2><h3>bind, one-way, two-way &amp; one-time</h3>
 <p>Use on any HTML attribute.</p>
 <ul>
 <li><code>.bind</code> - Uses the default binding. One-way binding for everything but form controls, which use two-way binding.</li>
@@ -141,18 +141,18 @@ When the browser loads in the template it very helpfully validates the structure
 <code-listing heading="Data Binding Examples">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20value.bind%3D%22firstName%22%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20value.two-way%3D%22lastName%22%3E%0A%0A%20%20%20%20%20%20%3Ca%20href.one-way%3D%22profileUrl%22%3EView%20Profile%3C/a%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 At the moment inheritance of bindables is not supported. For use cases where <code>class B extends A</code> and <code>B</code> is used as custom Element/Attribute <code>@bindable</code> properties cannot be defined only on <code>class A</code>. If inheritance is used, <code>@bindable</code> properties should be defined on the instantiated class.</p>
-</au-alert>
+</div>
 <h3>delegate, trigger</h3>
 <p>Use on any native or custom DOM event. (Do not include the &quot;on&quot; prefix in the event name.)</p>
 <ul>
 <li><code>.trigger</code> - Attaches an event handler directly to the element. When the event fires, the expression will be invoked.</li>
 <li><code>.delegate</code> - Attaches a single event handler to the document (or nearest shadow DOM boundary) which handles all events of the specified type, properly dispatching them back to their original targets for invocation of the associated expression.</li>
 </ul>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 The <code>$event</code> value can be passed as an argument to a <code>delegate</code> or <code>trigger</code> function call if you need to access the event object.</p>
-</au-alert>
+</div>
 <code-listing heading="Event Binding Examples">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cbutton%20click.trigger%3D%22save%28%29%22%3ESave%3C/button%3E%0A%20%20%20%20%20%20%3Cbutton%20click.delegate%3D%22save%28%24event%29%22%3ESave%3C/button%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -206,9 +206,9 @@ The <code>$event</code> value can be passed as an argument to a <code>delegate</
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%3Cinput%20type%3D%22radio%22%20name%3D%22tacos%22%20model.bind%3D%22null%22%20checked.bind%3D%22likesTacos%22%20/%3EUnanswered%3C/label%3E%0A%20%20%20%20%20%20%3Clabel%3E%3Cinput%20type%3D%22radio%22%20name%3D%22tacos%22%20model.bind%3D%22true%22%20checked.bind%3D%22likesTacos%22%20/%3EYes%3C/label%3E%0A%20%20%20%20%20%20%3Clabel%3E%3Cinput%20type%3D%22radio%22%20name%3D%22tacos%22%20model.bind%3D%22false%22%20checked.bind%3D%22likesTacos%22%20/%3ENo%3C/label%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
 <h3>Binding Checkboxes</h3>
-<au-alert type="warning"><p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 You cannot use a <code>click.delegate</code> on checkboxes if you want to attach a method to it. You need to use <code>change.delegate</code>.</p>
-</au-alert>
+</div>
 <code-listing heading="Checkboxes with an Array">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%20repeat.for%3D%22color%20of%20colors%22%3E%0A%20%20%20%20%20%20%20%20%3Cinput%20type%3D%22checkbox%22%20value.bind%3D%22color%22%20checked.bind%3D%22%24parent.favoriteColors%22%20/%3E%0A%20%20%20%20%20%20%20%20%24%7Bcolor%7D%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -222,14 +222,14 @@ You cannot use a <code>click.delegate</code> on checkboxes if you want to attach
 <code-listing heading="Binding innerHTML">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20innerhtml.bind%3D%22htmlProperty%20%7C%20sanitizeHTML%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20innerhtml%3D%22%24%7BhtmlProperty%20%7C%20sanitizeHTML%7D%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-<au-alert type="danger"><p>
+<div class="danger"><div class="icon"> <i></i> </div><p>
 Always use HTML sanitization. We provide a simple converter that can be used. You are encouraged to use a more complete HTML sanitizer such as 
 <a href="https://www.npmjs.com/package/sanitize-html" target="_blank">sanitize-html</a>
 .</p>
-</au-alert>
-<au-alert type="warning"><p>
+</div>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 Binding using the <code>innerhtml</code> attribute simply sets the element's <code>innerHTML</code> property.  The markup does not pass through Aurelia's templating system.  Binding expressions and require elements will not be evaluated.</p>
-</au-alert>
+</div>
 <code-listing heading="Binding textContent">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20textcontent.bind%3D%22stringProperty%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20textcontent%3D%22%24%7BstringProperty%7D%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -257,8 +257,8 @@ Binding using the <code>innerhtml</code> attribute simply sets the element's <co
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7BcomputedFrom%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20@computedFrom%28%27firstName%27%2C%20%27lastName%27%29%0A%20%20%20%20%20%20get%20fullName%28%29%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BcomputedFrom%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%3A%20string%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%3A%20string%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20@computedFrom%28%27firstName%27%2C%20%27lastName%27%29%0A%20%20%20%20%20%20get%20fullName%28%29%3A%20string%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Templating View Resources"><code-listing heading="Conditionally displays an HTML element.">
+</section>
+<section><h2>Templating View Resources</h2><code-listing heading="Conditionally displays an HTML element.">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20show.bind%3D%22isSaving%22%20class%3D%22spinner%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
 <code-listing heading="Conditionally add/remove an HTML element.">
@@ -284,9 +284,9 @@ Binding using the <code>innerhtml</code> attribute simply sets the element's <co
 <li><code>$even</code> - True if the item has an even numbered index.</li>
 <li><code>$odd</code> - True if the item has an odd numbered index.</li>
 </ul>
-<au-alert type="info"heading="Containerless Template Controllers"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Containerless Template Controllers</h4><p>
 The <code>if</code> and <code>repeat</code> attributes are usually placed on the HTML elements that they affect. However, you can also use a <code>template</code> tag to group a collection of elements that don't have a parent element and place the <code>if</code> or <code>repeat</code> on the <code>template</code> element instead.</p>
-</au-alert>
+</div>
 <code-listing heading="Dynamically render UI into the DOM based on data.">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%20repeat.for%3D%22item%20of%20items%22%3E%0A%20%20%20%20%20%20%3Ccompose%20model.bind%3D%22item%22%20view-model%3D%22widgets/%24%7Bitem.type%7D%22%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -296,8 +296,8 @@ The <code>if</code> and <code>repeat</code> attributes are usually placed on the
 <code-listing heading="Compose an existing object instance with a view.">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20repeat.for%3D%22item%20of%20items%22%3E%0A%20%20%20%20%20%20%20%20%3Ccompose%20view%3D%22my-view.html%22%20view-model.bind%3D%22item%22%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Routing"><code-listing heading="Basic Route Configuration">
+</section>
+<section><h2>Routing</h2><code-listing heading="Basic Route Configuration">
   <source-code lang="ES 2015/2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%2C%20router%29%20%7B%0A%20%20%20%20%20%20%20%20this.router%20%3D%20router%3B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%5B%27%27%2C%20%27home%27%5D%2C%20%20%20%20%20%20%20name%3A%20%27home%27%2C%20%20%20%20%20%20%20moduleId%3A%20%27home/index%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27users%27%2C%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20%27users%27%2C%20%20%20%20%20%20moduleId%3A%20%27users/index%27%2C%20%20%20nav%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27users/%3Aid/detail%27%2C%20name%3A%20%27userDetail%27%2C%20moduleId%3A%20%27users/detail%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27files*path%27%2C%20%20%20%20%20%20%20name%3A%20%27files%27%2C%20%20%20%20%20%20moduleId%3A%20%27files/index%27%2C%20%20%20href%3A%27%23files%27%2C%20%20%20nav%3A%20true%20%7D%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BRouterConfiguration%2C%20Router%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%3A%20RouterConfiguration%2C%20router%3A%20Router%29%3A%20void%20%7B%0A%20%20%20%20%20%20%20%20this.router%20%3D%20router%3B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%5B%27%27%2C%20%27home%27%5D%2C%20%20%20%20%20%20%20name%3A%20%27home%27%2C%20%20%20%20%20%20%20moduleId%3A%20%27home/index%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27users%27%2C%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20%27users%27%2C%20%20%20%20%20%20moduleId%3A%20%27users/index%27%2C%20%20%20nav%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27users/%3Aid/detail%27%2C%20name%3A%20%27userDetail%27%2C%20moduleId%3A%20%27users/detail%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27files*path%27%2C%20%20%20%20%20%20%20name%3A%20%27files%27%2C%20%20%20%20%20%20moduleId%3A%20%27files/index%27%2C%20%20%20href%3A%27%23files%27%2C%20%20%20nav%3A%20true%20%7D%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
@@ -326,10 +326,10 @@ The <code>if</code> and <code>repeat</code> attributes are usually placed on the
 <li><code>canDeactivate()</code> - Implement this hook if you want to control whether or not the router <em>can navigate away</em> from your view-model when moving to a new route. Return a boolean value, a promise for a boolean value, or a navigation command.</li>
 <li><code>deactivate()</code> - Implement this hook if you want to perform custom logic when your view-model is being navigated away from. You can optionally return a promise to tell the router to wait until after you finish your work.</li>
 </ul>
-<au-alert type="warning"heading="Root Screen Activation"><p>
+<div class="warning"><div class="icon"> <i></i> </div><h4>Root Screen Activation</h4><p>
 Unlike the mapped routes, the root's view-model only has access to the <code>activate()</code> hook.
 However this can also be used to implement logic for <em>attaching the component</em> by returning a promise for a boolean value.</p>
-</au-alert>
+</div>
 <p>The <code>params</code> object will have a property for each parameter of the route that was parsed, as well as a property for each query string value. <code>routeConfig</code> will be the original route configuration object that you set up. <code>routeConfig</code> will also have a new <code>navModel</code> property, which can be used to change the document title for data loaded by your view-model. For example:</p>
 <code-listing heading="Route Params and NavModel">
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7Bautoinject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BUserService%7D%20from%20%27./user-service%27%3B%0A%0A%20%20%20%20@inject%28UserService%29%0A%20%20%20%20export%20class%20UserEditScreen%20%7B%0A%20%20%20%20%20%20constructor%28userService%29%20%7B%0A%20%20%20%20%20%20%20%20this.userService%20%3D%20userService%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20activate%28params%2C%20routeConfig%29%20%7B%0A%20%20%20%20%20%20%20%20return%20this.userService.getUser%28params.id%29%0A%20%20%20%20%20%20%20%20%20%20.then%28user%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20routeConfig.navModel.setTitle%28user.name%29%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -352,22 +352,22 @@ However this can also be used to implement logic for <em>attaching the component
   <source-code lang="ES 2015/2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%29%20%7B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.options.pushState%20%3D%20true%3B%0A%20%20%20%20%20%20%20%20config.options.root%20%3D%20%27/%27%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%5B%27welcome%27%5D%2C%20%20%20%20name%3A%20%27welcome%27%2C%20%20%20%20%20moduleId%3A%20%27welcome%27%2C%20%20%20%20%20%20nav%3A%20true%2C%20title%3A%27Welcome%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27flickr%27%2C%20%20%20%20%20%20%20name%3A%20%27flickr%27%2C%20%20%20%20%20%20moduleId%3A%20%27flickr%27%2C%20%20%20%20%20%20%20nav%3A%20true%2C%20auth%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27child-router%27%2C%20name%3A%20%27childRouter%27%2C%20moduleId%3A%20%27child-router%27%2C%20nav%3A%20true%2C%20title%3A%27Child%20Router%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27%27%2C%20%20%20%20%20%20%20%20%20%20%20%20%20redirect%3A%20%27welcome%27%20%7D%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BRedirect%2C%20NavigationInstruction%2C%20RouterConfiguration%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%3A%20RouterConfiguration%29%3A%20void%20%7B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.options.pushState%20%3D%20true%3B%0A%20%20%20%20%20%20%20%20config.options.root%20%3D%20%27/%27%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%5B%27welcome%27%5D%2C%20%20%20%20name%3A%20%27welcome%27%2C%20%20%20%20%20moduleId%3A%20%27welcome%27%2C%20%20%20%20%20%20nav%3A%20true%2C%20title%3A%27Welcome%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27flickr%27%2C%20%20%20%20%20%20%20name%3A%20%27flickr%27%2C%20%20%20%20%20%20moduleId%3A%20%27flickr%27%2C%20%20%20%20%20%20%20nav%3A%20true%2C%20auth%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27child-router%27%2C%20name%3A%20%27childRouter%27%2C%20moduleId%3A%20%27child-router%27%2C%20nav%3A%20true%2C%20title%3A%27Child%20Router%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27%27%2C%20%20%20%20%20%20%20%20%20%20%20%20%20redirect%3A%20%27welcome%27%20%7D%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-<au-alert type="warning"><p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 PushState requires server-side support. Don't forget to configure your server appropriately.</p>
-</au-alert>
+</div>
 <h3>Reusing an existing VM</h3>
 <p>Since the VM's navigation life-cycle is called only once you may have problems recognizing that the user switched the route from <code>Product A</code> to <code>Product B</code> (see below).  To work around this issue implement the method <code>determineActivationStrategy</code> in your VM and return hints for the router about what you'd like to happen.</p>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 Additionally, you can add an <code>activationStrategy</code> property to your route config if the strategy is always the same and you don't want that to be in your view-model code. Available values are <code>replace</code> and <code>invoke-lifecycle</code>. Remember, &quot;lifecycle&quot; refers to the navigation lifecycle.</p>
-</au-alert>
+</div>
 <code-listing heading="Router VM Activation Control">
   <source-code lang="ES 2015/2016">%0A%20%20%20%20//app.js%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%29%20%7B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27product/a%27%2C%20%20%20%20moduleId%3A%20%27product%27%2C%20%20%20%20%20nav%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27product/b%27%2C%20%20%20%20moduleId%3A%20%27product%27%2C%20%20%20%20%20nav%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20//product.js%0A%0A%20%20%20%20import%20%7BactivationStrategy%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20export%20class%20Product%20%7B%0A%20%20%20%20%20%20determineActivationStrategy%28%29%7B%0A%20%20%20%20%20%20%20%20return%20activationStrategy.replace%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BRouterConfiguration%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20//app.ts%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20configureRouter%28config%3A%20RouterConfiguration%29%3A%20void%20%7B%0A%20%20%20%20%20%20%20%20config.title%20%3D%20%27Aurelia%27%3B%0A%20%20%20%20%20%20%20%20config.map%28%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27product/a%27%2C%20%20%20%20moduleId%3A%20%27product%27%2C%20%20%20%20%20nav%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20route%3A%20%27product/b%27%2C%20%20%20%20moduleId%3A%20%27product%27%2C%20%20%20%20%20nav%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20//product.ts%0A%0A%20%20%20%20import%20%7BactivationStrategy%7D%20from%20%27aurelia-router%27%3B%0A%0A%20%20%20%20export%20class%20Product%20%7B%0A%20%20%20%20%20%20determineActivationStrategy%28%29%3A%20string%20%7B%0A%20%20%20%20%20%20%20%20return%20activationStrategy.replace%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
 <h3>Rendering multiple ViewPorts</h3>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 If you don't name a <code>router-view</code>, it will be available under the name <code>'default'</code>.</p>
-</au-alert>
+</div>
 <code-listing heading="Multi-ViewPort View">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22page-host%22%3E%0A%20%20%20%20%20%20%20%20%3Crouter-view%20name%3D%22left%22%3E%3C/router-view%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22page-host%22%3E%0A%20%20%20%20%20%20%20%20%3Crouter-view%20name%3D%22right%22%3E%3C/router-view%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -385,8 +385,8 @@ If you don't name a <code>router-view</code>, it will be available under the nam
 <code-listing heading="Rendering an Anchor for a Route">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ca%20route-href%3D%22route%3A%20routeName%3B%20params.bind%3A%20%7B%20id%3A%20user.id%20%7D%22%3E%24%7Buser.name%7D%3C/a%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Custom Attributes"><code-listing heading="Simple Attribute Declaration">
+</section>
+<section><h2>Custom Attributes</h2><code-listing heading="Simple Attribute Declaration">
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7Binject%2C%20customAttribute%2C%20DOM%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20@customAttribute%28%27my-attribute%27%29%0A%20%20%20%20@inject%28DOM.Element%29%0A%20%20%20%20export%20class%20Show%20%7B%0A%20%20%20%20%20%20constructor%28element%29%20%7B%0A%20%20%20%20%20%20%20%20this.element%20%3D%20element%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20valueChanged%28newValue%2C%20oldValue%29%20%7B%0A%20%20%20%20%20%20%20%20...%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7BcustomAttribute%2C%20inject%2C%20decorators%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20let%20MyAttribute%20%3D%20decorators%28%0A%20%20%20%20%20%20customAttribute%28%27my-attribute%27%29%2C%0A%20%20%20%20%20%20inject%28DOM.Element%29%0A%20%20%20%20%29.on%28class%20%7B%0A%20%20%20%20%20%20constructor%28element%29%20%7B%0A%20%20%20%20%20%20%20%20this.element%20%3D%20element%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20valueChanged%28newValue%2C%20oldValue%29%20%7B%0A%20%20%20%20%20%20%20%20...%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7Binject%2C%20customAttribute%2C%20DOM%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20@customAttribute%28%27my-attribute%27%29%0A%20%20%20%20@inject%28DOM.Element%29%0A%20%20%20%20export%20class%20Show%20%7B%0A%20%20%20%20%20%20constructor%28private%20element%3A%20Element%29%20%7B%20%7D%0A%0A%20%20%20%20%20%20valueChanged%28newValue%2C%20oldValue%29%20%7B%0A%20%20%20%20%20%20%20%20...%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -421,8 +421,8 @@ If you don't name a <code>router-view</code>, it will be available under the nam
 <code-listing heading="Template Controller Attribute Use">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20naive-if.bind%3D%22an.expression%22%3E%3C/div%3E%0A%0A%20%20%20%20%20%20%3Ctemplate%20naive-if.bind%3D%22an.expression%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%3C/div%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%3E%3C/div%3E%0A%20%20%20%20%20%20%3C/template%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="9" version="1.0.0" heading="Custom Elements"><code-listing heading="Custom Element View-Model Declaration">
+</section>
+<section><h2>Custom Elements</h2><code-listing heading="Custom Element View-Model Declaration">
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7BcustomElement%2C%20bindable%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20@customElement%28%27say-hello%27%29%0A%20%20%20%20export%20class%20SayHello%20%7B%0A%20%20%20%20%20%20@bindable%20to%3B%0A%0A%20%20%20%20%20%20speak%28%29%7B%0A%20%20%20%20%20%20%20%20alert%28%60Hello%20%24%7Bthis.to%7D%21%60%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7BcustomElement%2C%20bindable%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20let%20SayHello%20%3D%20decorators%28%0A%20%20%20%20%20%20customElement%28%27say-hello%27%29%2C%0A%20%20%20%20%20%20bindable%28%27to%27%29%0A%20%20%20%20%29.on%28class%20%7B%0A%20%20%20%20%20%20speak%28%29%7B%0A%20%20%20%20%20%20%20%20alert%28%60Hello%20%24%7Bthis.to%7D%21%60%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BcustomElement%2C%20bindable%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20@customElement%28%27say-hello%27%29%0A%20%20%20%20export%20class%20SayHello%20%7B%0A%20%20%20%20%20%20@bindable%20to%3A%20string%3B%0A%0A%20%20%20%20%20%20speak%28%29%3A%20void%20%7B%0A%20%20%20%20%20%20%20%20alert%28%60Hello%20%24%7Bthis.to%7D%21%60%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -501,8 +501,8 @@ If you don't name a <code>router-view</code>, it will be available under the nam
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7Bdecorators%2C%20observable%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20let%20MyCustomViewModel%20%3D%20decorators%28%0A%20%20%20%20%20%20observable%28%7Bname%3A%27name%27%2C%20changeHandler%3A%20%27nameChanged%27%7D%29%0A%20%20%20%20%29.on%28class%20%7B%0A%20%20%20%20%20%20nameChanged%28newValue%2C%20oldValue%29%20%7B%0A%20%20%20%20%20%20%20%20//%20react%20to%20change%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7Bobservable%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20MyCustomViewModel%20%7B%0A%20%20%20%20%20%20@observable%28%7BchangeHandler%3A%20%27nameChanged%27%7D%29%20name%20%3D%20%27Hello%20world%27%3B%0A%20%20%20%20%20%20nameChanged%28newValue%2C%20oldValue%29%20%7B%0A%20%20%20%20%20%20%20%20//%20react%20to%20change%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="10" version="1.0.0" heading="The Event Aggregator"><p>If you include the <code>aurelia-event-aggregator</code> plugin using &quot;basicConfiguration&quot; or &quot;standardConfiguration&quot; then the singleton EventAggregator's API will be also present on the <code>Aurelia</code> object. You can also create additional instances of the EventAggregator, if needed, and &quot;merge&quot; them into any object. To do this, import <code>includeEventsIn</code> and invoke it with the object you wish to turn into an event aggregator. For example <code>includeEventsIn(myObject)</code>. Now my object has <code>publish</code> and <code>subscribe</code> methods and can be used in the same way as the global event aggregator, detailed below.</p>
+</section>
+<section><h2>The Event Aggregator</h2><p>If you include the <code>aurelia-event-aggregator</code> plugin using &quot;basicConfiguration&quot; or &quot;standardConfiguration&quot; then the singleton EventAggregator's API will be also present on the <code>Aurelia</code> object. You can also create additional instances of the EventAggregator, if needed, and &quot;merge&quot; them into any object. To do this, import <code>includeEventsIn</code> and invoke it with the object you wish to turn into an event aggregator. For example <code>includeEventsIn(myObject)</code>. Now my object has <code>publish</code> and <code>subscribe</code> methods and can be used in the same way as the global event aggregator, detailed below.</p>
 <code-listing heading="Publishing on a Channel">
   <source-code lang="ES 2016">%0A%20%20%20%20import%20%7Binject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BEventAggregator%7D%20from%20%27aurelia-event-aggregator%27%3B%0A%0A%20%20%20%20@inject%28EventAggregator%29%0A%20%20%20%20export%20class%20APublisher%20%7B%0A%20%20%20%20%20%20constructor%28eventAggregator%29%20%7B%0A%20%20%20%20%20%20%20%20this.eventAggregator%20%3D%20eventAggregator%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20publish%28%29%7B%0A%20%20%20%20%20%20%20%20var%20payload%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20this.eventAggregator.publish%28%27channel%20name%20here%27%2C%20payload%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="ES 2015">%0A%20%20%20%20import%20%7BEventAggregator%7D%20from%20%27aurelia-event-aggregator%27%3B%0A%0A%20%20%20%20export%20class%20APublisher%7B%0A%20%20%20%20%20%20static%20inject%28%29%20%7B%20return%20%5BEventAggregator%5D%3B%20%7D%0A%0A%20%20%20%20%20%20constructor%28eventAggregator%29%7B%0A%20%20%20%20%20%20%20%20this.eventAggregator%20%3D%20eventAggregator%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20publish%28%29%7B%0A%20%20%20%20%20%20%20%20var%20payload%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20this.eventAggregator.publish%28%27channel%20name%20here%27%2C%20payload%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -524,7 +524,7 @@ If you don't name a <code>router-view</code>, it will be available under the nam
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7Bautoinject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BEventAggregator%7D%20from%20%27aurelia-event-aggregator%27%3B%0A%20%20%20%20import%20%7BSomeMessage%7D%20from%20%27./some-message%27%3B%0A%0A%20%20%20%20@autoinject%0A%20%20%20%20export%20class%20ASubscriber%20%7B%0A%20%20%20%20%20%20constructor%28private%20eventAggregator%3A%20EventAggregator%29%20%7B%20%7D%0A%0A%20%20%20%20%20%20subscribe%28%29%3A%20void%20%7B%0A%20%20%20%20%20%20%20%20this.eventAggregator.subscribe%28SomeMessage%2C%20message%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20...%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
 </svg></rect></svg></svg></template>
-</au-doc-section>
+</section>
 
   </article>
 </section>

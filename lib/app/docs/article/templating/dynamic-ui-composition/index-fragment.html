@@ -5,11 +5,11 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>In this section, we are going to be learning how you can dynamically render components in your applications by utilizing Aurelia's dynamic composition functionality.</p>
+    <section><h2>Introduction</h2><p>In this section, we are going to be learning how you can dynamically render components in your applications by utilizing Aurelia's dynamic composition functionality.</p>
 <p>In many respects, dynamic composition closely resembles that of how Aurelia's routing works. The big exception, of course, is dynamic composition allows you to dynamically render views and view-models after the page has loaded.</p>
 <p>When using Aurelia's <code>&lt;compose&gt;</code> element, inside of the view-model being used, you have access to all of Aurelia's standard view lifecycle events, such as <code>attached</code>, as well as the other callback hooks.</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Basic Composition"><p>Using the <code>&lt;compose&gt;</code> element, we are going to be dynamically composing a view.</p>
+</section>
+<section><h2>Basic Composition</h2><p>Using the <code>&lt;compose&gt;</code> element, we are going to be dynamically composing a view.</p>
 <code-listing heading="hello-world.html">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ccompose%20view-model%3D%22./compose-me%22%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -21,8 +21,8 @@
 </code-listing>
 <p>Inside of our <code>hello-world.html</code> template, we are using the <code>&lt;compose&gt;</code> element and passing through a view-model (without file extension) to be rendered. The view-model is just a standard class, like you create elsewhere in an Aurelia application.</p>
 <p>Because Aurelia is a convention based framework, the <code>&lt;compose&gt;</code> element knows to use the default convention of loading the matching view for our view-model of the same name.</p>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Composing Without a View-Model"><p>If you're wanting to dynamically compose just a view template without specifying a view-model, all you need to do is omit the <code>view-model</code> property and supply a <code>view</code>. The result will be that the current view-model will be used as the binding context for our view, allowing you to create HTML partials that take the current properties and methods.</p>
+</section>
+<section><h2>Composing Without a View-Model</h2><p>If you're wanting to dynamically compose just a view template without specifying a view-model, all you need to do is omit the <code>view-model</code> property and supply a <code>view</code>. The result will be that the current view-model will be used as the binding context for our view, allowing you to create HTML partials that take the current properties and methods.</p>
 <code-listing heading="hello-world.html">
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ccompose%20view%3D%22./compose-me.html%22%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
@@ -30,8 +30,8 @@
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3EHello%20World%21%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
 <p>For the <code>view</code> property, we need to specify a file extension, unlike the view-model property, which does not have an extension. The above example will work the same way as our first example, except we're not supplying our own view-model, it's inheriting the binding context from where the <code>compose</code> element is used.</p>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Passing Through Data"><p>Using what we learned above, we can dynamically compose view-models and views and pass through additional data via the <code>model</code> property on the <code>&lt;compose&gt;</code> element.</p>
+</section>
+<section><h2>Passing Through Data</h2><p>Using what we learned above, we can dynamically compose view-models and views and pass through additional data via the <code>model</code> property on the <code>&lt;compose&gt;</code> element.</p>
 <p>We are going to be building an example which will dynamically render a view/view-model pair and accept an object of provided values.</p>
 <code-listing heading="hello-world${context.language.fileExtension}">
   <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20HelloWorld%20%7B%0A%20%20%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20this.data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20%27John%20Doe%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20company%3A%20%27Cool%20Co.%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20likes%3A%20%5B%27Javascript%27%2C%20%27fruit%27%2C%20%27jelly%27%5D%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -49,11 +49,11 @@
   <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3EHello%2C%20my%20name%20is%20%24%7Bdata.name%7D%20and%20my%20company%20is%20%24%7Bdata.company%7D.%3C/p%3E%0A%20%20%20%20%20%20%3Cp%3EMy%20likes%20include%3A%3C/p%3E%0A%20%20%20%20%20%20%3Col%3E%0A%20%20%20%20%20%20%20%20%3Cli%20repeat.for%3D%22like%20of%20data.likes%22%3E%24%7Blike%7D%3C/li%3E%0A%20%20%20%20%20%20%3C/ol%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
 <p>Notice how we are referencing values on our provided object, <code>name</code> and <code>company</code>, and then looping over an array of provided strings for <code>likes</code>.</p>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 While the full view lifecycle (created, bind, attached, detached, unbind) is support during dynamic composition, the full navigation lifecycle is not. Only the <code>activate</code> hook is enabled. I receives a single parameter which is the <code>model</code> and can optionally return a promise if executing an asynchronous task.
 </compose></compose></compose></compose></compose></p>
-</au-alert>
-</au-doc-section>
+</div>
+</section>
 
   </article>
 </section>

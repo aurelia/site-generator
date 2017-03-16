@@ -5,17 +5,17 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Most of the current major browsers limit the number of simultaneous connections per hostname to six. This means that while six requests are being processed, additional requests for assets on a host will be queued by the browser. In the image below, the Chrome F12 developer tools network tab shows the timing for assets required by the <code>welcome view</code> of the unbundled, JSPM-based skeleton-navigation application.</p>
+    <section><h2>Introduction</h2><p>Most of the current major browsers limit the number of simultaneous connections per hostname to six. This means that while six requests are being processed, additional requests for assets on a host will be queued by the browser. In the image below, the Chrome F12 developer tools network tab shows the timing for assets required by the <code>welcome view</code> of the unbundled, JSPM-based skeleton-navigation application.</p>
 <p><img src="img/unbundled-aurelia-application.jpg" alt="No of requests made by unbundled application" /></p>
 <p>As we can see, there are over 95 requests being made to load the first view. While the first few requests are being processed the others are waiting, ultimately taking almost 2.39s on a local machine.</p>
 <p>In the past, the most common browser limit has been 2 connections. This may have been sufficient in the beginning of the web when most of the content was delivered in a single page load. However, it can soon become the bottleneck when building rich client applications with frameworks like Aurelia and others.</p>
 <p>You may wonder: If this limit can have such a great impact on performance, then why don't browsers give us a higher limit? Most well-known browsers choose not to grant this wish in order to prevent the server from being overloaded by a small number of browsers. Such activity would be similar in nature to a DDOS attack.</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Bundling "><p>This connection limit will not cause slowness in our application if we can manage resources well enough to avoid it. When the page is first loaded, this is the initial request that returns HTML content. When the browser processes the HTML content, it spawns more requests to load resources like JS, CSS and images. It also executes JavaScript and sends AJAX requests to the server.</p>
+</section>
+<section><h2>Bundling </h2><p>This connection limit will not cause slowness in our application if we can manage resources well enough to avoid it. When the page is first loaded, this is the initial request that returns HTML content. When the browser processes the HTML content, it spawns more requests to load resources like JS, CSS and images. It also executes JavaScript and sends AJAX requests to the server.</p>
 <p>To make this process efficient, we need to compress the assets and make fewer (possibly less than 6) requests to load everything we need. Fortunately, static resources can be cached and only downloaded the first time. If they cause slowness, it happens on the first page load only and may be tolerable.</p>
 <p>Bundling along with minification are techniques that can also be used to improve load time. Bundling and minification improve load time by reducing the number of requests to the server as well as reducing the size of requested assets such as views, view-models and CSS.</p>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Bundling an Aurelia Webpack Application"><p>In the following example, we will use the <code>skeleton-navigation</code> as our app to bundle. If you don't have that set up. Follow 
+</section>
+<section><h2>Bundling an Aurelia Webpack Application</h2><p>In the following example, we will use the <code>skeleton-navigation</code> as our app to bundle. If you don't have that set up. Follow 
 <a href="https://github.com/aurelia/skeleton-navigation#running-the-app" target="_blank">these steps</a>
 .</p>
 <p>Now that we have our app running, let's try to build the preconfigured bundle. Webpack, as opposed to JSPM, is not a loader, which means it always creates bundles before loading a page is possible. By default there are two versions of bundles you can create: the development bundle and the production bundle.</p>
@@ -27,15 +27,15 @@
 </code></pre>
 <p>You can find the configuration for both of these bundles in the <code>webpack.config.js</code> file. We'll look into it in a bit.</p>
 <p>After the bundle is created, by default you'll find the output in the <code>dist</code> folder.</p>
-<au-alert type="warning"><p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 The <code>dist</code> folder is automatically deleted before a new bundle is built.</p>
-</au-alert>
+</div>
 <p>To start a simple web server and test either the development or production build execute:</p>
 <pre><code class="language-shell">npm run server:prod
 </code></pre>
 <p>After executing the command, you'll see a link which will run your bundled application.</p>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Entry Bundles"><p>The skeleton-navigation is configured to create 3 explicit entry bundles by default:</p>
+</section>
+<section><h2>Entry Bundles</h2><p>The skeleton-navigation is configured to create 3 explicit entry bundles by default:</p>
 <ul>
 <li><code>aurelia-bootstrap</code> - contains modules needed to be loaded first, such as polyfills and Aurelia's Platform Abstraction Layer</li>
 <li><code>aurelia</code> - contains all of the aurelia's modules</li>
@@ -56,8 +56,8 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <p>In the above example we created an explicit bundle called <code>vendor</code> that only contains the package: <code>moment</code>.</p>
 <p>Defining entry bundles is only useful when you want to be able to make use of client-server file caching, because it means that you can only update the bundles which contain the changes, instead of all of them.</p>
 <p>To make it easier to see whether it's necessary to update a certain bundle, the production bundles by default contain a hash in their filename.</p>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Code-Splitting: Chunks / Async Bundles"><p>By default, all of our application code is contained in the <code>app</code> entry bundle. If our application is small enough, we can keep using just that single bundle, however the number of bundles we would like to have should mostly depend on our application structure and the usage patterns of our app. For example, if our app was built in a modular fashion, such that it is a collection of child-app/sections, then a <code>common</code> bundle for third-party libraries and a <code>bundle per section</code> makes much more sense and performs better than a huge single bundle that needs to be loaded up front.</p>
+</section>
+<section><h2>Code-Splitting: Chunks / Async Bundles</h2><p>By default, all of our application code is contained in the <code>app</code> entry bundle. If our application is small enough, we can keep using just that single bundle, however the number of bundles we would like to have should mostly depend on our application structure and the usage patterns of our app. For example, if our app was built in a modular fashion, such that it is a collection of child-app/sections, then a <code>common</code> bundle for third-party libraries and a <code>bundle per section</code> makes much more sense and performs better than a huge single bundle that needs to be loaded up front.</p>
 <p>This is because such &quot;implicit bundles&quot; are loaded asynchronously, on demand.</p>
 <p>There are two ways to define code-splitting bundles:</p>
 <ul>
@@ -70,13 +70,13 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <code-listing heading="package.json">
   <source-code lang="JavaScript">%0A%20%20%20%20%22aurelia%22%3A%20%7B%0A%20%20%20%20%20%20%22build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22bundle%22%3A%20%22users%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22users%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 Note that <code>path</code> is relative to the <code>src</code> of our application, but can also be an external path, such as <code>bootstrap/css/bootstrap.css</code> or <code>aurelia-plugin/some-resource.html</code>. If no extension is specified, all of <code>.js</code>, <code>.ts</code> and <code>.html</code> are tried. The <code>path</code> property may also be an <code>Array</code> with a list of paths to be contained in a bundle.</p>
-</au-alert>
+</div>
 <p>Such a definition will create a Webpack split-point, meaning the bundle will only be loaded when it is needed (so-called &quot;lazy-loading&quot;).</p>
-<au-alert type="warning"><p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 It is imperative to remember that the code will not end-up in the bundle, or the bundle will end-up being loaded prematurely, if you statically <code>import</code> anything from the files specified for implicit bundling.</p>
-</au-alert>
+</div>
 <p>Webpack is intelligent enough to resolve any further dependencies that those files and modules depend on (regardless if they are JavaScript files, modules with their own <code>package.json</code> declarations or additional HTML or CSS resources). In our example, the <code>users</code> ViewModel also requires the <code>blur-image</code> Custom Attribute, and thus would also be contained within it the <code>users</code> bundle.</p>
 <p>When the bundler plugin analyzes the <code>users</code> file it will find <code>aurelia-framework</code> and <code>aurelia-fetch-client</code> as it's dependencies and include them in the bundle. But the bundler does not stop there. It will recursively find the dependencies of <code>aurelia-framework</code> and <code>aurelia-fetch-client</code> and will go on until there is nothing left. But since those dependencies are already in the <code>aurelia</code> entry bundle, it will not duplicate them in the <code>users</code> bundle, thanks to the <code>@easy-webpack/config-common-chunks-simple</code> present in the default configuration (more on that later on).</p>
 <h3>In-View Approach</h3>
@@ -86,12 +86,12 @@ It is imperative to remember that the code will not end-up in the bundle, or the
 </code-listing>
 <p>Both the <code>lazy</code> and the <code>bundle</code> attributes are optional.
 If you do not specify the bundle name, the chunk number will be used instead.</p>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Declaring Build Resources"><p>By default, all the production dependencies declared in the <code>package.json</code> that have a <code>main</code> entry file are considered as build resources.</p>
+</section>
+<section><h2>Declaring Build Resources</h2><p>By default, all the production dependencies declared in the <code>package.json</code> that have a <code>main</code> entry file are considered as build resources.</p>
 <p>In case Aurelia is supposed to load an external file or an external module that was not defined as a resource by any of its the dependencies, resources must also be specified manually.</p>
-<au-alert type="warning"><p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 Since the syntax is still relatively new, many Aurelia plugins do not declare their resources. If you are developing an Aurelia plugin, make sure you do this, so that your users do not have to. The <code>package.json</code> syntax is similar, with the one exception that resources are relative to the root directory of the plugin, as there is no <code>src</code> folder.</p>
-</au-alert>
+</div>
 <p>There might reasons not to declare those resources in all cases,for example when the plugin is to be partially consumed (e.g. only one Button element from a package containing multiple Aurelia elements).</p>
 <p>If we'd like to consume such external resources, we should declare them ourselves, for example:</p>
 <code-listing heading="package.json">
@@ -101,8 +101,8 @@ Since the syntax is still relatively new, many Aurelia plugins do not declare th
 <code-listing heading="package.json">
   <source-code lang="JavaScript">%0A%20%20%20%20%22aurelia%22%3A%20%7B%0A%20%20%20%20%20%20%22build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22aurelia-animator-css%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22bundle%22%3A%20%22animator%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20lets%20say%20we%20only%20use%20the%20checkbox%20from%20within%20subpage1%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20we%20want%20those%20to%20be%20bundled%20together%20in%20a%20bundle%20called%3A%20%22subpage1%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22aurelia-some-ui-plugin/checkbox%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22./items/subpage1%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22bundle%22%3A%20%22subpage1%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%22aurelia-some-ui-plugin/dropdown%22%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Chunking Code When It Is Not Loaded By Aurelia"><p>If you have code that you'd like to load asynchronously in your ${context.language.name} files, you can make use of the System loader compliant syntax to create split-points.
+</section>
+<section><h2>Chunking Code When It Is Not Loaded By Aurelia</h2><p>If you have code that you'd like to load asynchronously in your ${context.language.name} files, you can make use of the System loader compliant syntax to create split-points.
 Example use-cases for this are: conditionally loading foreign language support based on the user's selection or conditionally polyfilling certain features.</p>
 <p>Such code-splitting is used to polyfill fetch support in the <code>users</code> file of skeleton-navigation. Let's take a look at how it works:</p>
 <code-listing heading="users.js">
@@ -114,8 +114,8 @@ Example use-cases for this are: conditionally loading foreign language support b
 <code-listing heading="custom_typings/system.d.ts">
   <source-code lang="TypeScript">%0A%20%20%20%20declare%20module%20%27system%27%20%7B%0A%20%20%20%20%20%20import%20fetch%20%3D%20require%28%27isomorphic-fetch%27%29%3B%0A%20%20%20%20%20%20import%20*%20as%20Aurelia%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20*%20List%20your%20dynamically%20imported%20modules%20to%20get%20typing%20support%0A%20%20%20%20%20%20%20*/%0A%20%20%20%20%20%20interface%20System%20%7B%0A%20%20%20%20%20%20%20%20import%28name%3A%20string%29%3A%20Promise%3Cany%3E%3B%0A%20%20%20%20%20%20%20%20import%28name%3A%20%27aurelia-framework%27%29%3A%20Promise%3Ctypeof%20Aurelia%3E%3B%0A%20%20%20%20%20%20%20%20import%28name%3A%20%27isomorphic-fetch%27%29%3A%20Promise%3Ctypeof%20fetch%3E%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20global%20%7B%0A%20%20%20%20%20%20%20%20var%20System%3A%20System%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Duplicate Modules in Multiple Bundles"><p>By default, the <code>webpack.config.js</code> uses the <code>CommonsChunkPlugin</code> under the hood, to eliminate code duplication across bundles by placing common code in the <code>app</code> bundle. If you have additional custom entry bundles, or somehow misused or misconfigured them, you may end up with duplicated modules in multiple bundles.</p>
+</section>
+<section><h2>Duplicate Modules in Multiple Bundles</h2><p>By default, the <code>webpack.config.js</code> uses the <code>CommonsChunkPlugin</code> under the hood, to eliminate code duplication across bundles by placing common code in the <code>app</code> bundle. If you have additional custom entry bundles, or somehow misused or misconfigured them, you may end up with duplicated modules in multiple bundles.</p>
 <p>Creating multiple bundles requires us to be extra careful because multiple bundles may contain duplicate modules. Before explaining that, we need to understand how bundling works behind the scenes a bit. Let's consider the example modules <code>A</code> and <code>B</code> below:</p>
 <code-listing heading="a.js">
   <source-code lang="JavaScript">%0A%20%20%20%20import%20b%20from%20%27./b%27%3B%0A%20%20%20%20console.log%28%27Hi%2C%20I%20am%20module%20A%27%29%3B%0A%20%20</source-code>
@@ -127,8 +127,8 @@ Example use-cases for this are: conditionally loading foreign language support b
 <p>To have full control over how Webpack distributes and de-duplicates the modules in the chunks, please refer to 
 <a href="https://github.com/webpack/docs/wiki/optimization#multi-page-app" target="_blank">Webpack documentation</a>
  on the matter and replace the <code>@easy-webpack/config-common-chunks-simple</code> configuration with a custom one.</p>
-</au-doc-section>
-<au-doc-section uid="9" version="1.0.0" heading="Bundle Configuration and Easy Webpack"><p>Webpack is a very advanced piece technology, but it can be quite intimidating to beginners and hard to re-configure even for seasoned users. For this very reason, the skeleton-navigation example uses a package called 
+</section>
+<section><h2>Bundle Configuration and Easy Webpack</h2><p>Webpack is a very advanced piece technology, but it can be quite intimidating to beginners and hard to re-configure even for seasoned users. For this very reason, the skeleton-navigation example uses a package called 
 <a href="https://github.com/easy-webpack/core" target="_blank">Easy Webpack</a>
  that allows us to quickly stich together a number of configuration objects and supports presets. In more advanced use-cases, we can still override its configuration values, or replace the presets with custom configuration.</p>
 <p>Let's take a look at how a configuration file can be put together:</p>
@@ -140,10 +140,10 @@ Example use-cases for this are: conditionally loading foreign language support b
 <p>You can easily replace all the preset packages with your own configuration objects. Please refer to the 
 <a href="https://github.com/easy-webpack/core" target="_blank">Easy Webpack</a>
  documentation for more information about its capabilities.</p>
-</au-doc-section>
-<au-doc-section uid="10" version="1.0.0" heading="Conclusion"><p>In this article, you've learned both the why and how of bundling with Webpack. We've covered how to configure Webpack's configuration file for use with Aurelia and demonstrated several different scenarios for asynchonous loading of parts of your code. To bundle your own app, we recommend that you begin with the skeleton-navigation configuration file and customize it. You may have a small app that makes sense as a single bundle or a larger one that can be broken down into features. Each application is different, but Webpack is extremely flexible and should help you to create the optimal deployment for your unique scenarios.
+</section>
+<section><h2>Conclusion</h2><p>In this article, you've learned both the why and how of bundling with Webpack. We've covered how to configure Webpack's configuration file for use with Aurelia and demonstrated several different scenarios for asynchonous loading of parts of your code. To bundle your own app, we recommend that you begin with the skeleton-navigation configuration file and customize it. You may have a small app that makes sense as a single bundle or a larger one that can be broken down into features. Each application is different, but Webpack is extremely flexible and should help you to create the optimal deployment for your unique scenarios.
 </require></require></p>
-</au-doc-section>
+</section>
 
   </article>
 </section>

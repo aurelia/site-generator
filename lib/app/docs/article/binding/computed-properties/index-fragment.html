@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Introduction"><p>Sometimes it is desirable to return a dynamically computed value when accessing a property, or you may want to reflect the status of an internal variable without requiring the use of explicit method calls. In JavaScript, this can be accomplished with the use of a getter.</p>
+    <section><h2>Introduction</h2><p>Sometimes it is desirable to return a dynamically computed value when accessing a property, or you may want to reflect the status of an internal variable without requiring the use of explicit method calls. In JavaScript, this can be accomplished with the use of a getter.</p>
 <p>Here's an example <code>Person</code> class that exposes a <code>fullName</code> property that computes it's value using the <code>firstName</code> and <code>lastName</code> properties.</p>
 <code-listing heading="Computed Properties">
   <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20get%20fullName%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
@@ -21,7 +21,7 @@
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BcomputedFrom%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%3A%20string%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%3A%20string%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20@computedFrom%28%27firstName%27%2C%20%27lastName%27%29%0A%20%20%20%20%20%20get%20fullName%28%29%3A%20string%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
 <p><code>@computedFrom</code> tells the binding system which expressions to observe. When those expressions change, the binding system will re-evaluate the property (execute the getter). This eliminates the need for dirty checking and can improve performance. The <code>@computedFrom</code> parameters can be simple property names as shown above or more complex expressions like <code>@computedFrom('event.startDate', 'event.endDate')</code>.</p>
-</au-doc-section>
+</section>
 
   </article>
 </section>

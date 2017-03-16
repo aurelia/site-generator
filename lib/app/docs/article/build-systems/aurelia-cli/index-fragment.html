@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Machine Setup"><p>The CLI itself has a couple of prerequisites that you must install first:</p>
+    <section><h2>Machine Setup</h2><p>The CLI itself has a couple of prerequisites that you must install first:</p>
 <ul>
 <li>Install NodeJS version 4.x or above.
 <ul>
@@ -28,38 +28,38 @@
 <p>Once you have the prerequisites installed, you can install the Aurelia CLI itself. From the command line, use npm to install the CLI globally:</p>
 <pre><code>npm install aurelia-cli -g
 </code></pre>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 Always run commands from a Bash prompt. Depending on your environment, you may need to use <code>sudo</code> when executing npm global installs.</p>
-</au-alert>
-<au-alert type="warning"><p>
+</div>
+<div class="warning"><div class="icon"> <i></i> </div><p>
 While creating a new project doesn't require NPM 3, front-end development, in general, requires a flat-package structure, which is not available with NPM versions prior to 3. It is recommended that you update to NPM 3, which will be able to manage this structural requirement. You can check your NPM version with <code>npm -v</code>. If you need to update, run <code>npm install npm -g</code>.</p>
-</au-alert>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="Creating A New Aurelia Project"><p>To create a new project, you can run <code>au new</code>. You will be presented with a number of options. If you aren't sure what you want, you can select one of the defaults. Otherwise, you can create a custom project. Simply follow the prompts.</p>
+</div>
+</section>
+<section><h2>Creating A New Aurelia Project</h2><p>To create a new project, you can run <code>au new</code>. You will be presented with a number of options. If you aren't sure what you want, you can select one of the defaults. Otherwise, you can create a custom project. Simply follow the prompts.</p>
 <p>Once you've made your choice, the CLI will show you your selections and ask if you'd like to create the file structure. After that, you'll be asked if you would like to install your new project's dependencies.</p>
 <p>Once the dependencies are installed, your project is ready to go.</p>
 <h3>ASP.NET Core</h3>
 <p>If you would like to use ASP.NET Core, first begin by using Visual Studio to create your ASP.NET Core project. Select whatever options make the most sense based on your .NET project plans. After you have created the project, open a command line and change directory into your web project's project folder. This is the folder that contains the <code>.xproj</code> file. From within this folder, you can execute the following command <code>au new --here</code> which will setup Aurelia &quot;here&quot; inside this project folder. You will be prompted to choose the platform you want. Simply select &quot;ASP.NET Core&quot;. Follow the prompts for the rest of the process, just like above.</p>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 Since Aurelia-CLI should be in charge of building your client side code, make sure before running the <code>new</code> command from <strong>Aurelia-CLI</strong> you add <code>&lt;typescriptcompileblocked&gt;true</code> to your .xproj file inside the first <code>&lt;propertygroup&gt;</code> you find to stop Visual Studio from compiling the <code>.ts</code> files in your project. If you build your solution before doing this, Visual Studio will compile your <code>.ts</code> files breaking some of the <strong>Aurelia-CLI</strong> commands.</p>
-</au-alert>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="Running Your Aurelia App"><p>From inside your project folder, simply execute <code>au run</code>. This will build your app, creating all bundles in the process. It will start a minimal web server and serve your application. If you would like to develop, with auto-refresh of the browser, simply specify the <code>--watch</code> flag like this: <code>au run --watch</code>.</p>
+</div>
+</section>
+<section><h2>Running Your Aurelia App</h2><p>From inside your project folder, simply execute <code>au run</code>. This will build your app, creating all bundles in the process. It will start a minimal web server and serve your application. If you would like to develop, with auto-refresh of the browser, simply specify the <code>--watch</code> flag like this: <code>au run --watch</code>.</p>
 <h3>Environments</h3>
 <p>The CLI build system understands that you might run your code in different environments. By default, you are set up with three: <code>dev</code>, <code>stage</code> and <code>prod</code>. You can use the <code>--env</code> flag to specify what environment you want to run under. For example: <code>au run --env prod --watch</code>.</p>
-</au-doc-section>
-<au-doc-section uid="4" version="1.0.0" heading="Building Your App"><p>Aurelia CLI apps always run in bundled mode, even during development. To build your app, simply run <code>au build</code>. You can also specify an environment to build for. For example: <code>au build --env stage</code>.</p>
-</au-doc-section>
-<au-doc-section uid="5" version="1.0.0" heading="Deploying Your App"><p>Run the following build command:</p>
+</section>
+<section><h2>Building Your App</h2><p>Aurelia CLI apps always run in bundled mode, even during development. To build your app, simply run <code>au build</code>. You can also specify an environment to build for. For example: <code>au build --env stage</code>.</p>
+</section>
+<section><h2>Deploying Your App</h2><p>Run the following build command:</p>
 <pre><code>au build --env prod
 </code></pre>
 <p>Then copy the file <code>index.html</code> and the folder <code>/scripts</code>  to the main deployment folder on your server.</p>
-</au-doc-section>
-<au-doc-section uid="6" version="1.0.0" heading="Unit Testing"><p>If you selected a project setup that includes unit tests, you can run your tests with <code>au test</code>. If you would like to adopt a tdd-based workflow, writing code and tests with continual test evaluation, you can use the <code>--watch</code> flag. For example: <code>au test --watch</code>.</p>
-</au-doc-section>
-<au-doc-section uid="7" version="1.0.0" heading="Generators"><p>Executing <code>au generate resource</code> runs a generator to scaffold out typical Aurelia constructs. Options for <em>resource</em> are: element, attribute, value-converter, binding-behavior, task and generator. That's right...there's a generator generator so you can write your own. Ex. <code>au generate element</code></p>
-</au-doc-section>
-<au-doc-section uid="8" version="1.0.0" heading="Build Revisions"><p>To create builds with revision numbers, you must set <code>rev</code> to be <code>true</code> under the build options. This will cause a unique revision number to be added to the bundled files. For example:</p>
+</section>
+<section><h2>Unit Testing</h2><p>If you selected a project setup that includes unit tests, you can run your tests with <code>au test</code>. If you would like to adopt a tdd-based workflow, writing code and tests with continual test evaluation, you can use the <code>--watch</code> flag. For example: <code>au test --watch</code>.</p>
+</section>
+<section><h2>Generators</h2><p>Executing <code>au generate resource</code> runs a generator to scaffold out typical Aurelia constructs. Options for <em>resource</em> are: element, attribute, value-converter, binding-behavior, task and generator. That's right...there's a generator generator so you can write your own. Ex. <code>au generate element</code></p>
+</section>
+<section><h2>Build Revisions</h2><p>To create builds with revision numbers, you must set <code>rev</code> to be <code>true</code> under the build options. This will cause a unique revision number to be added to the bundled files. For example:</p>
 <pre><code class="language-javascript">&quot;options&quot;: {
   &quot;minify&quot;: &quot;stage &amp; prod&quot;,
   &quot;sourcemaps&quot;: &quot;dev &amp; stage&quot;,
@@ -87,8 +87,8 @@ Since Aurelia-CLI should be in charge of building your client side code, make su
   ]
 }
 </code></pre>
-</au-doc-section>
-<au-doc-section uid="9" version="1.0.0" heading="Bundling Your Project"><p>By default, the Aurelia CLI creates two bundles, an <code>app-bundle.js</code>, and a <code>vendor-bundle.js</code>. An example of the default <code>app-bundle.js</code> looks like this:</p>
+</section>
+<section><h2>Bundling Your Project</h2><p>By default, the Aurelia CLI creates two bundles, an <code>app-bundle.js</code>, and a <code>vendor-bundle.js</code>. An example of the default <code>app-bundle.js</code> looks like this:</p>
 <pre><code class="language-javascript">{
   &quot;name&quot;: &quot;app-bundle.js&quot;,
   &quot;source&quot;: [
@@ -120,11 +120,11 @@ Optionally, you can define an <code>exclude</code> list by setting the <code>sou
   ]
 }
 </code></pre>
-</au-doc-section>
-<au-doc-section uid="10" version="1.0.0" heading="Adding Client Libraries to Your Project"><p>If you need to add a 3rd party client library to your project, first <code>npm install</code> the library. After that, open the <code>aurelia_project/aurelia.json</code> file and scroll down to the <code>build.bundles</code> section. You'll need to add the library into one of your bundle's <code>dependencies</code> sections.</p>
-<au-alert type="info"><p>
+</section>
+<section><h2>Adding Client Libraries to Your Project</h2><p>If you need to add a 3rd party client library to your project, first <code>npm install</code> the library. After that, open the <code>aurelia_project/aurelia.json</code> file and scroll down to the <code>build.bundles</code> section. You'll need to add the library into one of your bundle's <code>dependencies</code> sections.</p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 One of the first new features you'll see soon is a command to help you with 3rd party module configuration. The command will inspect a previously npm-installed package, and make a configuration recommendation to you, automating the process if you desire.</p>
-</au-alert>
+</div>
 <p>Below is some guidance for how to manually configure several different common 3rd party library scenarios:</p>
 <h3>A Single-File Module</h3>
 <p>If the library you have installed is a single CommonJS or AMD file, you can add an entry similar to the following to the dependencies of your bundle:</p>
@@ -149,9 +149,9 @@ One of the first new features you'll see soon is a command to help you with 3rd 
 <li><code>path</code> - This is a path to the folder where the package's source is located. This path is relative to your application's <code>src</code> folder.</li>
 <li><code>main</code> - This is the main module (entry point) of the package, relative to the <code>path</code>. You should not include the file extension. <code>.js</code> will be appended automatically.</li>
 </ul>
-<au-alert type="info"heading="Environment-Specific Dependencies"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Environment-Specific Dependencies</h4><p>
 We've also shown how to use the <code>env</code> setting on a dependency. This can be used on any dependency in the bundle to indicate what environment builds the dependency should be included in. By default, dependencies are included in all builds. The example above shows how to include the library only in builds targeting the &quot;dev&quot; environment. You can also specify multiple environments like <code>dev &amp; stage</code>.</p>
-</au-alert>
+</div>
 <h3>A Legacy Library</h3>
 <p>Libraries that predate module systems can be a pain because they often rely on global scripts which must be loaded before the library. These libraries also add their own global variables. An example of one such library is 
 <a href="http://getbootstrap.com/css/" target="_blank">bootstrap</a>
@@ -182,9 +182,9 @@ We've also shown how to use the <code>env</code> setting on a dependency. This c
   }
 </code></pre>
 <p>Now, the font files will be copied to the <code>bootstrap/fonts</code> folder when building the application.</p>
-<au-alert type="info"heading="Setup for copying files"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Setup for copying files</h4><p>
 The <code>copyFiles</code> works as a 'from':'to' setup, where 'from' is the location of the file you want to copy, and 'to' is the destination folder. Both paths are relative to project folder. The sintax is:</p>
-</au-alert>
+</div>
 <pre><code>&quot;bundles&quot;: [ ... ], 
 &quot;copyFiles&quot;: {
   FILE_YOU_WANT_TO_COPY_BASED_ON_PROJECT_FOLDER: DESTINATION_FOLDER_BASED_ON_PROJECT_FOLDER
@@ -193,9 +193,9 @@ The <code>copyFiles</code> works as a 'from':'to' setup, where 'from' is the loc
 <blockquote>
 <p>If you run the application providing the <code>--watch</code> flag, the files will be recopied when changed.</p>
 </blockquote>
-<au-alert type="info"><p>
+<div class="info"><div class="icon"> <i></i> </div><p>
 Remember that CSS bundled in this way is bundled as a text resource designed to be required in your view. To load the Bootstrap css file in a view, use <code>&lt;require from=&quot;bootstrap/css/bootstrap.css&quot;&gt;&lt;/require&gt;</code>. Notice that the module name derives from combining the <code>name</code> property with the resource.</p>
-</au-alert>
+</div>
 <h3>A Very Stubborn Legacy Library</h3>
 <p>Sometimes you can't get a library to work with the module loading system. That's ok. You can still include it in the bundle, using traditional concatenation techniques. In fact, this is how the CLI bundles up the loader and promise polyfills. These items don't go into the <code>dependencies</code> section but instead go into the <code>prepend</code> section. This is because they aren't module dependencies. They also aren't relative to the <code>src</code>, but relative to the project folder. Using the <code>prepend</code> section causes the scripts to be prepended to the beginning of the bundle, using normal script concatenation techniques. Here's a full vendor bundle example, showing this and the rest of the techniques listed above.</p>
 <code-listing heading="A Sample Bundle">
@@ -222,8 +222,8 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
 <p>And this is an example of loading a <code>@scope/packagename</code> plugin during app startup:</p>
 <pre><code>aurelia.use.standardConfiguration().plugin('@scope/packagename');
 </code></pre>
-</au-doc-section>
-<au-doc-section uid="11" version="1.0.0" heading="Configuring the Loader"><p>You can configure the loader by adding a <code>config</code> key to <code>build.loader</code> with the options you want to add. For instance, if you want to increase the timeout for requirejs, you would do this:</p>
+</section>
+<section><h2>Configuring the Loader</h2><p>You can configure the loader by adding a <code>config</code> key to <code>build.loader</code> with the options you want to add. For instance, if you want to increase the timeout for requirejs, you would do this:</p>
 <pre><code>&quot;build&quot;: {
     &quot;loader&quot;: {
         &quot;type&quot;: &quot;require&quot;,
@@ -235,8 +235,8 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
     }
 }
 </code></pre>
-</au-doc-section>
-<au-doc-section uid="12" version="1.0.0" heading="Styling your Application"><p>There are many ways to style components in Aurelia. The CLI sets up your project to only process styles inside your application's <code>src</code> folder. Those styles can then be imported into a view using Aurelia's <code>require</code> element.</p>
+</section>
+<section><h2>Styling your Application</h2><p>There are many ways to style components in Aurelia. The CLI sets up your project to only process styles inside your application's <code>src</code> folder. Those styles can then be imported into a view using Aurelia's <code>require</code> element.</p>
 <ul>
 <li>If you aren't using any CSS preprocessor, you write css and then simply require it in the view like this:</li>
 </ul>
@@ -257,10 +257,10 @@ your style file is transpiled into a module that encodes the resulting <code>css
 </code-listing>
 <p>Bear in mind that you can always configure things any way you want by modifying the tasks in the <code>aurelia_project/tasks</code> folder.
 For styling purposes, you can modify the <code>process-css.js</code> file.</p>
-</au-doc-section>
-<au-doc-section uid="13" version="1.0.0" heading="What if I forget this stuff?"><p>If you need your memory refreshed as to what the available options are, at any time you can execute <code>au help</code>. If you aren't sure what version of the CLI you are running, you can run <code>au -v</code>;</p>
-</au-doc-section>
-<au-doc-section uid="14" version="1.0.0" heading="Troubleshooting"><p><em><strong>I updated aurelia-cli and now executing <code>au run</code> returns <code>&quot;Invalid Command: run&quot;</code></strong></em></p>
+</section>
+<section><h2>What if I forget this stuff?</h2><p>If you need your memory refreshed as to what the available options are, at any time you can execute <code>au help</code>. If you aren't sure what version of the CLI you are running, you can run <code>au -v</code>;</p>
+</section>
+<section><h2>Troubleshooting</h2><p><em><strong>I updated aurelia-cli and now executing <code>au run</code> returns <code>&quot;Invalid Command: run&quot;</code></strong></em></p>
 <p>There appears to be an ongoing issue with npm's cache that can affect the upgrade of the aurelia-cli. Clearing the npm-cache appears to resolve the issue.
 Steps:</p>
 <ul>
@@ -268,10 +268,10 @@ Steps:</p>
 <li>delete the contents under c:/Users/NAME/AppData/Roaming/npm-cache</li>
 <li><code>npm install aurelia-cli -g</code></li>
 </ul>
-</au-doc-section>
-<au-doc-section uid="15" version="1.0.0" heading="Updating A Single Library"><p>To update a single library use the command <code>npm install library-name</code> where library-name is the library that you wish to update.</p>
-</au-doc-section>
-<au-doc-section uid="16" version="1.0.0" heading="Updating Multiple Libraries"><ul>
+</section>
+<section><h2>Updating A Single Library</h2><p>To update a single library use the command <code>npm install library-name</code> where library-name is the library that you wish to update.</p>
+</section>
+<section><h2>Updating Multiple Libraries</h2><ul>
 <li>Add the following section to the project's package.json file</li>
 </ul>
 <pre><code>&quot;scripts&quot;: {
@@ -284,7 +284,7 @@ Steps:</p>
 <li>Use the command <code>npm run au-update</code> to update all of the libraries in the au-update list above.
 </propertygroup></typescriptcompileblocked></li>
 </ul>
-</au-doc-section>
+</section>
 
   </article>
 </section>

@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <au-doc-section uid="1" version="1.0.0" heading="Options"><p>When building front-end applications, it's often necessary to leverage HTTP services to acquire data or persist state. There are many ways to accomplish this. You could use an advanced data library that implements object-relational mapping, an opinionated restful client or just a simple HTTP library. All these options are provided by the global web community and all of them can be used in an Aurelia application.</p>
+    <section><h2>Options</h2><p>When building front-end applications, it's often necessary to leverage HTTP services to acquire data or persist state. There are many ways to accomplish this. You could use an advanced data library that implements object-relational mapping, an opinionated restful client or just a simple HTTP library. All these options are provided by the global web community and all of them can be used in an Aurelia application.</p>
 <p>That said, the Aurelia team felt the need to provide a simple solution out of the box. We wanted our community to have a directly supported option while still keeping Aurelia open so that our own community could innovate or leverage any other library developed elsewhere.</p>
 <p>Along these lines, the Aurelia project provides two options:</p>
 <ul>
@@ -13,17 +13,17 @@
 <li><code>aurelia-fetch-client</code> - A more forward-looking HttpClient based on the Fetch specification. It supports all HTTP verbs and integrates with Service Workers, including Request/Response caching.</li>
 </ul>
 <p>How should you choose between these two options? We recommend using <code>aurelia-fetch-client</code> if possible. It is based on the Fetch specification which will be the preferred way of handling all AJAX going forward. However, if you need request cancellation or download progress, the Fetch spec does not currently support these features. While these improvements to the spec are being considered for the future, it isn't available at present. So, if you need these capabilities, you may need to use <code>aurelia-http-client</code> instead.</p>
-</au-doc-section>
-<au-doc-section uid="2" version="1.0.0" heading="aurelia-fetch-client"><p>As previously stated, the <code>aurelia-fetch-client</code> library aims to embrace and expose the new 
+</section>
+<section><h2>aurelia-fetch-client</h2><p>As previously stated, the <code>aurelia-fetch-client</code> library aims to embrace and expose the new 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API</a>
 , while providing features important in web applications: default configuration of request parameters, interceptors and centralized request tracking. The main method, <code>HttpClient#fetch()</code>, has the same signature as <code>window.fetch()</code>. The difference is that our <code>HttpClient</code> will apply default configuration values, execute any registered interceptors and track the number of active requests.</p>
-<au-alert type="info"heading="Learn About The Fetch Spec"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Learn About The Fetch Spec</h4><p>
 If you are looking for some information on the Fetch API specification, we recommend that you start with the 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">MDN documentation</a>
 . You may also find 
 <a href="http://jakearchibald.com/2015/thats-so-fetch/" target="_blank">Jake Archibald</a>
  useful.</p>
-</au-alert>
+</div>
 <h3>Bring Your Own Polyfill</h3>
 <p>This library relies on the Fetch API, which is not yet supported by all popular browsers. <em>This library does not include a polyfill for Fetch.</em> If you need to support 
 <a href="http://caniuse.com/#feat=fetch" target="_blank">browsers that have not implemented Fetch</a>
@@ -35,9 +35,9 @@ If you are looking for some information on the Fetch API specification, we recom
   <source-code lang="ES 2015/2016">%0A%20%20%20%20import%20%27fetch%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%29%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
   <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BAurelia%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%27fetch%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%3A%20Aurelia%29%3A%20void%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28%28%29%20%3D%3E%20aurelia.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
 </code-listing>
-<au-alert type="info"heading="Encapsulate HttpClient Use"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>Encapsulate HttpClient Use</h4><p>
 Generally, we recommend that you don't litter your application code with usage of the HttpClient. Instead, we reccommend that you create one or more service classes that encapsulate all HTTP access behind a friendly, application-specific API. If you do this, we also recommend that you import the <code>fetch</code> polyfill inside these service modules rather than in your application's main module. This helps to preserve the encapsulation.</p>
-</au-alert>
+</div>
 <h3>Basic Use</h3>
 <p>Data requests are accomplished by calling the <code>fetch</code> method on an instance of <code>HttpClient</code>. By default, <code>fetch</code> makes <code>GET</code> requests. All calls to <code>fetch</code> return a <code>Promise</code> which will resolve to a <code>Response</code> object. Using this <code>Response</code> object, you can easily parse content, read headers and inspect status codes. See the Fetch API spec for more information.</p>
 <p>Below is a simple sample demonstrating a basic <code>GET</code> request to a JSON file, including parsing of the response content and writing data values out to the console.</p>
@@ -104,8 +104,8 @@ Generally, we recommend that you don't litter your application code with usage o
  provides its own default values, so if a Request is created before invoking <code>HttpClient#fetch</code> (eg, the <code>HttpClient#fetch(request)</code> signature is used instead of the <code>HttpClient#fetch(url, params)</code> signature), there is no way for the client to know which default values to merge into the Request. The base URL and headers can be merged, but currently no other defaults will be applied in this case.</li>
 </ul>
 <p>If your application has requirements that don't fit within these limitations, then you may want to look into using <code>aurelia-http-client</code> instead.</p>
-</au-doc-section>
-<au-doc-section uid="3" version="1.0.0" heading="aurelia-http-client"><p>In addition to <code>aurelia-fetch-client</code>, Aurelia includes a basic <code>HttpClient</code> to provide a comfortable interface to the browser's <code>XMLHttpRequest</code> object. Like <code>aurelia-fetch-client</code>, <code>aurelia-http-client</code> is not included in the modules that Aurelia's bootstrapper installs, since it's completely optional and many apps may choose to use a different strategy for data retrieval. So, if you want to use it, first you must install it with your preferred package manager.</p>
+</section>
+<section><h2>aurelia-http-client</h2><p>In addition to <code>aurelia-fetch-client</code>, Aurelia includes a basic <code>HttpClient</code> to provide a comfortable interface to the browser's <code>XMLHttpRequest</code> object. Like <code>aurelia-fetch-client</code>, <code>aurelia-http-client</code> is not included in the modules that Aurelia's bootstrapper installs, since it's completely optional and many apps may choose to use a different strategy for data retrieval. So, if you want to use it, first you must install it with your preferred package manager.</p>
 <h3>Basic Use</h3>
 <p>Once installed, you can use it like this:</p>
 <code-listing heading="GET JSON with Basic HTTP">
@@ -128,9 +128,9 @@ Generally, we recommend that you don't litter your application code with usage o
 <li><code>reviver</code> - A function used to transform the raw <code>response</code> content.</li>
 <li><code>requestMessage</code> - A reference to the original request message.</li>
 </ul>
-<au-alert type="info"heading="JSON By Default"><p>
+<div class="info"><div class="icon"> <i></i> </div><h4>JSON By Default</h4><p>
 By default, the <code>HttpClient</code> assumes you are expecting a JSON responseType.</p>
-</au-alert>
+</div>
 <h3>Configuration</h3>
 <p>You can use <code>configure</code> to access a fluent api for configuring all requests sent by the client. You can also use <code>createRequest</code> to custom configure individual requests. Here's an example of configuration:</p>
 <code-listing heading="Configuring Basic HTTP">
@@ -146,7 +146,7 @@ By default, the <code>HttpClient</code> assumes you are expecting a JSON respons
   <source-code lang="ES 2015/ES 2016/TypeScript">%0A%20%20%20%20let%20client%20%3D%20new%20HttpClient%28%29%3B%0A%20%20%20%20client.configure%28x%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20x.withInterceptor%28%7B%0A%20%20%20%20%20%20%20%20%20%20request%28message%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20message%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20requestError%28error%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20throw%20error%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20response%28message%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20message%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%0A%20%20%20%20%20%20%20%20%20%20responseError%28error%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20throw%20error%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%7D%29%3B%0A%20%20</source-code>
 </code-listing>
 <p>All interceptors used with a client form a chain. The return value of an intercept method is passed on as the argument to the next. Interceptors are called in the order they were added. See the <code>aurelia-fetch-client</code> interceptor documentation for more information on interceptors.</p>
-</au-doc-section>
+</section>
 
   </article>
 </section>
