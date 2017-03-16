@@ -1,6 +1,9 @@
-export interface DocItem {
+export interface Location {
   name: string;
   dest: string;
+}
+
+export interface DocItem extends Location {
   parent?: ToCItem;
   items?: ToCItem[];
 }
@@ -26,7 +29,14 @@ export class Configuration {
   
   public activePersona: Persona = this.availablePersonas[0];
 
+  public discuss: Location;
+  public blog: Location;
+  public home: Location;
+
   constructor() {
+    this.home = this.config.home;
+    this.blog = this.config.blog;
+    this.discuss = this.config.discuss;
     this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
     this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article', showPersonas: true };
  

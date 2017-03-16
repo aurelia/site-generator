@@ -4,6 +4,9 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {ShowMenu, HideMenu, ActivateScreen, ActivateTab} from './messages/shell';
 import {ArticleScreen} from './screens/article-screen';
 import {APIScreen} from './screens/api-screen';
+import {HomeScreen} from './screens/home-screen';
+import {DiscussScreen} from './screens/discuss-screen';
+import {BlogScreen} from './screens/blog-screen';
 import {Configuration} from './configuration';
 
 @autoinject
@@ -24,9 +27,11 @@ export class Router {
     
     if (url.indexOf('discuss') !== -1) {
       this.ea.publish(new ActivateTab('discuss'));
+      this.ea.publish(new ActivateScreen(this.container.get(DiscussScreen).withItem(this.config.discuss)));
       this.ea.publish(new HideMenu());
     } else if (url.indexOf('blog') !== -1) {
       this.ea.publish(new ActivateTab('blog'));
+      this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
       this.ea.publish(new HideMenu());
     } else if (url.indexOf('api') !== -1) {
       let matchedAPI = this.config.findApiItem(url);
@@ -53,6 +58,7 @@ export class Router {
 
   navigateHome() {
     this.ea.publish(new ActivateTab('home'));
+    this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem(this.config.home)));
     this.ea.publish(new HideMenu());
   }
 }
