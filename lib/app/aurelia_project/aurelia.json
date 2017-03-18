@@ -95,6 +95,7 @@
           "aurelia-loader",
           "aurelia-loader-default",
           "aurelia-logging",
+          "aurelia-logging-console",
           "aurelia-metadata",
           "aurelia-pal",
           "aurelia-pal-browser",
@@ -114,12 +115,6 @@
             "main": "aurelia-fetch-client",
             "path": "../node_modules/aurelia-fetch-client/dist/amd",
             "resources": []
-          },
-          {
-            "name": "aurelia-logging-console",
-            "main": "aurelia-logging-console",
-            "path": "../node_modules/aurelia-logging-console/dist/amd",
-            "env": "dev"
           }
         ]
       }
