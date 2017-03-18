@@ -8,7 +8,10 @@ export function configure(aurelia: Aurelia) {
     .history()
     .globalResources([
       './resources/side-bar',
-      './resources/screen-activator'
+      './resources/screen-activator',
+      './resources/search-trigger',
+      './resources/search-panel',
+      './resources/account-indicator'
     ]);
 
   if (environment.debug) {

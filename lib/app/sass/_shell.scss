@@ -10,6 +10,7 @@ html {
 html, body {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 header.app-header {
@@ -21,8 +22,47 @@ header.app-header {
   background-color: $panel-color;
   box-shadow: -20px 0 14px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.1);
 
-  svg {
+  svg.aurelia-logo {
     margin-left: 10px;
+  }
+
+  search-trigger {
+    margin-left: auto;
+    fill: $primary-text-color;
+    float: right;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+    
+    svg {
+      position: relative;
+      top: 4px;
+      cursor: pointer;
+    }
+  }
+
+  account-indicator {
+    float: right;
+    height: 100%;
+    margin: 0 16px;
+    color: $primary-text-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a.login {
+      font-size: 20px;
+      display: block;
+      color: $primary-color;
+
+      svg {
+        fill: $primary-color;
+        position: relative;
+        top: 4px;
+      }
+    }
   }
 }
 

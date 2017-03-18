@@ -231,7 +231,8 @@ html {
 
 html, body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  overflow: hidden; }
 
 header.app-header {
   position: absolute;
@@ -241,8 +242,37 @@ header.app-header {
   height: 60px;
   background-color: #f4f4f4;
   box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
-  header.app-header svg {
+  header.app-header svg.aurelia-logo {
     margin-left: 10px; }
+  header.app-header search-trigger {
+    margin-left: auto;
+    fill: #646464;
+    float: right;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px; }
+    header.app-header search-trigger svg {
+      position: relative;
+      top: 4px;
+      cursor: pointer; }
+  header.app-header account-indicator {
+    float: right;
+    height: 100%;
+    margin: 0 16px;
+    color: #646464;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    header.app-header account-indicator a.login {
+      font-size: 20px;
+      display: block;
+      color: #6d50a2; }
+      header.app-header account-indicator a.login svg {
+        fill: #6d50a2;
+        position: relative;
+        top: 4px; }
 
 nav {
   position: absolute;
@@ -407,7 +437,7 @@ section.article-group section {
         line-height: 1.2;
         font-size: 16px;
         margin: 0;
-        color: #777;
+        color: #646464;
         padding-bottom: 8px; }
       section.article-group section > ul > li .spacer {
         height: 28px; }
@@ -509,5 +539,16 @@ section.api {
       margin-bottom: 16px; }
       .markdown section ul li {
         display: list-item; }
+
+search-panel {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  width: 24rem;
+  background-color: #f4f4f4;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+  transition: all .2s;
+  transform: translateX(100%); }
 
 /*# sourceMappingURL=aurelia-docs.css.map */
