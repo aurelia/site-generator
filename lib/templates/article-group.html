@@ -1,15 +1,31 @@
-<section class="article">
+<section class="article-group">
   <header>
     <h1>{{name}}</h1>
+    <h2>{{description}}</h2>
   </header>
 
-  <article>
+  <section>
     <ul>
       {{#each items}}
       <li>
-        <a href="{{links.static}}"><strong>{{name}}</strong></a> - {{description}}
+        <header>
+          <h3>{{name}}</h3>
+          {{#if author.url}}
+            <h4>by <a href="{{author.url}}" target="_blank">{{author.name}}</a></h4>
+          {{else}}
+            <h4>Article Collection</h4>
+          {{/if}}
+        </header>
+        <article>
+          {{description}}
+        </article>
+        <div class="spacer"></div>
+        <div class="actions">
+          <a href="{{links.static}}">Read</a>
+          <a>Edit</a>
+        </div>
       </li>
       {{/each}}
     </ul>
-  </article>
+  </section>
 </section>

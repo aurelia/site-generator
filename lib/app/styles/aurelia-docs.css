@@ -350,9 +350,9 @@ side-bar {
         overflow: hidden;
         text-overflow: ellipsis; }
 
-section.article {
+section.article, section.article-group {
   margin-left: 275px; }
-  section.article header h1 {
+  section.article header h1, section.article-group header h1 {
     text-align: center;
     letter-spacing: .15rem;
     color: white;
@@ -361,14 +361,72 @@ section.article {
     font-weight: bold;
     padding: 16px 0 16px 0;
     background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%); }
-  section.article header h2 {
+  section.article header h2, section.article-group header h2 {
     font-size: 14px;
     line-height: 16px;
     padding: 16px;
     background: #f4f4f4;
     box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
-  section.article article {
-    padding: 16px; }
+
+section.article article {
+  padding: 16px; }
+
+section.article-group section {
+  padding: 16px; }
+  section.article-group section > ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around; }
+    section.article-group section > ul > li {
+      margin: 16px;
+      width: 300px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      border: 1px solid #dadada;
+      overflow: hidden;
+      max-height: 100%;
+      position: relative;
+      border-radius: 4px; }
+      section.article-group section > ul > li header {
+        background-color: #f7f7f7;
+        text-align: center;
+        border-bottom: 1px solid #dadada; }
+        section.article-group section > ul > li header h3 {
+          color: #6d50a2;
+          font-size: 2em;
+          padding: 4px 4px 2px 4px; }
+        section.article-group section > ul > li header h4 {
+          font-size: 1em;
+          color: #ed2b88;
+          padding: 4px; }
+          section.article-group section > ul > li header h4 a {
+            text-decoration: none;
+            color: inherit; }
+      section.article-group section > ul > li article {
+        background-color: #fff;
+        padding: 16px;
+        line-height: 1.2;
+        font-size: 16px;
+        margin: 0;
+        color: #777;
+        padding-bottom: 8px; }
+      section.article-group section > ul > li .spacer {
+        height: 28px; }
+      section.article-group section > ul > li .actions {
+        display: flex;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        border-top: 1px solid #dadada; }
+        section.article-group section > ul > li .actions a {
+          width: 50%;
+          text-align: center;
+          text-decoration: none;
+          color: inherit;
+          color: #6d50a2;
+          padding: 4px; }
+        section.article-group section > ul > li .actions a:first-child {
+          border-right: 1px solid #dadada; }
 
 section.api {
   margin-left: 275px; }

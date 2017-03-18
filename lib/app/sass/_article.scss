@@ -1,4 +1,4 @@
-section.article {
+section.article, section.article-group {
   margin-left: $sidebar-width;
 
   header {
@@ -10,7 +10,7 @@ section.article {
       font-size: 42px;
       font-weight: bold;
       padding: 16px 0 16px 0;
-      background: linear-gradient(135deg, rgba(109,80,162,1) 0%, $accent-color 100%);
+      background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
     }
 
     h2 {
@@ -21,8 +21,92 @@ section.article {
       box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
   }
+}
 
+section.article {
   article {
     padding: 16px;
+  }
+}
+
+section.article-group {
+  section {
+    padding: 16px;
+
+    >ul {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+
+      >li {
+        margin: 16px;
+        width: 300px;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+        border: 1px solid #dadada;
+        overflow: hidden;
+        max-height: 100%;
+        position: relative;
+        border-radius: 4px;
+
+        header {
+          background-color: #f7f7f7;
+          text-align: center;
+          border-bottom: 1px solid #dadada;
+
+          h3 {
+            color: $primary-color;
+            font-size: 2em;
+            padding: 4px 4px 2px 4px;
+          }
+
+          h4 {
+            font-size: 1em;
+            color: $accent-color;
+            padding: 4px;
+
+            a {
+              text-decoration: none;
+              color: inherit;
+            }
+          }
+        }
+
+        article {
+          background-color: #fff;
+          padding: 16px;
+          line-height: 1.2;
+          font-size: 16px;
+          margin: 0;
+          color: #777;
+          padding-bottom: 8px;
+        }
+
+        .spacer {
+          height: 28px;
+        }
+
+        .actions {
+          display: flex;
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          right: 0px;
+          border-top: 1px solid #dadada;
+
+          a {
+            width: 50%;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            color: $primary-color;
+            padding: 4px;
+          }
+
+          a:first-child {
+            border-right: 1px solid #dadada;
+          }
+        }
+      }
+    }
   }
 }
