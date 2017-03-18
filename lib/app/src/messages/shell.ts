@@ -14,5 +14,5 @@ export class ShowMenu {
 
 export class HideMenu {}
 
-export class ToggleSearch {}
+export class ShowSearch {}
 export class HideSearch {}

@@ -1,6 +1,6 @@
 search-panel {
   position: absolute;
-  top: $header-height;
+  top: 0;
   right: 0;
   bottom: 0;
   width: $search-width;
@@ -8,4 +8,51 @@ search-panel {
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 1px 8px 0 rgba(0,0,0,.12);
   transition: all .2s;
   transform: translateX(100%);
+
+  header {
+    background: $primary-color;
+    box-shadow: -2px 0 40px 0 rgba(0,0,0,.1), -2px 2px 4px 0 rgba(0,0,0,.15), inset 0 -7px 40px 0 rgba(0,0,0,.1), inset 0 -3px 3px 0 rgba(0,0,0,.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: $header-height;
+    max-height: $header-height;
+
+    svg {
+      fill: $panel-color;
+      margin: 12px;
+    }
+
+    input {
+      font-size: 24px;
+      color: #FFF;
+      align-self: center;
+      background: 0 0;
+      border: none;
+      box-sizing: border-box;
+      flex: 1;
+      letter-spacing: 1pt;
+      line-height: 40px;
+      margin: 6px;
+      max-height: 40px;
+      outline: 0;
+
+      &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+          color: #967FB7;
+      }
+      &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #967FB7;
+        opacity: 1;
+      }
+      &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #967FB7;
+        opacity:  1;
+      }
+      &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #967FB7;
+      }
+    }
+  }
 }
+
+

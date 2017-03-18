@@ -38,7 +38,7 @@ header.app-header {
     
     svg {
       position: relative;
-      top: 4px;
+      top: 2px;
       cursor: pointer;
     }
   }
@@ -57,10 +57,14 @@ header.app-header {
       display: block;
       color: $primary-color;
 
+      span {
+        font-size: 20px;
+        position: relative;
+        top: -4px;
+      }
+
       svg {
         fill: $primary-color;
-        position: relative;
-        top: 4px;
       }
     }
   }
