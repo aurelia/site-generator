@@ -1,6 +1,7 @@
 import {Aurelia} from 'aurelia-framework'
 import environment from './environment';
 import {App} from './app';
+import {SearchEngine} from './backend/search-engine';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -19,7 +20,11 @@ export function configure(aurelia: Aurelia) {
   }
   
   aurelia.start().then(() => {
-    let app = <App>aurelia.container.get(App);
+    let container = aurelia.container;
+    let searchEngine = <SearchEngine>container.get(SearchEngine);
+    let app = <App>container.get(App);
+
+    searchEngine.getIndexes(); //pre-load the search index as soon as possible, but do not block
     aurelia.enhance(app, 'app-host').then(() => app.activate());
   });
 }

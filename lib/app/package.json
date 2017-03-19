@@ -12,6 +12,7 @@
     "aurelia-bootstrapper": "^2.1.0",
     "aurelia-fetch-client": "^1.1.1",
     "bluebird": "^3.4.1",
+    "lunr": "^1.0.0",
     "requirejs": "^2.3.2",
     "text": "github:requirejs/text#latest"
   },

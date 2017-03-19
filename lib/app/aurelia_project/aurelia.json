@@ -120,6 +120,10 @@
             "main": "aurelia-logging-console",
             "path": "../node_modules/aurelia-logging-console/dist/amd",
             "env": "dev"
+          },
+          {
+            "name": "lunr",
+            "path": "../node_modules/lunr/lunr"
           }
         ]
       }

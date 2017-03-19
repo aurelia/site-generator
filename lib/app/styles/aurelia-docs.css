@@ -563,6 +563,8 @@ search-panel {
     search-panel header svg {
       fill: #f4f4f4;
       margin: 12px; }
+    search-panel header .close {
+      cursor: pointer; }
     search-panel header input {
       font-size: 24px;
       color: #FFF;
