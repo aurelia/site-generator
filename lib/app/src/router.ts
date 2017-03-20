@@ -22,8 +22,8 @@ export class Router {
   }
 
   loadUrl(url: string) {
-    let fragment = window.location.hash.substring(1)
-    url = trimStart('/', trimEnd('/', url))
+    let fragment = window.location.hash.substring(1) || '';
+    url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
     console.log(url, fragment);
     
