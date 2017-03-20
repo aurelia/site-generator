@@ -551,7 +551,9 @@ search-panel {
   background-color: #f4f4f4;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
   transition: all .2s;
-  transform: translateX(100%); }
+  transform: translateX(100%);
+  display: flex;
+  flex-direction: column; }
   search-panel header {
     background: #6d50a2;
     box-shadow: -2px 0 40px 0 rgba(0, 0, 0, 0.1), -2px 2px 4px 0 rgba(0, 0, 0, 0.15), inset 0 -7px 40px 0 rgba(0, 0, 0, 0.1), inset 0 -3px 3px 0 rgba(0, 0, 0, 0.05);
@@ -592,5 +594,7 @@ search-panel {
       search-panel header input:-ms-input-placeholder {
         /* Internet Explorer 10-11 */
         color: #967FB7; }
+  search-panel article {
+    overflow-y: auto; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */

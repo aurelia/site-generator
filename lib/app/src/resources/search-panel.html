@@ -31,7 +31,7 @@
           <li repeat.for="item of searchResults.articleResults">
             <a class="aandg" href.bind="item.href">
               <h4>${item.sectionName}</h4>
-              <span><b>from:</b> <i>${item.name}</i></span>
+              <span><b>from:</b> <i>${item.articleName}</i></span>
             </a>
           </li>
         </ul>
@@ -42,10 +42,10 @@
         <ul>
           <li repeat.for="item of searchResults.apiResults">
             <a href.bind="item.href">
-              <h4>${item.name}</h4>
-              <span><b>${item.kind}</b></span>
+              <h4>${item.apiName}</h4>
+              <span><b>${item.apiKind}</b></span>
               <span if.bind="item.ownerName"><b>of ${item.ownerName}</b> </span>
-              <span><b>From:</b> <i>${item.userName}-${item.productName}</i></span>
+              <span><b>From:</b> <i>${item.libraryName}</i></span>
             </a>
           </li>
         </ul>

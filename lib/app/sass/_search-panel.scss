@@ -8,6 +8,8 @@ search-panel {
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 1px 8px 0 rgba(0,0,0,.12);
   transition: all .2s;
   transform: translateX(100%);
+  display: flex;
+  flex-direction: column;
 
   header {
     background: $primary-color;
@@ -56,6 +58,10 @@ search-panel {
         color: #967FB7;
       }
     }
+  }
+
+  article {
+    overflow-y: auto;
   }
 }
 

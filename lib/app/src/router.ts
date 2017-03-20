@@ -21,9 +21,11 @@ export class Router {
     });
   }
 
-  loadUrl(url: string) { 
-    url = trimStart('/', trimEnd('/', url));
-    console.log(url);
+  loadUrl(url: string) {
+    let fragment = window.location.hash.substring(1)
+    url = trimStart('/', trimEnd('/', url))
+
+    console.log(url, fragment);
     
     if (url.indexOf('discuss') !== -1) {
       this.ea.publish(new ActivateTab('discuss'));
@@ -37,7 +39,7 @@ export class Router {
       let matchedAPI = this.config.findApiItem(url);
       if (matchedAPI) {
         this.ea.publish(new ActivateTab('api'));
-        this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI)));
+        this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, fragment)));
         this.ea.publish(new ShowMenu(matchedAPI));
       } else {
         this.navigateHome();
@@ -46,7 +48,7 @@ export class Router {
       let matchedToCItem = this.config.findToCItem(url);
       if (matchedToCItem) {
         this.ea.publish(new ActivateTab('article'));
-        this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem)));
+        this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem, fragment)));
         this.ea.publish(new ShowMenu(matchedToCItem));
       } else {
         this.navigateHome();
@@ -81,4 +83,18 @@ function trimEnd(character: string, string: string) {
   }
 
   return string.substr(0, startIndex + 1);
+}
+
+function getHashParams() {
+  var hashParams = {};
+  var e,
+      a = /\+/g,  // Regex for replacing addition symbol with a space
+      r = /([^&;=]+)=?([^&;]*)/g,
+      d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+      q = window.location.hash.substring(1);
+
+  while (e = r.exec(q))
+      hashParams[d(e[1])] = d(e[2]);
+
+  return hashParams;
 }

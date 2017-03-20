@@ -49,7 +49,7 @@ export class SearchEngine {
         }),
         apiIndex: lunr(function() {
           this.ref('id');
-          this.field('name', { boost: 10 });
+          this.field('apiName', { boost: 10 });
           this.field('ownerName', { boost: 7 });
         })
       };
@@ -67,9 +67,9 @@ export class SearchEngine {
         indexes.apiIndex.add(x);
 
         if (x.ownerKind) {
-          x.href = x.apiHref + '#/' + x.ownerKind.toLowerCase() + '/' + x.ownerName;
+          x.href = x.apiHref + '#/' + x.ownerKind.toLowerCase() + '/' + x.ownerName + '/' + x.apiKind.toLowerCase() + '/' + x.apiName;
         } else {
-          x.href = x.apiHref + '#/' + x.kind.toLowerCase() + '/' + x.name;
+          x.href = x.apiHref + '#/' + x.apiKind.toLowerCase() + '/' + x.apiName;
         }
       });
 
