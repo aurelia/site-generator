@@ -224,7 +224,9 @@ textarea {
 
 html {
   box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif; }
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  letter-spacing: .4px; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
@@ -329,7 +331,7 @@ side-bar {
   top: 60px;
   left: 60px;
   bottom: 0;
-  width: 275px;
+  width: 325px;
   background-color: #f4f4f4;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 8px 8px 0 rgba(0, 0, 0, 0.12);
   transition: all .2s;
@@ -383,7 +385,7 @@ side-bar {
         text-overflow: ellipsis; }
 
 section.article, section.article-group {
-  margin-left: 275px; }
+  margin-left: 325px; }
   section.article header h1, section.article-group header h1 {
     text-align: center;
     letter-spacing: .15rem;
@@ -461,7 +463,7 @@ section.article-group section {
           border-right: 1px solid #dadada; }
 
 section.api {
-  margin-left: 275px; }
+  margin-left: 325px; }
   section.api header {
     background: #6d50a2;
     background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%);
@@ -547,8 +549,8 @@ search-panel {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 24rem;
-  background-color: #f4f4f4;
+  width: 425px;
+  background: #fff;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
   transition: all .2s;
   transform: translateX(100%);
@@ -594,7 +596,64 @@ search-panel {
       search-panel header input:-ms-input-placeholder {
         /* Internet Explorer 10-11 */
         color: #967FB7; }
-  search-panel article {
+  search-panel article.search-results {
     overflow-y: auto; }
+    search-panel article.search-results .search-empty, search-panel article.search-results .search-no-results {
+      background: #f4f4f4;
+      color: #646464;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      text-align: center;
+      padding: 30px 0;
+      margin: 20px; }
+      search-panel article.search-results .search-empty h4, search-panel article.search-results .search-no-results h4 {
+        margin: -30px 0 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #6d50a2;
+        color: #fff;
+        border-radius: 4px 4px 0 0; }
+      search-panel article.search-results .search-empty h5, search-panel article.search-results .search-no-results h5 {
+        text-align: left;
+        margin: 25px 0 15px;
+        padding: 4px 25px;
+        color: #6d50a2;
+        font-weight: 400;
+        background: rgba(248, 248, 248, 0.8);
+        box-shadow: 0 -1px 0 0 #D1D1D1, 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
+      search-panel article.search-results .search-empty p, search-panel article.search-results .search-no-results p {
+        margin: 0 25px 30px; }
+      search-panel article.search-results .search-empty ul, search-panel article.search-results .search-no-results ul {
+        text-align: left;
+        font-weight: 200; }
+        search-panel article.search-results .search-empty ul li, search-panel article.search-results .search-no-results ul li {
+          list-style: disc;
+          margin-left: 50px;
+          line-height: 1.5em; }
+    search-panel article.search-results h3 {
+      font-size: 18px;
+      color: #fff;
+      padding: 4px 20px 4px;
+      margin: 0;
+      background: #6d50a2;
+      box-shadow: 0 -1px 0 0 #6d50a2, 0 1px 3px 0 rgba(0, 0, 0, 0.2), inset 0 3px 3px 0 rgba(255, 255, 255, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.1); }
+    search-panel article.search-results ul li a {
+      border-bottom: 1px solid #EDEDED;
+      padding: 10px 25px;
+      display: block;
+      cursor: pointer;
+      text-decoration: none; }
+      search-panel article.search-results ul li a:hover {
+        background-color: #f4f4f4; }
+      search-panel article.search-results ul li a h4 {
+        color: #4F769D;
+        font-size: 18px; }
+      search-panel article.search-results ul li a span {
+        color: #646464;
+        font-size: 14px; }
+        search-panel article.search-results ul li a span b {
+          font-weight: bold; }
+        search-panel article.search-results ul li a span i {
+          font-style: italic; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */
