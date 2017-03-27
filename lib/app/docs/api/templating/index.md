@@ -1577,9 +1577,10 @@ element container.
   * `target?:any` - No description available.
 
 
-* `customAttribute(name: string, defaultBindingMode?: number): any` - Decorator: Indicates that the decorated class is a custom attribute.
+* `customAttribute(name: string, defaultBindingMode?: number, aliases?: string): any` - Decorator: Indicates that the decorated class is a custom attribute.
   * `name:string` - The name of the custom attribute.
-  * `defaultBindingMode?:number` - The default binding mode to use when the attribute is bound wtih .bind.
+  * `defaultBindingMode?:number` - The default binding mode to use when the attribute is bound with .bind.
+  * `aliases?:string` - The array of aliases to associate to the custom attribute.
 
 
 

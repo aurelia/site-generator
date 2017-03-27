@@ -1,0 +1,51 @@
+<section class="article-group-root">
+  <div class="carousel slide">
+    <div class="carousel-inner" role="listbox">
+      {{#each featured}}
+        <div class="carousel-item">
+          <h2>{{name}}</h2>
+          <p>{{description}}</p>
+          <a href="{{links.static}}">Read</a>
+        </div>
+      {{/each}}
+    </div>
+
+    <a class="carousel-control-prev" role="button">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" role="button">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div>
+    {{#each groups}}
+      <div class="group-item">
+        <h2>{{name}}</h2>
+
+        <ul>
+          {{#each items}}
+          <li>
+            <header>
+              <h3>{{name}}</h3>
+              {{#if author.url}}
+                <h4>by <a href="{{author.url}}" target="_blank">{{author.name}}</a></h4>
+              {{else}}
+                <h4>Article Collection</h4>
+              {{/if}}
+            </header>
+            <article>
+              {{description}}
+            </article>
+            <div class="spacer"></div>
+            <div class="actions">
+              <a href="{{links.static}}">Read</a>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/each}}
+  </div>
+</section>

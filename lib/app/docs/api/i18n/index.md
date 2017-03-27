@@ -346,6 +346,10 @@ No description available.
   * `newValue?:any` - No description available
 
 
+* `configureAliases(aliases?: any): any` - 
+  * `aliases?:any` - No description available
+
+
 
 ### TParamsCustomAttribute
 
@@ -360,6 +364,10 @@ No description available.
 
 
 * `valueChanged(): any` - 
+
+
+* `configureAliases(aliases?: any): any` - 
+  * `aliases?:any` - No description available
 
 
 

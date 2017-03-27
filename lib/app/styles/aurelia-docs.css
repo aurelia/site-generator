@@ -462,6 +462,39 @@ section.article-group section {
         section.article-group section > ul > li .actions a:first-child {
           border-right: 1px solid #dadada; }
 
+section.article-group-root {
+  margin-left: 325px; }
+  section.article-group-root .group-item h2 {
+    color: #EC2685;
+    font-size: 24px;
+    line-height: 1.225;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding-bottom: .3em;
+    margin-bottom: 16px; }
+  section.article-group-root .carousel {
+    margin-bottom: 24px; }
+    section.article-group-root .carousel .carousel-inner {
+      position: relative;
+      width: 100%;
+      overflow: hidden; }
+      section.article-group-root .carousel .carousel-inner .carousel-item {
+        background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%);
+        transition: transform .6s ease-in-out;
+        backface-visibility: hidden;
+        position: relative;
+        display: none;
+        padding: 48px;
+        color: #fff; }
+        section.article-group-root .carousel .carousel-inner .carousel-item h2 {
+          font-size: 48px;
+          text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7); }
+        section.article-group-root .carousel .carousel-inner .carousel-item p {
+          margin: 16px 0;
+          font-size: 22px;
+          line-height: 24px; }
+      section.article-group-root .carousel .carousel-inner .carousel-item:first-child {
+        display: block; }
+
 section.api {
   margin-left: 325px; }
   section.api header {

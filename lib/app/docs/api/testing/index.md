@@ -79,8 +79,8 @@ No description available.
 #### Methods
 
 
-* `withResources(resources: ): ComponentTester` - 
-  * `resources:` - No description available
+* `withResources(resources?: ): ComponentTester` - 
+  * `resources?:` - No description available
 
 
 

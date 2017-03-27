@@ -1580,10 +1580,11 @@ element container.</p>
 </ul>
 </li>
 <li>
-<p><code>customAttribute(name: string, defaultBindingMode?: number): any</code> - Decorator: Indicates that the decorated class is a custom attribute.</p>
+<p><code>customAttribute(name: string, defaultBindingMode?: number, aliases?: string): any</code> - Decorator: Indicates that the decorated class is a custom attribute.</p>
 <ul>
 <li><code>name:string</code> - The name of the custom attribute.</li>
-<li><code>defaultBindingMode?:number</code> - The default binding mode to use when the attribute is bound wtih .bind.</li>
+<li><code>defaultBindingMode?:number</code> - The default binding mode to use when the attribute is bound with .bind.</li>
+<li><code>aliases?:string</code> - The array of aliases to associate to the custom attribute.</li>
 </ul>
 </li>
 <li>
