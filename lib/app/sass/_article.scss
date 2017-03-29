@@ -116,7 +116,6 @@ section.article-group-root {
     h2 {
       color: #EC2685;
       font-size: 24px;
-      border-bottom: 1px solid rgba(0,0,0,.12);
       padding-bottom: .3em;
       margin-bottom: 16px;
     }
@@ -139,16 +138,15 @@ section.article-group-root {
           background-color: #f7f7f7;
           text-align: center;
           border-bottom: 1px solid #dadada;
-          height: 106px;
 
           h3 {
             color: $primary-color;
-            font-size: 2em;
+            font-size: 26px;
             padding: 4px 4px 2px 4px;
           }
 
           h4 {
-            font-size: 1em;
+            font-size: 18px;
             color: $accent-color;
             padding: 4px;
 
@@ -161,9 +159,6 @@ section.article-group-root {
 
         article {
           background-color: #fff;
-          position: absolute;
-          top: 106px;
-          bottom: 28px; 
           padding: 16px;
           line-height: 1.2;
           font-size: 16px;
@@ -223,6 +218,15 @@ section.article-group-root {
           margin: 16px 0;
           font-size: 22px;
           line-height: 24px;
+        }
+
+        a {
+          text-decoration: none;
+          color: $white;
+          border: 1px solid $white;
+          border-radius: 4px;
+          padding: 6px;
+          float: right;
         }
       }
     }
