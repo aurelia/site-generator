@@ -74,12 +74,8 @@
 <li>You cannot dynamically generate <code>slot</code> elements inside a component's view.</li>
 </ul>
 <p>For example, the following would fail because the slot cannot be dynamic, however <code>show.bind</code> would be okay as the slot is generated but show hides it using css. Using template parts would be another alternative or applying <code>if.bind</code> to the content inside the slot.</p>
-<code-listing heading="The Composed Visual Tree">
-  <template>
-    <div if.bind="something">
-      <slot></slot>
-    </div>
-  </template>
+<code-listing heading="Invalid Slot Usage">
+  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20if.bind%3D%22something%22%3E%0A%20%20%20%20%20%20%20%20%3Cslot%3E%3C/slot%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
 </code-listing>
 </section>
 

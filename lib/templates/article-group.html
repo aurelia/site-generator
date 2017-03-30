@@ -7,22 +7,21 @@
   <section>
     <ul>
       {{#each items}}
-      <li>
-        <header>
-          <h3>{{name}}</h3>
-          {{#if author.url}}
-            <h4>by <a href="{{author.url}}" target="_blank">{{author.name}}</a></h4>
-          {{else}}
-            <h4>Article Collection</h4>
-          {{/if}}
-        </header>
-        <article>
-          {{description}}
-        </article>
-        <div class="spacer"></div>
-        <div class="actions">
-          <a href="{{links.static}}">Read</a>
-        </div>
+      <li class="article-card">
+        <a href="{{links.static}}">
+          <header>
+            <h3>{{name}}</h3>
+            {{#if author.url}}
+              <h4>by {{author.name}}</h4>
+            {{else}}
+              <h4>Article Collection</h4>
+            {{/if}}
+          </header>
+          <article>
+            {{description}}
+          </article>
+          <div class="spacer"></div>
+        </a>
       </li>
       {{/each}}
     </ul>
