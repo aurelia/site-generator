@@ -9,6 +9,7 @@ export function configure(aurelia: Aurelia) {
     .history()
     .globalResources([
       './resources/side-bar',
+      './resources/side-bar-view.html',
       './resources/screen-activator',
       './resources/search-trigger',
       './resources/search-panel',

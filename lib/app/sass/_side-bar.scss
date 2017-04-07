@@ -8,72 +8,89 @@ side-bar {
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.12);
   transition: all .2s;
   transform: translateX(-100%);
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 
-  .nav-button {
-    background: #dfdfe1;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
-    position: relative;
-    line-height: 36px;
-    font-size: 18px;
-
-    .arrow {
-      position: absolute;
-      left: 8px;
-      top: 9px;
-      fill: #70509D;
-    }
-
-    a {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      color: #70509D;
-    }
+  .slide-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    backface-visibility: hidden;
   }
 
-  .nav-button.personas {
-    .arrow {
-      position: absolute;
-      right: 16px;
-      left: auto;
-    }
+  side-bar-view {
+    width: $sidebar-width;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    
+    .nav-button {
+      background: #dfdfe1;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+      position: relative;
+      line-height: 36px;
+      font-size: 18px;
 
-    a {
-      padding-left: 16px;
-      text-align: left;
-    }
-  }
-
-  ul {
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    li {
-      line-height: 44px;
-      color: #777;
-      border-bottom: 1px solid #ccc;
-      cursor: pointer;
-      transition: all .1s;
-
-      &:hover {
-        background: rgba(255,255,255,.5);
-      }
-
-      &.active {
-        background: #ffffff;
-        color: $accent-color;
+      .arrow {
+        position: absolute;
+        left: 8px;
+        top: 9px;
+        fill: #70509D;
       }
 
       a {
-        display: block;
+        display: inline-block;
         width: 100%;
-        padding: 0 0 0 1rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        text-align: center;
+        text-decoration: none;
+        color: #70509D;
+      }
+    }
+
+    .nav-button.personas {
+      .arrow {
+        position: absolute;
+        right: 16px;
+        left: auto;
+      }
+
+      a {
+        padding-left: 16px;
+        text-align: left;
+      }
+    }
+
+    ul {
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      li {
+        line-height: 44px;
+        color: #777;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+        transition: all .1s;
+
+        &:hover {
+          background: rgba(255,255,255,.5);
+        }
+
+        &.active {
+          background: #ffffff;
+          color: $accent-color;
+        }
+
+        a {
+          display: block;
+          width: 100%;
+          padding: 0 0 0 1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
     }
   }
