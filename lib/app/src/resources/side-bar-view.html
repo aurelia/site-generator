@@ -1,5 +1,5 @@
-<template bindable="sidebar">
-  <div class="nav-button personas" if.bind="sidebar.activeItem.showPersonas">
+<template bindable="menu">
+  <div class="nav-button personas" if.bind="menu.activeItem.showPersonas">
     <a>
       <svg class="arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
         <g id="Filled_Icons">
@@ -9,12 +9,12 @@
             c0.145,0,0.283-0.063,0.378-0.173L23.878,7.04c0.087-0.101,0.13-0.231,0.121-0.364C23.989,6.543,23.926,6.42,23.825,6.333z"/>
         </g>
       </svg>
-      ${sidebar.config.activePersona.hello}
+      ${menu.config.activePersona.hello}
     </a>
   </div>
 
-  <div class="nav-button" if.bind="sidebar.activeItem.parent && !sidebar.activeItem.parent.hideWhenParent">
-    <a href.bind="sidebar.activeItem.parent.dest">
+  <div class="nav-button" if.bind="menu.activeItem.parent && !menu.activeItem.parent.hideWhenParent">
+    <a href.bind="menu.activeItem.parent.dest">
       <svg class="arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
         <g id="Filled_Icons">
           <path d="M10.273,12.002l10.051-8.535c0.101-0.086,0.164-0.209,0.175-0.342c0.01-0.132-0.032-0.264-0.119-0.364l-2.213-2.582
@@ -24,13 +24,13 @@
             L10.273,12.002z"/>
         </g>
       </svg>
-    ${sidebar.activeItem.parent.name}
+    ${menu.activeItem.parent.name}
     </a>
   </div>
   
   <ul>
-    <li repeat.for="item of sidebar.items" class="${sidebar.activeItem === item ? 'active' : ''}">
-      <a click.trigger="sidebar.select(item)">${item.name}</a>
+    <li repeat.for="item of menu.items" class="${menu.activeItem === item ? 'active' : ''}">
+      <a click.trigger="menu.select(item)">${item.name}</a>
     </li>
   </ul>
 </template>

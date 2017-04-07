@@ -9,9 +9,9 @@ export class SideBar {
   isActive = false;
   menu = null;
 
-  $sidebarOne: HTMLElement;
-  $sidebarTwo: HTMLElement;
-  $currentSidebar: HTMLElement;
+  $viewOne: HTMLElement;
+  $viewTwo: HTMLElement;
+  $currentView: HTMLElement;
 
   constructor(private config: Configuration, private ea: EventAggregator, private history: History) {
     ea.subscribe(ShowMenu, (msg:ShowMenu) => {
@@ -42,18 +42,18 @@ export class SideBar {
   }
 
   showMenu(menu, backward = false) {
-    if (this.$currentSidebar) {
-      let newContent = this.$currentSidebar === this.$sidebarOne ? this.$sidebarTwo : this.$sidebarOne;
-      let oldContent = this.$currentSidebar === this.$sidebarOne ? this.$sidebarOne : this.$sidebarTwo;
-      this.$currentSidebar = newContent;
+    if (this.$currentView) {
+      let newContent = this.$currentView === this.$viewOne ? this.$viewTwo : this.$viewOne;
+      let oldContent = this.$currentView === this.$viewOne ? this.$viewOne : this.$viewTwo;
+      this.$currentView = newContent;
       animate(menu, newContent, oldContent, backward);
     } else {
-      this.$currentSidebar = this.$sidebarOne;
-      this.$sidebarOne.style.transition = 'none';
-      this.$sidebarOne.style.transform = 'translate(0%, 0%)';
-      this.$sidebarOne['au'].controller.viewModel.sidebar = menu;
-      this.$sidebarTwo.style.transition = 'none';
-      this.$sidebarTwo.style.transform = 'translate(100%, 0%)';
+      this.$currentView = this.$viewOne;
+      this.$viewOne.style.transition = 'none';
+      this.$viewOne.style.transform = 'translate(0%, 0%)';
+      this.$viewOne['au'].controller.viewModel.menu = menu;
+      this.$viewTwo.style.transition = 'none';
+      this.$viewTwo.style.transform = 'translate(100%, 0%)';
     }
   }
 }
@@ -82,7 +82,7 @@ function animate(menu, newSidebar, oldSidebar, backward) {
   if (backward) {
     newSidebar.style.transition = 'none';
     newSidebar.style.transform = 'translate(-100%, 0%)';
-    newSidebar['au'].controller.viewModel.sidebar = menu;
+    newSidebar['au'].controller.viewModel.menu = menu;
 
     oldSidebar.style.transition = 'none';
     oldSidebar.style.transform = 'translate(0%, 0%)';
@@ -97,7 +97,7 @@ function animate(menu, newSidebar, oldSidebar, backward) {
   } else {
     newSidebar.style.transition = 'none';
     newSidebar.style.transform = 'translate(100%, 0%)';
-    newSidebar['au'].controller.viewModel.sidebar = menu;
+    newSidebar['au'].controller.viewModel.menu = menu;
 
     oldSidebar.style.transition = 'none';
     oldSidebar.style.transform = 'translate(0%, 0%)';
