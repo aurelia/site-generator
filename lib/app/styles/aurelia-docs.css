@@ -548,7 +548,7 @@ section.api {
       font-weight: 600;
       margin-top: 1em;
       margin-bottom: 16px; }
-    .markdown section p {
+    .markdown section > p {
       margin-top: 0;
       margin-bottom: 16px; }
     .markdown section pre {
@@ -590,6 +590,65 @@ section.api {
       margin-bottom: 16px; }
       .markdown section ul li {
         display: list-item; }
+    .markdown section .info, .markdown section .warning, .markdown section .danger {
+      padding: 16px 20px;
+      font-size: 18px;
+      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.7), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      margin: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+      .markdown section .info .icon, .markdown section .warning .icon, .markdown section .danger .icon {
+        border-radius: 100%;
+        width: 45px;
+        height: 45px;
+        margin: -40px 0 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .markdown section .info .icon i, .markdown section .warning .icon i, .markdown section .danger .icon i {
+          width: 25px;
+          height: 25px;
+          background-repeat: no-repeat; }
+      .markdown section .info h4, .markdown section .warning h4, .markdown section .danger h4 {
+        font-size: 20px;
+        margin-bottom: 16px; }
+      .markdown section .info p, .markdown section .warning p, .markdown section .danger p {
+        font-style: italic;
+        font-weight: 200;
+        line-height: 23px; }
+    .markdown section .info {
+      background: #F0EDF5;
+      border: 2px solid #BDA9DA; }
+      .markdown section .info .icon {
+        background: #FFF;
+        border: 2px solid #BDA9DA; }
+        .markdown section .info .icon i {
+          background-image: url("./images/alert/info.svg"); }
+      .markdown section .info h4 {
+        color: #70519E; }
+    .markdown section .warning {
+      background: #FCF9E4;
+      border: 2px solid #E6D55B; }
+      .markdown section .warning .icon {
+        background: #FFF;
+        border: 2px solid #E6D55B; }
+        .markdown section .warning .icon i {
+          background-image: url("./images/alert/warning.svg"); }
+      .markdown section .warning h4 {
+        color: #B9810B; }
+    .markdown section .danger {
+      background: #F9E9E8;
+      border: 2px solid #DFA29F; }
+      .markdown section .danger .icon {
+        background: #FFF;
+        border: 2px solid #DFA29F; }
+        .markdown section .danger .icon i {
+          background-image: url("./images/alert/danger.svg"); }
+      .markdown section .danger h4 {
+        color: #A31F07; }
 
 search-panel {
   position: absolute;
@@ -702,5 +761,113 @@ search-panel {
           font-weight: bold; }
         search-panel article.search-results ul li a span i {
           font-style: italic; }
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  color: #333; }
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+  text-shadow: none;
+  background: #b3d4fc; }
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+  text-shadow: none;
+  background: #b3d4fc; }
+
+@media print {
+  code[class*="language-"],
+  pre[class*="language-"] {
+    text-shadow: none; } }
+
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto; }
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background-color: #FCFCFC; }
+
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal; }
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray; }
+
+.token.punctuation {
+  color: #333; }
+
+.namespace {
+  opacity: .7; }
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #0086b3; }
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #183691; }
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #a71d5d;
+  background: rgba(255, 255, 255, 0.5); }
+
+.token.atrule,
+.token.tag,
+.token.keyword {
+  color: #a71d5d; }
+
+.token.function {
+  color: #0086b3; }
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90; }
+
+.token.important,
+.token.bold {
+  font-weight: bold; }
+
+.token.italic {
+  font-style: italic; }
+
+.token.entity {
+  cursor: help; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */

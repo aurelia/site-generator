@@ -25,7 +25,53 @@
 </code></pre>
 <p>Now, let's create a <code>bundle.js</code> file in <code>build/tasks/bundle.js</code> as follows:</p>
 <code-listing heading="bundle.js">
-  <source-code lang="JavaScript">%0A%0A%20%20%20%20var%20gulp%20%3D%20require%28%27gulp%27%29%3B%0A%20%20%20%20var%20bundle%20%3D%20require%28%27aurelia-bundler%27%29.bundle%3B%0A%0A%20%20%20%20var%20config%20%3D%20%7B%0A%20%20%20%20%20%20force%3A%20true%2C%0A%20%20%20%20%20%20baseURL%3A%20%27.%27%2C%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20baseURL%20of%20the%20application%0A%20%20%20%20%20%20configPath%3A%20%27./config.js%27%2C%20%20%20%20%20%20//%20config.js%20file.%20Must%20be%20within%20%60baseURL%60%0A%20%20%20%20%20%20bundles%3A%20%7B%0A%20%20%20%20%20%20%20%20%22dist/app-build%22%3A%20%7B%20%20%20%20%20%20%20%20%20%20%20//%20bundle%20name/path.%20Must%20be%20within%20%60baseURL%60.%20Final%20path%20is%3A%20%60baseURL/dist/app-build.js%60.%0A%20%20%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27%5B*.js%5D%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27*.html%21text%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27*.css%21text%27%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20inject%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20minify%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%22dist/vendor-build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-bootstrapper%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-fetch-client%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-router%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-animator-css%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/templating-binding%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/templating-resources%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/templating-router%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/loader-default%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/history-browser%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/logging-console%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27bootstrap/css/bootstrap.css%21text%27%0A%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20inject%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20minify%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20gulp.task%28%27bundle%27%2C%20function%28%29%20%7B%0A%20%20%20%20%20%20return%20bundle%28config%29%3B%0A%20%20%20%20%7D%29%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+
+    <span class="token keyword">var</span> gulp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> bundle <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'aurelia-bundler'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bundle<span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+      force<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      baseURL<span class="token punctuation">:</span> <span class="token string">'.'</span><span class="token punctuation">,</span>                   <span class="token comment" spellcheck="true">// baseURL of the application</span>
+      configPath<span class="token punctuation">:</span> <span class="token string">'./config.js'</span><span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">// config.js file. Must be within `baseURL`</span>
+      bundles<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>           <span class="token comment" spellcheck="true">// bundle name/path. Must be within `baseURL`. Final path is: `baseURL/dist/app-build.js`.</span>
+          includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">'[*.js]'</span><span class="token punctuation">,</span>
+            <span class="token string">'*.html!text'</span><span class="token punctuation">,</span>
+            <span class="token string">'*.css!text'</span>        
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"dist/vendor-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">,</span>
+            <span class="token string">'aurelia-fetch-client'</span><span class="token punctuation">,</span>
+            <span class="token string">'aurelia-router'</span><span class="token punctuation">,</span>
+            <span class="token string">'aurelia-animator-css'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/templating-binding'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/templating-resources'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/templating-router'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/loader-default'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/history-browser'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/logging-console'</span><span class="token punctuation">,</span>
+            <span class="token string">'bootstrap/css/bootstrap.css!text'</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'bundle'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token function">bundle</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 The bundle function returns a Promise for proper integration into async task engines like Gulp.</p>
@@ -48,28 +94,99 @@ The bundle function returns a Promise for proper integration into async task eng
 </section>
 <section><h2>Bundling a JSPM v0.17 App</h2><p>In a JSPM v0.17 style app, we have two separate config files: <code>jspm.browser.js</code> and <code>jspm.config.js</code>. In such case the <code>configPath</code> in the bundle config should look like: <code>configPath: ['./jspm.browser.js', './jspm.config.js']</code>. We also have to add another <code>injectionConfigPath</code> to indicate which config file should host the bundle and depCache injection. Here is a typical bundle configuration for a <code>JSPM v0.17</code> app.</p>
 <code-listing heading="bundle.js">
-  <source-code lang="JavaScript">%0A%0A%20%20%20%20var%20config%20%3D%20%7B%0A%20%20%20%20%20%20force%3A%20true%2C%0A%20%20%20%20%20%20baseURL%3A%20%27.%27%2C%20%20%20%20%20%20%20%20%20%20%20%20%20//%20baseURL%20of%20the%20application%0A%20%20%20%20%20%20configPath%3A%20%5B%20%20%20%20%20%20%20%20%20%20%20%20%20//%20SystemJS/JSPM%20configuration%20files%0A%20%20%20%20%20%20%20%20%27./jspm.browser.js%27%2C%0A%20%20%20%20%20%20%20%20%27./jspm.config.js%27%0A%20%20%20%20%20%20%5D%2C%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20injectionConfigPath%3A%20%27./jspm.config.js%27%2C%20%20//%20Configuration%20file%20path%20where%20bundle%20and%20depCache%20meta%20will%20be%20injected.%0A%20%20%20%20%20%20bundles%3A%20%7B%0A%20%20%20%20%20%20%20%20%22dist/app-build%22%3A%20%7B%20%20%20%20%20//%20bundle%20name/path.%20Must%20be%20within%20%60baseURL%60.%20Output%20path%20will%20look%20like%3A%20%60baseURL/dist/app-build.js%60.%0A%20%20%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27%5B*.js%5D%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27*.html%21text%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27*.css%21text%27%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20inject%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20minify%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+      force<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      baseURL<span class="token punctuation">:</span> <span class="token string">'.'</span><span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">// baseURL of the application</span>
+      configPath<span class="token punctuation">:</span> <span class="token punctuation">[</span>             <span class="token comment" spellcheck="true">// SystemJS/JSPM configuration files</span>
+        <span class="token string">'./jspm.browser.js'</span><span class="token punctuation">,</span>
+        <span class="token string">'./jspm.config.js'</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>        
+      injectionConfigPath<span class="token punctuation">:</span> <span class="token string">'./jspm.config.js'</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// Configuration file path where bundle and depCache meta will be injected.</span>
+      bundles<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>     <span class="token comment" spellcheck="true">// bundle name/path. Must be within `baseURL`. Output path will look like: `baseURL/dist/app-build.js`.</span>
+          includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">'[*.js]'</span><span class="token punctuation">,</span>
+            <span class="token string">'*.html!text'</span><span class="token punctuation">,</span>
+            <span class="token string">'*.css!text'</span>        
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 </section>
 <section><h2>Duplicate Modules in Multiple Bundles</h2><p>Creating multiple bundles requires us to be extra careful because multiple bundles may contain duplicate modules. Before explaining that, we need to understand how bundling works behind the scenes a bit. Let's consider the example modules <code>A</code> and <code>B</code> below:</p>
 <code-listing heading="a.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20import%20b%20from%20%27./b%27%3B%0A%20%20%20%20console.log%28%27Hi%2C%20I%20am%20module%20A%27%29%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> b <span class="token keyword">from</span> <span class="token string">'./b'</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hi, I am module A'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="b.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20console.log%28%27Hi%2C%20I%20am%20module%20B%27%29%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hi, I am module B'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <p>When we want to bundle <code>a.js</code>, the bundler will analyze the source code of the module and find the dependencies by tracing the <code>import</code> statements. In this case, the bundler will yield <code>b.js</code> as the dependency of <code>a.js</code> and ultimately place <code>b.js</code> in the bundle.</p>
 <p>Let us now take a closer look at the <code>config</code> object. We will skip <code>force</code> and <code>packagePath</code> for the moment. <code>bundles</code> is where we will focus now, specifically the <code>includes</code>.</p>
 <code-listing heading="Includes">
-  <source-code lang="JavaScript">%0A%20%20%20%20bundles%3A%20%7B%0A%20%20%20%20%20%20%22dist/app-build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%27%5B*.js%5D%27%2C%0A%20%20%20%20%20%20%20%20%20%20%27*.html%21text%27%2C%0A%20%20%20%20%20%20%20%20%20%20%27*.css%21text%27%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    bundles<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token string">'[*.js]'</span><span class="token punctuation">,</span>
+          <span class="token string">'*.html!text'</span><span class="token punctuation">,</span>
+          <span class="token string">'*.css!text'</span>        
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Please pay attention to the pattern <code>[*.js]</code>. The bundler supports some glob patterns like <code>*.js</code>, <code>*/**/*.js</code> etc. <code>*.js</code> here means, we are interested in bundling all the <code>js</code> assets in the <code>dist</code> folder (considering the <code>path</code> in <code>config.js</code>). So what does <code>[*.js]</code> mean here? Well, as we know, the bundler will trace the module dependencies from the import statements. Lot's of our code refers to the modules of <code>Aurelia</code> via <code>import</code> statements. For example:</p>
 <code-listing heading="users.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20import%20%7Binject%7D%20from%20%27aurelia-framework%27%3B%0A%20%20%20%20import%20%7BHttpClient%7D%20from%20%27aurelia-fetch-client%27%3B%0A%20%20%20%20import%20%27fetch%27%3B%0A%0A%20%20%20%20@inject%28HttpClient%29%0A%20%20%20%20export%20class%20Users%7B%0A%20%20%20%20%20%20heading%20%3D%20%27Github%20Users%27%3B%0A%20%20%20%20%20%20users%20%3D%20%5B%5D%3B%0A%0A%20%20%20%20%20%20constructor%28http%29%7B%0A%20%20%20%20%20%20%20%20http.configure%28config%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20config%0A%20%20%20%20%20%20%20%20%20%20%20%20.useStandardConfiguration%28%29%0A%20%20%20%20%20%20%20%20%20%20%20%20.withBaseUrl%28%27https%3A//api.github.com/%27%29%3B%0A%20%20%20%20%20%20%20%20%7D%29%3B%0A%0A%20%20%20%20%20%20%20%20this.http%20%3D%20http%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20activate%28%29%7B%0A%20%20%20%20%20%20%20%20return%20this.http.fetch%28%27users%27%29%0A%20%20%20%20%20%20%20%20%20%20.then%28response%20%3D%3E%20response.json%28%29%29%0A%20%20%20%20%20%20%20%20%20%20.then%28users%20%3D%3E%20this.users%20%3D%20users%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>HttpClient<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-fetch-client'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token string">'fetch'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">inject</span><span class="token punctuation">(</span>HttpClient<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Users</span><span class="token punctuation">{</span>
+      heading <span class="token operator">=</span> <span class="token string">'Github Users'</span><span class="token punctuation">;</span>
+      users <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      <span class="token function">constructor</span><span class="token punctuation">(</span>http<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        http<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span>config <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          config
+            <span class="token punctuation">.</span><span class="token function">useStandardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">withBaseUrl</span><span class="token punctuation">(</span><span class="token string">'https://api.github.com/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>http <span class="token operator">=</span> http<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>http<span class="token punctuation">.</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">></span> response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>users <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>users <span class="token operator">=</span> users<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>When the bundler analyzes this file it will find <code>aurelia-framework</code> and <code>aurelia-fetch-client</code> as it's dependencies and include them in the bundle. But the bundler does not stop there. It will recursively find the dependencies of <code>aurelia-framework</code> and <code>aurelia-fetch-client</code> and will go on until there is nothing left.</p>
 <code-listing heading="Includes">
-  <source-code lang="JavaScript">%0A%20%20%20%20bundles%3A%20%7B%0A%20%20%20%20%20%20%22dist/app-build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%27*.js%27%2C%0A%20%20%20%20%20%20%20%20%20%20%27*.html%21text%27%2C%0A%20%20%20%20%20%20%20%20%20%20%27*.css%21text%27%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    bundles<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token string">'*.js'</span><span class="token punctuation">,</span>
+          <span class="token string">'*.html!text'</span><span class="token punctuation">,</span>
+          <span class="token string">'*.css!text'</span>        
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Having <code>*.js</code> in the above config will create a bundle containing lots of <code>Aurelia</code> libraries including <code>aurelia-framework</code> and <code>aurelia-fetch-client</code>. If we consider the second bundle config <code>dist/vendor-build</code>, we have 'aurelia-bootstrapper' and 'aurelia-fetch-client'. <code>aurelia-bootstrapper</code> will yield <code>aurelia-framework</code>. Ultimately, we will end up with duplicate modules in both the bundles.</p>
 <p>Our goal is to create a bundle of our application code only. We have to somehow instruct the bundler not to recursively trace the dependencies. Guess what? <code>[*.js]</code> is how we do it.</p>
@@ -77,7 +194,25 @@ The bundle function returns a Promise for proper integration into async task eng
 </section>
 <section><h2>Bundle Configuration</h2><p>Here is a typical bundle configuration in all its glory:</p>
 <code-listing heading="Typical Bundle Configuration">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22dist/app-build%22%3A%20%7B%0A%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%27%5B*.js%5D%27%2C%0A%20%20%20%20%20%20%20%20%27*.html%21text%27%2C%0A%20%20%20%20%20%20%20%20%27*.css%21text%27%2C%0A%20%20%20%20%20%20%20%20%27bootstrap/css/bootstrap.css%21text%27%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20excludes%3A%20%5B%0A%20%20%20%20%20%20%20%20%27npm%3Acore-js%27%2C%0A%20%20%20%20%20%20%20%20%27github%3Ajspm/nodelibs-process%27%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20inject%3A%20true%2C%0A%20%20%20%20%20%20%20%20minify%3A%20true%2C%0A%20%20%20%20%20%20%20%20rev%3A%20true%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">'[*.js]'</span><span class="token punctuation">,</span>
+        <span class="token string">'*.html!text'</span><span class="token punctuation">,</span>
+        <span class="token string">'*.css!text'</span><span class="token punctuation">,</span>
+        <span class="token string">'bootstrap/css/bootstrap.css!text'</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      excludes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">'npm:core-js'</span><span class="token punctuation">,</span>
+        <span class="token string">'github:jspm/nodelibs-process'</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        rev<span class="token punctuation">:</span> <span class="token boolean">true</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <ul>
 <li><strong>dist/app-build</strong> : This is the name of the bundle and also where the bundle file will be placed. The name of the bundle file will be <code>app-build.js</code>. As the <code>baseURL</code> for <code>skeleton-navigation</code> pointed to <code>dist</code> folder, we named it <code>dist/app-build</code>.</li>
@@ -87,7 +222,11 @@ The bundle function returns a Promise for proper integration into async task eng
 <li><strong>excludes</strong>: This is where we specify what we want to exclude from the bundle. For example, <code>*</code> includes all the JS files in the <code>dist</code> folder. For example, if for some reason we want <code>app.js</code> to be excluded from the bundle, we would write:</li>
 </ul>
 <code-listing heading="Excludes">
-  <source-code lang="JavaScript">%0A%20%20%20%20excludes%20%3A%20%5B%0A%20%20%20%20%20%20%20%27app%27%0A%20%20%20%20%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    excludes <span class="token punctuation">:</span> <span class="token punctuation">[</span>
+       <span class="token string">'app'</span>
+    <span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <div class="warning"><div class="icon"> <i></i> </div><p>
 Exclusion of files that are being used in the project but are not part of it (e.g. CDN URLs, URLs relative to the host, etc.) is done automatically. For bundling to work, do not add them to the <strong>excludes</strong> section. It will cause an error.</p>
@@ -110,15 +249,87 @@ Exclusion of files that are being used in the project but are not part of it (e.
 </code></pre>
 <p>After the change <code>main.js</code> should look like this:</p>
 <code-listing heading="main.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20import%20%27bootstrap%27%3B%0A%0A%20%20%20%20export%20function%20configure%28aurelia%29%20%7B%0A%20%20%20%20%20%20aurelia.use%0A%20%20%20%20%20%20%20%20.standardConfiguration%28%29%0A%20%20%20%20%20%20%20%20.developmentLogging%28%29%3B%0A%0A%20%20%20%20%20%20aurelia.use.plugin%28%27aurelia-html-import-template-loader%27%29%0A%0A%20%20%20%20%20%20aurelia.start%28%29.then%28a%20%3D%3E%20a.setRoot%28%29%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token string">'bootstrap'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-html-import-template-loader'</span><span class="token punctuation">)</span>
+
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>With this little change Aurelia Loader will now use <code>HTML Imports</code> to load all the views. Now, back in our bundle task, we will add a <code>config</code> like this:</p>
 <code-listing heading="HTML Import Config">
-  <source-code lang="JavaScript">%0A%0A%20%20%20%20%22dist/view-bundle%22%3A%20%7B%0A%20%20%20%20%20%20htmlimports%3A%20true%2C%0A%20%20%20%20%20%20includes%3A%20%27dist/*.html%27%2C%0A%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20inject%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20indexFile%20%3A%20%27index.html%27%2C%0A%20%20%20%20%20%20%20%20%20%20destFile%20%3A%20%27dest_index.html%27%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+
+    <span class="token string">"dist/view-bundle"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      htmlimports<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      includes<span class="token punctuation">:</span> <span class="token string">'dist/*.html'</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        inject<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          indexFile <span class="token punctuation">:</span> <span class="token string">'index.html'</span><span class="token punctuation">,</span>
+          destFile <span class="token punctuation">:</span> <span class="token string">'dest_index.html'</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>We will also change the first bundle a little bit to exclude all the <code>html</code> and <code>css</code> files. Finally our <code>bundle.js</code> file should look like this:</p>
 <code-listing heading="Full HTML Import Bundle Config">
-  <source-code lang="JavaScript">%0A%0A%20%20%20%20var%20gulp%20%3D%20require%28%27gulp%27%29%3B%0A%20%20%20%20var%20bundle%20%3D%20require%28%27aurelia-bundler%27%29.bundle%3B%0A%0A%20%20%20%20var%20config%20%3D%20%7B%0A%20%20%20%20%20%20force%3A%20true%2C%0A%20%20%20%20%20%20packagePath%3A%20%27.%27%2C%0A%20%20%20%20%20%20bundles%3A%20%7B%0A%20%20%20%20%20%20%20%20%22dist/app-build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27%5B*.js%5D%27%0A%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20inject%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20minify%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%22dist/aurelia%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20includes%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-bootstrapper%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-fetch-client%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-router%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27aurelia-animator-css%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/templating-binding%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/templating-resources%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/templating-router%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/loader-default%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/history-browser%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%27github%3Aaurelia/logging-console%27%0A%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20inject%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20minify%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%22dist/view-bundle%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20htmlimport%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20includes%3A%20%27dist/*.html%27%2C%0A%20%20%20%20%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20inject%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20indexFile%20%3A%20%27index.html%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20destFile%20%3A%20%27dest_index.html%27%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+
+    <span class="token keyword">var</span> gulp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> bundle <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'aurelia-bundler'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bundle<span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+      force<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      packagePath<span class="token punctuation">:</span> <span class="token string">'.'</span><span class="token punctuation">,</span>
+      bundles<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">'[*.js]'</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"dist/aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          includes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">,</span>
+            <span class="token string">'aurelia-fetch-client'</span><span class="token punctuation">,</span>
+            <span class="token string">'aurelia-router'</span><span class="token punctuation">,</span>
+            <span class="token string">'aurelia-animator-css'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/templating-binding'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/templating-resources'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/templating-router'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/loader-default'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/history-browser'</span><span class="token punctuation">,</span>
+            <span class="token string">'github:aurelia/logging-console'</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"dist/view-bundle"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          htmlimport<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          includes<span class="token punctuation">:</span> <span class="token string">'dist/*.html'</span><span class="token punctuation">,</span>
+          options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            inject<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              indexFile <span class="token punctuation">:</span> <span class="token string">'index.html'</span><span class="token punctuation">,</span>
+              destFile <span class="token punctuation">:</span> <span class="token string">'dest_index.html'</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <p>We have changed the source code (src/main.js), so we need to rebuild our app. The command below should do that:</p>
 <pre><code class="language-shell"> gulp serve
@@ -137,14 +348,19 @@ The order in which the tasks are run is important. The <code>build</code> remove
 <li><strong>includes</strong>: This is where we will specify what goes in the bundle. All the glob patterns are supported here including arrays of patterns and <code>!</code> based exclusion. For example:</li>
 </ul>
 <code-listing heading="Glob Patterns">
-  <source-code lang="JavaScript">%0A%20%20%20%20includes%20%3A%20%5B%27dist/**/*.html%27%2C%20%27%21dist/movie/*.html%27%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    includes <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dist/**/*.html'</span><span class="token punctuation">,</span> <span class="token string">'!dist/movie/*.html'</span><span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <p>The above pattern will bundle all the views in <code>dist</code> and its child folders except everything in the <code>dist/movie</code> folder.</p>
 <ul>
 <li><strong>options</strong> : if <code>inject</code> is set to <code>true</code> then a <code>&lt;link rel=&quot;import&quot; href=&quot;path/of/bundle.html&quot;&gt;</code> will be injected in the body of <code>index.html</code>. If you would like to keep your <code>index.html</code> clean and create a separate index file then you have to set <code>indexFile</code> and <code>destFile</code>.</li>
 </ul>
 <code-listing heading="HTML Import Injection Options">
-  <source-code lang="JavaScript">%0A%20%20%20%20indexFile%3A%20%27index.html%27%2C%0A%20%20%20%20destFile%20%3A%20%27dest_index.html%27%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    indexFile<span class="token punctuation">:</span> <span class="token string">'index.html'</span><span class="token punctuation">,</span>
+    destFile <span class="token punctuation">:</span> <span class="token string">'dest_index.html'</span>
+  </code></pre></source-code>
 </code-listing>
 </section>
 <section><h2>Conclusion</h2><p>In this article, you've learned both the why and how of bundling. We've covered the <code>bundler</code> library, how to configure it for use with Gulp and demonstrated several different scenarios. To bundle your own app, we recommend that you begin with one of the configurations above and customize it. You may have a small app that makes sense as a single bundle or a larger one that can be broken down into features. Each application is different, but the bundler will help you to create the optimal deployment for your unique scenarios.</p>

@@ -8,17 +8,81 @@
     <section><h2>Introduction</h2><p>Sometimes it is desirable to return a dynamically computed value when accessing a property, or you may want to reflect the status of an internal variable without requiring the use of explicit method calls. In JavaScript, this can be accomplished with the use of a getter.</p>
 <p>Here's an example <code>Person</code> class that exposes a <code>fullName</code> property that computes it's value using the <code>firstName</code> and <code>lastName</code> properties.</p>
 <code-listing heading="Computed Properties">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20get%20fullName%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20get%20fullName%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%3A%20string%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%3A%20string%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20get%20fullName%28%29%3A%20string%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+      firstName<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+      lastName<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>There isn't anything special you need to do to bind to a computed property like <code>fullName</code>. The binding system will examine the property's 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor" target="_blank">descriptor</a>
 , determine that the value of the property is computed by a function and choose the <em>dirty checking</em> observation strategy. <em>Dirty checking</em> means the binding system will periodically check the property's value for changes and update the view as-needed. This means your property's getter function will be executed many times, approximately once every 120 milliseconds. Most of the time this isn't an issue, however, if you're using a lot of computed properties or if your getter functions are sufficiently complex you may want to consider giving the binding system hints on what to observe so that it doesn't need to use dirty checking. This is where the <code>@computedFrom</code> decorator comes in:</p>
 <code-listing heading="Computed Properties">
-  <source-code lang="ES 2015">%0A%20%20%20%20import%20%7BdeclarePropertyDependencies%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20get%20fullName%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20declarePropertyDependencies%28Person%2C%20%27fullName%27%2C%20%5B%27firstName%27%2C%20%27lastName%27%5D%29%3B%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20import%20%7BcomputedFrom%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20@computedFrom%28%27firstName%27%2C%20%27lastName%27%29%0A%20%20%20%20%20%20get%20fullName%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20import%20%7BcomputedFrom%7D%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20export%20class%20Person%20%7B%0A%20%20%20%20%20%20firstName%3A%20string%20%3D%20%27John%27%3B%0A%20%20%20%20%20%20lastName%3A%20string%20%3D%20%27Doe%27%3B%0A%0A%20%20%20%20%20%20@computedFrom%28%27firstName%27%2C%20%27lastName%27%29%0A%20%20%20%20%20%20get%20fullName%28%29%3A%20string%20%7B%0A%20%20%20%20%20%20%20%20return%20%60%24%7Bthis.firstName%7D%20%24%7Bthis.lastName%7D%60%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>declarePropertyDependencies<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">declarePropertyDependencies</span><span class="token punctuation">(</span>Person<span class="token punctuation">,</span> <span class="token string">'fullName'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'firstName'</span><span class="token punctuation">,</span> <span class="token string">'lastName'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>computedFrom<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+
+      @<span class="token function">computedFrom</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">,</span> <span class="token string">'lastName'</span><span class="token punctuation">)</span>
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>computedFrom<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+      firstName<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+      lastName<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+
+      @<span class="token function">computedFrom</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">,</span> <span class="token string">'lastName'</span><span class="token punctuation">)</span>
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p><code>@computedFrom</code> tells the binding system which expressions to observe. When those expressions change, the binding system will re-evaluate the property (execute the getter). This eliminates the need for dirty checking and can improve performance. The <code>@computedFrom</code> parameters can be simple property names as shown above or more complex expressions like <code>@computedFrom('event.startDate', 'event.endDate')</code>.</p>
 </section>

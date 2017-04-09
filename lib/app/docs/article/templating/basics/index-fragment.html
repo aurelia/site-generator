@@ -12,18 +12,36 @@ templates, binding and manipulating data through the view-model, and the use of 
 <section><h2>A Simple Template</h2><p>All Aurelia templates must be wrapped with a <code>&lt;template&gt;</code> element. The most basic template is a component that prints
 &quot;Hello World&quot;:</p>
 <code-listing heading="hello-world.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%09%20%20Hello%2C%20World%21%0A%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    	  Hello, World!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>This template could be a page in an Aurelia application, or it could be the view for a custom element. A template
 containing only boilerplate could be useful as a footer containing copyright information or disclaimers, but where's
 the fun in a static template?</p>
 <p>All Aurelia templates work with a view-model, so let's create one:</p>
 <code-listing heading="hello${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20%20%20export%20class%20Hello%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.name%20%3D%20%27John%20Doe%27%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Hello</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'John Doe'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Let's bind the <code>name</code> property in our view-model into our template using Aurelia's string interpolation:</p>
 <code-listing heading="hello.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%09%20%20Hello%2C%20%24%7Bname%7D%21%0A%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    	  Hello, ${name}!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>One of the key features of Aurelia's templating system is helping to reduce context switching between your javascript
 code and your template markup. String interpolation using the <code>\${}</code> operator is a new feature in ES2015 that makes it
@@ -32,10 +50,26 @@ simple to insert values into a string. Thus, Aurelia uses this standard syntax i
 appears. Pretty simple, right? But what if we want logic in our string interpolation. Can we add our own expressions?
 Absolutely!</p>
 <code-listing heading="greeter.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%09%20%20%24%7Barriving%20%3F%20%27Hello%27%20%3A%20%27Goodbye%27%7D%2C%20%24%7Bname%7D%21%0A%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    	  ${arriving ? 'Hello' : 'Goodbye'}, ${name}!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="greeter${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20%20%20export%20class%20Greeter%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.name%20%3D%20%27John%20Doe%27%3B%0A%20%20%20%20%20%20%20%20this.arriving%20%3D%20true%3B%0A%20%20%20%20%20%20%20%20setTimeout%28%0A%20%20%20%20%20%20%20%20%20%20%28%29%20%3D%3E%20this.arriving%20%3D%20false%2C%0A%20%20%20%20%20%20%20%20%20%205000%29%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Greeter</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'John Doe'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>arriving <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span>
+          <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>arriving <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+          <span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>In our template, when <code>arriving</code> is true, the ternary operator makes our result <code>'Hello'</code>, but when it's false, it
 makes our result <code>'Goodbye'</code>. Our view-model code initializes <code>arriving</code> to <code>true</code> and changes it to <code>false</code> after 5
@@ -49,14 +83,43 @@ functionality to your template and view-model.</p>
 is linking a text box to the view model using <code>value.bind</code>. What if we let the user decide who they want to greet,
 and whether to say Hello or Goodbye?</p>
 <code-listing heading="greeter.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%20for%3D%22nameField%22%3E%0A%20%20%20%20%20%20%20%20Who%20to%20greet%3F%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20value.bind%3D%22name%22%20id%3D%22nameField%22%3E%0A%20%20%20%20%20%20%3Clabel%20for%3D%22arrivingBox%22%3E%0A%20%20%20%20%20%20%20%20Arriving%3F%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22checkbox%22%20checked.bind%3D%22arriving%22%20id%3D%22arrivingBox%22%3E%0A%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%09%20%20%24%7Barriving%20%3F%20%27Hello%27%20%3A%20%27Goodbye%27%7D%2C%20%24%7Bname%7D%21%0A%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nameField<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Who to greet?
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nameField<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>arrivingBox<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Arriving?
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>checkbox<span class="token punctuation">"</span></span> <span class="token attr-name">checked.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>arriving<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>arrivingBox<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    	  ${arriving ? 'Hello' : 'Goodbye'}, ${name}!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="hello-dynamic-template${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016">%0A%20%20export%20class%20HelloDynamicTemplate%20%7B%0A%20%20%20%20greeting%20%3D%20%22Hello%2C%20World%21%22%0A%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20export%20class%20HelloDynamicTemplate%20%7B%0A%20%20%20%20greeting%20%3D%20%22Hello%2C%20World%21%22%0A%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">HelloDynamicTemplate</span> <span class="token punctuation">{</span>
+    greeting <span class="token operator">=</span> <span class="token string">"Hello, World!"</span>
+  <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">HelloDynamicTemplate</span> <span class="token punctuation">{</span>
+    greeting <span class="token operator">=</span> <span class="token string">"Hello, World!"</span>
+  <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="greeter${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20%20%20export%20class%20Greeter%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.name%20%3D%20%27John%20Doe%27%3B%0A%20%20%20%20%20%20%20%20this.arriving%20%3D%20true%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Greeter</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'John Doe'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>arriving <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Above, we have a text box that asks for the name of the person to greet, and a checkbox indicating whether they're
 arriving. Because we defined <code>name</code> as &quot;John Doe&quot; in our view-model, the initial value of the text-box will be &quot;John
@@ -67,16 +130,41 @@ greeting will change with it: &quot;Hello, Jane Doe!&quot;. If we uncheck the bo
 <h3>Binding Focus</h3>
 <p>We can also use two-way data binding to communicate whether or not an element has focus:</p>
 <code-listing heading="bind-focus.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cinput%20focus.bind%3D%22hasFocus%22%20/%3E%0A%20%20%20%20%20%20%24%7BhasFocus%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">focus.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hasFocus<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+      ${hasFocus}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>When we click the input field, we see &quot;true&quot; printed. When we click elsewhere, it changes to &quot;false&quot;.</p>
 <h3>Binding Scopes Using <code>with</code></h3>
 <p>We can also declare that certain parts of our markup will be referencing properties of an object in the view model, as below:</p>
 <code-listing heading="bind-with.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20with.bind%3D%22first%22%3E%0A%20%20%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20value.bind%3D%22message%22%20/%3E%0A%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%20%20%3Cp%20with.bind%3D%22second%22%3E%0A%20%20%20%20%20%20%20%20%3Cinput%20type%3D%22text%22%20value.bind%3D%22message%22%20/%3E%0A%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">with.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>first<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>message<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">with.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>second<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>message<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="bind-with${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20%20%20export%20class%20Hello%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.first%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20message%20%3A%20%27Hello%27%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20this.second%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20message%20%3A%20%27Goodbye%27%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Hello</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>first <span class="token operator">=</span> <span class="token punctuation">{</span>
+          message <span class="token punctuation">:</span> <span class="token string">'Hello'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>second <span class="token operator">=</span> <span class="token punctuation">{</span>
+          message <span class="token punctuation">:</span> <span class="token string">'Goodbye'</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Using <code>with</code> is basically shorthand for &quot;I'm working on properties of this object&quot;, which lets you reuse code as necessary.</p>
 </section>
@@ -84,34 +172,72 @@ greeting will change with it: &quot;Hello, Jane Doe!&quot;. If we uncheck the bo
 between our view and view-model pairs. Wouldn't it be great if there was a custom element that would arbitrarily combine
 an HTML template, a view-model, and maybe even some initialization data for us? As it turns out, we're in luck:</p>
 <code-listing heading="compose-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ccompose%20view-model%3D%22hello%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20view.bind%3D%22hello.html%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.bind%3D%22%7B%20target%20%3A%20%27World%27%20%7D%22%20%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>compose</span> <span class="token attr-name">view-model</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello<span class="token punctuation">"</span></span>
+               <span class="token attr-name">view.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello.html<span class="token punctuation">"</span></span>
+               <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{ target : <span class="token punctuation">'</span>World<span class="token punctuation">'</span> }<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>compose</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="hello.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20Hello%2C%20%24%7Bfriend%7D%21%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      Hello, ${friend}!
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="hello${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20export%20class%20Hello%20%7B%0A%20%20%20%20activate%28model%29%20%7B%0A%20%20%20%20%20%20this.friend%20%3D%20model.target%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Hello</span> <span class="token punctuation">{</span>
+    <span class="token function">activate</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friend <span class="token operator">=</span> model<span class="token punctuation">.</span>target<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Note that the view-model we're composing into has an <code>activate</code> method. When we use <code>model.bind</code>, the contents are passed to <code>activate</code>. We then pull the exact value that we need out of the passed model and assign it.</p>
 </section>
 <section><h2>The as-element Attribute</h2><p>In some cases, especially when creating table rows out of Aurelia custom elements, you may need to have a custom element masquerade as a standard HTML element. For example, if you're trying to fill table rows with data, you may need your custom element to appear as a <code>&lt;tr&gt;</code> row or <code>&lt;td&gt;</code> cell. This is where the <code>as-element</code> attribute comes in handy:</p>
 <code-listing heading="as-element.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Crequire%20from%3D%22./hello-row.html%22%3E%3C/require%3E%0A%20%20%20%20%20%20%3Ctable%3E%0A%20%20%20%20%20%20%20%20%3Ctr%20as-element%3D%22hello-row%22%3E%0A%20%20%20%20%20%20%3C/table%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./hello-row.html<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name">as-element</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hello-row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="hello-row.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ctd%3EHello%3C/td%3E%0A%20%20%20%20%20%20%3Ctd%3EWorld%3C/td%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>Hello<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>World<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>The <code>as-element</code> attribute tells Aurelia that we want the content of the table row to be exactly what our <code>hello-row</code> template wraps. The way different browsers render tables means this may be necessary sometimes.</p>
 </section>
 <section><h2>The View Resource Pipeline</h2><p>The basic idea behind the View Resource Pipeline is that we're not limited to HTML or JavaScript. A basic example would be pulling in Bootstrap:</p>
 <code-listing heading="hello.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Crequire%20from%3D%22bootstrap/css/bootstrap.min.css%22%3E%3C/require%3E%0A%20%20%20%20%20%20%3Cp%20class%3D%22lead%22%3EHello%2C%20World%21%3C/p%3E%0A%20%20%20%20%20%20%3Cp%3ELorem%20Ipsum...%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bootstrap/css/bootstrap.min.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lead<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hello, World!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Lorem Ipsum...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>Here, the <code>&lt;require&gt;</code> tag is taking a CSS file, instead of html or a view model. The View Resource Pipeline is the part of Aurelia that's responsible for recognizing that it's CSS, and handling it appropriately. One of the most powerful features of Aurelia is that the View Resource Pipeline is completely extensible, allowing you to define your own handler for any type of view resource you might want to define!</p>
 </section>
 <section><h2>View and Compilation Spies</h2><p>If you've installed the <code>aurelia-testing</code> plugin, you have access to two special templating behaviors:</p>
 <code-listing heading="hello.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20view-spy%20compile-spy%3EHello%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">view-spy</span> <span class="token attr-name">compile-spy</span><span class="token punctuation">></span></span>Hello!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p><code>view-spy</code> drops Aurelia's copy of the View object into the console, while <code>compile-spy</code> emits the compiler's TargetInstruction. This is especially useful for debugging any new View Resources you've created using the View Resource Pipeline.</p>
 </section>
@@ -123,23 +249,56 @@ However, if <code>show</code> is being used for a very large template, such as a
 their own bound data, then keeping those elements loaded-but-hidden may not end up being a useful approach.</p>
 <p>Here's our basic &quot;Hello World&quot; that asks the user if they want to greet the world first:</p>
 <code-listing heading="if-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%20for%3D%22greet%22%3EWould%20you%20like%20me%20to%20greet%20the%20world%3F%3C/label%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22checkbox%22%20id%3D%22greet%22%20checked.bind%3D%22greet%22%20/%3E%0A%20%20%20%20%20%20%3Cdiv%20if.bind%3D%22greet%22%3E%0A%20%20%20%20%20%20%20%20Hello%2C%20World%21%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Would you like me to greet the world?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>checkbox<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span> <span class="token attr-name">checked.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Hello, World!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>However, if we just want to hide the element from view instead of destroying it completely, we should use <code>show</code>
 instead of <code>if</code>.</p>
 <code-listing heading="show-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%20for%3D%22greet%22%3EWould%20you%20like%20me%20to%20greet%20the%20world%3F%3C/label%3E%0A%20%20%20%20%20%20%3Cinput%20type%3D%22checkbox%22%20id%3D%22greet%22%20checked.bind%3D%22greet%22%20/%3E%0A%20%20%20%20%20%20%3Cdiv%20show.bind%3D%22greet%22%3E%0A%20%20%20%20%20%20%20%20Hello%2C%20World%21%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Would you like me to greet the world?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>checkbox<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span> <span class="token attr-name">checked.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">show.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Hello, World!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>When unchecked, our &quot;Hello World&quot; div will have the <code>aurelia-hide</code> class, which sets <code>display: none</code> if you're using
 Aurelia's CSS libraries. However, if you don't want to do that, you can also define your own CSS rules that treat
 <code>aurelia-hide</code> differently, like setting <code>visibility: none</code> or <code>height: 0px</code>.</p>
 <p>Conditionals can also be one-time bound, so that parts of the template are fixed when they're instantiated:</p>
 <code-listing heading="conditional-one-time-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20if.one-time%3D%22greet%22%3E%0A%20%20%20%20%20%20%20%20Hello%2C%20World%21%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20if.one-time%3D%22%21greet%22%3E%0A%20%20%20%20%20%20%20%20Some%20other%20time.%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">if.one-time</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Hello, World!
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">if.one-time</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>!greet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Some other time.
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="bind-template${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016">%0A%20%20%20%20export%20class%20ConditionalOneTimeTemplate%20%7B%0A%20%20%20%20%20%20greet%20%3D%20%28Math.random%28%29%20%3E%200.5%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="Typescript">%0A%20%20%20%20export%20class%20ConditionalOneTimeTemplate%20%7B%0A%20%20%20%20%20%20greet%20%3D%20%28Math.random%28%29%20%3E%200.5%29%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ConditionalOneTimeTemplate</span> <span class="token punctuation">{</span>
+      greet <span class="token operator">=</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="Typescript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ConditionalOneTimeTemplate</span> <span class="token punctuation">{</span>
+      greet <span class="token operator">=</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>There's a 50-50 chance that we'll greet the world, or put it off until later. Once the page loads, this is fixed,
 because the data is one-time bound. Why don't we use <code>show.one-time</code>? If we think about what <code>show</code> does, it doesn't
@@ -150,48 +309,132 @@ change. In most cases, we want <code>if</code> to refuse to create an element we
 <h3>Arrays</h3>
 <p>Aurelia is also able to repeat elements for each element in an array.</p>
 <code-listing heading="repeater-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20repeat.for%3D%22friend%20of%20friends%22%3EHello%2C%20%24%7Bfriend%7D%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>friend of friends<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hello, ${friend}!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="repeater-template${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20export%20class%20RepeaterTemplate%20%7B%0A%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20this.friends%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%27Alice%27%2C%0A%20%20%20%20%20%20%20%20%27Bob%27%2C%0A%20%20%20%20%20%20%20%20%27Carol%27%2C%0A%20%20%20%20%20%20%20%20%27Dana%27%0A%20%20%20%20%20%20%5D%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RepeaterTemplate</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token string">'Alice'</span><span class="token punctuation">,</span>
+        <span class="token string">'Bob'</span><span class="token punctuation">,</span>
+        <span class="token string">'Carol'</span><span class="token punctuation">,</span>
+        <span class="token string">'Dana'</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>This allows me to list out my friends and greet them one by one, rather than attempting to greet all 7 billion
 inhabitants of the world at once.</p>
 <p>As mentioned before, we can also use the template element as our repeater - but we have to wrap it in a surrogate <code>&lt;template&gt;</code> element:</p>
 <code-listing heading="repeater-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ctemplate%20repeat.for%3D%22friend%20of%20friends%22%3E%0A%20%20%20%20%20%20%20%20%3Cp%3EHello%2C%20%24%7Bfriend%7D%21%3C/p%3E%0A%20%20%20%20%20%20%3C/template%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>friend of friends<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Hello, ${friend}!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <h3>Range</h3>
 <p>We can also iterate over a numerical range:</p>
 <code-listing heading="repeater-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20repeat.for%3D%22i%20of%2010%22%3E%24%7B10-i%7D%3C/p%3E%0A%20%20%20%20%20%20%3Cp%3EBlast%20off%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>i of 10<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${10-i}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Blast off!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>Note that the range will start at 0 with a length of 10, so our countdown really does start at 10 and end at 1 before blast off.</p>
 <h3>Sets</h3>
 <p>I can also use an ES6 Set in the same way:</p>
 <code-listing heading="repeater-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20repeat.for%3D%22friend%20of%20friends%22%3EHello%2C%20%24%7Bfriend%7D%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>friend of friends<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Hello, ${friend}!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="repeater-template${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20export%20class%20RepeaterTemplate%20%7B%0A%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20this.friends%20%3D%20new%20Set%28%29%3B%0A%20%20%20%20%20%20this.friends.add%28%27Alice%27%29%3B%0A%20%20%20%20%20%20this.friends.add%28%27Bob%27%29%3B%0A%20%20%20%20%20%20this.friends.add%28%27Carol%27%29%3B%0A%20%20%20%20%20%20this.friends.add%28%27Dana%27%29%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RepeaterTemplate</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'Alice'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'Bob'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'Carol'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'Dana'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>We can use repeaters with arrays, which is useful - but we can also use repeaters with other iterable data types, including objects, plus new ES6 standards such as Map and Set.</p>
 <h3>Map</h3>
 <p>One of the more useful iterables is the Map, because you can decompose your key and value into two variables directly in the repeater. Although you can repeat over objects straightforwardly, Maps can be two-way bound much more straightforwardly than Objects, so you should try to use Maps where possible.</p>
 <code-listing heading="repeater-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20repeat.for%3D%22%5Bgreeting%2C%20friend%5D%20of%20friends%22%3E%24%7Bgreeting%7D%2C%20%24%7Bfriend.name%7D%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[greeting, friend] of friends<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${greeting}, ${friend.name}!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="repeater-template${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20export%20class%20RepeaterTemplate%20%7B%0A%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20this.friends%20%3D%20new%20Map%28%29%3B%0A%20%20%20%20%20%20this.friends.set%28%27Hello%27%2C%0A%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Alice%27%20%7D%29%3B%0A%20%20%20%20%20%20this.friends.set%28%27Hola%27%2C%0A%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Bob%27%20%7D%29%3B%0A%20%20%20%20%20%20this.friends.set%28%27Ni%20Hao%27%2C%0A%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Carol%27%20%7D%29%3B%0A%20%20%20%20%20%20this.friends.set%28%27Molo%27%2C%0A%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Dana%27%20%7D%29%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RepeaterTemplate</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'Hello'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Alice'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'Hola'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Bob'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'Ni Hao'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Carol'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">'Molo'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Dana'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>One thing to notice in the example above is the dereference operator in <code>[greeting, friend]</code> - which breaks apart the map's key-value pair into <code>greeting</code>, the key, and <code>friend</code>, the value. Note that because all of our values are objects with the <code>name</code> property set, we can get our friend's name with <code>\${friend.name}</code>, just as if we were getting it from JavaScript!</p>
 <h3>Objects</h3>
 <p>Let's do the same thing, except with a traditional JavaScript object in our view-model:</p>
 <code-listing heading="repeater-template.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%20repeat.for%3D%22greeting%20of%20friends%20%7C%20keys%22%3E%24%7Bgreeting%7D%2C%20%24%7Bfriends%5Bgreeting%5D.name%7D%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>greeting of friends | keys<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${greeting}, ${friends[greeting].name}!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="repeater-template${context.language.fileExtension}">
-  <source-code lang="ES2015/ES2016/TypeScript">%0A%20%20export%20class%20RepeaterTemplate%20%7B%0A%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20this.friends%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%27Hello%27%3A%0A%20%20%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Alice%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%27Hola%27%3A%0A%20%20%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Bob%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%27Ni%20Hao%27%3A%0A%20%20%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Carol%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%27Molo%27%3A%0A%20%20%20%20%20%20%20%20%20%20%7B%20name%20%3A%20%27Dana%27%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20export%20class%20KeysValueConverter%20%7B%0A%20%20%20%20toView%28obj%29%20%7B%0A%20%20%20%20%20%20return%20Reflect.ownKeys%28obj%29%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20</source-code>
+  <source-code lang="ES2015/ES2016/TypeScript"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RepeaterTemplate</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>friends <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string">'Hello'</span><span class="token punctuation">:</span>
+          <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Alice'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'Hola'</span><span class="token punctuation">:</span>
+          <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Bob'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'Ni Hao'</span><span class="token punctuation">:</span>
+          <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Carol'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'Molo'</span><span class="token punctuation">:</span>
+          <span class="token punctuation">{</span> name <span class="token punctuation">:</span> <span class="token string">'Dana'</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">KeysValueConverter</span> <span class="token punctuation">{</span>
+    <span class="token function">toView</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> Reflect<span class="token punctuation">.</span><span class="token function">ownKeys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  </code></pre></source-code>
 </code-listing>
 <p>We just introduced something called a &quot;value converter&quot;. Basically, we take the object in our view model, <code>friends</code>, and run it through our <code>keys</code> value converter. Aurelia looks for a class named <code>KeysValueConverter</code> and tries to call its <code>toView()</code> method with our <code>friends</code> object. That method returns an array of keys- which we can iterate. In a pinch, we can use this to iterate over Objects.</p>
 <p>A common question pops up here: Why can't we just dereference the object into <code>[key, value]</code> like we did with Maps? The short answer is that JavaScript objects aren't iterable in the same way that Arrays, Maps, and Sets are. So in order to iterate over JavaScript objects, we have to transform them into something that is iterable. The way you approach it will change based on what exactly you want to do with that object. There is also a 

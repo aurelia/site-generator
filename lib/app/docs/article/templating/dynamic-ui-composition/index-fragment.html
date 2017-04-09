@@ -11,42 +11,105 @@
 </section>
 <section><h2>Basic Composition</h2><p>Using the <code>&lt;compose&gt;</code> element, we are going to be dynamically composing a view.</p>
 <code-listing heading="hello-world.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ccompose%20view-model%3D%22./compose-me%22%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>compose</span> <span class="token attr-name">view-model</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./compose-me<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>compose</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="compose-me${context.language.fileExtension}">
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20ComposeMe%20%7B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ComposeMe</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="compose-me.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3EHello%20World%21%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Hello World!!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>Inside of our <code>hello-world.html</code> template, we are using the <code>&lt;compose&gt;</code> element and passing through a view-model (without file extension) to be rendered. The view-model is just a standard class, like you create elsewhere in an Aurelia application.</p>
 <p>Because Aurelia is a convention based framework, the <code>&lt;compose&gt;</code> element knows to use the default convention of loading the matching view for our view-model of the same name.</p>
 </section>
 <section><h2>Composing Without a View-Model</h2><p>If you're wanting to dynamically compose just a view template without specifying a view-model, all you need to do is omit the <code>view-model</code> property and supply a <code>view</code>. The result will be that the current view-model will be used as the binding context for our view, allowing you to create HTML partials that take the current properties and methods.</p>
 <code-listing heading="hello-world.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ccompose%20view%3D%22./compose-me.html%22%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>compose</span> <span class="token attr-name">view</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./compose-me.html<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>compose</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="compose-me.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3EHello%20World%21%21%3C/p%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Hello World!!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>For the <code>view</code> property, we need to specify a file extension, unlike the view-model property, which does not have an extension. The above example will work the same way as our first example, except we're not supplying our own view-model, it's inheriting the binding context from where the <code>compose</code> element is used.</p>
 </section>
 <section><h2>Passing Through Data</h2><p>Using what we learned above, we can dynamically compose view-models and views and pass through additional data via the <code>model</code> property on the <code>&lt;compose&gt;</code> element.</p>
 <p>We are going to be building an example which will dynamically render a view/view-model pair and accept an object of provided values.</p>
 <code-listing heading="hello-world${context.language.fileExtension}">
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20HelloWorld%20%7B%0A%20%20%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20this.data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20%27John%20Doe%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20company%3A%20%27Cool%20Co.%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20likes%3A%20%5B%27Javascript%27%2C%20%27fruit%27%2C%20%27jelly%27%5D%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="Typescript">%0A%20%20%20%20export%20class%20HelloWorld%20%7B%0A%20%20%20%20%20%20private%20data%20%3D%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20%27John%20Doe%27%2C%0A%20%20%20%20%20%20%20%20company%3A%20%27Cool%20Co.%27%2C%0A%20%20%20%20%20%20%20%20likes%3A%20%5B%27Javascript%27%2C%20%27fruit%27%2C%20%27jelly%27%5D%0A%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld</span> <span class="token punctuation">{</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token punctuation">{</span>
+            name<span class="token punctuation">:</span> <span class="token string">'John Doe'</span><span class="token punctuation">,</span>
+            company<span class="token punctuation">:</span> <span class="token string">'Cool Co.'</span><span class="token punctuation">,</span>
+            likes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'Javascript'</span><span class="token punctuation">,</span> <span class="token string">'fruit'</span><span class="token punctuation">,</span> <span class="token string">'jelly'</span><span class="token punctuation">]</span>
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="Typescript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld</span> <span class="token punctuation">{</span>
+      <span class="token keyword">private</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">'John Doe'</span><span class="token punctuation">,</span>
+        company<span class="token punctuation">:</span> <span class="token string">'Cool Co.'</span><span class="token punctuation">,</span>
+        likes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'Javascript'</span><span class="token punctuation">,</span> <span class="token string">'fruit'</span><span class="token punctuation">,</span> <span class="token string">'jelly'</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="hello-world.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Ccompose%20view-model%3D%22./compose-me%22%20model.bind%3D%22data%22%3E%3C/compose%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>compose</span> <span class="token attr-name">view-model</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./compose-me<span class="token punctuation">"</span></span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>data<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>compose</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="compose-me${context.language.fileExtension}">
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20ComposeMe%20%7B%0A%20%20%20%20%20%20activate%28model%29%20%7B%0A%20%20%20%20%20%20%20%20this.data%20%3D%20model%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="Typescript">%0A%20%20%20%20export%20class%20ComposeMe%20%7B%0A%20%20%20%20%20%20private%20data%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20activate%28model%29%20%7B%0A%20%20%20%20%20%20%20%20this.data%20%3D%20model%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ComposeMe</span> <span class="token punctuation">{</span>
+      <span class="token function">activate</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> model<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="Typescript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ComposeMe</span> <span class="token punctuation">{</span>
+      <span class="token keyword">private</span> data<span class="token punctuation">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+      <span class="token function">activate</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> model<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>If you have worked with the Aurelia router before and router parameters, you will notice we obtain the provided model object the same way: as the first argument of the <code>activate</code> method. We then store the object on our class itself, making it available in our HTML view under a property called <code>data</code>.</p>
 <code-listing heading="compose-me.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cp%3EHello%2C%20my%20name%20is%20%24%7Bdata.name%7D%20and%20my%20company%20is%20%24%7Bdata.company%7D.%3C/p%3E%0A%20%20%20%20%20%20%3Cp%3EMy%20likes%20include%3A%3C/p%3E%0A%20%20%20%20%20%20%3Col%3E%0A%20%20%20%20%20%20%20%20%3Cli%20repeat.for%3D%22like%20of%20data.likes%22%3E%24%7Blike%7D%3C/li%3E%0A%20%20%20%20%20%20%3C/ol%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Hello, my name is ${data.name} and my company is ${data.company}.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>My likes include:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>like of data.likes<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${like}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>Notice how we are referencing values on our provided object, <code>name</code> and <code>company</code>, and then looping over an array of provided strings for <code>likes</code>.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>

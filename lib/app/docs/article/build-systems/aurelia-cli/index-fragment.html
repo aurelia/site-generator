@@ -129,7 +129,14 @@ One of the first new features you'll see soon is a command to help you with 3rd 
 <h3>A Single-File Module</h3>
 <p>If the library you have installed is a single CommonJS or AMD file, you can add an entry similar to the following to the dependencies of your bundle:</p>
 <code-listing heading="A Single File Module Dependency">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22dependencies%22%3A%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22name%22%3A%20%22library-name%22%2C%0A%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/library-name/dist/library-name%22%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"library-name"</span><span class="token punctuation">,</span>
+        <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/library-name/dist/library-name"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <ul>
 <li><code>name</code> - This is the name of the library as you will import it in your JavaScript or TypeScript code.</li>
@@ -137,12 +144,25 @@ One of the first new features you'll see soon is a command to help you with 3rd 
 </ul>
 <p>If the <code>main</code> field of the library's <code>package.json</code> points to the single file that you need to bundle, then you can opt for a simplified configuration by just adding the package name to your dependencies directly:</p>
 <code-listing heading="A Single File Module Dependency via Main">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22dependencies%22%3A%20%5B%0A%20%20%20%20%20%20%22library-name%22%0A%20%20%20%20%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"library-name"</span>
+    <span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <h3>A CommonJS Package</h3>
 <p>Many modules installed through NPM are packages made up of multiple source files. Configuring a library like this is a bit different than the single-file scenario above. Here's an example configuration for a multi-file package:</p>
 <code-listing heading="A CommonJS Package Dependency">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22dependencies%22%3A%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22name%22%3A%20%22aurelia-testing%22%2C%0A%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/aurelia-testing/dist/amd%22%2C%0A%20%20%20%20%20%20%20%20%22main%22%3A%20%22aurelia-testing%22%2C%0A%20%20%20%20%20%20%20%20%22env%22%3A%20%22dev%22%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-testing"</span><span class="token punctuation">,</span>
+        <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/aurelia-testing/dist/amd"</span><span class="token punctuation">,</span>
+        <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-testing"</span><span class="token punctuation">,</span>
+        <span class="token string">"env"</span><span class="token punctuation">:</span> <span class="token string">"dev"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <ul>
 <li><code>name</code> - This is the name of the library as you will import it in your JavaScript or TypeScript code.</li>
@@ -157,7 +177,22 @@ We've also shown how to use the <code>env</code> setting on a dependency. This c
 <a href="http://getbootstrap.com/css/" target="_blank">bootstrap</a>
 . Let's take a look at how to handle a legacy library like that.</p>
 <code-listing heading="A Legacy Library Dependency">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22dependencies%22%3A%20%5B%0A%20%20%20%20%20%20%22jquery%22%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22name%22%3A%20%22bootstrap%22%2C%0A%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/bootstrap/dist%22%2C%0A%20%20%20%20%20%20%20%20%22main%22%3A%20%22js/bootstrap.min%22%2C%0A%20%20%20%20%20%20%20%20%22deps%22%3A%20%5B%22jquery%22%5D%2C%0A%20%20%20%20%20%20%20%20%22exports%22%3A%20%22%24%22%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"jquery"</span><span class="token punctuation">,</span>
+        <span class="token string">"path"</span><span class="token punctuation">:</span><span class="token string">"../node_modules/jquery/dist"</span><span class="token punctuation">,</span>
+        <span class="token string">"main"</span><span class="token punctuation">:</span><span class="token string">"jquery.min"</span><span class="token punctuation">,</span>
+        <span class="token string">"export"</span><span class="token punctuation">:</span> <span class="token string">"$"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/bootstrap/dist"</span><span class="token punctuation">,</span>
+          <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"js/bootstrap.min"</span><span class="token punctuation">,</span>
+          <span class="token string">"deps"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"jquery"</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <ul>
 <li><code>name</code> - This is the name of the library as you will import it in your JavaScript or TypeScript code.</li>
@@ -166,11 +201,30 @@ We've also shown how to use the <code>env</code> setting on a dependency. This c
 <li><code>deps</code> - This is an array of dependencies which must be loaded and available before the legacy library can be evaluated.</li>
 <li><code>exports</code> - This is the name of the global variable that should be used as the exported value of the module.</li>
 </ul>
-<p>Notice first that we've included &quot;jquery&quot; as one of our dependencies. We are able to use the simplified form because it's a single file and its <code>package.json</code> <code>main</code> points directly to that file. Below that we configure <code>bootstrap</code>. The first three properties are the same as in our package example above. However, now we have a <code>deps</code> list. We've included <code>jquery</code> since Bootstrap needs it to be present before it can load. Finally, we have the <code>exports</code> property. Usually a library creates a unique global variable, but jQuery plugins, like Bootstrap, are different. They attach their APIs to the jQuery object itself. So, in this case, we export the jQuery object as the module. This could be any global variable though.</p>
+<p>Notice first that we've included &quot;jquery&quot; as one of our dependencies, <em>and specifically at the beginning of the dependency list</em>.<br />
+We are using the <code>exports</code> property to export the jQuery object since jQuery plugin, like Bootstrap, attach their APIs to the jQuery object itself.  (This could be any global variable, though.)  Finally, below that we configure <code>bootstrap</code>. The first three properties are the same as in our package example above. However, now we have a <code>deps</code> list. We've included <code>jquery</code> since Bootstrap needs it to be present before it can load.</p>
 <h3>A Library with Additional Resources</h3>
 <p>The Bootstrap example above results in the bundling of the JavaScript portions of the library. But, as you probably know, Bootstrap is mostly about CSS. The CSS files distributed with Bootstrap aren't traceable through the module system so this still doesn't result in the Bootstrap CSS being bundled. Here's how we solve that problem:</p>
 <code-listing heading="A Library with Additional Resources">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22dependencies%22%3A%20%5B%0A%20%20%20%20%20%20%22jquery%22%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22name%22%3A%20%22bootstrap%22%2C%0A%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/bootstrap/dist%22%2C%0A%20%20%20%20%20%20%20%20%22main%22%3A%20%22js/bootstrap.min%22%2C%0A%20%20%20%20%20%20%20%20%22deps%22%3A%20%5B%22jquery%22%5D%2C%0A%20%20%20%20%20%20%20%20%22exports%22%3A%20%22%24%22%2C%0A%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%22css/bootstrap.css%22%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"jquery"</span><span class="token punctuation">,</span>
+        <span class="token string">"path"</span><span class="token punctuation">:</span><span class="token string">"../node_modules/jquery/dist"</span><span class="token punctuation">,</span>
+        <span class="token string">"main"</span><span class="token punctuation">:</span><span class="token string">"jquery.min"</span><span class="token punctuation">,</span>
+        <span class="token string">"export"</span><span class="token punctuation">:</span> <span class="token string">"$"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/bootstrap/dist"</span><span class="token punctuation">,</span>
+          <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"js/bootstrap.min"</span><span class="token punctuation">,</span>
+          <span class="token string">"deps"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"jquery"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"css/bootstrap.css"</span>
+          <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  </code></pre></source-code>
 </code-listing>
 <p>Notice that we've added a <code>resources</code> array. Here we can provide a list of additional files to be included with the bundle. These files are relative to the <code>path</code> designated above and must include the file extension. You can also use glob patterns in place of exact file names.</p>
 <p>The final step to make Bootstrap work is to copy the necessary font files to the <code>bootstrap/fonts</code> folder, which by default is where Bootstrap will look for the font files. To do this, we should declare these files in the <code>copyFiles</code> property, after the <code>bundles</code> property.</p>
@@ -199,7 +253,70 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
 <h3>A Very Stubborn Legacy Library</h3>
 <p>Sometimes you can't get a library to work with the module loading system. That's ok. You can still include it in the bundle, using traditional concatenation techniques. In fact, this is how the CLI bundles up the loader and promise polyfills. These items don't go into the <code>dependencies</code> section but instead go into the <code>prepend</code> section. This is because they aren't module dependencies. They also aren't relative to the <code>src</code>, but relative to the project folder. Using the <code>prepend</code> section causes the scripts to be prepended to the beginning of the bundle, using normal script concatenation techniques. Here's a full vendor bundle example, showing this and the rest of the techniques listed above.</p>
 <code-listing heading="A Sample Bundle">
-  <source-code lang="JavaScript">%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%22name%22%3A%20%22vendor-bundle.js%22%2C%0A%20%20%20%20%20%20%22prepend%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%22node_modules/bluebird/js/browser/bluebird.core.js%22%2C%0A%20%20%20%20%20%20%20%20%22scripts/require.js%22%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%22dependencies%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%22aurelia-binding%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-bootstrapper%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-dependency-injection%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-event-aggregator%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-framework%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-history%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-history-browser%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-loader%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-loader-default%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-logging%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-logging-console%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-metadata%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-pal%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-pal-browser%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-path%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-polyfills%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-route-recognizer%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-router%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-task-queue%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-templating%22%2C%0A%20%20%20%20%20%20%20%20%22aurelia-templating-binding%22%2C%0A%20%20%20%20%20%20%20%20%22nprogress%22%2C%0A%20%20%20%20%20%20%20%20%22jquery%22%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22bootstrap%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/bootstrap/dist%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22main%22%3A%20%22js/bootstrap.min%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22deps%22%3A%20%5B%22jquery%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%22exports%22%3A%20%22%24%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22css/bootstrap.css%22%0A%20%20%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22text%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22../scripts/text%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22aurelia-templating-resources%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/aurelia-templating-resources/dist/amd%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22main%22%3A%20%22aurelia-templating-resources%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22aurelia-templating-router%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/aurelia-templating-router/dist/amd%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22main%22%3A%20%22aurelia-templating-router%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22aurelia-testing%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22../node_modules/aurelia-testing/dist/amd%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22main%22%3A%20%22aurelia-testing%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22env%22%3A%20%22dev%22%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%5D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"vendor-bundle.js"</span><span class="token punctuation">,</span>
+      <span class="token string">"prepend"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"node_modules/bluebird/js/browser/bluebird.core.js"</span><span class="token punctuation">,</span>
+        <span class="token string">"scripts/require.js"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"aurelia-binding"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-bootstrapper"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-dependency-injection"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-event-aggregator"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-framework"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-history"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-history-browser"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-loader"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-loader-default"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-logging"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-logging-console"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-metadata"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-pal"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-pal-browser"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-path"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-polyfills"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-route-recognizer"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-router"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-task-queue"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-templating"</span><span class="token punctuation">,</span>
+        <span class="token string">"aurelia-templating-binding"</span><span class="token punctuation">,</span>
+        <span class="token string">"nprogress"</span><span class="token punctuation">,</span>
+        <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/bootstrap/dist"</span><span class="token punctuation">,</span>
+          <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"js/bootstrap.min"</span><span class="token punctuation">,</span>
+          <span class="token string">"deps"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"jquery"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token string">"exports"</span><span class="token punctuation">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
+          <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"css/bootstrap.css"</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../scripts/text"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-templating-resources"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/aurelia-templating-resources/dist/amd"</span><span class="token punctuation">,</span>
+          <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-templating-resources"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-templating-router"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/aurelia-templating-router/dist/amd"</span><span class="token punctuation">,</span>
+          <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-templating-router"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-testing"</span><span class="token punctuation">,</span>
+          <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/aurelia-testing/dist/amd"</span><span class="token punctuation">,</span>
+          <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-testing"</span><span class="token punctuation">,</span>
+          <span class="token string">"env"</span><span class="token punctuation">:</span> <span class="token string">"dev"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <h3>A Very Stubborn Legacy Library With Plugins</h3>
 <p>Some legacy libraries may support plugins which you also want included in your bundle. In some cases these plugins depend on a global object defined by the main library, so it is important that the plugins exist later in the bundle than the main library scripts. These plugins can go in the <code>append</code> section, which works exactly the same as the <code>prepend</code> section but the scripts are appended to the end of the bundle, after all other items.  Like the <code>prepend</code> section all items are relative to the project folder, not the <code>src</code>.</p>
@@ -235,13 +352,30 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
     }
 }
 </code></pre>
+<p><strong>Setting the baseUrl</strong></p>
+<p>Sometimes you may want to keep the scripts folder somewhere other than the default location, or move the index.html file a few folders up from the project root. In that case it is possible to set the <code>baseUrl</code> property so that the build system uses the correct paths and that bundles get loaded correctly in the browser. The <code>baseUrl</code> property should be set in both the <code>platform</code> object as well as the <code>build.targets</code> object:</p>
+<code-listing heading="baseUrl">
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"targets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"web"</span><span class="token punctuation">,</span>
+        <span class="token string">"displayName"</span><span class="token punctuation">:</span> <span class="token string">"Web"</span><span class="token punctuation">,</span>
+        <span class="token string">"output"</span><span class="token punctuation">:</span> <span class="token string">"some/dir/scripts"</span><span class="token punctuation">,</span>
+        <span class="token string">"index"</span><span class="token punctuation">:</span> <span class="token string">"index.html"</span><span class="token punctuation">,</span>
+        <span class="token string">"baseUrl"</span><span class="token punctuation">:</span> <span class="token string">"some/dir/scripts"</span>
+      <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The script tag for the bundle in <code>index.html</code> file needs to point to the modified location of the scripts folder as well: <code>&lt;script src=&quot;some/dir/scripts/vendor-bundle.js&quot; data-main=&quot;aurelia-bootstrapper&quot;&gt;&lt;/script&gt;</code></p>
 </section>
 <section><h2>Styling your Application</h2><p>There are many ways to style components in Aurelia. The CLI sets up your project to only process styles inside your application's <code>src</code> folder. Those styles can then be imported into a view using Aurelia's <code>require</code> element.</p>
 <ul>
 <li>If you aren't using any CSS preprocessor, you write css and then simply require it in the view like this:</li>
 </ul>
 <code-listing heading="Requiring styles.css">
-  <source-code lang="HTML">%0A%20%20%20%20%3Crequire%20from%3D%22./styles.css%22%3E%3C/require%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./styles.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <ul>
 <li>For projects that use a CSS preprocessor (chosen from the cli setup questions):
@@ -253,7 +387,9 @@ your style file is transpiled into a module that encodes the resulting <code>css
 </li>
 </ul>
 <code-listing heading="Requiring main.sass">
-  <source-code lang="HTML">%0A%20%20%20%20%3Crequire%20from%20%3D%22./main.css%22%3E%3C/require%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    &lt;require from ="./main.css"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>Bear in mind that you can always configure things any way you want by modifying the tasks in the <code>aurelia_project/tasks</code> folder.
 For styling purposes, you can modify the <code>process-css.js</code> file.</p>

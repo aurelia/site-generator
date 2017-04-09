@@ -7,7 +7,13 @@
   <article class="markdown">
     <section><h2>Class</h2><p>You can bind an element's <code>class</code> attribute using string interpolation or with <code>.bind</code>/<code>.one-time</code>.</p>
 <code-listing heading="Class Binding">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22foo%20%24%7BisActive%20%3F%20%27active%27%20%3A%20%27%27%7D%20bar%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class.bind%3D%22isActive%20%3F%20%27active%27%20%3A%20%27%27%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20class.one-time%3D%22isActive%20%3F%20%27active%27%20%3A%20%27%27%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo ${isActive ? <span class="token punctuation">'</span>active<span class="token punctuation">'</span> : <span class="token punctuation">'</span><span class="token punctuation">'</span>} bar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>isActive ? <span class="token punctuation">'</span>active<span class="token punctuation">'</span> : <span class="token punctuation">'</span><span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class.one-time</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>isActive ? <span class="token punctuation">'</span>active<span class="token punctuation">'</span> : <span class="token punctuation">'</span><span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>To ensure maximum interoperability with other JavaScript libraries, the binding system will only add or remove classes specified in the binding expression. This ensures classes added by other code (eg via <code>classList.add(...)</code>) are preserved. This &quot;safe by default&quot; behavior comes at a small cost but can be noticeable in benchmarks or other performance critical situations like repeats with lots of elements. You can opt out of the default behavior by binding directly to the element's 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" target="_blank">className</a>
@@ -15,17 +21,55 @@
 </section>
 <section><h2>Style</h2><p>You can bind a css string or object to an element's <code>style</code> attribute. Use the <code>style</code> attribute's alias, <code>css</code> when doing string interpolation to ensure your application is compatible with Internet Explorer and Edge.</p>
 <code-listing heading="Style Binding Data">
-  <source-code lang="ES 2015/2016">%0A%20%20%20%20export%20class%20StyleData%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.styleString%20%3D%20%27color%3A%20red%3B%20background-color%3A%20blue%27%3B%0A%0A%20%20%20%20%20%20%20%20this.styleObject%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20color%3A%20%27red%27%2C%0A%20%20%20%20%20%20%20%20%20%20%27background-color%27%3A%20%27blue%27%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20StyleData%20%7B%0A%20%20%20%20%20%20styleString%3A%20string%3B%0A%20%20%20%20%20%20styleObject%3A%20any%3B%0A%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.styleString%20%3D%20%27color%3A%20red%3B%20background-color%3A%20blue%27%3B%0A%0A%20%20%20%20%20%20%20%20this.styleObject%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20color%3A%20%27red%27%2C%0A%20%20%20%20%20%20%20%20%20%20%27background-color%27%3A%20%27blue%27%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">StyleData</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>styleString <span class="token operator">=</span> <span class="token string">'color: red; background-color: blue'</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>styleObject <span class="token operator">=</span> <span class="token punctuation">{</span>
+          color<span class="token punctuation">:</span> <span class="token string">'red'</span><span class="token punctuation">,</span>
+          <span class="token string">'background-color'</span><span class="token punctuation">:</span> <span class="token string">'blue'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">StyleData</span> <span class="token punctuation">{</span>
+      styleString<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+      styleObject<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>styleString <span class="token operator">=</span> <span class="token string">'color: red; background-color: blue'</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>styleObject <span class="token operator">=</span> <span class="token punctuation">{</span>
+          color<span class="token punctuation">:</span> <span class="token string">'red'</span><span class="token punctuation">,</span>
+          <span class="token string">'background-color'</span><span class="token punctuation">:</span> <span class="token string">'blue'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="Style Binding View">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20style.bind%3D%22styleString%22%3E%3C/div%3E%0A%20%20%20%20%20%20%3Cdiv%20style.bind%3D%22styleObject%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>styleString<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>styleObject<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="Illegal Style Interpolation">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20style%3D%22width%3A%20%24%7Bwidth%7Dpx%3B%20height%3A%20%24%7Bheight%7Dpx%3B%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width: ${width}px; height: ${height}px;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="Legal Style Interpolation">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Cdiv%20css%3D%22width%3A%20%24%7Bwidth%7Dpx%3B%20height%3A%20%24%7Bheight%7Dpx%3B%22%3E%3C/div%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width: ${width}px; height: ${height}px;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 </section>
 

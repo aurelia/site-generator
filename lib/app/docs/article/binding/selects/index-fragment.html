@@ -16,100 +16,452 @@
 </ol>
 </section>
 <section><h2>Select Number</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProductId%20%3D%20null%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductId%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductId%3A%20number%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>products <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedProductId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProductId <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IProduct</span> <span class="token punctuation">{</span>
+       id<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+       name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> IProduct<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProductId<span class="token punctuation">:</span> <span class="token keyword">number</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20product%3A%3Cbr/%3E%0A%20%20%20%20%20%20%20%20%3Cselect%20value.bind%3D%22selectedProductId%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20model.bind%3D%22null%22%3EChoose...%3C/option%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.bind%3D%22product.id%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct.id%7D%20-%20%24%7Bproduct.name%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20Selected%20product%20ID%3A%20%24%7BselectedProductId%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select product:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProductId<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>null<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Choose...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product.id} - ${product.name}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      Selected product ID: ${selectedProductId}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select number demo">
-  <source-code src="example/binding-selects/single/numbers/app.js"></source-code>
+  <source-code src="example/binding-selects/single/numbers/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Select Object</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProduct%20%3D%20null%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProduct%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProduct%3A%20IProduct%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>products <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedProduct <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProduct <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IProduct</span> <span class="token punctuation">{</span>
+       id<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+       name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> IProduct<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProduct<span class="token punctuation">:</span> IProduct <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20product%3A%3Cbr/%3E%0A%20%20%20%20%20%20%20%20%3Cselect%20value.bind%3D%22selectedProduct%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20model.bind%3D%22null%22%3EChoose...%3C/option%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.bind%3D%22product%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct.id%7D%20-%20%24%7Bproduct.name%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%0A%20%20%20%20%20%20Selected%20product%3A%20%24%7BselectedProduct.id%7D%20-%20%24%7BselectedProduct.name%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select product:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProduct<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>null<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Choose...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product.id} - ${product.name}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+
+      Selected product: ${selectedProduct.id} - ${selectedProduct.name}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select object demo">
-  <source-code src="example/binding-selects/single/objects/app.js"></source-code>
+  <source-code src="example/binding-selects/single/objects/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Select Object with Matcher</h2><p>You may run into situations where the object your select element's value is bound does not have reference equality with any of the objects your option element model properties are bound to. The select's value object might &quot;match&quot; one of the option objects by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
 <code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProduct%20%3D%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%0A%20%20%20%20%20%20selectedProduct%20%3D%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20productMatcher%20%3D%20%28a%2C%20b%29%20%3D%3E%20a.id%20%3D%3D%3D%20b.id%3B%0A%0A%20%20%20%20%20%20selectedProduct%3A%20IProduct%20%3D%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>products <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>productMatcher <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span>id <span class="token operator">===</span> b<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedProduct <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      productMatcher <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span>id <span class="token operator">===</span> b<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+
+      selectedProduct <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IProduct</span> <span class="token punctuation">{</span>
+       id<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+       name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> IProduct<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      productMatcher <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span>id <span class="token operator">===</span> b<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+
+      selectedProduct<span class="token punctuation">:</span> IProduct <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20product%3A%3Cbr/%3E%0A%20%20%20%20%20%20%20%20%3Cselect%20value.bind%3D%22selectedProduct%22%20matcher.bind%3D%22productMatcher%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20model.bind%3D%22null%22%3EChoose...%3C/option%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.bind%3D%22product%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct.id%7D%20-%20%24%7Bproduct.name%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%0A%20%20%20%20%20%20Selected%20product%3A%20%24%7BselectedProduct.id%7D%20-%20%24%7BselectedProduct.name%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select product:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProduct<span class="token punctuation">"</span></span> <span class="token attr-name">matcher.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>productMatcher<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>null<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Choose...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product.id} - ${product.name}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+
+      Selected product: ${selectedProduct.id} - ${selectedProduct.name}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select object matcher demo">
-  <source-code src="example/binding-selects/single/objects-matcher/app.js"></source-code>
+  <source-code src="example/binding-selects/single/objects-matcher/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Select Boolean</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20likesTacos%20%3D%20null%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20likesTacos%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20likesTacos%20%3D%20null%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        likesTacos <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      likesTacos <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      likesTacos <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Do%20you%20like%20tacos%3F%3A%0A%20%20%20%20%20%20%20%20%3Cselect%20value.bind%3D%22likesTacos%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20model.bind%3D%22null%22%3EChoose...%3C/option%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20model.bind%3D%22true%22%3EYes%3C/option%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20model.bind%3D%22false%22%3ENo%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20likesTacos%3A%20%24%7BlikesTacos%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Do you like tacos?:
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>likesTacos<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>null<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Choose...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Yes<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>No<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      likesTacos: ${likesTacos}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select boolean demo">
-  <source-code src="example/binding-selects/single/booleans/app.js"></source-code>
+  <source-code src="example/binding-selects/single/booleans/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Select String</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20%20%20this.selectedProduct%20%3D%20%27%27%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProduct%20%3D%20%27%27%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20string%5B%5D%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProduct%3A%20string%20%3D%20%27%27%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>products <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Motherboard'</span><span class="token punctuation">,</span> <span class="token string">'CPU'</span><span class="token punctuation">,</span> <span class="token string">'Memory'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedProduct <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Motherboard'</span><span class="token punctuation">,</span> <span class="token string">'CPU'</span><span class="token punctuation">,</span> <span class="token string">'Memory'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      selectedProduct <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Motherboard'</span><span class="token punctuation">,</span> <span class="token string">'CPU'</span><span class="token punctuation">,</span> <span class="token string">'Memory'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      selectedProduct<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20product%3A%3Cbr/%3E%0A%20%20%20%20%20%20%20%20%3Cselect%20value.bind%3D%22selectedProduct%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20value%3D%22%22%3EChoose...%3C/option%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20value.bind%3D%22product%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20Selected%20product%3A%20%24%7BselectedProduct%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select product:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProduct<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Choose...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      Selected product: ${selectedProduct}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select string demo">
-  <source-code src="example/binding-selects/single/strings/app.js"></source-code>
+  <source-code src="example/binding-selects/single/strings/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Multiple Select Numbers</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20this.selectedProductIds%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductIds%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProductIds%3A%20number%5B%5D%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>products <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedProductIds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProductIds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IProduct</span> <span class="token punctuation">{</span>
+       id<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+       name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> IProduct<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProductIds<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20products%3A%0A%20%20%20%20%20%20%20%20%3Cselect%20multiple%20value.bind%3D%22selectedProductIds%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.bind%3D%22product.id%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct.id%7D%20-%20%24%7Bproduct.name%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20Selected%20product%20IDs%3A%20%24%7BselectedProductIds%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select products:
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">multiple</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProductIds<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product.id} - ${product.name}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      Selected product IDs: ${selectedProductIds}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select multiple numbers demo">
-  <source-code src="example/binding-selects/multiple/numbers/app.js"></source-code>
+  <source-code src="example/binding-selects/multiple/numbers/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Multiple Select Objects</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20interface%20IProduct%20%7B%0A%20%20%20%20%20%20%20id%3A%20number%3B%0A%20%20%20%20%20%20%20name%3A%20string%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20IProduct%5B%5D%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%20id%3A%200%2C%20name%3A%20%27Motherboard%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%201%2C%20name%3A%20%27CPU%27%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20id%3A%202%2C%20name%3A%20%27Memory%27%20%7D%2C%0A%20%20%20%20%20%20%5D%3B%0A%0A%20%20%20%20%20%20selectedProducts%3A%20IProduct%5B%5D%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        products <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        selectedProducts <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProducts <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IProduct</span> <span class="token punctuation">{</span>
+       id<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+       name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> IProduct<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Motherboard'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'CPU'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Memory'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      selectedProducts<span class="token punctuation">:</span> IProduct<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20products%3A%0A%20%20%20%20%20%20%20%20%3Cselect%20multiple%20value.bind%3D%22selectedProducts%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.bind%3D%22product%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct.id%7D%20-%20%24%7Bproduct.name%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%0A%20%20%20%20%20%20Selected%20products%3A%0A%20%20%20%20%20%20%3Cul%3E%0A%20%20%20%20%20%20%20%20%3Cli%20repeat.for%3D%22product%20of%20selectedProducts%22%3E%24%7Bproduct.id%7D%20-%20%24%7Bproduct.name%7D%3C/li%3E%0A%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select products:
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">multiple</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProducts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product.id} - ${product.name}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+
+      Selected products:
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of selectedProducts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${product.id} - ${product.name}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select multiple objects demo">
-  <source-code src="example/binding-selects/multiple/objects/app.js"></source-code>
+  <source-code src="example/binding-selects/multiple/objects/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
 <section><h2>Multiple Select Strings</h2><code-listing heading="app${context.language.fileExtension}">
-  <source-code lang="ES 2015">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20constructor%28%29%20%7B%0A%20%20%20%20%20%20%20%20this.products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20%20%20this.selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="ES 2016">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProducts%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
-  <source-code lang="TypeScript">%0A%20%20%20%20export%20class%20App%20%7B%0A%20%20%20%20%20%20products%3A%20string%5B%5D%20%3D%20%5B%27Motherboard%27%2C%20%27CPU%27%2C%20%27Memory%27%5D%3B%0A%20%20%20%20%20%20selectedProducts%3A%20string%5B%5D%20%3D%20%5B%5D%3B%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>products <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Motherboard'</span><span class="token punctuation">,</span> <span class="token string">'CPU'</span><span class="token punctuation">,</span> <span class="token string">'Memory'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedProducts <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Motherboard'</span><span class="token punctuation">,</span> <span class="token string">'CPU'</span><span class="token punctuation">,</span> <span class="token string">'Memory'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      selectedProducts <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      products<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Motherboard'</span><span class="token punctuation">,</span> <span class="token string">'CPU'</span><span class="token punctuation">,</span> <span class="token string">'Memory'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      selectedProducts<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="app.html">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20Select%20products%3A%0A%20%20%20%20%20%20%20%20%3Cselect%20multiple%20value.bind%3D%22selectedProducts%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Coption%20repeat.for%3D%22product%20of%20products%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20value.bind%3D%22product%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%24%7Bproduct%7D%0A%20%20%20%20%20%20%20%20%20%20%3C/option%3E%0A%20%20%20%20%20%20%20%20%3C/select%3E%0A%20%20%20%20%20%20%3C/label%3E%0A%20%20%20%20%20%20Selected%20products%3A%20%24%7BselectedProducts%7D%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>
+        Select products:
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">multiple</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedProducts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product of products<span class="token punctuation">"</span></span>
+                  <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            ${product}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+      Selected products: ${selectedProducts}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <au-demo heading="Select multiple strings demo">
-  <source-code src="example/binding-selects/multiple/strings/app.js"></source-code>
+  <source-code src="example/binding-selects/multiple/strings/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </option></select></select>
 </section>

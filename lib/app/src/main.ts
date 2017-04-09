@@ -13,7 +13,8 @@ export function configure(aurelia: Aurelia) {
       './resources/screen-activator',
       './resources/search-trigger',
       './resources/search-panel',
-      './resources/account-indicator'
+      './resources/account-indicator',
+      './resources/source-code'
     ]);
 
   if (environment.debug) {

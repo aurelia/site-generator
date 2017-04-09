@@ -68,7 +68,19 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <h3>Centralized Approach</h3>
 <p>Let's say we want to separate out the View and ViewModel: <code>src/users</code> contained in the skeleton and defer its loading to when the user clicks on a link to that route, you could define an async bundle as follows:</p>
 <code-listing heading="package.json">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22aurelia%22%3A%20%7B%0A%20%20%20%20%20%20%22build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22bundle%22%3A%20%22users%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22users%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token string">"bundle"</span><span class="token punctuation">:</span> <span class="token string">"users"</span><span class="token punctuation">,</span>
+            <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"users"</span><span class="token punctuation">,</span>
+            <span class="token string">"lazy"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Note that <code>path</code> is relative to the <code>src</code> of our application, but can also be an external path, such as <code>bootstrap/css/bootstrap.css</code> or <code>aurelia-plugin/some-resource.html</code>. If no extension is specified, all of <code>.js</code>, <code>.ts</code> and <code>.html</code> are tried. The <code>path</code> property may also be an <code>Array</code> with a list of paths to be contained in a bundle.</p>
@@ -82,7 +94,11 @@ It is imperative to remember that the code will not end-up in the bundle, or the
 <h3>In-View Approach</h3>
 <p>For quickly declaring a certain <code>&lt;require&gt;</code> as lazy (deferred loading), or in testing scenarios, you can use Webpack-specific custom attributes that will be analyzed by Aurelia's Webpack plugin and forwarded as bundling information to Webpack:</p>
 <code-listing heading="View">
-  <source-code lang="HTML">%0A%20%20%20%20%3Ctemplate%3E%0A%20%20%20%20%20%20%3Crequire%20from%3D%22./blur-image%22%20lazy%20bundle%3D%22blur-image%22%3E%0A%20%20%20%20%3C/template%3E%0A%20%20</source-code>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./blur-image<span class="token punctuation">"</span></span> <span class="token attr-name">lazy</span> <span class="token attr-name">bundle</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>blur-image<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
 </code-listing>
 <p>Both the <code>lazy</code> and the <code>bundle</code> attributes are optional.
 If you do not specify the bundle name, the chunk number will be used instead.</p>
@@ -95,33 +111,90 @@ Since the syntax is still relatively new, many Aurelia plugins do not declare th
 <p>There might reasons not to declare those resources in all cases,for example when the plugin is to be partially consumed (e.g. only one Button element from a package containing multiple Aurelia elements).</p>
 <p>If we'd like to consume such external resources, we should declare them ourselves, for example:</p>
 <code-listing heading="package.json">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22aurelia%22%3A%20%7B%0A%20%20%20%20%20%20%22build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%22aurelia-some-ui-plugin/dropdown%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22aurelia-some-ui-plugin/checkbox%22%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"aurelia-some-ui-plugin/dropdown"</span><span class="token punctuation">,</span>
+          <span class="token string">"aurelia-some-ui-plugin/checkbox"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 <p>You can also combine both features to separate out plugins or resources for lazy-loading:</p>
 <code-listing heading="package.json">
-  <source-code lang="JavaScript">%0A%20%20%20%20%22aurelia%22%3A%20%7B%0A%20%20%20%20%20%20%22build%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%22resources%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%22aurelia-animator-css%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22bundle%22%3A%20%22animator%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22path%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20lets%20say%20we%20only%20use%20the%20checkbox%20from%20within%20subpage1%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20we%20want%20those%20to%20be%20bundled%20together%20in%20a%20bundle%20called%3A%20%22subpage1%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22aurelia-some-ui-plugin/checkbox%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22./items/subpage1%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22bundle%22%3A%20%22subpage1%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22lazy%22%3A%20true%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%22aurelia-some-ui-plugin/dropdown%22%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-animator-css"</span><span class="token punctuation">,</span>
+            <span class="token string">"bundle"</span><span class="token punctuation">:</span> <span class="token string">"animator"</span><span class="token punctuation">,</span>
+            <span class="token string">"lazy"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+              <span class="token comment" spellcheck="true">// lets say we only use the checkbox from within subpage1</span>
+              <span class="token comment" spellcheck="true">// we want those to be bundled together in a bundle called: "subpage1"</span>
+              <span class="token string">"aurelia-some-ui-plugin/checkbox"</span><span class="token punctuation">,</span>
+              <span class="token string">"./items/subpage1"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string">"bundle"</span><span class="token punctuation">:</span> <span class="token string">"subpage1"</span><span class="token punctuation">,</span>
+            <span class="token string">"lazy"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token string">"aurelia-some-ui-plugin/dropdown"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 </section>
 <section><h2>Chunking Code When It Is Not Loaded By Aurelia</h2><p>If you have code that you'd like to load asynchronously in your ${context.language.name} files, you can make use of the System loader compliant syntax to create split-points.
 Example use-cases for this are: conditionally loading foreign language support based on the user's selection or conditionally polyfilling certain features.</p>
 <p>Such code-splitting is used to polyfill fetch support in the <code>users</code> file of skeleton-navigation. Let's take a look at how it works:</p>
 <code-listing heading="users.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20const%20fetch%20%3D%20%21self.fetch%20%3F%20System.import%28%27isomorphic-fetch%27%29%20%3A%20Promise.resolve%28self.fetch%29%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">const</span> fetch <span class="token operator">=</span> <span class="token operator">!</span>self<span class="token punctuation">.</span>fetch <span class="token operator">?</span> System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'isomorphic-fetch'</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>fetch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <p>The <code>System.import</code> method is the asynchronous equivalent of the ES2015 <code>import</code>. It returns a <code>Promise</code>. The example above will only load the <code>isomorphic-fetch</code> polyfill in case <code>fetch</code> is not already available in the browser.</p>
 <h3>System.import and TypeScript</h3>
 <p>When using TypeScript and the <code>System.import</code> API means you do not get any Typing information. As a workaround you can add custom definitions in a stub file, defining all of the asynchronous imports explicitly. To allow Typings for asynchronously loaded <code>aurelia-framework</code> and <code>isomorphic-fetch</code> packages, see the following example:</p>
 <code-listing heading="custom_typings/system.d.ts">
-  <source-code lang="TypeScript">%0A%20%20%20%20declare%20module%20%27system%27%20%7B%0A%20%20%20%20%20%20import%20fetch%20%3D%20require%28%27isomorphic-fetch%27%29%3B%0A%20%20%20%20%20%20import%20*%20as%20Aurelia%20from%20%27aurelia-framework%27%3B%0A%0A%20%20%20%20%20%20/**%0A%20%20%20%20%20%20%20*%20List%20your%20dynamically%20imported%20modules%20to%20get%20typing%20support%0A%20%20%20%20%20%20%20*/%0A%20%20%20%20%20%20interface%20System%20%7B%0A%20%20%20%20%20%20%20%20import%28name%3A%20string%29%3A%20Promise%3Cany%3E%3B%0A%20%20%20%20%20%20%20%20import%28name%3A%20%27aurelia-framework%27%29%3A%20Promise%3Ctypeof%20Aurelia%3E%3B%0A%20%20%20%20%20%20%20%20import%28name%3A%20%27isomorphic-fetch%27%29%3A%20Promise%3Ctypeof%20fetch%3E%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20global%20%7B%0A%20%20%20%20%20%20%20%20var%20System%3A%20System%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20</source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">'system'</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span> fetch <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'isomorphic-fetch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">import</span> <span class="token operator">*</span> as Aurelia <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+      <span class="token comment" spellcheck="true">/**
+       * List your dynamically imported modules to get typing support
+       */</span>
+      <span class="token keyword">interface</span> <span class="token class-name">System</span> <span class="token punctuation">{</span>
+        <span class="token keyword">import</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+        <span class="token keyword">import</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">typeof</span> Aurelia<span class="token operator">></span><span class="token punctuation">;</span>
+        <span class="token keyword">import</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">'isomorphic-fetch'</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">typeof</span> fetch<span class="token operator">></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      global <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> System<span class="token punctuation">:</span> System<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
 </code-listing>
 </section>
 <section><h2>Duplicate Modules in Multiple Bundles</h2><p>By default, the <code>webpack.config.js</code> uses the <code>CommonsChunkPlugin</code> under the hood, to eliminate code duplication across bundles by placing common code in the <code>app</code> bundle. If you have additional custom entry bundles, or somehow misused or misconfigured them, you may end up with duplicated modules in multiple bundles.</p>
 <p>Creating multiple bundles requires us to be extra careful because multiple bundles may contain duplicate modules. Before explaining that, we need to understand how bundling works behind the scenes a bit. Let's consider the example modules <code>A</code> and <code>B</code> below:</p>
 <code-listing heading="a.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20import%20b%20from%20%27./b%27%3B%0A%20%20%20%20console.log%28%27Hi%2C%20I%20am%20module%20A%27%29%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> b <span class="token keyword">from</span> <span class="token string">'./b'</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hi, I am module A'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="b.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20console.log%28%27Hi%2C%20I%20am%20module%20B%27%29%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hi, I am module B'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <p>When we want to bundle <code>a.js</code>, Webpack will analyze the source code of the module and find the dependencies by tracing the <code>import</code> statements. In this case, Webpack will yield <code>b.js</code> as the dependency of <code>a.js</code> and ultimately place <code>b.js</code> in the bundle.</p>
 <p>To have full control over how Webpack distributes and de-duplicates the modules in the chunks, please refer to 
@@ -133,7 +206,53 @@ Example use-cases for this are: conditionally loading foreign language support b
  that allows us to quickly stich together a number of configuration objects and supports presets. In more advanced use-cases, we can still override its configuration values, or replace the presets with custom configuration.</p>
 <p>Let's take a look at how a configuration file can be put together:</p>
 <code-listing heading="webpack.config.js">
-  <source-code lang="JavaScript">%0A%20%20%20%20const%20generateConfig%20%3D%20require%28%27@easy-webpack/core%27%29.default%3B%0A%0A%20%20%20%20//%20...%0A%20%20%20%20//%20let%27s%20assume%20these%20variables%20are%20defined%3A%0A%20%20%20%20//%20%20%20rootDir%2C%20srcDir%2C%20title%2C%20baseUrl%0A%20%20%20%20//%20...%0A%0A%20%20%20%20const%20baseConfig%20%3D%20%7B%0A%20%20%20%20%20%20//%20here%20we%27d%20put%20our%20base%20configuration%0A%20%20%20%20%20%20//%20such%20as%20the%20entry%20bundles%20and%20output%20path%0A%20%20%20%20%7D%3B%0A%20%20%20%20config%20%3D%20generateConfig%28%0A%20%20%20%20%20%20baseConfig%2C%0A%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-env-production%27%29%28%29%2C%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-aurelia%27%29%0A%20%20%20%20%20%20%20%20%28%7Broot%3A%20rootDir%2C%20src%3A%20srcDir%2C%20title%3A%20title%2C%20baseUrl%3A%20baseUrl%7D%29%2C%0A%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-javascript%27%29%28%29%2C%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-html%27%29%28%29%2C%0A%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-css%27%29%0A%20%20%20%20%20%20%20%20%28%7B%20filename%3A%20%27styles.css%27%2C%20allChunks%3A%20true%2C%20sourceMap%3A%20false%20%7D%29%2C%0A%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-fonts-and-images%27%29%28%29%2C%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-global-bluebird%27%29%28%29%2C%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-global-jquery%27%29%28%29%2C%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-global-regenerator%27%29%28%29%2C%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-generate-index-html%27%29%0A%20%20%20%20%20%20%20%20%28%7Bminify%3A%20true%7D%29%2C%0A%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-uglify%27%29%0A%20%20%20%20%20%20%20%20%28%7Bdebug%3A%20false%7D%29%2C%0A%0A%20%20%20%20%20%20require%28%27@easy-webpack/config-common-chunks-simple%27%29%0A%20%20%20%20%20%20%28%7BappChunkName%3A%20%27app%27%2C%20firstChunk%3A%20%27aurelia-bootstrap%27%7D%29%0A%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20//%20here%20we%20can%20override%20or%20append%20any%20setting%20or%20plugin%0A%20%20%20%20%20%20%20%20//%20that%20can%20be%20manually%20set%20in%20a%20webpack.config.js%20file%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%29%3B%0A%0A%20%20%20%20module.exports%20%3D%20config%3B%0A%20%20</source-code>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">const</span> generateConfig <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/core'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// ...</span>
+    <span class="token comment" spellcheck="true">// let's assume these variables are defined:</span>
+    <span class="token comment" spellcheck="true">//   rootDir, srcDir, title, baseUrl</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+
+    <span class="token keyword">const</span> baseConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// here we'd put our base configuration</span>
+      <span class="token comment" spellcheck="true">// such as the entry bundles and output path</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    config <span class="token operator">=</span> <span class="token function">generateConfig</span><span class="token punctuation">(</span>
+      baseConfig<span class="token punctuation">,</span>
+
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-env-production'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-aurelia'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token punctuation">{</span>root<span class="token punctuation">:</span> rootDir<span class="token punctuation">,</span> src<span class="token punctuation">:</span> srcDir<span class="token punctuation">,</span> title<span class="token punctuation">:</span> title<span class="token punctuation">,</span> baseUrl<span class="token punctuation">:</span> baseUrl<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-javascript'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-html'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-css'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token punctuation">{</span> filename<span class="token punctuation">:</span> <span class="token string">'styles.css'</span><span class="token punctuation">,</span> allChunks<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> sourceMap<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-fonts-and-images'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-global-bluebird'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-global-jquery'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-global-regenerator'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-generate-index-html'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token punctuation">{</span>minify<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-uglify'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token punctuation">{</span>debug<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+      <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-common-chunks-simple'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">(</span><span class="token punctuation">{</span>appChunkName<span class="token punctuation">:</span> <span class="token string">'app'</span><span class="token punctuation">,</span> firstChunk<span class="token punctuation">:</span> <span class="token string">'aurelia-bootstrap'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+      <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// here we can override or append any setting or plugin</span>
+        <span class="token comment" spellcheck="true">// that can be manually set in a webpack.config.js file</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    module<span class="token punctuation">.</span>exports <span class="token operator">=</span> config<span class="token punctuation">;</span>
+  </code></pre></source-code>
 </code-listing>
 <p>As you can see, adding each <code>easy-webpack</code> preset package is like adding a &quot;feature&quot; to the configuration file, without needing to know much more.</p>
 <p>The names of the packages are self-explanatory. The skeleton-navigation config file is a bit more advanced, in that it generates different configs depending on the set environment, since you might want slightly different settings for production, testing and development. For example, you'd want to minify resources in production, but keep fast loading Source Maps in development.</p>
