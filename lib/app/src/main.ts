@@ -14,7 +14,7 @@ export function configure(aurelia: Aurelia) {
       './resources/search-trigger',
       './resources/search-panel',
       './resources/account-indicator',
-      './resources/source-code'
+      './resources/code-listing'
     ]);
 
   if (environment.debug) {

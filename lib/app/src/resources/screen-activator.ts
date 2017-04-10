@@ -71,6 +71,8 @@ export class ScreenActivator {
         let swapStrategy = SwapStrategies.after;
         let previousViews = (<any>this.viewSlot).children.slice();
 
+        view.bind(newValue, null);
+
         return swapStrategy(this.viewSlot, previousViews, () => this.viewSlot.add(view));
       });
   }

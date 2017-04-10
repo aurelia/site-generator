@@ -28,6 +28,7 @@ export class Configuration {
   ];
   
   public activePersona: Persona = this.availablePersonas[0];
+  public activeLanguage: string = 'ES Next';
 
   public discuss: Location;
   public blog: Location;
