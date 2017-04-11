@@ -551,6 +551,25 @@ section.api {
     .markdown section > p {
       margin-top: 0;
       margin-bottom: 16px; }
+    .markdown section code {
+      color: #0086b3;
+      padding: .2em .4em;
+      margin: 0;
+      font-size: 85%;
+      background-color: rgba(0, 0, 0, 0.04);
+      border-radius: 3px;
+      font-family: 'Source Code Pro'; }
+    .markdown section a {
+      color: #EC2685;
+      font-family: 'Source Code Pro'; }
+    .markdown section strong {
+      font-weight: 700; }
+    .markdown section ul {
+      padding: 0 0 0 2em;
+      list-style-type: disc;
+      margin-bottom: 16px; }
+      .markdown section ul li {
+        display: list-item; }
     .markdown section pre {
       padding: 16px;
       overflow: auto;
@@ -571,25 +590,6 @@ section.api {
       word-wrap: normal;
       background-color: transparent;
       border: 0; }
-    .markdown section code {
-      color: #0086b3;
-      padding: .2em .4em;
-      margin: 0;
-      font-size: 85%;
-      background-color: rgba(0, 0, 0, 0.04);
-      border-radius: 3px;
-      font-family: 'Source Code Pro'; }
-    .markdown section a {
-      color: #EC2685;
-      font-family: 'Source Code Pro'; }
-    .markdown section strong {
-      font-weight: 700; }
-    .markdown section ul {
-      padding: 0 0 0 2em;
-      list-style-type: disc;
-      margin-bottom: 16px; }
-      .markdown section ul li {
-        display: list-item; }
     .markdown section .info, .markdown section .warning, .markdown section .danger {
       padding: 16px 20px;
       font-size: 18px;
@@ -649,6 +649,30 @@ section.api {
           background-image: url("./images/alert/danger.svg"); }
       .markdown section .danger h4 {
         color: #A31F07; }
+    .markdown section code-listing {
+      background-color: #fff;
+      display: block;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2); }
+      .markdown section code-listing .title-bar {
+        max-height: 40px;
+        min-height: 40px;
+        padding: 0;
+        z-index: 1;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+        .markdown section code-listing .title-bar h4 {
+          font-size: 18px;
+          color: #5B5B5B;
+          line-height: 40px;
+          margin: 0 16px; }
+      .markdown section code-listing .code-container pre {
+        background-color: #FCFCFC;
+        margin: 0;
+        padding: 0; }
+        .markdown section code-listing .code-container pre code {
+          background-color: #FCFCFC; }
 
 search-panel {
   position: absolute;

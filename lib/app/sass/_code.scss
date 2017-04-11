@@ -40,7 +40,6 @@ code[class*="language-"]::selection, code[class*="language-"] ::selection {
   }
 }
 
-
 pre[class*="language-"] {
   padding: 1em;
   margin: .5em 0;
@@ -51,7 +50,6 @@ pre[class*="language-"] {
 pre[class*="language-"] {
   background-color: $code-background;
 }
-
 
 :not(pre) > code[class*="language-"] {
   padding: .1em;
