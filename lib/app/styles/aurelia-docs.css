@@ -409,8 +409,9 @@ section.article, section.article-group {
     padding: 16px 0 16px 0;
     background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%); }
   section.article header h2, section.article-group header h2 {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 200;
     padding: 16px;
     background: #f4f4f4;
     box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
@@ -521,8 +522,9 @@ section.api {
     padding: 16px 0 16px 0;
     background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%); }
   section.api header h2 {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 200;
     padding: 16px;
     background: #f4f4f4;
     box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
