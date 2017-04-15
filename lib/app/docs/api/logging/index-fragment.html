@@ -1,135 +1,37 @@
 <section class="api">
   <header>
     <h1>Logging</h1>
+    <h2>A minimal but effective logging mechanism with support for log levels and pluggable log appenders.</h2>
   </header>
 
-  <article class="markdown">
-    <h1>Logging API</h1>
-<h2>Classes</h2>
-<h3>Logger</h3>
-<p>A logger logs messages to a set of appenders, depending on the log level that is set.</p>
-<h4>Properties</h4>
-<ul>
-<li><code>id:string</code> - The id that the logger was created with.</li>
-<li><code>level:number</code> - The logging severity level for this logger</li>
-</ul>
-<h4>Methods</h4>
-<ul>
-<li>
-<p><code>debug(message: string, rest: any): void</code> - Logs a debug message.</p>
-<ul>
-<li><code>message:string</code> - The message to log.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-<li>
-<p><code>error(message: string, rest: any): void</code> - Logs an error.</p>
-<ul>
-<li><code>message:string</code> - The message to log.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-<li>
-<p><code>info(message: string, rest: any): void</code> - Logs info.</p>
-<ul>
-<li><code>message:string</code> - The message to log.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-<li>
-<p><code>setLevel(level: number): void</code> - Sets the level of logging for this logger instance</p>
-<ul>
-<li><code>level:number</code> - Matches a value of logLevel specifying the level of logging.</li>
-</ul>
-</li>
-<li>
-<p><code>warn(message: string, rest: any): void</code> - Logs a warning.</p>
-<ul>
-<li><code>message:string</code> - The message to log.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-</ul>
-<h2>Interfaces</h2>
-<h3>Appender</h3>
-<p>Implemented by classes which wish to append log data to a target data store.</p>
-<h4>Properties</h4>
-<h4>Methods</h4>
-<ul>
-<li>
-<p><code>debug(logger: Logger, rest: any): void</code> - Appends a debug log.</p>
-<ul>
-<li><code>logger:Logger</code> - The source logger.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-<li>
-<p><code>error(logger: Logger, rest: any): void</code> - Appends an error log.</p>
-<ul>
-<li><code>logger:Logger</code> - The source logger.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-<li>
-<p><code>info(logger: Logger, rest: any): void</code> - Appends an info log.</p>
-<ul>
-<li><code>logger:Logger</code> - The source logger.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-<li>
-<p><code>warn(logger: Logger, rest: any): void</code> - Appends a warning log.</p>
-<ul>
-<li><code>logger:Logger</code> - The source logger.</li>
-<li><code>rest:any</code> - The data to log.</li>
-</ul>
-</li>
-</ul>
-<h3>LogLevel</h3>
-<p>Specifies the available logging levels.</p>
-<h4>Properties</h4>
-<ul>
-<li><code>debug:number</code> - Log all messages.</li>
-<li><code>error:number</code> - Log only error messages.</li>
-<li><code>info:number</code> - Log informational messages or above.</li>
-<li><code>none:number</code> - No logging.</li>
-<li><code>warn:number</code> - Log warnings messages or above.</li>
-</ul>
-<h4>Methods</h4>
-<h2>Variables</h2>
-<ul>
-<li><code>logLevel:LogLevel</code> - Specifies the available logging levels.</li>
-</ul>
-<h2>Functions</h2>
-<ul>
-<li>
-<p><code>addAppender(appender: Appender): void</code> - Adds an appender capable of processing logs and channeling them to an output.</p>
-<ul>
-<li><code>appender:Appender</code> - An appender instance to begin processing logs with.</li>
-</ul>
-</li>
-<li>
-<p><code>getLevel(): number</code> - Gets the level of logging of ALL the application loggers.</p>
-</li>
-<li>
-<p><code>getLogger(id: string): Logger</code> - Gets the instance of a logger associated with a particular id (or creates one if it doesn't already exist).</p>
-<ul>
-<li><code>id:string</code> - The id of the logger you wish to get an instance of.</li>
-</ul>
-</li>
-<li>
-<p><code>removeAppender(appender: Appender): void</code> - Removes an appender</p>
-<ul>
-<li><code>appender:Appender</code> - An appender that has been added previously.</li>
-</ul>
-</li>
-<li>
-<p><code>setLevel(level: number): void</code> - Sets the level of logging for ALL the application loggers.</p>
-<ul>
-<li><code>level:number</code> - Matches a value of logLevel specifying the level of logging.</li>
-</ul>
-</li>
-</ul>
+  <article>
+      <h3 class="api-category-header">Classes</h3>
 
+      <ul class="api-category-list">
+          <li class="class-item"><a href="docs/api/logging/class/Logger">Logger</a></li>
+      </ul>
+
+      <h3 class="api-category-header">Interfaces</h3>
+
+      <ul class="api-category-list">
+          <li class="interface-item"><a href="docs/api/logging/interface/Appender">Appender</a></li>
+          <li class="interface-item"><a href="docs/api/logging/interface/LogLevel">LogLevel</a></li>
+      </ul>
+
+      <h3 class="api-category-header">Constants</h3>
+
+      <ul class="api-category-list">
+          <li class="constant-item"><a href="docs/api/logging/constant/logLevel">logLevel</a></li>
+      </ul>
+
+      <h3 class="api-category-header">Functions</h3>
+
+      <ul class="api-category-list">
+          <li class="function-item"><a href="docs/api/logging/function/addAppender">addAppender</a></li>
+          <li class="function-item"><a href="docs/api/logging/function/getLevel">getLevel</a></li>
+          <li class="function-item"><a href="docs/api/logging/function/getLogger">getLogger</a></li>
+          <li class="function-item"><a href="docs/api/logging/function/removeAppender">removeAppender</a></li>
+          <li class="function-item"><a href="docs/api/logging/function/setLevel">setLevel</a></li>
+      </ul>
   </article>
 </section>

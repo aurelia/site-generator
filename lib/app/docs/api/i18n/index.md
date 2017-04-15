@@ -280,6 +280,30 @@ No description available.
 
 
 
+### RtBindingBehavior
+
+No description available.
+
+#### Properties
+
+
+#### Methods
+
+
+* `bind(binding?: any, source?: any): any` - 
+  * `binding?:any` - No description available
+  * `source?:any` - No description available
+
+
+* `unbind(binding?: any, source?: any): any` - 
+  * `binding?:any` - No description available
+  * `source?:any` - No description available
+
+
+* `inject(): any` - 
+
+
+
 ### RtValueConverter
 
 No description available.

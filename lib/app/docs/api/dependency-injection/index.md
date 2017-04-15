@@ -459,7 +459,7 @@ Used to allow functions/classes to specify custom dependency resolution logic.
   * `value:Registration` - No description available.
 
 
-* `singleton(keyOrRegisterInChild?: any, registerInChild?: boolean): any` - Decorator: Specifies to register the decorated item with a &quot;singleton&quot; lieftime.
+* `singleton(keyOrRegisterInChild?: any, registerInChild?: boolean): any` - Decorator: Specifies to register the decorated item with a &quot;singleton&quot; lifetime.
   * `keyOrRegisterInChild?:any` - No description available.
   * `registerInChild?:boolean` - No description available.
 

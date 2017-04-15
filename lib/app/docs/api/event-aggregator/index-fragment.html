@@ -1,62 +1,28 @@
 <section class="api">
   <header>
     <h1>Event Aggregator</h1>
+    <h2>A lightweight pub/sub messaging system for app-wide or per-object loosely coupled events.</h2>
   </header>
 
-  <article class="markdown">
-    <h1>Event Aggregator API</h1>
-<h2>Classes</h2>
-<h3>EventAggregator</h3>
-<p>Enables loosely coupled publish/subscribe messaging.</p>
-<h4>Properties</h4>
-<h4>Methods</h4>
-<ul>
-<li>
-<p><code>publish(event: , data?: any): void</code> - Publishes a message.</p>
-<ul>
-<li><code>event:</code> - The event or channel to publish to.</li>
-<li><code>data?:any</code> - The data to publish on the channel.</li>
-</ul>
-</li>
-<li>
-<p><code>subscribe(event: , callback: Function): Subscription</code> - Subscribes to a message channel or message type.</p>
-<ul>
-<li><code>event:</code> - The event channel or event data type.</li>
-<li><code>callback:Function</code> - The callback to be invoked when when the specified message is published.</li>
-</ul>
-</li>
-<li>
-<p><code>subscribeOnce(event: , callback: Function): Subscription</code> - Subscribes to a message channel or message type, then disposes the subscription automatically after the first message is received.</p>
-<ul>
-<li><code>event:</code> - The event channel or event data type.</li>
-<li><code>callback:Function</code> - The callback to be invoked when when the specified message is published.</li>
-</ul>
-</li>
-</ul>
-<h2>Interfaces</h2>
-<h3>Subscription</h3>
-<p>Represents a disposable subsciption to an EventAggregator event.</p>
-<h4>Properties</h4>
-<h4>Methods</h4>
-<ul>
-<li><code>dispose(): void</code> - Disposes the subscription.</li>
-</ul>
-<h2>Variables</h2>
-<h2>Functions</h2>
-<ul>
-<li>
-<p><code>configure(config: Object): void</code> - Configures a global EA by merging functionality into the Aurelia instance.</p>
-<ul>
-<li><code>config:Object</code> - The Aurelia Framework configuration object used to configure the plugin.</li>
-</ul>
-</li>
-<li>
-<p><code>includeEventsIn(obj: Object): EventAggregator</code> - Includes EA functionality into an object instance.</p>
-<ul>
-<li><code>obj:Object</code> - The object to mix Event Aggregator functionality into.</li>
-</ul>
-</li>
-</ul>
+  <article>
+      <h3 class="api-category-header">Classes</h3>
 
+      <ul class="api-category-list">
+          <li class="class-item"><a href="docs/api/event-aggregator/class/EventAggregator">EventAggregator</a></li>
+      </ul>
+
+      <h3 class="api-category-header">Interfaces</h3>
+
+      <ul class="api-category-list">
+          <li class="interface-item"><a href="docs/api/event-aggregator/interface/Subscription">Subscription</a></li>
+      </ul>
+
+
+      <h3 class="api-category-header">Functions</h3>
+
+      <ul class="api-category-list">
+          <li class="function-item"><a href="docs/api/event-aggregator/function/configure">configure</a></li>
+          <li class="function-item"><a href="docs/api/event-aggregator/function/includeEventsIn">includeEventsIn</a></li>
+      </ul>
   </article>
 </section>

@@ -1,118 +1,23 @@
 <section class="api">
   <header>
     <h1>Loader-Default</h1>
+    <h2>A default implementation of the loader interface compatible with system.js and require-based loaders.</h2>
   </header>
 
-  <article class="markdown">
-    <h1>Loader-Default API</h1>
-<h2>Classes</h2>
-<h3>DefaultLoader</h3>
-<p>A default implementation of the Loader abstraction which works with SystemJS, RequireJS and Dojo Loader.</p>
-<h4>Properties</h4>
-<ul>
-<li><code>textPluginName:string</code> - The name of the underlying native loader plugin used to load text.</li>
-</ul>
-<h4>Methods</h4>
-<ul>
-<li>
-<p><code>addPlugin(pluginName: string, implementation: LoaderPlugin): void</code> - Registers a plugin with the loader.</p>
-<ul>
-<li><code>pluginName:string</code> - The name of the plugin.</li>
-<li><code>implementation:LoaderPlugin</code> - The plugin implementation.</li>
-</ul>
-</li>
-<li>
-<p><code>applyPluginToUrl(url: string, pluginName: string): string</code> - Alters a module id so that it includes a plugin loader.</p>
-<ul>
-<li><code>url:string</code> - The url of the module to load.</li>
-<li><code>pluginName:string</code> - The plugin to apply to the module id.</li>
-</ul>
-</li>
-<li>
-<p><code>getOrCreateTemplateRegistryEntry(address: string): TemplateRegistryEntry</code> - Gets or creates a TemplateRegistryEntry for the provided address.</p>
-<ul>
-<li><code>address:string</code> - The address of the template.</li>
-</ul>
-</li>
-<li>
-<p><code>loadAllModules(ids: string): Promise</code> - Loads a collection of modules.</p>
-<ul>
-<li><code>ids:string</code> - The set of module ids to load.</li>
-</ul>
-</li>
-<li>
-<p><code>loadModule(id: string): Promise</code> - Loads a module.</p>
-<ul>
-<li><code>id:string</code> - The module id to normalize.</li>
-</ul>
-</li>
-<li>
-<p><code>loadTemplate(url: string): Promise</code> - Loads a template.</p>
-<ul>
-<li><code>url:string</code> - The url of the template to load.</li>
-</ul>
-</li>
-<li>
-<p><code>loadText(url: string): Promise</code> - Loads a text-based resource.</p>
-<ul>
-<li><code>url:string</code> - The url of the text file to load.</li>
-</ul>
-</li>
-<li>
-<p><code>map(id: string, source: string): void</code> - Maps a module id to a source.</p>
-<ul>
-<li><code>id:string</code> - The module id.</li>
-<li><code>source:string</code> - The source to map the module to.</li>
-</ul>
-</li>
-<li>
-<p><code>normalize(moduleId: string, relativeTo: string): Promise</code> - Normalizes a module id.</p>
-<ul>
-<li><code>moduleId:string</code> - The module id to normalize.</li>
-<li><code>relativeTo:string</code> - What the module id should be normalized relative to.</li>
-</ul>
-</li>
-<li>
-<p><code>normalizeSync(moduleId: string, relativeTo: string): string</code> - Normalizes a module id.</p>
-<ul>
-<li><code>moduleId:string</code> - The module id to normalize.</li>
-<li><code>relativeTo:string</code> - What the module id should be normalized relative to.</li>
-</ul>
-</li>
-<li>
-<p><code>useTemplateLoader(templateLoader: TemplateLoader): void</code> - Instructs the loader to use a specific TemplateLoader instance for loading templates</p>
-<ul>
-<li><code>templateLoader:TemplateLoader</code> - The instance of TemplateLoader to use for loading templates.</li>
-</ul>
-</li>
-</ul>
-<h3>TextTemplateLoader</h3>
-<p>An implementation of the TemplateLoader interface implemented with text-based loading.</p>
-<h4>Properties</h4>
-<h4>Methods</h4>
-<ul>
-<li><code>loadTemplate(loader: Loader, entry: TemplateRegistryEntry): Promise</code> - Loads a template.
-<ul>
-<li><code>loader:Loader</code> - The loader that is requesting the template load.</li>
-<li><code>entry:TemplateRegistryEntry</code> - The TemplateRegistryEntry to load and populate with a template.</li>
-</ul>
-</li>
-</ul>
-<h2>Interfaces</h2>
-<h3>TemplateLoader</h3>
-<p>Represents a template loader.</p>
-<h4>Properties</h4>
-<h4>Methods</h4>
-<ul>
-<li><code>loadTemplate(loader: Loader, entry: TemplateRegistryEntry): Promise</code> - Loads a template.
-<ul>
-<li><code>loader:Loader</code> - The loader that is requesting the template load.</li>
-<li><code>entry:TemplateRegistryEntry</code> - The TemplateRegistryEntry to load and populate with a template.</li>
-</ul>
-</li>
-</ul>
-<h2>Variables</h2>
-<h2>Functions</h2>
+  <article>
+      <h3 class="api-category-header">Classes</h3>
+
+      <ul class="api-category-list">
+          <li class="class-item"><a href="docs/api/loader-default/class/DefaultLoader">DefaultLoader</a></li>
+          <li class="class-item"><a href="docs/api/loader-default/class/TextTemplateLoader">TextTemplateLoader</a></li>
+      </ul>
+
+      <h3 class="api-category-header">Interfaces</h3>
+
+      <ul class="api-category-list">
+          <li class="interface-item"><a href="docs/api/loader-default/interface/TemplateLoader">TemplateLoader</a></li>
+      </ul>
+
 
   </article>
 </section>

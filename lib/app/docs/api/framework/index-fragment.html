@@ -1,145 +1,23 @@
 <section class="api">
   <header>
     <h1>Framework</h1>
+    <h2>The aurelia framework brings together all the required core aurelia libraries into a ready-to-go application-building platform.</h2>
   </header>
 
-  <article class="markdown">
-    <h1>Framework API</h1>
-<h2>Classes</h2>
-<h3>Aurelia</h3>
-<p>The framework core that provides the main Aurelia object.</p>
-<h4>Properties</h4>
-<ul>
-<li><code>container:Container</code> - The root DI container used by the application.</li>
-<li><code>host:Element</code> - The DOM Element that Aurelia will attach to.</li>
-<li><code>loader:Loader</code> - /**
-The loader used by the application.</li>
-<li><code>resources:ViewResources</code> - The global view resources used by the application.</li>
-<li><code>use:FrameworkConfiguration</code> - The configuration used during application startup.</li>
-</ul>
-<h4>Methods</h4>
-<ul>
-<li>
-<p><code>enhance(bindingContext?: Object, applicationHost?: ): Promise</code> - Enhances the host's existing elements with behaviors and bindings.</p>
-<ul>
-<li><code>bindingContext?:Object</code> - A binding context for the enhanced elements.</li>
-<li><code>applicationHost?:</code> - The DOM object that Aurelia will enhance.</li>
-</ul>
-</li>
-<li>
-<p><code>setRoot(root?: string, applicationHost?: ): Promise</code> - Instantiates the root component and adds it to the DOM.</p>
-<ul>
-<li><code>root?:string</code> - The root component to load upon bootstrap.</li>
-<li><code>applicationHost?:</code> - The DOM object that Aurelia will attach to.</li>
-</ul>
-</li>
-<li>
-<p><code>start(): Promise</code> - Loads plugins, then resources, and then starts the Aurelia instance.</p>
-</li>
-</ul>
-<h3>FrameworkConfiguration</h3>
-<p>Manages configuring the aurelia framework instance.</p>
-<h4>Properties</h4>
-<ul>
-<li><code>aurelia:Aurelia</code> - The aurelia instance.</li>
-<li><code>container:Container</code> - The root DI container used by the application.</li>
-</ul>
-<h4>Methods</h4>
-<ul>
-<li>
-<p><code>apply(): Promise</code> - Loads and configures the plugins registered with this instance.</p>
-</li>
-<li>
-<p><code>basicConfiguration(): FrameworkConfiguration</code> - Sets up a basic Aurelia configuration. This is equivalent to calling `.defaultBindingLanguage().defaultResources().eventAggregator();`</p>
-</li>
-<li>
-<p><code>defaultBindingLanguage(): FrameworkConfiguration</code> - Plugs in the default binding language from aurelia-templating-binding.</p>
-</li>
-<li>
-<p><code>defaultResources(): FrameworkConfiguration</code> - Plugs in the default templating resources (if, repeat, show, compose, etc.) from aurelia-templating-resources.</p>
-</li>
-<li>
-<p><code>developmentLogging(): FrameworkConfiguration</code> - Plugs in the ConsoleAppender and sets the log level to debug.</p>
-</li>
-<li>
-<p><code>eventAggregator(): FrameworkConfiguration</code> - Plugs in the event aggregator from aurelia-event-aggregator.</p>
-</li>
-<li>
-<p><code>feature(plugin: string, config?: any): FrameworkConfiguration</code> - Configures an internal feature plugin before Aurelia starts.</p>
-<ul>
-<li><code>plugin:string</code> - The folder for the internal plugin to configure (expects an index.js in that folder).</li>
-<li><code>config?:any</code> - The configuration for the specified plugin.</li>
-</ul>
-</li>
-<li>
-<p><code>globalName(resourcePath: string, newName: string): FrameworkConfiguration</code> - Renames a global resource that was imported.</p>
-<ul>
-<li><code>resourcePath:string</code> - The path to the resource.</li>
-<li><code>newName:string</code> - The new name.</li>
-</ul>
-</li>
-<li>
-<p><code>globalResources(resources: ): FrameworkConfiguration</code> - Adds globally available view resources to be imported into the Aurelia framework.</p>
-<ul>
-<li><code>resources:</code> - The relative module id to the resource. (Relative to the plugin's installer.)</li>
-</ul>
-</li>
-<li>
-<p><code>history(): FrameworkConfiguration</code> - Plugs in the default history implementation from aurelia-history-browser.</p>
-</li>
-<li>
-<p><code>instance(type: any, instance: any): FrameworkConfiguration</code> - Adds an existing object to the framework's dependency injection container.</p>
-<ul>
-<li><code>type:any</code> - The object type of the dependency that the framework will inject.</li>
-<li><code>instance:any</code> - The existing instance of the dependency that the framework will inject.</li>
-</ul>
-</li>
-<li>
-<p><code>plugin(plugin: string, config?: any): FrameworkConfiguration</code> - Configures an external, 3rd party plugin before Aurelia starts.</p>
-<ul>
-<li><code>plugin:string</code> - The ID of the 3rd party plugin to configure.</li>
-<li><code>config?:any</code> - The configuration for the specified plugin.</li>
-</ul>
-</li>
-<li>
-<p><code>postTask(task: Function): FrameworkConfiguration</code> - Adds an async function that runs after the plugins are run.</p>
-<ul>
-<li><code>task:Function</code> - The function to run after start.</li>
-</ul>
-</li>
-<li>
-<p><code>preTask(task: Function): FrameworkConfiguration</code> - Adds an async function that runs before the plugins are run.</p>
-<ul>
-<li><code>task:Function</code> - The function to run before start.</li>
-</ul>
-</li>
-<li>
-<p><code>router(): FrameworkConfiguration</code> - Plugs in the router from aurelia-templating-router.</p>
-</li>
-<li>
-<p><code>singleton(type: any, implementation?: Function): FrameworkConfiguration</code> - Adds a singleton to the framework's dependency injection container.</p>
-<ul>
-<li><code>type:any</code> - The object type of the dependency that the framework will inject.</li>
-<li><code>implementation?:Function</code> - The constructor function of the dependency that the framework will inject.</li>
-</ul>
-</li>
-<li>
-<p><code>standardConfiguration(): FrameworkConfiguration</code> - Sets up the standard Aurelia configuration. This is equivalent to calling `.defaultBindingLanguage().defaultResources().eventAggregator().history().router();`</p>
-</li>
-<li>
-<p><code>transient(type: any, implementation?: Function): FrameworkConfiguration</code> - Adds a transient to the framework's dependency injection container.</p>
-<ul>
-<li><code>type:any</code> - The object type of the dependency that the framework will inject.</li>
-<li><code>implementation?:Function</code> - The constructor function of the dependency that the framework will inject.</li>
-</ul>
-</li>
-</ul>
-<h2>Interfaces</h2>
-<h2>Variables</h2>
-<ul>
-<li><code>LogManager:any</code> - The log manager.</li>
-</ul>
-<h2>Functions</h2>
+  <article>
+      <h3 class="api-category-header">Classes</h3>
+
+      <ul class="api-category-list">
+          <li class="class-item"><a href="docs/api/framework/class/Aurelia">Aurelia</a></li>
+          <li class="class-item"><a href="docs/api/framework/class/FrameworkConfiguration">FrameworkConfiguration</a></li>
+      </ul>
+
+
+      <h3 class="api-category-header">Constants</h3>
+
+      <ul class="api-category-list">
+          <li class="constant-item"><a href="docs/api/framework/constant/LogManager">LogManager</a></li>
+      </ul>
 
   </article>
 </section>

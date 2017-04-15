@@ -1,9 +1,48 @@
 <section class="api">
   <header>
-    <h1>{{name}}</h1>
+    <h1>{{api.name}}</h1>
+    <h2>{{api.package.description}}</h2>
   </header>
 
-  <article class="markdown">
-    {{{content}}}
+  <article>
+    {{#if classes.length}}
+      <h3 class="api-category-header">Classes</h3>
+
+      <ul class="api-category-list">
+        {{#each classes}}
+          <li class="class-item"><a href="{{../api.dest}}/class/{{name}}">{{name}}</a></li>
+        {{/each}} 
+      </ul>
+    {{/if}}
+
+    {{#if interfaces.length}}
+      <h3 class="api-category-header">Interfaces</h3>
+
+      <ul class="api-category-list">
+        {{#each interfaces}}
+          <li class="interface-item"><a href="{{../api.dest}}/interface/{{name}}">{{name}}</a></li>
+        {{/each}} 
+      </ul>
+    {{/if}}
+
+    {{#if variables.length}}
+      <h3 class="api-category-header">Constants</h3>
+
+      <ul class="api-category-list">
+        {{#each variables}}
+          <li class="constant-item"><a href="{{../api.dest}}/constant/{{name}}">{{name}}</a></li>
+        {{/each}} 
+      </ul>
+    {{/if}}
+
+    {{#if functions.length}}
+      <h3 class="api-category-header">Functions</h3>
+
+      <ul class="api-category-list">
+        {{#each functions}}
+          <li class="function-item"><a href="{{../api.dest}}/function/{{name}}">{{name}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
   </article>
 </section>

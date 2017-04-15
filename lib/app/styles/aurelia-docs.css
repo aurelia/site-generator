@@ -511,20 +511,53 @@ li.article-card {
 
 section.api {
   margin-left: 325px; }
-  section.api header {
-    background: #6d50a2;
-    background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%);
+  section.api header h1 {
     text-align: center;
+    letter-spacing: .15rem;
     color: white;
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
-    padding: 16px 0 8px 0;
-    letter-spacing: .15rem; }
-    section.api header h1 {
-      font-size: 42px;
-      font-weight: bold;
-      margin-bottom: 16px; }
+    font-size: 42px;
+    font-weight: bold;
+    padding: 16px 0 16px 0;
+    background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%); }
+  section.api header h2 {
+    font-size: 14px;
+    line-height: 16px;
+    padding: 16px;
+    background: #f4f4f4;
+    box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
   section.api article {
-    padding: 16px; }
+    padding: 32px; }
+    section.api article .api-category-header {
+      color: #EC2685;
+      font-size: 24px;
+      line-height: 1.225;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      padding-bottom: .3em;
+      margin-bottom: 16px; }
+    section.api article .api-category-list {
+      columns: 2;
+      margin-bottom: 32px; }
+      section.api article .api-category-list li {
+        font-size: 20px;
+        line-height: 32px;
+        margin-bottom: 4px;
+        background-position: left center;
+        background-repeat: no-repeat;
+        padding-left: 42px;
+        /* Adjust according to image size to push text across. */ }
+        section.api article .api-category-list li a {
+          color: #6d50a2;
+          opacity: .8;
+          text-decoration: none; }
+      section.api article .api-category-list .class-item {
+        background-image: url("./images/api/class.svg"); }
+      section.api article .api-category-list .interface-item {
+        background-image: url("./images/api/interface.svg"); }
+      section.api article .api-category-list .constant-item {
+        background-image: url("./images/api/field.svg"); }
+      section.api article .api-category-list .function-item {
+        background-image: url("./images/api/method.svg"); }
 
 .markdown {
   color: #646464;
