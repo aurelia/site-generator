@@ -1,4 +1,4 @@
-# Metadata API
+# Metadata Module
 
 ## Classes
 

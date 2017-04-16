@@ -1,4 +1,4 @@
-# History-Browser API
+# History-Browser Module
 
 ## Classes
 

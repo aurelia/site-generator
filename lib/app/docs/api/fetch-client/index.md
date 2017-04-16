@@ -1,4 +1,4 @@
-# Fetch API
+# Fetch Module
 
 ## Classes
 

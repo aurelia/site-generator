@@ -1,4 +1,4 @@
-# Platform Abstraction Layer (PAL) API
+# Platform Abstraction Layer (PAL) Module
 
 ## Classes
 

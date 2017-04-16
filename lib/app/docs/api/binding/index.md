@@ -1,4 +1,4 @@
-# Binding API
+# Binding Module
 
 ## Classes
 

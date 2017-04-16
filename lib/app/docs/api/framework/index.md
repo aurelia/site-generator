@@ -1,4 +1,4 @@
-# Framework API
+# Framework Module
 
 ## Classes
 

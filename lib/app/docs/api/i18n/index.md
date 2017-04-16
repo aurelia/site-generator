@@ -1,4 +1,4 @@
-# I18N API
+# I18N Module
 
 ## Classes
 

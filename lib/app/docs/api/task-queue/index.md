@@ -1,4 +1,4 @@
-# Task Queue API
+# Task Queue Module
 
 ## Classes
 

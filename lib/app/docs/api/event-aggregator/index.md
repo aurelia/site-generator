@@ -1,4 +1,4 @@
-# Event Aggregator API
+# Event Aggregator Module
 
 ## Classes
 

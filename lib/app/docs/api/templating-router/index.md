@@ -1,4 +1,4 @@
-# Templating-Router API
+# Templating-Router Module
 
 ## Classes
 

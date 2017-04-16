@@ -1,4 +1,4 @@
-# {{name}} API
+# {{name}} Module
 
 ## Classes
 

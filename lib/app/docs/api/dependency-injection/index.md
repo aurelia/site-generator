@@ -1,4 +1,4 @@
-# Dependency Injection API
+# Dependency Injection Module
 
 ## Classes
 

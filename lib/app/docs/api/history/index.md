@@ -1,4 +1,4 @@
-# History API
+# History Module
 
 ## Classes
 

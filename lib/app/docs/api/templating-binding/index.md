@@ -1,4 +1,4 @@
-# Templating-Binding API
+# Templating-Binding Module
 
 ## Classes
 

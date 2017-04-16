@@ -1,4 +1,4 @@
-# Loader-Default API
+# Loader-Default Module
 
 ## Classes
 

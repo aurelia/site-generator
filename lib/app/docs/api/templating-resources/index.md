@@ -1,4 +1,4 @@
-# Templating-Resources API
+# Templating-Resources Module
 
 ## Classes
 

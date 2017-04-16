@@ -1,4 +1,4 @@
-# Path API
+# Path Module
 
 ## Classes
 

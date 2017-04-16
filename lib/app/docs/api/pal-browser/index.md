@@ -1,4 +1,4 @@
-# PAL-Browser API
+# PAL-Browser Module
 
 ## Classes
 

@@ -1,4 +1,4 @@
-# Logging API
+# Logging Module
 
 ## Classes
 

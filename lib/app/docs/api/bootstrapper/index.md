@@ -1,4 +1,4 @@
-# Bootstrapper API
+# Bootstrapper Module
 
 ## Classes
 

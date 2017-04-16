@@ -1,4 +1,4 @@
-# Logging-Console API
+# Logging-Console Module
 
 ## Classes
 
