@@ -25,11 +25,11 @@
       </ul>
     {{/if}}
 
-    {{#if variables.length}}
+    {{#if constants.length}}
       <h3 class="api-category-header">Constants</h3>
 
       <ul class="api-category-list">
-        {{#each variables}}
+        {{#each constants}}
           <li class="constant-item"><a href="{{../api.dest}}/constant/{{name}}">{{name}}</a></li>
         {{/each}} 
       </ul>

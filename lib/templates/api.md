@@ -54,9 +54,9 @@
 
 {{/each}}
 
-## Variables
+## Constants
 
-{{#each variables}}
+{{#each constants}}
 * `{{name}}:{{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 {{/each}}
 
