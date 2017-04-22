@@ -3,14 +3,29 @@ import {autoinject, transient} from 'aurelia-dependency-injection';
 import {InlineViewStrategy} from 'aurelia-templating';
 import {join} from 'aurelia-path';
 import {Location} from '../configuration';
+import 'http://blog.aurelia.io/shared/ghost-url.min.js?v=7013f8d3ca';
+
+declare var ghost: any;
+ghost.init({
+  clientId: "ghost-frontend",
+  clientSecret: "92ecab236b7e"
+});
 
 @autoinject
 @transient()
 export class HomeScreen {
   item: Location = null;
   strategy: InlineViewStrategy;
+  blog;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.http.fetch(ghost.url.api('posts', {limit: 5}))
+      .then(response => response.json())
+      .then(blog => {
+        this.blog = blog;
+        console.log(blog)
+      });
+  }
 
   withItem(item: Location) {
     this.item = item;

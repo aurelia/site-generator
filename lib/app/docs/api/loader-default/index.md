@@ -102,7 +102,7 @@ Represents a template loader.
 
 
 
-## Variables
+## Constants
 
 
 ## Functions

@@ -1,0 +1,21 @@
+section.home {
+  padding: 32px;
+
+  header {
+    h1 {
+      color: $primary-color;
+      font-size: 64px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      text-align: center;
+      color: $primary-text-color;
+      font-size: 24px;
+      font-style: italic;
+      line-height: 32px;
+      margin: 0 32px;
+    }
+  }
+}

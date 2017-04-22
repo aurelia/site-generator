@@ -883,7 +883,7 @@ object take precedence over members of the bindingContext object.
 
 
 
-## Variables
+## Constants
 
 * `sourceContext:string` - A context used when invoking a binding&#x27;s callable API to notify
 the binding that the context is a &quot;source update&quot;.

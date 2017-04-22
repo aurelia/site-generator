@@ -106,7 +106,7 @@ Provides information about how to handle an anchor event.
 
 
 
-## Variables
+## Constants
 
 
 ## Functions

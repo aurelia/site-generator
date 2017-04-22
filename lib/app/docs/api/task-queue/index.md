@@ -53,7 +53,7 @@ Either a Function or a class with a call method that will do work when dequeued.
 
 
 
-## Variables
+## Constants
 
 
 ## Functions

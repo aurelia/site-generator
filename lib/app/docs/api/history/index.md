@@ -52,7 +52,7 @@ The options that can be specified as part of a history navigation request.
 
 
 
-## Variables
+## Constants
 
 
 ## Functions

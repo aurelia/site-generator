@@ -205,7 +205,7 @@ and optionally allows adding custom metadata used by the build step.
 
 
 
-## Variables
+## Constants
 
 * `DOM:Dom` - The singleton instance of the Dom API.
 * `FEATURE:Feature` - The singleton instance of the Feature discovery API.

@@ -95,7 +95,7 @@ No description available.
 ## Interfaces
 
 
-## Variables
+## Constants
 
 
 ## Functions

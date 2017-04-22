@@ -116,7 +116,7 @@ Represents a plugin to the module loader.
 
 
 
-## Variables
+## Constants
 
 
 ## Functions

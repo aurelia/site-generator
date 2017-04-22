@@ -751,7 +751,7 @@ A strategy is for repeating a template over an iterable or iterable-like object.
 
 
 
-## Variables
+## Constants
 
 * `aureliaHideClassName:any` - No description available.
 * `lifecycleOptionalBehaviors:any` - Behaviors that do not require the composition lifecycle callbacks when replacing

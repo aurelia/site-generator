@@ -417,7 +417,7 @@ No description available.
 ## Interfaces
 
 
-## Variables
+## Constants
 
 * `assignObjectToKeys:any` - No description available.
 * `extend:any` - No description available.

@@ -49,7 +49,7 @@ Represents a disposable subsciption to an EventAggregator event.
 
 
 
-## Variables
+## Constants
 
 
 ## Functions

@@ -398,7 +398,7 @@ Used to allow functions/classes to specify custom dependency resolution logic.
 
 
 
-## Variables
+## Constants
 
 * `_emptyParameters:any` - No description available.
 * `resolver:Function &amp; { decorates?: any; }` - Decorator: Indicates that the decorated class/object is a custom resolver.

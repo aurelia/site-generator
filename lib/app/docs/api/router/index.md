@@ -855,7 +855,7 @@ specifying the moduleId to load into that viewPort.  The values may optionally i
 
 
 
-## Variables
+## Constants
 
 * `activationStrategy:any` - The strategy to use when activating modules during navigation.
 * `pipelineStatus:any` - The status of a Pipeline.

@@ -929,4 +929,19 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help; }
 
+section.home {
+  padding: 32px; }
+  section.home header h1 {
+    color: #6d50a2;
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 12px; }
+  section.home header h2 {
+    text-align: center;
+    color: #646464;
+    font-size: 24px;
+    font-style: italic;
+    line-height: 32px;
+    margin: 0 32px; }
+
 /*# sourceMappingURL=aurelia-docs.css.map */

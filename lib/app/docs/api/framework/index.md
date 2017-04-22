@@ -118,7 +118,7 @@ Manages configuring the aurelia framework instance.
 ## Interfaces
 
 
-## Variables
+## Constants
 
 * `LogManager:any` - The log manager.
 

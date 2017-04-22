@@ -6,7 +6,7 @@
 ## Interfaces
 
 
-## Variables
+## Constants
 
 * `starting:any` - A promise that represents the bootstrapper&#x27;s startup process.
 It resolves when the process has finished starting.

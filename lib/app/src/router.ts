@@ -39,7 +39,7 @@ export class Router {
       let matchedAPI = this.config.findApiItem(url);
       if (matchedAPI) {
         this.ea.publish(new ActivateTab('api'));
-        this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, fragment)));
+        this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI)));
         this.ea.publish(new ShowMenu(matchedAPI));
       } else {
         this.navigateHome();

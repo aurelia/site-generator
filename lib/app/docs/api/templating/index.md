@@ -1543,7 +1543,7 @@ Implemented by classes that describe how a view factory should be loaded.
 
 
 
-## Variables
+## Constants
 
 * `SwapStrategies:any` - No description available.
 * `animationEvent:any` - List the events that an Animator should raise.

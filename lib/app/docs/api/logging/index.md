@@ -99,7 +99,7 @@ Specifies the available logging levels.
 
 
 
-## Variables
+## Constants
 
 * `logLevel:LogLevel` - Specifies the available logging levels.
 

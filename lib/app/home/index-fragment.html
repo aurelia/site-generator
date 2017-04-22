@@ -1,1 +1,26 @@
-<h1>Home</h1>
+<section class="home">
+  <header>
+    <h1>Welcome to the Aurelia Hub!</h1>
+    <h2>
+      This is a branching off point for digging into the various aspects of Aurelia. Here you will find
+      How To's, the API Reference, our community forum and much more...
+    </h2>
+  </header>
+
+  <article>
+
+    <section>
+      <h3>The Latest from the Aurelia Blog</h3>
+      <ul>
+        <li repeat.for="post of blog.posts">
+          <a href="http://blog.aurelia.io${post.url}" target="_blank">
+            <h4>${post.title}</h4>
+            <p>
+
+            </p>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </article>
+</section>

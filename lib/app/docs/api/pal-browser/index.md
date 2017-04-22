@@ -6,7 +6,7 @@
 ## Interfaces
 
 
-## Variables
+## Constants
 
 
 ## Functions

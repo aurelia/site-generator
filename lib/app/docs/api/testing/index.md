@@ -119,7 +119,7 @@ all child views, live bindings, behaviors and more.
 ## Interfaces
 
 
-## Variables
+## Constants
 
 
 ## Functions

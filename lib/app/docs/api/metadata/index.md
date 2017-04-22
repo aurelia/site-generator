@@ -118,7 +118,7 @@ If the validation fails, a message should be returned which directs the develope
 
 
 
-## Variables
+## Constants
 
 * `metadata:MetadataType` - Provides helpers for working with metadata.
 
