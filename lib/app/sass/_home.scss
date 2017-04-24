@@ -1,4 +1,4 @@
-section.home {
+.home-screen {
   padding: 32px;
 
   header {
@@ -16,6 +16,38 @@ section.home {
       font-style: italic;
       line-height: 32px;
       margin: 0 32px;
+    }
+
+    margin-bottom: 32px;
+  }
+
+  article {
+    display: flex;
+
+    h3 {
+      color: $accent-color;
+      font-size: 24px;
+      line-height: 1.225;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+      padding-bottom: .3em;
+      margin-bottom: 16px;
+    }
+
+    section {
+      width: 50%;
+      margin: 32px;
+    }
+
+    .client-bound-zone {
+      transition: opacity .3s;
+
+      &.visible {
+        opacity: 1;
+      }
+
+      &.hidden {
+        opacity: 0;
+      }
     }
   }
 }

@@ -571,7 +571,7 @@ section.api {
     margin-bottom: 16px;
     padding: 16px 0; }
     .markdown section h2 {
-      color: #EC2685;
+      color: #ed2b88;
       font-size: 24px;
       line-height: 1.225;
       border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -595,7 +595,7 @@ section.api {
       border-radius: 3px;
       font-family: 'Source Code Pro'; }
     .markdown section a {
-      color: #EC2685;
+      color: #ed2b88;
       font-family: 'Source Code Pro'; }
     .markdown section strong {
       font-weight: 700; }
@@ -929,19 +929,39 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help; }
 
-section.home {
+.home-screen {
   padding: 32px; }
-  section.home header h1 {
-    color: #6d50a2;
-    font-size: 64px;
-    text-align: center;
-    margin-bottom: 12px; }
-  section.home header h2 {
-    text-align: center;
-    color: #646464;
-    font-size: 24px;
-    font-style: italic;
-    line-height: 32px;
-    margin: 0 32px; }
+  .home-screen header {
+    margin-bottom: 32px; }
+    .home-screen header h1 {
+      color: #6d50a2;
+      font-size: 64px;
+      text-align: center;
+      margin-bottom: 12px; }
+    .home-screen header h2 {
+      text-align: center;
+      color: #646464;
+      font-size: 24px;
+      font-style: italic;
+      line-height: 32px;
+      margin: 0 32px; }
+  .home-screen article {
+    display: flex; }
+    .home-screen article h3 {
+      color: #ed2b88;
+      font-size: 24px;
+      line-height: 1.225;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      padding-bottom: .3em;
+      margin-bottom: 16px; }
+    .home-screen article section {
+      width: 50%;
+      margin: 32px; }
+    .home-screen article .client-bound-zone {
+      transition: opacity .3s; }
+      .home-screen article .client-bound-zone.visible {
+        opacity: 1; }
+      .home-screen article .client-bound-zone.hidden {
+        opacity: 0; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */
