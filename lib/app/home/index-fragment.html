@@ -18,16 +18,22 @@
 
     <section class="client-bound-zone ${blog ? 'visible' : 'hidden'}">
       <h3>The Latest from the Aurelia Blog</h3>
-      <ul>
-        <li repeat.for="post of blog.posts">
+      <ul class="post-list">
+        <li repeat.for="post of blog.posts" class="post-item">
           <a href="http://blog.aurelia.io${post.url}" target="_blank">
-            <h4>${post.title}</h4>
+            <h4 class="post-title">${post.title}</h4>
             <p>
-
+              Published ${post.published_at}
             </p>
           </a>
         </li>
       </ul>
+
+      <div>
+        <a class="newsletter-button" title="" href="http://eepurl.com/ces50j">
+          Aurelia Newsletter Sign Up
+        </a>
+      </div>
     </section>
   </article>
 </section>

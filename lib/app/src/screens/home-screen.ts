@@ -21,7 +21,11 @@ export class HomeScreen {
   constructor(private http: HttpClient) {
     this.http.fetch(ghost.url.api('posts', {limit: 5}))
       .then(response => response.json())
-      .then(blog => {
+      .then((blog: any) => {
+        blog.posts.forEach(item => {
+           let d = new Date(item.published_at);
+           item.published_at = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+        });
         this.blog = blog;
         console.log(blog)
       });
