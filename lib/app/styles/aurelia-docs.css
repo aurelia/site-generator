@@ -957,19 +957,19 @@ pre[class*="language-"] {
     .home-screen article section {
       width: 50%;
       margin: 32px; }
-    .home-screen article .post-list .post-item {
+    .home-screen article .list .item {
       border-left: 2px solid #6d50a2;
       margin: 12px 0;
       padding-left: 8px;
       color: #6d50a2; }
-      .home-screen article .post-list .post-item .post-title {
+      .home-screen article .list .item .title {
         font-size: 22px;
         line-height: 26px;
         margin-bottom: 4px; }
-      .home-screen article .post-list .post-item p {
+      .home-screen article .list .item p {
         font-style: italic;
         color: #646464; }
-      .home-screen article .post-list .post-item a {
+      .home-screen article .list .item a {
         text-decoration: none;
         color: inherit; }
     .home-screen article .newsletter-button {

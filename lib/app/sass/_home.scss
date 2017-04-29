@@ -38,14 +38,14 @@
       margin: 32px;
     }
 
-    .post-list {
-      .post-item {
+    .list {
+      .item {
         border-left: 2px solid $primary-color;
         margin: 12px 0;
         padding-left: 8px;
         color: $primary-color;
 
-        .post-title {
+        .title {
           font-size: 22px;
           line-height: 26px;
           margin-bottom: 4px;

@@ -421,6 +421,7 @@ No description available.
 
 * `assignObjectToKeys:any` - No description available.
 * `extend:any` - No description available.
+* `isInteger:any` - No description available.
 * `translations:any` - No description available.
 
 ## Functions

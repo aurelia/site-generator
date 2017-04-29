@@ -153,7 +153,7 @@ be slight differences. The following listings show the configuration for first t
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
       aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 </code></pre></source-code>
 </code-listing>
 <code-listing heading="Registering the Plugin - using the i18next-xhr-backend">
@@ -204,6 +204,23 @@ be slight differences. The following listings show the configuration for first t
       ns<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'translation'</span><span class="token punctuation">,</span><span class="token string">'nav'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
       defaultNS<span class="token punctuation">:</span> <span class="token string">'translation'</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Reflect-Metadata Compatibility</h3>
+<p>If you are using 
+<a href="https://www.npmjs.com/package/reflect-metadata" target="_blank">reflect-metadata</a>
+, there is an outstanding 
+<a href="https://github.com/aurelia/i18n/issues/209" target="_blank">compatibility issue</a>
+ which is resolved by ensuring <code>reflect-metadata</code> is loaded before Aurelia is initialized. If you are using SystemJS, this can be achieved in your <code>index.html</code> as follows:</p>
+<code-listing heading="Ensuring reflect-metadata is loaded first">
+  <source-code lang="HTML"><pre class="language-markup"><code>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+      System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'reflect-metadata'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
   </code></pre></source-code>
 </code-listing>
 </section>
@@ -782,7 +799,24 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Bundle Translation Files</h2><p>When bundling is used, the built-in backend will read the translations from the bundle with the aurelia loader. Make sure that the <code>translation.json</code> files are packed in the bundle using the text module.</p>
+<section><h2>Bundle Translation Files</h2><p>When bundling is used, the built-in backend will read the translations from the bundle with the aurelia loader. Make sure that the <code>translation.json</code> files are packed in the bundle using the text module, by changing the <code>aurelia.json</code> and adding <code>.json</code> as an extension for the text plugin:</p>
+<pre><code class="language-json">&quot;loader&quot;: {
+			&quot;type&quot;: &quot;require&quot;,
+			&quot;configTarget&quot;: &quot;vendor-bundle.js&quot;,
+			&quot;includeBundleMetadataInConfig&quot;: &quot;auto&quot;,
+			&quot;plugins&quot;: [
+				{
+					&quot;name&quot;: &quot;text&quot;,
+					&quot;extensions&quot;: [
+						&quot;.html&quot;,
+						&quot;.css&quot;,
+						&quot;.json&quot;
+					],
+					&quot;stub&quot;: true
+				}
+			]
+		},
+</code></pre>
 <h3>Using JSPM</h3>
 <p>If you're using JSPM as your module loader, the bundle configuration might look like.</p>
 <pre><code class="language-json">

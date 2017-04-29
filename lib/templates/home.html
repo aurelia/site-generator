@@ -9,19 +9,27 @@
 
   <article>
     <section>
-      <h3>Top Articles</h3>
-
-      <ul>
-        
+      <h3>Featured</h3>
+      <ul class="list">
+        {{#each featured}}
+          <li class="item">
+            <a href="{{links.static}}">
+              <h4 class="title">{{name}}</h4>
+              <p>
+                By {{author.name}}
+              </p>
+            </a>
+        </li>
+        {{/each}}
       </ul>
     </section>
 
     <section class="client-bound-zone ${blog ? 'visible' : 'hidden'}">
       <h3>The Latest from the Aurelia Blog</h3>
-      <ul class="post-list">
-        <li repeat.for="post of blog.posts" class="post-item">
+      <ul class="list">
+        <li repeat.for="post of blog.posts" class="item">
           <a href="http://blog.aurelia.io${post.url}" target="_blank">
-            <h4 class="post-title">${post.title}</h4>
+            <h4 class="title">${post.title}</h4>
             <p>
               Published ${post.published_at}
             </p>
