@@ -11,20 +11,27 @@ export class SideBar {
 
   $viewOne: HTMLElement;
   $viewTwo: HTMLElement;
-  $currentView: HTMLElement;
+  $currentView: HTMLElement = null;
 
   constructor(private config: Configuration, private ea: EventAggregator, private history: History) {
     ea.subscribe(ShowMenu, (msg:ShowMenu) => {
+      let newItems = msg.item.items || msg.item.parent.items;
+      let oldItems = this.menu && this.menu.items;
       let backward = isBackward(this.menu, msg.item);
       
       this.menu = {
         config: this.config,
         activeItem: msg.item,
-        items: msg.item.items || msg.item.parent.items,
+        items: newItems,
         select: (item) => this.select(item)
       };
 
-      this.showMenu(this.menu, backward);
+      if (newItems !== oldItems) {
+        this.showMenu(this.menu, backward, !this.isActive && this.$currentView !== null);
+      } else {
+        this.$currentView['au'].controller.viewModel.menu = this.menu;
+      }
+      
       this.isActive = true;
     });
 
@@ -41,8 +48,8 @@ export class SideBar {
     }
   }
 
-  showMenu(menu, backward = false) {
-    if (this.$currentView) {
+  showMenu(menu, backward = false, skipAnimation = false) {
+    if (this.$currentView && !skipAnimation) {
       let newContent = this.$currentView === this.$viewOne ? this.$viewTwo : this.$viewOne;
       let oldContent = this.$currentView === this.$viewOne ? this.$viewOne : this.$viewTwo;
       this.$currentView = newContent;
