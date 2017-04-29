@@ -12,7 +12,10 @@ export function configure(aurelia: Aurelia) {
       './resources/side-bar-view.html',
       './resources/screen-activator',
       './resources/search-trigger',
+      './resources/search-box',
       './resources/search-panel',
+      './resources/no-search-results.html',
+      './resources/api-search-results.html',
       './resources/account-indicator',
       './resources/code-listing'
     ]);

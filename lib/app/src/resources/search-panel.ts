@@ -3,37 +3,29 @@ import {autoinject} from 'aurelia-dependency-injection';
 import {observable} from 'aurelia-binding';
 import {ShowSearch, HideSearch} from '../messages/shell';
 import {SearchEngine} from '../backend/search-engine';
+import {SearchBox} from './search-box';
 
 @autoinject
 export class SearchPanel {
   isActive = false;
-  searchBox: HTMLInputElement;
   searchResults;
   onHide = event => this.hide();
-
-  @observable value: string = '';
+  searchBox: SearchBox;
+  query: string;
 
   constructor(ea: EventAggregator, private searchEngine: SearchEngine) { 
     ea.subscribe(ShowSearch, () => this.show());
     ea.subscribe(HideSearch, () => this.hide());
   }
 
-  valueChanged(newValue) {
-    this.search(newValue);
-  }
+  search(event) {
+    this.query = event.detail;
 
-  search(query) {
-    if (!query) {
+    if (!this.query) {
       this.searchResults = null;
     } else {
-      this.searchEngine.search(query).then(x => this.searchResults = x);
-      console.log(query);
+      this.searchEngine.search(this.query).then(x => this.searchResults = x);
     }
-  }
-
-  clear() {
-    this.value = '';
-    this.searchBox.focus();
   }
 
   show() {

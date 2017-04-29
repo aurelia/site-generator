@@ -27,7 +27,6 @@ export class HomeScreen {
            item.published_at = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
         });
         this.blog = blog;
-        console.log(blog)
       });
   }
 

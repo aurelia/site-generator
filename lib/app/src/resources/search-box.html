@@ -1,0 +1,25 @@
+<template>
+  <header>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+      height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+      <g>
+        <path d="M9,18c2.131,0,4.089-0.749,5.633-1.992l7.658,7.697c0.389,0.392,1.021,0.393,1.414,0.003
+          c0.392-0.39,0.393-1.023,0.004-1.414l-7.668-7.706C17.264,13.052,18,11.111,18,9c0-4.963-4.037-9-9-9S0,4.037,0,9
+          C0,13.962,4.037,18,9,18z M9,2c3.859,0,7,3.14,7,7c0,3.859-3.141,7-7,7c-3.86,0-7-3.141-7-7C2,5.14,5.14,2,9,2z" />
+      </g>
+    </svg>
+
+    <input type="text" value.two-way="value & debounce" placeholder="${placeholder}" ref="searchBox">
+
+    <a click.trigger="clear($event)" class="close" show.bind="value">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+        <g id="Filled_Icons">
+		      <path d="M23.707,22.293L13.414,12L23.706,1.707c0.391-0.39,0.391-1.023,0-1.414c-0.391-0.391-1.023-0.391-1.414,0L12,10.586
+			L1.706,0.292c-0.391-0.39-1.023-0.39-1.414,0c-0.391,0.391-0.391,1.023,0,1.414L10.586,12L0.292,22.294
+			c-0.39,0.39-0.391,1.024,0,1.414c0.391,0.391,1.024,0.39,1.414,0L12,13.414l10.293,10.292c0.39,0.391,1.023,0.391,1.414,0
+			C24.098,23.316,24.097,22.683,23.707,22.293z"/>
+	      </g>
+      </svg>
+    </a>
+  </header>
+</template>

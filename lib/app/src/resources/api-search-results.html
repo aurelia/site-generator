@@ -1,0 +1,12 @@
+<template bindable="results">
+  <ul>
+    <li repeat.for="item of results">
+      <a href.bind="item.href">
+        <h4>${item.apiName}</h4>
+        <span><b>${item.apiKind}</b></span>
+        <span if.bind="item.ownerName"><b>of ${item.ownerName}</b> </span>
+        <span><b>From:</b> <i>${item.libraryName}</i></span>
+      </a>
+    </li>
+  </ul>
+</template>

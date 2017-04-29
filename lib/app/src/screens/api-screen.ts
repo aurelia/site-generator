@@ -3,14 +3,17 @@ import {autoinject, transient} from 'aurelia-dependency-injection';
 import {InlineViewStrategy} from 'aurelia-templating';
 import {join} from 'aurelia-path';
 import {DocItem} from '../configuration';
+import {SearchEngine} from '../backend/search-engine';
 
 @autoinject
 @transient()
 export class APIScreen {
   item: DocItem = null;
   strategy: InlineViewStrategy;
+  searchResults;
+  query: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private searchEngine: SearchEngine) { }
 
   withItem(item: DocItem) {
     this.item = item;
@@ -27,5 +30,15 @@ export class APIScreen {
 
   getViewStrategy() {
     return this.strategy;
+  }
+
+  search(event) {
+    this.query = event.detail;
+
+    if (!this.query) {
+      this.searchResults = null;
+    } else {
+      this.searchEngine.searchAPI(this.query).then(x => this.searchResults = x);
+    }
   }
 }
