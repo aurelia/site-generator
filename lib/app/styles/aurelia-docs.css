@@ -799,6 +799,9 @@ no-search-results {
       margin-left: 50px;
       line-height: 1.5em; }
 
+.api-search-area {
+  margin: 32px 128px; }
+
 .search-results {
   overflow-y: auto; }
   .search-results h3 {
