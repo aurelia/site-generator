@@ -154,83 +154,16 @@
       <section class="article">
   <header>
     <h1>APIs</h1>
+    <h2>Type any class, method, function or constant name to search across all Aurelia APIs.</h2>
   </header>
 
-  <article>
-    <ul>
-      <li>
-        <a href="docs/api/binding"><strong>Binding</strong></a> - A modern databinding library for JavaScript and HTML.
-      </li>
-      <li>
-        <a href="docs/api/bootstrapper"><strong>Bootstrapper</strong></a> - Sets up the default configuration for the aurelia framework and gets you up and running quick and easy.
-      </li>
-      <li>
-        <a href="docs/api/dependency-injection"><strong>Dependency Injection</strong></a> - A lightweight, extensible dependency injection container for JavaScript.
-      </li>
-      <li>
-        <a href="docs/api/event-aggregator"><strong>Event Aggregator</strong></a> - A lightweight pub/sub messaging system for app-wide or per-object loosely coupled events.
-      </li>
-      <li>
-        <a href="docs/api/fetch-client"><strong>Fetch</strong></a> - A simple client based on the Fetch standard.
-      </li>
-      <li>
-        <a href="docs/api/framework"><strong>Framework</strong></a> - The aurelia framework brings together all the required core aurelia libraries into a ready-to-go application-building platform.
-      </li>
-      <li>
-        <a href="docs/api/history"><strong>History</strong></a> - An abstract module which specifies the interface for history implementations used by a router.
-      </li>
-      <li>
-        <a href="docs/api/history-browser"><strong>History-Browser</strong></a> - An implementation of the Aurelia history interface based on standard browser hash change and push state mechanisms.
-      </li>
-      <li>
-        <a href="docs/api/i18n"><strong>I18N</strong></a> - A plugin that provides i18n support.
-      </li>
-      <li>
-        <a href="docs/api/loader"><strong>Loader</strong></a> - An abstract module which specifies an interface for loading modules and view templates.
-      </li>
-      <li>
-        <a href="docs/api/loader-default"><strong>Loader-Default</strong></a> - A default implementation of the loader interface compatible with system.js and require-based loaders.
-      </li>
-      <li>
-        <a href="docs/api/logging"><strong>Logging</strong></a> - A minimal but effective logging mechanism with support for log levels and pluggable log appenders.
-      </li>
-      <li>
-        <a href="docs/api/logging-console"><strong>Logging-Console</strong></a> - A console log appender for the Aurelia logging library.
-      </li>
-      <li>
-        <a href="docs/api/metadata"><strong>Metadata</strong></a> - Utilities for reading and writing the metadata of JavaScript functions.
-      </li>
-      <li>
-        <a href="docs/api/pal"><strong>Platform Abstraction Layer (PAL)</strong></a> - Aurelia&#x27;s platform abstraction layer (PAL).
-      </li>
-      <li>
-        <a href="docs/api/pal-browser"><strong>PAL-Browser</strong></a> - The browser-specific implementation of Aurelia&#x27;s platform abstraction layer.
-      </li>
-      <li>
-        <a href="docs/api/path"><strong>Path</strong></a> - Utilities for path manipulation.
-      </li>
-      <li>
-        <a href="docs/api/router"><strong>Router</strong></a> - A powerful client-side router.
-      </li>
-      <li>
-        <a href="docs/api/task-queue"><strong>Task Queue</strong></a> - A simple task queue for the browser that enables the queuing of both standard tasks and micro tasks.
-      </li>
-      <li>
-        <a href="docs/api/templating"><strong>Templating</strong></a> - An extensible HTML templating engine supporting databinding, custom elements, attached behaviors and more.
-      </li>
-      <li>
-        <a href="docs/api/templating-binding"><strong>Templating-Binding</strong></a> - An implementation of the templating engine&#x27;s Binding Language abstraction which uses a pluggable command syntax.
-      </li>
-      <li>
-        <a href="docs/api/templating-resources"><strong>Templating-Resources</strong></a> - A standard set of behaviors, converters and other resources for use with the Aurelia templating library.
-      </li>
-      <li>
-        <a href="docs/api/templating-router"><strong>Templating-Router</strong></a> - An implementation of the RouteLoader interface for use with the router module. Also contains a custom element that allows the templating engine to display the current route.
-      </li>
-      <li>
-        <a href="docs/api/testing"><strong>Testing</strong></a> - A collection of helpers for testing Aurelia apps and components.
-      </li>
-    </ul>
+  <article class="api-search-area">
+    <search-box placeholder="Search for an Aurelia API" search.trigger="search($event)"></search-box>
+
+    <section class="search-results">
+      <api-search-results if.bind="searchResults.length" results.bind="searchResults"></api-search-results>
+      <no-search-results if.bind="searchResults && !searchResults.length" query.bind="query" tip="Try searching for a different related API."></no-search-results>
+    </section>
   </article>
 </section>
 

@@ -54,7 +54,10 @@ export class Configuration {
       return this.apiRoot;
     }
 
-    return this.config.docs.api.find(x => x.dest === path);
+    const parts = path.split('/');
+    const toSearch = `${parts[0]}/${parts[1]}/${parts[2]}`;
+
+    return this.config.docs.api.find(x => x.dest === toSearch);
   }
 
   findToCItem(path: string): ToCItem | null {

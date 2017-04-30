@@ -9,19 +9,21 @@ import {SearchEngine} from '../backend/search-engine';
 @transient()
 export class APIScreen {
   item: DocItem = null;
+  dest: string;
   strategy: InlineViewStrategy;
   searchResults;
   query: string;
 
   constructor(private http: HttpClient, private searchEngine: SearchEngine) { }
 
-  withItem(item: DocItem) {
+  withItem(item: DocItem, dest: string) {
     this.item = item;
+    this.dest = dest;
     return this;
   }
 
   activate() {
-    return this.http.fetch(join(this.item.dest, 'index-fragment.html'))
+    return this.http.fetch(join(this.dest, 'index-fragment.html'))
       .then(response => response.text())
       .then(text => {
         this.strategy = new InlineViewStrategy(`<template>${text}</template>`);

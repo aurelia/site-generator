@@ -68,9 +68,9 @@ export class SearchEngine {
         indexes.apiIndex.add(x);
 
         if (x.ownerKind) {
-          x.href = x.libraryHref + '#' + x.ownerKind.toLowerCase() + '/' + x.ownerName + '/' + x.apiKind.toLowerCase() + '/' + x.apiName;
+          x.href = x.libraryHref + '/' + x.ownerKind.toLowerCase() + '/' + x.ownerName + '/' + x.apiKind.toLowerCase() + '/' + x.apiName;
         } else {
-          x.href = x.libraryHref + '#' + x.apiKind.toLowerCase() + '/' + x.apiName;
+          x.href = x.libraryHref + '/' + x.apiKind.toLowerCase() + '/' + x.apiName;
         }
       });
 
