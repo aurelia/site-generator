@@ -1,0 +1,52 @@
+<div class="api-card">
+  <blockquote>
+    <h3 class="api-signature">
+      {{#if flags.isStatic}}
+      <span class="api-tag">static</span>
+      {{/if}}
+      <span class="api-name">{{name}}</span>(
+      <span class="function-params">
+        {{#each signature.parameters}}
+        <span class="declare-param">
+          <span class="param-name">{{name}}</span>
+          <span class="param-flag">{{flags.isOptional ? '?: ' : ': '}}</span>
+          <span class="param-type">{{type.name || 'any'}}</span>
+        </span>
+        {{/each}}
+      </span>
+      )
+      {{#if signature.type}}
+      <span>: <span class="function-returns">${signature.type.name || 'any'}</span></span>
+      {{/if}}
+    </h3>
+    <div class="api-description">{{signature.comment.shortText}}</div>
+  </blockquote>
+
+  <br>
+
+  <article class="function-detail">
+    {{#if signature.parameters.length}}
+    <h4>Params</h4>
+    {{#each signature.parameters}}
+    <div class="function-params">
+      <div class="declare-param">
+        <span class="param-name">{{name}}</span>
+        <span class="param-flag">{{flags.isOptional ? '?: ' : ': '}}</span>
+        <span class="param-type">{{type.name || 'any'}}</span>
+      </div>
+
+      {{#if comment.text}}
+      <div class="param-comment">{{comment.text}}</div>
+      {{/if}}
+    </div>
+    {{/each}}
+    {{/if}}
+
+    {{#if signature.comment.returns}}
+    <h4 class="function-returns">Returns</h4>
+    <span class="function-params">
+      <span class="param-comment">{{signature.comment.returns}}</span>
+    </span>
+    {{/if}}
+  </article>
+</div>
