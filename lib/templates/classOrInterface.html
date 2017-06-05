@@ -5,6 +5,29 @@
   </header>
 
   <article>
+    {{#if constructorMethod}}
+      <h3 class="api-category-header">Constructor</h3>
+      {{> functionOrMethod constructorMethod }}
+    {{/if}}
 
+    {{#if properties.length}}
+      <h3 class="api-category-header">Properties</h3>
+
+      <ul class="api-category-list">
+        {{#each properties}}
+          <li class="constant-item"><a href="{{../links.static}}/property/{{name}}">{{name}}</a></li>
+        {{/each}} 
+      </ul>
+    {{/if}}
+
+    {{#if methods.length}}
+      <h3 class="api-category-header">Methods</h3>
+
+      <ul class="api-category-list">
+        {{#each methods}}
+          <li class="function-item"><a href="{{../links.static}}/method/{{name}}">{{name}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
   </article>
 </section>
