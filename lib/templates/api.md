@@ -11,16 +11,16 @@
 #### Properties
 
 {{#each properties}}
-* `{{name}}:{{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
+* `{{#if flags.isStatic}}static {{/if}}{{name}}: {{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 {{/each}}
 
 #### Methods
 
 {{#each methods}}
 
-* `{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
+* `{{#if flags.isStatic}}static {{/if}}{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}{{#if flags.isOptional}}?{{/if}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available{{/if}}
+  * `{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available{{/if}}
   {{/each}}
 
 {{/each}}
@@ -38,16 +38,16 @@
 #### Properties
 
 {{#each properties}}
-* `{{name}}:{{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
+* `{{#if flags.isStatic}}static {{/if}}{{name}}: {{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 {{/each}}
 
 #### Methods
 
 {{#each methods}}
 
-* `{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
+* `{{#if flags.isStatic}}static {{/if}}{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}{{#if flags.isOptional}}?{{/if}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
+  * `{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
   {{/each}}
 
 {{/each}}
@@ -57,16 +57,16 @@
 ## Constants
 
 {{#each constants}}
-* `{{name}}:{{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
+* `{{#if flags.isStatic}}static {{/if}}{{name}}: {{type.name}}` - {{#if comment.shortText}}{{comment.shortText}}{{else}}No description available.{{/if}}
 {{/each}}
 
 ## Functions
 
 {{#each functions}}
 
-* `{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
+* `{{#if flags.isStatic}}static {{/if}}{{name}}({{#each signatures.0.parameters}}{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}{{#unless @last}}, {{/unless}}{{/each}}): {{signatures.0.type.name}}` - {{signatures.0.comment.shortText}}
   {{#each signatures.0.parameters}}
-  * `{{name}}{{#if flags.isOptional}}?{{/if}}:{{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
+  * `{{name}}{{#if flags.isOptional}}?{{/if}}: {{type.name}}` - {{#if comment.text}}{{comment.text}}{{else}}No description available.{{/if}}
   {{/each}}
 
 {{/each}}
