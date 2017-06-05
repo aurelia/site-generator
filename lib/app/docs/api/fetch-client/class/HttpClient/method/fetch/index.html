@@ -161,7 +161,65 @@ to registered Response interceptors before it is returned.</h2>
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">fetch</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">input</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">any</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">init</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">RequestInit</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">Promise</span></span>
+        </h3>
+        <div class="api-description">Starts the process of fetching a resource. Default configuration parameters
+    will be applied to the Request. The constructed Request will be passed to
+    registered request interceptors before being sent. The Response will be passed
+    to registered Response interceptors before it is returned.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">input</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">The resource that you wish to fetch. Either a
+    Request object, or a string containing the URL of the resource.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">init</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">RequestInit</span>
+          </div>
+    
+          <div class="param-comment">An options object containing settings to be applied to
+    the Request.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">A Promise for the Response from the fetch request.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 

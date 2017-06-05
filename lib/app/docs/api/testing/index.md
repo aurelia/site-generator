@@ -22,50 +22,50 @@ No description available.
 
 #### Properties
 
-* `attached:` - No description available.
-* `bind:` - No description available.
-* `configure:any` - No description available.
-* `element:Element` - No description available.
-* `unbind:` - No description available.
-* `viewModel:any` - No description available.
+* `attached: ` - No description available.
+* `bind: ` - No description available.
+* `configure: any` - No description available.
+* `element: Element` - No description available.
+* `unbind: ` - No description available.
+* `viewModel: any` - No description available.
 
 #### Methods
 
 
 * `bootstrap(configure: ): any` - 
-  * `configure:` - No description available
+  * `configure: ` - No description available
 
 
 * `boundTo(bindingContext: any): ComponentTester` - 
-  * `bindingContext:any` - No description available
+  * `bindingContext: any` - No description available
 
 
 * `create(bootstrap: ): Promise` - 
-  * `bootstrap:` - No description available
+  * `bootstrap: ` - No description available
 
 
 * `dispose(): any` - 
 
 
 * `inView(html: string): ComponentTester` - 
-  * `html:string` - No description available
+  * `html: string` - No description available
 
 
 * `manuallyHandleLifecycle(): ComponentTester` - 
 
 
 * `waitForElement(selector: string, options: any): Promise` - 
-  * `selector:string` - No description available
-  * `options:any` - No description available
+  * `selector: string` - No description available
+  * `options: any` - No description available
 
 
 * `waitForElements(selector: string, options: any): Promise` - 
-  * `selector:string` - No description available
-  * `options:any` - No description available
+  * `selector: string` - No description available
+  * `options: any` - No description available
 
 
 * `withResources(resources: ): ComponentTester` - 
-  * `resources:` - No description available
+  * `resources: ` - No description available
 
 
 
@@ -79,8 +79,8 @@ No description available.
 #### Methods
 
 
-* `withResources(resources?: ): ComponentTester` - 
-  * `resources?:` - No description available
+* `static withResources(resources?: ): ComponentTester` - 
+  * `resources?: ` - No description available
 
 
 
@@ -100,12 +100,12 @@ all child views, live bindings, behaviors and more.
 
 
 * `bind(bindingContext?: any): any` - Invoked when the target view is bound.
-  * `bindingContext?:any` - The target view&#x27;s binding context.
+  * `bindingContext?: any` - The target view&#x27;s binding context.
 
 
 
 * `created(view?: any): any` - Invoked when the target view is created.
-  * `view?:any` - The target view.
+  * `view?: any` - The target view.
 
 
 
@@ -126,16 +126,16 @@ all child views, live bindings, behaviors and more.
 
 
 * `waitFor(getter: , options: any): Promise` - Generic function to wait for something to happen. Uses polling
-  * `getter:` - No description available.
-  * `options:any` - No description available.
+  * `getter: ` - No description available.
+  * `options: any` - No description available.
 
 
 * `waitForDocumentElement(selector: string, options: any): Promise` - 
-  * `selector:string` - No description available.
-  * `options:any` - No description available.
+  * `selector: string` - No description available.
+  * `options: any` - No description available.
 
 
 * `waitForDocumentElements(selector: string, options: any): Promise` - 
-  * `selector:string` - No description available.
-  * `options:any` - No description available.
+  * `selector: string` - No description available.
+  * `options: any` - No description available.
 

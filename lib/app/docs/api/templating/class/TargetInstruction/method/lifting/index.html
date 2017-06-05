@@ -158,7 +158,61 @@
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-tag">static</span>
+          <span class="api-name">lifting</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">parentInjectorId</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">number</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">liftingInstruction</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">BehaviorInstruction</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">TargetInstruction</span></span>
+        </h3>
+        <div class="api-description">Creates an instruction that represents content that was lifted out of the DOM and into a ViewFactory.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">parentInjectorId</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">number</span>
+          </div>
+    
+          <div class="param-comment">The id of the parent dependency injection container.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">liftingInstruction</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">BehaviorInstruction</span>
+          </div>
+    
+          <div class="param-comment">The behavior instruction of the lifting behavior.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">The created instruction.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 

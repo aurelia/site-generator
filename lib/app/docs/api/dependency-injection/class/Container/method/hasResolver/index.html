@@ -158,7 +158,60 @@
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">hasResolver</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">key</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">any</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">checkParent</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">boolean</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">boolean</span></span>
+        </h3>
+        <div class="api-description">Inspects the container to determine if a particular key has been registred.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">key</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">The key that identifies the dependency at resolution time; usually a constructor function.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">checkParent</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">boolean</span>
+          </div>
+    
+          <div class="param-comment">Indicates whether or not to check the parent container hierarchy.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">Returns true if the key has been registred; false otherwise.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 

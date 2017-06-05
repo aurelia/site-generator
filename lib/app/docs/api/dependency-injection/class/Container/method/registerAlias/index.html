@@ -158,7 +158,60 @@
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">registerAlias</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">originalKey</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">any</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">aliasKey</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">any</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">Resolver</span></span>
+        </h3>
+        <div class="api-description">Registers an additional key that serves as an alias to the original DI key.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">originalKey</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">The key that originally identified the dependency; usually a constructor function.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">aliasKey</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">An alternate key which can also be used to resolve the same dependency  as the original.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">The resolver that was registered.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 

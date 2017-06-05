@@ -158,7 +158,60 @@
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">invoke</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">fn</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">Function &amp; { name?: string; }</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">dynamicDependencies</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">any</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">any</span></span>
+        </h3>
+        <div class="api-description">Invokes a function, recursively resolving its dependencies.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">fn</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">Function &amp; { name?: string; }</span>
+          </div>
+    
+          <div class="param-comment">The function to invoke with the auto-resolved dependencies.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">dynamicDependencies</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">Additional function dependencies to use during invocation.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">Returns the instance resulting from calling the function.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 

@@ -159,7 +159,46 @@ The default implementation returns and instance of ConventionalViewStrategy.</h2
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">createFallbackViewStrategy</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">origin</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">Origin</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">ViewStrategy</span></span>
+        </h3>
+        <div class="api-description">Creates a fallback View Strategy. Used when unable to locate a configured strategy.
+    The default implementation returns and instance of ConventionalViewStrategy.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">origin</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">Origin</span>
+          </div>
+    
+          <div class="param-comment">The origin of the view model to return the strategy for.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">The fallback ViewStrategy.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 

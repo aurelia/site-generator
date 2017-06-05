@@ -158,7 +158,56 @@
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">autoRegister</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">key</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">any</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">fn</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">Function</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">Resolver</span></span>
+        </h3>
+        <div class="api-description">Registers a type (constructor function) by inspecting its registration annotations. If none are found, then the default singleton registration is used.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">key</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">The key that identifies the dependency at resolution time; usually a constructor function.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">fn</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">Function</span>
+          </div>
+    
+          <div class="param-comment">The constructor function to use when the dependency needs to be instantiated. This defaults to the key value when fn is not supplied.
+    </div>
+        </div>
+    
+      </article>
+    </div>
   </article>
 </section>
 

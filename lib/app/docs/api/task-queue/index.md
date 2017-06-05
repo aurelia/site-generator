@@ -9,8 +9,8 @@ Implements an asynchronous task queue.
 
 #### Properties
 
-* `flushing:any` - Whether the queue is in the process of flushing.
-* `longStacks:any` - Enables long stack traces for queued tasks.
+* `flushing: any` - Whether the queue is in the process of flushing.
+* `longStacks: any` - Enables long stack traces for queued tasks.
 
 #### Methods
 
@@ -22,16 +22,16 @@ Implements an asynchronous task queue.
 
 
 * `prepareQueueStack(separator?: any): any` - 
-  * `separator?:any` - No description available
+  * `separator?: any` - No description available
 
 
 * `queueMicroTask(task: ): void` - Queues a task on the micro task queue for ASAP execution.
-  * `task:` - The task to queue up for ASAP execution.
+  * `task: ` - The task to queue up for ASAP execution.
 
 
 
 * `queueTask(task: ): void` - Queues a task on the macro task queue for turn-based execution.
-  * `task:` - The task to queue up for turn-based execution.
+  * `task: ` - The task to queue up for turn-based execution.
 
 
 

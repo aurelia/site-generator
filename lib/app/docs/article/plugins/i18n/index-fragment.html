@@ -124,7 +124,7 @@ be slight differences. The following listings show the configuration for first t
 <code-listing heading="Registering the Plugin - using the built-in aurelia loader backed:">
     <source-code lang="ES 2015"><pre class="language-javascript"><code>
 
-      <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">,</span> Backend<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
+      <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">,</span> Backend<span class="token punctuation">,</span> TCustomAttribute<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
       <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
@@ -159,7 +159,7 @@ be slight differences. The following listings show the configuration for first t
 <code-listing heading="Registering the Plugin - using the i18next-xhr-backend">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
 
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">,</span> TCustomAttribute<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> Backend <span class="token keyword">from</span> <span class="token string">'i18next-xhr-backend'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// &lt;-- your previously installed backend plugin</span>
 
     <span class="token comment" spellcheck="true">// if you use TypeScript and target ES5 you might need to import it like this instead</span>

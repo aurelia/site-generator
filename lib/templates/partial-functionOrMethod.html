@@ -4,20 +4,20 @@
       {{#if flags.isStatic}}
       <span class="api-tag">static</span>
       {{/if}}
-      <span class="api-name">{{name}}</span>(
+      <span class="api-name">{{signatures.0.name}}</span>(
       <span class="function-params">
         {{#each signatures.0.parameters}}
         <span class="declare-param">
           <span class="param-name">{{name}}</span>
           <span class="param-flag">{{#if flags.isOptional}}?{{/if}}: </span>
-          <span class="param-type">{{type.name || 'any'}}</span>
+          <span class="param-type">{{#if type.name}}{{type.name}}{{else}}any{{/if}}</span>
           {{#unless @last}}, {{/unless}}
         </span>
         {{/each}}
       </span>
       )
       {{#if signatures.0.type}}
-      <span>: <span class="function-returns">${signatures.0.type.name || 'any'}</span></span>
+        <span>: <span class="function-returns">{{signatures.0.type.name}}</span></span>
       {{/if}}
     </h3>
     <div class="api-description">{{signatures.0.comment.shortText}}</div>
@@ -32,8 +32,8 @@
     <div class="function-params">
       <div class="declare-param">
         <span class="param-name">{{name}}</span>
-        <span class="param-flag">{{flags.isOptional ? '?: ' : ': '}}</span>
-        <span class="param-type">{{type.name || 'any'}}</span>
+        <span class="param-flag">{{#if flags.isOptional}}?{{/if}}: </span>
+        <span class="param-type">{{#if type.name}}{{type.name}}{{else}}any{{/if}}</span>
       </div>
 
       {{#if comment.text}}

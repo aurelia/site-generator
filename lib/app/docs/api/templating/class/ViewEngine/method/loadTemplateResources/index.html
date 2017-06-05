@@ -158,7 +158,90 @@
   </header>
 
   <article>
-
+    <div class="api-card">
+      <blockquote>
+        <h3 class="api-signature">
+          <span class="api-name">loadTemplateResources</span>(
+          <span class="function-params">
+            <span class="declare-param">
+              <span class="param-name">registryEntry</span>
+              <span class="param-flag">: </span>
+              <span class="param-type">TemplateRegistryEntry</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">compileInstruction</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">ViewCompileInstruction</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">loadContext</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">ResourceLoadContext</span>
+              , 
+            </span>
+            <span class="declare-param">
+              <span class="param-name">target</span>
+              <span class="param-flag">?: </span>
+              <span class="param-type">any</span>
+              
+            </span>
+          </span>
+          )
+            <span>: <span class="function-returns">Promise</span></span>
+        </h3>
+        <div class="api-description">Loads all the resources specified by the registry entry.</div>
+      </blockquote>
+    
+      <br>
+    
+      <article class="function-detail">
+        <h4>Params</h4>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">registryEntry</span>
+            <span class="param-flag">: </span>
+            <span class="param-type">TemplateRegistryEntry</span>
+          </div>
+    
+          <div class="param-comment">The template registry entry to load the resources for.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">compileInstruction</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">ViewCompileInstruction</span>
+          </div>
+    
+          <div class="param-comment">The compile instruction associated with the load.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">loadContext</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">ResourceLoadContext</span>
+          </div>
+    
+          <div class="param-comment">The load context if this is happening within the context of a larger load operation.</div>
+        </div>
+        <div class="function-params">
+          <div class="declare-param">
+            <span class="param-name">target</span>
+            <span class="param-flag">?: </span>
+            <span class="param-type">any</span>
+          </div>
+    
+          <div class="param-comment">A class from which to extract metadata of additional resources to load.</div>
+        </div>
+    
+        <h4 class="function-returns">Returns</h4>
+        <span class="function-params">
+          <span class="param-comment">A promise of ViewResources for the registry entry.
+    </span>
+        </span>
+      </article>
+    </div>
   </article>
 </section>
 
