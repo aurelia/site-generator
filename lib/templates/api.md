@@ -1,5 +1,7 @@
 # {{name}} Module
 
+> {{description}}
+
 ## Classes
 
 {{#each classes}}

@@ -1,5 +1,7 @@
 # I18N Module
 
+> A plugin that provides i18n support.
+
 ## Classes
 
 

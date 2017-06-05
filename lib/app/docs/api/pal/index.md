@@ -1,5 +1,7 @@
 # Platform Abstraction Layer (PAL) Module
 
+> Aurelia&#x27;s platform abstraction layer (PAL).
+
 ## Classes
 
 

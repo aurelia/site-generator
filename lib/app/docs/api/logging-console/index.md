@@ -1,5 +1,7 @@
 # Logging-Console Module
 
+> A console log appender for the Aurelia logging library.
+
 ## Classes
 
 

@@ -1,5 +1,7 @@
 # Dependency Injection Module
 
+> A lightweight, extensible dependency injection container for JavaScript.
+
 ## Classes
 
 

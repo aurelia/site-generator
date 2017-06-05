@@ -1,5 +1,7 @@
 # Loader-Default Module
 
+> A default implementation of the loader interface compatible with system.js and require-based loaders.
+
 ## Classes
 
 

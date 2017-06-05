@@ -1,5 +1,7 @@
 # Testing Module
 
+> A collection of helpers for testing Aurelia apps and components.
+
 ## Classes
 
 

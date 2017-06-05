@@ -1,5 +1,7 @@
 # Loader Module
 
+> An abstract module which specifies an interface for loading modules and view templates.
+
 ## Classes
 
 

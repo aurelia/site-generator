@@ -1,5 +1,7 @@
 # Router Module
 
+> A powerful client-side router.
+
 ## Classes
 
 

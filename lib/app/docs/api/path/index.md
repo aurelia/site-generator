@@ -1,5 +1,7 @@
 # Path Module
 
+> Utilities for path manipulation.
+
 ## Classes
 
 

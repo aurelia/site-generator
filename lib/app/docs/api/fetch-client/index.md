@@ -1,5 +1,7 @@
 # Fetch Module
 
+> A simple client based on the Fetch standard.
+
 ## Classes
 
 

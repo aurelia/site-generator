@@ -1,5 +1,7 @@
 # Task Queue Module
 
+> A simple task queue for the browser that enables the queuing of both standard tasks and micro tasks.
+
 ## Classes
 
 
