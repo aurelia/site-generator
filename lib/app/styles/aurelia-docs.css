@@ -560,6 +560,29 @@ section.api {
         background-image: url("./images/api/field.svg"); }
       section.api article .api-category-list .function-item {
         background-image: url("./images/api/method.svg"); }
+    section.api article .api-card {
+      border: 1px solid #dadada;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      background: #FCFCFC;
+      margin-bottom: 16px; }
+      section.api article .api-card blockquote {
+        padding: 24px; }
+        section.api article .api-card blockquote .api-signature {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+          margin-bottom: 8px;
+          padding-bottom: 8px;
+          font-family: 'Source Code Pro';
+          color: #a71d5d; }
+          section.api article .api-card blockquote .api-signature .param-name {
+            color: #183691; }
+          section.api article .api-card blockquote .api-signature .param-type, section.api article .api-card blockquote .api-signature .api-type {
+            color: #0086b3; }
+          section.api article .api-card blockquote .api-signature .function-returns {
+            color: #0086b3; }
+        section.api article .api-card blockquote .api-description {
+          line-height: 1.4;
+          font-size: 16px;
+          color: #646464; }
 
 .markdown {
   color: #646464;

@@ -70,5 +70,43 @@ section.api {
         background-image: url('./images/api/method.svg');
       }
     }
+
+    .api-card {
+      border: 1px solid #dadada;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+      background: $code-background;
+      margin-bottom: 16px;
+
+      blockquote {
+        padding: 24px;
+
+        .api-signature {
+          border-bottom: 1px solid rgba(0,0,0,.12);
+          margin-bottom: 8px;
+          padding-bottom: 8px;
+
+          font-family: 'Source Code Pro';
+          color: $token-keyword;
+
+          .param-name {
+            color: $token-string;
+          }
+
+          .param-type, .api-type {
+            color: $token-function;
+          }
+
+          .function-returns {
+            color: $token-function;
+          }
+        }
+
+        .api-description {
+          line-height: 1.4;
+          font-size: 16px;
+          color: $primary-text-color;
+        }
+      }
+    }
   }
 }
