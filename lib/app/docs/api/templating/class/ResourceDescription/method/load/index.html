@@ -153,62 +153,39 @@
     <screen-activator active-screen.bind="activeScreen">
       <section class="api">
   <header>
-    <h1>load Method</h1>
+    <h1>load</h1>
+    <h2>A Method</h2>
   </header>
 
   <article>
     <div class="api-card">
       <blockquote>
         <h3 class="api-signature">
-          <span class="api-name">load</span>(
-          <span class="function-params">
-            <span class="declare-param">
-              <span class="param-name">container</span>
-              <span class="param-flag">: </span>
-              <span class="param-type">Container</span>
-              , 
-            </span>
-            <span class="declare-param">
-              <span class="param-name">loadContext</span>
-              <span class="param-flag">?: </span>
-              <span class="param-type">ResourceLoadContext</span>
-              
-            </span>
-          </span>
-          )
-            <span>: <span class="function-returns"></span></span>
+          <span class="api-name">load</span>(<span class="function-params"><span class="declare-param"><span class="param-name">container</span><span class="param-flag">: </span><span class="param-type">Container</span>, </span><span class="declare-param"><span class="param-name">loadContext</span><span class="param-flag">?: </span><span class="param-type">ResourceLoadContext</span></span></span>)<span>: <span class="function-returns"></span></span>
         </h3>
         <div class="api-description">Loads any dependencies of the resource.</div>
       </blockquote>
     
-      <br>
-    
       <article class="function-detail">
-        <h4>Params</h4>
+        <h4>Parameters</h4>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">container</span>
-            <span class="param-flag">: </span>
-            <span class="param-type">Container</span>
+            <span class="param-name">container</span><span class="param-flag">: </span><span class="param-type">Container</span>
           </div>
-    
           <div class="param-comment">The DI container to use during dependency resolution.</div>
         </div>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">loadContext</span>
-            <span class="param-flag">?: </span>
-            <span class="param-type">ResourceLoadContext</span>
+            <span class="param-name">loadContext</span><span class="param-flag">?: </span><span class="param-type">ResourceLoadContext</span>
           </div>
-    
           <div class="param-comment">The loading context used for loading all resources and dependencies.</div>
         </div>
     
         <h4 class="function-returns">Returns</h4>
-        <span class="function-params">
-          <span class="param-comment">A promise that resolves when all loading is complete.
+        <div class="function-params">
+          <div class="param-comment">A promise that resolves when all loading is complete.
     </span>
-        </span>
+        </div>
       </article>
     </div>
   </article>

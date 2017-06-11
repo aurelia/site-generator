@@ -1,41 +1,19 @@
 <div class="api-card">
   <blockquote>
     <h3 class="api-signature">
-      {{#if flags.isStatic}}
-      <span class="api-tag">static</span>
-      {{/if}}
-      <span class="api-name">{{signatures.0.name}}</span>(
-      <span class="function-params">
-        {{#each signatures.0.parameters}}
-        <span class="declare-param">
-          <span class="param-name">{{name}}</span>
-          <span class="param-flag">{{#if flags.isOptional}}?{{/if}}: </span>
-          <span class="param-type">{{#if type.name}}{{type.name}}{{else}}any{{/if}}</span>
-          {{#unless @last}}, {{/unless}}
-        </span>
-        {{/each}}
-      </span>
-      )
-      {{#if signatures.0.type}}
-        <span>: <span class="function-returns">{{signatures.0.type.name}}</span></span>
-      {{/if}}
+      {{#if flags.isStatic}}<span class="api-tag">static&nbsp;</span>{{/if}}<span class="api-name">{{signatures.0.name}}</span>(<span class="function-params">{{#each signatures.0.parameters}}<span class="declare-param"><span class="param-name">{{name}}</span><span class="param-flag">{{#if flags.isOptional}}?{{/if}}: </span><span class="param-type">{{#if type.name}}{{type.name}}{{else}}any{{/if}}</span>{{#unless @last}}, {{/unless}}</span>{{/each}}</span>){{#if signatures.0.type}}<span>: <span class="function-returns">{{signatures.0.type.name}}</span></span>{{/if}}
     </h3>
     <div class="api-description">{{signatures.0.comment.shortText}}</div>
   </blockquote>
 
-  <br>
-
   <article class="function-detail">
     {{#if signatures.0.parameters.length}}
-    <h4>Params</h4>
+    <h4>Parameters</h4>
     {{#each signatures.0.parameters}}
     <div class="function-params">
       <div class="declare-param">
-        <span class="param-name">{{name}}</span>
-        <span class="param-flag">{{#if flags.isOptional}}?{{/if}}: </span>
-        <span class="param-type">{{#if type.name}}{{type.name}}{{else}}any{{/if}}</span>
+        <span class="param-name">{{name}}</span><span class="param-flag">{{#if flags.isOptional}}?{{/if}}: </span><span class="param-type">{{#if type.name}}{{type.name}}{{else}}any{{/if}}</span>
       </div>
-
       {{#if comment.text}}
       <div class="param-comment">{{comment.text}}</div>
       {{/if}}
@@ -45,9 +23,9 @@
 
     {{#if signatures.0.comment.returns}}
     <h4 class="function-returns">Returns</h4>
-    <span class="function-params">
-      <span class="param-comment">{{signatures.0.comment.returns}}</span>
-    </span>
+    <div class="function-params">
+      <div class="param-comment">{{signatures.0.comment.returns}}</span>
+    </div>
     {{/if}}
   </article>
 </div>

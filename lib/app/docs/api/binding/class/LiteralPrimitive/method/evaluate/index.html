@@ -153,54 +153,31 @@
     <screen-activator active-screen.bind="activeScreen">
       <section class="api">
   <header>
-    <h1>evaluate Method</h1>
+    <h1>evaluate</h1>
+    <h2>A Method</h2>
   </header>
 
   <article>
     <div class="api-card">
       <blockquote>
         <h3 class="api-signature">
-          <span class="api-name">evaluate</span>(
-          <span class="function-params">
-            <span class="declare-param">
-              <span class="param-name">scope</span>
-              <span class="param-flag">: </span>
-              <span class="param-type">Scope</span>
-              , 
-            </span>
-            <span class="declare-param">
-              <span class="param-name">lookupFunctions</span>
-              <span class="param-flag">?: </span>
-              <span class="param-type">LookupFunctions</span>
-              
-            </span>
-          </span>
-          )
-            <span>: <span class="function-returns">any</span></span>
+          <span class="api-name">evaluate</span>(<span class="function-params"><span class="declare-param"><span class="param-name">scope</span><span class="param-flag">: </span><span class="param-type">Scope</span>, </span><span class="declare-param"><span class="param-name">lookupFunctions</span><span class="param-flag">?: </span><span class="param-type">LookupFunctions</span></span></span>)<span>: <span class="function-returns">any</span></span>
         </h3>
         <div class="api-description">Evaluates the expression using the provided scope and lookup functions.</div>
       </blockquote>
     
-      <br>
-    
       <article class="function-detail">
-        <h4>Params</h4>
+        <h4>Parameters</h4>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">scope</span>
-            <span class="param-flag">: </span>
-            <span class="param-type">Scope</span>
+            <span class="param-name">scope</span><span class="param-flag">: </span><span class="param-type">Scope</span>
           </div>
-    
           <div class="param-comment">The scope (bindingContext + overrideContext)</div>
         </div>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">lookupFunctions</span>
-            <span class="param-flag">?: </span>
-            <span class="param-type">LookupFunctions</span>
+            <span class="param-name">lookupFunctions</span><span class="param-flag">?: </span><span class="param-type">LookupFunctions</span>
           </div>
-    
           <div class="param-comment">Required for BindingBehavior and ValueConverter expressions.
     </div>
         </div>

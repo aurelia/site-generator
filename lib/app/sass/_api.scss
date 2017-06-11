@@ -23,7 +23,7 @@ section.api {
     }
   }
 
-  article {
+  > article {
     padding: 32px;
 
     .api-category-header {
@@ -78,7 +78,7 @@ section.api {
       margin-bottom: 16px;
 
       blockquote {
-        padding: 24px;
+        padding: 32px;
 
         .api-signature {
           border-bottom: 1px solid rgba(0,0,0,.12);
@@ -87,24 +87,47 @@ section.api {
 
           font-family: 'Source Code Pro';
           color: $token-keyword;
+        }
+      }
 
-          .param-name {
-            color: $token-string;
-          }
+      .param-name {
+        color: $token-string;
+      }
 
-          .param-type, .api-type {
-            color: $token-function;
-          }
+      .param-type, .api-type {
+        color: $token-function;
+      }
 
-          .function-returns {
-            color: $token-function;
-          }
+      .function-returns {
+        color: $token-function;
+      }
+
+      .api-description, .param-comment {
+        line-height: 1.4;
+        font-size: 16px;
+        color: $primary-text-color;
+      }
+
+      article {
+        margin: 0 32px;
+
+        h4, h4.function-returns {
+          margin: 16px 0;
+          font-size: 20px;
+          color: $accent-color;
         }
 
-        .api-description {
-          line-height: 1.4;
-          font-size: 16px;
-          color: $primary-text-color;
+        .param-comment {
+          margin-top: 8px;
+        }
+
+        .function-params {
+          margin-bottom: 24px;
+        }
+
+        .declare-param {
+          font-family: 'Source Code Pro';
+          color: $token-keyword;
         }
       }
     }

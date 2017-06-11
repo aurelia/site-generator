@@ -153,62 +153,39 @@
     <screen-activator active-screen.bind="activeScreen">
       <section class="api">
   <header>
-    <h1>transient Method</h1>
+    <h1>transient</h1>
+    <h2>A Method</h2>
   </header>
 
   <article>
     <div class="api-card">
       <blockquote>
         <h3 class="api-signature">
-          <span class="api-name">transient</span>(
-          <span class="function-params">
-            <span class="declare-param">
-              <span class="param-name">type</span>
-              <span class="param-flag">: </span>
-              <span class="param-type">any</span>
-              , 
-            </span>
-            <span class="declare-param">
-              <span class="param-name">implementation</span>
-              <span class="param-flag">?: </span>
-              <span class="param-type">Function</span>
-              
-            </span>
-          </span>
-          )
-            <span>: <span class="function-returns">FrameworkConfiguration</span></span>
+          <span class="api-name">transient</span>(<span class="function-params"><span class="declare-param"><span class="param-name">type</span><span class="param-flag">: </span><span class="param-type">any</span>, </span><span class="declare-param"><span class="param-name">implementation</span><span class="param-flag">?: </span><span class="param-type">Function</span></span></span>)<span>: <span class="function-returns">FrameworkConfiguration</span></span>
         </h3>
         <div class="api-description">Adds a transient to the framework&#x27;s dependency injection container.</div>
       </blockquote>
     
-      <br>
-    
       <article class="function-detail">
-        <h4>Params</h4>
+        <h4>Parameters</h4>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">type</span>
-            <span class="param-flag">: </span>
-            <span class="param-type">any</span>
+            <span class="param-name">type</span><span class="param-flag">: </span><span class="param-type">any</span>
           </div>
-    
           <div class="param-comment">The object type of the dependency that the framework will inject.</div>
         </div>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">implementation</span>
-            <span class="param-flag">?: </span>
-            <span class="param-type">Function</span>
+            <span class="param-name">implementation</span><span class="param-flag">?: </span><span class="param-type">Function</span>
           </div>
-    
           <div class="param-comment">The constructor function of the dependency that the framework will inject.</div>
         </div>
     
         <h4 class="function-returns">Returns</h4>
-        <span class="function-params">
-          <span class="param-comment">Returns the current FrameworkConfiguration instance.
+        <div class="function-params">
+          <div class="param-comment">Returns the current FrameworkConfiguration instance.
     </span>
-        </span>
+        </div>
       </article>
     </div>
   </article>

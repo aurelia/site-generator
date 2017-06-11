@@ -153,92 +153,51 @@
     <screen-activator active-screen.bind="activeScreen">
       <section class="api">
   <header>
-    <h1>loadViewFactory Method</h1>
+    <h1>loadViewFactory</h1>
+    <h2>A Method</h2>
   </header>
 
   <article>
     <div class="api-card">
       <blockquote>
         <h3 class="api-signature">
-          <span class="api-name">loadViewFactory</span>(
-          <span class="function-params">
-            <span class="declare-param">
-              <span class="param-name">viewEngine</span>
-              <span class="param-flag">: </span>
-              <span class="param-type">ViewEngine</span>
-              , 
-            </span>
-            <span class="declare-param">
-              <span class="param-name">compileInstruction</span>
-              <span class="param-flag">: </span>
-              <span class="param-type">ViewCompileInstruction</span>
-              , 
-            </span>
-            <span class="declare-param">
-              <span class="param-name">loadContext</span>
-              <span class="param-flag">?: </span>
-              <span class="param-type">ResourceLoadContext</span>
-              , 
-            </span>
-            <span class="declare-param">
-              <span class="param-name">target</span>
-              <span class="param-flag">?: </span>
-              <span class="param-type">any</span>
-              
-            </span>
-          </span>
-          )
-            <span>: <span class="function-returns">Promise</span></span>
+          <span class="api-name">loadViewFactory</span>(<span class="function-params"><span class="declare-param"><span class="param-name">viewEngine</span><span class="param-flag">: </span><span class="param-type">ViewEngine</span>, </span><span class="declare-param"><span class="param-name">compileInstruction</span><span class="param-flag">: </span><span class="param-type">ViewCompileInstruction</span>, </span><span class="declare-param"><span class="param-name">loadContext</span><span class="param-flag">?: </span><span class="param-type">ResourceLoadContext</span>, </span><span class="declare-param"><span class="param-name">target</span><span class="param-flag">?: </span><span class="param-type">any</span></span></span>)<span>: <span class="function-returns">Promise</span></span>
         </h3>
         <div class="api-description">Loads a view factory.</div>
       </blockquote>
     
-      <br>
-    
       <article class="function-detail">
-        <h4>Params</h4>
+        <h4>Parameters</h4>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">viewEngine</span>
-            <span class="param-flag">: </span>
-            <span class="param-type">ViewEngine</span>
+            <span class="param-name">viewEngine</span><span class="param-flag">: </span><span class="param-type">ViewEngine</span>
           </div>
-    
           <div class="param-comment">The view engine to use during the load process.</div>
         </div>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">compileInstruction</span>
-            <span class="param-flag">: </span>
-            <span class="param-type">ViewCompileInstruction</span>
+            <span class="param-name">compileInstruction</span><span class="param-flag">: </span><span class="param-type">ViewCompileInstruction</span>
           </div>
-    
           <div class="param-comment">Additional instructions to use during compilation of the view.</div>
         </div>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">loadContext</span>
-            <span class="param-flag">?: </span>
-            <span class="param-type">ResourceLoadContext</span>
+            <span class="param-name">loadContext</span><span class="param-flag">?: </span><span class="param-type">ResourceLoadContext</span>
           </div>
-    
           <div class="param-comment">The loading context used for loading all resources and dependencies.</div>
         </div>
         <div class="function-params">
           <div class="declare-param">
-            <span class="param-name">target</span>
-            <span class="param-flag">?: </span>
-            <span class="param-type">any</span>
+            <span class="param-name">target</span><span class="param-flag">?: </span><span class="param-type">any</span>
           </div>
-    
           <div class="param-comment">A class from which to extract metadata of additional resources to load.</div>
         </div>
     
         <h4 class="function-returns">Returns</h4>
-        <span class="function-params">
-          <span class="param-comment">A promise for the view factory that is produced by this strategy.
+        <div class="function-params">
+          <div class="param-comment">A promise for the view factory that is produced by this strategy.
     </span>
-        </span>
+        </div>
       </article>
     </div>
   </article>
