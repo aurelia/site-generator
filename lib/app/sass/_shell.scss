@@ -36,38 +36,12 @@ header.app-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 8px;
+    margin: 0 16px;
     
     svg {
       position: relative;
       top: 2px;
       cursor: pointer;
-    }
-  }
-
-  account-indicator {
-    float: right;
-    height: 100%;
-    margin: 0 16px;
-    color: $primary-text-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    a.login {
-      font-size: 20px;
-      display: block;
-      color: $primary-color;
-
-      span {
-        font-size: 20px;
-        position: relative;
-        top: -4px;
-      }
-
-      svg {
-        fill: $primary-color;
-      }
     }
   }
 }

@@ -5,22 +5,12 @@
   </header>
 
   <section>
-    <ul>
+    <ul class="article-list">
       {{#each items}}
-      <li class="article-card">
+      <li>
         <a href="{{links.static}}">
-          <header>
-            <h3>{{name}}</h3>
-            {{#if author.url}}
-              <h4>by {{author.name}}</h4>
-            {{else}}
-              <h4>Article Collection</h4>
-            {{/if}}
-          </header>
-          <article>
-            {{description}}
-          </article>
-          <div class="spacer"></div>
+          <h3>{{name}}</h3>
+          <p>{{description}}</p>
         </a>
       </li>
       {{/each}}
