@@ -1045,4 +1045,35 @@ pre[class*="language-"] {
       .home-screen .video-zone .quote-wrapper blockquote::after {
         content: "\""; }
 
+.home-screen .feature-zone {
+  color: #646464;
+  margin: 64px 128px; }
+  .home-screen .feature-zone .feature-header {
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 48px;
+    padding-bottom: 48px; }
+    .home-screen .feature-zone .feature-header h1 {
+      color: #1e1e1e;
+      font-weight: bold;
+      font-size: 36px;
+      margin-bottom: 8px; }
+    .home-screen .feature-zone .feature-header h2 {
+      font-style: italic;
+      font-size: 24px; }
+  .home-screen .feature-zone .features {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between; }
+    .home-screen .feature-zone .features .feature {
+      width: 50%;
+      margin-bottom: 32px;
+      padding-right: 32px; }
+      .home-screen .feature-zone .features .feature .feature-detail .feature-name {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 16px; }
+      .home-screen .feature-zone .features .feature .feature-detail .feature-description {
+        line-height: 32px; }
+
 /*# sourceMappingURL=aurelia-docs.css.map */

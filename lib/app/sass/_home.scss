@@ -88,4 +88,56 @@
       }
     }
   }
+
+  .feature-zone {
+    color: $primary-text-color;
+    margin: 64px 128px;
+
+    .feature-header {
+      text-align: center;
+      border-bottom: 1px solid $panel-border;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      
+      h1 {
+        color: #1e1e1e;
+        font-weight: bold;
+        font-size: 36px;
+        margin-bottom: 8px;
+      }
+
+      h2 {
+        font-style: italic;
+        font-size: 24px;
+      }
+    }
+
+    .features {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+
+      .feature {
+        width: 50%;
+        margin-bottom: 32px;
+        padding-right: 32px;
+
+        .feature-icon {
+
+        }
+
+        .feature-detail {
+          .feature-name {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 16px;
+          }
+
+          .feature-description {
+            line-height: 32px;
+          }
+        }
+      }
+    }
+  }
 }
