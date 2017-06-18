@@ -1,87 +1,90 @@
 .home-screen {
-  padding: 32px;
-
-  header {
-    h1 {
-      color: $primary-color;
-      font-size: 64px;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      text-align: center;
-      color: $primary-text-color;
-      font-size: 24px;
-      font-style: italic;
-      line-height: 32px;
-      margin: 0 32px;
-    }
-
-    margin-bottom: 32px;
-  }
-
-  article {
+  .get-started-banner {
+    background: $accent-color;
+    height: 64px;
+    padding: 0 32px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    h3 {
-      color: $accent-color;
-      font-size: 24px;
-      line-height: 1.225;
-      border-bottom: 1px solid rgba(0,0,0,.12);
-      padding-bottom: .3em;
-      margin-bottom: 16px;
-    }
+    h1 {
+      text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0px;
+      color: $white;
+      font-size: 16px;
+      display: inline-block;
 
-    section {
-      width: 50%;
-      margin: 32px;
-    }
-
-    .list {
-      .item {
-        border-left: 2px solid $primary-color;
-        margin: 12px 0;
-        padding-left: 8px;
-        color: $primary-color;
-
-        .title {
-          font-size: 22px;
-          line-height: 26px;
-          margin-bottom: 4px;
-        }
-
-        p {
-          font-style: italic;
-          color: $primary-text-color;
-        }
-
-        a {
-          text-decoration: none;
-          color: inherit;
-        }
+      strong {
+        font-weight: bold;
       }
     }
 
-    .newsletter-button {
-      background: $panel-color;
-      border: 1px solid #DADADA;
-      box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.10);
-      border-radius: 4px;
-      font-size: 22px;
-      text-decoration: none;
-      margin: 20px 38px;
-      padding: 15px 20px;
+    a {
+      background: $white;
+      color: $accent-color;
+      border: 1px solid $accent-color;
+      padding: 10px 13px;
+      border-radius: 3px;
       text-align: center;
-      display: block;
+      box-shadow: 0 7px 10px rgba(0,0,0,.2);
+      text-decoration: none;
+      font-size: 16px;
+    }
+  }
+
+  .video-zone {
+    background-image: linear-gradient(to top, $primary-color, $accent-color);
+    padding: 32px 0;
+    display: flex;
+    
+    .video-wrapper {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      margin: 32px;
+      padding-bottom: 27%;
+      position: relative;
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 40px 40px rgba(0,0,0,.2);
+      }
     }
 
-    .client-bound-zone {
-      transition: opacity .3s;
-      opacity: 0;
+    .quote-wrapper {
+      width: 50%;
+      margin: 0 32px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      &.visible {
-        opacity: 1;
+      blockquote {
+        font-size: 36px;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+        letter-spacing: 4px;
+        text-align: center;
+        font-weight: lighter;
+        font-variant: small-caps;
+
+        &::before {
+          content: "\""
+        }
+
+        small {
+          font-size: 20px;
+
+          &::before {
+            content: '\2014 \00A0';
+          }
+        }
+
+        &::after {
+          content: "\""
+        }
       }
     }
   }

@@ -267,7 +267,7 @@ nav {
   bottom: 0;
   width: 60px;
   background-color: #1e1e1e;
-  box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1), inset -1px 0px 0 #afafaf; }
+  box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1); }
   nav ul li {
     padding: 8px 0 20px 13px;
     margin: 0 1px 8px 0;
@@ -979,64 +979,70 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help; }
 
-.home-screen {
-  padding: 32px; }
-  .home-screen header {
-    margin-bottom: 32px; }
-    .home-screen header h1 {
-      color: #6d50a2;
-      font-size: 64px;
+.home-screen .get-started-banner {
+  background: #ed2b88;
+  height: 64px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  .home-screen .get-started-banner h1 {
+    text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0px;
+    color: #fff;
+    font-size: 16px;
+    display: inline-block; }
+    .home-screen .get-started-banner h1 strong {
+      font-weight: bold; }
+  .home-screen .get-started-banner a {
+    background: #fff;
+    color: #ed2b88;
+    border: 1px solid #ed2b88;
+    padding: 10px 13px;
+    border-radius: 3px;
+    text-align: center;
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-size: 16px; }
+
+.home-screen .video-zone {
+  background-image: linear-gradient(to top, #6d50a2, #ed2b88);
+  padding: 32px 0;
+  display: flex; }
+  .home-screen .video-zone .video-wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 32px;
+    padding-bottom: 27%;
+    position: relative; }
+    .home-screen .video-zone .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2); }
+  .home-screen .video-zone .quote-wrapper {
+    width: 50%;
+    margin: 0 32px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .home-screen .video-zone .quote-wrapper blockquote {
+      font-size: 36px;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+      letter-spacing: 4px;
       text-align: center;
-      margin-bottom: 12px; }
-    .home-screen header h2 {
-      text-align: center;
-      color: #646464;
-      font-size: 24px;
-      font-style: italic;
-      line-height: 32px;
-      margin: 0 32px; }
-  .home-screen article {
-    display: flex; }
-    .home-screen article h3 {
-      color: #ed2b88;
-      font-size: 24px;
-      line-height: 1.225;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      padding-bottom: .3em;
-      margin-bottom: 16px; }
-    .home-screen article section {
-      width: 50%;
-      margin: 32px; }
-    .home-screen article .list .item {
-      border-left: 2px solid #6d50a2;
-      margin: 12px 0;
-      padding-left: 8px;
-      color: #6d50a2; }
-      .home-screen article .list .item .title {
-        font-size: 22px;
-        line-height: 26px;
-        margin-bottom: 4px; }
-      .home-screen article .list .item p {
-        font-style: italic;
-        color: #646464; }
-      .home-screen article .list .item a {
-        text-decoration: none;
-        color: inherit; }
-    .home-screen article .newsletter-button {
-      background: #f4f4f4;
-      border: 1px solid #DADADA;
-      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-      font-size: 22px;
-      text-decoration: none;
-      margin: 20px 38px;
-      padding: 15px 20px;
-      text-align: center;
-      display: block; }
-    .home-screen article .client-bound-zone {
-      transition: opacity .3s;
-      opacity: 0; }
-      .home-screen article .client-bound-zone.visible {
-        opacity: 1; }
+      font-weight: lighter;
+      font-variant: small-caps; }
+      .home-screen .video-zone .quote-wrapper blockquote::before {
+        content: "\""; }
+      .home-screen .video-zone .quote-wrapper blockquote small {
+        font-size: 20px; }
+        .home-screen .video-zone .quote-wrapper blockquote small::before {
+          content: '\2014 \00A0'; }
+      .home-screen .video-zone .quote-wrapper blockquote::after {
+        content: "\""; }
 
 /*# sourceMappingURL=aurelia-docs.css.map */
