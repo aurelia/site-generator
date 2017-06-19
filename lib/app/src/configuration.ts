@@ -30,14 +30,14 @@ export class Configuration {
   public activePersona: Persona = this.availablePersonas[0];
   public activeLanguage: string = 'ES Next';
 
-  public discuss: Location;
+  public help: Location;
   public blog: Location;
   public home: Location;
 
   constructor() {
     this.home = this.config.home;
     this.blog = this.config.blog;
-    this.discuss = this.config.discuss;
+    this.help = this.config.help;
     this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
     this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article', showPersonas: true };
  

@@ -5,7 +5,6 @@ import {ShowMenu, HideMenu, ActivateScreen, ActivateTab} from './messages/shell'
 import {ArticleScreen} from './screens/article-screen';
 import {APIScreen} from './screens/api-screen';
 import {HomeScreen} from './screens/home-screen';
-import {DiscussScreen} from './screens/discuss-screen';
 import {BlogScreen} from './screens/blog-screen';
 import {Configuration} from './configuration';
 
@@ -24,13 +23,12 @@ export class Router {
   loadUrl(url: string) {
     let fragment = window.location.hash.substring(1) || '';
     url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
-
-    console.log(url, fragment);
     
-    if (url.indexOf('discuss') !== -1) {
-      this.ea.publish(new ActivateTab('discuss'));
-      this.ea.publish(new ActivateScreen(this.container.get(DiscussScreen).withItem(this.config.discuss)));
-      this.ea.publish(new HideMenu());
+    if (url.indexOf('help') !== -1) {
+      let helpToc = this.config.help;
+      this.ea.publish(new ActivateTab('help'));
+      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc, fragment)));
+      this.ea.publish(new ShowMenu(helpToc));
     } else if (url.indexOf('blog') !== -1) {
       this.ea.publish(new ActivateTab('blog'));
       this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
