@@ -1,47 +1,105 @@
 <section class="home-screen">
-  <header>
-    <h1>Welcome to the Aurelia Hub!</h1>
-    <h2>
-      This is a branching off point for digging into the various aspects of Aurelia. Here you will find
-      How To's, the API Reference, our community forum and much more...
-    </h2>
-  </header>
+  <section class="get-started-banner">
+    <h1>
+      <strong>Aurelia</strong> is a JavaScript client framework for web, mobile and desktop that leverages simple conventions
+      to empower your creativity.
+    </h1>
+    <a title="Get Started" href="/docs/article/getting-started/quick-start">
+      Get Started
+    </a>
+  </section>
 
-  <article>
-    <section>
-      <h3>Featured</h3>
-      <ul class="list">
-        {{#each featured}}
-          <li class="item">
-            <a href="{{links.static}}">
-              <h4 class="title">{{name}}</h4>
-              <p>
-                By {{author.name}}
-              </p>
-            </a>
-        </li>
-        {{/each}}
-      </ul>
-    </section>
+  <section class="video-zone">
+    <div class="quote-wrapper">
+      <blockquote class="bigTitle">Aurelia allows us to focus on business logic, not on the framework - so concise and simple, yet so powerful and flexible!<br><small>Ats Uiboupin</small></blockquote>
+    </div>
+    <div class="video-wrapper">
+      <iframe src="http://player.vimeo.com/video/117778145" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+  </section>
 
-    <section class="client-bound-zone ${blog ? 'visible' : 'hidden'}">
-      <h3>The Latest from the Aurelia Blog</h3>
-      <ul class="list">
-        <li repeat.for="post of blog.posts" class="item">
-          <a href="http://blog.aurelia.io${post.url}" target="_blank">
-            <h4 class="title">${post.title}</h4>
-            <p>
-              Published ${post.published_at}
-            </p>
-          </a>
-        </li>
-      </ul>
+  <section class="feature-zone">
+    <div class="feature-header">
+      <h1>Features</h1>
+      <h2>Create next generation JavaScript apps today.</h2>
+    </div>
 
-      <div>
-        <a class="newsletter-button" title="" href="http://eepurl.com/ces50j">
-          Aurelia Newsletter Sign Up
-        </a>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h3 class="feature-name">Forward-thinking</h3>
+          <p class="feature-description">Written with next-generation EcmaScript. Integrates with Web Components. No external dependencies. Leverage the
+            technology of the future but target today's mobile, desktop and browser environments.</p>
+        </div>
       </div>
-    </section>
-  </article>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">Modern Architecture</h2>
+          <p class="feature-description">Rather than taking the monolithic framework approach, Aurelia is composed of smaller, focused modules. Use them
+            together as a full-featured framework or pick and choose to build a custom solution.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">Two-Way Databinding</h2>
+          <p class="feature-description">Our technology enables powerful two-way binding to any object. By using adaptive techniques we can select the
+            most efficient way to observe each property in your model and automatically sync your UI with best-in-class
+            performance.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">Extensible HTML</h2>
+          <p class="feature-description">Aurelia's extensible HTML compiler lets you create custom HTML elements, add custom attributes to existing elements
+            and control template generation, all with full support for dynamic loading, databinding and high-performance
+            batched rendering.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">Routing &amp; UI Composition</h2>
+          <p class="feature-description">Leverage our advanced client-side router with its pluggable pipeline, dynamic route patterns, child routers and
+            asynchronous screen activation. Don't need a router but need dynamic, data-driven UI composition? We do that
+            too.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">MV* with Conventions</h2>
+          <p class="feature-description">Who wants to waste time writing tons of configuration code for their MV* architecture? Simply leverage conventions
+            to make constructing your app effortless. Don't like the conventions? Plug in your own or drop them altogether.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">Broad Language Support</h2>
+          <p class="feature-description">Use ES5, ES 2015, ES 2016 and TypeScript. Aurelia's APIs were carefully designed to be consumed naturally from
+            both today's and tomorrow's popular web programming languages.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+        </div>
+        <div class="feature-detail">
+          <h2 class="feature-name">Testable</h2>
+          <p class="feature-description">By combining ES 2015 modules with a simple, yet powerful Dependency Injection Container, we make it easy for
+            you to create highly cohesive, yet minimally coupled code, making unit testing a snap.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </section>
