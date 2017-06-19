@@ -24,7 +24,13 @@
             L10.273,12.002z"/>
         </g>
       </svg>
-    ${menu.activeItem.parent.name}
+    ${menu.activeItem.name}
+    </a>
+  </div>
+
+  <div class="nav-button" if.bind="(!menu.activeItem.parent || menu.activeItem.parent.hideWhenParent) && !menu.activeItem.showPersonas">
+    <a href="${menu.activeItem.parent ? menu.activeItem.parent.dest : menu.activeItem.dest}">
+    ${menu.activeItem.parent ? menu.activeItem.parent.name : menu.activeItem.name}
     </a>
   </div>
   
