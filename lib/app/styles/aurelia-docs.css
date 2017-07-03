@@ -260,6 +260,38 @@ header.app-header {
       top: 2px;
       cursor: pointer; }
 
+footer.content-footer {
+  padding: 48px;
+  background-color: #6d50a2;
+  color: #fff;
+  transition: margin-left .2s; }
+  footer.content-footer.with-sidebar {
+    margin-left: 325px; }
+  footer.content-footer a {
+    color: #fff;
+    text-decoration: none; }
+    footer.content-footer a:hover {
+      text-decoration: underline; }
+  footer.content-footer > .links {
+    margin-bottom: 36px;
+    display: flex;
+    justify-content: center;
+    text-align: left; }
+    footer.content-footer > .links .link-column {
+      margin: 0 36px;
+      vertical-align: top; }
+      footer.content-footer > .links .link-column > h4 {
+        margin-bottom: 16px;
+        text-transform: uppercase; }
+      footer.content-footer > .links .link-column li {
+        font-weight: lighter;
+        font-size: 16px;
+        line-height: 24px; }
+  footer.content-footer > .copyright {
+    text-align: center;
+    font-weight: lighter;
+    font-size: 14px; }
+
 nav {
   position: absolute;
   top: 60px;
@@ -306,7 +338,11 @@ main {
   bottom: 0;
   right: 0;
   overflow-y: auto;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column; }
+  main screen-activator {
+    flex: 1; }
 
 side-bar {
   position: absolute;

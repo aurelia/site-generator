@@ -46,6 +46,55 @@ header.app-header {
   }
 }
 
+footer.content-footer {
+  padding: 48px;
+  background-color: $primary-color;
+  color: $white;
+  transition: margin-left .2s;
+
+  &.with-sidebar {
+    margin-left: $sidebar-width;
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  > .links {
+    margin-bottom: 36px;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+
+    .link-column {
+      margin: 0 36px;
+      vertical-align: top;
+
+      > h4 {
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+
+      li {
+        font-weight: lighter;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  > .copyright {
+    text-align: center;
+    font-weight: lighter;
+    font-size: 14px;
+  }
+}
+
 nav {
   position: absolute;
   top: $header-height;
@@ -116,4 +165,10 @@ main {
   right: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  screen-activator {
+    flex: 1;
+  }
 }

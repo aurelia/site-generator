@@ -3,6 +3,7 @@ import {autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
 import {ShowMenu, HideMenu} from '../messages/shell';
 import {Configuration, DocItem} from '../configuration';
+import {DOM} from 'aurelia-pal';
 
 @autoinject
 export class SideBar {
@@ -33,10 +34,12 @@ export class SideBar {
       }
       
       this.isActive = true;
+      DOM.getElementById('app-footer').classList.add('with-sidebar');
     });
 
     ea.subscribe(HideMenu, (msg:HideMenu) => {
       this.isActive = false;
+      DOM.getElementById('app-footer').classList.remove('with-sidebar');
     });
   }
 
