@@ -5,7 +5,7 @@
         <div class="carousel-item">
           <h2>{{name}}</h2>
           <p>{{description}}</p>
-          <a href="{{links.static}}">Read The Article</a>
+          <a href="{{links.static}}">Learn More &#65515;</a>
         </div>
       {{/each}}
     </div>
@@ -19,31 +19,27 @@
     </a>
   </div>
 
-  <div>
+  <div class="groups">
     {{#each groups}}
-      <div class="group-item">
-        <h2>{{name}}</h2>
+      <div class="group">
+        <div class="group-summary">
+          <div class="group-header">
+            <p class="group-item-count">{{items.length}} Guides</p>
+            <h2 class="group-name">{{name}}</h2>
+          </div>
+          <p class="group-description">{{description}}</p>
+          <a class="group-learn" href="{{links.static}}">Learn More &#65515;</a>
+        </div>
 
-        <ul>
-          {{#each items}}
-          <li class="article-card">
-            <a href="{{links.static}}">
-              <header>
-                <h3>{{name}}</h3>
-                {{#if author.url}}
-                  <h4>by {{author.name}}</h4>
-                {{else}}
-                  <h4>Article Collection</h4>
-                {{/if}}
-              </header>
-              <article>
-                {{description}}
-              </article>
-              <div class="spacer"></div>
-            </a>
-          </li>
-          {{/each}}
-        </ul>
+        <div class="group-details">
+          <ul class="group-items">
+            {{#each items}}
+            <li class="item">
+              <a class="item-link" href="{{links.static}}">{{name}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
       </div>
     {{/each}}
   </div>

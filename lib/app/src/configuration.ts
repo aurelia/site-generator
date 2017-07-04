@@ -12,22 +12,11 @@ export interface ToCItem extends DocItem {
   personas?: string[];
 }
 
-export interface Persona {
-  hello: string;
-}
-
 export class Configuration {
   private config = window['aureliaDocConfiguration'];
   private apiRoot;
   private articleRoot;
 
-  public availablePersonas: Persona[] = [
-    {
-      hello: 'I am a web developer'
-    }
-  ];
-  
-  public activePersona: Persona = this.availablePersonas[0];
   public activeLanguage: string = 'ES Next';
 
   public help: Location;
@@ -39,7 +28,7 @@ export class Configuration {
     this.blog = this.config.blog;
     this.help = this.config.help;
     this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
-    this.articleRoot = { items: this.config.docs.article, name: 'Articles', dest: 'docs/article', showPersonas: true };
+    this.articleRoot = { items: this.config.docs.article, name: 'Guides', dest: 'docs' };
  
     associateParents(this.apiRoot, this.config.docs.api);
     associateParents(this.articleRoot, this.config.docs.article);
@@ -61,7 +50,7 @@ export class Configuration {
   }
 
   findToCItem(path: string): ToCItem | null {
-    if (path === 'docs/article') {
+    if (path === 'docs') {
       return this.articleRoot;
     }
 

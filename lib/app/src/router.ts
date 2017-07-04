@@ -30,33 +30,40 @@ export class Router {
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc, fragment)));
       this.ea.publish(new ShowMenu(helpToc));
     } else if (url.indexOf('blog') !== -1) {
+      //TODO: Implement Blog. Currently the sidebar links to Ghost.
       this.ea.publish(new ActivateTab('blog'));
       this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
       this.ea.publish(new HideMenu());
-    } else if (url.indexOf('api') !== -1) {
-      let matchedAPI = this.config.findApiItem(url);
-      if (matchedAPI) {
-        this.ea.publish(new ActivateTab('api'));
-        this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, url)));
-        this.ea.publish(new ShowMenu(matchedAPI));
+    } else if (url.indexOf('docs') !== -1) {
+      if (url.indexOf('api') !== -1) {
+        let matchedAPI = this.config.findApiItem(url);
+        if (matchedAPI) {
+          this.ea.publish(new ActivateTab('api'));
+          this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, url)));
+          this.ea.publish(new ShowMenu(matchedAPI));
+        } else {
+          this.navigateToNotFound();
+        }
       } else {
-        this.navigateHome();
-      }
-    } else if (url.indexOf('article') !== -1) {
-      let matchedToCItem = this.config.findToCItem(url);
-      if (matchedToCItem) {
-        this.ea.publish(new ActivateTab('article'));
-        this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem, fragment)));
-        this.ea.publish(new ShowMenu(matchedToCItem));
-      } else {
-        this.navigateHome();
+        let matchedToCItem = this.config.findToCItem(url);
+        if (matchedToCItem) {
+          this.ea.publish(new ActivateTab('article'));
+          this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem, fragment)));
+          this.ea.publish(new ShowMenu(matchedToCItem));
+        } else {
+          this.navigateToNotFound();
+        }
       }
     } else {
-      this.navigateHome();
+      this.navigateToHome();
     }
   }
 
-  navigateHome() {
+  navigateToNotFound() {
+    this.navigateToHome();
+  }
+
+  navigateToHome() {
     this.ea.publish(new ActivateTab('home'));
     this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem(this.config.home)));
     this.ea.publish(new HideMenu());
