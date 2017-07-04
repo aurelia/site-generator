@@ -418,29 +418,25 @@ side-bar {
 section.article, section.article-group {
   margin-left: 325px; }
   section.article header h1, section.article-group header h1 {
-    text-align: center;
     letter-spacing: .15rem;
     color: #fff;
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
     font-size: 42px;
     font-weight: bold;
-    padding: 16px 0 16px 0;
+    padding: 16px 0 16px 48px;
     background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%); }
   section.article header h2, section.article-group header h2 {
     font-size: 18px;
     line-height: 26px;
     font-weight: 200;
-    padding: 16px 32px;
+    padding: 16px 48px;
     background: #f4f4f4;
     box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
-
-section.article article {
-  padding: 32px; }
 
 section.article-group-root {
   margin-left: 325px; }
   section.article-group-root .group {
-    margin: 32px 64px;
+    margin: 32px 48px;
     padding: 32px;
     box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
     border-radius: 6px;
@@ -514,53 +510,46 @@ section.article-group-root {
           float: right;
           margin-top: 16px; }
 
-section.article-group section {
-  padding: 32px; }
-  section.article-group section ul.article-list {
-    background: #f4f4f4;
-    border-top: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-radius: 3px; }
-    section.article-group section ul.article-list li {
-      display: block;
-      border-bottom: 1px solid #ccc;
-      padding-left: 20px; }
-      section.article-group section ul.article-list li:hover {
-        background: #fff; }
-      section.article-group section ul.article-list li a {
-        display: block;
-        text-decoration: none; }
-        section.article-group section ul.article-list li a h3 {
-          font-size: 20px;
-          padding: 8px 0 4px 0;
-          color: #6d50a2; }
-        section.article-group section ul.article-list li a p {
-          line-height: 1.2;
-          margin: 0px 32px 8px 0;
-          color: #646464;
-          font-size: 16px; }
+section.article-group section ul.article-list li {
+  margin: 32px 48px;
+  padding: 32px;
+  box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+  border-radius: 6px;
+  display: flex; }
+  section.article-group section ul.article-list li a {
+    text-decoration: none; }
+    section.article-group section ul.article-list li a h3 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #353535; }
+    section.article-group section ul.article-list li a p {
+      margin: 24px 0;
+      font-weight: lighter;
+      line-height: 24px;
+      color: #646464; }
+
+section.article article {
+  margin: 32px 48px; }
 
 section.api {
   margin-left: 325px; }
   section.api header h1 {
-    text-align: center;
     letter-spacing: .15rem;
     color: #fff;
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
     font-size: 42px;
     font-weight: bold;
-    padding: 16px 0 16px 0;
+    padding: 16px 0 16px 48px;
     background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%); }
   section.api header h2 {
     font-size: 18px;
     line-height: 26px;
     font-weight: 200;
-    padding: 16px 32px;
+    padding: 16px 48px;
     background: #f4f4f4;
     box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
   section.api > article {
-    padding: 32px; }
+    margin: 32px 48px; }
     section.api > article .api-category-header {
       color: #ed2b88;
       font-size: 24px;
@@ -570,7 +559,7 @@ section.api {
       margin-bottom: 16px; }
     section.api > article .api-category-list {
       columns: 2;
-      margin-bottom: 32px; }
+      margin-bottom: 48px; }
       section.api > article .api-category-list li {
         font-size: 20px;
         line-height: 32px;
@@ -595,7 +584,7 @@ section.api {
       border: 1px solid #dadada;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
       background: #FCFCFC;
-      margin-bottom: 16px; }
+      margin-bottom: 48px; }
       section.api > article .api-card blockquote {
         padding: 32px; }
         section.api > article .api-card blockquote .api-signature {
