@@ -33,6 +33,7 @@ section.article-group-root {
     padding: 32px;
     box-shadow: $box-shadow;
     border-radius: $border-radius;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     display: flex;
 
     .group-summary {
@@ -142,13 +143,16 @@ section.article-group {
     ul.article-list {
       li {
         margin: 32px 48px;
-        padding: 32px;
         box-shadow: $box-shadow;
         border-radius: $border-radius;
+        border: 1px solid rgba(0, 0, 0, 0.12);
         display: flex;
 
         a {
           text-decoration: none;
+          display: inline-block;
+          width: 100%;
+          padding: 32px;
 
           h3 {
             font-size: 22px;
