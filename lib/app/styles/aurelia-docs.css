@@ -301,13 +301,16 @@ nav {
   background-color: #1e1e1e;
   box-shadow: 2px 0px 14px 0px rgba(0, 0, 0, 0.1); }
   nav ul li {
-    padding: 8px 0 20px 13px;
-    margin: 0 1px 8px 0;
+    margin-bottom: 8px;
     cursor: pointer;
     position: relative;
-    transition: background .2s; }
+    transition: background-color .2s; }
     nav ul li.article, nav ul li.api, nav ul li.discuss, nav ul li.blog, nav ul li.help {
-      padding-left: 18px; }
+      padding-left: 5px; }
+    nav ul li a {
+      display: inline-block;
+      padding: 8px 0 20px 13px;
+      width: 100%; }
     nav ul li svg {
       fill: #c6c6c6;
       transition: fill .2s; }
@@ -325,7 +328,7 @@ nav {
     nav ul li:hover .label {
       color: white; }
     nav ul li.active {
-      background: #2e2e30; }
+      background-color: #2e2e30; }
       nav ul li.active svg {
         fill: #EC2685; }
       nav ul li.active .label {
