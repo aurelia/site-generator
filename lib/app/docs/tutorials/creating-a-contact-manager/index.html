@@ -209,7 +209,7 @@ While creating a new project doesn't require NPM 3, front-end development, in ge
 Before proceeding any further, please make sure you are familiar with the concepts introduced in the Quick Start Guide or otherwise have some basic experience with Aurelia. Topics covered in the Quick Start will not be explained again here.</p>
 </div>
 <p>Let's start by looking at a picture of the final product of this tutorial. It will help us to see the application's structure and the pieces we need to build.</p>
-<p><img src="img/contact-app-final.png" alt="The Final Contact Manager App" /></p>
+<p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-final.png" alt="The Final Contact Manager App" /></p>
 <p>In the picture, you can see that we have a header across the top, a contact list on the left and a detail pane filling the rest of the space. We'll refer to the over-arching application structure, as the shell or layout of our app. Let's begin by putting that in place now.</p>
 <p>To begin, we're going to setup our <code>App</code> class by configuring it with a router. We want our browser history to reflect which contact in our list is selected, so we'll introduce a client-side router to handle the navigation from screen to screen. Replace the code in your <code>app${context.language.fileExtension}</code> with the following:</p>
 <code-listing heading="app${context.language.fileExtension}">
@@ -334,7 +334,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
   </code></pre></source-code>
 </code-listing>
 <p>All it does is provide a container with some styling in order to display our message to the user. With this in place, you should now be able to run your application. If you haven't stopped/restarted it after editing the bundles, then you will need to do that now. When you run the application, you should see something like this:</p>
-<p><img src="img/contact-app-no-selection.png" alt="No Selection Screen" /></p>
+<p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-no-selection.png" alt="No Selection Screen" /></p>
 </section>
 <section><h2>Building Out the Contact List</h2><p>We've got the basic visual structure of our application in place and routing is now working. We've even created our first screen. However, it's not very interesting. We've got a <code>div</code> placeholder for the actual contact list at present. Let's go ahead and build that out, as a <code>contact-list</code> custom element.</p>
 <p>Aurelia strives to be a self-consistent framework. As such, building a custom element is the same as creating your <code>App</code> component and your routed components. To create the <code>contact-list</code> custom element, start by creating a new file named <code>contact-list${context.language.fileExtension}</code> and add the following code:</p>
@@ -455,7 +455,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 </code-listing>
 <p>There are two important additions. First, we've added another <code>require</code> element at the top, to import our new <code>contact-list</code> into this view. Remember that views are encapsulated, just like modules. So, this makes the <code>contact-list</code> visible from within this view. Second, we now use the custom element, right above our <code>router-view</code>.</p>
 <p>If you go ahead and run the application, you should now see something like this:</p>
-<p><img src="img/contact-app-contact-list.png" alt="The Contact List" /></p>
+<p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-contact-list.png" alt="The Contact List" /></p>
 </section>
 <section><h2>Building Out the Contact Detail Screen</h2><p>Ok, things are starting to come together, but we still can't view an individual contact. If you try selecting something from the list, you'll see an error like the following in the console:</p>
 <pre><code>ERROR [app-router] Error: Script error for &quot;contact-detail&quot;
@@ -652,7 +652,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 </code-listing>
 <p>Don't be intimidated by the amount of HTML above. It's mostly all basic form controls and bootstrap structures. If you look at the <code>input</code> elements, you will see that they all have a two-way binding to the appropriate contact's properties. The only real interesting part is the <code>button</code> element at the bottom. This button invokes <code>save</code> when clicked, but notice that it also has its <code>disabled</code> attribute bound to our <code>canSave</code> property. The result is that the user won't be able to save if the API is in the middle of a request or if there is missing contact information.</p>
 <p>You should now be able to select contacts in the list, see their details, edit them, save and even see the confirm dialog on unsaved data navigations. It should look something like this:</p>
-<p><img src="img/contact-app-contact-detail.png" alt="The Contact Details" /></p>
+<p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-contact-detail.png" alt="The Contact Details" /></p>
 </section>
 <section><h2>Adding Pub/Sub Messaging</h2><p>If you play around with the application for a bit, you'll notice a few &quot;buggy&quot; behaviors:</p>
 <ul>

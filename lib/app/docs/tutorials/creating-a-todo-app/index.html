@@ -357,7 +357,7 @@ We call a View's associated class its <em>View-Model</em> because it's a model f
 <li><strong>Firefox</strong> - If you don't want to worry about setting up a web server, Firefox is flexible enough to serve the app directly from your hard drive. Simply open the <code>index.html</code> file with Firefox.</li>
 </ul>
 <p>When you run the app, you should see the app render out the <code>heading</code> property, something like this:</p>
-<p><img src="img/todo-app-with-heading.png" alt="Todo App With Heading" /></p>
+<p><img src="docs/tutorials/creating-a-todo-app/img/todo-app-with-heading.png" alt="Todo App With Heading" /></p>
 <p>Rendering properties in HTML seems simple enough, but what about working with user input? Let's add some markup that enables us to take input from the user to create our todos:</p>
 <code-listing heading="app.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -378,7 +378,7 @@ We call a View's associated class its <em>View-Model</em> because it's a model f
 Aurelia will use two-way binding for all form control value bindings and one-way binding for everything else. However, you can always override this by using an explicit binding command. For example, instead of using <code>.bind</code> you can use <code>.one-way</code>, <code>.two-way</code> or <code>.one-time</code>. Similarly, you can use <code>.delegate</code> for event delegation in place of <code>.trigger</code>.</p>
 </div>
 <p>If you run the app now, you should see something like this:</p>
-<p><img src="img/todo-app-with-form.png" alt="Todo App With Form" /></p>
+<p><img src="docs/tutorials/creating-a-todo-app/img/todo-app-with-form.png" alt="Todo App With Form" /></p>
 <p>Try typing into the input box and adding the todo. You should notice that the input box gets cleared out each time you do that. The reason for this is that the <code>value</code> of the <code>input</code> has two way binding and our original code cleared out the <code>todoDescription</code> after adding a new Todo instance. Here's our <code>addTodo()</code> implementation for reference:</p>
 <code-listing heading="The Add Todo Implementation">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
@@ -423,7 +423,7 @@ Aurelia will use two-way binding for all form control value bindings and one-way
 </code-listing>
 <p>To generate HTML based on an Array, Map or Set, we use the <code>repeat.for=&quot;local of collection&quot;</code> syntax. This syntax is derived from the <code>for...of</code> loop of ${context.language.name} itself. As you can see above, we want to generate one <code>li</code> for each item in our <code>todos</code> array. So, we place a <code>repeat.for</code> attribute on the <code>li</code> we want to be generated and we specify the <code>todos</code> collection and that we want the local loop variable to be named <code>todo</code>. With this we can bind to any property of the <code>todo</code> instance. So, you can see how we're just re-applying all the same techniques from above now. We're binding the <code>checked</code> attribute to the todo's <code>done</code> property and its <code>description</code> property is being injected into the content of the <code>span</code>. Finally, we're adding a <code>trigger</code> on the button's <code>click</code> event so that we can remove the todo. Notice that the <code>removeTodo</code> is still in scope. Just like in ${context.language.name}, inside a loop, you still have access to the variable in the outer block. This allows us to call the <code>removeTodo</code> method on the App class, passing in the particular <code>Todo</code> instance that we want to remove.</p>
 <p>If you run the application again, you should now see something like this:</p>
-<p><img src="img/todo-app-with-list.png" alt="Todo App With List" /></p>
+<p><img src="docs/tutorials/creating-a-todo-app/img/todo-app-with-list.png" alt="Todo App With List" /></p>
 <p>We're almost there! There's one thing that's missing. Notice that if you check and uncheck the boxes, nothing happens. We would like to have some user feedback in this case. Perhaps crossing out the todo item? Let's make one final version of our view to add that in:</p>
 <code-listing heading="app.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -452,7 +452,7 @@ Aurelia will use two-way binding for all form control value bindings and one-way
 Use the <code>style</code> attribute's alias, <code>css</code> when doing string interpolation to ensure your application is compatible with Internet Explorer and Edge, if you care about supporting these browsers.</p>
 </div>
 <p>Run the application one more time and you should see the expected result:</p>
-<p><img src="img/todo-app-with-css.png" alt="Todo App With CSS" /></p>
+<p><img src="docs/tutorials/creating-a-todo-app/img/todo-app-with-css.png" alt="Todo App With CSS" /></p>
 </section>
 <section><h2>Conclusion</h2><p>With its strong focus on developer experience, Aurelia can enable you to not only create amazing applications, but also enjoy the process. We've designed it with simple conventions in mind so you don't need to waste time with tons of configuration or write boilerplate code just to satisfy a stubborn or restrictive framework. You'll never hit a roadblock with Aurelia either. It's been carefully designed to be pluggable and customizable...and most of the time you just write plain ${context.language.name} and forget the framework is even there.</p>
 <p>Thanks for taking the time to read through our guide. There's so much more to learn and do! We hope you'll continue on to our &quot;Contact Manager&quot; tutorial to learn how to use the Aurelia CLI to get setup with a production-grade project and use some more advanced features like routing, publish/subscribe and custom elements.</p>

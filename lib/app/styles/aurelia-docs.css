@@ -660,6 +660,16 @@ section.api {
     .markdown section a {
       color: #ed2b88;
       font-family: 'Source Code Pro'; }
+    .markdown section img {
+      max-width: 100%;
+      box-sizing: content-box;
+      background-color: #fff;
+      border-radius: 4px;
+      border: 6pt solid #fff;
+      overflow: hidden;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
     .markdown section strong {
       font-weight: 700; }
     .markdown section ul {

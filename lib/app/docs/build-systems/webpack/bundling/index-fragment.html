@@ -6,7 +6,7 @@
 
   <article class="markdown">
     <section><h2>Introduction</h2><p>Most of the current major browsers limit the number of simultaneous connections per hostname to six. This means that while six requests are being processed, additional requests for assets on a host will be queued by the browser. In the image below, the Chrome F12 developer tools network tab shows the timing for assets required by the <code>welcome view</code> of the unbundled, JSPM-based skeleton-navigation application.</p>
-<p><img src="img/unbundled-aurelia-application.jpg" alt="No of requests made by unbundled application" /></p>
+<p><img src="docs/build-systems/webpack/bundling/img/unbundled-aurelia-application.jpg" alt="No of requests made by unbundled application" /></p>
 <p>As we can see, there are over 95 requests being made to load the first view. While the first few requests are being processed the others are waiting, ultimately taking almost 2.39s on a local machine.</p>
 <p>In the past, the most common browser limit has been 2 connections. This may have been sufficient in the beginning of the web when most of the content was delivered in a single page load. However, it can soon become the bottleneck when building rich client applications with frameworks like Aurelia and others.</p>
 <p>You may wonder: If this limit can have such a great impact on performance, then why don't browsers give us a higher limit? Most well-known browsers choose not to grant this wish in order to prevent the server from being overloaded by a small number of browsers. Such activity would be similar in nature to a DDOS attack.</p>
