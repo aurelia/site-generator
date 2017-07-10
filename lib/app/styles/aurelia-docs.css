@@ -588,10 +588,11 @@ section.api {
       section.api > article .api-category-list .function-item {
         background-image: url("./images/api/method.svg"); }
     section.api > article .api-card {
-      border: 1px solid #dadada;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+      border-radius: 6px;
       background: #FCFCFC;
-      margin-bottom: 48px; }
+      margin: 48px 0; }
       section.api > article .api-card blockquote {
         padding: 32px; }
         section.api > article .api-card blockquote .api-signature {
