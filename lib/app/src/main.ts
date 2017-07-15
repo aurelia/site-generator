@@ -8,6 +8,7 @@ export function configure(aurelia: Aurelia) {
     .basicConfiguration()
     .history()
     .globalResources([
+      './resources/drop-down',
       './resources/side-bar',
       './resources/side-bar-view.html',
       './resources/screen-activator',

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -770,12 +771,59 @@ section.api {
         min-height: 40px;
         padding: 0;
         z-index: 1;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        display: flex; }
         .markdown section code-listing .title-bar h4 {
           font-size: 18px;
           color: #5B5B5B;
           line-height: 40px;
-          margin: 0 16px; }
+          margin: 0 16px;
+          flex: 1; }
+        .markdown section code-listing .title-bar .src-lang {
+          display: flex;
+          align-items: center;
+          border-left: 1px solid rgba(0, 0, 0, 0.12);
+          border-right: 1px solid rgba(0, 0, 0, 0.12);
+          padding: 0 16px; }
+        .markdown section code-listing .title-bar drop-down {
+          display: inline-block; }
+          .markdown section code-listing .title-bar drop-down > .container {
+            position: relative; }
+            .markdown section code-listing .title-bar drop-down > .container > .button {
+              display: inline-block;
+              border-left: 1px solid rgba(0, 0, 0, 0.12);
+              border-right: 1px solid rgba(0, 0, 0, 0.12);
+              padding: 6px 16px;
+              cursor: pointer; }
+              .markdown section code-listing .title-bar drop-down > .container > .button > .selected-item-container {
+                display: inline-block; }
+              .markdown section code-listing .title-bar drop-down > .container > .button::after {
+                content: '▾';
+                margin-left: 8px;
+                display: inline-block;
+                color: black;
+                position: relative; }
+              .markdown section code-listing .title-bar drop-down > .container > .button.open::after {
+                top: 2px;
+                transform: rotate(180deg); }
+            .markdown section code-listing .title-bar drop-down > .container > .options-container {
+              position: relative; }
+              .markdown section code-listing .title-bar drop-down > .container > .options-container > .options {
+                position: absolute;
+                top: 1px;
+                right: 0px;
+                border: 1px solid rgba(0, 0, 0, 0.12);
+                border-top: 0;
+                box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+                background: #fff;
+                z-index: 10000;
+                list-style-type: none;
+                padding: 0; }
+                .markdown section code-listing .title-bar drop-down > .container > .options-container > .options > li {
+                  cursor: pointer;
+                  padding: 6px 12px; }
+                  .markdown section code-listing .title-bar drop-down > .container > .options-container > .options > li:hover {
+                    background: #f6f6f6; }
       .markdown section code-listing .code-container pre {
         background-color: #FCFCFC;
         margin: 0;

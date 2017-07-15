@@ -1,3 +1,7 @@
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {autoinject} from 'aurelia-dependency-injection';
+import {observable} from 'aurelia-binding';
+import {ActiveLanguageChanged} from './messages/shell';
 export interface Location {
   name: string;
   dest: string;
@@ -12,18 +16,23 @@ export interface ToCItem extends DocItem {
   personas?: string[];
 }
 
+@autoinject
 export class Configuration {
   private config = window['aureliaDocConfiguration'];
   private apiRoot;
   private articleRoot;
 
-  public activeLanguage: string = 'ES Next';
+  @observable activeLanguage: string = 'ES Next';
+  availableLanguages = [
+    this.activeLanguage,
+    'TypeScript'
+  ];
 
   public help: Location;
   public blog: Location;
   public home: Location;
 
-  constructor() {
+  constructor(private ea: EventAggregator) {
     this.home = this.config.home;
     this.blog = this.config.blog;
     this.help = this.config.help;
@@ -55,6 +64,14 @@ export class Configuration {
     }
 
     return findIn(this.config.docs.article, path);
+  }
+
+  subscribeToActiveLanguageChanged(callback: Function) {
+    return this.ea.subscribe(ActiveLanguageChanged, callback);
+  }
+
+  private activeLanguageChanged() {
+    this.ea.publish(new ActiveLanguageChanged(this.activeLanguage));
   }
 }
 

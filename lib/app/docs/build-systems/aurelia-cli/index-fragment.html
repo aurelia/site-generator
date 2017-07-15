@@ -339,6 +339,19 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
 <p>And this is an example of loading a <code>@scope/packagename</code> plugin during app startup:</p>
 <pre><code>aurelia.use.standardConfiguration().plugin('@scope/packagename');
 </code></pre>
+<h3>Reference packages outside of the node_modules folder</h3>
+<p>It is possible to use packages outside of the node_modules folder. The only difference is that you need te define what the <code>packageRoot</code> is. In <code>aurelia.json</code>, you can define a package that lives outside of the node_modules folder as follows:</p>
+<code-listing heading="Package outside of node_modules">
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    dependencies<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"my-standalone-folder"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../my-standalone-folder/dist/amd"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"index"</span><span class="token punctuation">,</span>
+      <span class="token string">"packageRoot"</span><span class="token punctuation">:</span> <span class="token string">"../my-standalone-folder"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The <code>packageRoot</code> is the root folder of the package. This is often the folder which contains the <code>package.json</code> file of the package.</p>
 </section>
 <section><h2>Configuring the Loader</h2><p>You can configure the loader by adding a <code>config</code> key to <code>build.loader</code> with the options you want to add. For instance, if you want to increase the timeout for requirejs, you would do this:</p>
 <pre><code>&quot;build&quot;: {

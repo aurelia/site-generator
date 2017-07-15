@@ -3,6 +3,15 @@
     <h4 if.bind="heading">
       ${heading}
     </h4>
+
+    <drop-down if.bind="availableSources.length > 1"
+           items.bind="config.availableLanguages"
+           selected-item.bind="config.activeLanguage">
+    </drop-down>
+
+    <div if.bind="availableSources.length < 2" class="src-lang">
+      ${selectedSource.lang}
+    </div>
   </div>
 
   <div ref="code" class="code-container"></div>

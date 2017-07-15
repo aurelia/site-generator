@@ -1,0 +1,25 @@
+<template>
+  <require from="./dynamic-expression-binding-behavior"></require>
+
+  <div class="container">
+    <div class="button ${listIsOpen ? 'open' : ''}"
+         click.trigger="toggleList($event)" ref="button">
+      <div class="selected-item-container" with.bind="selectedItem">
+        <span replaceable part="selected-item-template"
+              textcontent.bind="$this"></span>
+      </div>
+    </div>
+
+    <div if.bind="listIsOpen" class="options-container">
+      <ul class="options" css="min-width: ${button.offsetWidth & oneTime}px">
+        <li repeat.for="item of items"
+            click.trigger="select(item)">
+          <div with.bind="item">
+            <span replaceable part="list-item-template"
+                  textcontent.bind="$this"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>

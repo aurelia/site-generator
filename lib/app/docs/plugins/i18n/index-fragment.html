@@ -31,10 +31,10 @@ or a variation of this plugin — <code>aurelia-18n-loader</code> — that uses 
 We'll discuss TypeScript specifics in a later section.</p>
 <h3>Aurelia CLI</h3>
 <p>In order to install the Plugin with a CLI Project, first install the plugin via npm, from within the root folder of your project:</p>
-<p><code>npm install aurelia-i18n</code></p>
+<p><code>npm install aurelia-i18n --save</code></p>
 <p>Since Aurelia-I18N is backed by i18next, you should install it and a backend plugin of your choice. You can use the built-in backend that uses aurelia's loader or any of your choice.
 As an example we're going to leverage the i18next-xhr-backend:</p>
-<p><code>npm install i18next i18next-xhr-backend</code></p>
+<p><code>npm install i18next i18next-xhr-backend --save</code></p>
 <p>After that we need to tell our CLI App about the new dependencies. To do so we're going to open the file <em>aurelia_project/aurelia.json</em> and scroll down to the section named <em>dependencies</em>. In there add the following three entries:</p>
 <pre><code>{
   &quot;name&quot;: &quot;i18next&quot;,
@@ -67,10 +67,10 @@ As an example we're going to leverage the i18next-xhr-backend:</p>
 </blockquote>
 <h3>Webpack</h3>
 <p>Install the <code>aurelia-i18n</code> plugin in your project using <code>npm</code> and the following command:</p>
-<pre><code class="language-shell">npm install aurelia-i18n
+<pre><code class="language-shell">npm install aurelia-i18n --save
 </code></pre>
 <p>Also optionally install the <code>i18next-xhr-backend</code> plugin:</p>
-<pre><code class="language-shell">npm install i18next-xhr-backend
+<pre><code class="language-shell">npm install i18next-xhr-backend --save
 </code></pre>
 <blockquote>
 <p>You can skip this part if you're planning to use the built-in aurelia-i18n-loader</p>
@@ -121,6 +121,9 @@ If you're using one of the
 </code></pre>
 <p>Fifth, create (if you haven't already) a file <code>main.js</code> in your <code>src</code> folder to configure the plugin. Depending on which backend you've chosen there might
 be slight differences. The following listings show the configuration for first the built-in aurelia loader, the second using i18next-xhr-backend.</p>
+<blockquote>
+<p>Notice that Aurelia I18N makes use of a non-standard attributes option, which is used to define custom aliases besides the default ones, being <code>t</code> and <code>i18n</code>. Calling <code>TCustomAttribute.configureAliases</code> is currently necessary in order make sure that the aliases are defined before view templates are fully processed.</p>
+</blockquote>
 <code-listing heading="Registering the Plugin - using the built-in aurelia loader backed:">
     <source-code lang="ES 2015"><pre class="language-javascript"><code>
 
@@ -195,7 +198,9 @@ be slight differences. The following listings show the configuration for first t
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<p>You may also group your translations by namespaces, spread across multiple files. Say you have the standard translation.json and an additional <code>nav.json</code> for the navigation items, you can configure aurelia-i18n by passing the <code>ns</code> setting in the config object containing the different namespaces as well as the default namespace.</p>
+<p>You may also group your translations by namespaces, spread across multiple files. Say you have the standard translation.json and an additional <code>nav.json</code> for the navigation items, you can configure aurelia-i18n by passing the <code>ns</code> setting in the config object containing the different namespaces as well as the default namespace.
+When using namespaces, you will need to prepend string references with <code>ns:</code> for those strings that are not in the
+defaultNS. For example <code>t='nav:profile'</code> would access the <code>profile</code> string in <code>nav.json</code>.</p>
 <code-listing heading="Setting up Multiple Namespaces">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
 
@@ -301,7 +306,9 @@ that TypeScript does not see proper ES6 exported defaults. So you can now either
   </code></pre></source-code>
 </code-listing>
 <h3>Translating via code</h3>
-<p>Translating stuff via code works by using the method <code>tr</code>. You pass in the <code>key</code> as its first parameter, followed by the optional second parameter <code>options</code> to specify in detail how the translations should be performed. Please consult the [i18next docs](http://i18next.com/translate/#overrideoptions for a detailed list of those:</p>
+<p>Translating stuff via code works by using the method <code>tr</code>. You pass in the <code>key</code> as its first parameter, followed by the optional second parameter <code>options</code> to specify in detail how the translations should be performed. Please consult the 
+<a href="http://i18next.com/translate/#overrideoptions" target="_blank">i18next docs</a>
+ for a detailed list of those:</p>
 <code-listing heading="Translating using the i18n.tr function">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
 
@@ -896,7 +903,7 @@ Amongst those are Safari for Mac and iOS. The Polyfill will be lazy loaded in de
 automatically as part of the bundle. The reason is the decent file size of ~50k in minified mode, as such you as the developer
 have to opt-in and bundle the Polyfill manually.</p>
 <p>To do so first install the Polyfill as part of your project using npm:</p>
-<p><code>npm install intl</code></p>
+<p><code>npm install intl --save</code></p>
 <p>After that open up the <em>aurelia_project/aurelia.json</em> file and add the following dependency:</p>
 <pre><code class="language-json">{
   &quot;name&quot;: &quot;intl&quot;,

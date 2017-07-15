@@ -1,0 +1,40 @@
+@charset "UTF-8";
+drop-down {
+  margin: 8px;
+  display: inline-block; }
+  drop-down > .container {
+    position: relative; }
+    drop-down > .container > .button {
+      display: inline-block;
+      border: 1px solid #cccccc;
+      padding: 6px 12px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+      background: #eeeeee;
+      cursor: pointer; }
+      drop-down > .container > .button > .selected-item-container {
+        display: inline-block; }
+      drop-down > .container > .button::after {
+        content: '▾';
+        display: inline-block;
+        color: black;
+        position: relative; }
+      drop-down > .container > .button.open::after {
+        top: 2px;
+        transform: rotate(180deg); }
+    drop-down > .container > .options-container {
+      position: relative; }
+      drop-down > .container > .options-container > .options {
+        position: absolute;
+        top: 0px;
+        border: 1px solid #cccccc;
+        border-top: 0;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+        background: #eeeeee;
+        z-index: 10000; }
+        drop-down > .container > .options-container > .options > li {
+          cursor: pointer;
+          padding: 6px 12px; }
+          drop-down > .container > .options-container > .options > li:hover {
+            background: #f6f6f6; }
+
+/*# sourceMappingURL=drop-down.css.map */

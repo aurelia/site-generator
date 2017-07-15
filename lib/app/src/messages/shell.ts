@@ -16,3 +16,7 @@ export class HideMenu {}
 
 export class ShowSearch {}
 export class HideSearch {}
+
+export class ActiveLanguageChanged {
+  constructor(public language: string) {}
+}
