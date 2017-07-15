@@ -16,15 +16,17 @@ export interface ToCItem extends DocItem {
   personas?: string[];
 }
 
+const activeLanguageKey = 'activeLanguage';
+
 @autoinject
 export class Configuration {
   private config = window['aureliaDocConfiguration'];
   private apiRoot;
   private articleRoot;
 
-  @observable activeLanguage: string = 'ES Next';
+  @observable activeLanguage: string = localGet(activeLanguageKey, 'ES Next');
   availableLanguages = [
-    this.activeLanguage,
+    'ES Next',
     'TypeScript'
   ];
 
@@ -71,7 +73,22 @@ export class Configuration {
   }
 
   private activeLanguageChanged() {
+    localSet(activeLanguageKey, this.activeLanguage);
     this.ea.publish(new ActiveLanguageChanged(this.activeLanguage));
+  }
+}
+
+function localGet(key: string, defaultValue: string): string {
+  if (localStorage !== undefined) {
+    return localStorage.getItem(key);
+  }
+
+  return defaultValue;
+}
+
+function localSet(key: string, value: string) {
+  if (localStorage !== undefined) {
+    return localStorage.setItem(key, value);
   }
 }
 
