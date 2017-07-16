@@ -17,7 +17,8 @@ export function configure(aurelia: Aurelia) {
       './resources/search-panel',
       './resources/no-search-results.html',
       './resources/api-search-results.html',
-      './resources/code-listing'
+      './resources/code-listing',
+      './resources/au-demo'
     ]);
 
   if (environment.debug) {
