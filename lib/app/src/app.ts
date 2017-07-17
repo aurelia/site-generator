@@ -7,13 +7,45 @@ import {ActivateTab, ActivateScreen} from './messages/shell';
 export class App {
   activeTab = null;
   activeScreen = null;
+  main: HTMLElement;
 
   constructor(private router: Router, private ea: EventAggregator) {
     this.ea.subscribe(ActivateTab, (msg:ActivateTab) => this.activeTab = msg.name);
-    this.ea.subscribe(ActivateScreen, (msg:ActivateScreen) => this.activeScreen = msg.screen);
+    this.ea.subscribe(ActivateScreen, (msg:ActivateScreen) => {
+      this.activeScreen = msg.screen;
+      scrollTo(this.main, 0, 400);
+    });
   }
 
   activate() {
     this.router.activate();
   }
+}
+
+function scrollTo(element, to, duration) {
+  let start = element.scrollTop,
+      change = to - start,
+      increment = 20;
+
+  let animateScroll = elapsedTime => {        
+    elapsedTime += increment;
+    var position = easeInOut(elapsedTime, start, change, duration);                        
+    element.scrollTop = position; 
+    if (elapsedTime < duration) {
+      setTimeout(() => animateScroll(elapsedTime), increment);
+    }
+  };
+
+  animateScroll(0);
+}
+
+function easeInOut(currentTime, start, change, duration) {
+  currentTime /= duration / 2;
+
+  if (currentTime < 1) {
+      return change / 2 * currentTime * currentTime + start;
+  }
+
+  currentTime -= 1;
+  return -change / 2 * (currentTime * (currentTime - 2) - 1) + start;
 }
