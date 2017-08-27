@@ -680,6 +680,10 @@ section.api {
     section.api > article {
       margin: 32px 32px; } }
 
+@media only screen and (max-width: 1100px) {
+  section.api > article .api-category-list {
+    columns: 1; } }
+
 .markdown {
   color: #646464;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;

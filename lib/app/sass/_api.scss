@@ -155,3 +155,13 @@ section.api {
     }
   }
 }
+
+@media only screen and (max-width : 1100px){
+  section.api {
+    > article {
+      .api-category-list {
+        columns: 1;
+      }
+    }
+  }
+}
