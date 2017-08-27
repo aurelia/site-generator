@@ -24,11 +24,12 @@ export class Configuration {
   private apiRoot;
   private articleRoot;
 
-  @observable activeLanguage: string = localGet(activeLanguageKey, 'ES Next');
   availableLanguages = [
     'ES Next',
     'TypeScript'
   ];
+
+  @observable activeLanguage: string = this.retrieveLanguagePreference();  
 
   public help: Location;
   public blog: Location;
@@ -73,22 +74,26 @@ export class Configuration {
   }
 
   private activeLanguageChanged() {
-    localSet(activeLanguageKey, this.activeLanguage);
+    this.saveLanguagePreference();
     this.ea.publish(new ActiveLanguageChanged(this.activeLanguage));
   }
-}
 
-function localGet(key: string, defaultValue: string): string {
-  if (localStorage !== undefined) {
-    return localStorage.getItem(key);
+  private retrieveLanguagePreference(): string {
+    if (localStorage !== undefined) {
+      let value = localStorage.getItem(activeLanguageKey);
+  
+      if (this.availableLanguages.indexOf(value) !== -1) {
+        return value;
+      }
+    }
+  
+    return this.availableLanguages[0];
   }
-
-  return defaultValue;
-}
-
-function localSet(key: string, value: string) {
-  if (localStorage !== undefined) {
-    return localStorage.setItem(key, value);
+  
+  private saveLanguagePreference() {
+    if (localStorage !== undefined) {
+      return localStorage.setItem(activeLanguageKey, this.activeLanguage);
+    }
   }
 }
 
