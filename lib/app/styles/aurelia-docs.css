@@ -860,7 +860,7 @@ section.api {
             .markdown section code-listing .title-bar drop-down > .container > .button {
               display: inline-block;
               border-left: 1px solid rgba(0, 0, 0, 0.12);
-              padding: 8px;
+              padding: 6px 16px;
               height: 100%;
               cursor: pointer; }
               .markdown section code-listing .title-bar drop-down > .container > .button > .selected-item-container {
