@@ -348,6 +348,10 @@ main {
   main screen-activator {
     flex: 1; }
 
+@media only screen and (max-width: 710px) {
+  footer.content-footer.with-sidebar {
+    margin-left: 0; } }
+
 side-bar {
   position: absolute;
   top: 60px;
@@ -418,6 +422,10 @@ side-bar {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis; }
+
+@media only screen and (max-width: 710px) {
+  side-bar {
+    display: none; } }
 
 section.article, section.article-group {
   margin-left: 325px; }
@@ -539,6 +547,10 @@ section.article-group section ul.article-list li {
 section.article article {
   margin: 32px 48px; }
 
+@media only screen and (max-width: 710px) {
+  section.article, section.article-group, section.article-group-root {
+    margin-left: 0; } }
+
 section.api {
   margin-left: 325px; }
   section.api header h1 {
@@ -625,6 +637,10 @@ section.api {
         section.api > article .api-card article .declare-param {
           font-family: 'Source Code Pro';
           color: #a71d5d; }
+
+@media only screen and (max-width: 710px) {
+  section.api {
+    margin-left: 0; } }
 
 .markdown {
   color: #646464;

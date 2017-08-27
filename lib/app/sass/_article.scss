@@ -23,8 +23,6 @@ section.article, section.article-group {
   }
 }
 
-
-
 section.article-group-root {
   margin-left: $sidebar-width;
 
@@ -175,5 +173,11 @@ section.article-group {
 section.article {
   article {
     margin: 32px 48px;
+  }
+}
+
+@media only screen and (max-width : 710px) {
+  section.article, section.article-group, section.article-group-root {
+    margin-left: 0;
   }
 }

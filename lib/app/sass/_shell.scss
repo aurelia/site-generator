@@ -177,3 +177,11 @@ main {
     flex: 1;
   }
 }
+
+@media only screen and (max-width : 710px) {
+  footer.content-footer {
+    &.with-sidebar {
+      margin-left: 0;
+    }
+  }
+}

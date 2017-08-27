@@ -133,3 +133,9 @@ section.api {
     }
   }
 }
+
+@media only screen and (max-width : 710px) {
+  section.api {
+    margin-left: 0;
+  }
+}

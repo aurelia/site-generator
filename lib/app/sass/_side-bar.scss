@@ -95,3 +95,9 @@ side-bar {
     }
   }
 }
+
+@media only screen and (max-width : 710px) {
+  side-bar {
+    display: none;
+  }
+}
