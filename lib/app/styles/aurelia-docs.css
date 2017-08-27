@@ -709,6 +709,12 @@ section.api {
     .markdown section > p {
       margin-top: 0;
       margin-bottom: 16px; }
+    .markdown section blockquote {
+      border-left: 2px solid #646464;
+      padding-left: 8px;
+      font-size: 18px;
+      font-style: italic;
+      margin: 48px 0 24px 0; }
     .markdown section code {
       color: #0086b3;
       padding: .2em .4em;

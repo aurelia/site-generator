@@ -31,6 +31,14 @@
       margin-bottom: 16px;
     }
 
+    blockquote {
+      border-left: 2px solid $primary-text-color;
+      padding-left: 8px;
+      font-size: 18px;
+      font-style: italic;
+      margin: 48px 0 24px 0;
+    }
+
     code {
       color: #0086b3;
       padding: .2em .4em;
