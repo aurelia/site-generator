@@ -837,8 +837,6 @@ section.api {
       border: 1px solid rgba(0, 0, 0, 0.12);
       box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06); }
       .markdown section code-listing .title-bar {
-        max-height: 40px;
-        min-height: 40px;
         padding: 0;
         z-index: 1;
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -853,31 +851,33 @@ section.api {
           display: flex;
           align-items: center;
           border-left: 1px solid rgba(0, 0, 0, 0.12);
-          border-right: 1px solid rgba(0, 0, 0, 0.12);
           padding: 0 16px; }
         .markdown section code-listing .title-bar drop-down {
           display: inline-block; }
           .markdown section code-listing .title-bar drop-down > .container {
-            position: relative; }
+            position: relative;
+            height: 100%; }
             .markdown section code-listing .title-bar drop-down > .container > .button {
               display: inline-block;
               border-left: 1px solid rgba(0, 0, 0, 0.12);
-              border-right: 1px solid rgba(0, 0, 0, 0.12);
-              padding: 6px 16px;
+              padding: 8px;
+              height: 100%;
               cursor: pointer; }
               .markdown section code-listing .title-bar drop-down > .container > .button > .selected-item-container {
-                display: inline-block; }
+                display: inline-block;
+                margin-right: 16px; }
               .markdown section code-listing .title-bar drop-down > .container > .button::after {
                 content: '▾';
-                margin-left: 8px;
                 display: inline-block;
                 color: black;
-                position: relative; }
+                position: absolute;
+                right: 8px; }
               .markdown section code-listing .title-bar drop-down > .container > .button.open::after {
-                top: 2px;
+                top: 8px;
                 transform: rotate(180deg); }
             .markdown section code-listing .title-bar drop-down > .container > .options-container {
-              position: relative; }
+              position: relative;
+              left: 1px; }
               .markdown section code-listing .title-bar drop-down > .container > .options-container > .options {
                 position: absolute;
                 top: 1px;
@@ -961,6 +961,22 @@ section.api {
         padding: 16px;
         display: block;
         box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 0 10px 0 rgba(154, 132, 186, 0.2); }
+
+@media only screen and (max-width: 710px) {
+  .markdown section code-listing .title-bar {
+    display: block; }
+    .markdown section code-listing .title-bar .src-lang {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      border-left: none;
+      line-height: 40px; }
+    .markdown section code-listing .title-bar drop-down {
+      display: block; }
+      .markdown section code-listing .title-bar drop-down > .container > .button {
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        border-left: none;
+        width: 100%; }
+      .markdown section code-listing .title-bar drop-down > .container > .options-container {
+        left: 0; } }
 
 search-box header {
   background: #6d50a2;
