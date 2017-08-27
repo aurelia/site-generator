@@ -770,10 +770,7 @@ section.api {
       box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
       border-radius: 6px;
       margin: 48px 0 24px 0;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center; }
+      text-align: center; }
       .markdown section .info .icon, .markdown section .warning .icon, .markdown section .danger .icon {
         border-radius: 100%;
         width: 45px;
@@ -781,7 +778,8 @@ section.api {
         margin: -40px 0 12px;
         display: flex;
         justify-content: center;
-        align-items: center; }
+        align-items: center;
+        margin: -42px auto 8px; }
         .markdown section .info .icon i, .markdown section .warning .icon i, .markdown section .danger .icon i {
           width: 25px;
           height: 25px;
