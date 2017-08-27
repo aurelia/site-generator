@@ -8,7 +8,7 @@ section.article, section.article-group {
       text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
       font-size: 42px;
       font-weight: bold;
-      padding: 16px 0 16px 48px;
+      padding: 16px 0 16px $standard-side-margin;
       background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
     }
 
@@ -16,7 +16,7 @@ section.article, section.article-group {
       font-size: 18px;
       line-height: 26px;
       font-weight: 200;
-      padding: 16px 48px;
+      padding: 16px $standard-side-margin;
       background: $panel-color;
       box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
@@ -27,7 +27,7 @@ section.article-group-root {
   margin-left: $sidebar-width;
 
   .group {
-    margin: 32px 48px;
+    margin: 32px $standard-side-margin;
     padding: 32px;
     box-shadow: $box-shadow;
     border-radius: $border-radius;
@@ -105,7 +105,7 @@ section.article-group-root {
         backface-visibility: hidden;
         position: relative;
         display: inline-block;
-        padding: 32px 64px;
+        padding: 32px $standard-side-margin;
         color: $white;
         width: 100%;
         white-space: normal;
@@ -140,7 +140,7 @@ section.article-group {
   section {
     ul.article-list {
       li {
-        margin: 32px 48px;
+        margin: 32px $standard-side-margin;
         box-shadow: $box-shadow;
         border-radius: $border-radius;
         border: 1px solid rgba(0, 0, 0, 0.12);
@@ -154,6 +154,7 @@ section.article-group {
 
           h3 {
             font-size: 22px;
+            line-height: 26px;
             font-weight: bold;
             color: $black;
           }
@@ -172,13 +173,41 @@ section.article-group {
 
 section.article {
   article {
-    margin: 32px 48px;
+    margin: 32px $standard-side-margin;
   }
 }
 
 @media only screen and (max-width : $sidebar-max-width) {
   section.article, section.article-group {
+    header {
+      h1 {
+        padding: 16px 0 16px $small-side-margin;
+      }
+  
+      h2 {
+        padding: 16px $small-side-margin;
+      }
+    }
+  }
+
+  section.article {
     margin-left: 0;
+
+    article {
+      margin: 32px $small-side-margin;
+    }
+  }
+
+  section.article-group {
+    margin-left: 0;
+
+    section {
+      ul.article-list {
+        li {
+          margin: 32px $small-side-margin;
+        }
+      }
+    }
   }
 
   section.article-group-root {
@@ -186,6 +215,7 @@ section.article {
 
     .group {
       display: block;
+      margin: 32px $small-side-margin;
 
       .group-summary {
         min-width: auto;
@@ -194,6 +224,14 @@ section.article {
 
       .group-details {
         display: none;
+      }
+    }
+
+    .carousel {
+      .carousel-inner {
+        .carousel-item {
+          padding: 32px $small-side-margin;
+        }
       }
     }
   }

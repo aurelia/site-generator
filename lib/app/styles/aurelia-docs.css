@@ -509,7 +509,7 @@ section.article-group-root {
         backface-visibility: hidden;
         position: relative;
         display: inline-block;
-        padding: 32px 64px;
+        padding: 32px 48px;
         color: #fff;
         width: 100%;
         white-space: normal;
@@ -543,6 +543,7 @@ section.article-group section ul.article-list li {
     padding: 32px; }
     section.article-group section ul.article-list li a h3 {
       font-size: 22px;
+      line-height: 26px;
       font-weight: bold;
       color: #353535; }
     section.article-group section ul.article-list li a p {
@@ -555,17 +556,30 @@ section.article article {
   margin: 32px 48px; }
 
 @media only screen and (max-width: 710px) {
-  section.article, section.article-group {
+  section.article header h1, section.article-group header h1 {
+    padding: 16px 0 16px 32px; }
+  section.article header h2, section.article-group header h2 {
+    padding: 16px 32px; }
+  section.article {
     margin-left: 0; }
+    section.article article {
+      margin: 32px 32px; }
+  section.article-group {
+    margin-left: 0; }
+    section.article-group section ul.article-list li {
+      margin: 32px 32px; }
   section.article-group-root {
     margin-left: 0; }
     section.article-group-root .group {
-      display: block; }
+      display: block;
+      margin: 32px 32px; }
       section.article-group-root .group .group-summary {
         min-width: auto;
         max-width: 100%; }
       section.article-group-root .group .group-details {
-        display: none; } }
+        display: none; }
+    section.article-group-root .carousel .carousel-inner .carousel-item {
+      padding: 32px 32px; } }
 
 section.api {
   margin-left: 325px; }
@@ -656,7 +670,13 @@ section.api {
 
 @media only screen and (max-width: 710px) {
   section.api {
-    margin-left: 0; } }
+    margin-left: 0; }
+    section.api header h1 {
+      padding: 16px 0 16px 32px; }
+    section.api header h2 {
+      padding: 16px 32px; }
+    section.api > article {
+      margin: 32px 32px; } }
 
 .markdown {
   color: #646464;
