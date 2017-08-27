@@ -161,3 +161,9 @@ no-search-results {
     }
   }
 }
+
+@media only screen and (max-width : $search-width) {
+  search-panel {
+    width: 100%;
+  }
+}
