@@ -423,9 +423,6 @@
       code-listing {
         .title-bar {
           display: block;
-          
-          h4 {
-          }
       
           .src-lang {
             border-top: 1px solid rgba(0,0,0,.12);
@@ -441,26 +438,6 @@
                 border-top: 1px solid rgba(0,0,0,.12);
                 border-left: none;
                 width: 100%;
-
-                & > .selected-item-container {
-                }
-      
-                &::after {
-                }
-      
-                &.open::after {
-                }
-              }
-      
-              > .options-container {
-                left: 0;
-
-                > .options {
-                  > li {
-                    &:hover {
-                    }
-                  }
-                }
               }
             }
           }

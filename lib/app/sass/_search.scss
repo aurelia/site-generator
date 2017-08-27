@@ -167,3 +167,14 @@ no-search-results {
     width: 100%;
   }
 }
+
+
+@media only screen and (max-width : $sidebar-max-width) {
+  search-box {
+    header {
+      input {
+        font-size: 18px;
+      }
+    }
+  }
+}

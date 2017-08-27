@@ -974,9 +974,7 @@ section.api {
       .markdown section code-listing .title-bar drop-down > .container > .button {
         border-top: 1px solid rgba(0, 0, 0, 0.12);
         border-left: none;
-        width: 100%; }
-      .markdown section code-listing .title-bar drop-down > .container > .options-container {
-        left: 0; } }
+        width: 100%; } }
 
 search-box header {
   background: #6d50a2;
@@ -1102,6 +1100,10 @@ no-search-results {
 @media only screen and (max-width: 425px) {
   search-panel {
     width: 100%; } }
+
+@media only screen and (max-width: 710px) {
+  search-box header input {
+    font-size: 18px; } }
 
 code[class*="language-"],
 pre[class*="language-"] {
