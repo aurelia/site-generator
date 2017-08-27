@@ -759,6 +759,24 @@ section.api {
           background-image: url("./images/alert/danger.svg"); }
       .markdown section .danger h4 {
         color: #A31F07; }
+    .markdown section table {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      word-break: normal;
+      word-break: keep-all; }
+    .markdown section table th {
+      font-weight: bold;
+      text-align: left; }
+    .markdown section table th,
+    .markdown section table td {
+      padding: 6px 13px;
+      border: 1px solid #ddd; }
+    .markdown section table tr {
+      background-color: #fff;
+      border-top: 1px solid #ccc; }
+    .markdown section table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
     .markdown section code-listing {
       background-color: #fff;
       display: block;

@@ -189,6 +189,34 @@
       }
     }
 
+    table {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      word-break: normal;
+      word-break: keep-all;
+    }
+  
+    table th {
+      font-weight: bold;
+      text-align: left;
+    }
+  
+    table th,
+    table td {
+      padding: 6px 13px;
+      border: 1px solid #ddd;
+    }
+  
+    table tr {
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+  
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8;
+    }
+
     code-listing {
       background-color: #fff;
       display: block;

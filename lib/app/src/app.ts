@@ -22,6 +22,18 @@ export class App {
   }
 }
 
+//when navigation link clicked
+//  update fragment; replace: true, trigger: true
+//when user scroll changes
+//  update fragment; replace: true, trigger: true
+//when fragment changed
+//  scroll to fragment associated header (only if not user scrolling)
+//  highlight associated navigation link
+//when page loads
+//  is there a fragment?
+//    yes: manually trigger fragment changed handler
+//    no: scroll to top
+
 function scrollTo(element, to, duration) {
   let start = element.scrollTop,
       change = to - start,

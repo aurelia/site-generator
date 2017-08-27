@@ -124,6 +124,19 @@
           {
             "name": "lunr",
             "path": "../node_modules/lunr/lunr"
+          },
+          "numeral",
+          {
+            "name": "moment",
+            "main": "./moment.js",
+            "path": "../node_modules/moment",
+            "resources": []
+          },
+          {
+            "name": "aurelia-http-client",
+            "main": "aurelia-http-client",
+            "path": "../node_modules/aurelia-http-client/dist/amd",
+            "resources": []
           }
         ]
       }
