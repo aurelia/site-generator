@@ -134,7 +134,7 @@ section.api {
   }
 }
 
-@media only screen and (max-width : 710px) {
+@media only screen and (max-width : $flip-width) {
   section.api {
     margin-left: 0;
   }

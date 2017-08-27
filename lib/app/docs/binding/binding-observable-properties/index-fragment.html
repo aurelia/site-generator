@@ -1,0 +1,156 @@
+<section class="article">
+  <header>
+    <h1>Binding: Observable Properties</h1>
+    <h2>Data-binding observable properties with Aurelia.</h2>
+  </header>
+
+  <article class="markdown">
+    <section><h2>Introduction</h2><p>Have you ever needed to perform an action when a property is changed? If you have, that's a great use of property observation.</p>
+<p>To observe a property, you need to decorate it with the <code>@observable</code> decorator and define a method as the change handler. This method can receive 2 parameters: the new value and the old value. You can put any business logic inside this method.</p>
+<p>By convention, the change handler is a method whose name is composed of the <em>property_name</em> and the literal value 'Changed'. For example, if you decorate the property <code>color</code> with <code>@observable</code>, you have to define a method named <code>colorChanged()</code> to be the change handler. Here's an example of that:</p>
+<code-listing heading="Observable Properties">
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable<span class="token punctuation">,</span> decorators <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">const</span> App <span class="token operator">=</span> <span class="token function">decorators</span><span class="token punctuation">(</span>
+      <span class="token function">observable</span><span class="token punctuation">(</span><span class="token string">'color'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token keyword">class</span> <span class="token punctuation">{</span>
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+
+      <span class="token function">colorChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+      @observable color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+
+      <span class="token function">colorChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+      @observable color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+
+      <span class="token function">colorChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<div class="info"><div class="icon"> <i></i> </div><p>
+You do not have to check if <code>newValue</code> and <code>oldValue</code> are different. The change handler will not be called if you assign a value that the property already has.</p>
+</div>
+<p>If you do not want to use the convention, you can define the callback name for the change handler by setting the <code>changeHandler</code> property of the <code>@observable</code> decorator:</p>
+<code-listing heading="Observable Properties">
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable<span class="token punctuation">,</span> decorators <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">const</span> Car <span class="token operator">=</span> <span class="token function">decorators</span><span class="token punctuation">(</span>
+      <span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'color'</span><span class="token punctuation">,</span> changeHandler<span class="token punctuation">:</span> <span class="token string">'myChangeHandler'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token keyword">class</span> <span class="token punctuation">{</span>
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+
+      <span class="token function">myChangeHandler</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+      @<span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> changeHandler<span class="token punctuation">:</span> <span class="token string">'myChangeHandler'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+
+      <span class="token function">myChangeHandler</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+      @<span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> changeHandler<span class="token punctuation">:</span> <span class="token string">'myChangeHandler'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+
+      <span class="token function">myChangeHandler</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>If you prefer, can also put the <code>@observable</code> on classes:</p>
+<code-listing heading="Observable Properties">
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable<span class="token punctuation">,</span> decorators <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">const</span> App <span class="token operator">=</span> <span class="token function">decorators</span><span class="token punctuation">(</span>
+      <span class="token function">observable</span><span class="token punctuation">(</span><span class="token string">'color'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'speed'</span><span class="token punctuation">,</span> changeHandler<span class="token punctuation">:</span> <span class="token string">'speedChangeHandler'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token keyword">class</span> <span class="token punctuation">{</span>
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+      speed <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">;</span>
+
+      <span class="token function">colorChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">speedChangeHandler</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'speed' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  </code></pre></source-code>
+  <source-code lang="ES 2016"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">observable</span><span class="token punctuation">(</span><span class="token string">'color'</span><span class="token punctuation">)</span>
+    @<span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'speed'</span><span class="token punctuation">,</span> changeHandler<span class="token punctuation">:</span> <span class="token string">'speedChangeHandler'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+      speed <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">;</span>
+
+      <span class="token function">colorChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">speedChangeHandler</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'speed' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">observable</span><span class="token punctuation">(</span><span class="token string">'color'</span><span class="token punctuation">)</span>
+    @<span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'speed'</span><span class="token punctuation">,</span> changeHandler<span class="token punctuation">:</span> <span class="token string">'speedChangeHandler'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">{</span>
+
+      color <span class="token operator">=</span> <span class="token string">'blue'</span><span class="token punctuation">;</span>
+      speed <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">;</span>
+
+      <span class="token function">colorChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'color' property changes</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">speedChangeHandler</span><span class="token punctuation">(</span>newValue<span class="token punctuation">,</span> oldValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this will fire whenever the 'speed' property changes</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>  
+<div class="info"><div class="icon"> <i></i> </div><p>
+The <code>@observable</code> <em>only</em> tracks changes to the value of a property, <em>not</em> changes <em>in</em> the value itself. This means that if the property is an array, the change handler will not fire when adding, removing or editing items.</p>
+</div>
+</section>
+
+  </article>
+</section>

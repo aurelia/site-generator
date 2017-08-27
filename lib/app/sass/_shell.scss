@@ -178,7 +178,7 @@ main {
   }
 }
 
-@media only screen and (max-width : 710px) {
+@media only screen and (max-width : $flip-width) {
   footer.content-footer {
     &.with-sidebar {
       margin-left: 0;

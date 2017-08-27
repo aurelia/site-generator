@@ -176,8 +176,25 @@ section.article {
   }
 }
 
-@media only screen and (max-width : 710px) {
-  section.article, section.article-group, section.article-group-root {
+@media only screen and (max-width : $flip-width) {
+  section.article, section.article-group {
     margin-left: 0;
+  }
+
+  section.article-group-root {
+    margin-left: 0;
+
+    .group {
+      display: block;
+
+      .group-summary {
+        min-width: auto;
+        max-width: 100%;
+      }
+
+      .group-details {
+        display: none;
+      }
+    }
   }
 }

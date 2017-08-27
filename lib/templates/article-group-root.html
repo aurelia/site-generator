@@ -1,13 +1,11 @@
 <section class="article-group-root">
   <div class="carousel slide">
     <div class="carousel-inner" role="listbox">
-      {{#each featured}}
-        <div class="carousel-item">
-          <h2>{{name}}</h2>
-          <p>{{description}}</p>
-          <a href="{{links.static}}">Learn More &#65515;</a>
-        </div>
-      {{/each}}
+      <div class="carousel-item">
+        <h2>{{featured.0.name}}</h2>
+        <p>{{featured.0.description}}</p>
+        <a href="{{featured.0.links.static}}">Learn More &#65515;</a>
+      </div>
     </div>
 
     <a class="carousel-control-prev" role="button">

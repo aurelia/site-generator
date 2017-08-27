@@ -40,6 +40,10 @@ Represents the core APIs of the DOM.
 
 
 
+* `createAttribute(name: string): Attr` - Creates the specified HTML attribute
+  * `name: string` - A string that specifies the name of attribute to be created.
+
+
 * `createComment(text: string): Comment` - Creates a new Comment node.
   * `text: string` - A string to populate the new Comment node.
 
@@ -58,6 +62,9 @@ Represents the core APIs of the DOM.
 
 * `createMutationObserver(callback: Function): MutationObserver` - Creates a new MutationObserver.
   * `callback: Function` - A callback that will recieve the change records with the mutations.
+
+
+* `createTemplateElement(): HTMLTemplateElement` - Creates a new HTMLTemplateElement.
 
 
 * `createTemplateFromMarkup(markup: string): Element` - Creates an HTMLTemplateElement using the markup provided.

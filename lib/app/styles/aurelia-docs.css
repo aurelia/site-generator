@@ -548,8 +548,17 @@ section.article article {
   margin: 32px 48px; }
 
 @media only screen and (max-width: 710px) {
-  section.article, section.article-group, section.article-group-root {
-    margin-left: 0; } }
+  section.article, section.article-group {
+    margin-left: 0; }
+  section.article-group-root {
+    margin-left: 0; }
+    section.article-group-root .group {
+      display: block; }
+      section.article-group-root .group .group-summary {
+        min-width: auto;
+        max-width: 100%; }
+      section.article-group-root .group .group-details {
+        display: none; } }
 
 section.api {
   margin-left: 325px; }
