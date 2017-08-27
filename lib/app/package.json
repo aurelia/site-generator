@@ -17,7 +17,8 @@
     "moment": "^2.18.1",
     "numeral": "^2.0.6",
     "requirejs": "^2.3.2",
-    "text": "github:requirejs/text#latest"
+    "text": "github:requirejs/text#latest",
+    "whatwg-fetch": "^2.0.3"
   },
   "peerDependencies": {},
   "devDependencies": {
