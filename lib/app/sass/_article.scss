@@ -176,7 +176,7 @@ section.article {
   }
 }
 
-@media only screen and (max-width : $flip-width) {
+@media only screen and (max-width : $sidebar-max-width) {
   section.article, section.article-group {
     margin-left: 0;
   }

@@ -96,7 +96,7 @@ side-bar {
   }
 }
 
-@media only screen and (max-width : 710px) {
+@media only screen and (max-width : $sidebar-max-width) {
   side-bar {
     display: none;
   }

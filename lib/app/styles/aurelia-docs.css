@@ -291,7 +291,8 @@ footer.content-footer {
   footer.content-footer > .copyright {
     text-align: center;
     font-weight: lighter;
-    font-size: 14px; }
+    font-size: 14px;
+    line-height: 18px; }
 
 nav {
   position: absolute;
@@ -350,7 +351,13 @@ main {
 
 @media only screen and (max-width: 710px) {
   footer.content-footer.with-sidebar {
-    margin-left: 0; } }
+    margin-left: 0; }
+  footer.content-footer > .links {
+    display: block; }
+    footer.content-footer > .links .link-column > h4 {
+      margin-top: 16px; }
+  footer.content-footer > .copyright {
+    text-align: left; } }
 
 side-bar {
   position: absolute;

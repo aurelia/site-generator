@@ -92,6 +92,7 @@ footer.content-footer {
     text-align: center;
     font-weight: lighter;
     font-size: 14px;
+    line-height: 18px;
   }
 }
 
@@ -178,10 +179,24 @@ main {
   }
 }
 
-@media only screen and (max-width : $flip-width) {
+@media only screen and (max-width : $sidebar-max-width) {
   footer.content-footer {
     &.with-sidebar {
       margin-left: 0;
+    }
+
+    > .links {
+      display: block;
+  
+      .link-column {
+        > h4 {
+          margin-top: 16px;
+        }
+      }
+    }
+
+    > .copyright {
+      text-align: left;
     }
   }
 }
