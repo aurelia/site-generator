@@ -643,6 +643,7 @@ section.api {
           margin-bottom: 8px;
           padding-bottom: 8px;
           font-family: 'Source Code Pro';
+          line-height: 22px;
           color: #a71d5d; }
       section.api > article .api-card .param-name {
         color: #183691; }
@@ -655,7 +656,7 @@ section.api {
         font-size: 16px;
         color: #646464; }
       section.api > article .api-card article {
-        margin: 0 32px; }
+        margin: 16px 32px; }
         section.api > article .api-card article h4, section.api > article .api-card article h4.function-returns {
           margin: 16px 0;
           font-size: 20px;
@@ -663,7 +664,8 @@ section.api {
         section.api > article .api-card article .param-comment {
           margin-top: 8px; }
         section.api > article .api-card article .function-params {
-          margin-bottom: 24px; }
+          margin-bottom: 8px;
+          line-height: 22px; }
         section.api > article .api-card article .declare-param {
           font-family: 'Source Code Pro';
           color: #a71d5d; }
