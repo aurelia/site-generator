@@ -1221,8 +1221,8 @@ pre[class*="language-"] {
 
 .home-screen .get-started-banner {
   background: #ed2b88;
-  height: 64px;
-  padding: 0 32px;
+  min-height: 64px;
+  padding: 8px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between; }
@@ -1230,7 +1230,8 @@ pre[class*="language-"] {
     text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0px;
     color: #fff;
     font-size: 16px;
-    display: inline-block; }
+    display: inline-block;
+    margin-right: 8px; }
     .home-screen .get-started-banner h1 strong {
       font-weight: bold; }
   .home-screen .get-started-banner a {
@@ -1300,7 +1301,8 @@ pre[class*="language-"] {
       margin-bottom: 8px; }
     .home-screen .feature-zone .feature-header h2 {
       font-style: italic;
-      font-size: 24px; }
+      font-size: 24px;
+      line-height: 28px; }
   .home-screen .feature-zone .features {
     display: flex;
     flex-flow: row wrap;
@@ -1312,8 +1314,24 @@ pre[class*="language-"] {
       .home-screen .feature-zone .features .feature .feature-detail .feature-name {
         font-weight: bold;
         font-size: 20px;
+        line-height: 24px;
         margin-bottom: 16px; }
       .home-screen .feature-zone .features .feature .feature-detail .feature-description {
         line-height: 32px; }
+
+@media only screen and (max-width: 1100px) {
+  .home-screen .video-zone .quote-wrapper {
+    display: none; }
+  .home-screen .video-zone .video-wrapper {
+    width: 100%;
+    padding-bottom: 54%; }
+  .home-screen .feature-zone {
+    margin: 64px 32px; }
+    .home-screen .feature-zone .features {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between; }
+      .home-screen .feature-zone .features .feature {
+        width: auto; } }
 
 /*# sourceMappingURL=aurelia-docs.css.map */
