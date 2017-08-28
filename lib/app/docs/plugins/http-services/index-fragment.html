@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Options</h2><p>When building front-end applications, it's often necessary to leverage HTTP services to acquire data or persist state. There are many ways to accomplish this. You could use an advanced data library that implements object-relational mapping, an opinionated restful client or just a simple HTTP library. All these options are provided by the global web community and all of them can be used in an Aurelia application.</p>
+    <section><h2 id="options">Options</h2><p>When building front-end applications, it's often necessary to leverage HTTP services to acquire data or persist state. There are many ways to accomplish this. You could use an advanced data library that implements object-relational mapping, an opinionated restful client or just a simple HTTP library. All these options are provided by the global web community and all of them can be used in an Aurelia application.</p>
 <p>That said, the Aurelia team felt the need to provide a simple solution out of the box. We wanted our community to have a directly supported option while still keeping Aurelia open so that our own community could innovate or leverage any other library developed elsewhere.</p>
 <p>Along these lines, the Aurelia project provides two options:</p>
 <ul>
@@ -14,7 +14,7 @@
 </ul>
 <p>How should you choose between these two options? We recommend using <code>aurelia-fetch-client</code> if possible. It is based on the Fetch specification which will be the preferred way of handling all AJAX going forward. However, if you need request cancellation or download progress, the Fetch spec does not currently support these features. While these improvements to the spec are being considered for the future, it isn't available at present. So, if you need these capabilities, you may need to use <code>aurelia-http-client</code> instead.</p>
 </section>
-<section><h2>aurelia-fetch-client</h2><p>As previously stated, the <code>aurelia-fetch-client</code> library aims to embrace and expose the new 
+<section><h2 id="aurelia-fetch-client">aurelia-fetch-client</h2><p>As previously stated, the <code>aurelia-fetch-client</code> library aims to embrace and expose the new 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API</a>
 , while providing features important in web applications: default configuration of request parameters, interceptors and centralized request tracking. The main method, <code>HttpClient#fetch()</code>, has the same signature as <code>window.fetch()</code>. The difference is that our <code>HttpClient</code> will apply default configuration values, execute any registered interceptors and track the number of active requests.</p>
 <div class="info"><div class="icon"> <i></i> </div><h4>Learn About The Fetch Spec</h4><p>
@@ -211,7 +211,7 @@ Generally, we recommend that you don't litter your application code with usage o
 </ul>
 <p>If your application has requirements that don't fit within these limitations, then you may want to look into using <code>aurelia-http-client</code> instead.</p>
 </section>
-<section><h2>aurelia-http-client</h2><p>In addition to <code>aurelia-fetch-client</code>, Aurelia includes a basic <code>HttpClient</code> to provide a comfortable interface to the browser's <code>XMLHttpRequest</code> object. Like <code>aurelia-fetch-client</code>, <code>aurelia-http-client</code> is not included in the modules that Aurelia's bootstrapper installs, since it's completely optional and many apps may choose to use a different strategy for data retrieval. So, if you want to use it, first you must install it with your preferred package manager.</p>
+<section><h2 id="aurelia-http-client">aurelia-http-client</h2><p>In addition to <code>aurelia-fetch-client</code>, Aurelia includes a basic <code>HttpClient</code> to provide a comfortable interface to the browser's <code>XMLHttpRequest</code> object. Like <code>aurelia-fetch-client</code>, <code>aurelia-http-client</code> is not included in the modules that Aurelia's bootstrapper installs, since it's completely optional and many apps may choose to use a different strategy for data retrieval. So, if you want to use it, first you must install it with your preferred package manager.</p>
 <h3>Basic Use</h3>
 <p>Once installed, you can use it like this:</p>
 <code-listing heading="GET JSON with Basic HTTP">

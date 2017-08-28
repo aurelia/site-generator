@@ -5,13 +5,13 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>Binding behaviors are a category of view resource, just like value converters, custom attributes and custom elements.  Binding behaviors are most like 
+    <section><h2 id="introduction">Introduction</h2><p>Binding behaviors are a category of view resource, just like value converters, custom attributes and custom elements.  Binding behaviors are most like 
 <a href="http://www.danyow.net/aurelia-value-converters/" target="_blank">value converters</a>
  in that you use them declaratively in binding expressions to affect the binding.</p>
 <p>The primary difference between a binding behavior and a value converter is <em>binding behaviors have full access to the binding instance, throughout it's lifecycle</em>. Contrast this with a value converter which only has the ability to intercept values passing from the model to the view and visa versa.</p>
 <p>The additional &quot;access&quot; afforded to binding behaviors gives them the ability to change the behavior of the binding, enabling a lot of interesting scenarios which you'll see below.</p>
 </section>
-<section><h2>throttle</h2><p>Aurelia ships with a handful of behaviors out of the box to enable common scenarios.  The first is the throttle binding behavior which limits the rate at which the view-model is updated in two-way bindings or the rate at which the view is updated in one-way binding scenarios.</p>
+<section><h2 id="throttle">throttle</h2><p>Aurelia ships with a handful of behaviors out of the box to enable common scenarios.  The first is the throttle binding behavior which limits the rate at which the view-model is updated in two-way bindings or the rate at which the view is updated in one-way binding scenarios.</p>
 <p>By default <code>throttle</code> will only allow updates every 200ms. You can customize the rate of course.  Here are a few examples.</p>
 <code-listing heading="Updating a property, at most, every 200ms">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -40,7 +40,7 @@
   <source-code src="example/binding-binding-behaviors/throttle/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>debounce</h2><p>The debounce binding behavior is another rate limiting binding behavior. Debounce prevents the binding from being updated until a specified interval has passed without any changes.</p>
+<section><h2 id="debounce">debounce</h2><p>The debounce binding behavior is another rate limiting binding behavior. Debounce prevents the binding from being updated until a specified interval has passed without any changes.</p>
 <p>A common use case is a search input that triggers searching automatically.  You wouldn't want to make a search API on every change (every keystroke).  It's more efficient to wait until the user has paused typing to invoke the search logic.</p>
 <code-listing heading="Update after typing stopped for 200ms">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -62,7 +62,7 @@
   <source-code src="example/binding-binding-behaviors/debounce/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>updateTrigger</h2><p>Update trigger allows you to override the input events that cause the element's value to be written to the view-model. The default events are <code>change</code> and <code>input</code>.</p>
+<section><h2 id="updatetrigger">updateTrigger</h2><p>Update trigger allows you to override the input events that cause the element's value to be written to the view-model. The default events are <code>change</code> and <code>input</code>.</p>
 <p>Here's how you would tell the binding to only update the model on <code>blur</code>:</p>
 <code-listing heading="Update on blur">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -79,7 +79,7 @@
   <source-code src="example/binding-binding-behaviors/update-trigger/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>signal</h2><p>The signal binding behavior enables you to &quot;signal&quot; the binding to refresh. This is especially useful when a binding result is impacted by global changes that are outside of the observation path.</p>
+<section><h2 id="signal">signal</h2><p>The signal binding behavior enables you to &quot;signal&quot; the binding to refresh. This is especially useful when a binding result is impacted by global changes that are outside of the observation path.</p>
 <p>For example, if you have a &quot;translate&quot; value converter that converts a key to a localized string- eg <code>\${'greeting-key' | translate}</code> and your site allows users to change the current language, how would you refresh the bindings when that happens?</p>
 <p>Another example is a value converter that uses the current time to convert a record's datetime to a &quot;time ago&quot; value:  <code>posted \${postDateTime | timeAgo}</code>. The moment this binding expression is evaluated it will correctly result in <code>posted a minute ago</code>.  As time passes, it will eventually become inaccurate. How can we refresh this binding periodically so that it correctly displays <code>5 minutes ago</code>, then <code>15 minutes ago</code>, <code>an hour ago</code>, etc?</p>
 <p>Here's how you would accomplish this using the <code>signal</code> binding behavior:</p>
@@ -129,7 +129,7 @@
   <source-code src="example/binding-binding-behaviors/signal/app.js"><pre class="language-typescript"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>oneTime</h2><p>With the <code>oneTime</code> binding behavior you can specify that string interpolated bindings should happen once. Simply write:</p>
+<section><h2 id="onetime">oneTime</h2><p>With the <code>oneTime</code> binding behavior you can specify that string interpolated bindings should happen once. Simply write:</p>
 <code-listing heading="One-time String Interpolation">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>${foo &amp; oneTime}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
@@ -150,7 +150,7 @@
 The casing for binding modes is different depending on whether they appear as a <strong>binding command</strong> or as a <strong>binding behavior</strong>. Because HTML is case-insensitive, binding commands cannot use capitals. Thus, the binding modes, when specified in this place, use lowercase, dashed names. However, when used within a binding expression as a binding behavior, they must not use a dash because that is not a valid symbol for variable names in JavaScript. So, in this case, camel casing is used.</p>
 </div>
 </section>
-<section><h2>self</h2><p>With the <code>self</code> binding behavior, you can specify that event handler will only response to the target where listener was attached to, not its descendants.</p>
+<section><h2 id="self">self</h2><p>With the <code>self</code> binding behavior, you can specify that event handler will only response to the target where listener was attached to, not its descendants.</p>
 <p>For example, in the following markup</p>
 <code-listing heading="Self binding behavior">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -201,7 +201,7 @@ you achieve the same goal without filling up your methods with unnecessary code:
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Custom binding behaviors</h2><p>You can build custom binding behaviors just like you can build value converters. Instead of <code>toView</code> and <code>fromView</code> methods you'll create <code>bind(binding, scope, [...args])</code> and <code>unbind(binding, scope)</code> methods. In the bind method you'll add your behavior to the binding and in the unbind method you should cleanup whatever you did in the bind method to restore the binding instance to it's original state. The <code>binding</code> argument is the binding instance whose behavior you want to change. It's an implementation of the <code>Binding</code> interface. The <code>scope</code> argument is the binding's data-context. It provides access to the model the binding will be bound to via it's <code>bindingContext</code> and <code>overrideContext</code> properties.</p>
+<section><h2 id="custom-binding-behaviors">Custom binding behaviors</h2><p>You can build custom binding behaviors just like you can build value converters. Instead of <code>toView</code> and <code>fromView</code> methods you'll create <code>bind(binding, scope, [...args])</code> and <code>unbind(binding, scope)</code> methods. In the bind method you'll add your behavior to the binding and in the unbind method you should cleanup whatever you did in the bind method to restore the binding instance to it's original state. The <code>binding</code> argument is the binding instance whose behavior you want to change. It's an implementation of the <code>Binding</code> interface. The <code>scope</code> argument is the binding's data-context. It provides access to the model the binding will be bound to via it's <code>bindingContext</code> and <code>overrideContext</code> properties.</p>
 <p>Here's a custom binding behavior that calls a method on your view model each time the binding's <code>updateSource</code> / <code>updateTarget</code> and <code>callSource</code> methods are invoked.</p>
 <code-listing heading="Creating a Custom Binding Behavior">
   <source-code lang="ES 2015/ES 2016/TypeScript"><pre class="language-javascript"><code>

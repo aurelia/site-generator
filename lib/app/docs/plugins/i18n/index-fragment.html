@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>This documentation explains how to get up and running with Aurelia-I18N
+    <section><h2 id="introduction">Introduction</h2><p>This documentation explains how to get up and running with Aurelia-I18N
 in order to provide localization and internationalization features with your app.</p>
 <p>Under the hood it uses 
 <a href="http://i18next.com/" target="_blank">i18next</a>
@@ -14,7 +14,7 @@ open source library with an extensive set of features. By building on top of it
 not only can you reuse your work across various other platforms and frameworks
 but you are able to use an extensive eco-system full of various packages.</p>
 </section>
-<section><h2>Installing the Plugin</h2><p>There are various ways to setup your Aurelia app. It not only boils down
+<section><h2 id="installing-the-plugin">Installing the Plugin</h2><p>There are various ways to setup your Aurelia app. It not only boils down
 to the question whether you use JavaScript or TypeScript but also which module loader
 and bundler is in use.</p>
 <p>Aurelia-I18N is tested and optimized to support both JS and TS, as well as the following loader/bundler scenarios:</p>
@@ -86,7 +86,7 @@ As an example we're going to leverage the i18next-xhr-backend:</p>
 }
 </code></pre>
 </section>
-<section><h2>Setting up the Plugin</h2><p>Now that you have installed and configured your loader, these are the steps to get started with the plugin.</p>
+<section><h2 id="setting-up-the-plugin">Setting up the Plugin</h2><p>Now that you have installed and configured your loader, these are the steps to get started with the plugin.</p>
 <p>First, use Manual Boostrapping. Open your <code>index.html</code> and locate the element with the attribute aurelia-app. Change it to look like this:</p>
 <code-listing heading="Setting up Aurelia Bootstrapping">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -229,7 +229,7 @@ defaultNS. For example <code>t='nav:profile'</code> would access the <code>profi
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>TypeScript Support</h2><p>In order to get proper support for autocompletion and typesafety you should install
+<section><h2 id="typescript-support">TypeScript Support</h2><p>In order to get proper support for autocompletion and typesafety you should install
 the necessary type definitions (d.ts) for the plugins dependencies.
 Here we show how you can do that for i18next and the i18next-xhr-backend, but this
 should be applicable to every other backend choice.</p>
@@ -266,7 +266,7 @@ that TypeScript does not see proper ES6 exported defaults. So you can now either
 </code></pre>
 <p>or update your tsconfig with <code>&quot;allowSyntheticDefaultImports&quot;: true</code> to maintain the same import style.</p>
 </section>
-<section><h2>Using the Plugin</h2><p>i18next translations work by setting up an active locale, which you've setup above in the init phase with the property <code>lng</code>.</p>
+<section><h2 id="using-the-plugin">Using the Plugin</h2><p>i18next translations work by setting up an active locale, which you've setup above in the init phase with the property <code>lng</code>.</p>
 <h3>Setting the active locale</h3>
 <p>In order to change the active language you'd have to call the function <code>setLocale(localeName)</code> via code.</p>
 <code-listing heading="Setting the active locale with setLocale">
@@ -806,7 +806,7 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Bundle Translation Files</h2><p>When bundling is used, the built-in backend will read the translations from the bundle with the aurelia loader. Make sure that the <code>translation.json</code> files are packed in the bundle using the text module, by changing the <code>aurelia.json</code> and adding <code>.json</code> as an extension for the text plugin:</p>
+<section><h2 id="bundle-translation-files">Bundle Translation Files</h2><p>When bundling is used, the built-in backend will read the translations from the bundle with the aurelia loader. Make sure that the <code>translation.json</code> files are packed in the bundle using the text module, by changing the <code>aurelia.json</code> and adding <code>.json</code> as an extension for the text plugin:</p>
 <pre><code class="language-json">&quot;loader&quot;: {
 			&quot;type&quot;: &quot;require&quot;,
 			&quot;configTarget&quot;: &quot;vendor-bundle.js&quot;,
@@ -891,7 +891,7 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
       ...
 </code></pre>
 </section>
-<section><h2>Internationalization API Polyfill</h2><p>The plugin leverages the JavaScript Internationalization API to perform certain tasks. Since not all browsers do fully support it (
+<section><h2 id="internationalization-api-polyfill">Internationalization API Polyfill</h2><p>The plugin leverages the JavaScript Internationalization API to perform certain tasks. Since not all browsers do fully support it (
 <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl#Browser_compatibility" target="_blank">compatibility table</a>
 ) the aurelia-i18n conditionally loads the Polyfill if needed.</p>
 <p>In case of bundling your app you should thus keep in mind that it will not be automatically included into the bundle. That means you have to manually adjust the bundle config to include the polyfill as well, if you intend to have your application run on browsers without full support. 

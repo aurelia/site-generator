@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Setting Up Your Machine</h2><p>For this tutorial, we're going to use the Aurelia CLI. If you've already setup your machine with the CLI, you can skip to the next section. If not, then please install the following CLI prerequisites:</p>
+    <section><h2 id="setting-up-your-machine">Setting Up Your Machine</h2><p>For this tutorial, we're going to use the Aurelia CLI. If you've already setup your machine with the CLI, you can skip to the next section. If not, then please install the following CLI prerequisites:</p>
 <ul>
 <li>Install NodeJS version 4.x or above.
 <ul>
@@ -38,11 +38,11 @@ Always run commands from a Bash prompt. Depending on your environment, you may n
 While creating a new project doesn't require NPM 3, front-end development, in general, requires a flat-package structure, which is not available with NPM versions prior to 3. It is recommended that you update to NPM 3, which will be able to manage this structural requirement. You can check your NPM version with <code>npm -v</code>. If you need to update, run <code>npm install npm -g</code>.</p>
 </div>
 </section>
-<section><h2>Creating A New Aurelia Project</h2><p>Now, that you've got your machine setup, we can create our contact manager app. To create the project, run <code>au new</code> from the command line. You will be presented with a number of options. Name the project &quot;contact-manager&quot; and then select either the &quot;Default ESNext&quot; or &quot;Default TypeScript&quot; option depending on what is most comfortable for you. (Do not select &quot;Custom&quot; for this tutorial.)</p>
+<section><h2 id="creating-a-new-aurelia-project">Creating A New Aurelia Project</h2><p>Now, that you've got your machine setup, we can create our contact manager app. To create the project, run <code>au new</code> from the command line. You will be presented with a number of options. Name the project &quot;contact-manager&quot; and then select either the &quot;Default ESNext&quot; or &quot;Default TypeScript&quot; option depending on what is most comfortable for you. (Do not select &quot;Custom&quot; for this tutorial.)</p>
 <p>Once you've made your choice, the CLI will show you your selections and ask if you'd like to create the file structure. Hit enter to accept the default &quot;yes&quot;. After that, you'll be asked if you would like to install your new project's dependencies. Press enter to select the default &quot;yes&quot; for this as well.</p>
 <p>Once the dependencies are installed (it will take a few minutes), your project is ready to go. Just change directory into the project folder and run it by typing <code>au run --watch</code>. This will run the app and watch the project's source for changes. Open a web browser and navigate to the url indicated in the CLI's output. If you've got everything setup correctly, you should see the message &quot;Hello World!&quot; in the browser.</p>
 </section>
-<section><h2>Adding Required Assets</h2><p>For this tutorial, we're going to be working against a fake, in-memory backend. We've also pre-created the CSS and some utility functions, so we don't have to waste time on that here. Before we begin writing the app, you'll need to download these required assets and add them to your project.</p>
+<section><h2 id="adding-required-assets">Adding Required Assets</h2><p>For this tutorial, we're going to be working against a fake, in-memory backend. We've also pre-created the CSS and some utility functions, so we don't have to waste time on that here. Before we begin writing the app, you'll need to download these required assets and add them to your project.</p>
 <div style="text-align: center; margin-bottom: 32px">
   <a class="au-button" href="http://aurelia.io/downloads/contact-manager-assets.zip" target="_blank">Download the Contact Manager Assets</a>
 </div>
@@ -54,7 +54,7 @@ While creating a new project doesn't require NPM 3, front-end development, in ge
 </ul>
 <p>Copy all of these files to the <code>src</code> folder of your project. TypeScript users should also rename the file extensions from <code>.js</code> to <code>.ts</code>.</p>
 </section>
-<section><h2>Building the Application Shell</h2><div class="warning"><div class="icon"> <i></i> </div><p>
+<section><h2 id="building-the-application-shell">Building the Application Shell</h2><div class="warning"><div class="icon"> <i></i> </div><p>
 Before proceeding any further, please make sure you are familiar with the concepts introduced in the Quick Start Guide or otherwise have some basic experience with Aurelia. Topics covered in the Quick Start will not be explained again here.</p>
 </div>
 <p>Let's start by looking at a picture of the final product of this tutorial. It will help us to see the application's structure and the pieces we need to build.</p>
@@ -153,7 +153,7 @@ Before proceeding any further, please make sure you are familiar with the concep
 </code-listing>
 <p>You can read more about configuring 3rd party libraries in the documentation on the Aurelia CLI. For now, just know that this causes jQuery, Bootstrap and all necessary CSS to be included in the vendor bundle and makes it reachable through the module system.</p>
 </section>
-<section><h2>Building Out the Default Route</h2><p>If you run the application now, you'll see a blank screen and the browser's console will display the following message:</p>
+<section><h2 id="building-out-the-default-route">Building Out the Default Route</h2><p>If you run the application now, you'll see a blank screen and the browser's console will display the following message:</p>
 <pre><code>Failed to load resource: the server responded with a status of 404 (Not Found) http://localhost:9000/src/no-selection.js
 ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 </code></pre>
@@ -185,7 +185,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 <p>All it does is provide a container with some styling in order to display our message to the user. With this in place, you should now be able to run your application. If you haven't stopped/restarted it after editing the bundles, then you will need to do that now. When you run the application, you should see something like this:</p>
 <p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-no-selection.png" alt="No Selection Screen" /></p>
 </section>
-<section><h2>Building Out the Contact List</h2><p>We've got the basic visual structure of our application in place and routing is now working. We've even created our first screen. However, it's not very interesting. We've got a <code>div</code> placeholder for the actual contact list at present. Let's go ahead and build that out, as a <code>contact-list</code> custom element.</p>
+<section><h2 id="building-out-the-contact-list">Building Out the Contact List</h2><p>We've got the basic visual structure of our application in place and routing is now working. We've even created our first screen. However, it's not very interesting. We've got a <code>div</code> placeholder for the actual contact list at present. Let's go ahead and build that out, as a <code>contact-list</code> custom element.</p>
 <p>Aurelia strives to be a self-consistent framework. As such, building a custom element is the same as creating your <code>App</code> component and your routed components. To create the <code>contact-list</code> custom element, start by creating a new file named <code>contact-list${context.language.fileExtension}</code> and add the following code:</p>
 <code-listing heading="contact-list${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -306,7 +306,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 <p>If you go ahead and run the application, you should now see something like this:</p>
 <p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-contact-list.png" alt="The Contact List" /></p>
 </section>
-<section><h2>Building Out the Contact Detail Screen</h2><p>Ok, things are starting to come together, but we still can't view an individual contact. If you try selecting something from the list, you'll see an error like the following in the console:</p>
+<section><h2 id="building-out-the-contact-detail-screen">Building Out the Contact Detail Screen</h2><p>Ok, things are starting to come together, but we still can't view an individual contact. If you try selecting something from the list, you'll see an error like the following in the console:</p>
 <pre><code>ERROR [app-router] Error: Script error for &quot;contact-detail&quot;
 </code></pre>
 <p>Again, this is because the router is trying to route to the detail screen, but we have not yet created the component. So, let's do that next. Create a new file named <code>contact-detail${context.language.fileExtension}</code> and add the following code:</p>
@@ -503,7 +503,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 <p>You should now be able to select contacts in the list, see their details, edit them, save and even see the confirm dialog on unsaved data navigations. It should look something like this:</p>
 <p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-contact-detail.png" alt="The Contact Details" /></p>
 </section>
-<section><h2>Adding Pub/Sub Messaging</h2><p>If you play around with the application for a bit, you'll notice a few &quot;buggy&quot; behaviors:</p>
+<section><h2 id="adding-pubsub-messaging">Adding Pub/Sub Messaging</h2><p>If you play around with the application for a bit, you'll notice a few &quot;buggy&quot; behaviors:</p>
 <ul>
 <li>Refreshing the browser with a contact selected results in the correct contact being shown, but not in the correct contact list item being highlighted.</li>
 <li>If you edit some data, try to navigate away and then cancel, the contact list item selection will go out of sync, highlighting the contact you were going to before you cancelled, but not the current contact.</li>
@@ -813,7 +813,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 <p>As you can see, we've just imported and injected our <code>EventAggregator</code> and then it's as simple as calling the <code>subscribe</code> method and passing it the message type and a callback. When the message is published, your callback is fired and passed the instance of the message type. In this case, we use these messages to update our selection as well as the details of the contact that are relevant to our list.</p>
 <p>If you run the application now, you should see that everything is working as expected.</p>
 </section>
-<section><h2>Adding A Loading Indicator</h2><p>Let's add one more final touch to this application. Whenever we're navigating from screen to screen or making a <code>WebAPI</code> request, let's show a loading indicator at the top of our app. To do this, we'll use a 3rd party library and create a custom Aurelia element to wrap it up.</p>
+<section><h2 id="adding-a-loading-indicator">Adding A Loading Indicator</h2><p>Let's add one more final touch to this application. Whenever we're navigating from screen to screen or making a <code>WebAPI</code> request, let's show a loading indicator at the top of our app. To do this, we'll use a 3rd party library and create a custom Aurelia element to wrap it up.</p>
 <p>Begin by installing the <code>nprogress</code> library with the following command:</p>
 <pre><code>npm install nprogress --save
 </code></pre>
@@ -1011,7 +1011,7 @@ TypeScript users should note that when using 3rd party libraries, in order to ma
 </code-listing>
 <p>And with that, we've finished our app. Congratulations!</p>
 </section>
-<section><h2>Next Steps</h2><p>Now that you've completed the tutorial, you may want to consider doing some additional research or development exercises to continue your learning and hone your skills. Here are a few ideas:</p>
+<section><h2 id="next-steps">Next Steps</h2><p>Now that you've completed the tutorial, you may want to consider doing some additional research or development exercises to continue your learning and hone your skills. Here are a few ideas:</p>
 <ul>
 <li>Create a real backend for the app and use the <a href="#/doc/article/aurelia/fetch-client/latest/http-services">http-client or fetch-client</a> to retrieve the data.</li>
 <li>Extend that application so that new contacts can be added.</li>
@@ -1021,7 +1021,7 @@ TypeScript users should note that when using 3rd party libraries, in order to ma
 <li>Expand your knowledge of <a href="#/doc/article/aurelia/binding/latest/binding-basics">binding</a> and <a href="#/doc/article/aurelia/templating/latest/templating-basics">templating</a>.</li>
 </ul>
 </section>
-<section><h2>Conclusion</h2><p>This tutorial presents a fairly simple application, but it provides an opportunity to demonstrate a number of interesting techniques. We hope it's helped you along in the process of learning Aurelia and we look forward to seeing what things you will build next.</p>
+<section><h2 id="conclusion">Conclusion</h2><p>This tutorial presents a fairly simple application, but it provides an opportunity to demonstrate a number of interesting techniques. We hope it's helped you along in the process of learning Aurelia and we look forward to seeing what things you will build next.</p>
 </section>
 
   </article>

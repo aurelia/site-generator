@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Basic Configuration</h2><p>To use Aurelia's router, your component view must have a <code>&lt;router-view&gt;&lt;/router-view&gt;</code> element. In order to configure the router, the component's view-model requires a <code>configureRouter()</code> function.</p>
+    <section><h2 id="basic-configuration">Basic Configuration</h2><p>To use Aurelia's router, your component view must have a <code>&lt;router-view&gt;&lt;/router-view&gt;</code> element. In order to configure the router, the component's view-model requires a <code>configureRouter()</code> function.</p>
 <code-listing heading="app.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -73,7 +73,7 @@
 </li>
 </ul>
 </section>
-<section><h2>Options</h2><h3>Push State</h3>
+<section><h2 id="options">Options</h2><h3>Push State</h3>
 <p>Set <code>config.options.pushState</code> to <code>true</code> to activate push state and add 
 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base" target="_blank">a base tag</a>
  to the head of your html document. If you're using JSPM, RequireJS or a similar module loader, you will also need to configure it with a base url, corresponding to your base tag's <code>href</code>. Finally, be sure to set the <code>config.options.root</code> to match your base tag's setting.</p>
@@ -115,7 +115,7 @@
 PushState requires server-side support. Don't forget to configure your server appropriately.</p>
 </div>
 </section>
-<section><h2>Dynamically Specify Route Components</h2><p>You can add a <code>navigationStrategy</code> to a route to allow dynamic routes. Within the navigation strategy Aurelia requires you to configure <code>instruction.config</code> with the desired <code>moduleId</code>, <code>viewPorts</code> or <code>redirect</code>.</p>
+<section><h2 id="dynamically-specify-route-components">Dynamically Specify Route Components</h2><p>You can add a <code>navigationStrategy</code> to a route to allow dynamic routes. Within the navigation strategy Aurelia requires you to configure <code>instruction.config</code> with the desired <code>moduleId</code>, <code>viewPorts</code> or <code>redirect</code>.</p>
 <code-listing heading="Using a Route Navigation Strategy">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -157,7 +157,7 @@ PushState requires server-side support. Don't forget to configure your server ap
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Adding Additional Data To A Route</h2><p>Although Aurelia does allow you to pass any additional property to a route's configuration object, <code>settings</code> is the default parameter to which you should add arbitrary data that you want to pass to the route.</p>
+<section><h2 id="adding-additional-data-to-a-route">Adding Additional Data To A Route</h2><p>Although Aurelia does allow you to pass any additional property to a route's configuration object, <code>settings</code> is the default parameter to which you should add arbitrary data that you want to pass to the route.</p>
 <code-listing heading="Using Route Settings">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -189,7 +189,7 @@ PushState requires server-side support. Don't forget to configure your server ap
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Case Sensitive Routes</h2><p>You can set a route to be case sensitive, should you wish:</p>
+<section><h2 id="case-sensitive-routes">Case Sensitive Routes</h2><p>You can set a route to be case sensitive, should you wish:</p>
 <code-listing heading="Making a Route Case-Sensitive">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -222,7 +222,7 @@ PushState requires server-side support. Don't forget to configure your server ap
 </code-listing>
 <p>In the above example, our route will only match URL fragment of <code>/users</code> and not <code>/Users</code>, <em>but</em> since the route <code>home</code> is not case sensitive the URL <code>/Home</code> would match. By default Aurelia's routes are not case sensitive.</p>
 </section>
-<section><h2>Handling Unknown Routes</h2><p>Aurelia allows you to map any unknown routes. Parameters passed to <code>mapUnknownRoutes()</code> can be:</p>
+<section><h2 id="handling-unknown-routes">Handling Unknown Routes</h2><p>Aurelia allows you to map any unknown routes. Parameters passed to <code>mapUnknownRoutes()</code> can be:</p>
 <ul>
 <li>A string to a moduleId. This module will be navigated to any time a route is not found.</li>
 <li>A routeConfig object. This configuration object will be used any time a route is not found.</li>
@@ -319,7 +319,7 @@ PushState requires server-side support. Don't forget to configure your server ap
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Redirecting Routes</h2><p>Aurelia allows redirecting of routes to URL fragments by specifying redirect with a string consisting of a URL fragment.</p>
+<section><h2 id="redirecting-routes">Redirecting Routes</h2><p>Aurelia allows redirecting of routes to URL fragments by specifying redirect with a string consisting of a URL fragment.</p>
 <code-listing heading="Route Config Redirects">
   <source-code lang="ES 2015/ES 2016/TypeScript"><pre class="language-javascript"><code>
     config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
@@ -332,7 +332,7 @@ PushState requires server-side support. Don't forget to configure your server ap
 The <code>redirect</code> is particularly useful when you have an &quot;empty&quot; route pattern (such as the first route above) that maps to a component with a child router. In this case, create a non-empty route and then redirect the empty route to the non-empty route (as above). This will enable the child router to consistently match child routes without getting confused in scenarios where the empty route was matched.</p>
 </div>
 </section>
-<section><h2>Pipelines</h2><p>Aurelia has two router classes, <code>AppRouter</code> and <code>Router</code>. <code>AppRouter</code> extends the <code>Router</code> class and is the main application router. <code>Router</code> is used for any child routers including nested child routers. One of the main differences between the two is pipelines are only allowed on the <code>AppRouter</code> and not any child routers.</p>
+<section><h2 id="pipelines">Pipelines</h2><p>Aurelia has two router classes, <code>AppRouter</code> and <code>Router</code>. <code>AppRouter</code> extends the <code>Router</code> class and is the main application router. <code>Router</code> is used for any child routers including nested child routers. One of the main differences between the two is pipelines are only allowed on the <code>AppRouter</code> and not any child routers.</p>
 <p>The default pipeline slots in order are <code>authorize</code>, <code>preActivate</code>, <code>preRender</code>, and <code>postRender</code>. For each slot, Aurelia has convenience functions for creating a pipeline step for these slots: <code>addAuthorizeStep</code>, <code>addPreActivateStep</code>, <code>addPreRenderStep</code>, <code>addPostRenderStep</code>. You can create your own pipeline steps using <code>addPipelineStep</code>, but the step's name must match one of the default pipeline's slots.</p>
 <ul>
 <li><code>authorize</code> is called between loading the route's step and calling the route view-model' <code>canActivate</code> function if defined.</li>
@@ -516,7 +516,7 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Rendering View Ports</h2><p>Every instance of a <code>router-view</code> custom element essentially defines a &quot;view port&quot;. When you give a <code>router-view</code> a name, you can refer to it in the <code>viewPorts</code> property of the route configuration in your javascript. The value of a <code>viewPorts</code> property is an object where each property name is the name of a view port (ie, <code>router-view</code>) and each value is the <code>moduleId</code> destination of the route. Thus you can specify any number of view ports on a single route configuration.</p>
+<section><h2 id="rendering-view-ports">Rendering View Ports</h2><p>Every instance of a <code>router-view</code> custom element essentially defines a &quot;view port&quot;. When you give a <code>router-view</code> a name, you can refer to it in the <code>viewPorts</code> property of the route configuration in your javascript. The value of a <code>viewPorts</code> property is an object where each property name is the name of a view port (ie, <code>router-view</code>) and each value is the <code>moduleId</code> destination of the route. Thus you can specify any number of view ports on a single route configuration.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
 If you don't name a <code>router-view</code>, it will be available under the name 'default'.</p>
 </div>
@@ -561,7 +561,7 @@ If you don't name a <code>router-view</code>, it will be available under the nam
 In addition to the <code>moduleId</code>, you can also specify a &quot;layout&quot; in the configuration of a view port. See the discussion of Layouts elsewhere in this document.</p>
 </div>
 </section>
-<section><h2>Layouts</h2><p>Similar to MVC-style master/layout pages, Aurelia allows you to use a &quot;layout&quot; view like an MVC &quot;master template&quot; for a set of views.</p>
+<section><h2 id="layouts">Layouts</h2><p>Similar to MVC-style master/layout pages, Aurelia allows you to use a &quot;layout&quot; view like an MVC &quot;master template&quot; for a set of views.</p>
 <p>The set of views subject to being part of a layout is defined in Aurelia as a set of views referenced by one or more routes in a router configuration. There are two ways to associate a layout with routes. The first is via HTML, the second is via view model code.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
 We're going to be a little sloppy here in terminology. Technically, routes refer to &quot;moduleIds&quot;, not
@@ -739,7 +739,7 @@ All of these layout attributes are bindable.</p>
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>View Swapping and Animation</h2><p>When the Aurelia router navigates from one view to another, we refer to this as &quot;swapping&quot; one view for another.  Aurelia gives us an optional set of strategies dictating how a swap proceeds, or more specifically, how animation plays out during the swap.  We refer to these strategies more precisely as the &quot;swap order&quot;.</p>
+<section><h2 id="view-swapping-and-animation">View Swapping and Animation</h2><p>When the Aurelia router navigates from one view to another, we refer to this as &quot;swapping&quot; one view for another.  Aurelia gives us an optional set of strategies dictating how a swap proceeds, or more specifically, how animation plays out during the swap.  We refer to these strategies more precisely as the &quot;swap order&quot;.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
 If there is no animation defined, then swap-order has no visible impact.</p>
 </div>
@@ -764,7 +764,7 @@ If there is no animation defined, then swap-order has no visible impact.</p>
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Internationalizing Titles</h2><p>If your application targets multiple cultures or languages, you probably want to translate your route titles. The <code>Router</code> class has a <code>transformTitle</code> property that can be used for this. It is expected to be assigned a function that takes the active route's title as a parameter and then returns the translated title. For example, if your app uses <code>aurelia-i18n</code>, its routes' titles would typically be set to some translation keys
+<section><h2 id="internationalizing-titles">Internationalizing Titles</h2><p>If your application targets multiple cultures or languages, you probably want to translate your route titles. The <code>Router</code> class has a <code>transformTitle</code> property that can be used for this. It is expected to be assigned a function that takes the active route's title as a parameter and then returns the translated title. For example, if your app uses <code>aurelia-i18n</code>, its routes' titles would typically be set to some translation keys
 and the <code>AppRouter</code>'s <code>transformTitle</code> would be configured in such a way that the active route's title is translated using the <code>I18N</code>'s <code>tr</code> method. Additionally you can listen to a custom event published by the I18N service to react on locale changes using the EventAggregator:</p>
 <code-listing heading="src/main${context.language.fileExtension}">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
@@ -876,7 +876,7 @@ and the <code>AppRouter</code>'s <code>transformTitle</code> would be configured
 </ul>
 <p>In the previous example, the <code>AppRouter</code>'s <code>transformTitle</code> is set, so all child <code>Router</code>s will delegate down to it by default. However, this means that the <code>transformTitle</code> can be overridden for specific child <code>Router</code>s if some areas of your app need custom transformation.</p>
 </section>
-<section><h2>Configuring a Fallback Route</h2><p>Whenever navigation is rejected, it is redirected to a previous location. However in certain cases a previous location doesn't exist, e.g. when it happens as the first navigation after the startup of application. To handle this scenario, you can set up a fallback route.</p>
+<section><h2 id="configuring-a-fallback-route">Configuring a Fallback Route</h2><p>Whenever navigation is rejected, it is redirected to a previous location. However in certain cases a previous location doesn't exist, e.g. when it happens as the first navigation after the startup of application. To handle this scenario, you can set up a fallback route.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>

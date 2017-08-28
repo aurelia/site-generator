@@ -5,9 +5,9 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>This article covers the dialog plugin for Aurelia.  This plugin is created for showing dialogs (sometimes referred to as modals) in your application.  The plugin supports the use of dynamic content for all aspects and is easily configurable / overridable.</p>
+    <section><h2 id="introduction">Introduction</h2><p>This article covers the dialog plugin for Aurelia.  This plugin is created for showing dialogs (sometimes referred to as modals) in your application.  The plugin supports the use of dynamic content for all aspects and is easily configurable / overridable.</p>
 </section>
-<section><h2>Installing The Plugin</h2><ol>
+<section><h2 id="installing-the-plugin">Installing The Plugin</h2><ol>
 <li>In your <strong>JSPM</strong>-based project install the plugin via <code>jspm</code> with following command</li>
 </ol>
 <pre><code class="language-shell">jspm install aurelia-dialog
@@ -66,7 +66,7 @@
 <p>Note: If you are using WebPack it is possible that the plugin is installed before Aurelia has replaced the <code>&lt;body&gt;</code> element, if that is where your <code>aurelia-app=&quot;main&quot;</code> is defined, which results in some of the dialog components getting overwritten.  In this case you can move the <code>aurelia-app</code> attribute to a <code>&lt;div&gt;</code> inside of the <code>&lt;body&gt;</code>.  Example - <code>&lt;body&gt;&lt;div aurelia-app=&quot;main&quot;&gt;&lt;/div&gt;&lt;/body&gt;</code>.</p>
 </blockquote>
 </section>
-<section><h2>Using The Plugin</h2><p>There are a few ways you can take advantage of the Aurelia dialog.</p>
+<section><h2 id="using-the-plugin">Using The Plugin</h2><p>There are a few ways you can take advantage of the Aurelia dialog.</p>
 <ol>
 <li>You can use the dialog service to open a prompt -</li>
 </ol>
@@ -156,7 +156,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Attach Focus Custom Attribute</h2><p>The library exposes an <code>attach-focus</code> custom attribute that allows focusing in on an element in the modal when it is loaded.  You can use this to focus a button, input, etc...  Example usage -</p>
+<section><h2 id="attach-focus-custom-attribute">Attach Focus Custom Attribute</h2><p>The library exposes an <code>attach-focus</code> custom attribute that allows focusing in on an element in the modal when it is loaded.  You can use this to focus a button, input, etc...  Example usage -</p>
 <code-listing heading="edit-person.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -177,7 +177,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Settings</h2><h3>Global Settings</h3>
+<section><h2 id="settings">Settings</h2><h3>Global Settings</h3>
 <p>You can specify global settings as well for all dialogs to use when installing the plugin via the configure method. If providing a custom configuration, you <em>must</em> call the <code>useDefaults()</code> method to apply the base configuration.</p>
 <code-listing heading="main.js">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -232,7 +232,7 @@ If not provided a new child container will be created from the root one.</li>
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Accessing The DialogController API</h2><p>It is possible to resolve and close (using cancel/ok/error methods) dialog in the same context where you open it.</p>
+<section><h2 id="accessing-the-dialogcontroller-api">Accessing The DialogController API</h2><p>It is possible to resolve and close (using cancel/ok/error methods) dialog in the same context where you open it.</p>
 <code-listing heading="welcome.js">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
   <span class="token keyword">import</span> <span class="token punctuation">{</span>EditPerson<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./edit-person'</span><span class="token punctuation">;</span>
@@ -265,7 +265,7 @@ If not provided a new child container will be created from the root one.</li>
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Styling The Dialog</h2><h3>Overlay With 50% Opacity</h3>
+<section><h2 id="styling-the-dialog">Styling The Dialog</h2><h3>Overlay With 50% Opacity</h3>
 <p>Bootstrap adds 50% opacity and a background color of black to the modal.  To achieve this in dialog you can simply add the following CSS -</p>
 <code-listing heading="welcome.js">
   <source-code lang="CSS"><pre class="language-javascript"><code>
@@ -276,7 +276,7 @@ ux<span class="token operator">-</span>dialog<span class="token operator">-</spa
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Lifecycle Hooks</h2><p>In adition to the lifecycle hooks defined by <code>aurelia-templating</code>, the <code>aurelia-dialog</code> defines additional ones. All dialog specific hooks can return a <code>Promise</code>, that resolves to the appropriate value for the hook, and will be awaited.</p>
+<section><h2 id="lifecycle-hooks">Lifecycle Hooks</h2><p>In adition to the lifecycle hooks defined by <code>aurelia-templating</code>, the <code>aurelia-dialog</code> defines additional ones. All dialog specific hooks can return a <code>Promise</code>, that resolves to the appropriate value for the hook, and will be awaited.</p>
 <h3><code>.canActivate()</code></h3>
 <p>With this hook you can cancel the opening of a dialog. It is invoked with one parameter - the value of the <code>model</code> setting passed to <code>.open()</code>. To cancel the opening of the dialog return <code>false</code> - <code>null</code> and <code>undefined</code> will be coerced to <code>true</code>.</p>
 <h3><code>.activate()</code></h3>

@@ -5,14 +5,14 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>A group of radio inputs is a type of &quot;single select&quot; interface. Aurelia supports two-way binding any type of property to a group of radio inputs. The examples below illustrate binding number, object, string and boolean properties to sets of radio inputs. In each of the examples there's a common set of steps:</p>
+    <section><h2 id="introduction">Introduction</h2><p>A group of radio inputs is a type of &quot;single select&quot; interface. Aurelia supports two-way binding any type of property to a group of radio inputs. The examples below illustrate binding number, object, string and boolean properties to sets of radio inputs. In each of the examples there's a common set of steps:</p>
 <ol>
 <li>Group the radios via the <code>name</code> property. Radio buttons that have the same value for the name attribute are in the same &quot;radio button group&quot;; only one radio button in a group can be selected at a time.</li>
 <li>Define each radio's value using the <code>model</code> property.</li>
 <li>Two-way bind each radio's <code>checked</code> attribute to a &quot;selected item&quot; property on the view-model.</li>
 </ol>
 </section>
-<section><h2>Numbers</h2><p>Let's start with an example that uses a numeric &quot;selected item&quot; property. In this example each radio input will be assigned a number value via the model property. Selecting a radio will cause it's model value to be assigned to the <code>selectedProductId</code> property.</p>
+<section><h2 id="numbers">Numbers</h2><p>Let's start with an example that uses a numeric &quot;selected item&quot; property. In this example each radio input will be assigned a number value via the model property. Selecting a radio will cause it's model value to be assigned to the <code>selectedProductId</code> property.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -75,7 +75,7 @@
   <source-code src="example/binding-radios/numbers/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Objects</h2><p>The binding system supports binding all types to radios, including objects. Here's an example that binds a group of radios to a <code>selectedProduct</code> object property.</p>
+<section><h2 id="objects">Objects</h2><p>The binding system supports binding all types to radios, including objects. Here's an example that binds a group of radios to a <code>selectedProduct</code> object property.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -138,7 +138,7 @@
   <source-code src="example/binding-radios/objects/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Objects with Matcher</h2><p>You may run into situations where the object your input element's model is bound to does not have reference equality to any of the object in your checked attribute is bound to. The objects might match by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
+<section><h2 id="objects-with-matcher">Objects with Matcher</h2><p>You may run into situations where the object your input element's model is bound to does not have reference equality to any of the object in your checked attribute is bound to. The objects might match by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -205,7 +205,7 @@
   <source-code src="example/binding-radios/objects-matcher/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Booleans</h2><p>In this example each radio input is assigned one of three literal values: <code>null</code>, <code>true</code> and <code>false</code>. Selecting one of the radios will assign it's value to the <code>likesCake</code> property.</p>
+<section><h2 id="booleans">Booleans</h2><p>In this example each radio input is assigned one of three literal values: <code>null</code>, <code>true</code> and <code>false</code>. Selecting one of the radios will assign it's value to the <code>likesCake</code> property.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -255,7 +255,7 @@
   <source-code src="example/binding-radios/booleans/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Strings</h2><p>Finally, here's an example using strings. This is example is unique because it does not use <code>model.bind</code> to assign each radio's value. Instead the input's standard <code>value</code> attribute is used. Normally we cannot use the standard <code>value</code> attribute in conjunction with checked binding because it coerces anything it's assigned to a string.</p>
+<section><h2 id="strings">Strings</h2><p>Finally, here's an example using strings. This is example is unique because it does not use <code>model.bind</code> to assign each radio's value. Instead the input's standard <code>value</code> attribute is used. Normally we cannot use the standard <code>value</code> attribute in conjunction with checked binding because it coerces anything it's assigned to a string.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>

@@ -5,9 +5,9 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>Most of the standard HTML elements allow for content inside them. Custom Elements would be of limited use if we couldn't put content inside them. Thus, we need a way to take this content and place it inside our custom element's template. The Shadow DOM spec provides the <code>slot</code> processing instruction for doing this. Let's explore the various strategies available for utilizing content projection.</p>
+    <section><h2 id="introduction">Introduction</h2><p>Most of the standard HTML elements allow for content inside them. Custom Elements would be of limited use if we couldn't put content inside them. Thus, we need a way to take this content and place it inside our custom element's template. The Shadow DOM spec provides the <code>slot</code> processing instruction for doing this. Let's explore the various strategies available for utilizing content projection.</p>
 </section>
-<section><h2>Basic Content Projection</h2><p>Let's create a name tag custom element. When the <code>name-tag</code> element is used, it will take the name it will display as content in the element.</p>
+<section><h2 id="basic-content-projection">Basic Content Projection</h2><p>Let's create a name tag custom element. When the <code>name-tag</code> element is used, it will take the name it will display as content in the element.</p>
 <code-listing heading="Name Tag Element Usage">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name-tag</span><span class="token punctuation">></span></span>
@@ -30,7 +30,7 @@
 </code-listing>
 <p>Aurelia will project the element's content in to the template where the <code>&lt;slot&gt;&lt;/slot&gt;</code> element is located.</p>
 </section>
-<section><h2>Named Slots</h2><p>The scenario above uses a &quot;default&quot; slot because the <code>slot</code> has no <code>name</code> attribute. In Shadow DOM, you can create as many slots as you want, provided that you give them different names. Then, the content that gets projected into the Shadow DOM must specify which slot it wants using a <code>slot</code> attribute. If it indicates no particular slot (or is plain text) it will get projected into the default slot. Here's an example of named slots:</p>
+<section><h2 id="named-slots">Named Slots</h2><p>The scenario above uses a &quot;default&quot; slot because the <code>slot</code> has no <code>name</code> attribute. In Shadow DOM, you can create as many slots as you want, provided that you give them different names. Then, the content that gets projected into the Shadow DOM must specify which slot it wants using a <code>slot</code> attribute. If it indicates no particular slot (or is plain text) it will get projected into the default slot. Here's an example of named slots:</p>
 <code-listing heading="named-slot.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -81,7 +81,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Fallback Slots</h2><p>A nice feature of slots is that they can have fallback content. If nothing gets projected into the slot, the slot will render its fallback content:</p>
+<section><h2 id="fallback-slots">Fallback Slots</h2><p>A nice feature of slots is that they can have fallback content. If nothing gets projected into the slot, the slot will render its fallback content:</p>
 <code-listing heading="fallback-content.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -272,7 +272,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Slot Implementation Limitations</h2><p>At the time this document is written, no browser supports 
+<section><h2 id="slot-implementation-limitations">Slot Implementation Limitations</h2><p>At the time this document is written, no browser supports 
 <a href="https://w3c.github.io/webcomponents/spec/shadow/" target="_blank">Shadow DOM</a>
  v1 slots. Thus, Aurelia has implemented the specification. We haven't attempted to create a &quot;generic&quot; polyfill designed to be used outside of Aurelia. Our slots implementation is baked into Aurelia's templating compiler and renderer so that it can provide maximum performance and meet the needs of our community. We haven't attempted to implement all the APIs of the spec, but rather to emulate the declarative rendering capabilities of slots. By programming against Aurelia in this way, you don't need to worry about whether or not your browser does or does not support slots natively. Aurelia will take care of it for you.</p>
 <p>Known limitations of our implementation are as follows:</p>

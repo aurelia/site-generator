@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Setup</h2><p>Aurelia is an amazing framework that embraces simple and clean code without sacrificing power. In this tutorial we'll introduce you to the simplicity of Aurelia through the construction of a &quot;Todo&quot; application. You'll see just how clean and simple your application code can be and you'll learn several of the basic concepts and capabilities of Aurelia.</p>
+    <section><h2 id="setup">Setup</h2><p>Aurelia is an amazing framework that embraces simple and clean code without sacrificing power. In this tutorial we'll introduce you to the simplicity of Aurelia through the construction of a &quot;Todo&quot; application. You'll see just how clean and simple your application code can be and you'll learn several of the basic concepts and capabilities of Aurelia.</p>
 <p>Before we start writing some code, you'll need to get setup with a basic project structure. There are several ways to setup Aurelia, including using our command line tools, Webpack, Yeoman or our skeletons. However, to start you out, we're going to show you a basic script-tag setup that requires no additional tools or build systems. Please begin by downloading the basic script setup by clicking the button below.</p>
 <div style="text-align: center; margin-bottom: 32px">
   <a class="au-button" href="http://aurelia.io/downloads/basic-aurelia-project.zip" target="_blank">Download the Basic Aurelia Project Setup</a>
@@ -39,7 +39,7 @@
 <p>Before we explain what this does, let's adjust the programming language it's using. If you look at the second script tag, you will see its <code>src</code> pointing to <code>scripts/config-typescript.js</code>. This is the configuration for TypeScript. So, if you want to use TypeScript, you are all set and don't need to make any changes. If you want to use ESNext, you need to swap its <code>src</code> so that it points at <code>scripts/config-esnext.js</code>.</p>
 <p>That's it. Your language selection is now configured with these docs and with your new project.</p>
 </section>
-<section><h2>The Index.html Page</h2><p>If you've followed along this far, you now have everything set up to help you learn Aurelia. Let's start by taking a look at the <code>index.html</code> file in a bit more depth.</p>
+<section><h2 id="the-indexhtml-page">The Index.html Page</h2><p>If you've followed along this far, you now have everything set up to help you learn Aurelia. Let's start by taking a look at the <code>index.html</code> file in a bit more depth.</p>
 <code-listing heading="index.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token doctype">&lt;!DOCTYPE html></span>
@@ -78,7 +78,7 @@ In a production app, you wouldn't use a transpiler to transform code on-the-fly 
 <p>There's one more thing to note. I wonder if you noticed it. On the <code>body</code> tag, there's an <code>aurelia-app</code> attribute. It's pointing to <code>src/main</code>. This is what tells Aurelia's bootstrapper what module contains the framework configuration as well as what HTML element is the &quot;host&quot; element where the application will be rendered. We'll look at creating that file a little bit later. Before we do that, we want to do something a bit non-traditional. We want to show you how you can build your entire Todo application in plain, vanilla ${context.language.name} without using any Aurelia APIs. Then, we'll use Aurelia to render our application to the screen, without changing any of our ${context.language.name} code.</p>
 <p>I know you're going to find this interesting, so let's get to it!</p>
 </section>
-<section><h2>The Todo Class</h2><p>One of the amazing things you can do with Aurelia, that you can't with any other framework or library, is model your entire application using plain ${context.language.name}. We think you'll understand it when you see it.</p>
+<section><h2 id="the-todo-class">The Todo Class</h2><p>One of the amazing things you can do with Aurelia, that you can't with any other framework or library, is model your entire application using plain ${context.language.name}. We think you'll understand it when you see it.</p>
 <p>We're going to begin by creating a <code>Todo</code> class. Since we're making a Todo App, we'll need a class to model out an individual Todo item. In the <code>src</code> folder of your project, create the following file:</p>
 <code-listing heading="todo${context.language.fileExtension}">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
@@ -99,7 +99,7 @@ In a production app, you wouldn't use a transpiler to transform code on-the-fly 
 </code-listing>
 <p>That's it. It's a plain class that models the todo's <code>description</code> text along with a boolean <code>done</code> to indicate if you've completed your todo.</p>
 </section>
-<section><h2>The App Class</h2><p>Our todo application contains a list of <code>Todo</code> instances. It can add and remove todos. The todos are added by allowing the end user to provide a todo description. Once they type a description and add the todo, the description is cleared so they can create another todo. Let's model these ideas. Here's the <code>App</code> class:</p>
+<section><h2 id="the-app-class">The App Class</h2><p>Our todo application contains a list of <code>Todo</code> instances. It can add and remove todos. The todos are added by allowing the end user to provide a todo description. Once they type a description and add the todo, the description is cleared so they can create another todo. Let's model these ideas. Here's the <code>App</code> class:</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>Todo<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./todo'</span><span class="token punctuation">;</span>
@@ -160,7 +160,7 @@ In a production app, you wouldn't use a transpiler to transform code on-the-fly 
 </ul>
 <p>Here's what's amazing. This is all the ${context.language.name} code for the app. But where is Aurelia? Well, the answer is that Aurelia tries as hard as possible to stay out of your ${context.language.name} code. That's why you don't see it above. It's not needed. Aurelia has the ability to render plain ${context.language.name} objects.</p>
 </section>
-<section><h2>Getting Ready to Render</h2><p>Ok, now that we've modeled out our application in ${context.language.name}, we need to make Aurelia render it. We weren't completely honest when we said above that we had showed you all the ${context.language.name} code. There's one final piece that gets it all going.</p>
+<section><h2 id="getting-ready-to-render">Getting Ready to Render</h2><p>Ok, now that we've modeled out our application in ${context.language.name}, we need to make Aurelia render it. We weren't completely honest when we said above that we had showed you all the ${context.language.name} code. There's one final piece that gets it all going.</p>
 <p>If you recall, when we looked at <code>index.html</code> there was an <code>aurelia-app</code> attribute on the <code>body</code> element. This attribute tells the <code>aurelia-bootstrapper</code> where to render the application and what main file to use to configure the app. The value of that attribute points to <code>src/main</code>. So, let's create that file in our <code>src</code> folder and see what it does.</p>
 <code-listing heading="main${context.language.fileExtension}">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
@@ -186,7 +186,7 @@ When working with TypeScript, in this simple setup, you may see some &quot;squig
 <p>The next thought you might have is &quot;but you didn't say what component to render!&quot; That's a great point. One of the ways that Aurelia is able to stay out of the way is by having some basic conventions. In this case, we have a very simple convention. The root, by default, is <code>app.js</code>, relative to the <code>main.js</code> file. If you don't like that, as with all Aurelia conventions, you can override it with explicit configuration. For now, let's stick to the conventions.</p>
 <p>Ok, we're almost ready to run our app. The next piece is to tell Aurelia <em>how</em> it should render <code>app.js</code>;</p>
 </section>
-<section><h2>Rendering the App</h2><p>As a brief recap, remember that almost nothing we've done so far is Aurelia-specific. Almost all the code we've written is just vanilla ${context.language.name}. Now that we've added a <code>main</code> file to our project and have specified which module exports the root component of our UI hierarchy, Aurelia is ready to render.</p>
+<section><h2 id="rendering-the-app">Rendering the App</h2><p>As a brief recap, remember that almost nothing we've done so far is Aurelia-specific. Almost all the code we've written is just vanilla ${context.language.name}. Now that we've added a <code>main</code> file to our project and have specified which module exports the root component of our UI hierarchy, Aurelia is ready to render.</p>
 <p>In order to render, we need to create a view for the <code>app</code> component. This introduces the next convention of Aurelia. To create a view for any class, simply create an HTML file with the same name as the ${context.language.name} module but change the file extension to <code>.html</code>. Inside that view, you can place an HTML 5 template with <em>data binding expressions</em> declaring how the view should render an instance of the class. Let's start with a very basic view of our <code>app</code>.</p>
 <code-listing heading="app.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -303,7 +303,7 @@ Use the <code>style</code> attribute's alias, <code>css</code> when doing string
 <p>Run the application one more time and you should see the expected result:</p>
 <p><img src="docs/tutorials/creating-a-todo-app/img/todo-app-with-css.png" alt="Todo App With CSS" /></p>
 </section>
-<section><h2>Conclusion</h2><p>With its strong focus on developer experience, Aurelia can enable you to not only create amazing applications, but also enjoy the process. We've designed it with simple conventions in mind so you don't need to waste time with tons of configuration or write boilerplate code just to satisfy a stubborn or restrictive framework. You'll never hit a roadblock with Aurelia either. It's been carefully designed to be pluggable and customizable...and most of the time you just write plain ${context.language.name} and forget the framework is even there.</p>
+<section><h2 id="conclusion">Conclusion</h2><p>With its strong focus on developer experience, Aurelia can enable you to not only create amazing applications, but also enjoy the process. We've designed it with simple conventions in mind so you don't need to waste time with tons of configuration or write boilerplate code just to satisfy a stubborn or restrictive framework. You'll never hit a roadblock with Aurelia either. It's been carefully designed to be pluggable and customizable...and most of the time you just write plain ${context.language.name} and forget the framework is even there.</p>
 <p>Thanks for taking the time to read through our guide. There's so much more to learn and do! We hope you'll continue on to our &quot;Contact Manager&quot; tutorial to learn how to use the Aurelia CLI to get setup with a production-grade project and use some more advanced features like routing, publish/subscribe and custom elements.</p>
 <p>We're looking forward to seeing what you create!</p>
 </section>

@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Configuration and Startup</h2><code-listing heading="Bootstrapping Older Browsers">
+    <section><h2 id="configuration-and-startup">Configuration and Startup</h2><code-listing heading="Bootstrapping Older Browsers">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>jspm_packages/system.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>config.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
@@ -132,7 +132,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Creating Components</h2><p>UI components consist of two parts: a view-model and a view. Simply create each part in its own file. Use the same file name but different file extensions for the two parts. For example: <em>hello${context.language.fileExtension}</em> and <em>hello.html</em>.</p>
+<section><h2 id="creating-components">Creating Components</h2><p>UI components consist of two parts: a view-model and a view. Simply create each part in its own file. Use the same file name but different file extensions for the two parts. For example: <em>hello${context.language.fileExtension}</em> and <em>hello.html</em>.</p>
 <code-listing heading="Explicit Configuration">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>useView<span class="token punctuation">,</span> decorators<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
@@ -169,7 +169,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
 <li><code>unbind()</code> - After a component is detached, it's usually unbound. If your view-model has the <code>unbind</code> callback, it will be invoked during this process.</li>
 </ol>
 </section>
-<section><h2>Dependency Injection</h2><code-listing heading="Declaring Dependencies">
+<section><h2 id="dependency-injection">Dependency Injection</h2><code-listing heading="Declaring Dependencies">
   <source-code lang="ES 2016"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>Dep1<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'dep1'</span><span class="token punctuation">;</span>
@@ -312,7 +312,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Templating Basics</h2><code-listing heading="A Simple Template">
+<section><h2 id="templating-basics">Templating Basics</h2><code-listing heading="A Simple Template">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>Hello World!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
@@ -406,7 +406,7 @@ When the browser loads in the template it very helpfully validates the structure
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Databinding</h2><h3>bind, one-way, two-way &amp; one-time</h3>
+<section><h2 id="databinding">Databinding</h2><h3>bind, one-way, two-way &amp; one-time</h3>
 <p>Use on any HTML attribute.</p>
 <ul>
 <li><code>.bind</code> - Uses the default binding. One-way binding for everything but form controls, which use two-way binding.</li>
@@ -721,7 +721,7 @@ Binding using the <code>innerhtml</code> attribute simply sets the element's <co
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Templating View Resources</h2><code-listing heading="Conditionally displays an HTML element.">
+<section><h2 id="templating-view-resources">Templating View Resources</h2><code-listing heading="Conditionally displays an HTML element.">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">show.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>isSaving<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spinner<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
@@ -809,7 +809,7 @@ The <code>if</code> and <code>repeat</code> attributes are usually placed on the
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Routing</h2><code-listing heading="Basic Route Configuration">
+<section><h2 id="routing">Routing</h2><code-listing heading="Basic Route Configuration">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> router<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1179,7 +1179,7 @@ If you don't name a <code>router-view</code>, it will be available under the nam
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Custom Attributes</h2><code-listing heading="Simple Attribute Declaration">
+<section><h2 id="custom-attributes">Custom Attributes</h2><code-listing heading="Simple Attribute Declaration">
   <source-code lang="ES 2016"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">,</span> customAttribute<span class="token punctuation">,</span> DOM<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
 
@@ -1408,7 +1408,7 @@ If you don't name a <code>router-view</code>, it will be available under the nam
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Custom Elements</h2><code-listing heading="Custom Element View-Model Declaration">
+<section><h2 id="custom-elements">Custom Elements</h2><code-listing heading="Custom Element View-Model Declaration">
   <source-code lang="ES 2016"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>customElement<span class="token punctuation">,</span> bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
 
@@ -1700,7 +1700,7 @@ If you don't name a <code>router-view</code>, it will be available under the nam
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>The Event Aggregator</h2><p>If you include the <code>aurelia-event-aggregator</code> plugin using &quot;basicConfiguration&quot; or &quot;standardConfiguration&quot; then the singleton EventAggregator's API will be also present on the <code>Aurelia</code> object. You can also create additional instances of the EventAggregator, if needed, and &quot;merge&quot; them into any object. To do this, import <code>includeEventsIn</code> and invoke it with the object you wish to turn into an event aggregator. For example <code>includeEventsIn(myObject)</code>. Now my object has <code>publish</code> and <code>subscribe</code> methods and can be used in the same way as the global event aggregator, detailed below.</p>
+<section><h2 id="the-event-aggregator">The Event Aggregator</h2><p>If you include the <code>aurelia-event-aggregator</code> plugin using &quot;basicConfiguration&quot; or &quot;standardConfiguration&quot; then the singleton EventAggregator's API will be also present on the <code>Aurelia</code> object. You can also create additional instances of the EventAggregator, if needed, and &quot;merge&quot; them into any object. To do this, import <code>includeEventsIn</code> and invoke it with the object you wish to turn into an event aggregator. For example <code>includeEventsIn(myObject)</code>. Now my object has <code>publish</code> and <code>subscribe</code> methods and can be used in the same way as the global event aggregator, detailed below.</p>
 <code-listing heading="Publishing on a Channel">
   <source-code lang="ES 2016"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>

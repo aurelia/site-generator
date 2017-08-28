@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>This article covers the basics of validation with Aurelia's validation plugin. You'll learn how to add validation to your applications using a fluent rule API and minimal changes to your templates.</p>
+    <section><h2 id="introduction">Introduction</h2><p>This article covers the basics of validation with Aurelia's validation plugin. You'll learn how to add validation to your applications using a fluent rule API and minimal changes to your templates.</p>
 <p>To get started you'll need to install <code>aurelia-validation</code> using <code>jspm install aurelia-validation</code> or <code>npm install aurelia-validation --save</code>. Afterwards, add <code>.plugin('aurelia-validation')</code> to the configuration in your <code>main.js</code> to ensure the plugin is loaded at application startup.</p>
 <p>If you're using the <code>aurelia-cli</code>, add the following configuration to your <code>aurelia.json</code> after you've installed the package with npm.</p>
 <code-listing heading="aurelia.json">
@@ -19,7 +19,7 @@
 </code-listing>
 <p>If you're not sure where to put this, search your <code>aurelia.json</code> for <em>aurelia-templating-resources</em> and put it underneath.</p>
 </section>
-<section><h2>Defining Rules</h2><p>Aurelia Validation's standard rule engine uses a fluent syntax to define a set of rules. There are five parts to the syntax:</p>
+<section><h2 id="defining-rules">Defining Rules</h2><p>Aurelia Validation's standard rule engine uses a fluent syntax to define a set of rules. There are five parts to the syntax:</p>
 <ol>
 <li>Selecting a property using <code>.ensure</code></li>
 <li>Associating rules with the property using <code>.required</code>, <code>.matches</code>, etc</li>
@@ -173,7 +173,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Customizing Messages</h2><p>The previous section showed how to customize the message of an individual property rule. You can override messages system-wide by replacing a rule's default message in the <code>validationMessages</code> dictionary:</p>
+<section><h2 id="customizing-messages">Customizing Messages</h2><p>The previous section showed how to customize the message of an individual property rule. You can override messages system-wide by replacing a rule's default message in the <code>validationMessages</code> dictionary:</p>
 <code-listing heading="Overriding Messages">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>validationMessages<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validation'</span><span class="token punctuation">;</span>
@@ -207,7 +207,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Validation Controller</h2><p>The <code>ValidationController</code> orchestrates the UI process of validating properties in response to various triggers and surfacing validation errors via renderers. Typically you'll have one validation controller instance per &quot;form&quot; view model. Depending on the use-case you may have multiple.</p>
+<section><h2 id="validation-controller">Validation Controller</h2><p>The <code>ValidationController</code> orchestrates the UI process of validating properties in response to various triggers and surfacing validation errors via renderers. Typically you'll have one validation controller instance per &quot;form&quot; view model. Depending on the use-case you may have multiple.</p>
 <h3>Creating a Controller</h3>
 <p>Validation controllers can be created using the <code>NewInstance</code> resolver:</p>
 <code-listing heading="Creating a Controller">
@@ -308,11 +308,15 @@
 <h3>addError &amp; removeError</h3>
 <p>You may need to surface validation errors from other sources. Perhaps while attempting to save a change the server returned a business rule error. You can display the server error using the controller's <code>addError(message: string, object: any, propertyName?: string): ValidateResult</code> method. The method returns a <code>ValidateResult</code> instance which can be used to unrender the error using <code>removeError(result: ValidateResult)</code>.</p>
 <h3>addRenderer &amp; removeRenderer</h3>
-<p>The validation controller renders errors by sending them to implementations of the <code>ValidationRenderer</code> interface. The library ships with a built-in renderer that &quot;renders&quot; the errors to an array property for data-binding/templating purposes. This is covered in the <a href="aurelia-doc://section/11/version/1.0.0">displaying errors</a> section below. You can create your own <a href="aurelia-doc://section/12/version/1.0.0">custom renderer</a> and add it to the controller's set of renderers using the <code>addRenderer(renderer)</code> method.</p>
+<p>The validation controller renders errors by sending them to implementations of the <code>ValidationRenderer</code> interface. The library ships with a built-in renderer that &quot;renders&quot; the errors to an array property for data-binding/templating purposes. This is covered in the 
+<a href="aurelia-doc://section/11/version/1.0.0" target="_blank">displaying errors</a>
+ section below. You can create your own 
+<a href="aurelia-doc://section/12/version/1.0.0" target="_blank">custom renderer</a>
+ and add it to the controller's set of renderers using the <code>addRenderer(renderer)</code> method.</p>
 <h3>Events</h3>
 <p>The validation controller has a <code>subscribe(callback: (event: ValidateEvent) =&gt; void)</code> method you can use to subscribe to validate and reset events. Callbacks will be invoked whenever the controller's validate and reset methods are called. Callbacks will be passed an instance <code>ValidateEvent</code> which contains properties you can use to determine the overall validity state as well as the result of the validate or reset invocation. Refer to the API docs for more info.</p>
 </section>
-<section><h2>Validator</h2><p><code>Validator</code> is an interface used by the <code>ValidationController</code> to do the behind-the-scenes work of validating objects and properties. The <code>aurelia-validation</code> plugin ships with an implementation of this interface called the <code>StandardValidator</code>, which knows how to evaluate rules created by <code>aurelia-validation</code>'s fluent API. When you use a <code>Validator</code> directly to validate a particular object or property, there are no UI side-effects- the validation results are not sent to the the validation renderers.</p>
+<section><h2 id="validator">Validator</h2><p><code>Validator</code> is an interface used by the <code>ValidationController</code> to do the behind-the-scenes work of validating objects and properties. The <code>aurelia-validation</code> plugin ships with an implementation of this interface called the <code>StandardValidator</code>, which knows how to evaluate rules created by <code>aurelia-validation</code>'s fluent API. When you use a <code>Validator</code> directly to validate a particular object or property, there are no UI side-effects- the validation results are not sent to the the validation renderers.</p>
 <h3>Creating a Validator</h3>
 <p>Validators can be injected:</p>
 <code-listing heading="Creating a Validator">
@@ -332,7 +336,7 @@
 </code-listing>
 <p>Use the Validator instance's <code>validateObject</code> and <code>validateProperty</code> methods to run validation without any render side-effects. These methods return a <code>Promise</code> that resolves with an array of <code>ValidateResults</code>.</p>
 </section>
-<section><h2>Validate Binding Behavior</h2><p>The <code>validate</code> binding behavior enables quick and easy validation for two-way data-bindings. The behavior registers the binding instance with a controller, enabling the system to validate the binding's associated property when the validate trigger occurs (blur / change). The binding behavior is able to identify the object and property name to validate in all sorts of binding expressions:</p>
+<section><h2 id="validate-binding-behavior">Validate Binding Behavior</h2><p>The <code>validate</code> binding behavior enables quick and easy validation for two-way data-bindings. The behavior registers the binding instance with a controller, enabling the system to validate the binding's associated property when the validate trigger occurs (blur / change). The binding behavior is able to identify the object and property name to validate in all sorts of binding expressions:</p>
 <code-listing heading="Automatic Binding Validation">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName &amp; validate<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -362,7 +366,7 @@
 <li><code>&amp; validateManually</code>: the binding is not validated automatically when the associated element is blurred or changed by the user.</li>
 </ul>
 </section>
-<section><h2>Displaying Errors</h2><p>The controller exposes properties that are useful for creating error UIs using standard Aurelia templating techniques:</p>
+<section><h2 id="displaying-errors">Displaying Errors</h2><p>The controller exposes properties that are useful for creating error UIs using standard Aurelia templating techniques:</p>
 <ul>
 <li><code>results</code>: An array of the current <code>ValidateResult</code> instances. These are the results of validating individual rules.</li>
 <li><code>errors</code>: An array of the current <code>ValidateResult</code> instances whose <code>valid</code> property is false.</li>
@@ -413,7 +417,7 @@
 <p>This first form-group div uses the <code>validation-errors</code> custom attribute to create a <code>firstNameErrors</code> property. When there are items in the array the bootstrap <code>has-error</code> class is applied to the form-group div. Each error message is displayed below the input using <code>help-block</code> spans. The same approach is used to display the lastName field's errors.</p>
 <p>The <code>validation-errors</code> custom attribute implements the <code>ValidationRenderer</code> interface. Instead of doing direct DOM manipulation to display the errors it &quot;renders&quot; the errors to an array property to enable the data-binding and templating scenarios illustrated above. It also automatically adds itself to the controller using <code>addRenderer</code> when its &quot;bind&quot; lifecycle event occurs and removes itself from the controller using the <code>removeRenderer</code> method when its &quot;unbind&quot; composition lifecycle event occurs.</p>
 </section>
-<section><h2>Custom Renderers</h2><p>The templating approaches described in the previous section may require more markup than you wish to include in your templates. If you would prefer use direct DOM manipulation to render validation errors you can implement a custom renderer.</p>
+<section><h2 id="custom-renderers">Custom Renderers</h2><p>The templating approaches described in the previous section may require more markup than you wish to include in your templates. If you would prefer use direct DOM manipulation to render validation errors you can implement a custom renderer.</p>
 <p>Custom renderers implement a one-method interface: <code>render(instruction: RenderInstruction)</code>. The <code>RenderInstruction</code> is an object with two properties: the results to render and the results to unrender. Below is an example implementation for bootstrap forms:</p>
 <code-listing heading="bootstrap-form-renderer.ts">
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
@@ -558,7 +562,7 @@ The renderer example uses <code>Element.closest</code>. You'll need to
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Entity Validation</h2><p>The examples so far show the controller validating specific properties used in <code>&amp; validate</code> bindings. The controller can validate whole entities even if some of the properties aren't used in data bindings. Opt in to this &quot;entity&quot; style validation using the controller's <code>addObject(object, rules?)</code> method. Calling <code>addObject</code> will add the specified object to the set of objects the controller should validate when its <code>validate</code> method is called. The <code>rules</code> parameter is optional. Use it when the rules for the object haven't been specified using the fluent syntax's <code>.on</code> method. You can remove objects from the controller's list of objects to validate using <code>removeObject(object)</code>. Calling <code>removeObject</code> will unrender any errors associated with the object.</p>
+<section><h2 id="entity-validation">Entity Validation</h2><p>The examples so far show the controller validating specific properties used in <code>&amp; validate</code> bindings. The controller can validate whole entities even if some of the properties aren't used in data bindings. Opt in to this &quot;entity&quot; style validation using the controller's <code>addObject(object, rules?)</code> method. Calling <code>addObject</code> will add the specified object to the set of objects the controller should validate when its <code>validate</code> method is called. The <code>rules</code> parameter is optional. Use it when the rules for the object haven't been specified using the fluent syntax's <code>.on</code> method. You can remove objects from the controller's list of objects to validate using <code>removeObject(object)</code>. Calling <code>removeObject</code> will unrender any errors associated with the object.</p>
 <p>You may have rules that are not associated with a single property. The fluent rule syntax has an <code>ensureObject()</code> method you can use to define rules for the whole object.</p>
  <code-listing heading="ensureObject">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -576,7 +580,7 @@ The renderer example uses <code>Element.closest</code>. You'll need to
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Custom Rules</h2><p>The fluent API's <code>satisfies</code> method enables quick custom rules. If you have a custom rule that you need to use multiple times you can define it using the <code>customRule</code> method. Once defined, you can apply the rule using <code>satisfiesRule</code>.  Here's how you could define and use a simple date validation rule:</p>
+<section><h2 id="custom-rules">Custom Rules</h2><p>The fluent API's <code>satisfies</code> method enables quick custom rules. If you have a custom rule that you need to use multiple times you can define it using the <code>customRule</code> method. Once defined, you can apply the rule using <code>satisfiesRule</code>.  Here's how you could define and use a simple date validation rule:</p>
 <code-listing heading="customRule">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     ValidationRules<span class="token punctuation">.</span><span class="token function">customRule</span><span class="token punctuation">(</span>
@@ -655,7 +659,7 @@ The renderer example uses <code>Element.closest</code>. You'll need to
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Multiple Validation Controllers</h2><p>If you have two forms that need to be independently validated, it is of course recommended you implement them in separate components. However, it is technically possible to do two or more independant validations in the same component by creating multiple validation controllers.</p>
+<section><h2 id="multiple-validation-controllers">Multiple Validation Controllers</h2><p>If you have two forms that need to be independently validated, it is of course recommended you implement them in separate components. However, it is technically possible to do two or more independant validations in the same component by creating multiple validation controllers.</p>
 <p>For instance: imagine you're building an order form for an Italian restaurant. The customer can order pizza or pasta. If the customer makes a mistake in ordering a pizza, they should be able to order a pasta regardless. In that case your view model would look like this:</p>
 <code-listing heading="ViewModel with multiple validation controllers">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -733,7 +737,7 @@ The renderer example uses <code>Element.closest</code>. You'll need to
 </code-listing>
 <p>In the forms above you can see that each <code>validation-errors</code> attribute and each <code>validateManually</code> binding behavior is bound to the appropriate validation controller. This needs to be specified each time, since by default the attribute and the binding behavior will ask the container for a <code>ValidationController</code> instance not knowing which one it will get.</p>
 </section>
-<section><h2>Integration With Other Libraries</h2><p>In <code>aurelia-validation</code> the object and property validation work is handled by the <code>StandardValidator</code> class which is an implementation of the <code>Validator</code> interface. The <code>StandardValidator</code> is responsible for applying the rules created with aurelia-validation's fluent syntax. You may not need any of this machinery if you have your own custom validation engine or if you're using a client-side data management library like 
+<section><h2 id="integration-with-other-libraries">Integration With Other Libraries</h2><p>In <code>aurelia-validation</code> the object and property validation work is handled by the <code>StandardValidator</code> class which is an implementation of the <code>Validator</code> interface. The <code>StandardValidator</code> is responsible for applying the rules created with aurelia-validation's fluent syntax. You may not need any of this machinery if you have your own custom validation engine or if you're using a client-side data management library like 
 <a href="http://www.getbreezenow.com/breezejs" target="_blank">Breeze</a>
  which has its own validation logic. You can replace the <code>StandardValidator</code> with your own implementation when the plugin is installed. Here's an example using breeze:</p>
  <code-listing heading="breeze-validator">
@@ -776,7 +780,7 @@ The renderer example uses <code>Element.closest</code>. You'll need to
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Integrating with Aurelia-I18N</h2><p><code>aurelia-i18n</code> is Aurelia's official I18N plugin. Check out the project's 
+<section><h2 id="integrating-with-aurelia-i18n">Integrating with Aurelia-I18N</h2><p><code>aurelia-i18n</code> is Aurelia's official I18N plugin. Check out the project's 
 <a href="https://github.com/aurelia/i18n/blob/master/README.md" target="_blank">readme</a>
  for information on how to use <code>aurelia-i18n</code> in your application.</p>
 <p>Integrating <code>aurelia-i18n</code> with <code>aurelia-validation</code> is easy. All standard validation messages are supplied by the <code>ValidationMessageProvider</code> class. To translate the messages, override the <code>getMessage(key)</code> and <code>getDisplayName(propertyName, displayName)</code> methods with implementations that use <code>aurelia-i18n</code> to fetch translated versions of the messages/property-names.</p>
@@ -924,7 +928,7 @@ The renderer example uses <code>Element.closest</code>. You'll need to
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Server-Side Validation</h2><p>The fluent rule API and Validator API can be used server-side in a NodeJS application.</p>
+<section><h2 id="server-side-validation">Server-Side Validation</h2><p>The fluent rule API and Validator API can be used server-side in a NodeJS application.</p>
 <p><em>todo: example</em>
 </boolean></p>
 </section>

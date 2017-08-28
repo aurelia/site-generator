@@ -5,11 +5,11 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>In this section, we are going to be learning how you can dynamically render components in your applications by utilizing Aurelia's dynamic composition functionality.</p>
+    <section><h2 id="introduction">Introduction</h2><p>In this section, we are going to be learning how you can dynamically render components in your applications by utilizing Aurelia's dynamic composition functionality.</p>
 <p>In many respects, dynamic composition closely resembles that of how Aurelia's routing works. The big exception, of course, is dynamic composition allows you to dynamically render views and view-models after the page has loaded.</p>
 <p>When using Aurelia's <code>&lt;compose&gt;</code> element, inside of the view-model being used, you have access to all of Aurelia's standard view lifecycle events, such as <code>attached</code>, as well as the other callback hooks.</p>
 </section>
-<section><h2>Basic Composition</h2><p>Using the <code>&lt;compose&gt;</code> element, we are going to be dynamically composing a view.</p>
+<section><h2 id="basic-composition">Basic Composition</h2><p>Using the <code>&lt;compose&gt;</code> element, we are going to be dynamically composing a view.</p>
 <code-listing heading="hello-world.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -33,7 +33,7 @@
 <p>Inside of our <code>hello-world.html</code> template, we are using the <code>&lt;compose&gt;</code> element and passing through a view-model (without file extension) to be rendered. The view-model is just a standard class, like you create elsewhere in an Aurelia application.</p>
 <p>Because Aurelia is a convention based framework, the <code>&lt;compose&gt;</code> element knows to use the default convention of loading the matching view for our view-model of the same name.</p>
 </section>
-<section><h2>Composing Without a View-Model</h2><p>If you're wanting to dynamically compose just a view template without specifying a view-model, all you need to do is omit the <code>view-model</code> property and supply a <code>view</code>. The result will be that the current view-model will be used as the binding context for our view, allowing you to create HTML partials that take the current properties and methods.</p>
+<section><h2 id="composing-without-a-view-model">Composing Without a View-Model</h2><p>If you're wanting to dynamically compose just a view template without specifying a view-model, all you need to do is omit the <code>view-model</code> property and supply a <code>view</code>. The result will be that the current view-model will be used as the binding context for our view, allowing you to create HTML partials that take the current properties and methods.</p>
 <code-listing heading="hello-world.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -50,7 +50,7 @@
 </code-listing>
 <p>For the <code>view</code> property, we need to specify a file extension, unlike the view-model property, which does not have an extension. The above example will work the same way as our first example, except we're not supplying our own view-model, it's inheriting the binding context from where the <code>compose</code> element is used.</p>
 </section>
-<section><h2>Passing Through Data</h2><p>Using what we learned above, we can dynamically compose view-models and views and pass through additional data via the <code>model</code> property on the <code>&lt;compose&gt;</code> element.</p>
+<section><h2 id="passing-through-data">Passing Through Data</h2><p>Using what we learned above, we can dynamically compose view-models and views and pass through additional data via the <code>model</code> property on the <code>&lt;compose&gt;</code> element.</p>
 <p>We are going to be building an example which will dynamically render a view/view-model pair and accept an object of provided values.</p>
 <code-listing heading="hello-world${context.language.fileExtension}">
   <source-code lang="ES 2016"><pre class="language-javascript"><code>

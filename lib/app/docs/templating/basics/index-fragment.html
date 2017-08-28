@@ -5,11 +5,11 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>Aurelia's templating system is simple to learn, and yet powerful enough to build even the most complex applications.
+    <section><h2 id="introduction">Introduction</h2><p>Aurelia's templating system is simple to learn, and yet powerful enough to build even the most complex applications.
 This article will walk you through the construction of a static template, importing that template into parent
 templates, binding and manipulating data through the view-model, and the use of conditionals, repeaters, and events.</p>
 </section>
-<section><h2>A Simple Template</h2><p>All Aurelia templates must be wrapped with a <code>&lt;template&gt;</code> element. The most basic template is a component that prints
+<section><h2 id="a-simple-template">A Simple Template</h2><p>All Aurelia templates must be wrapped with a <code>&lt;template&gt;</code> element. The most basic template is a component that prints
 &quot;Hello World&quot;:</p>
 <code-listing heading="hello-world.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -79,7 +79,7 @@ say &quot;Goodbye, John Doe!&quot;. Aurelia re-evaluates the string interpolatio
 as they happen without having to do dirty-checking. This means that Aurelia doesn't slow down as you add more complex
 functionality to your template and view-model.</p>
 </section>
-<section><h2>Binding</h2><p>Binding in Aurelia allows data from the view-model to drive template behavior. The most basic example of binding
+<section><h2 id="binding">Binding</h2><p>Binding in Aurelia allows data from the view-model to drive template behavior. The most basic example of binding
 is linking a text box to the view model using <code>value.bind</code>. What if we let the user decide who they want to greet,
 and whether to say Hello or Goodbye?</p>
 <code-listing heading="greeter.html">
@@ -168,7 +168,7 @@ greeting will change with it: &quot;Hello, Jane Doe!&quot;. If we uncheck the bo
 </code-listing>
 <p>Using <code>with</code> is basically shorthand for &quot;I'm working on properties of this object&quot;, which lets you reuse code as necessary.</p>
 </section>
-<section><h2>Composition</h2><p>In order to live by the DRY (Don't Repeat Yourself) Principle, we don't necessarily want to rely on tight coupling
+<section><h2 id="composition">Composition</h2><p>In order to live by the DRY (Don't Repeat Yourself) Principle, we don't necessarily want to rely on tight coupling
 between our view and view-model pairs. Wouldn't it be great if there was a custom element that would arbitrarily combine
 an HTML template, a view-model, and maybe even some initialization data for us? As it turns out, we're in luck:</p>
 <code-listing heading="compose-template.html">
@@ -198,7 +198,7 @@ an HTML template, a view-model, and maybe even some initialization data for us? 
 </code-listing>
 <p>Note that the view-model we're composing into has an <code>activate</code> method. When we use <code>model.bind</code>, the contents are passed to <code>activate</code>. We then pull the exact value that we need out of the passed model and assign it.</p>
 </section>
-<section><h2>The as-element Attribute</h2><p>In some cases, especially when creating table rows out of Aurelia custom elements, you may need to have a custom element masquerade as a standard HTML element. For example, if you're trying to fill table rows with data, you may need your custom element to appear as a <code>&lt;tr&gt;</code> row or <code>&lt;td&gt;</code> cell. This is where the <code>as-element</code> attribute comes in handy:</p>
+<section><h2 id="the-as-element-attribute">The as-element Attribute</h2><p>In some cases, especially when creating table rows out of Aurelia custom elements, you may need to have a custom element masquerade as a standard HTML element. For example, if you're trying to fill table rows with data, you may need your custom element to appear as a <code>&lt;tr&gt;</code> row or <code>&lt;td&gt;</code> cell. This is where the <code>as-element</code> attribute comes in handy:</p>
 <code-listing heading="as-element.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -219,7 +219,7 @@ an HTML template, a view-model, and maybe even some initialization data for us? 
 </code-listing>
 <p>The <code>as-element</code> attribute tells Aurelia that we want the content of the table row to be exactly what our <code>hello-row</code> template wraps. The way different browsers render tables means this may be necessary sometimes.</p>
 </section>
-<section><h2>The View Resource Pipeline</h2><p>The basic idea behind the View Resource Pipeline is that we're not limited to HTML or JavaScript. A basic example would be pulling in Bootstrap:</p>
+<section><h2 id="the-view-resource-pipeline">The View Resource Pipeline</h2><p>The basic idea behind the View Resource Pipeline is that we're not limited to HTML or JavaScript. A basic example would be pulling in Bootstrap:</p>
 <code-listing heading="hello.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -231,7 +231,7 @@ an HTML template, a view-model, and maybe even some initialization data for us? 
 </code-listing>
 <p>Here, the <code>&lt;require&gt;</code> tag is taking a CSS file, instead of html or a view model. The View Resource Pipeline is the part of Aurelia that's responsible for recognizing that it's CSS, and handling it appropriately. One of the most powerful features of Aurelia is that the View Resource Pipeline is completely extensible, allowing you to define your own handler for any type of view resource you might want to define!</p>
 </section>
-<section><h2>View and Compilation Spies</h2><p>If you've installed the <code>aurelia-testing</code> plugin, you have access to two special templating behaviors:</p>
+<section><h2 id="view-and-compilation-spies">View and Compilation Spies</h2><p>If you've installed the <code>aurelia-testing</code> plugin, you have access to two special templating behaviors:</p>
 <code-listing heading="hello.html">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -241,7 +241,7 @@ an HTML template, a view-model, and maybe even some initialization data for us? 
 </code-listing>
 <p><code>view-spy</code> drops Aurelia's copy of the View object into the console, while <code>compile-spy</code> emits the compiler's TargetInstruction. This is especially useful for debugging any new View Resources you've created using the View Resource Pipeline.</p>
 </section>
-<section><h2>Conditionals</h2><p>Aurelia has two major tools for conditional display: <code>if</code>, and <code>show</code>. The difference is that <code>if</code> removes the element
+<section><h2 id="conditionals">Conditionals</h2><p>Aurelia has two major tools for conditional display: <code>if</code>, and <code>show</code>. The difference is that <code>if</code> removes the element
 entirely from the DOM, and <code>show</code> toggles the <code>aurelia-hide</code> CSS class which controls the element's visibility.</p>
 <p>The difference is subtle but important in terms of speed and usability. When the state changes in <code>if</code>, the template
 and all of its children are deleted from the DOM, which is computationally expensive if it's being done over and over.
@@ -305,7 +305,7 @@ because the data is one-time bound. Why don't we use <code>show.one-time</code>?
 really make sense. We're saying we want a CSS class to be applied that will hide an element, and that it will never
 change. In most cases, we want <code>if</code> to refuse to create an element we'll never use.</p>
 </section>
-<section><h2>Repeaters</h2><p>Repeaters can be used on any element, including custom elements, and template elements too! Here are a few different data types that can be iterated with a repeater.</p>
+<section><h2 id="repeaters">Repeaters</h2><p>Repeaters can be used on any element, including custom elements, and template elements too! Here are a few different data types that can be iterated with a repeater.</p>
 <h3>Arrays</h3>
 <p>Aurelia is also able to repeat elements for each element in an array.</p>
 <code-listing heading="repeater-template.html">

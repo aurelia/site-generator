@@ -5,9 +5,9 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>Aurelia supports two-way binding a variety of data-types to checkbox input elements.</p>
+    <section><h2 id="introduction">Introduction</h2><p>Aurelia supports two-way binding a variety of data-types to checkbox input elements.</p>
 </section>
-<section><h2>Booleans</h2><p>Bind a boolean property to an input element's <code>checked</code> attribute using <code>checked.bind=&quot;myBooleanProperty&quot;</code>.</p>
+<section><h2 id="booleans">Booleans</h2><p>Bind a boolean property to an input element's <code>checked</code> attribute using <code>checked.bind=&quot;myBooleanProperty&quot;</code>.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -53,7 +53,7 @@
   <source-code src="example/binding-checkboxes/booleans/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Array of Numbers</h2><p>A set of checkbox elements is a multiple selection interface. If you have an array that serves as the &quot;selected items&quot; list, you can bind the array to each input's <code>checked</code> attribute. The binding system will track the input's checked status, adding the input's value to the array when the input is checked and removing the input's value from the array when the input is unchecked.</p>
+<section><h2 id="array-of-numbers">Array of Numbers</h2><p>A set of checkbox elements is a multiple selection interface. If you have an array that serves as the &quot;selected items&quot; list, you can bind the array to each input's <code>checked</code> attribute. The binding system will track the input's checked status, adding the input's value to the array when the input is checked and removing the input's value from the array when the input is unchecked.</p>
 <p>To define the input's &quot;value&quot;, bind the input's <code>model</code> attribute: <code>model.bind=&quot;product.id&quot;</code>.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -116,7 +116,7 @@
   <source-code src="example/binding-checkboxes/numbers/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Array of Objects</h2><p>Numbers aren't the only type of value you can store in a &quot;selected items&quot; array. The binding system supports all types, including objects.  Here's an example that adds and removes &quot;product&quot; objects from a <code>selectedProducts</code> array using the checkbox data-binding.</p>
+<section><h2 id="array-of-objects">Array of Objects</h2><p>Numbers aren't the only type of value you can store in a &quot;selected items&quot; array. The binding system supports all types, including objects.  Here's an example that adds and removes &quot;product&quot; objects from a <code>selectedProducts</code> array using the checkbox data-binding.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -181,7 +181,7 @@
   <source-code src="example/binding-checkboxes/objects/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Array of Objects with Matcher</h2><p>You may run into situations where the object your input element's model is bound to does not have reference equality to any of the objects in your checked array. The objects might match by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
+<section><h2 id="array-of-objects-with-matcher">Array of Objects with Matcher</h2><p>You may run into situations where the object your input element's model is bound to does not have reference equality to any of the objects in your checked array. The objects might match by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -257,7 +257,7 @@
   <source-code src="example/binding-checkboxes/objects-matcher/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Array of Strings</h2><p>Finally, here's an example that adds and removes strings from a <code>selectedProducts</code> array using the checkbox data-binding. This is example is unique because it does not use <code>model.bind</code> to assign each checkbox's value. Instead the input's standard <code>value</code> attribute is used. Normally we cannot use the standard <code>value</code> attribute in conjunction with checked binding because it coerces anything it's assigned to a string. This example uses an array of strings so everything works just fine.</p>
+<section><h2 id="array-of-strings">Array of Strings</h2><p>Finally, here's an example that adds and removes strings from a <code>selectedProducts</code> array using the checkbox data-binding. This is example is unique because it does not use <code>model.bind</code> to assign each checkbox's value. Instead the input's standard <code>value</code> attribute is used. Normally we cannot use the standard <code>value</code> attribute in conjunction with checked binding because it coerces anything it's assigned to a string. This example uses an array of strings so everything works just fine.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>

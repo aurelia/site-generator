@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>A <code>&lt;select&gt;</code> element can serve as a single-select or multiple-select &quot;picker&quot; depending on whether the <code>multiple</code> attribute is present. The binding system supports both use cases. The samples below demonstrate a variety scenarios, all use a common series of steps to configure the select element:</p>
+    <section><h2 id="introduction">Introduction</h2><p>A <code>&lt;select&gt;</code> element can serve as a single-select or multiple-select &quot;picker&quot; depending on whether the <code>multiple</code> attribute is present. The binding system supports both use cases. The samples below demonstrate a variety scenarios, all use a common series of steps to configure the select element:</p>
 <ol>
 <li>Add a <code>&lt;select&gt;</code> element to the template and decide whether the <code>multiple</code> attribute should be applied.</li>
 <li>Bind the select element's <code>value</code> attribute to a property. In &quot;multiple&quot; mode, the property should be an array. In singular mode it can be any type.</li>
@@ -15,7 +15,7 @@
 <em>You can use the standard <code>value</code> attribute instead of <code>model</code>, just remember- it will coerce anything it's assigned to a string.</em></li>
 </ol>
 </section>
-<section><h2>Select Number</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="select-number">Select Number</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -78,7 +78,7 @@
   <source-code src="example/binding-selects/single/numbers/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Select Object</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="select-object">Select Object</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -142,7 +142,7 @@
   <source-code src="example/binding-selects/single/objects/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Select Object with Matcher</h2><p>You may run into situations where the object your select element's value is bound does not have reference equality with any of the objects your option element model properties are bound to. The select's value object might &quot;match&quot; one of the option objects by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
+<section><h2 id="select-object-with-matcher">Select Object with Matcher</h2><p>You may run into situations where the object your select element's value is bound does not have reference equality with any of the objects your option element model properties are bound to. The select's value object might &quot;match&quot; one of the option objects by id, but they may not be the same object instance. To support this scenario you can override Aurelia's default &quot;matcher&quot; which is a equality comparison function that looks like this: <code>(a, b) =&gt; a === b</code>. You can substitute a function of your choosing that has the right logic to compare your objects.</p>
 <code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
@@ -213,7 +213,7 @@
   <source-code src="example/binding-selects/single/objects-matcher/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Select Boolean</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="select-boolean">Select Boolean</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -251,7 +251,7 @@
   <source-code src="example/binding-selects/single/booleans/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Select String</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="select-string">Select String</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -294,7 +294,7 @@
   <source-code src="example/binding-selects/single/strings/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Multiple Select Numbers</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="multiple-select-numbers">Multiple Select Numbers</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -356,7 +356,7 @@
   <source-code src="example/binding-selects/multiple/numbers/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Multiple Select Objects</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="multiple-select-objects">Multiple Select Objects</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -422,7 +422,7 @@
   <source-code src="example/binding-selects/multiple/objects/app.js"><pre class="language-markup"><code></code></pre></source-code>
 </au-demo>
 </section>
-<section><h2>Multiple Select Strings</h2><code-listing heading="app${context.language.fileExtension}">
+<section><h2 id="multiple-select-strings">Multiple Select Strings</h2><code-listing heading="app${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>

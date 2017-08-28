@@ -5,9 +5,9 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>This article covers the basics of data-binding with Aurelia. You'll learn how to bind to HTML attributes, DOM Events and element content. You'll also see how to give your view-models references to DOM elements, making it easy work with elements directly.</p>
+    <section><h2 id="introduction">Introduction</h2><p>This article covers the basics of data-binding with Aurelia. You'll learn how to bind to HTML attributes, DOM Events and element content. You'll also see how to give your view-models references to DOM elements, making it easy work with elements directly.</p>
 </section>
-<section><h2>HTML and SVG Attributes</h2><p>Aurelia supports binding HTML and SVG attributes to JavaScript expressions. Attribute binding declarations have three parts: <code>attribute.command=&quot;expression&quot;</code>.</p>
+<section><h2 id="html-and-svg-attributes">HTML and SVG Attributes</h2><p>Aurelia supports binding HTML and SVG attributes to JavaScript expressions. Attribute binding declarations have three parts: <code>attribute.command=&quot;expression&quot;</code>.</p>
 <ul>
 <li><code>attribute</code>:  an HTML or SVG attribute name.</li>
 <li><code>command</code>: one of Aurelia's attribute binding commands:
@@ -33,7 +33,7 @@
 </code-listing>
 <p>The first input uses the <code>bind</code> command which will automatically create <code>two-way</code> bindings for input value attribute bindings.  The second input uses the <code>two-way</code> command which explicitly sets the binding mode. The first anchor element uses the <code>bind</code> command which will automatically create a <code>one-way</code> binding for anchor href attributes. The other two anchor elements use the <code>one-way</code> and <code>one-time</code> commands to explicitly set the binding's mode.</p>
 </section>
-<section><h2>DOM Events</h2><p>The binding system supports binding to DOM events.  A DOM event binding will execute a JavaScript expression whenever the specified DOM event occurs. Event binding declarations have three parts: <code>event.command=&quot;expression&quot;</code>.</p>
+<section><h2 id="dom-events">DOM Events</h2><p>The binding system supports binding to DOM events.  A DOM event binding will execute a JavaScript expression whenever the specified DOM event occurs. Event binding declarations have three parts: <code>event.command=&quot;expression&quot;</code>.</p>
 <ul>
 <li><code>event</code>:  the name of a DOM event, without the &quot;on&quot; prefix.</li>
 <li><code>command</code>: one of Aurelia's event binding commands:
@@ -63,7 +63,7 @@
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault" target="_blank">preventDefault()</a>
  on events handled with <code>delegate</code> or <code>trigger</code> binding. Most of the time this is the behavior you want. To turn this off, return <code>true</code> from your event handler function.</p>
 </section>
-<section><h2>Function References</h2><p>While developing custom elements or custom attributes you may encounter a situation where you have a <code>@bindable</code> property that expects a reference to a function. Use the <code>call</code> binding command to declare and pass a function to the bindable property. The <code>call</code> command is superior to the <code>bind</code> command for this use-case because it will execute the function in the correct context, ensuring <code>this</code> is what you expect it to be.</p>
+<section><h2 id="function-references">Function References</h2><p>While developing custom elements or custom attributes you may encounter a situation where you have a <code>@bindable</code> property that expects a reference to a function. Use the <code>call</code> binding command to declare and pass a function to the bindable property. The <code>call</code> command is superior to the <code>bind</code> command for this use-case because it will execute the function in the correct context, ensuring <code>this</code> is what you expect it to be.</p>
 <code-listing heading="Simple call binding">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>my-element</span> <span class="token attr-name">go.call</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>doSomething()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>my-element</span><span class="token punctuation">></span></span>
@@ -79,7 +79,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Referencing Elements</h2><p>Use the <code>ref</code> binding command to create a reference to a DOM element. The ref command's most basic syntax is <code>ref=&quot;expression&quot;</code>. When the view is data-bound the specified expression will be assigned the DOM element.</p>
+<section><h2 id="referencing-elements">Referencing Elements</h2><p>Use the <code>ref</code> binding command to create a reference to a DOM element. The ref command's most basic syntax is <code>ref=&quot;expression&quot;</code>. When the view is data-bound the specified expression will be assigned the DOM element.</p>
 <code-listing heading="Simple ref example">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -96,7 +96,7 @@
 <li><code>controller.ref=&quot;expression&quot;</code>: create a reference to a custom element's controller instance.</li>
 </ul>
 </section>
-<section><h2>String Interpolation</h2><p>String interpolation expressions enable interpolating (surprise!) the result of an expression with text.  The best way to demonstrate this capability is with an example. Below are two span elements with data-bound textcontent:</p>
+<section><h2 id="string-interpolation">String Interpolation</h2><p>String interpolation expressions enable interpolating (surprise!) the result of an expression with text.  The best way to demonstrate this capability is with an example. Below are two span elements with data-bound textcontent:</p>
 <code-listing heading="String interpolation example">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">textcontent.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">'</span>Hello<span class="token punctuation">'</span> + firstName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
@@ -109,7 +109,7 @@
  syntax standardized in ES2015/ES6.</p>
 <p>String interpolation can be used within html attributes as an alternative to one-way binding. By default, the mode of an interpolation binding is <code>one-way</code> and the result of the expression is always coerced to a string. Results that are <code>null</code> or <code>undefined</code> will result in empty string.</p>
 </section>
-<section><h2>Element Content</h2><p>The previous example compared string interpolation binding with <code>textcontent.bind</code>. Interpolation is easier to read but <code>textcontent.bind</code> can come in handy when you need to two-bind a <code>contenteditable</code> element:</p>
+<section><h2 id="element-content">Element Content</h2><p>The previous example compared string interpolation binding with <code>textcontent.bind</code>. Interpolation is easier to read but <code>textcontent.bind</code> can come in handy when you need to two-bind a <code>contenteditable</code> element:</p>
 <code-listing heading="textContent example">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">contenteditable</span> <span class="token attr-name">textcontent.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
@@ -134,7 +134,7 @@ Always use HTML sanitization. We provide a simple converter that can be used. Yo
 Binding using the <code>innerhtml</code> attribute simply sets the element's <code>innerHTML</code> property.  The markup does not pass through Aurelia's templating system.  Binding expressions and require elements will not be evaluated.</p>
 </div>
 </section>
-<section><h2>Contextual Properties</h2><p>The binding system makes several properties available for binding in your templates, depending on the context.</p>
+<section><h2 id="contextual-properties">Contextual Properties</h2><p>The binding system makes several properties available for binding in your templates, depending on the context.</p>
 <ul>
 <li><code>$this</code> - The binding context (the view-model).</li>
 <li><code>$parent</code> - Explicitly accesses the outer scope from within a compose or repeat template. You may need this when a property on the current scope masks a property on the outer scope. Chainable- eg <code>$parent.$parent.foo</code> is supported.</li>

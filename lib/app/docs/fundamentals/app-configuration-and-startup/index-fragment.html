@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Bootstrapping Aurelia</h2><p>Most platforms have a &quot;main&quot; or entry point for code execution. Aurelia is no different. If you've read the Quick Start, then you've seen the <code>aurelia-app</code> attribute. Simply place this on an HTML element and Aurelia's bootstrapper will load an <em>app${context.language.fileExtension}</em> and <em>app.html</em>, databind them together and inject them into the DOM element on which you placed that attribute.</p>
+    <section><h2 id="bootstrapping-aurelia">Bootstrapping Aurelia</h2><p>Most platforms have a &quot;main&quot; or entry point for code execution. Aurelia is no different. If you've read the Quick Start, then you've seen the <code>aurelia-app</code> attribute. Simply place this on an HTML element and Aurelia's bootstrapper will load an <em>app${context.language.fileExtension}</em> and <em>app.html</em>, databind them together and inject them into the DOM element on which you placed that attribute.</p>
 <p>Often times you want to configure the framework or run some code prior to displaying anything to the user though. So chances are, as your project progresses, you will migrate towards needing some startup configuration. In order to do this, you can provide a value for the <code>aurelia-app</code> attribute that points to a configuration module. This module should export a single function named <code>configure</code>. Aurelia invokes your <code>configure</code> function, passing it the Aurelia object which you can then use to configure the framework yourself and decide what, when, and where to display your UI. Here's an example configuration file showing the standard configuration, the same configuration that is equivalent to what you would get when using <code>aurelia-app</code> without a value:</p>
 <code-listing heading="Standard Configuration">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
@@ -96,7 +96,7 @@
 </code-listing>
 <p>Once you've configured the framework, you need to start things up by calling <code>aurelia.start()</code>. This API returns a promise. Once it's resolved, the framework is ready, including all plugins, and it is now safe to interact with the services and begin rendering.</p>
 </section>
-<section><h2>Rendering the Root Component</h2><p>The root component is set by calling <code>aurelia.setRoot()</code>. If no values are provided, this defaults to treating the element with the <code>aurelia-app</code> attribute as the DOM host for your app and <code>app${context.language.fileExtension}</code>/<code>app.html</code> as the source for the root component. However, you can specify whatever you want, just like this:</p>
+<section><h2 id="rendering-the-root-component">Rendering the Root Component</h2><p>The root component is set by calling <code>aurelia.setRoot()</code>. If no values are provided, this defaults to treating the element with the <code>aurelia-app</code> attribute as the DOM host for your app and <code>app${context.language.fileExtension}</code>/<code>app.html</code> as the source for the root component. However, you can specify whatever you want, just like this:</p>
 <code-listing heading="Manual Root Component">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -121,7 +121,7 @@
 </code-listing>
 <p>This causes the <code>my-root${context.language.fileExtension}</code>/<code>my-root.html</code> to be loaded as the root component and injected into the <code>some-element</code> HTML element.</p>
 </section>
-<section><h2>Bootstrapping Older Browsers</h2><p>Aurelia was originally designed for Evergreen Browsers. This includes Chrome, Firefox, IE11 and Safari 8. However, we also support IE9 and above through the use of additional polyfills. To support these earlier browsers, you need the 
+<section><h2 id="bootstrapping-older-browsers">Bootstrapping Older Browsers</h2><p>Aurelia was originally designed for Evergreen Browsers. This includes Chrome, Firefox, IE11 and Safari 8. However, we also support IE9 and above through the use of additional polyfills. To support these earlier browsers, you need the 
 <a href="https://www.npmjs.com/package/raf" target="_blank">requestAnimationFrame Polyfill</a>
  and the 
 <a href="https://github.com/megawac/MutationObserver.js" target="_blank">MutationObserver polyfill</a>
@@ -168,7 +168,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
  library to replace Edge's native implementation. You can do this by simply referencing the library prior to loading other libraries.</p>
 </div>
 </section>
-<section><h2>Manual Bootstrapping</h2><p>So far, we've been bootstrapping our app declaratively by using the <code>aurelia-app</code> attribute. That's not the only way though. You can manually bootstrap the framework as well. In case of JSPM, here's how you would change your HTML file to use manual bootstrapping:</p>
+<section><h2 id="manual-bootstrapping">Manual Bootstrapping</h2><p>So far, we've been bootstrapping our app declaratively by using the <code>aurelia-app</code> attribute. That's not the only way though. You can manually bootstrap the framework as well. In case of JSPM, here's how you would change your HTML file to use manual bootstrapping:</p>
 <code-listing heading="Manual Bootstrapping with JSPM">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token doctype">&lt;!doctype html></span>
@@ -224,7 +224,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
 </code-listing>
 <p>The function you pass to the <code>bootstrap</code> method is the same as the <code>configure</code> function from the examples above.</p>
 </section>
-<section><h2>Making Resources Global</h2><p>When you create a view in Aurelia, it is completely encapsulated. In the same way that you must <code>import</code> modules into an ES2015/TypeScript module, you must also import or <code>require</code> components into an Aurelia view. However, certain components are used so frequently across views that it can become very tedious to import them over and over again. To solve this problem, Aurelia lets you explicitly declare certain &quot;view resources&quot; as global. In fact, the configuration helper method <code>defaultResources()</code> mentioned above does just that. It takes the default set of view resources, such as <code>repeat</code>, <code>if</code>, <code>compose</code>, etc, and makes them globally usable in every view. You can do the same with your own components. Here's how we could make the <code>my-component</code> custom element, located in a <em>resources</em> subfolder of your project, globally available in all views.</p>
+<section><h2 id="making-resources-global">Making Resources Global</h2><p>When you create a view in Aurelia, it is completely encapsulated. In the same way that you must <code>import</code> modules into an ES2015/TypeScript module, you must also import or <code>require</code> components into an Aurelia view. However, certain components are used so frequently across views that it can become very tedious to import them over and over again. To solve this problem, Aurelia lets you explicitly declare certain &quot;view resources&quot; as global. In fact, the configuration helper method <code>defaultResources()</code> mentioned above does just that. It takes the default set of view resources, such as <code>repeat</code>, <code>if</code>, <code>compose</code>, etc, and makes them globally usable in every view. You can do the same with your own components. Here's how we could make the <code>my-component</code> custom element, located in a <em>resources</em> subfolder of your project, globally available in all views.</p>
 <code-listing heading="Make a Component Global">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -250,7 +250,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Organizing Your App with Features</h2><p>Sometimes you have whole group of components or related functionality that collectively form a &quot;feature&quot;. This &quot;feature&quot; may even be owned by a particular set of developers on your team. You want these developers to be able to manage the configuration and resources of their own feature, without interfering with the other parts of the app. For this scenario, Aurelia provides the &quot;feature&quot; feature.</p>
+<section><h2 id="organizing-your-app-with-features">Organizing Your App with Features</h2><p>Sometimes you have whole group of components or related functionality that collectively form a &quot;feature&quot;. This &quot;feature&quot; may even be owned by a particular set of developers on your team. You want these developers to be able to manage the configuration and resources of their own feature, without interfering with the other parts of the app. For this scenario, Aurelia provides the &quot;feature&quot; feature.</p>
 <p>Imagine, as above, that we have a <code>my-component</code> component. Imagine that that was then one of a dozen components that formed a logical feature in your app called <code>my-feature</code>. Rather than place the feature's configuration logic inside the app's configuration module, we can place the feature's configuration inside its own feature configuration module.</p>
 <p>To create a &quot;feature&quot;, simply create a folder in your app; in the case of our example: <code>my-feature</code>. Inside that folder, place all the components and other code that pertain to that feature. Finally, create an <code>index${context.language.fileExtension}</code> file at the root of the <code>my-feature</code> folder. The <code>index${context.language.fileExtension}</code> file should export a single <code>configure</code> function. Here's what our code might look like for our hypothetical <code>my-feature</code> feature:</p>
 <code-listing heading="A Feature Module (index${context.language.fileExtension})">
@@ -294,7 +294,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Installing Plugins</h2><p>Similar to features, you can install 3rd party plugins. The main difference is that a &quot;feature&quot; is provided internally by your application, while a plugin is installed from a 3rd party source through your package manager.</p>
+<section><h2 id="installing-plugins">Installing Plugins</h2><p>Similar to features, you can install 3rd party plugins. The main difference is that a &quot;feature&quot; is provided internally by your application, while a plugin is installed from a 3rd party source through your package manager.</p>
 <p>To use a plugin, you first install the package. For example <code>jspm install my-plugin</code> would use jspm to install the <code>my-plugin</code> package. Once the package is installed, you must configure it in your application. Here's some code that shows how that works.</p>
 <code-listing heading="Using a Plugin">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
@@ -322,7 +322,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
 </code-listing>
 <p>Simply provide the same name used during installation, to the plugin API. Some plugins may require configuration (see the plugin's documentation for details). If so, pass the configuration object or configuration callback function as the second parameter of the <code>plugin</code> API.</p>
 </section>
-<section><h2>Leveraging Progressive Enhancement</h2><p>So far you've seen Aurelia replacing a portion of the DOM with a root component. However, that's not the only way to render with Aurelia. Aurelia can also progressively enhance existing HTML.</p>
+<section><h2 id="leveraging-progressive-enhancement">Leveraging Progressive Enhancement</h2><p>So far you've seen Aurelia replacing a portion of the DOM with a root component. However, that's not the only way to render with Aurelia. Aurelia can also progressively enhance existing HTML.</p>
 <p>Imagine that you want to generate your home page on the server, including using your server-side templating engine to render out HTML. Perhaps you've got custom components you created with Aurelia, but you want to render the custom elements on the server with some content, in order to make things a bit more SEO friendly. Or perhaps you have an existing, traditional web app, that you want to incrementally start adding Aurelia to. When the HTML is rendered in the browser, you want to progressively enhance that HTML and &quot;bring it to life&quot; by activating all the Aurelia component's rich behavior.</p>
 <p>All this is possible with Aurelia, using a single method call: <code>enhance</code>. Instead of using <code>aurelia-app</code> let's use manual bootstrapping for this example. To progressively enhance the entire <code>body</code> of your HTML page, you can do something like this (JSPM-based example):</p>
 <code-listing heading="Progressive Enhancement">
@@ -439,7 +439,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Customizing Conventions</h2><p>There are many things you may want to customize or configure as part of your application's bootstrap process. Once you have your main <code>configure</code> method in place and <code>aurelia-app</code> is pointing to that module, you can do just about anything you want. One of the most common aspects of Aurelia that developers may want to customize, is its conventions.</p>
+<section><h2 id="customizing-conventions">Customizing Conventions</h2><p>There are many things you may want to customize or configure as part of your application's bootstrap process. Once you have your main <code>configure</code> method in place and <code>aurelia-app</code> is pointing to that module, you can do just about anything you want. One of the most common aspects of Aurelia that developers may want to customize, is its conventions.</p>
 <h3>Configuring the View Location Convention</h3>
 <p>Aurelia uses a <em>View Strategy</em> to locate the view that is associated with a particular component's view-model. If the component doesn't specify its own view strategy, then Aurelia's <code>ViewLocator</code> service will use a fallback view strategy. The fallback strategy that is used is named <code>ConventionalViewStrategy</code>. This strategy uses the view-model's module id to conventionally map to its view id. For example, if the module id is &quot;welcome${context.language.fileExtension}&quot; then this strategy will look for the view at &quot;welcome.html&quot;. The conventional strategy's mapping logic can be changed if a different convention is desired. To do this, during bootstrap, import the <code>ViewLocator</code> and replace its <code>convertOriginToViewUrl</code> method with your own implementation. Here's some example code:</p>
 <code-listing heading="Custom View Location Convention">
@@ -551,7 +551,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Logging</h2><p>Aurelia has a simple logging abstraction that the framework itself uses. By default it is a no-op. The configuration in the above examples shows how to install an appender which will take the log data and output it to the console. Here's the code again, for convenience:</p>
+<section><h2 id="logging">Logging</h2><p>Aurelia has a simple logging abstraction that the framework itself uses. By default it is a no-op. The configuration in the above examples shows how to install an appender which will take the log data and output it to the console. Here's the code again, for convenience:</p>
 <code-listing heading="Configuring Logging">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>LogManager<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>

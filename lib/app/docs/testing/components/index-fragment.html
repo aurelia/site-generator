@@ -5,9 +5,9 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>With the Component Tester you can easily stage a custom element or custom attribute in isolation inside a mini Aurelia application, assert how it responds to data-binding and assert its behavior throughout the component's lifecycle (bind, attached etc).</p>
+    <section><h2 id="introduction">Introduction</h2><p>With the Component Tester you can easily stage a custom element or custom attribute in isolation inside a mini Aurelia application, assert how it responds to data-binding and assert its behavior throughout the component's lifecycle (bind, attached etc).</p>
 </section>
-<section><h2>Getting Started</h2><p>If you are using JSPM:</p>
+<section><h2 id="getting-started">Getting Started</h2><p>If you are using JSPM:</p>
 <pre><code class="language-shell">jspm install aurelia-testing
 </code></pre>
 <p>If you are using NPM:</p>
@@ -15,7 +15,7 @@
 </code></pre>
 <p>Once you've got the library installed, you can use it in a unit test. In the following examples we will be using Jasmine, but any testing framework would work.</p>
 </section>
-<section><h2>Testing a Custom Element</h2><p>Let's start with a simple custom element that we want to test:</p>
+<section><h2 id="testing-a-custom-element">Testing a Custom Element</h2><p>Let's start with a simple custom element that we want to test:</p>
 <code-listing heading="A Custom Element's View">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -84,7 +84,7 @@
 <p>Next, we come to the actual test where we call <code>create</code> on the <code>ComponentTester</code>. Create will kick everything off and bootstrap the mini Aurelia application, configure it with <code>standardConfiguration</code> (we will take a look later at how you can run with your own configuration), register provided resources as global resources, start the application and finally render your component so you can assert the expected behavior. In this case, we want to make sure our <code>firstName</code> property gets rendered correctly in the HTML by selecting the <code>div</code> tag via it's class name. We use <code>document.querySelector('.firstName');</code> to grab that and then check that its innerHTML is <code>Bob</code>. Next we call Jasmine's <code>done</code> function to tell Jasmine that the test is complete. Calling <code>done</code> is needed since the <code>create</code> method is asynchronous and returns a Promise.</p>
 <p>Finally, we call <code>dispose</code> on our <code>ComponentTester</code> instance. This will clean up the DOM so our next test will start out with a clean document. That's pretty much all there is to it. Easy right? Imagine doing the same assert with stand alone unit tests that run outside of Aurelia. It would be pretty difficult, especially for a more complex component.</p>
 </section>
-<section><h2>Manually handling lifecycle</h2><p>When testing a component sometimes you want to have tests run at certain points of the lifecycle.  To do this we can tell the component we created that we will manually handle the lifecycle methods -</p>
+<section><h2 id="manually-handling-lifecycle">Manually handling lifecycle</h2><p>When testing a component sometimes you want to have tests run at certain points of the lifecycle.  To do this we can tell the component we created that we will manually handle the lifecycle methods -</p>
 <code-listing heading="Manually handling lifecycle">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>StageComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-testing'</span><span class="token punctuation">;</span>
@@ -141,7 +141,7 @@
 </code-listing>
 <p>As you see, the test helper lets you easily push components through their lifecycle, testing various aspects of it at each point along the way.</p>
 </section>
-<section><h2>Testing a Custom Attribute</h2><p>Testing a Custom Attribute is not much different than testing a Custom Element. Let's look at how it's done by starting with a simple example custom attribute that lets you change the background color of the element it is placed on:</p>
+<section><h2 id="testing-a-custom-attribute">Testing a Custom Attribute</h2><p>Testing a Custom Attribute is not much different than testing a Custom Element. Let's look at how it's done by starting with a simple example custom attribute that lets you change the background color of the element it is placed on:</p>
 <code-listing heading="A Custom Attribute">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyAttributeCustomAttribute</span> <span class="token punctuation">{</span>
@@ -187,7 +187,7 @@
 </code-listing>
 <p>As you can see, everything follows the same pattern we had for our custom element test. One exception is that we take advantage of the <code>element</code> property which gets provided by the <code>ComponentTester</code> instance. The <code>element</code> property is the actual HTML element that gets rendered. This can also be used when testing custom elements.</p>
 </section>
-<section><h2>Testing custom component with a real view-model</h2><p>If you want to test a custom component with a real view-model, mocking
+<section><h2 id="testing-custom-component-with-a-real-view-model">Testing custom component with a real view-model</h2><p>If you want to test a custom component with a real view-model, mocking
 out all dependencies, you can do this as well.  A common scenario is
 to test the view/view-model, mocking out service calls to the backend.</p>
 <p>If the view model has a dependency on a class called Service for all backend communication:</p>
@@ -232,7 +232,7 @@ describe('MyComponent', () =&gt; {
 });
 </code></pre>
 </section>
-<section><h2>Using a Real Parent View-model</h2><p>If you want to test using a custom element inside of a real parent view-model this can be done just as easily.  This can be really helpful when needing to test the state of a parent that is affected by the child custom element or attribute -</p>
+<section><h2 id="using-a-real-parent-view-model">Using a Real Parent View-model</h2><p>If you want to test using a custom element inside of a real parent view-model this can be done just as easily.  This can be really helpful when needing to test the state of a parent that is affected by the child custom element or attribute -</p>
 <code-listing heading="A Custom Attribute Test with Real Parent View-model">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>StageComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-testing'</span><span class="token punctuation">;</span>
@@ -285,7 +285,7 @@ describe('MyComponent', () =&gt; {
 </code-listing>
 <p>Now the service dependency for <code>MyComponent</code> will be resolved through DI automatically.</p>
 </section>
-<section><h2>Improving Readability with Multi-line Strings</h2><p>You can improve the readability of your complex views by using template literals in your tests -</p>
+<section><h2 id="improving-readability-with-multi-line-strings">Improving Readability with Multi-line Strings</h2><p>You can improve the readability of your complex views by using template literals in your tests -</p>
 <code-listing heading="Multi-line Strings for Views">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>StageComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-testing'</span><span class="token punctuation">;</span>
@@ -312,7 +312,7 @@ describe('MyComponent', () =&gt; {
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Helpful Properties and Functions</h2><p>The <code>ComponentTester</code> exposes a set of properties that can be handy when doing asserts or to stage a component in a specific way. Here's a list of what is available:</p>
+<section><h2 id="helpful-properties-and-functions">Helpful Properties and Functions</h2><p>The <code>ComponentTester</code> exposes a set of properties that can be handy when doing asserts or to stage a component in a specific way. Here's a list of what is available:</p>
 <ul>
 <li><code>element</code> - The HTML element that gets rendered.</li>
 <li><code>viewModel</code> - The view-model for the component.</li>
@@ -325,7 +325,7 @@ describe('MyComponent', () =&gt; {
 <li><code>waitForElement</code> and <code>waitForElements</code> - Waits until one or several elements are present / absent. See below.</li>
 </ul>
 </section>
-<section><h2>Testing complex components</h2><p>In some cases, the tested element is not rendered yet when the <code>component.create()</code> promise is resolved, and therefore when the actual test starts. For these situations, <code>aurelia-testing</code> and <code>ComponentTester</code> expose helper methods and functions to wait for tested elements to be present in the page.</p>
+<section><h2 id="testing-complex-components">Testing complex components</h2><p>In some cases, the tested element is not rendered yet when the <code>component.create()</code> promise is resolved, and therefore when the actual test starts. For these situations, <code>aurelia-testing</code> and <code>ComponentTester</code> expose helper methods and functions to wait for tested elements to be present in the page.</p>
 <h3>Waiting for element(s)</h3>
 <p>If you want to wait for elements that can be looked up in the DOM using a query passed to <code>querySelector</code> or <code>querySelectorAll</code>, you can use one of the following:</p>
 <ul>

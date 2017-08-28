@@ -5,7 +5,7 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Setup</h2><p>The first step is obtaining Polymer, which is generally done with the 
+    <section><h2 id="setup">Setup</h2><p>The first step is obtaining Polymer, which is generally done with the 
 <a href="http://bower.io/" target="_blank">Bower</a>
  package manager. The following <code>bower.json</code> will install Polymer's base and material design elements.</p>
 <code-listing heading="Bower Config">
@@ -92,7 +92,7 @@
 </code-listing>
 <p>At this point, Aurelia and Polymer are ready to go. The examples below incorporate various Polymer elements into the Aurelia skeleton navigation starter.</p>
 </section>
-<section><h2>Importing Elements</h2><p>With the normal Aurelia template loader, nothing is allowed outside the root <code>&lt;template&gt;</code> element. When using HTML imports, however, the import statements must be before the <code>&lt;template&gt;</code>.</p>
+<section><h2 id="importing-elements">Importing Elements</h2><p>With the normal Aurelia template loader, nothing is allowed outside the root <code>&lt;template&gt;</code> element. When using HTML imports, however, the import statements must be before the <code>&lt;template&gt;</code>.</p>
 <code-listing heading="Using HTML Imports">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>import<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/bower_components/paper-drawer-panel/paper-drawer-panel.html<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -109,7 +109,7 @@
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Data Binding</h2><p>Given the imports above, this shows how to implement a basic layout in <code>app.html</code> with Polymer components.</p>
+<section><h2 id="data-binding">Data Binding</h2><p>Given the imports above, this shows how to implement a basic layout in <code>app.html</code> with Polymer components.</p>
 <code-listing heading="Using Polymer Elements">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -145,7 +145,7 @@ normal HTML elements.</p>
 binding on the <code>&lt;paper-item&gt;</code> elements in the navigation menu shows that attributes
 defined by Polymer are also supported by Aurelia.</p>
 </section>
-<section><h2>Forms and Two-Way Binding</h2><p>The updated <code>welcome.html</code> uses Polymer input elements to enhance its form.</p>
+<section><h2 id="forms-and-two-way-binding">Forms and Two-Way Binding</h2><p>The updated <code>welcome.html</code> uses Polymer input elements to enhance its form.</p>
 <code-listing heading="Using Polymer in a Form">
   <source-code lang="HTML"><pre class="language-markup"><code>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>import<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>../bower_components/paper-input/paper-input.html<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -188,7 +188,7 @@ use a <code>click.delegate</code> on a Polymer button instead.</p>
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>How the Plugin Works</h2><p>The <code>aurelia-polymer</code> plugin is fairly simple. For each Polymer element, it
+<section><h2 id="how-the-plugin-works">How the Plugin Works</h2><p>The <code>aurelia-polymer</code> plugin is fairly simple. For each Polymer element, it
 registers the element's properties and what events they support with the
 <code>EventManager</code> in Aurelia's binding component. The core of the plugin, the
 <a href="https://github.com/roguePanda/aurelia-polymer/blob/1.0.0-beta.1.0.1/src/index.js#L7" target="_blank">registerElement</a>

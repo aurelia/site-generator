@@ -5,17 +5,17 @@
   </header>
 
   <article class="markdown">
-    <section><h2>Introduction</h2><p>Most of the current major browsers limit the number of simultaneous connections per hostname to six. This means that while six requests are being processed, additional requests for assets on a host will be queued by the browser. In the image below, the Chrome F12 developer tools network tab shows the timing for assets required by the <code>welcome view</code> of the unbundled, JSPM-based skeleton-navigation application.</p>
+    <section><h2 id="introduction">Introduction</h2><p>Most of the current major browsers limit the number of simultaneous connections per hostname to six. This means that while six requests are being processed, additional requests for assets on a host will be queued by the browser. In the image below, the Chrome F12 developer tools network tab shows the timing for assets required by the <code>welcome view</code> of the unbundled, JSPM-based skeleton-navigation application.</p>
 <p><img src="docs/build-systems/webpack/bundling/img/unbundled-aurelia-application.jpg" alt="No of requests made by unbundled application" /></p>
 <p>As we can see, there are over 95 requests being made to load the first view. While the first few requests are being processed the others are waiting, ultimately taking almost 2.39s on a local machine.</p>
 <p>In the past, the most common browser limit has been 2 connections. This may have been sufficient in the beginning of the web when most of the content was delivered in a single page load. However, it can soon become the bottleneck when building rich client applications with frameworks like Aurelia and others.</p>
 <p>You may wonder: If this limit can have such a great impact on performance, then why don't browsers give us a higher limit? Most well-known browsers choose not to grant this wish in order to prevent the server from being overloaded by a small number of browsers. Such activity would be similar in nature to a DDOS attack.</p>
 </section>
-<section><h2>Bundling </h2><p>This connection limit will not cause slowness in our application if we can manage resources well enough to avoid it. When the page is first loaded, this is the initial request that returns HTML content. When the browser processes the HTML content, it spawns more requests to load resources like JS, CSS and images. It also executes JavaScript and sends AJAX requests to the server.</p>
+<section><h2 id="bundling">Bundling </h2><p>This connection limit will not cause slowness in our application if we can manage resources well enough to avoid it. When the page is first loaded, this is the initial request that returns HTML content. When the browser processes the HTML content, it spawns more requests to load resources like JS, CSS and images. It also executes JavaScript and sends AJAX requests to the server.</p>
 <p>To make this process efficient, we need to compress the assets and make fewer (possibly less than 6) requests to load everything we need. Fortunately, static resources can be cached and only downloaded the first time. If they cause slowness, it happens on the first page load only and may be tolerable.</p>
 <p>Bundling along with minification are techniques that can also be used to improve load time. Bundling and minification improve load time by reducing the number of requests to the server as well as reducing the size of requested assets such as views, view-models and CSS.</p>
 </section>
-<section><h2>Bundling an Aurelia Webpack Application</h2><p>In the following example, we will use the <code>skeleton-navigation</code> as our app to bundle. If you don't have that set up. Follow 
+<section><h2 id="bundling-an-aurelia-webpack-application">Bundling an Aurelia Webpack Application</h2><p>In the following example, we will use the <code>skeleton-navigation</code> as our app to bundle. If you don't have that set up. Follow 
 <a href="https://github.com/aurelia/skeleton-navigation#running-the-app" target="_blank">these steps</a>
 .</p>
 <p>Now that we have our app running, let's try to build the preconfigured bundle. Webpack, as opposed to JSPM, is not a loader, which means it always creates bundles before loading a page is possible. By default there are two versions of bundles you can create: the development bundle and the production bundle.</p>
@@ -35,7 +35,7 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 </code></pre>
 <p>After executing the command, you'll see a link which will run your bundled application.</p>
 </section>
-<section><h2>Entry Bundles</h2><p>The skeleton-navigation is configured to create 3 explicit entry bundles by default:</p>
+<section><h2 id="entry-bundles">Entry Bundles</h2><p>The skeleton-navigation is configured to create 3 explicit entry bundles by default:</p>
 <ul>
 <li><code>aurelia-bootstrap</code> - contains modules needed to be loaded first, such as polyfills and Aurelia's Platform Abstraction Layer</li>
 <li><code>aurelia</code> - contains all of the aurelia's modules</li>
@@ -57,7 +57,7 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <p>Defining entry bundles is only useful when you want to be able to make use of client-server file caching, because it means that you can only update the bundles which contain the changes, instead of all of them.</p>
 <p>To make it easier to see whether it's necessary to update a certain bundle, the production bundles by default contain a hash in their filename.</p>
 </section>
-<section><h2>Code-Splitting: Chunks / Async Bundles</h2><p>By default, all of our application code is contained in the <code>app</code> entry bundle. If our application is small enough, we can keep using just that single bundle, however the number of bundles we would like to have should mostly depend on our application structure and the usage patterns of our app. For example, if our app was built in a modular fashion, such that it is a collection of child-app/sections, then a <code>common</code> bundle for third-party libraries and a <code>bundle per section</code> makes much more sense and performs better than a huge single bundle that needs to be loaded up front.</p>
+<section><h2 id="code-splitting-chunks-async-bundles">Code-Splitting: Chunks / Async Bundles</h2><p>By default, all of our application code is contained in the <code>app</code> entry bundle. If our application is small enough, we can keep using just that single bundle, however the number of bundles we would like to have should mostly depend on our application structure and the usage patterns of our app. For example, if our app was built in a modular fashion, such that it is a collection of child-app/sections, then a <code>common</code> bundle for third-party libraries and a <code>bundle per section</code> makes much more sense and performs better than a huge single bundle that needs to be loaded up front.</p>
 <p>This is because such &quot;implicit bundles&quot; are loaded asynchronously, on demand.</p>
 <p>There are two ways to define code-splitting bundles:</p>
 <ul>
@@ -103,7 +103,7 @@ It is imperative to remember that the code will not end-up in the bundle, or the
 <p>Both the <code>lazy</code> and the <code>bundle</code> attributes are optional.
 If you do not specify the bundle name, the chunk number will be used instead.</p>
 </section>
-<section><h2>Declaring Build Resources</h2><p>By default, all the production dependencies declared in the <code>package.json</code> that have a <code>main</code> entry file are considered as build resources.</p>
+<section><h2 id="declaring-build-resources">Declaring Build Resources</h2><p>By default, all the production dependencies declared in the <code>package.json</code> that have a <code>main</code> entry file are considered as build resources.</p>
 <p>In case Aurelia is supposed to load an external file or an external module that was not defined as a resource by any of its the dependencies, resources must also be specified manually.</p>
 <div class="warning"><div class="icon"> <i></i> </div><p>
 Since the syntax is still relatively new, many Aurelia plugins do not declare their resources. If you are developing an Aurelia plugin, make sure you do this, so that your users do not have to. The <code>package.json</code> syntax is similar, with the one exception that resources are relative to the root directory of the plugin, as there is no <code>src</code> folder.</p>
@@ -150,7 +150,7 @@ Since the syntax is still relatively new, many Aurelia plugins do not declare th
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Chunking Code When It Is Not Loaded By Aurelia</h2><p>If you have code that you'd like to load asynchronously in your ${context.language.name} files, you can make use of the System loader compliant syntax to create split-points.
+<section><h2 id="chunking-code-when-it-is-not-loaded-by-aurelia">Chunking Code When It Is Not Loaded By Aurelia</h2><p>If you have code that you'd like to load asynchronously in your ${context.language.name} files, you can make use of the System loader compliant syntax to create split-points.
 Example use-cases for this are: conditionally loading foreign language support based on the user's selection or conditionally polyfilling certain features.</p>
 <p>Such code-splitting is used to polyfill fetch support in the <code>users</code> file of skeleton-navigation. Let's take a look at how it works:</p>
 <code-listing heading="users.js">
@@ -183,7 +183,7 @@ Example use-cases for this are: conditionally loading foreign language support b
   </code></pre></source-code>
 </code-listing>
 </section>
-<section><h2>Duplicate Modules in Multiple Bundles</h2><p>By default, the <code>webpack.config.js</code> uses the <code>CommonsChunkPlugin</code> under the hood, to eliminate code duplication across bundles by placing common code in the <code>app</code> bundle. If you have additional custom entry bundles, or somehow misused or misconfigured them, you may end up with duplicated modules in multiple bundles.</p>
+<section><h2 id="duplicate-modules-in-multiple-bundles">Duplicate Modules in Multiple Bundles</h2><p>By default, the <code>webpack.config.js</code> uses the <code>CommonsChunkPlugin</code> under the hood, to eliminate code duplication across bundles by placing common code in the <code>app</code> bundle. If you have additional custom entry bundles, or somehow misused or misconfigured them, you may end up with duplicated modules in multiple bundles.</p>
 <p>Creating multiple bundles requires us to be extra careful because multiple bundles may contain duplicate modules. Before explaining that, we need to understand how bundling works behind the scenes a bit. Let's consider the example modules <code>A</code> and <code>B</code> below:</p>
 <code-listing heading="a.js">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
@@ -201,7 +201,7 @@ Example use-cases for this are: conditionally loading foreign language support b
 <a href="https://github.com/webpack/docs/wiki/optimization#multi-page-app" target="_blank">Webpack documentation</a>
  on the matter and replace the <code>@easy-webpack/config-common-chunks-simple</code> configuration with a custom one.</p>
 </section>
-<section><h2>Bundle Configuration and Easy Webpack</h2><p>Webpack is a very advanced piece technology, but it can be quite intimidating to beginners and hard to re-configure even for seasoned users. For this very reason, the skeleton-navigation example uses a package called 
+<section><h2 id="bundle-configuration-and-easy-webpack">Bundle Configuration and Easy Webpack</h2><p>Webpack is a very advanced piece technology, but it can be quite intimidating to beginners and hard to re-configure even for seasoned users. For this very reason, the skeleton-navigation example uses a package called 
 <a href="https://github.com/easy-webpack/core" target="_blank">Easy Webpack</a>
  that allows us to quickly stich together a number of configuration objects and supports presets. In more advanced use-cases, we can still override its configuration values, or replace the presets with custom configuration.</p>
 <p>Let's take a look at how a configuration file can be put together:</p>
@@ -260,7 +260,7 @@ Example use-cases for this are: conditionally loading foreign language support b
 <a href="https://github.com/easy-webpack/core" target="_blank">Easy Webpack</a>
  documentation for more information about its capabilities.</p>
 </section>
-<section><h2>Conclusion</h2><p>In this article, you've learned both the why and how of bundling with Webpack. We've covered how to configure Webpack's configuration file for use with Aurelia and demonstrated several different scenarios for asynchonous loading of parts of your code. To bundle your own app, we recommend that you begin with the skeleton-navigation configuration file and customize it. You may have a small app that makes sense as a single bundle or a larger one that can be broken down into features. Each application is different, but Webpack is extremely flexible and should help you to create the optimal deployment for your unique scenarios.
+<section><h2 id="conclusion">Conclusion</h2><p>In this article, you've learned both the why and how of bundling with Webpack. We've covered how to configure Webpack's configuration file for use with Aurelia and demonstrated several different scenarios for asynchonous loading of parts of your code. To bundle your own app, we recommend that you begin with the skeleton-navigation configuration file and customize it. You may have a small app that makes sense as a single bundle or a larger one that can be broken down into features. Each application is different, but Webpack is extremely flexible and should help you to create the optimal deployment for your unique scenarios.
 </require></require></p>
 </section>
 
