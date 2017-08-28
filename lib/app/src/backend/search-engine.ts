@@ -59,7 +59,7 @@ export class SearchEngine {
       this.indexData.articles.data.forEach(x => {
         this.indexData.articles.lookup[x.id] = x;
         indexes.articleIndex.add(x);
-        x.href = `${x.articleHref}#section/${x.sectionId}`;
+        x.href = `${x.articleHref}#${x.sectionId}`;
       });
 
       this.indexData.api.lookup = {};
