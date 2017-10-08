@@ -12,7 +12,7 @@ export class ArticleScreen {
 
   constructor(private http: HttpClient) {}
 
-  withItem(item: DocItem) {
+  withItem(item: DocItem, fragment: string) {
     this.item = item;
     return this;
   }

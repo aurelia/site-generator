@@ -24,8 +24,11 @@ header.app-header {
   background-color: $panel-color;
   box-shadow: -20px 0 14px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.1);
 
-  svg.aurelia-logo {
-    margin-left: 10px;
+  img.aurelia-logo {
+    position: relative;
+    left: 12px;
+    top: 12px;
+    height: 36px;
   }
 
   search-trigger {
