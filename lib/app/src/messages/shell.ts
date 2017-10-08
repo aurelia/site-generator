@@ -1,11 +1,15 @@
 import {DocItem} from '../configuration';
 
+export class ActivateTab {
+  constructor(public name: string) {}
+}
+
 export class ActivateScreen {
   constructor(public screen: any) {}
 }
 
-export class ActivateTab {
-  constructor(public name: string) {}
+export class ActivateSection {
+  constructor(public id: string) {}
 }
 
 export class ShowMenu {

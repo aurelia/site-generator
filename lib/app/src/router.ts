@@ -10,6 +10,8 @@ import {Configuration} from './configuration';
 
 @autoinject
 export class Router {
+  private url: string;
+
   constructor(private config: Configuration, private container: Container, private history: History, private ea: EventAggregator) {}
 
   activate() {
@@ -22,7 +24,7 @@ export class Router {
 
   loadUrl(url: string) {
     let fragment = window.location.hash.substring(1) || '';
-    url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
+    url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
     
     if (url.indexOf('help') !== -1) {
       let helpToc = this.config.help;
@@ -67,6 +69,10 @@ export class Router {
     this.ea.publish(new ActivateTab('home'));
     this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem(this.config.home)));
     this.ea.publish(new HideMenu());
+  }
+
+  replaceFragment(fragment) {
+    this.history.navigate(this.url + '#' + fragment, { replace: true, trigger: false })
   }
 }
 

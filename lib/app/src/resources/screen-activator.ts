@@ -1,4 +1,5 @@
 import {inject, Container} from 'aurelia-dependency-injection';
+import {DOM} from 'aurelia-pal';
 import {
   TemplatingEngine,
   ViewSlot, 
@@ -74,6 +75,9 @@ export class ScreenActivator {
         view.bind(newValue, null);
 
         return swapStrategy(this.viewSlot, previousViews, () => this.viewSlot.add(view));
+      }).then(() => {
+        let evt = DOM.createCustomEvent('screen-activated', { bubbles: true, cancelable: false });
+        this.element.dispatchEvent(evt);
       });
   }
 }

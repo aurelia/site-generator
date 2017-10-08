@@ -1,7 +1,7 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
-import {ShowMenu, HideMenu} from '../messages/shell';
+import {ShowMenu, HideMenu, ActivateSection} from '../messages/shell';
 import {Configuration, DocItem} from '../configuration';
 import {DOM} from 'aurelia-pal';
 
@@ -48,6 +48,8 @@ export class SideBar {
       return;
     } else if (item.dest) {
       this.history.navigate(item.dest);
+    } else {
+      this.ea.publish(new ActivateSection(item.id));
     }
   }
 
@@ -55,10 +57,13 @@ export class SideBar {
     if (this.$currentView && !skipAnimation) {
       let newContent = this.$currentView === this.$viewOne ? this.$viewTwo : this.$viewOne;
       let oldContent = this.$currentView === this.$viewOne ? this.$viewOne : this.$viewTwo;
+      oldContent.classList.remove('active');
+      newContent.classList.add('active');
       this.$currentView = newContent;
       animate(menu, newContent, oldContent, backward);
     } else {
       this.$currentView = this.$viewOne;
+      this.$currentView.classList.add('active');
       this.$viewOne.style.transition = 'none';
       this.$viewOne.style.transform = 'translate(0%, 0%)';
       this.$viewOne['au'].controller.viewModel.menu = menu;

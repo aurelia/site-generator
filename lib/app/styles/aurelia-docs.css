@@ -426,12 +426,14 @@ side-bar {
           background: #ffffff;
           color: #ed2b88; }
         side-bar side-bar-view ul li a {
+          color: inherit;
           display: block;
           width: 100%;
           padding: 0 0 0 1rem;
           white-space: nowrap;
           overflow: hidden;
-          text-overflow: ellipsis; }
+          text-overflow: ellipsis;
+          text-decoration: none; }
 
 @media only screen and (max-width: 710px) {
   side-bar {

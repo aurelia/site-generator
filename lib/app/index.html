@@ -19,7 +19,7 @@
   </header>
 
   <main ref="main">
-    <screen-activator active-screen.bind="activeScreen">
+    <screen-activator active-screen.bind="activeScreen" screen-activated.trigger="onScreenActivated()">
       {{{content}}}
     </screen-activator>
 

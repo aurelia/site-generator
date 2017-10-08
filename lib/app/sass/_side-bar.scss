@@ -84,12 +84,14 @@ side-bar {
         }
 
         a {
+          color: inherit;
           display: block;
           width: 100%;
           padding: 0 0 0 1rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          text-decoration: none;
         }
       }
     }

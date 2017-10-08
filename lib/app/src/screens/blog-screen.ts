@@ -2,17 +2,17 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {autoinject, transient} from 'aurelia-dependency-injection';
 import {InlineViewStrategy} from 'aurelia-templating';
 import {join} from 'aurelia-path';
-import {Location} from '../configuration';
+import {DocItem} from '../configuration';
 
 @autoinject
 @transient()
 export class BlogScreen {
-  item: Location = null;
+  item: DocItem = null;
   strategy: InlineViewStrategy;
 
   constructor(private http: HttpClient) {}
 
-  withItem(item: Location) {
+  withItem(item: DocItem) {
     this.item = item;
     return this;
   }

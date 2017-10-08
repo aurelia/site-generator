@@ -2,18 +2,13 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {autoinject} from 'aurelia-dependency-injection';
 import {observable} from 'aurelia-binding';
 import {ActiveLanguageChanged} from './messages/shell';
-export interface Location {
-  name: string;
-  dest: string;
-}
 
 export interface DocItem extends Location {
-  parent?: ToCItem;
-  items?: ToCItem[];
-}
-
-export interface ToCItem extends DocItem {
-  personas?: string[];
+  name: string;
+  dest: string;
+  parent?: DocItem;
+  items?: DocItem[];
+  id: string;  
 }
 
 const activeLanguageKey = 'activeLanguage';
@@ -31,9 +26,9 @@ export class Configuration {
 
   @observable activeLanguage: string = this.retrieveLanguagePreference();  
 
-  public help: Location;
-  public blog: Location;
-  public home: Location;
+  public help: DocItem;
+  public blog: DocItem;
+  public home: DocItem;
 
   constructor(private ea: EventAggregator) {
     this.home = this.config.home;
@@ -61,7 +56,7 @@ export class Configuration {
     return this.config.docs.api.find(x => x.dest === toSearch);
   }
 
-  findToCItem(path: string): ToCItem | null {
+  findToCItem(path: string): DocItem | null {
     if (path === 'docs') {
       return this.articleRoot;
     }
@@ -97,9 +92,17 @@ export class Configuration {
   }
 }
 
+function slugify(string) {
+  return string.toLowerCase()
+    .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
+    .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
+    .replace(/^-+|-+$/g, ''); // remove leading, trailing -
+}
+
 function associateParents(parent, items: DocItem[]) {
   items.forEach(x => {
     x.parent = parent;
+    x.id = slugify(x.name);
 
     if (x.items) {
       associateParents(x, x.items);
@@ -107,7 +110,7 @@ function associateParents(parent, items: DocItem[]) {
   });
 }
 
-function findIn(items:ToCItem[], path: string): any {
+function findIn(items:DocItem[], path: string): any {
   let found = items.find(x => x.dest === path);
 
   if (found) {
