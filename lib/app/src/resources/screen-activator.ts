@@ -58,6 +58,7 @@ export class ScreenActivator {
       view.attached();
       //HACK
 
+      this.fireScreenActivated();
       return;
     }
     
@@ -76,8 +77,12 @@ export class ScreenActivator {
 
         return swapStrategy(this.viewSlot, previousViews, () => this.viewSlot.add(view));
       }).then(() => {
-        let evt = DOM.createCustomEvent('screen-activated', { bubbles: true, cancelable: false });
-        this.element.dispatchEvent(evt);
+        this.fireScreenActivated();
       });
+  }
+
+  fireScreenActivated() {
+    let evt = DOM.createCustomEvent('screen-activated', { bubbles: true, cancelable: false });
+    this.element.dispatchEvent(evt);
   }
 }
