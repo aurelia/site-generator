@@ -98,7 +98,7 @@ export class Router {
 
   onScreenActivated() {
     let nodeList = document.querySelectorAll('side-bar-view.active ul li a');
-    var ary = Array.prototype.slice.call(nodeList);
+    let ary = Array.prototype.slice.call(nodeList);
     
     this.items = getItems(ary);
 

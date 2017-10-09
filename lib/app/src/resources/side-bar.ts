@@ -70,6 +70,10 @@ export class SideBar {
       this.$viewTwo.style.transition = 'none';
       this.$viewTwo.style.transform = 'translate(100%, 0%)';
     }
+
+    let nodeList = this.$currentView.querySelectorAll('ul li a');
+    let ary = Array.prototype.slice.call(nodeList);
+    ary.forEach(element => element.parentElement.classList.remove('active'));
   }
 }
 
