@@ -21,7 +21,11 @@ export class App {
 
     this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
       this.main.scrollTop = findPos(document.getElementById(msg.id)) - 64;
-      this.router.replaceFragment(msg.id);
+
+      if (msg.replaceFragment) {
+        this.router.replaceFragment(msg.id);
+      }
+
       this.spy();
     });
   }
@@ -41,7 +45,7 @@ export class App {
     this.items = getItems(ary);
 
     if (this.fragment) {
-      this.ea.publish(new ActivateSection(this.fragment));
+      this.ea.publish(new ActivateSection(this.fragment, false));
     } else {
       this.main.scrollTop = 0;
       this.spy();
@@ -73,7 +77,13 @@ function getItems(ary) {
 
   for (let i = 0, l = ary.length; i < l; i++) {
     var id = ary[i].hash.replace(/^#/, '');
-    var $target = document.getElementById(id).parentElement;
+    var $element = document.getElementById(id);
+
+    if (!$element) {
+      return items;
+    }
+
+    var $target = $element.parentElement;
     var offset = getOffsetRect($target);
     var height = window.getComputedStyle($target)['height'];
 

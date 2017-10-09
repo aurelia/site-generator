@@ -9,7 +9,7 @@ export class ActivateScreen {
 }
 
 export class ActivateSection {
-  constructor(public id: string) {}
+  constructor(public id: string, public replaceFragment = true) {}
 }
 
 export class ShowMenu {
