@@ -1,24 +1,49 @@
 import {Container, autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {ShowMenu, HideMenu, ActivateScreen, ActivateTab} from './messages/shell';
+import {ShowMenu, HideMenu, ActivateScreen, ActivateTab, ActivateSection} from './messages/shell';
 import {ArticleScreen} from './screens/article-screen';
 import {APIScreen} from './screens/api-screen';
 import {HomeScreen} from './screens/home-screen';
 import {BlogScreen} from './screens/blog-screen';
 import {Configuration} from './configuration';
 
+const offset = 64;
+
 @autoinject
 export class Router {
   private url: string;
+  items: any[];
+  fragment: string;
+  main: HTMLElement;
 
   constructor(private config: Configuration, private container: Container, private history: History, private ea: EventAggregator) {}
 
-  activate() {
+  activate(main: HTMLElement) {
+    this.main = main;
+
     this.history.activate({ 
       pushState: true,
       root: document.getElementsByTagName('base')[0].getAttribute('href'),
       routeHandler: this.loadUrl.bind(this) 
+    });
+
+    this.ea.subscribe(ActivateScreen, (msg:ActivateScreen) => {
+      this.fragment = msg.fragment;
+    });
+
+    this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
+      this.main.scrollTop = findPos(document.getElementById(msg.id)) - offset;
+
+      if (msg.replaceFragment) {
+        this.replaceFragment(msg.id);
+      }
+
+      this.spy();
+    });
+
+    this.main.addEventListener('scroll', () => {
+      this.spy();
     });
   }
 
@@ -71,8 +96,41 @@ export class Router {
     this.ea.publish(new HideMenu());
   }
 
-  replaceFragment(fragment) {
+  onScreenActivated() {
+    let nodeList = document.querySelectorAll('side-bar-view.active ul li a');
+    var ary = Array.prototype.slice.call(nodeList);
+    
+    this.items = getItems(ary);
+
+    if (this.fragment) {
+      this.ea.publish(new ActivateSection(this.fragment, false));
+    } else {
+      this.main.scrollTop = 0;
+      this.spy();
+    }
+  }
+
+  private replaceFragment(fragment) {
     this.history.navigate(this.url + '#' + fragment, { replace: true, trigger: false })
+  }
+
+  private spy() {
+    let find = -1;
+  
+    for (var i = 0, l = this.items.length; i < l; i++) {
+      if (this.main.scrollTop > this.items[i].top - offset) {
+        find = i;
+      }
+    }
+  
+    for (let j = 0, l = this.items.length; j < l; j++) {
+      this.items[j].elem.parentElement.classList.remove('active');
+    }
+  
+    if (find !== -1) {
+      this.items[find].elem.parentElement.classList.add('active');
+      this.replaceFragment(this.items[find].id);
+    }
   }
 }
 
@@ -108,4 +166,64 @@ function getHashParams() {
       hashParams[d(e[1])] = d(e[2]);
 
   return hashParams;
+}
+
+function getItems(ary) {
+  var items = [];
+
+  for (let i = 0, l = ary.length; i < l; i++) {
+    var id = ary[i].hash.replace(/^#/, '');
+    var $element = document.getElementById(id);
+
+    if (!$element) {
+      return items;
+    }
+
+    var $target = $element.parentElement;
+    var offset = getOffsetRect($target);
+    var height = window.getComputedStyle($target)['height'];
+
+    items[i] = { 
+      id: id,
+      height: parseInt(height), 
+      top: offset.top, 
+      elem: ary[i] 
+    };
+  }
+
+  return items;
+}
+
+function findPos(obj) {
+  var curtop = 0;
+
+  if (obj.offsetParent) {
+    do {
+      curtop += obj.offsetTop;
+    } while (obj = obj.offsetParent);
+
+    return curtop;
+  }
+}
+
+function getOffsetRect(elem) {
+  // (1)
+  const box = elem.getBoundingClientRect();
+
+  const body = document.body;
+  const docElem = document.documentElement;
+
+  // (2)
+  const scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+  const scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+
+  // (3)
+  const clientTop = docElem.clientTop || body.clientTop || 0;
+  const clientLeft = docElem.clientLeft || body.clientLeft || 0;
+
+  // (4)
+  const top = box.top + scrollTop - clientTop;
+  const left = box.left + scrollLeft - clientLeft;
+
+  return { top: Math.round(top), left: Math.round(left) };
 }
