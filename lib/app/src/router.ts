@@ -33,7 +33,7 @@ export class Router {
     });
 
     this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
-      this.main.scrollTop = findPos(document.getElementById(msg.id)) - offset;
+      this.main.scrollTop = findPosition(document.getElementById(msg.id)) - offset;
 
       if (msg.replaceFragment) {
         this.replaceFragment(msg.id);
@@ -169,24 +169,22 @@ function getHashParams() {
 }
 
 function getItems(ary) {
-  var items = [];
+  let items = [];
 
   for (let i = 0, l = ary.length; i < l; i++) {
-    var id = ary[i].hash.replace(/^#/, '');
-    var $element = document.getElementById(id);
+    let id = ary[i].hash.replace(/^#/, '');
+    let $element = document.getElementById(id);
 
     if (!$element) {
       return items;
     }
 
-    var $target = $element.parentElement;
-    var offset = getOffsetRect($target);
-    var height = window.getComputedStyle($target)['height'];
+    let $target = $element.parentElement;
+    let offsetTop = getOffsetTop($target);
 
     items[i] = { 
       id: id,
-      height: parseInt(height), 
-      top: offset.top, 
+      top: offsetTop, 
       elem: ary[i] 
     };
   }
@@ -194,36 +192,24 @@ function getItems(ary) {
   return items;
 }
 
-function findPos(obj) {
-  var curtop = 0;
+function findPosition(obj) {
+  let currentTop = 0;
 
   if (obj.offsetParent) {
     do {
-      curtop += obj.offsetTop;
+      currentTop += obj.offsetTop;
     } while (obj = obj.offsetParent);
 
-    return curtop;
+    return currentTop;
   }
 }
 
-function getOffsetRect(elem) {
-  // (1)
+function getOffsetTop(elem) {
   const box = elem.getBoundingClientRect();
-
   const body = document.body;
   const docElem = document.documentElement;
-
-  // (2)
-  const scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
-  const scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
-
-  // (3)
+  const scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;;
   const clientTop = docElem.clientTop || body.clientTop || 0;
-  const clientLeft = docElem.clientLeft || body.clientLeft || 0;
-
-  // (4)
   const top = box.top + scrollTop - clientTop;
-  const left = box.left + scrollLeft - clientLeft;
-
-  return { top: Math.round(top), left: Math.round(left) };
+  return Math.round(top);
 }
