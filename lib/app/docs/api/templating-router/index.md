@@ -15,12 +15,12 @@ No description available.
 #### Methods
 
 
+* `attached(): any` - 
+
+
 * `attributeChanged(value?: any, previous?: any): any` - 
   * `value?: any` - No description available
   * `previous?: any` - No description available
-
-
-* `bind(): any` - 
 
 
 * `processChange(): any` - 

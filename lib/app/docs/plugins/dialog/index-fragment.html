@@ -52,19 +52,21 @@
 </ol>
 <code-listing heading="main.js">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
+  <span class="token keyword">import</span> <span class="token punctuation">{</span>PLATFORM<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-pal'</span><span class="token punctuation">;</span>
   <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     aurelia<span class="token punctuation">.</span>use
       <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-dialog'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span>PLATFORM<span class="token punctuation">.</span><span class="token function">moduleName</span><span class="token punctuation">(</span><span class="token string">'aurelia-dialog'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<blockquote>
-<p>Note: If you are using WebPack it is possible that the plugin is installed before Aurelia has replaced the <code>&lt;body&gt;</code> element, if that is where your <code>aurelia-app=&quot;main&quot;</code> is defined, which results in some of the dialog components getting overwritten.  In this case you can move the <code>aurelia-app</code> attribute to a <code>&lt;div&gt;</code> inside of the <code>&lt;body&gt;</code>.  Example - <code>&lt;body&gt;&lt;div aurelia-app=&quot;main&quot;&gt;&lt;/div&gt;&lt;/body&gt;</code>.</p>
-</blockquote>
+<div class="warning"><div class="icon"> <i></i> </div><h4>When the</h4><p><code>&lt;body&gt;</code> is marked with the <code>aurelia-app</code> attribute any dialog open prior to the app being attached to the DOM(before <code>Aurelia.prototype.setRoot</code> completes), will be <em>removed</em> from the DOM. Opening a dialog in the <code>canActivate</code> or <code>activate</code> hooks is <em>OK</em> in any scenario <em>if</em> you <em>await</em> it to close <em>before continuing</em>. If you just want to open a dialog, without awaiting it to close, do it the <code>attached</code> hook instead.</p>
+</div>
+<div class="warning"><div class="icon"> <i></i> </div><p><code>PLATFORM.moduleName</code> should <em>not</em> be omitted if you are using Webpack.</p>
+</div>
 </section>
 <section><h2 id="using-the-plugin">Using The Plugin</h2><p>There are a few ways you can take advantage of the Aurelia dialog.</p>
 <ol>
@@ -124,7 +126,6 @@
 <code-listing heading="edit-person.js">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
   <span class="token keyword">import</span> <span class="token punctuation">{</span>DialogController<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-dialog'</span><span class="token punctuation">;</span>
-
   <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">EditPerson</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span> inject <span class="token operator">=</span> <span class="token punctuation">[</span>DialogController<span class="token punctuation">]</span><span class="token punctuation">;</span>
     person <span class="token operator">=</span> <span class="token punctuation">{</span> firstName<span class="token punctuation">:</span> <span class="token string">''</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -181,11 +182,13 @@
 <p>You can specify global settings as well for all dialogs to use when installing the plugin via the configure method. If providing a custom configuration, you <em>must</em> call the <code>useDefaults()</code> method to apply the base configuration.</p>
 <code-listing heading="main.js">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
+  <span class="token keyword">import</span> <span class="token punctuation">{</span>PLATFORM<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-pal'</span><span class="token punctuation">;</span>
+
   <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     aurelia<span class="token punctuation">.</span>use
       <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-dialog'</span><span class="token punctuation">,</span> config <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span>PLATFORM<span class="token punctuation">.</span><span class="token function">moduleName</span><span class="token punctuation">(</span><span class="token string">'aurelia-dialog'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> config <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         config<span class="token punctuation">.</span><span class="token function">useDefaults</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span>settings<span class="token punctuation">.</span>lock <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span>settings<span class="token punctuation">.</span>centerHorizontalOnly <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
@@ -197,14 +200,48 @@
   <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<h3>Controller Settings</h3>
+<h3>Dialog Settings</h3>
 <p>The settings available for the dialog are set on the dialog controller on a per-dialog basis.</p>
 <ul>
-<li><code>viewModel</code> can be url, class reference or instance.</li>
+<li><code>viewModel</code> can be url, class reference or instance.
+<ul>
+<li>
+<p>url - path relative to the application root.</p>
+<pre><code>.
++-- app.js
++-- forms
+    +-- consent-form.js
+    +-- consent-form.html
++-- prompts
+    +-- prompt.js
+    +-- prompt.html
+</code></pre>
+<p>If you want to open a <code>prompt</code> from <code>consent-form</code> the path will be <code>prompts/prompt</code>.</p>
+<div class="warning"><div class="icon"> <i></i> </div><h4>Webpack users should</h4><p><em>always</em> mark dynamically loaded dependencies with <code>PLATFORM.moduleName</code>. For more details do check the <code>aurelia-webpack-plugin</code> 
+<a href="https://github.com/aurelia/webpack-plugin/wiki" target="_blank">wiki</a>
+.</p>
+</div>
+</li>
+<li>
+<p>object - it will be used as the view model. In this case <code>view</code> must also be specified.</p>
+</li>
+<li>
+<p>class - the view model <em>class</em> or <em>constructor function</em>.</p>
+<blockquote>
+<p>Note: This approach depends on being able resolve the origin of the class.</p>
+</blockquote>
+<blockquote>
+<p>Note: Webpack users are advised to use the string overload, wrapped with <code>PLATFORM.moduleName</code>, instead of this one.</p>
+</blockquote>
+<div class="warning"><div class="icon"> <i></i> </div><h4>This approach might not work for Webpack users when using</h4><p><em>DLLPlugin</em> or <em>ModuleConcatenationPlugin</em>.</p>
+</div>
+</li>
+</ul>
+</li>
 <li><code>view</code> can be url or view strategy to override the default view location convention.</li>
 <li><code>model</code> the data to be passed to the <code>canActivate</code> and <code>activate</code> methods of the view model if implemented.</li>
 <li><code>host</code> allows providing the element which will parent the dialog - if not provided the body will be used.</li>
-<li><code>childConainer</code> allows specifying the DI Container instance to be used for the dialog.
+<li><code>childContainer</code> allows specifying the DI Container instance to be used for the dialog.
 If not provided a new child container will be created from the root one.</li>
 <li><code>lock</code> makes the dialog modal, and removes the close button from the top-right hand corner. (defaults to true)</li>
 <li><code>keyboard</code> allows configuring keyboard keys that close the dialog. To disable set to <code>false</code>. To cancel close a dialog when the <em>ESC</em> key is pressed set to <code>true</code>, <code>'Escape'</code> or and array containing <code>'Escape'</code> - <code>['Escape']</code>. To close with confirmation when the <em>ENTER</em> key is pressed set to <code>'Enter'</code> or an array containing <code>'Enter'</code> - <code>['Enter']</code>. To combine the <em>ESC</em> and <em>ENTER</em> keys set to <code>['Enter', 'Escape']</code> - the order is irrelevant. (takes precedence over <code>lock</code>)</li>
@@ -302,7 +339,7 @@ When <code>DialogController.prototype.error()</code> is called this hook will be
 <li><code>.detached()</code> - as defined by <code>aurelia-templating</code></li>
 <li><code>.unbind()</code> - as defined by <code>aurelia-templating</code></li>
 </ol>
-</body></div></body>
+</body>
 </section>
 
   </article>

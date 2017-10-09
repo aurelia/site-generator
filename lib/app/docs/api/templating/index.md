@@ -496,7 +496,7 @@ particular view it&#x27;s being used.
 
 ### InlineViewStrategy
 
-A view strategy that allows the component authore to inline the html for the view.
+A view strategy that allows the component author to inline the html for the view.
 
 #### Properties
 
@@ -938,6 +938,7 @@ No description available.
 
 * `bindingContext: Object` - The primary binding context that this view is data-bound to.
 * `container: Container` - The Dependency Injection Container that was used to create this View instance.
+* `controller: Controller` - The Controller instance that owns this View.
 * `fragment: ` - Contains the DOM Nodes which represent this View. If the view was created via the &quot;enhance&quot; API, this will be an Element, otherwise it will be a DocumentFragment. If not created via &quot;enhance&quot; then the fragment will only contain nodes when the View is detached from the DOM.
 * `overrideContext: Object` - The override context which contains properties capable of overriding those found on the binding context.
 * `viewFactory: ViewFactory` - The ViewFactory that built this View instance.

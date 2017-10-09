@@ -29,7 +29,7 @@ export class Router {
     if (url.indexOf('help') !== -1) {
       let helpToc = this.config.help;
       this.ea.publish(new ActivateTab('help'));
-      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc, fragment)));
+      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
     } else if (url.indexOf('blog') !== -1) {
       //TODO: Implement Blog. Currently the sidebar links to Ghost.
@@ -50,7 +50,7 @@ export class Router {
         let matchedToCItem = this.config.findToCItem(url);
         if (matchedToCItem) {
           this.ea.publish(new ActivateTab('article'));
-          this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem, fragment)));
+          this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem), fragment));
           this.ea.publish(new ShowMenu(matchedToCItem));
         } else {
           this.navigateToNotFound();

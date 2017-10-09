@@ -120,20 +120,31 @@
   </code></pre></source-code>
 </code-listing>
 <p>This causes the <code>my-root${context.language.fileExtension}</code>/<code>my-root.html</code> to be loaded as the root component and injected into the <code>some-element</code> HTML element.</p>
+<blockquote>
+<p>Note: The content of the app host element, the one marked with <code>aurelia-app</code> or passed to <code>Aurelia.prototype.setRoot</code>, will be replaced when <code>Aurelia.prototype.setRoot</code> completes.</p>
+</blockquote>
+<div class="warning"><div class="icon"> <i></i> </div><h4>When using the</h4><p><code>&lt;body&gt;</code> element as the app host, bear in mind that any content added prior to the completion of <code>Aurelia.prototype.setRoot</code> will be removed.</p>
+</div>
 </section>
 <section><h2 id="bootstrapping-older-browsers">Bootstrapping Older Browsers</h2><p>Aurelia was originally designed for Evergreen Browsers. This includes Chrome, Firefox, IE11 and Safari 8. However, we also support IE9 and above through the use of additional polyfills. To support these earlier browsers, you need the 
 <a href="https://www.npmjs.com/package/raf" target="_blank">requestAnimationFrame Polyfill</a>
  and the 
 <a href="https://github.com/megawac/MutationObserver.js" target="_blank">MutationObserver polyfill</a>
-. Once you have installed these (via <code>npm install raf mutationobserver-shim</code>), you'll need to adjust your code to load them before Aurelia is initialized.</p>
-<p>In case you are using Webpack, create a bootstrapper file, e.g. <code>bootstrapper.js</code>:</p>
+. Once you have installed these (via <code>npm install --save-dev raf mutationobserver-shim</code>), you'll need to adjust your code to load them before Aurelia is initialized.</p>
+<p>In case you are using Webpack, create a file, e.g. <code>ie-polyfill.js</code>:</p>
 <code-listing heading="Polyfill Configuration">
-  <source-code lang="HTML"><pre class="language-markup"><code>
-    import 'mutationobserver-shim/MutationObserver'; // IE10 MutationObserver polyfill
-    import 'raf/polyfill'; // IE9 requestAnimationFrame polyfill
+  <source-code lang="JS"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token string">'mutationobserver-shim/MutationObserver'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// IE10 MutationObserver polyfill</span>
+    <span class="token keyword">import</span> <span class="token string">'raf/polyfill'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// IE9 requestAnimationFrame polyfill</span>
   </code></pre></source-code>
 </code-listing>
-<p>After you have created the file, add it as the first file in your <code>aurelia-bootstrapper</code> bundle. You can find bundle configuration in the <code>webpack.config.js</code> file.</p>
+<p>After you have created the file, add it as the first file in your <code>aurelia-bootstrapper</code> bundle. You can find bundle configuration in the <code>webpack.config.js</code> file, something like:</p>
+<code-listing heading="Polyfill Configuration">
+  <source-code lang="JS"><pre class="language-javascript"><code>
+    entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">'app'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'./ie-polyfill'</span><span class="token punctuation">,</span> <span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
+</code-listing>
 <p>If you are using JSPM change your <code>index.html</code> startup code as follows:</p>
 <code-listing heading="Polyfill Configuration">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -149,7 +160,7 @@
           SystemJS<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'raf/polyfill'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> SystemJS<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'aurelia-polyfills'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> SystemJS<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'webcomponents/webcomponentsjs/MutationObserver'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> SystemJS<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'mutationobserver-shim/MutationObserver'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             SystemJS<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -584,6 +595,7 @@ Currently, the Edge browser has a serious performance problem with its Promise i
 </code-listing>
 <p>You can also see how to set the log level. Values for the <code>logLevel</code> include: <code>none</code>, <code>error</code>, <code>warn</code>, <code>info</code> and <code>debug</code>.</p>
 <p>The above example uses our provided <code>ConsoleAppender</code>, but you can easily create your own appenders. Simply implement a class that matches the <code>Appender</code> interface from the logging library.</p>
+</body>
 </section>
 
   </article>

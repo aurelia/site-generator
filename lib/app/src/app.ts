@@ -9,12 +9,14 @@ export class App {
   activeScreen = null;
   main: HTMLElement;
   items: any[];
+  fragment: string;
 
   constructor(public router: Router, private ea: EventAggregator) {
     this.ea.subscribe(ActivateTab, (msg:ActivateTab) => this.activeTab = msg.name);
 
     this.ea.subscribe(ActivateScreen, (msg:ActivateScreen) => {
       this.activeScreen = msg.screen;
+      this.fragment = msg.fragment;
     });
 
     this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
@@ -26,6 +28,10 @@ export class App {
 
   activate() {
     this.router.activate();
+
+    this.main.addEventListener('scroll', () => {
+      this.spy();
+    });
   }
 
   onScreenActivated() {
@@ -34,11 +40,12 @@ export class App {
     
     this.items = getItems(ary);
 
-    this.spy();
-
-    this.main.addEventListener('scroll', () => {
+    if (this.fragment) {
+      this.ea.publish(new ActivateSection(this.fragment));
+    } else {
+      this.main.scrollTop = 0;
       this.spy();
-    });
+    }
   }
 
   spy() {

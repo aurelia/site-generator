@@ -121,10 +121,9 @@ Optionally, you can define an <code>exclude</code> list by setting the <code>sou
 }
 </code></pre>
 </section>
-<section><h2 id="adding-client-libraries-to-your-project">Adding Client Libraries to Your Project</h2><p>If you need to add a 3rd party client library to your project, first <code>npm install</code> the library. After that, open the <code>aurelia_project/aurelia.json</code> file and scroll down to the <code>build.bundles</code> section. You'll need to add the library into one of your bundle's <code>dependencies</code> sections.</p>
-<div class="info"><div class="icon"> <i></i> </div><p>
-One of the first new features you'll see soon is a command to help you with 3rd party module configuration. The command will inspect a previously npm-installed package, and make a configuration recommendation to you, automating the process if you desire.</p>
-</div>
+<section><h2 id="adding-client-libraries-to-your-project">Adding Client Libraries to Your Project</h2><p>The CLI provides two commands to help you add 3rd party client libraries, <code>au install &lt;library&gt;</code> and <code>au import &lt;library&gt;</code>. The <code>install</code> command will download, install and add the library to the configuration file <code>aurelia_project/aurelia.json</code>. The <code>import</code> command will add a library that you've previously installed with npm to the configuration file. Finally, both commands will give you instructions on how to access the library from your code.</p>
+<h3>Manual configuration</h3>
+<p>Unfortunately, not all 3rd party libraries can be successfully configured automatically by the <code>install</code> and <code>import</code> commands. In order the remedy this by manual configuration, open the <code>aurelia_project/aurelia.json</code> file and scroll down to the <code>build.bundles</code> section. You'll need to add the library into one of your bundle's <code>dependencies</code> sections.</p>
 <p>Below is some guidance for how to manually configure several different common 3rd party library scenarios:</p>
 <h3>A Single-File Module</h3>
 <p>If the library you have installed is a single CommonJS or AMD file, you can add an entry similar to the following to the dependencies of your bundle:</p>
@@ -167,7 +166,7 @@ One of the first new features you'll see soon is a command to help you with 3rd 
 <ul>
 <li><code>name</code> - This is the name of the library as you will import it in your JavaScript or TypeScript code.</li>
 <li><code>path</code> - This is a path to the folder where the package's source is located. This path is relative to your application's <code>src</code> folder.</li>
-<li><code>main</code> - This is the main module (entry point) of the package, relative to the <code>path</code>. You should not include the file extension. <code>.js</code> will be appended automatically.</li>
+<li><code>main</code> - This is the main module (entry point) of the package, relative to the <code>path</code>. You should not include the file extension. <code>.js</code> will be appended automatically. Set <code>main</code> to <code>false</code> when the package does not have a main file.</li>
 </ul>
 <div class="info"><div class="icon"> <i></i> </div><h4>Environment-Specific Dependencies</h4><p>
 We've also shown how to use the <code>env</code> setting on a dependency. This can be used on any dependency in the bundle to indicate what environment builds the dependency should be included in. By default, dependencies are included in all builds. The example above shows how to include the library only in builds targeting the &quot;dev&quot; environment. You can also specify multiple environments like <code>dev &amp; stage</code>.</p>
@@ -183,7 +182,7 @@ We've also shown how to use the <code>env</code> setting on a dependency. This c
         <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"jquery"</span><span class="token punctuation">,</span>
         <span class="token string">"path"</span><span class="token punctuation">:</span><span class="token string">"../node_modules/jquery/dist"</span><span class="token punctuation">,</span>
         <span class="token string">"main"</span><span class="token punctuation">:</span><span class="token string">"jquery.min"</span><span class="token punctuation">,</span>
-        <span class="token string">"export"</span><span class="token punctuation">:</span> <span class="token string">"$"</span>
+        <span class="token string">"exports"</span><span class="token punctuation">:</span> <span class="token string">"$"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
           <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap"</span><span class="token punctuation">,</span>
@@ -197,7 +196,7 @@ We've also shown how to use the <code>env</code> setting on a dependency. This c
 <ul>
 <li><code>name</code> - This is the name of the library as you will import it in your JavaScript or TypeScript code.</li>
 <li><code>path</code> - This is a path to the folder where the package's source is located. This path is relative to your application's <code>src</code> folder.</li>
-<li><code>main</code> - This is the main module (entry point) of the package, relative to the <code>path</code>. You should not include the file extension. <code>.js</code> will be appended automatically.</li>
+<li><code>main</code> - This is the main module (entry point) of the package, relative to the <code>path</code>. You should not include the file extension. <code>.js</code> will be appended automatically.  Set <code>main</code> to <code>false</code> when the package does not have a main file.</li>
 <li><code>deps</code> - This is an array of dependencies which must be loaded and available before the legacy library can be evaluated.</li>
 <li><code>exports</code> - This is the name of the global variable that should be used as the exported value of the module.</li>
 </ul>
@@ -212,7 +211,7 @@ We are using the <code>exports</code> property to export the jQuery object since
         <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"jquery"</span><span class="token punctuation">,</span>
         <span class="token string">"path"</span><span class="token punctuation">:</span><span class="token string">"../node_modules/jquery/dist"</span><span class="token punctuation">,</span>
         <span class="token string">"main"</span><span class="token punctuation">:</span><span class="token string">"jquery.min"</span><span class="token punctuation">,</span>
-        <span class="token string">"export"</span><span class="token punctuation">:</span> <span class="token string">"$"</span>
+        <span class="token string">"exports"</span><span class="token punctuation">:</span> <span class="token string">"$"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
           <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap"</span><span class="token punctuation">,</span>
@@ -340,7 +339,7 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
 <pre><code>aurelia.use.standardConfiguration().plugin('@scope/packagename');
 </code></pre>
 <h3>Reference packages outside of the node_modules folder</h3>
-<p>It is possible to use packages outside of the node_modules folder. The only difference is that you need te define what the <code>packageRoot</code> is. In <code>aurelia.json</code>, you can define a package that lives outside of the node_modules folder as follows:</p>
+<p>It is possible to use packages outside of the node_modules folder. The only difference is that you need to define what the <code>packageRoot</code> is. In <code>aurelia.json</code>, you can define a package that lives outside of the node_modules folder as follows:</p>
 <code-listing heading="Package outside of node_modules">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
     dependencies<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
@@ -430,9 +429,36 @@ Steps:</p>
 <ul>
 <li>List the libraries on a single line separated by a space.</li>
 <li>Include all of the libraries from the dependencies section of aurelia.json that you want to update.</li>
-<li>Use the command <code>npm run au-update</code> to update all of the libraries in the au-update list above.
-</propertygroup></typescriptcompileblocked></li>
+<li>Use the command <code>npm run au-update</code> to update all of the libraries in the au-update list above.</li>
 </ul>
+</section>
+<section><h2 id="javascript-minification">Javascript Minification</h2><p>The CLI will minify Javascript out of the box for the staging and production environments:</p>
+<code-listing heading="Default minification settings">
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"options"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span><span class="token punctuation">,</span>
+      <span class="token string">"sourcemaps"</span><span class="token punctuation">:</span> <span class="token string">"dev &amp; stage"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
+</code-listing>
+<p>These options can be found in the <code>&quot;build&quot;.&quot;options&quot;</code> section of <code>aurelia.json</code>. If you wish to specify the options that are used in the minification process, then replace <code>&quot;minify&quot;: &quot;stage &amp; prod&quot;</code> with:</p>
+<code-listing heading="Default minification settings">
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"dev"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token string">"default"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"indent_level"</span><span class="token punctuation">:</span> <span class="token number">2</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">"stage &amp; prod"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"max-line-len"</span><span class="token punctuation">:</span> <span class="token number">100000</span>
+      <span class="token punctuation">}</span> 
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The Aurelia-CLI uses 
+<a href="https://github.com/mishoo/UglifyJS2" target="_blank">UglifyJS2</a>
+ for minification, so any option that UglifyJS2 supports is also supported by the Aurelia-CLI. With the above configuration, minification will occur for the <code>stage</code> and <code>prod</code> environments, but not for the <code>dev</code> environment. For the <code>stage</code> and <code>prod</code> environments, both the <code>indent_level</code> as well as the <code>max-line-len</code> option are passed to the minifier. The <code>default</code> key is optional, but allows you to reduce code duplication when multiple environments have similar options.
+</library></library></propertygroup></typescriptcompileblocked></p>
 </section>
 
   </article>

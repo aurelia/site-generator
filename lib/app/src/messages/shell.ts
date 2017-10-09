@@ -5,7 +5,7 @@ export class ActivateTab {
 }
 
 export class ActivateScreen {
-  constructor(public screen: any) {}
+  constructor(public screen: any, public fragment?: string) {}
 }
 
 export class ActivateSection {

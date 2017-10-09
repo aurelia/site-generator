@@ -591,6 +591,20 @@ Class used to configure a [[Router]] instance.
 ## Interfaces
 
 
+### ActivationStrategy
+
+An optional interface describing the available activation strategies.
+
+#### Properties
+
+* `invokeLifecycle: ` - Reuse the existing view model, invoking Router lifecycle hooks.
+* `noChange: ` - Reuse the existing view model, without invoking Router lifecycle hooks.
+* `replace: ` - Replace the existing view model, invoking Router lifecycle hooks.
+
+#### Methods
+
+
+
 ### ConfiguresRouter
 
 An optional interface describing the router configuration convention.
@@ -808,7 +822,7 @@ An optional interface describing the determineActivationStrategy convention.
 #### Methods
 
 
-* `determineActivationStrategy(params: any, routeConfig: RouteConfig, navigationInstruction: NavigationInstruction): string` - Implement this hook if you want to give hints to the router about the activation strategy, when reusing
+* `determineActivationStrategy(params: any, routeConfig: RouteConfig, navigationInstruction: NavigationInstruction): ` - Implement this hook if you want to give hints to the router about the activation strategy, when reusing
 a view model for different routes. Available values are &#x27;replace&#x27; and &#x27;invoke-lifecycle&#x27;.
   * `params: any` - No description available.
   * `routeConfig: RouteConfig` - No description available.
@@ -822,7 +836,7 @@ A configuration object that describes a route.
 
 #### Properties
 
-* `activationStrategy: string` - Add to specify an activation strategy if it is always the same and you do not want that
+* `activationStrategy: ` - Add to specify an activation strategy if it is always the same and you do not want that
 to be in your view-model code. Available values are &#x27;replace&#x27; and &#x27;invoke-lifecycle&#x27;.
 * `caseSensitive: boolean` - When true is specified, this route will be case sensitive.
 * `generationUsesHref: boolean` - Indicates that when route generation is done for this route, it should just take the literal value of the href property.
@@ -859,7 +873,7 @@ specifying the moduleId to load into that viewPort.  The values may optionally i
 
 ## Constants
 
-* `activationStrategy: any` - The strategy to use when activating modules during navigation.
+* `activationStrategy: ActivationStrategy` - The strategy to use when activating modules during navigation.
 * `pipelineStatus: any` - The status of a Pipeline.
 
 ## Functions

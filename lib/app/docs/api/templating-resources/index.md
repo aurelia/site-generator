@@ -171,9 +171,7 @@ Used to compose a new view / view-model template or bind to an existing instance
 
 
 
-* `unbind(bindingContext?: any, overrideContext?: any): any` - Unbinds the Compose.
-  * `bindingContext?: any` - No description available
-  * `overrideContext?: any` - No description available
+* `unbind(): any` - Unbinds the Compose.
 
 
 * `viewChanged(newValue?: any, oldValue?: any): any` - Invoked everytime the bound view changes.
@@ -211,6 +209,25 @@ No description available.
 
 
 
+### Else
+
+No description available.
+
+#### Properties
+
+
+#### Methods
+
+
+* `bind(bindingContext?: any, overrideContext?: any): any` - 
+  * `bindingContext?: any` - No description available
+  * `overrideContext?: any` - No description available
+
+
+* `unbind(): any` - 
+
+
+
 ### Focus
 
 CustomAttribute that binds provided DOM element&#x27;s focus attribute with a property on the viewmodel.
@@ -225,6 +242,10 @@ CustomAttribute that binds provided DOM element&#x27;s focus attribute with a pr
 
 
 * `detached(): any` - Invoked when the attribute is detached from the DOM.
+
+
+* `handleEvent(e?: any): any` - 
+  * `e?: any` - No description available
 
 
 * `valueChanged(newValue?: any): any` - Invoked everytime the bound value changes.
@@ -280,6 +301,8 @@ Binding to conditionally include or not include template logic depending on retu
 
 #### Properties
 
+* `condition: any` - No description available.
+* `swapOrder: ` - No description available.
 
 #### Methods
 
@@ -290,12 +313,31 @@ Binding to conditionally include or not include template logic depending on retu
 
 
 
-* `unbind(): any` - Unbinds the if
-
-
-* `valueChanged(newValue?: any): any` - Invoked everytime value property changes.
+* `conditionChanged(newValue?: any): any` - Invoked everytime value property changes.
   * `newValue?: any` - The new value
 
+
+
+* `unbind(): any` - 
+
+
+
+### IfCore
+
+For internal use only. May change without warning.
+
+#### Properties
+
+
+#### Methods
+
+
+* `bind(bindingContext?: any, overrideContext?: any): any` - 
+  * `bindingContext?: any` - No description available
+  * `overrideContext?: any` - No description available
+
+
+* `unbind(): any` - 
 
 
 
@@ -586,8 +628,8 @@ A strategy for repeating a template over a Set.
 
 
 * `instanceMutated(repeat?: any, set?: any, records?: any): any` - Handle changes in a Set collection.
-  * `repeat?: any` - No description available
-  * `set?: any` - No description available
+  * `repeat?: any` - The repeat instance.
+  * `set?: any` - The underlying Set collection.
   * `records?: any` - The change records.
 
 

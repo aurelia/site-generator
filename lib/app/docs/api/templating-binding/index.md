@@ -154,6 +154,13 @@ No description available.
   * `existingInstruction?: any` - No description available
 
 
+* `from-view(resources?: any, element?: any, info?: any, existingInstruction?: any): any` - 
+  * `resources?: any` - No description available
+  * `element?: any` - No description available
+  * `info?: any` - No description available
+  * `existingInstruction?: any` - No description available
+
+
 * `handleUnknownCommand(resources?: any, element?: any, info?: any, existingInstruction?: any, context?: any): any` - 
   * `resources?: any` - No description available
   * `element?: any` - No description available
@@ -177,19 +184,19 @@ No description available.
   * `existingInstruction?: any` - No description available
 
 
-* `one-way(resources?: any, element?: any, info?: any, existingInstruction?: any): any` - 
-  * `resources?: any` - No description available
-  * `element?: any` - No description available
-  * `info?: any` - No description available
-  * `existingInstruction?: any` - No description available
-
-
 * `options(resources?: any, element?: any, info?: any, existingInstruction?: any, context?: any): any` - 
   * `resources?: any` - No description available
   * `element?: any` - No description available
   * `info?: any` - No description available
   * `existingInstruction?: any` - No description available
   * `context?: any` - No description available
+
+
+* `to-view(resources?: any, element?: any, info?: any, existingInstruction?: any): any` - 
+  * `resources?: any` - No description available
+  * `element?: any` - No description available
+  * `info?: any` - No description available
+  * `existingInstruction?: any` - No description available
 
 
 * `trigger(resources?: any, element?: any, info?: any): any` - 

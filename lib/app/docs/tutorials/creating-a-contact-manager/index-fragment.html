@@ -131,6 +131,9 @@ Before proceeding any further, please make sure you are familiar with the concep
 <p>Next, because Bootstrap uses jQuery, we want to install jQuery as well, like this:</p>
 <pre><code>npm install jquery@^2.2.4 --save
 </code></pre>
+<blockquote>
+<p>Whenever you install new dependencies used in your app, make sure to restart the <code>au run</code> or respectivley the <code>au run --watch</code> command, in order to have the CLI rebundle your freshly added dependecies.</p>
+</blockquote>
 <p>With these libraries installed, we now need to tell Aurelia which application bundle they should be included in and how to properly configure them with the module system. To do this, look in the <code>aurelia_project</code> folder and open up the <code>aurelia.json</code> file. This file contains all the information that the Aurelia CLI uses to build our project. If you scroll down, you will see a <code>bundles</code> section. There are two bundles defined by default: <code>app-bundle.js</code>, which contains your code and <code>vendor-bundle.js</code> which contains all 3rd party libraries. We need to add some new items to the <code>dependencies</code> array of the <code>vendor-bundle.js</code> bundle. Add the following two entries for jQuery and Bootstrap:</p>
 <code-listing heading="jQuery and Bootstrap Bundle Config">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
@@ -152,6 +155,7 @@ Before proceeding any further, please make sure you are familiar with the concep
   </code></pre></source-code>
 </code-listing>
 <p>You can read more about configuring 3rd party libraries in the documentation on the Aurelia CLI. For now, just know that this causes jQuery, Bootstrap and all necessary CSS to be included in the vendor bundle and makes it reachable through the module system.</p>
+<p>After you have modified the aurelia.json file, it is necessary to restart the <code>au run --watch</code> process in order for the changes to be picked up.</p>
 </section>
 <section><h2 id="building-out-the-default-route">Building Out the Default Route</h2><p>If you run the application now, you'll see a blank screen and the browser's console will display the following message:</p>
 <pre><code>Failed to load resource: the server responded with a status of 404 (Not Found) http://localhost:9000/src/no-selection.js

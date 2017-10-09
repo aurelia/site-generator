@@ -1051,12 +1051,9 @@ However this can also be used to implement logic for <em>attaching the component
 <div class="warning"><div class="icon"> <i></i> </div><p>
 PushState requires server-side support. Don't forget to configure your server appropriately.</p>
 </div>
-<h3>Reusing an existing VM</h3>
-<p>Since the VM's navigation life-cycle is called only once you may have problems recognizing that the user switched the route from <code>Product A</code> to <code>Product B</code> (see below).  To work around this issue implement the method <code>determineActivationStrategy</code> in your VM and return hints for the router about what you'd like to happen.</p>
-<div class="info"><div class="icon"> <i></i> </div><p>
-Additionally, you can add an <code>activationStrategy</code> property to your route config if the strategy is always the same and you don't want that to be in your view-model code. Available values are <code>replace</code> and <code>invoke-lifecycle</code>. Remember, &quot;lifecycle&quot; refers to the navigation lifecycle.</p>
-</div>
-<code-listing heading="Router VM Activation Control">
+<h3>Reusing an Existing View Model</h3>
+<p>Since the view model's navigation lifecycle is called only once, you may have problems recognizing that the user switched the route from <code>Product A</code> to <code>Product B</code> (see below). To work around this issue implement the method <code>determineActivationStrategy</code> in your view model and return hints for the router about what you'd like to happen. Available return values are <code>replace</code> and <code>invoke-lifecycle</code>. Remember, &quot;lifecycle&quot; refers to the navigation lifecycle.</p>
+<code-listing heading="Router View Model Activation Control">
   <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token comment" spellcheck="true">//app.js</span>
 
@@ -1075,7 +1072,7 @@ Additionally, you can add an <code>activationStrategy</code> property to your ro
     <span class="token keyword">import</span> <span class="token punctuation">{</span>activationStrategy<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
-      <span class="token function">determineActivationStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">determineActivationStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> activationStrategy<span class="token punctuation">.</span>replace<span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
@@ -1097,15 +1094,18 @@ Additionally, you can add an <code>activationStrategy</code> property to your ro
 
     <span class="token comment" spellcheck="true">//product.ts</span>
 
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>activationStrategy<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>activationStrategy<span class="token punctuation">,</span> RoutableComponentDetermineActivationStrategy<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
-      <span class="token function">determineActivationStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token keyword">implements</span> <span class="token class-name">RoutableComponentDetermineActivationStrategy</span> <span class="token punctuation">{</span>
+      <span class="token function">determineActivationStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> activationStrategy<span class="token punctuation">.</span>replace<span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Alternatively, if the strategy is always the same and you don't want that to be in your view model code, you can add the <code>activationStrategy</code> property to your route config instead.</p>
+</div>
 <h3>Rendering multiple ViewPorts</h3>
 <div class="info"><div class="icon"> <i></i> </div><p>
 If you don't name a <code>router-view</code>, it will be available under the name <code>'default'</code>.</p>

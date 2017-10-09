@@ -890,6 +890,21 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
       }
       ...
 </code></pre>
+<p>and inlcude the json extension in the loader plugin part build/loader/plugins/extensions</p>
+<pre><code class="language-json">     ...
+     &quot;plugins&quot;: [
+        {
+          &quot;name&quot;: &quot;text&quot;,
+          &quot;extensions&quot;: [
+            &quot;.html&quot;,
+            &quot;.css&quot;,
+            &quot;.json&quot;
+          ],
+          &quot;stub&quot;: true
+        }
+      ]
+      ...
+</code></pre>
 </section>
 <section><h2 id="internationalization-api-polyfill">Internationalization API Polyfill</h2><p>The plugin leverages the JavaScript Internationalization API to perform certain tasks. Since not all browsers do fully support it (
 <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl#Browser_compatibility" target="_blank">compatibility table</a>

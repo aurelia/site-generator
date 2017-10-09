@@ -26,12 +26,22 @@ An implementation of the basic history API.
 * `getAbsoluteRoot(): string` - Returns the fully-qualified root of the current history object.
 
 
+* `getState(key: string): any` - Gets a key in the history page state.
+  * `key: string` - The key for the value.
+
+
 * `navigate(fragment?: string, undefined?: any): boolean` - Causes a history navigation to occur.
   * `fragment?: string` - The history fragment to navigate to.
   * `undefined?: any` - No description available
 
 
 * `navigateBack(): void` - Causes the history state to navigate back.
+
+
+* `setState(key: string, value: any): void` - Sets a key in the history page state.
+  * `key: string` - The key for the value.
+  * `value: any` - The value to set.
+
 
 
 * `setTitle(title: string): void` - Sets the document title.
