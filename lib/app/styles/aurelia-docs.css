@@ -1256,15 +1256,14 @@ pre[class*="language-"] {
 
 .home-screen .video-zone {
   background-image: linear-gradient(to top, #6d50a2, #ed2b88);
-  padding: 32px 0;
+  padding: 32px;
   display: flex; }
   .home-screen .video-zone .video-wrapper {
     width: 50%;
-    display: flex;
-    justify-content: center;
-    margin: 32px;
-    padding-bottom: 27%;
-    position: relative; }
+    position: relative;
+    padding-bottom: 28.125%;
+    /* 16:9 */
+    height: auto; }
     .home-screen .video-zone .video-wrapper iframe {
       position: absolute;
       top: 0;
@@ -1274,11 +1273,9 @@ pre[class*="language-"] {
       box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2); }
   .home-screen .video-zone .quote-wrapper {
     width: 50%;
-    margin: 0 32px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
+    padding: 32px;
+    align-self: center;
+    color: white; }
     .home-screen .video-zone .quote-wrapper blockquote {
       font-size: 36px;
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
