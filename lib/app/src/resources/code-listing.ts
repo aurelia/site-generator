@@ -8,10 +8,19 @@ import {Configuration} from '../configuration';
 export class CodeListing {
   @bindable heading = null;
   
-  code: HTMLDivElement;
   availableSources: SourceCode[] = null;
   selectedSource: SourceCode = null;
   subscription;
+
+  _code: HTMLDivElement;
+
+  get code() : HTMLDivElement {
+    if (!this._code) {
+      this._code = <HTMLDivElement>this.element.getElementsByClassName('code-container')[0];
+    }
+
+    return this._code;
+  }
 
   constructor(private config: Configuration, private element: Element, instruction: TargetInstruction) {
     this.availableSources = instruction.elementInstruction['availableSources'];
