@@ -8,7 +8,8 @@ import {
   ViewLocator, 
   ViewFactory, 
   SwapStrategies, 
-  customAttribute
+  customAttribute,
+  processContent
 } from 'aurelia-templating';
 
 let compileInstruction = {
@@ -21,6 +22,7 @@ let processedIntialContent = false;
 
 @inject(Element, Container, TemplatingEngine, ViewLocator, ViewEngine, ViewSlot)
 @customAttribute('screen-activator')
+@processContent(false)
 export class ScreenActivator {
   value: any = null;
 
