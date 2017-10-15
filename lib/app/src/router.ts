@@ -28,10 +28,6 @@ export class Router {
       routeHandler: this.loadUrl.bind(this) 
     });
 
-    this.ea.subscribe(ActivateScreen, (msg:ActivateScreen) => {
-      this.fragment = msg.fragment;
-    });
-
     this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
       this.main.scrollTop = findPosition(document.getElementById(msg.id)) - offset;
 
@@ -39,7 +35,7 @@ export class Router {
         this.replaceFragment(msg.id);
       }
 
-      this.spy();
+      setTimeout(() => this.spy(), 16);
     });
 
     this.main.addEventListener('scroll', () => {
@@ -48,7 +44,7 @@ export class Router {
   }
 
   loadUrl(url: string) {
-    let fragment = window.location.hash.substring(1) || '';
+    let fragment = this.fragment = window.location.hash.substring(1) || '';
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
     
     if (url.indexOf('help') !== -1) {
