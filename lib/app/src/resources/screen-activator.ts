@@ -8,9 +8,7 @@ import {
   ViewLocator, 
   ViewFactory, 
   SwapStrategies, 
-  processContent, 
-  bindable,
-  noView
+  customAttribute
 } from 'aurelia-templating';
 
 let compileInstruction = {
@@ -22,14 +20,13 @@ let compileInstruction = {
 let processedIntialContent = false;
 
 @inject(Element, Container, TemplatingEngine, ViewLocator, ViewEngine, ViewSlot)
-@processContent(false)
-@noView()
+@customAttribute('screen-activator')
 export class ScreenActivator {
-  @bindable activeScreen: any = null;
+  value: any = null;
 
   constructor(private element: HTMLElement, private container: Container, private templatingEngine: TemplatingEngine, private viewLocator: ViewLocator, private viewEngine: ViewEngine, private viewSlot: ViewSlot) { }
 
-  activeScreenChanged(newValue) {
+  valueChanged(newValue) {
     if (!newValue) {
       return;
     }

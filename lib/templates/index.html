@@ -23,9 +23,9 @@
   </header>
 
   <main ref="main">
-    <screen-activator active-screen.bind="activeScreen" screen-activated.trigger="onScreenActivated()">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
       {{{content}}}
-    </screen-activator>
+    </div>
 
     <footer class="content-footer" id="app-footer">
       <div class="links">
