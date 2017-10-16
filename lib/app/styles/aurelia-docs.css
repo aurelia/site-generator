@@ -268,7 +268,8 @@ footer.content-footer {
   padding: 48px;
   background-color: #6d50a2;
   color: #fff;
-  transition: margin-left .2s; }
+  transition: margin-left .2s;
+  margin-top: 180px; }
   footer.content-footer.with-sidebar {
     margin-left: 325px; }
   footer.content-footer a {
@@ -1077,8 +1078,8 @@ no-search-results {
       margin-left: 50px;
       line-height: 1.5em; }
 
-.api-search-area {
-  margin: 32px 128px; }
+section.article article.api-search-area {
+  margin: 128px; }
 
 .search-results {
   overflow-y: auto; }

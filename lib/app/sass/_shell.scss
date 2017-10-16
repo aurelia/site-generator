@@ -54,6 +54,7 @@ footer.content-footer {
   background-color: $primary-color;
   color: $white;
   transition: margin-left .2s;
+  margin-top: 180px;
 
   &.with-sidebar {
     margin-left: $sidebar-width;

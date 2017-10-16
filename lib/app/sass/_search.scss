@@ -111,8 +111,10 @@ no-search-results {
   }
 }
 
-.api-search-area {
-  margin: 32px 128px
+section.article {
+  article.api-search-area {
+    margin: 128px;
+  }
 }
 
 .search-results {
