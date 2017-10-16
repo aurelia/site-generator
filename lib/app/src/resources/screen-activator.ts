@@ -26,7 +26,9 @@ let processedIntialContent = false;
 export class ScreenActivator {
   value: any = null;
 
-  constructor(private element: HTMLElement, private container: Container, private templatingEngine: TemplatingEngine, private viewLocator: ViewLocator, private viewEngine: ViewEngine, private viewSlot: ViewSlot) { }
+  constructor(private element: HTMLElement, private container: Container, 
+    private templatingEngine: TemplatingEngine, private viewLocator: ViewLocator, 
+    private viewEngine: ViewEngine, private viewSlot: ViewSlot) { }
 
   valueChanged(newValue) {
     if (!newValue) {
@@ -81,7 +83,9 @@ export class ScreenActivator {
   }
 
   fireScreenActivated() {
-    let evt = DOM.createCustomEvent('screen-activated', { bubbles: true, cancelable: false });
-    this.element.dispatchEvent(evt);
+    setTimeout(() => {
+      let evt = DOM.createCustomEvent('screen-activated', { bubbles: true, cancelable: false });
+      this.element.dispatchEvent(evt);
+    }, 100);
   }
 }

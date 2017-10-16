@@ -35,7 +35,7 @@ export class Router {
         this.replaceFragment(msg.id);
       }
 
-      setTimeout(() => this.spy(), 16);
+      this.spy();
     });
 
     this.main.addEventListener('scroll', () => {
@@ -93,10 +93,7 @@ export class Router {
   }
 
   onScreenActivated() {
-    let nodeList = document.querySelectorAll('side-bar-view.active ul li a');
-    let ary = Array.prototype.slice.call(nodeList);
-    
-    this.items = getItems(ary);
+    this.populateItems();
 
     if (this.fragment) {
       this.ea.publish(new ActivateSection(this.fragment, false));
@@ -104,6 +101,12 @@ export class Router {
       this.main.scrollTop = 0;
       this.spy();
     }
+  }
+
+  private populateItems() {
+    let nodeList = document.querySelectorAll('side-bar-view.active ul li a');
+    let ary = Array.prototype.slice.call(nodeList);
+    this.items = getItems(ary);
   }
 
   private replaceFragment(fragment) {
