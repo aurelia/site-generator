@@ -53,12 +53,6 @@ export class ScreenActivator {
       
       (<any>this.viewSlot).children.push(view);
 
-      //HACK: This should be part of the enhance logic...
-      (<any>view).firstChild = (<any>view).lastChild = view.fragment;
-      view.fragment = document.createDocumentFragment();
-      view.attached();
-      //HACK
-
       this.fireScreenActivated();
       return;
     }
