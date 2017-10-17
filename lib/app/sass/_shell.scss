@@ -175,6 +175,12 @@ main {
   right: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .screen-activator {
+    flex: 1 0 auto;
+  }
 }
 
 @media only screen and (max-width : $sidebar-max-width) {

@@ -347,7 +347,11 @@ main {
   bottom: 0;
   right: 0;
   overflow-y: auto;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column; }
+  main .screen-activator {
+    flex: 1 0 auto; }
 
 @media only screen and (max-width: 710px) {
   footer.content-footer.with-sidebar {

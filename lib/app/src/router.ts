@@ -16,6 +16,8 @@ export class Router {
   items: any[];
   fragment: string;
   main: HTMLElement;
+  scrollGuard = false;
+  scrollHooked = false;
 
   constructor(private config: Configuration, private container: Container, private history: History, private ea: EventAggregator) {}
 
@@ -29,16 +31,34 @@ export class Router {
     });
 
     this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
+      this.scrollGuard = true;
+
       this.main.scrollTop = findPosition(document.getElementById(msg.id)) - offset;
 
       if (msg.replaceFragment) {
         this.replaceFragment(msg.id);
       }
 
+      console.log('activate section');
+
       this.spy();
+
+      setTimeout(() => this.scrollGuard = false, 16);
     });
+  }
+
+  ensureScrollHooked() {
+    if (this.scrollHooked) {
+      return;
+    }
+
+    this.scrollHooked = true;
 
     this.main.addEventListener('scroll', () => {
+      if (this.scrollGuard) {
+        return;
+      }
+
       this.spy();
     });
   }
@@ -46,6 +66,8 @@ export class Router {
   loadUrl(url: string) {
     let fragment = this.fragment = window.location.hash.substring(1) || '';
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
+
+    console.log('load url', url, fragment);
     
     if (url.indexOf('help') !== -1) {
       let helpToc = this.config.help;
@@ -93,20 +115,25 @@ export class Router {
   }
 
   onScreenActivated() {
+    console.log('screen activated');
+
     this.populateItems();
 
     if (this.fragment) {
       this.ea.publish(new ActivateSection(this.fragment, false));
     } else {
-      this.main.scrollTop = 0;
       this.spy();
     }
   }
 
   private populateItems() {
+    this.main.scrollTop = 0;
+
     let nodeList = document.querySelectorAll('side-bar-view.active ul li a');
     let ary = Array.prototype.slice.call(nodeList);
     this.items = getItems(ary);
+
+    console.log('populated items', this.items);
   }
 
   private replaceFragment(fragment) {
@@ -115,6 +142,10 @@ export class Router {
 
   private spy() {
     let find = -1;
+
+    if (!this.items || !this.items.length) {
+      return;
+    }
   
     for (var i = 0, l = this.items.length; i < l; i++) {
       if (this.main.scrollTop > this.items[i].top - offset) {
@@ -130,6 +161,8 @@ export class Router {
       this.items[find].elem.parentElement.classList.add('active');
       this.replaceFragment(this.items[find].id);
     }
+
+    this.ensureScrollHooked();
   }
 }
 
