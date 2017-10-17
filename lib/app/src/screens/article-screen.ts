@@ -21,7 +21,6 @@ class ArticleContext {
     }; 
   }
 
-
   @computedFrom('config.activeLanguage')
   get language() {
     return this.availableLanguages[this.config.activeLanguage];
