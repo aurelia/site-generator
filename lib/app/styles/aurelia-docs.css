@@ -486,6 +486,8 @@ section.article-group-root {
       section.article-group-root .group .group-summary .group-learn {
         color: #ed2b88;
         text-decoration: none; }
+        section.article-group-root .group .group-summary .group-learn:hover {
+          text-decoration: underline; }
     section.article-group-root .group .group-details {
       background: rgba(238, 240, 247, 0.43);
       border-radius: 6px;
@@ -502,6 +504,8 @@ section.article-group-root {
             text-decoration: none;
             font-size: 16px;
             color: inherit; }
+          section.article-group-root .group .group-details .group-items li a:hover {
+            text-decoration: underline; }
   section.article-group-root .carousel {
     margin-bottom: 24px; }
     section.article-group-root .carousel .carousel-inner {
@@ -528,13 +532,20 @@ section.article-group-root {
           font-size: 22px;
           line-height: 24px; }
         section.article-group-root .carousel .carousel-inner .carousel-item a {
+          padding: 10px 13px;
+          text-align: center;
+          font-size: 16px;
           text-decoration: none;
           color: #fff;
           border: 1px solid #fff;
           border-radius: 4px;
-          padding: 6px;
+          transition: box-shadow .3s;
           float: right;
           margin-top: 16px; }
+          section.article-group-root .carousel .carousel-inner .carousel-item a:hover {
+            box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+          section.article-group-root .carousel .carousel-inner .carousel-item a:active {
+            box-shadow: none; }
 
 section.article-group section ul.article-list li {
   margin: 32px 48px;
@@ -542,6 +553,8 @@ section.article-group section ul.article-list li {
   border-radius: 6px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   display: flex; }
+  section.article-group section ul.article-list li:hover {
+    border: 1px solid #6d50a2; }
   section.article-group section ul.article-list li a {
     text-decoration: none;
     display: inline-block;
@@ -1245,15 +1258,18 @@ pre[class*="language-"] {
     .home-screen .get-started-banner h1 strong {
       font-weight: bold; }
   .home-screen .get-started-banner a {
-    background: #fff;
-    color: #ed2b88;
-    border: 1px solid #ed2b88;
     padding: 10px 13px;
-    border-radius: 3px;
     text-align: center;
-    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
     text-decoration: none;
-    font-size: 16px; }
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    transition: box-shadow .3s; }
+    .home-screen .get-started-banner a:hover {
+      box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+    .home-screen .get-started-banner a:active {
+      box-shadow: none; }
 
 .home-screen .video-zone {
   background-image: linear-gradient(to top, #6d50a2, #ed2b88);

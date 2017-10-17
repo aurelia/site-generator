@@ -31,3 +31,22 @@ $token-comment: slategray;
 $tokens-color: #333;
 $tokens-bg: #f7f7f7;
 $code-background: #FCFCFC;
+
+@mixin button() {
+  padding: 10px 13px;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  color: $white;
+  border: 1px solid $white;
+  border-radius: 4px;
+  transition: box-shadow .3s;
+  
+  &:hover {
+    box-shadow: 0 7px 10px rgba(0,0,0,.2);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}

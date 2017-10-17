@@ -62,6 +62,10 @@ section.article-group-root {
       .group-learn {
         color: $accent-color;
         text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
@@ -84,6 +88,10 @@ section.article-group-root {
             text-decoration: none;
             font-size: 16px;
             color: inherit;
+          }
+
+          a:hover {
+            text-decoration: underline;
           }
         }
       }
@@ -123,11 +131,8 @@ section.article-group-root {
         }
 
         a {
-          text-decoration: none;
-          color: $white;
-          border: 1px solid $white;
-          border-radius: 4px;
-          padding: 6px;
+          @include button();
+
           float: right;
           margin-top: 16px;
         }
@@ -145,6 +150,10 @@ section.article-group {
         border-radius: $border-radius;
         border: 1px solid rgba(0, 0, 0, 0.12);
         display: flex;
+
+        &:hover {
+          border: 1px solid $primary-color;
+        }
 
         a {
           text-decoration: none;
