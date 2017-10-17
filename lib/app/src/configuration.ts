@@ -1,6 +1,6 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {autoinject} from 'aurelia-dependency-injection';
-import {observable} from 'aurelia-binding';
+import {observable, computedFrom} from 'aurelia-binding';
 import {ActiveLanguageChanged} from './messages/shell';
 
 export interface DocItem extends Location {
@@ -24,7 +24,21 @@ export class Configuration {
     'TypeScript'
   ];
 
+  availableExtensions = [
+    '.js',
+    '.ts'
+  ];
+
   @observable activeLanguage: string = this.retrieveLanguagePreference();  
+
+  @computedFrom('activeLanguage')
+  get language() {
+    let index = this.availableLanguages.indexOf(this.activeLanguage);
+    return {
+      name: this.activeLanguage,
+      fileExtension: this.availableExtensions[index]
+    }
+  }
 
   public help: DocItem;
   public blog: DocItem;
