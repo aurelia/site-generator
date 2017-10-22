@@ -22,7 +22,7 @@
   
   <ul>
     <li repeat.for="item of menu.items" class="${menu.activeItem === item ? 'active' : ''}">
-      <a click.trigger="menu.select(item)" href="#${item.id}">${item.name}</a>
+      <a click.trigger="menu.select(item)" href="${item.dest ? item.dest : '#' + item.id}">${item.name}</a>
     </li>
   </ul>
 </template>

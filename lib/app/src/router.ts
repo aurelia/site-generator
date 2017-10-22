@@ -6,6 +6,7 @@ import {ArticleScreen} from './screens/article-screen';
 import {APIScreen} from './screens/api-screen';
 import {HomeScreen} from './screens/home-screen';
 import {BlogScreen} from './screens/blog-screen';
+import {NotFoundScreen} from './screens/not-found';
 import {Configuration} from './configuration';
 
 const offset = 64;
@@ -39,8 +40,6 @@ export class Router {
         this.replaceFragment(msg.id);
       }
 
-      console.log('activate section');
-
       this.spy();
 
       setTimeout(() => this.scrollGuard = false, 16);
@@ -67,8 +66,6 @@ export class Router {
     let fragment = this.fragment = window.location.hash.substring(1) || '';
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
-    console.log('load url', url, fragment);
-    
     if (url.indexOf('help') !== -1) {
       let helpToc = this.config.help;
       this.ea.publish(new ActivateTab('help'));
@@ -105,7 +102,9 @@ export class Router {
   }
 
   navigateToNotFound() {
-    this.navigateToHome();
+    this.ea.publish(new ActivateTab('article'));
+    this.ea.publish(new ActivateScreen(this.container.get(NotFoundScreen)));
+    this.ea.publish(new ShowMenu(this.config.findToCItem('docs')));
   }
 
   navigateToHome() {
@@ -115,8 +114,6 @@ export class Router {
   }
 
   onScreenActivated() {
-    console.log('screen activated');
-
     this.populateItems();
 
     if (this.fragment) {
@@ -132,8 +129,6 @@ export class Router {
     let nodeList = document.querySelectorAll('side-bar-view.active ul li a');
     let ary = Array.prototype.slice.call(nodeList);
     this.items = getItems(ary);
-
-    console.log('populated items', this.items);
   }
 
   private replaceFragment(fragment) {
