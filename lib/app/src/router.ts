@@ -66,17 +66,19 @@ export class Router {
     let fragment = this.fragment = window.location.hash.substring(1) || '';
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
-    if (url.indexOf('help') !== -1) {
+    if (url === 'help') {
       let helpToc = this.config.help;
       this.ea.publish(new ActivateTab('help'));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
-    } else if (url.indexOf('blog') !== -1) {
+    } else if (url === 'blog') {
       //TODO: Implement Blog. Currently the sidebar links to Ghost.
       this.ea.publish(new ActivateTab('blog'));
       this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
       this.ea.publish(new HideMenu());
-    } else if (url.indexOf('docs') !== -1) {
+    } else if (url === '' || url === 'home') {
+      this.navigateToHome();
+    } else if (url.indexOf('docs') === 0) {
       if (url.indexOf('api') !== -1) {
         let matchedAPI = this.config.findApiItem(url);
         if (matchedAPI) {
@@ -97,14 +99,14 @@ export class Router {
         }
       }
     } else {
-      this.navigateToHome();
+      this.navigateToNotFound();
     }
   }
 
   navigateToNotFound() {
-    this.ea.publish(new ActivateTab('article'));
+    this.ea.publish(new ActivateTab(''));
     this.ea.publish(new ActivateScreen(this.container.get(NotFoundScreen)));
-    this.ea.publish(new ShowMenu(this.config.findToCItem('docs')));
+    this.ea.publish(new HideMenu());
   }
 
   navigateToHome() {
