@@ -71,11 +71,13 @@ export class Router {
       this.ea.publish(new ActivateTab('help'));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
+      this.history.setTitle('Help | Aurelia');
     } else if (url === 'blog') {
       //TODO: Implement Blog. Currently the sidebar links to Ghost.
       this.ea.publish(new ActivateTab('blog'));
       this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
       this.ea.publish(new HideMenu());
+      this.history.setTitle('Blog | Aurelia');
     } else if (url === '' || url === 'home') {
       this.navigateToHome();
     } else if (url.indexOf('docs') === 0) {
@@ -85,6 +87,7 @@ export class Router {
           this.ea.publish(new ActivateTab('api'));
           this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, url)));
           this.ea.publish(new ShowMenu(matchedAPI));
+          this.history.setTitle(`${matchedAPI.name} | Aurelia`);
         } else {
           this.navigateToNotFound();
         }
@@ -94,6 +97,7 @@ export class Router {
           this.ea.publish(new ActivateTab('article'));
           this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem), fragment));
           this.ea.publish(new ShowMenu(matchedToCItem));
+          this.history.setTitle(`${matchedToCItem.name} | Aurelia`);
         } else {
           this.navigateToNotFound();
         }
@@ -107,12 +111,14 @@ export class Router {
     this.ea.publish(new ActivateTab(''));
     this.ea.publish(new ActivateScreen(this.container.get(NotFoundScreen)));
     this.ea.publish(new HideMenu());
+    this.history.setTitle('404 - Not Found | Aurelia');
   }
 
   navigateToHome() {
     this.ea.publish(new ActivateTab('home'));
     this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem(this.config.home)));
     this.ea.publish(new HideMenu());
+    this.history.setTitle('Home | Aurelia');
   }
 
   onScreenActivated() {
