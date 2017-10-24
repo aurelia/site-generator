@@ -173,7 +173,8 @@ main {
   left: $nav-width;
   bottom: 0;
   right: 0;
-  overflow-y: auto;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
