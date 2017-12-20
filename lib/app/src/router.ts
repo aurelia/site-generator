@@ -1,3 +1,4 @@
+import {DOM} from 'aurelia-pal';
 import {Container, autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -8,7 +9,9 @@ import {HomeScreen} from './screens/home-screen';
 import {BlogScreen} from './screens/blog-screen';
 import {NotFoundScreen} from './screens/not-found';
 import {Configuration} from './configuration';
+import environment from './environment';
 
+declare var gtag: any;
 const offset = 64;
 
 @autoinject
@@ -72,14 +75,16 @@ export class Router {
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
       this.history.setTitle('Help | Aurelia');
+      this.trackPageView(url);
     } else if (url === 'blog') {
       //TODO: Implement Blog. Currently the sidebar links to Ghost.
       this.ea.publish(new ActivateTab('blog'));
       this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
       this.ea.publish(new HideMenu());
       this.history.setTitle('Blog | Aurelia');
+      this.trackPageView(url);
     } else if (url === '' || url === 'home') {
-      this.navigateToHome();
+      this.navigateToHome(url);
     } else if (url.indexOf('docs') === 0) {
       if (url.indexOf('api') !== -1) {
         let matchedAPI = this.config.findApiItem(url);
@@ -88,8 +93,9 @@ export class Router {
           this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, url)));
           this.ea.publish(new ShowMenu(matchedAPI));
           this.history.setTitle(`${matchedAPI.name} | Aurelia`);
+          this.trackPageView(url);
         } else {
-          this.navigateToNotFound();
+          this.navigateToNotFound(url);
         }
       } else {
         let matchedToCItem = this.config.findToCItem(url);
@@ -98,27 +104,44 @@ export class Router {
           this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem), fragment));
           this.ea.publish(new ShowMenu(matchedToCItem));
           this.history.setTitle(`${matchedToCItem.name} | Aurelia`);
+          this.trackPageView(url);
         } else {
-          this.navigateToNotFound();
+          this.navigateToNotFound(url);
         }
       }
     } else {
-      this.navigateToNotFound();
+      this.navigateToNotFound(url);
     }
   }
 
-  navigateToNotFound() {
+  trackPageView(url) {
+    let data = {
+      'page_title': DOM.title,
+      'page_location': window.location.href,
+      'page_path': url
+    };
+
+    if (environment.debug) {
+      console.log(this.config.trackingID, data);
+    } else {
+      gtag('config', this.config.trackingID, data);
+    }
+  }
+
+  navigateToNotFound(url: string) {
     this.ea.publish(new ActivateTab(''));
     this.ea.publish(new ActivateScreen(this.container.get(NotFoundScreen)));
     this.ea.publish(new HideMenu());
     this.history.setTitle('404 - Not Found | Aurelia');
+    this.trackPageView(url);
   }
 
-  navigateToHome() {
+  navigateToHome(url: string) {
     this.ea.publish(new ActivateTab('home'));
     this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem(this.config.home)));
     this.ea.publish(new HideMenu());
     this.history.setTitle('Home | Aurelia');
+    this.trackPageView(url);
   }
 
   onScreenActivated() {

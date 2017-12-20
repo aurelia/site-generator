@@ -29,6 +29,7 @@ export class Configuration {
   public help: DocItem;
   public blog: DocItem;
   public home: DocItem;
+  public trackingID: string = this.config.trackingID;
 
   constructor(private ea: EventAggregator) {
     this.home = this.config.home;
