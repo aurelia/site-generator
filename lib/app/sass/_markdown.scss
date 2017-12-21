@@ -32,11 +32,33 @@
     }
 
     blockquote {
-      border-left: 2px solid $primary-text-color;
-      padding-left: 8px;
-      font-size: 18px;
-      font-style: italic;
-      margin: 48px 0 24px 0;
+      background: #f9f9f9;
+      border-left: 10px solid #ccc;
+      margin: 1.5em 10px;
+      padding: 0.5em 10px;
+      quotes: "\201C""\201D""\2018""\2019";
+    }
+
+    blockquote:before {
+      color: #ccc;
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.1em;
+      vertical-align: -0.4em;
+    }
+
+    blockquote:after {
+      color: #ccc;
+      content: close-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-left: 0.1em;
+      vertical-align: -0.4em;
+    }
+
+    blockquote p {
+      display: inline;
     }
 
     code {

@@ -10,13 +10,19 @@
 <section><h2 id="installing-the-plugin">Installing The Plugin</h2><ol>
 <li>In your <strong>JSPM</strong>-based project install the plugin via <code>jspm</code> with following command</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>jspm install aurelia<span class="token operator">-</span>dialog
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  jspm install aurelia<span class="token operator">-</span>dialog
+  
 </code></pre></source-code></code-listing>
 <p>If you use <strong>Webpack</strong>, install the plugin with the following command</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install aurelia<span class="token operator">-</span>dialog <span class="token operator">--</span>save
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install aurelia<span class="token operator">-</span>dialog <span class="token operator">--</span>save
+  
 </code></pre></source-code></code-listing>
 <p>If you use the <strong>Aurelia CLI</strong>, install the plugin with the following command</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install aurelia<span class="token operator">-</span>dialog <span class="token operator">--</span>save
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install aurelia<span class="token operator">-</span>dialog <span class="token operator">--</span>save
+  
 </code></pre></source-code></code-listing>
 <p>and then add a section in your <code>aurelia.json</code> for the plugin</p>
 <code-listing heading="aurelia.json">
@@ -35,7 +41,9 @@
   </code></pre></source-code>
 </code-listing>
 <p>If you use TypeScript, install the plugin's typings with the following command</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>typings install github:aurelia<span class="token operator">/</span>dialog <span class="token operator">--</span>save
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  typings install github:aurelia<span class="token operator">/</span>dialog <span class="token operator">--</span>save
+  
 </code></pre></source-code></code-listing>
 <ol start="2">
 <li>Make sure you use 
@@ -63,9 +71,11 @@
   <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<div class="warning"><div class="icon"> <i></i> </div><h4>When the</h4><p><code>&lt;body&gt;</code> is marked with the <code>aurelia-app</code> attribute any dialog open prior to the app being attached to the DOM(before <code>Aurelia.prototype.setRoot</code> completes), will be <em>removed</em> from the DOM. Opening a dialog in the <code>canActivate</code> or <code>activate</code> hooks is <em>OK</em> in any scenario <em>if</em> you <em>await</em> it to close <em>before continuing</em>. If you just want to open a dialog, without awaiting it to close, do it the <code>attached</code> hook instead.</p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
+When the <code>&lt;body&gt;</code> is marked with the <code>aurelia-app</code> attribute any dialog open prior to the app being attached to the DOM(before <code>Aurelia.prototype.setRoot</code> completes), will be <em>removed</em> from the DOM. Opening a dialog in the <code>canActivate</code> or <code>activate</code> hooks is <em>OK</em> in any scenario <em>if</em> you <em>await</em> it to close <em>before continuing</em>. If you just want to open a dialog, without awaiting it to close, do it the <code>attached</code> hook instead.</p>
 </div>
-<div class="warning"><div class="icon"> <i></i> </div><p><code>PLATFORM.moduleName</code> should <em>not</em> be omitted if you are using Webpack.</p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
+<code>PLATFORM.moduleName</code> should <em>not</em> be omitted if you are using Webpack.</p>
 </div>
 </section>
 <section><h2 id="using-the-plugin">Using The Plugin</h2><p>There are a few ways you can take advantage of the Aurelia dialog.</p>
@@ -207,17 +217,20 @@
 <ul>
 <li>
 <p>url - path relative to the application root.</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token punctuation">.</span>
-<span class="token operator">+</span><span class="token operator">--</span> app<span class="token punctuation">.</span>js
-<span class="token operator">+</span><span class="token operator">--</span> forms
-    <span class="token operator">+</span><span class="token operator">--</span> consent<span class="token operator">-</span>form<span class="token punctuation">.</span>js
-    <span class="token operator">+</span><span class="token operator">--</span> consent<span class="token operator">-</span>form<span class="token punctuation">.</span>html
-<span class="token operator">+</span><span class="token operator">--</span> prompts
-    <span class="token operator">+</span><span class="token operator">--</span> prompt<span class="token punctuation">.</span>js
-    <span class="token operator">+</span><span class="token operator">--</span> prompt<span class="token punctuation">.</span>html
+<code-listing><source-code lang="File System"><pre class="language-javascript"><code>
+  <span class="token punctuation">.</span>
+  <span class="token operator">+</span><span class="token operator">--</span> app<span class="token punctuation">.</span>js
+  <span class="token operator">+</span><span class="token operator">--</span> forms
+      <span class="token operator">+</span><span class="token operator">--</span> consent<span class="token operator">-</span>form<span class="token punctuation">.</span>js
+      <span class="token operator">+</span><span class="token operator">--</span> consent<span class="token operator">-</span>form<span class="token punctuation">.</span>html
+  <span class="token operator">+</span><span class="token operator">--</span> prompts
+      <span class="token operator">+</span><span class="token operator">--</span> prompt<span class="token punctuation">.</span>js
+      <span class="token operator">+</span><span class="token operator">--</span> prompt<span class="token punctuation">.</span>html
+  
 </code></pre></source-code></code-listing>
 <p>If you want to open a <code>prompt</code> from <code>consent-form</code> the path will be <code>prompts/prompt</code>.</p>
-<div class="warning"><div class="icon"> <i></i> </div><h4>Webpack users should</h4><p><em>always</em> mark dynamically loaded dependencies with <code>PLATFORM.moduleName</code>. For more details do check the <code>aurelia-webpack-plugin</code> 
+<div class="warning"><div class="icon"> <i></i> </div><p>
+Webpack users should <em>always</em> mark dynamically loaded dependencies with <code>PLATFORM.moduleName</code>. For more details do check the <code>aurelia-webpack-plugin</code> 
 <a href="https://github.com/aurelia/webpack-plugin/wiki" target="_blank">wiki</a>
 .</p>
 </div>
@@ -227,13 +240,14 @@
 </li>
 <li>
 <p>class - the view model <em>class</em> or <em>constructor function</em>.</p>
-<blockquote>
-<p>Note: This approach depends on being able resolve the origin of the class.</p>
-</blockquote>
-<blockquote>
-<p>Note: Webpack users are advised to use the string overload, wrapped with <code>PLATFORM.moduleName</code>, instead of this one.</p>
-</blockquote>
-<div class="warning"><div class="icon"> <i></i> </div><h4>This approach might not work for Webpack users when using</h4><p><em>DLLPlugin</em> or <em>ModuleConcatenationPlugin</em>.</p>
+<div class="info"><div class="icon"> <i></i> </div><p>
+This approach depends on being able resolve the origin of the class.</p>
+</div>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Webpack users are advised to use the string overload, wrapped with <code>PLATFORM.moduleName</code>, instead of this one.</p>
+</div>
+<div class="warning"><div class="icon"> <i></i> </div><p>
+This approach might not work for Webpack users when using <em>DLLPlugin</em> or <em>ModuleConcatenationPlugin</em>.</p>
 </div>
 </li>
 </ul>
@@ -251,7 +265,8 @@ If not provided a new child container will be created from the root one.</li>
 <li><code>ignoreTransitions</code> is a Boolean you must set to <code>true</code> if you disable css animation of your dialog. (optional, default to false)</li>
 <li><code>rejectOnCancel</code> is a Boolean you must set to <code>true</code> if you want to handle cancellations as rejection. The reason will be a <code>DialogCancelError</code> - the property <code>wasCancelled</code> will be set to <code>true</code> and if cancellation data was provided it will be set to the <code>output</code> property.</li>
 </ul>
-<div class="warning"><div class="icon"> <i></i> </div><h4>Plugin authors are advised to be explicit with settings that change behavior (</h4><p><code>rejectOnCancel</code>).</p>
+<div class="warning"><div class="icon"> <i></i> </div><p>
+Plugin authors are advised to be explicit with settings that change behavior (<code>rejectOnCancel</code>).</p>
 </div>
 <code-listing heading="prompt.js">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -303,13 +318,13 @@ If not provided a new child container will be created from the root one.</li>
 </code-listing>
 </section>
 <section><h2 id="styling-the-dialog">Styling The Dialog</h2><h3>Overlay With 50% Opacity</h3>
-<p>Bootstrap adds 50% opacity and a background color of black to the modal.  To achieve this in dialog you can simply add the following CSS -</p>
-<code-listing heading="welcome.js">
+<p>Bootstrap adds 50% opacity and a background color of black to the modal.  To achieve this in dialog you can simply add the following CSS.</p>
+<code-listing>
   <source-code lang="CSS"><pre class="language-javascript"><code>
-ux<span class="token operator">-</span>dialog<span class="token operator">-</span>overlay<span class="token punctuation">.</span>active <span class="token punctuation">{</span>
-  background<span class="token operator">-</span>color<span class="token punctuation">:</span> black<span class="token punctuation">;</span>
-  opacity<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token number">5</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    ux<span class="token operator">-</span>dialog<span class="token operator">-</span>overlay<span class="token punctuation">.</span>active <span class="token punctuation">{</span>
+      background<span class="token operator">-</span>color<span class="token punctuation">:</span> black<span class="token punctuation">;</span>
+      opacity<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
 </section>

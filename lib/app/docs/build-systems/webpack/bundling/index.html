@@ -53,10 +53,14 @@
 .</p>
 <p>Now that we have our app running, let's try to build the preconfigured bundle. Webpack, as opposed to JSPM, is not a loader, which means it always creates bundles before loading a page is possible. By default there are two versions of bundles you can create: the development bundle and the production bundle.</p>
 <p>To build the development bundle execute:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run build
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm run build
+  
 </code></pre></source-code></code-listing>
 <p>To build an optimized, minified production bundle execute:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run build:prod
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm run build:prod
+  
 </code></pre></source-code></code-listing>
 <p>You can find the configuration for both of these bundles in the <code>webpack.config.js</code> file. We'll look into it in a bit.</p>
 <p>After the bundle is created, by default you'll find the output in the <code>dist</code> folder.</p>
@@ -64,7 +68,9 @@
 The <code>dist</code> folder is automatically deleted before a new bundle is built.</p>
 </div>
 <p>To start a simple web server and test either the development or production build execute:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run server:prod
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm run server:prod
+  
 </code></pre></source-code></code-listing>
 <p>After executing the command, you'll see a link which will run your bundled application.</p>
 </section>
@@ -75,16 +81,18 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <li><code>app</code> - contains files from within the <code>src</code> folder and their dependencies</li>
 </ul>
 <p>However, you are free to define as many entry bundles as we want, by listing the packages as entry points of <code>webpack.config.js</code>:</p>
-<code-listing><source-code lang="js"><pre class="language-javascript"><code><span class="token keyword">const</span> baseConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token string">'app'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token comment" spellcheck="true">// (...) //</span>
-    <span class="token string">'vendor'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'moment'</span><span class="token punctuation">]</span> 
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    path<span class="token punctuation">:</span> outDir<span class="token punctuation">,</span>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <span class="token keyword">const</span> baseConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+    entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">'app'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// (...) //</span>
+      <span class="token string">'vendor'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'moment'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> outDir<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <p>In the above example we created an explicit bundle called <code>vendor</code> that only contains the package: <code>moment</code>.</p>
 <p>Defining entry bundles is only useful when you want to be able to make use of client-server file caching, because it means that you can only update the bundles which contain the changes, instead of all of them.</p>
@@ -101,7 +109,7 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <h3>Centralized Approach</h3>
 <p>Let's say we want to separate out the View and ViewModel: <code>src/users</code> contained in the skeleton and defer its loading to when the user clicks on a link to that route, you could define an async bundle as follows:</p>
 <code-listing heading="package.json">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
@@ -144,7 +152,7 @@ Since the syntax is still relatively new, many Aurelia plugins do not declare th
 <p>There might reasons not to declare those resources in all cases,for example when the plugin is to be partially consumed (e.g. only one Button element from a package containing multiple Aurelia elements).</p>
 <p>If we'd like to consume such external resources, we should declare them ourselves, for example:</p>
 <code-listing heading="package.json">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
@@ -157,7 +165,7 @@ Since the syntax is still relatively new, many Aurelia plugins do not declare th
 </code-listing>
 <p>You can also combine both features to separate out plugins or resources for lazy-loading:</p>
 <code-listing heading="package.json">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"aurelia"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">"resources"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
@@ -255,7 +263,7 @@ Example use-cases for this are: conditionally loading foreign language support b
       baseConfig<span class="token punctuation">,</span>
 
       <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-env-production'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        
+
       <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@easy-webpack/config-aurelia'</span><span class="token punctuation">)</span>
         <span class="token punctuation">(</span><span class="token punctuation">{</span>root<span class="token punctuation">:</span> rootDir<span class="token punctuation">,</span> src<span class="token punctuation">:</span> srcDir<span class="token punctuation">,</span> title<span class="token punctuation">:</span> title<span class="token punctuation">,</span> baseUrl<span class="token punctuation">:</span> baseUrl<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 

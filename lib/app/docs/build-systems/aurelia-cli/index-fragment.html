@@ -26,7 +26,9 @@
 </li>
 </ul>
 <p>Once you have the prerequisites installed, you can install the Aurelia CLI itself. From the command line, use npm to install the CLI globally:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install aurelia<span class="token operator">-</span>cli <span class="token operator">-</span>g
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install aurelia<span class="token operator">-</span><span class="token function">cli</span> <span class="token operator">-</span>g
+  
 </code></pre></source-code></code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Always run commands from a Bash prompt. Depending on your environment, you may need to use <code>sudo</code> when executing npm global installs.</p>
@@ -41,7 +43,7 @@ While creating a new project doesn't require NPM 3, front-end development, in ge
 <h3>ASP.NET Core</h3>
 <p>If you would like to use ASP.NET Core, first begin by using Visual Studio to create your ASP.NET Core project. Select whatever options make the most sense based on your .NET project plans. After you have created the project, open a command line and change directory into your web project's project folder. This is the folder that contains the <code>.xproj</code> file. From within this folder, you can execute the following command <code>au new --here</code> which will setup Aurelia &quot;here&quot; inside this project folder. You will be prompted to choose the platform you want. Simply select &quot;ASP.NET Core&quot;. Follow the prompts for the rest of the process, just like above.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
-Since Aurelia-CLI should be in charge of building your client side code, make sure before running the <code>new</code> command from <strong>Aurelia-CLI</strong> you add <code>&lt;typescriptcompileblocked&gt;true</code> to your .xproj file inside the first <code>&lt;propertygroup&gt;</code> you find to stop Visual Studio from compiling the <code>.ts</code> files in your project. If you build your solution before doing this, Visual Studio will compile your <code>.ts</code> files breaking some of the <strong>Aurelia-CLI</strong> commands.</p>
+Since the Aurelia-CLI should be in charge of building your client side code, make sure that before running the <code>new</code> command from <strong>Aurelia-CLI</strong> you add <code>&lt;typescriptcompileblocked&gt;true</code> to your .xproj file inside the first <code>&lt;propertygroup&gt;</code> you find to stop Visual Studio from compiling the <code>.ts</code> files in your project. If you build your solution before doing this, Visual Studio will compile your <code>.ts</code> files, breaking some of the <strong>Aurelia-CLI</strong> commands.</p>
 </div>
 </section>
 <section><h2 id="running-your-aurelia-app">Running Your Aurelia App</h2><p>From inside your project folder, simply execute <code>au run</code>. This will build your app, creating all bundles in the process. It will start a minimal web server and serve your application. If you would like to develop, with auto-refresh of the browser, simply specify the <code>--watch</code> flag like this: <code>au run --watch</code>.</p>
@@ -51,7 +53,9 @@ Since Aurelia-CLI should be in charge of building your client side code, make su
 <section><h2 id="building-your-app">Building Your App</h2><p>Aurelia CLI apps always run in bundled mode, even during development. To build your app, simply run <code>au build</code>. You can also specify an environment to build for. For example: <code>au build --env stage</code>.</p>
 </section>
 <section><h2 id="deploying-your-app">Deploying Your App</h2><p>Run the following build command:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>au build <span class="token operator">--</span>env prod
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  au build <span class="token operator">--</span>env prod
+  
 </code></pre></source-code></code-listing>
 <p>Then copy the file <code>index.html</code> and the folder <code>/scripts</code>  to the main deployment folder on your server.</p>
 </section>
@@ -60,65 +64,75 @@ Since Aurelia-CLI should be in charge of building your client side code, make su
 <section><h2 id="generators">Generators</h2><p>Executing <code>au generate resource</code> runs a generator to scaffold out typical Aurelia constructs. Options for <em>resource</em> are: element, attribute, value-converter, binding-behavior, task and generator. That's right...there's a generator generator so you can write your own. Ex. <code>au generate element</code></p>
 </section>
 <section><h2 id="build-revisions">Build Revisions</h2><p>To create builds with revision numbers, you must set <code>rev</code> to be <code>true</code> under the build options. This will cause a unique revision number to be added to the bundled files. For example:</p>
-<code-listing><source-code lang="javascript"><pre class="language-javascript"><code><span class="token string">"options"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-  <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span><span class="token punctuation">,</span>
-  <span class="token string">"sourcemaps"</span><span class="token punctuation">:</span> <span class="token string">"dev &amp; stage"</span><span class="token punctuation">,</span>
-  <span class="token string">"rev"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
-<span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"options"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span><span class="token punctuation">,</span>
+    <span class="token string">"sourcemaps"</span><span class="token punctuation">:</span> <span class="token string">"dev &amp; stage"</span><span class="token punctuation">,</span>
+    <span class="token string">"rev"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <p>You are also able to set specific flags so that build revisions only take place while staging or in production. For example:</p>
-<code-listing><source-code lang="javascript"><pre class="language-javascript"><code><span class="token string">"options"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-  <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span><span class="token punctuation">,</span>
-  <span class="token string">"sourcemaps"</span><span class="token punctuation">:</span> <span class="token string">"dev &amp; stage"</span><span class="token punctuation">,</span>
-  <span class="token string">"rev"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span>
-<span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"options"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span><span class="token punctuation">,</span>
+    <span class="token string">"sourcemaps"</span><span class="token punctuation">:</span> <span class="token string">"dev &amp; stage"</span><span class="token punctuation">,</span>
+    <span class="token string">"rev"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span>
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <p>Now, if you were to run <code>au build --env prod</code>, the output would contain build revisions, while <code>au build --env dev</code> would not. Setting the build revisions to only compile while in production can help the development process, since it keeps your workspace clean of various build revisions.</p>
 <h3>Modifying The Index File</h3>
 <p>In order for your <code>index.html</code> file to be updated to load up the correct revisioned bundle, you must ensure that the <code>&quot;index&quot;</code> property located in <code>build/targets</code> section is correctly pointing to the <code>index.html</code> (or starting page) for your project. For example:</p>
-<code-listing><source-code lang="javascript"><pre class="language-javascript"><code><span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-  <span class="token string">"targets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">{</span>
-      <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"web"</span><span class="token punctuation">,</span>
-      <span class="token string">"displayName"</span><span class="token punctuation">:</span> <span class="token string">"Web"</span><span class="token punctuation">,</span>
-      <span class="token string">"output"</span><span class="token punctuation">:</span> <span class="token string">"scripts"</span><span class="token punctuation">,</span>
-      <span class="token string">"index"</span><span class="token punctuation">:</span> <span class="token string">"index.html"</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"targets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"web"</span><span class="token punctuation">,</span>
+        <span class="token string">"displayName"</span><span class="token punctuation">:</span> <span class="token string">"Web"</span><span class="token punctuation">,</span>
+        <span class="token string">"output"</span><span class="token punctuation">:</span> <span class="token string">"scripts"</span><span class="token punctuation">,</span>
+        <span class="token string">"index"</span><span class="token punctuation">:</span> <span class="token string">"index.html"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 </section>
 <section><h2 id="bundling-your-project">Bundling Your Project</h2><p>By default, the Aurelia CLI creates two bundles, an <code>app-bundle.js</code>, and a <code>vendor-bundle.js</code>. An example of the default <code>app-bundle.js</code> looks like this:</p>
-<code-listing><source-code lang="javascript"><pre class="language-javascript"><code><span class="token punctuation">{</span>
-  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"app-bundle.js"</span><span class="token punctuation">,</span>
-  <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
-    <span class="token string">"[**/*.js]"</span><span class="token punctuation">,</span>
-    <span class="token string">"**/*.{css,html}"</span>
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"app-bundle.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"[**/*.js]"</span><span class="token punctuation">,</span>
+      <span class="token string">"**/*.{css,html}"</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <p>In this setup, we've named the bundle <code>app-bundle.js</code>, and have defined what's included by setting the <code>source</code> property to be an array of patterns that match to file paths (the patterns are using glob patterns, 
 <a href="https://github.com/isaacs/minimatch" target="_blank">minimatch</a>
  to be specific, to find files that match).<br />
 Optionally, you can define an <code>exclude</code> list by setting the <code>source</code> property to be an object containing both an <code>include</code> and <code>exclude</code> array of patterns. This is helpful when you're trying to define multiple bundles from your source code.</p>
-<code-listing><source-code lang="javascript"><pre class="language-javascript"><code><span class="token punctuation">{</span>
-  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"app-bundle.js"</span><span class="token punctuation">,</span>
-  <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"include"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
-      <span class="token string">"[**/*.js]"</span><span class="token punctuation">,</span>
-      <span class="token string">"**/*.{css,html}"</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">"exclude"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"app-bundle.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"include"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"[**/*.js]"</span><span class="token punctuation">,</span>
+        <span class="token string">"**/*.{css,html}"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string">"exclude"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"**/sub-module/**/*"</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"sub-module-bundle.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token string">"**/sub-module/**/*"</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">{</span>
-  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"sub-module-bundle.js"</span><span class="token punctuation">,</span>
-  <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
-    <span class="token string">"**/sub-module/**/*"</span><span class="token punctuation">,</span>
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 </section>
 <section><h2 id="adding-client-libraries-to-your-project">Adding Client Libraries to Your Project</h2><p>The CLI provides two commands to help you add 3rd party client libraries, <code>au install &lt;library&gt;</code> and <code>au import &lt;library&gt;</code>. The <code>install</code> command will download, install and add the library to the configuration file <code>aurelia_project/aurelia.json</code>. The <code>import</code> command will add a library that you've previously installed with npm to the configuration file. Finally, both commands will give you instructions on how to access the library from your code.</p>
@@ -128,7 +142,7 @@ Optionally, you can define an <code>exclude</code> list by setting the <code>sou
 <h3>A Single-File Module</h3>
 <p>If the library you have installed is a single CommonJS or AMD file, you can add an entry similar to the following to the dependencies of your bundle:</p>
 <code-listing heading="A Single File Module Dependency">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"library-name"</span><span class="token punctuation">,</span>
@@ -143,7 +157,7 @@ Optionally, you can define an <code>exclude</code> list by setting the <code>sou
 </ul>
 <p>If the <code>main</code> field of the library's <code>package.json</code> points to the single file that you need to bundle, then you can opt for a simplified configuration by just adding the package name to your dependencies directly:</p>
 <code-listing heading="A Single File Module Dependency via Main">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token string">"library-name"</span>
     <span class="token punctuation">]</span>
@@ -152,7 +166,7 @@ Optionally, you can define an <code>exclude</code> list by setting the <code>sou
 <h3>A CommonJS Package</h3>
 <p>Many modules installed through NPM are packages made up of multiple source files. Configuring a library like this is a bit different than the single-file scenario above. Here's an example configuration for a multi-file package:</p>
 <code-listing heading="A CommonJS Package Dependency">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-testing"</span><span class="token punctuation">,</span>
@@ -176,7 +190,7 @@ We've also shown how to use the <code>env</code> setting on a dependency. This c
 <a href="http://getbootstrap.com/css/" target="_blank">bootstrap</a>
 . Let's take a look at how to handle a legacy library like that.</p>
 <code-listing heading="A Legacy Library Dependency">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"jquery"</span><span class="token punctuation">,</span>
@@ -205,7 +219,7 @@ We are using the <code>exports</code> property to export the jQuery object since
 <h3>A Library with Additional Resources</h3>
 <p>The Bootstrap example above results in the bundling of the JavaScript portions of the library. But, as you probably know, Bootstrap is mostly about CSS. The CSS files distributed with Bootstrap aren't traceable through the module system so this still doesn't result in the Bootstrap CSS being bundled. Here's how we solve that problem:</p>
 <code-listing heading="A Library with Additional Resources">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"jquery"</span><span class="token punctuation">,</span>
@@ -227,32 +241,36 @@ We are using the <code>exports</code> property to export the jQuery object since
 </code-listing>
 <p>Notice that we've added a <code>resources</code> array. Here we can provide a list of additional files to be included with the bundle. These files are relative to the <code>path</code> designated above and must include the file extension. You can also use glob patterns in place of exact file names.</p>
 <p>The final step to make Bootstrap work is to copy the necessary font files to the <code>bootstrap/fonts</code> folder, which by default is where Bootstrap will look for the font files. To do this, we should declare these files in the <code>copyFiles</code> property, after the <code>bundles</code> property.</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token string">"bundles"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token operator">...</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> 
-<span class="token string">"copyFiles"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap/fonts"</span><span class="token punctuation">,</span>
-    <span class="token string">"node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap/fonts"</span><span class="token punctuation">,</span>
-    <span class="token string">"node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap/fonts"</span>
-  <span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"bundles"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token operator">...</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"copyFiles"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap/fonts"</span><span class="token punctuation">,</span>
+      <span class="token string">"node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap/fonts"</span><span class="token punctuation">,</span>
+      <span class="token string">"node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"</span><span class="token punctuation">:</span> <span class="token string">"bootstrap/fonts"</span>
+    <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <p>Now, the font files will be copied to the <code>bootstrap/fonts</code> folder when building the application.</p>
 <div class="info"><div class="icon"> <i></i> </div><h4>Setup for copying files</h4><p>
 The <code>copyFiles</code> works as a 'from':'to' setup, where 'from' is the location of the file you want to copy, and 'to' is the destination folder. Both paths are relative to project folder. The sintax is:</p>
 </div>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token string">"bundles"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token operator">...</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> 
-<span class="token string">"copyFiles"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-  FILE_YOU_WANT_TO_COPY_BASED_ON_PROJECT_FOLDER<span class="token punctuation">:</span> DESTINATION_FOLDER_BASED_ON_PROJECT_FOLDER
-<span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"bundles"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token operator">...</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"copyFiles"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    FILE_YOU_WANT_TO_COPY_BASED_ON_PROJECT_FOLDER<span class="token punctuation">:</span> DESTINATION_FOLDER_BASED_ON_PROJECT_FOLDER
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
-<blockquote>
-<p>If you run the application providing the <code>--watch</code> flag, the files will be recopied when changed.</p>
-</blockquote>
+<div class="warning"><div class="icon"> <i></i> </div><p>
+If you run the application providing the <code>--watch</code> flag, the files will be recopied when changed.</p>
+</div>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Remember that CSS bundled in this way is bundled as a text resource designed to be required in your view. To load the Bootstrap css file in a view, use <code>&lt;require from=&quot;bootstrap/css/bootstrap.css&quot;&gt;&lt;/require&gt;</code>. Notice that the module name derives from combining the <code>name</code> property with the resource.</p>
 </div>
 <h3>A Very Stubborn Legacy Library</h3>
 <p>Sometimes you can't get a library to work with the module loading system. That's ok. You can still include it in the bundle, using traditional concatenation techniques. In fact, this is how the CLI bundles up the loader and promise polyfills. These items don't go into the <code>dependencies</code> section but instead go into the <code>prepend</code> section. This is because they aren't module dependencies. They also aren't relative to the <code>src</code>, but relative to the project folder. Using the <code>prepend</code> section causes the scripts to be prepended to the beginning of the bundle, using normal script concatenation techniques. Here's a full vendor bundle example, showing this and the rest of the techniques listed above.</p>
 <code-listing heading="A Sample Bundle">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token punctuation">{</span>
       <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"vendor-bundle.js"</span><span class="token punctuation">,</span>
       <span class="token string">"prepend"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
@@ -324,25 +342,31 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
 <a href="https://docs.npmjs.com/misc/scope" target="_blank">scoped packages</a>
  in the same way as unscoped ones, you just need to remember that the scope is always part of its name.</p>
 <p>So, for example, if you need to consume a scoped package in a CLI project, you need the following in your <code>aurelia.json</code>:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>dependencies<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">{</span>
-    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"@scope/packagename"</span><span class="token punctuation">,</span>
-    <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/@scope/packagename/dist/amd"</span><span class="token punctuation">,</span>
-    <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"packagename"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">]</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"@scope/packagename"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/@scope/packagename/dist/amd"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"packagename"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+  
 </code></pre></source-code></code-listing>
 <p>Your imports must be scoped too:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> SomeClass <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@scope/packagename'</span><span class="token punctuation">;</span>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <span class="token keyword">import</span> <span class="token punctuation">{</span> SomeClass <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@scope/packagename'</span><span class="token punctuation">;</span>
+  
 </code></pre></source-code></code-listing>
 <p>And this is an example of loading a <code>@scope/packagename</code> plugin during app startup:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'@scope/packagename'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>
+  aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'@scope/packagename'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
 </code></pre></source-code></code-listing>
 <h3>Reference packages outside of the node_modules folder</h3>
 <p>It is possible to use packages outside of the node_modules folder. The only difference is that you need to define what the <code>packageRoot</code> is. In <code>aurelia.json</code>, you can define a package that lives outside of the node_modules folder as follows:</p>
 <code-listing heading="Package outside of node_modules">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
-    dependencies<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
+    <span class="token string">"dependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
       <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"my-standalone-folder"</span><span class="token punctuation">,</span>
       <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../my-standalone-folder/dist/amd"</span><span class="token punctuation">,</span>
       <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"index"</span><span class="token punctuation">,</span>
@@ -353,21 +377,23 @@ Remember that CSS bundled in this way is bundled as a text resource designed to 
 <p>The <code>packageRoot</code> is the root folder of the package. This is often the folder which contains the <code>package.json</code> file of the package.</p>
 </section>
 <section><h2 id="configuring-the-loader">Configuring the Loader</h2><p>You can configure the loader by adding a <code>config</code> key to <code>build.loader</code> with the options you want to add. For instance, if you want to increase the timeout for requirejs, you would do this:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token string">"loader"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-        <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"require"</span><span class="token punctuation">,</span>
-        <span class="token string">"configTarget"</span><span class="token punctuation">:</span> <span class="token string">"vendor-bundle.js"</span><span class="token punctuation">,</span>
-        <span class="token string">"includeBundleMetadataInConfig"</span><span class="token punctuation">:</span> <span class="token string">"auto"</span><span class="token punctuation">,</span>
-        <span class="token string">"config"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-            <span class="token string">"waitSeconds"</span><span class="token punctuation">:</span> <span class="token number">60</span>
-        <span class="token punctuation">}</span>
+      <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"require"</span><span class="token punctuation">,</span>
+      <span class="token string">"configTarget"</span><span class="token punctuation">:</span> <span class="token string">"vendor-bundle.js"</span><span class="token punctuation">,</span>
+      <span class="token string">"includeBundleMetadataInConfig"</span><span class="token punctuation">:</span> <span class="token string">"auto"</span><span class="token punctuation">,</span>
+      <span class="token string">"config"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"waitSeconds"</span><span class="token punctuation">:</span> <span class="token number">60</span>
+      <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <p><strong>Setting the baseUrl</strong></p>
 <p>Sometimes you may want to keep the scripts folder somewhere other than the default location, or move the index.html file a few folders up from the project root. In that case it is possible to set the <code>baseUrl</code> property so that the build system uses the correct paths and that bundles get loaded correctly in the browser. The <code>baseUrl</code> property should be set in both the <code>platform</code> object as well as the <code>build.targets</code> object:</p>
 <code-listing heading="baseUrl">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"targets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"web"</span><span class="token punctuation">,</span>
@@ -422,9 +448,11 @@ Steps:</p>
 <section><h2 id="updating-multiple-libraries">Updating Multiple Libraries</h2><ul>
 <li>Add the following section to the project's package.json file</li>
 </ul>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token string">"scripts"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"au-update"</span><span class="token punctuation">:</span> "npm install aurelia<span class="token operator">-</span>binding@latest aurelia<span class="token operator">-</span>bootstrapper@latest <span class="token operator">...</span>
-    <span class="token punctuation">}</span>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code>
+  <span class="token string">"scripts"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"au-update"</span><span class="token punctuation">:</span> <span class="token string">"npm install aurelia-binding@latest aurelia-bootstrapper@latest ..."</span>
+  <span class="token punctuation">}</span>
+  
 </code></pre></source-code></code-listing>
 <ul>
 <li>List the libraries on a single line separated by a space.</li>
@@ -434,7 +462,7 @@ Steps:</p>
 </section>
 <section><h2 id="javascript-minification">Javascript Minification</h2><p>The CLI will minify Javascript out of the box for the staging and production environments:</p>
 <code-listing heading="Default minification settings">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"options"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token string">"stage &amp; prod"</span><span class="token punctuation">,</span>
       <span class="token string">"sourcemaps"</span><span class="token punctuation">:</span> <span class="token string">"dev &amp; stage"</span>
@@ -443,7 +471,7 @@ Steps:</p>
 </code-listing>
 <p>These options can be found in the <code>&quot;build&quot;.&quot;options&quot;</code> section of <code>aurelia.json</code>. If you wish to specify the options that are used in the minification process, then replace <code>&quot;minify&quot;: &quot;stage &amp; prod&quot;</code> with:</p>
 <code-listing heading="Default minification settings">
-  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <source-code lang="JSON"><pre class="language-javascript"><code>
     <span class="token string">"minify"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token string">"dev"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token string">"default"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -451,7 +479,7 @@ Steps:</p>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">"stage &amp; prod"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">"max-line-len"</span><span class="token punctuation">:</span> <span class="token number">100000</span>
-      <span class="token punctuation">}</span> 
+      <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   </code></pre></source-code>
 </code-listing>

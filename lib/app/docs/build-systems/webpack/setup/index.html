@@ -52,8 +52,8 @@ For command-line operations, we recommend Windows users to use Git Bash or Git S
 </div>
 </section>
 <section><h2 id="setting-up-the-project-structure-and-build">Setting up the Project Structure and Build</h2><p>We'll begin by downloading a skeleton. We've got several versions available for you based on your language and tooling preferences. Please download the latest skeletons now.</p>
-<div style="text-align: center;">
-  <a class="au-button" href="https://github.com/aurelia/skeleton-navigation/releases/latest" style="text-decoration: none; margin: 32px 8px 42px 8px;" target="_blank">Download the Skeletons</a>
+<div style="text-align: center; margin-bottom: 32px">
+  <a class="au-button" href="https://github.com/aurelia/skeleton-navigation/releases/latest" target="_blank">Download the Skeletons</a>
 </div>
 <p>Once the download has completed, unzip it and look inside. The readme file contained therein will explain the various options available to you. Please select one of the skeletons and copy it to the location on your file system that you wish your code to reside. Be sure to rename the folder to appropriately represent the app you want to build.</p>
 <p>You will now find everything you need inside the folder, including a basic build, package configuration, styles and more. With all this in place, let's run some commands.</p>
@@ -61,16 +61,19 @@ For command-line operations, we recommend Windows users to use Git Bash or Git S
 <li>Open a console and change directory into your app's directory.</li>
 <li>Execute the following command to install the dependencies listed in the <em>dependencies</em> and <em>devDependencies</em> sections of the package manifest:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install
+  
 </code></pre></source-code></code-listing>
 <p>Everything we've done so far is standard Node.js build and package management procedures. It doesn't have anything specific to do with Aurelia itself. We're just walking you through setting up a modern ${context.language.name} project and build configuration from scratch.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
-Bootstrap and Font-Awesome are <strong>not</strong> dependencies of Aurelia. We only leverage them as part of the starter kit in order to help you quickly achieve a decent look out-of-the-box. You can easily replace them with whatever your favorite CSS framework and/or icon library is.
-Similarly, Bluebird is recommended, but not required. Note however that the <code>Promise</code> implementation in certain Microsoft Edge versions are extremely slow, thus keeping an alternative <code>Promise</code> implementation is recommended.</p>
+Bootstrap and Font-Awesome are <strong>not</strong> dependencies of Aurelia. We only leverage them as part of the starter kit in order to help you quickly achieve a decent look out-of-the-box. You can easily replace them with whatever your favorite CSS framework and/or icon library is. Similarly, Bluebird is recommended, but not required. Note however that the <code>Promise</code> implementation in certain Microsoft Edge versions are extremely slow, thus keeping an alternative <code>Promise</code> implementation is recommended.</p>
 </div>
 </section>
 <section><h2 id="running-the-app">Running The App</h2><p>If you've followed along this far, you now have all the libraries, build configuration and tools you need to create amazing ${context.language.name} apps with Aurelia. The next thing to do is run the sample app. To see this in action, on your console, use the following command to build and launch the server:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm <span class="token function">start</span>
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm <span class="token function">start</span>
+  
 </code></pre></source-code></code-listing>
 <p>You can now browse to 
 <a href="http://localhost:9000/" target="_blank">http://localhost:9000/</a>
@@ -80,32 +83,36 @@ The Skeleton App uses Webpack's Development Server for automated page refreshes 
 </div>
 </section>
 <section><h2 id="running-the-unit-tests">Running The Unit Tests</h2><p>To run the unit tests, first ensure that you have followed the steps above in order to install all dependencies and successfully build the library. Once you have done that, you may run the tests with the following command:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm test
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm test
+  
 </code></pre></source-code></code-listing>
 </section>
 <section><h2 id="running-the-e2e-tests">Running The E2E Tests</h2><p>Integration tests are performed with 
 <a href="http://angular.github.io/protractor/#/" target="_blank">Protractor</a>
 .</p>
 <ol>
-<li>
-<p>Place your E2E-Tests into the folder <code>test/e2e/src</code></p>
-</li>
-<li>
-<p>Run the tests by invoking</p>
-</li>
+<li>Place your E2E-Tests into the folder <code>test/e2e/src</code></li>
+<li>Run the tests by invoking</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run e2e
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm run e2e
+  
 </code></pre></source-code></code-listing>
 </section>
 <section><h2 id="running-e2e-tests-manually">Running E2E Tests Manually</h2><ol>
 <li>Make sure your app runs and is accessible:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>WEBPACK_PORT=19876 npm <span class="token function">start</span>
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  WEBPACK_PORT=19876 npm <span class="token function">start</span>
+  
 </code></pre></source-code></code-listing>
 <ol start="2">
 <li>Once bundle is ready, run the E2E-Tests in another console:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run e2e:<span class="token function">start</span>
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm run e2e:<span class="token function">start</span>
+  
 </code></pre></source-code></code-listing>
 </section>
 

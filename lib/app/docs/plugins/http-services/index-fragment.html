@@ -121,6 +121,7 @@ Generally, we recommend that you don't litter your application code with usage o
 . As with <code>request</code>, it can either pass the Response along, return a modified response, or throw.</li>
 <li><code>responseError</code> is similar to <code>requestError</code>, and acts as a Promise rejection handler for response rejections.</li>
 </ul>
+<p>These methods on the interceptor object can also return <code>Promise</code>s for their respective return values.</p>
 <h3>Helpers</h3>
 <p>The Fetch API has a couple gotchas, documented by the 
 <a href="https://github.com/github/fetch#caveats" target="_blank">GitHub Fetch polyfill</a>

@@ -29,7 +29,9 @@
 Note on Git for Windows installation: When installing Git for Windows, there is an option to <code>use git bash only</code>, <code>run git from windows command prompt</code>, or <code>run git and included unix tools from windows command prompt</code>. You have to choose <code>run git from windows command prompt</code> or <code>run git and included unix tools from windows command prompt</code> in order for Aurelia CLI to work.</p>
 </div>
 <p>Once you have the prerequisites installed, you can install the Aurelia CLI itself. From the command line, use npm to install the CLI globally:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install aurelia<span class="token operator">-</span>cli <span class="token operator">-</span>g
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install aurelia<span class="token operator">-</span><span class="token function">cli</span> <span class="token operator">-</span>g
+  
 </code></pre></source-code></code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Always run commands from a Bash prompt. Depending on your environment, you may need to use <code>sudo</code> when executing npm global installs.</p>
@@ -77,7 +79,7 @@ Before proceeding any further, please make sure you are familiar with the concep
   </code></pre></source-code>
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>Router<span class="token punctuation">,</span> RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
-       
+
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       router<span class="token punctuation">:</span> Router<span class="token punctuation">;</span>
 
@@ -126,10 +128,14 @@ Before proceeding any further, please make sure you are familiar with the concep
 <p>The <code>router-view</code> is provided by Aurelia and is a placeholder that indicated where the router should render the current route. This allows you to structure your application layout however you want, simply placing the <code>router-view</code> wherever you want to see the current page rendered. Whenever you have a <code>configureRouter</code> method, the view must also contain a <code>router-view</code>.</p>
 <p>We're almost done setting up the application shell. Before we're done, we need to install Bootstrap. We'll be using that in this tutorial in order to give our application a decent appearance. In your own apps, you can use any CSS framework you like.</p>
 <p>To get Bootstrap setup, we begin by installing the library itself with NPM. Execute the following on the command line to do this:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install bootstrap <span class="token operator">--</span>save
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install bootstrap <span class="token operator">--</span>save
+  
 </code></pre></source-code></code-listing>
 <p>Next, because Bootstrap uses jQuery, we want to install jQuery as well, like this:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install jquery@<span class="token operator">^</span><span class="token number">2.2</span><span class="token punctuation">.</span><span class="token number">4</span> <span class="token operator">--</span>save
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install jquery@^2<span class="token punctuation">.</span>2<span class="token punctuation">.</span>4 <span class="token operator">--</span>save
+  
 </code></pre></source-code></code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Whenever you install new dependencies used in your app, make sure to restart the <code>au run</code> or respectively the <code>au run --watch</code> command, in order to have the CLI re-bundle your freshly added dependencies.</p>
@@ -158,8 +164,10 @@ Whenever you install new dependencies used in your app, make sure to restart the
 <p>After you have modified the aurelia.json file, it is necessary to restart the <code>au run --watch</code> process in order for the changes to be picked up.</p>
 </section>
 <section><h2 id="building-out-the-default-route">Building Out the Default Route</h2><p>If you run the application now, you'll see a blank screen and the browser's console will display the following message:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>Failed to load resource<span class="token punctuation">:</span> the server responded <span class="token keyword">with</span> a status <span class="token keyword">of</span> <span class="token number">404</span> <span class="token punctuation">(</span>Not Found<span class="token punctuation">)</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">9000</span><span class="token operator">/</span>src<span class="token operator">/</span>no<span class="token operator">-</span>selection<span class="token punctuation">.</span>js
-ERROR <span class="token punctuation">[</span>app<span class="token operator">-</span>router<span class="token punctuation">]</span> Error<span class="token punctuation">:</span> Script error <span class="token keyword">for</span> <span class="token string">"no-selection"</span>
+<code-listing><source-code lang="Output"><pre class="language-javascript"><code>
+  Failed to load resource<span class="token punctuation">:</span> the server responded <span class="token keyword">with</span> a status <span class="token keyword">of</span> <span class="token number">404</span> <span class="token punctuation">(</span>Not Found<span class="token punctuation">)</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">9000</span><span class="token operator">/</span>src<span class="token operator">/</span>no<span class="token operator">-</span>selection<span class="token punctuation">.</span>js
+  ERROR <span class="token punctuation">[</span>app<span class="token operator">-</span>router<span class="token punctuation">]</span> Error<span class="token punctuation">:</span> Script error <span class="token keyword">for</span> <span class="token string">"no-selection"</span>
+  
 </code></pre></source-code></code-listing>
 <p>This is actually expected. Why? Well, we have now configured a router, that router is matching on the empty route pattern we defined and it's trying to load the <code>no-selection</code> module, but we haven't created that yet. Let's do that now. Create a new file under <code>src</code> named <code>no-selection${context.language.fileExtension}</code> and give it the following code:</p>
 <code-listing heading="no-selection${context.language.fileExtension}">
@@ -311,7 +319,9 @@ We use a dashed naming convention to separate the words <em>contact-list</em> as
 <p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-contact-list.png" alt="The Contact List" /></p>
 </section>
 <section><h2 id="building-out-the-contact-detail-screen">Building Out the Contact Detail Screen</h2><p>Ok, things are starting to come together, but we still can't view an individual contact. If you try selecting something from the list, you'll see an error like the following in the console:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>ERROR <span class="token punctuation">[</span>app<span class="token operator">-</span>router<span class="token punctuation">]</span> Error<span class="token punctuation">:</span> Script error <span class="token keyword">for</span> <span class="token string">"contact-detail"</span>
+<code-listing><source-code lang="Output"><pre class="language-javascript"><code>
+  ERROR <span class="token punctuation">[</span>app<span class="token operator">-</span>router<span class="token punctuation">]</span> Error<span class="token punctuation">:</span> Script error <span class="token keyword">for</span> <span class="token string">"contact-detail"</span>
+  
 </code></pre></source-code></code-listing>
 <p>Again, this is because the router is trying to route to the detail screen, but we have not yet created the component. So, let's do that next. Create a new file named <code>contact-detail${context.language.fileExtension}</code> and add the following code:</p>
 <code-listing heading="contact-detail${context.language.fileExtension}">
@@ -819,7 +829,9 @@ We use a dashed naming convention to separate the words <em>contact-list</em> as
 </section>
 <section><h2 id="adding-a-loading-indicator">Adding A Loading Indicator</h2><p>Let's add one more final touch to this application. Whenever we're navigating from screen to screen or making a <code>WebAPI</code> request, let's show a loading indicator at the top of our app. To do this, we'll use a 3rd party library and create a custom Aurelia element to wrap it up.</p>
 <p>Begin by installing the <code>nprogress</code> library with the following command:</p>
-<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install nprogress <span class="token operator">--</span>save
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install nprogress <span class="token operator">--</span>save
+  
 </code></pre></source-code></code-listing>
 <p>Once this is installed, we'll need to make sure it gets configured in the proper bundle. Open your <code>aurelia.json</code> file again, find the bundles section and add the following entry to the dependencies array of the <code>vendor-bundle.js</code> bundle:</p>
 <code-listing heading="NProgress Bundle Config">

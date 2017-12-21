@@ -20,17 +20,21 @@ For command-line operations, we recommend Windows users to use Git Bash or Git S
 <p>First, let's begin by installing 
 <a href="http://gulpjs.com/" target="_blank">Gulp</a>
  which we'll be using for build automation. If you don't have it already, you can use npm to set it up like this (in some environments you may need to use <code>sudo</code>):</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install <span class="token operator">-</span>g gulp
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install <span class="token operator">-</span>g gulp
+  
 </code></pre></source-code></code-listing>
 <p>Next, we need to install 
 <a href="http://jspm.io/" target="_blank">jspm</a>
 . This will serve as our client-side package manager. You can do that like this:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install <span class="token operator">-</span>g jspm
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install <span class="token operator">-</span>g jspm
+  
 </code></pre></source-code></code-listing>
 </section>
 <section><h2 id="setting-up-the-project-structure-and-build">Setting up the Project Structure and Build</h2><p>With the tooling installed, we can now turn our attention to setting up a basic structure for your app. We'll begin by downloading a skeleton. We've got several versions available for you based on your language and tooling preferences. Please download the latest skeletons now.</p>
-<div style="text-align: center;">
-  <a class="au-button" href="https://github.com/aurelia/skeleton-navigation/releases/latest" style="text-decoration: none; margin: 32px 8px 42px 8px;" target="_blank">Download the Skeletons</a>
+<div style="text-align: center; margin-bottom: 32px">
+  <a class="au-button" href="https://github.com/aurelia/skeleton-navigation/releases/latest" target="_blank">Download the Skeletons</a>
 </div>
 <p>Once the download has completed, unzip it and look inside. The readme file contained therein will explain the various options available to you. Please select one of the skeletons and copy it to the location on your file system that you wish your code to reside. Be sure to rename the folder to appropriately represent the app you want to build.</p>
 <p>You will now find everything you need inside the folder, including a basic build, package configuration, styles and more. With all this in place, let's run some commands.</p>
@@ -38,12 +42,16 @@ For command-line operations, we recommend Windows users to use Git Bash or Git S
 <li>Open a console and change directory into your app's directory.</li>
 <li>Execute the following command to install the dependencies listed in the <em>devDependencies</em> section of the package manifest:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install
+  
 </code></pre></source-code></code-listing>
 <ol start="3">
 <li>Next, execute the following command to install the Aurelia libraries, bootstrap and font-awesome, listed in the <em>jspm.dependencies</em> section of the package manifest:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>jspm install <span class="token operator">-</span>y
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  jspm install <span class="token operator">-</span>y
+  
 </code></pre></source-code></code-listing>
 <p>Everything we've done so far is standard Node.js build and package management procedures. It doesn't have anything specific to do with Aurelia itself. We're just walking you through setting up a modern ${context.language.name} project and build configuration from scratch.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
@@ -51,7 +59,9 @@ Bootstrap and Font-Awesome are <strong>not</strong> dependencies of Aurelia. We 
 </div>
 </section>
 <section><h2 id="running-the-app">Running The App</h2><p>If you've followed along this far, you now have all the libraries, build configuration and tools you need to create amazing ${context.language.name} apps with Aurelia. The next thing to do is run the sample app. To see this in action, on your console, use the following command to build and launch the server:</p>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>gulp watch
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  gulp watch
+  
 </code></pre></source-code></code-listing>
 <p>You can now browse to 
 <a href="http://localhost:9000/" target="_blank">http://localhost:9000/</a>
@@ -70,12 +80,16 @@ The Skeleton App uses
 <a href="http://karma-runner.github.io/" target="_blank">Karma</a>
  CLI is installed. If you need to install it, use the following command:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install <span class="token operator">-</span>g karma<span class="token operator">-</span><span class="token function">cli</span>
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  npm install <span class="token operator">-</span>g karma<span class="token operator">-</span><span class="token function">cli</span>
+  
 </code></pre></source-code></code-listing>
 <ol start="2">
 <li>You can now run the tests with this command:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>gulp test
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  gulp test
+  
 </code></pre></source-code></code-listing>
 </section>
 <section><h2 id="running-the-e2e-tests">Running The E2E Tests</h2><p>Integration tests are performed with 
@@ -85,18 +99,24 @@ The Skeleton App uses
 <li>Place your E2E-Tests into the folder <code>test/e2e/src</code>.</li>
 <li>Install the necessary webdriver:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>gulp webdriver<span class="token operator">-</span>update
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  gulp webdriver<span class="token operator">-</span>update
+  
 </code></pre></source-code></code-listing>
 <ol start="3">
 <li>Configure the path to the webdriver by opening the file <code>protractor.conf.js</code> and adjusting the <code>seleniumServerJar</code> property. Typically it's only needed to adjust the version number.</li>
 <li>Make sure your app runs and is accessible:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>gulp watch
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  gulp watch
+  
 </code></pre></source-code></code-listing>
 <ol start="5">
 <li>In another console run the E2E-Tests:</li>
 </ol>
-<code-listing><source-code lang="shell"><pre class="language-powershell"><code>gulp e2e
+<code-listing><source-code lang="Shell"><pre class="language-powershell"><code>
+  gulp e2e
+  
 </code></pre></source-code></code-listing>
 </section>
 
