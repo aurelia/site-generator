@@ -42,9 +42,15 @@ While creating a new project doesn't require NPM 3, front-end development, in ge
 <p>Once the dependencies are installed, your project is ready to go.</p>
 <h3>ASP.NET Core</h3>
 <p>If you would like to use ASP.NET Core, first begin by using Visual Studio to create your ASP.NET Core project. Select whatever options make the most sense based on your .NET project plans. After you have created the project, open a command line and change directory into your web project's project folder. This is the folder that contains the <code>.xproj</code> file. From within this folder, you can execute the following command <code>au new --here</code> which will setup Aurelia &quot;here&quot; inside this project folder. You will be prompted to choose the platform you want. Simply select &quot;ASP.NET Core&quot;. Follow the prompts for the rest of the process, just like above.</p>
-<div class="info"><div class="icon"> <i></i> </div><p>
-Since the Aurelia-CLI should be in charge of building your client side code, make sure that before running the <code>new</code> command from <strong>Aurelia-CLI</strong> you add <code>&lt;typescriptcompileblocked&gt;true</code> to your .xproj file inside the first <code>&lt;propertygroup&gt;</code> you find to stop Visual Studio from compiling the <code>.ts</code> files in your project. If you build your solution before doing this, Visual Studio will compile your <code>.ts</code> files, breaking some of the <strong>Aurelia-CLI</strong> commands.</p>
-</div>
+<p>Since the Aurelia-CLI should be in charge of building your client side code, make sure that before running the <code>new</code> command from <strong>Aurelia-CLI</strong> you add the following to your .xproj file inside the first <code>PropertyGroup</code> you find.</p>
+<code-listing>
+  <source-code lang="XML"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>PropertyGroup<span class="token operator">></span>
+      <span class="token operator">&lt;</span>TypeScriptCompileBlocked<span class="token operator">></span><span class="token boolean">true</span><span class="token operator">&lt;</span><span class="token operator">/</span>TypeScriptCompileBlocked<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>PropertyGroup<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>This will stop Visual Studio from compiling the <code>.ts</code> files in your project. If you build your solution before doing this, Visual Studio will compile your <code>.ts</code> files, breaking some of the <strong>Aurelia-CLI</strong> commands.</p>
 </section>
 <section><h2 id="running-your-aurelia-app">Running Your Aurelia App</h2><p>From inside your project folder, simply execute <code>au run</code>. This will build your app, creating all bundles in the process. It will start a minimal web server and serve your application. If you would like to develop, with auto-refresh of the browser, simply specify the <code>--watch</code> flag like this: <code>au run --watch</code>.</p>
 <h3>Environments</h3>
@@ -486,7 +492,7 @@ Steps:</p>
 <p>The Aurelia-CLI uses 
 <a href="https://github.com/mishoo/UglifyJS2" target="_blank">UglifyJS2</a>
  for minification, so any option that UglifyJS2 supports is also supported by the Aurelia-CLI. With the above configuration, minification will occur for the <code>stage</code> and <code>prod</code> environments, but not for the <code>dev</code> environment. For the <code>stage</code> and <code>prod</code> environments, both the <code>indent_level</code> as well as the <code>max-line-len</code> option are passed to the minifier. The <code>default</code> key is optional, but allows you to reduce code duplication when multiple environments have similar options.
-</library></library></propertygroup></typescriptcompileblocked></p>
+</library></library></p>
 </section>
 
   </article>
