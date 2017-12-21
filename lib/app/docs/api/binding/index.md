@@ -148,7 +148,7 @@ A binding behavior expression.
 
 #### Properties
 
-* `args: Expression` - No description available.
+* `args: ` - No description available.
 * `expression: Expression` - No description available.
 * `name: string` - No description available.
 
@@ -250,7 +250,7 @@ An expression representing a call to a member function.
 
 #### Properties
 
-* `args: Expression` - No description available.
+* `args: ` - No description available.
 * `name: string` - No description available.
 * `object: Expression` - No description available.
 
@@ -317,6 +317,32 @@ A conditional (ternary) expression.
 ### DataAttributeObserver
 
 Property observer for HTML Attributes.
+
+#### Properties
+
+
+#### Methods
+
+
+* `getValue(): any` - Gets the property value.
+
+
+* `setValue(newValue: any): void` - Sets the property value.
+  * `newValue: any` - No description available
+
+
+* `subscribe(callback: ): void` - Subscribe to property changes with a callback function.
+  * `callback: ` - No description available
+
+
+* `unsubscribe(callback: ): void` - Unsubscribes a callback function from property changes.
+  * `callback: ` - No description available
+
+
+
+### DirtyCheckProperty
+
+Property observer for properties that cannot be observed by other means
 
 #### Properties
 
@@ -533,8 +559,8 @@ A value converter expression.
 
 #### Properties
 
-* `allArgs: Expression` - No description available.
-* `args: Expression` - No description available.
+* `allArgs: ` - No description available.
+* `args: ` - No description available.
 * `expression: Expression` - No description available.
 * `name: string` - No description available.
 
@@ -889,6 +915,8 @@ object take precedence over members of the bindingContext object.
 
 * `sourceContext: string` - A context used when invoking a binding&#x27;s callable API to notify
 the binding that the context is a &quot;source update&quot;.
+* `targetContext: string` - A context used when invoking a binding&#x27;s callable API to notify
+the binding that the context is a &quot;target update&quot;.
 
 ## Functions
 
@@ -902,8 +930,14 @@ the binding that the context is a &quot;source update&quot;.
   * `name: string` - No description available.
 
 
-* `computedFrom(propertyNames: string): any` - Decorator: Indicates that the decorated property is computed from other properties.
-  * `propertyNames: string` - The names of the properties the decorated property is computed from.  Simple property names, not expressions.
+* `computedFrom(propertyNames: ): any` - Decorator: Indicates that the decorated property is computed from other properties.
+  * `propertyNames: ` - The names of the properties the decorated property is computed from.  Simple property names, not expressions.
+
+
+
+* `connectBindingToSignal(binding: Binding, name: string): void` - Connects a binding instance to a signal.
+  * `binding: Binding` - The binding instance that should be triggered to refresh by the signal.
+  * `name: string` - The signal to associate with the binding instance.
 
 
 
@@ -920,10 +954,10 @@ the binding that the context is a &quot;source update&quot;.
   * `parentBindingContext?: any` - No description available.
 
 
-* `declarePropertyDependencies(ctor: any, propertyName: string, dependencies: string): void` - Declares a property&#x27;s dependencies.
+* `declarePropertyDependencies(ctor: any, propertyName: string, dependencies: ): void` - Declares a property&#x27;s dependencies.
   * `ctor: any` - No description available.
   * `propertyName: string` - No description available.
-  * `dependencies: string` - No description available.
+  * `dependencies: ` - No description available.
 
 
 * `enqueueBindingConnect(binding: Binding): void` - Internal API that adds a binding to the connect queue.
@@ -949,6 +983,11 @@ the binding that the context is a &quot;source update&quot;.
 
   * `key?: any` - No description available.
   * `descriptor?: any` - No description available.
+
+
+* `signalBindings(name: string): void` - Signals all bindings that are associated with the specified signal name.
+  * `name: string` - The signal associated with the binding(s) to refresh.
+
 
 
 * `subscriberCollection(): any` - Decorator: Adds efficient subscription management methods to the decorated class&#x27;s prototype.

@@ -11,7 +11,7 @@
 <p>The primary difference between a binding behavior and a value converter is <em>binding behaviors have full access to the binding instance, throughout it's lifecycle</em>. Contrast this with a value converter which only has the ability to intercept values passing from the model to the view and visa versa.</p>
 <p>The additional &quot;access&quot; afforded to binding behaviors gives them the ability to change the behavior of the binding, enabling a lot of interesting scenarios which you'll see below.</p>
 </section>
-<section><h2 id="throttle">throttle</h2><p>Aurelia ships with a handful of behaviors out of the box to enable common scenarios.  The first is the throttle binding behavior which limits the rate at which the view-model is updated in two-way bindings or the rate at which the view is updated in one-way binding scenarios.</p>
+<section><h2 id="throttle">throttle</h2><p>Aurelia ships with a handful of behaviors out of the box to enable common scenarios.  The first is the throttle binding behavior which limits the rate at which the view-model is updated in two-way bindings or the rate at which the view is updated in to-view binding scenarios.</p>
 <p>By default <code>throttle</code> will only allow updates every 200ms. You can customize the rate of course.  Here are a few examples.</p>
 <code-listing heading="Updating a property, at most, every 200ms">
   <source-code lang="HTML"><pre class="language-markup"><code>
@@ -136,11 +136,11 @@
   </code></pre></source-code>
 </code-listing>
 <p>This is an important feature to expose. One-time bindings are the most efficient type of binding because they don't incur any property observation overhead.</p>
-<p>There are also binding behaviors for <code>oneWay</code> and <code>twoWay</code> which you could use like this:</p>
-<code-listing heading="One-way and two-way binding behaviours">
+<p>There are also binding behaviors for <code>toView</code> and <code>twoWay</code> which you could use like this:</p>
+<code-listing heading="To-view and two-way binding behaviours">
   <source-code lang="HTML"><pre class="language-markup"><code>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo &amp; oneWay<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">value.one-way</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo &amp; toView<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">value.to-view</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo &amp; twoWay<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">value.two-way</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>foo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>

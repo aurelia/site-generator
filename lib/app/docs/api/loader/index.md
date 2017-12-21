@@ -30,8 +30,8 @@ A generic resource loader, for loading modules, html, css and more.
   * `address: string` - The address of the template.
 
 
-* `loadAllModules(ids: string): Promise` - Loads a collection of modules.
-  * `ids: string` - The set of module ids to load.
+* `loadAllModules(ids: ): Promise` - Loads a collection of modules.
+  * `ids: ` - The set of module ids to load.
 
 
 * `loadModule(id: string): Promise` - Loads a module.
@@ -83,7 +83,7 @@ Represents an entry in the template registry.
 #### Properties
 
 * `address: string` - The address of the template that this entry represents.
-* `dependencies: TemplateDependency` - The dependencies of the associated template. Dependencies are not available until after the template is loaded.
+* `dependencies: ` - The dependencies of the associated template. Dependencies are not available until after the template is loaded.
 * `factory: any` - Gets the factory capable of creating instances of this template.
 * `factoryIsReady: boolean` - Indicates whether the factory is ready to be used to create instances of the associated template.
 * `resources: Object` - Sets the resources associated with this entry.

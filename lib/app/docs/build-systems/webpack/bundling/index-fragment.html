@@ -20,19 +20,19 @@
 .</p>
 <p>Now that we have our app running, let's try to build the preconfigured bundle. Webpack, as opposed to JSPM, is not a loader, which means it always creates bundles before loading a page is possible. By default there are two versions of bundles you can create: the development bundle and the production bundle.</p>
 <p>To build the development bundle execute:</p>
-<pre><code class="language-shell">npm run build
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run build
+</code></pre></source-code></code-listing>
 <p>To build an optimized, minified production bundle execute:</p>
-<pre><code class="language-shell">npm run build:prod
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run build:prod
+</code></pre></source-code></code-listing>
 <p>You can find the configuration for both of these bundles in the <code>webpack.config.js</code> file. We'll look into it in a bit.</p>
 <p>After the bundle is created, by default you'll find the output in the <code>dist</code> folder.</p>
 <div class="warning"><div class="icon"> <i></i> </div><p>
 The <code>dist</code> folder is automatically deleted before a new bundle is built.</p>
 </div>
 <p>To start a simple web server and test either the development or production build execute:</p>
-<pre><code class="language-shell">npm run server:prod
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run server:prod
+</code></pre></source-code></code-listing>
 <p>After executing the command, you'll see a link which will run your bundled application.</p>
 </section>
 <section><h2 id="entry-bundles">Entry Bundles</h2><p>The skeleton-navigation is configured to create 3 explicit entry bundles by default:</p>
@@ -41,18 +41,18 @@ The <code>dist</code> folder is automatically deleted before a new bundle is bui
 <li><code>aurelia</code> - contains all of the aurelia's modules</li>
 <li><code>app</code> - contains files from within the <code>src</code> folder and their dependencies</li>
 </ul>
-<p>However, you are free to define as many entry bundles as we want, by listing adding the packages as entry points of <code>webpack.config.js</code>:</p>
-<pre><code class="language-js">const baseConfig = {
-  entry: {
-    'app': [],
-    // (...) //
-    'vendor': ['moment'] 
-  },
-  output: {
-    path: outDir,
-  }
-}
-</code></pre>
+<p>However, you are free to define as many entry bundles as we want, by listing the packages as entry points of <code>webpack.config.js</code>:</p>
+<code-listing><source-code lang="js"><pre class="language-javascript"><code><span class="token keyword">const</span> baseConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'app'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// (...) //</span>
+    <span class="token string">'vendor'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'moment'</span><span class="token punctuation">]</span> 
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> outDir<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></source-code></code-listing>
 <p>In the above example we created an explicit bundle called <code>vendor</code> that only contains the package: <code>moment</code>.</p>
 <p>Defining entry bundles is only useful when you want to be able to make use of client-server file caching, because it means that you can only update the bundles which contain the changes, instead of all of them.</p>
 <p>To make it easier to see whether it's necessary to update a certain bundle, the production bundles by default contain a hash in their filename.</p>

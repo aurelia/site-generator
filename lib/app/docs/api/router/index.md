@@ -36,10 +36,10 @@ The main application router.
 * `isExplicitNavigationBack: boolean` - True if the [[Router]] is navigating due to explicit call to navigateBack function.
 * `isNavigating: boolean` - True if the [[Router]] is currently processing a navigation.
 * `isRoot: boolean` - Gets a value indicating whether or not this [[Router]] is the root in the router tree. I.e., it has no parent.
-* `navigation: NavModel` - The navigation models for routes that specified [[RouteConfig.nav]].
+* `navigation: ` - The navigation models for routes that specified [[RouteConfig.nav]].
 * `options: any` - No description available.
 * `parent: Router` - The parent router, or null if this instance is not a child router.
-* `routes: RouteConfig` - No description available.
+* `routes: ` - No description available.
 * `transformTitle: ` - Extension point to transform the document title before it is built and displayed.
 By default, child routers delegate to the parent router, and the app router
 returns the title unchanged.
@@ -438,10 +438,10 @@ The primary class responsible for handling routing and navigation.
 * `isExplicitNavigationBack: boolean` - True if the [[Router]] is navigating due to explicit call to navigateBack function.
 * `isNavigating: boolean` - True if the [[Router]] is currently processing a navigation.
 * `isRoot: boolean` - Gets a value indicating whether or not this [[Router]] is the root in the router tree. I.e., it has no parent.
-* `navigation: NavModel` - The navigation models for routes that specified [[RouteConfig.nav]].
+* `navigation: ` - The navigation models for routes that specified [[RouteConfig.nav]].
 * `options: any` - No description available.
 * `parent: Router` - The parent router, or null if this instance is not a child router.
-* `routes: RouteConfig` - No description available.
+* `routes: ` - No description available.
 * `transformTitle: ` - Extension point to transform the document title before it is built and displayed.
 By default, child routers delegate to the parent router, and the app router
 returns the title unchanged.

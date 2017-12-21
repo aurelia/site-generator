@@ -17,7 +17,7 @@
   </code></pre></source-code>
 </code-listing>
 <code-listing heading="Basic Route Configuration">
-  <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>    
+  <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> router<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>router <span class="token operator">=</span> router<span class="token punctuation">;</span>
@@ -36,7 +36,7 @@
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       router<span class="token punctuation">:</span> Router<span class="token punctuation">;</span>
-    
+
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">,</span> router<span class="token punctuation">:</span> Router<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>router <span class="token operator">=</span> router<span class="token punctuation">;</span>
         config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
@@ -51,25 +51,16 @@
   </code></pre></source-code>
 </code-listing>
 <ul>
-<li>
-<p><code>router.isNavigating</code> True if the <code>Router</code> is currently processing a navigation, bear in mind that it only works when you are in base router and not in child routers.</p>
-</li>
-<li>
-<p><code>config.map()</code> adds route(s) to the router. Although only <code>route</code>, <code>name</code>, <code>moduleId</code>, <code>href</code> and <code>nav</code> are shown above there are other properties that can be included in a route. The interface name for a route is <code>RouteConfig</code>. You can also use <code>config.mapRoute()</code> to add a single route.</p>
-</li>
-<li>
-<p><code>route</code> - is the pattern to match against incoming URL fragments. It can be a string or array of strings. The route can contain parameterized routes or wildcards as well.</p>
+<li><code>config.map()</code> adds route(s) to the router. Although only <code>route</code>, <code>name</code>, <code>moduleId</code>, <code>href</code> and <code>nav</code> are shown above there are other properties that can be included in a route. The interface name for a route is <code>RouteConfig</code>. You can also use <code>config.mapRoute()</code> to add a single route.</li>
+<li><code>route</code> - is the pattern to match against incoming URL fragments. It can be a string or array of strings. The route can contain parameterized routes or wildcards as well.
 <ul>
 <li>Parameterized routes match against a string with a <code>:token</code> parameter (ie: 'users/:id/detail'). An object with the token parameter's name is set as property and passed as a parameter to the route view-model's <code>activate()</code> function.</li>
 <li>A parameter can be made optional by appending a question mark <code>:token?</code> (ie: <code>users/:id?/detail</code> would match both <code>users/3/detail</code> and <code>users/detail</code>). When an optional parameter is missing from the url, the property passed to <code>activate()</code> is <code>undefined</code>.</li>
 <li>Wildcard routes are used to match the &quot;rest&quot; of a path (ie: files/*path matches files/new/doc or files/temp). An object with the rest of the URL after the segment is set as the <code>path</code> property and passed as a parameter to <code>activate()</code> as well.</li>
 </ul>
 </li>
-<li>
-<p><code>href</code> - is a conditionally optional property. If it is not defined then route is used. If route has segments then href is required as in the case of files because the router does not know how to fill out the parameterized portions of the pattern.</p>
-</li>
-<li>
-<p><code>nav</code> - is a boolean or number property. When set to true the route will be included in the router's navigation model. When specified as number, the value will be used in sorting the routes. This makes it easier to create a dynamic menu or similar elements.  The navigation model will be available as array of <code>NavModel</code> in <code>router.navigation</code>. These are the available properties in <code>NavModel</code>:</p>
+<li><code>href</code> - is a conditionally optional property. If it is not defined then route is used. If route has segments then href is required as in the case of files because the router does not know how to fill out the parameterized portions of the pattern.</li>
+<li><code>nav</code> - is a boolean or number property. When set to true the route will be included in the router's navigation model. When specified as number, the value will be used in sorting the routes. This makes it easier to create a dynamic menu or similar elements.  The navigation model will be available as array of <code>NavModel</code> in <code>router.navigation</code>. These are the available properties in <code>NavModel</code>:
 <ul>
 <li><code>isActive</code> flag which will be true when the associated route is active.</li>
 <li><code>title</code> which will be prepended in html title when the associated route is active.</li>
@@ -80,6 +71,18 @@
 <li>Other properties includes <code>relativeHref</code> and <code>order</code>.</li>
 </ul>
 </li>
+</ul>
+<h3>Navigation States</h3>
+<p>The router contains a number of additional properties that indicate the current status of router navigation. These properties are only set on the base router, i.e. not in child routers. Additionally, these properties are all with respect to browser history which extends past the lifecycle of the router itself.</p>
+<ul>
+<li><code>router.isNavigating</code>: <code>true</code> if the router is currently processing a navigation.</li>
+<li><code>router.isNavigatingFirst</code>: <code>true</code> if the router is navigating into the app for the first time in the browser session.</li>
+<li><code>router.isNavigatingNew</code>: <code>true</code> if the router is navigating to a page instance not in the browser session history. This is triggered when the user clicks a link or the navigate function is called explicitly.</li>
+<li><code>router.isNavigatingForward</code>: <code>true</code> if the router is navigating forward in the browser session history. This is triggered when the user clicks the forward button in their browser.</li>
+<li><code>router.isNavigatingBack</code>: <code>true</code> if the router is navigating back in the browser session history. This is triggered when the user clicks the back button in their browser or when the <code>navigateBack()</code> function is called.</li>
+<li><code>router.isNavigatingRefresh</code>: <code>true</code> if the router is navigating due to a browser refresh.</li>
+<li><code>router.isExplicitNavigation</code>: <code>true</code> if the router is navigating due to explicit call to navigate function(s).</li>
+<li><code>router.isExplicitNavigationBack</code>: <code>true</code> if the router is navigating due to explicit call to navigateBack function.</li>
 </ul>
 </section>
 <section><h2 id="options">Options</h2><h3>Push State</h3>
@@ -356,8 +359,7 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">const</span> step <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AuthorizeStep</span><span class="token punctuation">;</span>
-        config<span class="token punctuation">.</span><span class="token function">addAuthorizeStep</span><span class="token punctuation">(</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">addAuthorizeStep</span><span class="token punctuation">(</span>AuthorizeStep<span class="token punctuation">)</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
           <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'home'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>       name<span class="token punctuation">:</span> <span class="token string">'home'</span><span class="token punctuation">,</span>       moduleId<span class="token punctuation">:</span> <span class="token string">'home/index'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span>            name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span>      moduleId<span class="token punctuation">:</span> <span class="token string">'users/index'</span><span class="token punctuation">,</span>  settings<span class="token punctuation">:</span> <span class="token punctuation">{</span> auth<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -380,11 +382,10 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
     <span class="token punctuation">}</span>
   </code></pre></source-code>
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>Redirect<span class="token punctuation">,</span> NavigationInstruction<span class="token punctuation">,</span> RouterConfiguration<span class="token punctuation">,</span> Next<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">,</span> NavigationInstruction<span class="token punctuation">,</span> Next<span class="token punctuation">,</span> Redirect<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
-        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">addAuthorizeStep</span><span class="token punctuation">(</span>AuthorizeStep<span class="token punctuation">)</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
           <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'home'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>       name<span class="token punctuation">:</span> <span class="token string">'home'</span><span class="token punctuation">,</span>       moduleId<span class="token punctuation">:</span> <span class="token string">'home/index'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -416,7 +417,7 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
           <span class="token keyword">return</span> step<span class="token punctuation">.</span>run<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
         step<span class="token punctuation">.</span>run <span class="token operator">=</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-          <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+          <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">addPreActivateStep</span><span class="token punctuation">(</span>step<span class="token punctuation">)</span>
         config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
@@ -427,18 +428,16 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
     <span class="token punctuation">}</span>
   </code></pre></source-code>
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>NavigationInstruction<span class="token punctuation">,</span> RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">,</span> NavigationInstruction<span class="token punctuation">,</span> Next<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
         <span class="token keyword">function</span> <span class="token function">step</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token keyword">return</span> step<span class="token punctuation">.</span>run<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-        step<span class="token punctuation">.</span>run <span class="token operator">=</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">:</span> NavigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">:</span> <span class="token keyword">Function</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        step<span class="token punctuation">.</span>run <span class="token operator">=</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">:</span> NavigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">:</span> Next<span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
           <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">addPreActivateStep</span><span class="token punctuation">(</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
           <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'home'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'home'</span><span class="token punctuation">,</span>  moduleId<span class="token punctuation">:</span> <span class="token string">'home/index'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -453,7 +452,7 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">const</span> step <span class="token operator">=</span> <span class="token punctuation">{</span>
-          run<span class="token punctuation">:</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token function">run</span><span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -466,17 +465,15 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
     <span class="token punctuation">}</span>
   </code></pre></source-code>
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>NavigationInstruction<span class="token punctuation">,</span> RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">,</span> NavigationInstruction<span class="token punctuation">,</span> Next<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
         <span class="token keyword">const</span> step <span class="token operator">=</span> <span class="token punctuation">{</span>
-          run<span class="token punctuation">:</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">:</span> NavigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">:</span> <span class="token keyword">Function</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token function">run</span><span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">:</span> NavigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">:</span> Next<span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">addPreRenderStep</span><span class="token punctuation">(</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
           <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'home'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'home'</span><span class="token punctuation">,</span>  moduleId<span class="token punctuation">:</span> <span class="token string">'home/index'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -491,7 +488,7 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">const</span> step <span class="token operator">=</span> <span class="token punctuation">{</span>
-          run<span class="token punctuation">:</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token function">run</span><span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -504,17 +501,15 @@ The <code>redirect</code> is particularly useful when you have an &quot;empty&qu
     <span class="token punctuation">}</span>
   </code></pre></source-code>
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>NavigationInstruction<span class="token punctuation">,</span> RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">,</span> NavigationInstruction<span class="token punctuation">,</span> Next<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
         <span class="token keyword">const</span> step <span class="token operator">=</span> <span class="token punctuation">{</span>
-          run<span class="token punctuation">:</span> <span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">:</span> NavigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">:</span> <span class="token keyword">Function</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token function">run</span><span class="token punctuation">(</span>navigationInstruction<span class="token punctuation">:</span> NavigationInstruction<span class="token punctuation">,</span> next<span class="token punctuation">:</span> Next<span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">addPostRenderStep</span><span class="token punctuation">(</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
         config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
           <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'home'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'home'</span><span class="token punctuation">,</span>  moduleId<span class="token punctuation">:</span> <span class="token string">'home/index'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -566,8 +561,100 @@ If you don't name a <code>router-view</code>, it will be available under the nam
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
+<h3>Empty View Ports</h3>
+<p>You can empty a view port by setting <code>moduleId</code> null in the route configuration for that view port.</p>
+<code-listing>
+  <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> viewPorts<span class="token punctuation">:</span> <span class="token punctuation">{</span> left<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'user/list'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> viewPorts<span class="token punctuation">:</span> <span class="token punctuation">{</span> left<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'user/list'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>View Port Defaults</h3>
+<p>The empty view port is actually the out-of-the-box default. You can override this default to load a specific <code>moduleId</code> whenever <code>moduleId</code> is null by passing a view port configuration to the router configuration. These overrides can be set specifically to each view port.</p>
+<code-listing>
+  <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> viewPorts<span class="token punctuation">:</span> <span class="token punctuation">{</span> left<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'user/list'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">useViewPortDefaults</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'pages/placeholder'</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> viewPorts<span class="token punctuation">:</span> <span class="token punctuation">{</span> left<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'user/list'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">useViewPortDefaults</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'pages/placeholder'</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Optional View Ports</h3>
+<p>If a view port configuration is not defined on a route, the router will skip routing on that particular view port leaving the view port untouched. If there is no existing content in the view port, i.e. when the application is first loaded, the view port will be populated with the view port default configuration, which is empty if not otherwise specified (see View Port Defaults).</p>
+<code-listing>
+  <source-code lang="ES 2015/2016"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> viewPorts<span class="token punctuation">:</span> <span class="token punctuation">{</span> left<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'user/list'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">useViewPortDefaults</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'pages/placeholder'</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">:</span> RouterConfiguration<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span> viewPorts<span class="token punctuation">:</span> <span class="token punctuation">{</span> left<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'user/list'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">useViewPortDefaults</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          right<span class="token punctuation">:</span> <span class="token punctuation">{</span> moduleId<span class="token punctuation">:</span> <span class="token string">'pages/placeholder'</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
-In addition to the <code>moduleId</code>, you can also specify a &quot;layout&quot; in the configuration of a view port. See the discussion of Layouts elsewhere in this document.</p>
+In addition to the <code>moduleId</code>, you can also specify a &quot;layout&quot; in the configuration of a view port (see 
+<a href="aurelia-doc://section/10/version/1.0.0" target="_blank">Layouts</a>
+).</p>
 </div>
 </section>
 <section><h2 id="layouts">Layouts</h2><p>Similar to MVC-style master/layout pages, Aurelia allows you to use a &quot;layout&quot; view like an MVC &quot;master template&quot; for a set of views.</p>
@@ -796,7 +883,7 @@ and the <code>AppRouter</code>'s <code>transformTitle</code> would be configured
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
             <span class="token keyword">const</span> router <span class="token operator">=</span> aurelia<span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>AppRouter<span class="token punctuation">)</span><span class="token punctuation">;</span>
             router<span class="token punctuation">.</span>transformTitle <span class="token operator">=</span> title <span class="token operator">=</span><span class="token operator">></span> i18n<span class="token punctuation">.</span><span class="token function">tr</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            
+
             <span class="token keyword">const</span> eventAggregator <span class="token operator">=</span> aurelia<span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>EventAggregator<span class="token punctuation">)</span><span class="token punctuation">;</span>
             eventAggregator<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'i18n:locale:changed'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
               router<span class="token punctuation">.</span><span class="token function">updateTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -828,7 +915,7 @@ and the <code>AppRouter</code>'s <code>transformTitle</code> would be configured
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
             <span class="token keyword">const</span> router <span class="token operator">=</span> aurelia<span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>AppRouter<span class="token punctuation">)</span><span class="token punctuation">;</span>
             router<span class="token punctuation">.</span>transformTitle <span class="token operator">=</span> title <span class="token operator">=</span><span class="token operator">></span> i18n<span class="token punctuation">.</span><span class="token function">tr</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            
+
             <span class="token keyword">const</span> eventAggregator <span class="token operator">=</span> aurelia<span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>EventAggregator<span class="token punctuation">)</span><span class="token punctuation">;</span>
             eventAggregator<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'i18n:locale:changed'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
               router<span class="token punctuation">.</span><span class="token function">updateTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>

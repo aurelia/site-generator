@@ -21,8 +21,8 @@
 <a href="https://github.com/aurelia/skeleton-navigation#running-the-app" target="_blank">these steps</a>
 .</p>
 <p>Now that we have our app running, let's start by installing <code>aurelia-bundler</code>. To do so <code>cd</code> into <code>skeleton-navigation</code> and run the following command:</p>
-<pre><code class="language-shell">npm install aurelia-bundler --save-dev
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install aurelia<span class="token operator">-</span>bundler <span class="token operator">--</span>save<span class="token operator">-</span>dev
+</code></pre></source-code></code-listing>
 <p>Now, let's create a <code>bundle.js</code> file in <code>build/tasks/bundle.js</code> as follows:</p>
 <code-listing heading="bundle.js">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
@@ -77,8 +77,8 @@
 The bundle function returns a Promise for proper integration into async task engines like Gulp.</p>
 </div>
 <p>With that file in place, let's run the command below:</p>
-<pre><code class="language-shell">gulp bundle
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>gulp bundle
+</code></pre></source-code></code-listing>
 <p>Here are the things that should have happened after Gulp is finished executing the bundle task:</p>
 <ul>
 <li>A file, <code>dist/app-build.js</code> is created.</li>
@@ -242,11 +242,11 @@ Exclusion of files that are being used in the project but are not part of it (e.
 <section><h2 id="bundling-html-imports">Bundling HTML Imports</h2><p>At this point, if you are thinking: &quot;Well, this is all good but we have already developed an application that uses Polymer and  <code>HTML Imports</code> extensively. We want to bundle them as well.&quot; As you may already know, we have created a separate plugin 
 <a href="https://github.com/aurelia/html-import-template-loader" target="_blank">aurelia-html-import-template-loader</a>
  exclusively for this use case. We have bundling support for that too. This is how we can do it. It's actually a two part process. First let's install the <code>aurelia-html-import-template-loader</code> plugin with the command below:</p>
-<pre><code class="language-shell"> jspm install aurelia-html-import-template-loader
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code> jspm install aurelia<span class="token operator">-</span>html<span class="token operator">-</span>import<span class="token operator">-</span>template<span class="token operator">-</span>loader
+</code></pre></source-code></code-listing>
 <p>Now, let's open <code>src/main.js</code> and add this line:</p>
-<pre><code class="language-javascript">aurelia.use.plugin('aurelia-html-import-template-loader')
-</code></pre>
+<code-listing><source-code lang="javascript"><pre class="language-javascript"><code>aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-html-import-template-loader'</span><span class="token punctuation">)</span>
+</code></pre></source-code></code-listing>
 <p>After the change <code>main.js</code> should look like this:</p>
 <code-listing heading="main.js">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
@@ -332,8 +332,8 @@ Exclusion of files that are being used in the project but are not part of it (e.
   </code></pre></source-code>
 </code-listing>
 <p>We have changed the source code (src/main.js), so we need to rebuild our app. The command below should do that:</p>
-<pre><code class="language-shell"> gulp serve
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code> gulp serve
+</code></pre></source-code></code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 The <code>serve</code> task is already configured in such a way that it runs the <code>build</code> task first.</p>
 </div>

@@ -127,8 +127,8 @@ If the validation fails, a message should be returned which directs the develope
 ## Functions
 
 
-* `decorators(rest: Function): DecoratorApplicator` - Enables applying decorators, particularly for use when there is no syntax support in the language, such as with ES5 and ES2016.
-  * `rest: Function` - The decorators to apply.
+* `decorators(rest: ): DecoratorApplicator` - Enables applying decorators, particularly for use when there is no syntax support in the language, such as with ES5 and ES2016.
+  * `rest: ` - The decorators to apply.
 
 
 

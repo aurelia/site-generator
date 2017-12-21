@@ -8,11 +8,11 @@
     <section><h2 id="introduction">Introduction</h2><p>With the Component Tester you can easily stage a custom element or custom attribute in isolation inside a mini Aurelia application, assert how it responds to data-binding and assert its behavior throughout the component's lifecycle (bind, attached etc).</p>
 </section>
 <section><h2 id="getting-started">Getting Started</h2><p>If you are using JSPM:</p>
-<pre><code class="language-shell">jspm install aurelia-testing
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>jspm install aurelia<span class="token operator">-</span>testing
+</code></pre></source-code></code-listing>
 <p>If you are using NPM:</p>
-<pre><code class="language-shell">npm install aurelia-testing
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install aurelia<span class="token operator">-</span>testing
+</code></pre></source-code></code-listing>
 <p>Once you've got the library installed, you can use it in a unit test. In the following examples we will be using Jasmine, but any testing framework would work.</p>
 </section>
 <section><h2 id="testing-a-custom-element">Testing a Custom Element</h2><p>Let's start with a simple custom element that we want to test:</p>
@@ -78,9 +78,9 @@
   </code></pre></source-code>
 </code-listing>
 <p><code>StageComponent</code> comes with one property, <code>withResources</code>, that lets you start off the staging with a fluent API. <code>withResources</code> lets you specify which resource or resources for Aurelia to register.  It takes either a string for registering one single resource or an Array of strings for registering multiple resources. <code>inView</code> lets you provide the html markup to be run. This is just a standard Aurelia view where you can do all the data binding you are used to in a full-blown Aurelia application. <code>boundTo</code> lets you provide a test <code>viewModel</code> with the data that the view will get bound to. In this example, the staging of the component is done in Jasmine's <code>beforeEach</code> method in order to reuse the same setup for multiple tests.</p>
-<blockquote>
-<p>Note: If you are using <code>karma</code> and your configuration already has a path for <code>'*': 'src/*'</code> set you may not need to use <code>src/</code>, and just <code>my-component</code>.</p>
-</blockquote>
+<div class="info"><div class="icon"> <i></i> </div><p>
+If you are using <code>karma</code> and your configuration already has a path for <code>'*': 'src/*'</code> set you may not need to use <code>src/</code>, and just <code>my-component</code>.</p>
+</div>
 <p>Next, we come to the actual test where we call <code>create</code> on the <code>ComponentTester</code>. Create will kick everything off and bootstrap the mini Aurelia application, configure it with <code>standardConfiguration</code> (we will take a look later at how you can run with your own configuration), register provided resources as global resources, start the application and finally render your component so you can assert the expected behavior. In this case, we want to make sure our <code>firstName</code> property gets rendered correctly in the HTML by selecting the <code>div</code> tag via it's class name. We use <code>document.querySelector('.firstName');</code> to grab that and then check that its innerHTML is <code>Bob</code>. Next we call Jasmine's <code>done</code> function to tell Jasmine that the test is complete. Calling <code>done</code> is needed since the <code>create</code> method is asynchronous and returns a Promise.</p>
 <p>Finally, we call <code>dispose</code> on our <code>ComponentTester</code> instance. This will clean up the DOM so our next test will start out with a clean document. That's pretty much all there is to it. Easy right? Imagine doing the same assert with stand alone unit tests that run outside of Aurelia. It would be pretty difficult, especially for a more complex component.</p>
 </section>
@@ -198,32 +198,32 @@ to test the view/view-model, mocking out service calls to the backend.</p>
 
       <span class="token function">getFirstName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    
+
     <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'MyComponent'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
       <span class="token keyword">let</span> component<span class="token punctuation">;</span>
       <span class="token keyword">let</span> service <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MockService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
+
       <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         service<span class="token punctuation">.</span>firstName <span class="token operator">=</span> undefined<span class="token punctuation">;</span>
-    
+
         component <span class="token operator">=</span> StageComponent
           <span class="token punctuation">.</span><span class="token function">withResources</span><span class="token punctuation">(</span><span class="token string">'src/component'</span><span class="token punctuation">)</span>
           <span class="token punctuation">.</span><span class="token function">inView</span><span class="token punctuation">(</span><span class="token string">'&lt;component>&lt;/component>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
+
         component<span class="token punctuation">.</span><span class="token function">bootstrap</span><span class="token punctuation">(</span>aurelia <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
           aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          
+
           aurelia<span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token function">registerInstance</span><span class="token punctuation">(</span>Service<span class="token punctuation">,</span> service<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
+
       <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should render first name'</span><span class="token punctuation">,</span> done <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         service<span class="token punctuation">.</span>firstName <span class="token operator">=</span> <span class="token string">'Bob'</span><span class="token punctuation">;</span>
-    
+
         component<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>bootstrap<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
           <span class="token keyword">const</span> nameElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.first-name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Bob'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          
+
           <span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -362,7 +362,7 @@ to test the view/view-model, mocking out service calls to the backend.</p>
 <code-listing heading="... and here is the same using jQuery:">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>waitFor<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-testing'</span><span class="token punctuation">;</span>
-    
+
     <span class="token function">waitFor</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.firstName'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
       <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Bob'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>

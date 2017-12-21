@@ -15,7 +15,7 @@ Used to allow functions/classes to specify resolution of all matches to a key.
 #### Methods
 
 
-* `get(container: Container): any` - Called by the container to resolve all matching dependencies as an array of instances.
+* `get(container: Container): ` - Called by the container to resolve all matching dependencies as an array of instances.
   * `container: Container` - The container to resolve from.
 
 
@@ -37,8 +37,8 @@ A lightweight, extensible dependency injection container.
 #### Methods
 
 
-* `_createInvocationHandler(fn: Function &amp; { inject?: any; }): InvocationHandler` - 
-  * `fn: Function &amp; { inject?: any; }` - No description available
+* `_createInvocationHandler(fn: ): InvocationHandler` - 
+  * `fn: ` - No description available
 
 
 * `_get(key: any): any` - 
@@ -51,8 +51,8 @@ A lightweight, extensible dependency injection container.
 
 
 
-* `autoRegisterAll(fns: any): void` - Registers an array of types (constructor functions) by inspecting their registration annotations. If none are found, then the default singleton registration is used.
-  * `fns: any` - The constructor function to use when the dependency needs to be instantiated.
+* `autoRegisterAll(fns: ): void` - Registers an array of types (constructor functions) by inspecting their registration annotations. If none are found, then the default singleton registration is used.
+  * `fns: ` - The constructor function to use when the dependency needs to be instantiated.
 
 
 
@@ -63,7 +63,7 @@ A lightweight, extensible dependency injection container.
   * `key: any` - The key that identifies the object to resolve.
 
 
-* `getAll(key: any): any` - Resolves all instance registered under the provided key.
+* `getAll(key: any): ` - Resolves all instance registered under the provided key.
   * `key: any` - The key that identifies the objects to resolve.
 
 
@@ -76,9 +76,9 @@ A lightweight, extensible dependency injection container.
   * `checkParent?: boolean` - Indicates whether or not to check the parent container hierarchy.
 
 
-* `invoke(fn: Function &amp; { name?: string; }, dynamicDependencies?: any): any` - Invokes a function, recursively resolving its dependencies.
-  * `fn: Function &amp; { name?: string; }` - The function to invoke with the auto-resolved dependencies.
-  * `dynamicDependencies?: any` - Additional function dependencies to use during invocation.
+* `invoke(fn: , dynamicDependencies?: ): any` - Invokes a function, recursively resolving its dependencies.
+  * `fn: ` - The function to invoke with the auto-resolved dependencies.
+  * `dynamicDependencies?: ` - Additional function dependencies to use during invocation.
 
 
 * `makeGlobal(): Container` - Makes this container instance globally reachable through Container.instance.
@@ -155,17 +155,17 @@ An Invoker that is used to invoke a factory method.
 #### Methods
 
 
-* `invoke(container: Container, fn: Function, dependencies: any): any` - Invokes the function with the provided dependencies.
+* `invoke(container: Container, fn: Function, dependencies: ): any` - Invokes the function with the provided dependencies.
   * `container: Container` - The calling container.
   * `fn: Function` - The constructor or factory function.
-  * `dependencies: any` - The dependencies of the function call.
+  * `dependencies: ` - The dependencies of the function call.
 
 
-* `invokeWithDynamicDependencies(container: Container, fn: Function, staticDependencies: any, dynamicDependencies: any): any` - Invokes the function with the provided dependencies.
+* `invokeWithDynamicDependencies(container: Container, fn: Function, staticDependencies: , dynamicDependencies: ): any` - Invokes the function with the provided dependencies.
   * `container: Container` - The calling container.
   * `fn: Function` - The constructor or factory function.
-  * `staticDependencies: any` - The static dependencies of the function.
-  * `dynamicDependencies: any` - Additional dependencies to use during invocation.
+  * `staticDependencies: ` - The static dependencies of the function.
+  * `dynamicDependencies: ` - Additional dependencies to use during invocation.
 
 
 
@@ -175,16 +175,16 @@ Stores the information needed to invoke a function.
 
 #### Properties
 
-* `dependencies: any` - The statically known dependencies of this function invocation.
+* `dependencies: ` - The statically known dependencies of this function invocation.
 * `fn: Function` - The function to be invoked by this handler.
 * `invoker: Invoker` - The invoker implementation that will be used to actually invoke the function.
 
 #### Methods
 
 
-* `invoke(container: Container, dynamicDependencies?: any): any` - Invokes the function.
+* `invoke(container: Container, dynamicDependencies?: ): any` - Invokes the function.
   * `container: Container` - The calling container.
-  * `dynamicDependencies?: any` - Additional dependencies to use during invocation.
+  * `dynamicDependencies?: ` - Additional dependencies to use during invocation.
 
 
 
@@ -221,7 +221,7 @@ under a different key by supplying a key using the &#x60;as&#x60; method.
 #### Methods
 
 
-* `as(key: any): ` - Instructs the NewInstance resolver to register the resolved instance using the supplied key.
+* `as(key: any): this` - Instructs the NewInstance resolver to register the resolved instance using the supplied key.
   * `key: any` - The key to register the instance with.
 
 
@@ -230,9 +230,9 @@ as another key if the &#x60;as&#x60; method was used.
   * `container: any` - The container to resolve the parent from.
 
 
-* `static of(key: any, dynamicDependencies: any): NewInstance` - Creates an NewInstance Resolver for the supplied key.
+* `static of(key: any, dynamicDependencies: ): NewInstance` - Creates an NewInstance Resolver for the supplied key.
   * `key: any` - The key to resolve/instantiate.
-  * `dynamicDependencies: any` - An optional list of dynamic dependencies.
+  * `dynamicDependencies: ` - An optional list of dynamic dependencies.
 
 
 
@@ -353,17 +353,17 @@ A strategy for invoking a function, resulting in an object instance.
 #### Methods
 
 
-* `invoke(container: Container, fn: Function, dependencies: any): any` - Invokes the function with the provided dependencies.
+* `invoke(container: Container, fn: Function, dependencies: ): any` - Invokes the function with the provided dependencies.
   * `container: Container` - No description available.
   * `fn: Function` - The constructor or factory function.
-  * `dependencies: any` - The dependencies of the function call.
+  * `dependencies: ` - The dependencies of the function call.
 
 
-* `invokeWithDynamicDependencies(container: Container, fn: Function, staticDependencies: any, dynamicDependencies: any): any` - Invokes the function with the provided dependencies.
+* `invokeWithDynamicDependencies(container: Container, fn: Function, staticDependencies: , dynamicDependencies: ): any` - Invokes the function with the provided dependencies.
   * `container: Container` - No description available.
   * `fn: Function` - The constructor or factory function.
-  * `staticDependencies: any` - The static dependencies of the function.
-  * `dynamicDependencies: any` - Additional dependencies to use during invocation.
+  * `staticDependencies: ` - The static dependencies of the function.
+  * `dynamicDependencies: ` - Additional dependencies to use during invocation.
 
 
 
@@ -402,8 +402,8 @@ Used to allow functions/classes to specify custom dependency resolution logic.
 
 ## Constants
 
-* `_emptyParameters: any` - No description available.
-* `resolver: Function &amp; { decorates?: any; }` - Decorator: Indicates that the decorated class/object is a custom resolver.
+* `_emptyParameters: ` - No description available.
+* `resolver: ` - Decorator: Indicates that the decorated class/object is a custom resolver.
 
 ## Functions
 
@@ -426,8 +426,8 @@ Used to allow functions/classes to specify custom dependency resolution logic.
   * `name: any` - No description available.
 
 
-* `inject(rest: any): any` - Decorator: Specifies the dependencies that should be injected by the DI Container into the decoratored class/function.
-  * `rest: any` - No description available.
+* `inject(rest: ): any` - Decorator: Specifies the dependencies that should be injected by the DI Container into the decoratored class/function.
+  * `rest: ` - No description available.
 
 
 * `invokeAsFactory(potentialTarget?: any): any` - Decorator: Specifies that the decorated item should be called as a factory function, rather than a constructor.
@@ -442,9 +442,9 @@ Used to allow functions/classes to specify custom dependency resolution logic.
   * `keyValue: any` - No description available.
 
 
-* `newInstance(asKeyOrTarget?: any, dynamicDependencies: any): ` - Decorator: Specifies the dependency as a new instance
+* `newInstance(asKeyOrTarget?: any, dynamicDependencies: ): ` - Decorator: Specifies the dependency as a new instance
   * `asKeyOrTarget?: any` - No description available.
-  * `dynamicDependencies: any` - No description available.
+  * `dynamicDependencies: ` - No description available.
 
 
 * `optional(checkParentOrTarget?: boolean): ` - Decorator: Specifies the dependency as optional

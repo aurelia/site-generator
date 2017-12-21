@@ -29,8 +29,8 @@
 Note on Git for Windows installation: When installing Git for Windows, there is an option to <code>use git bash only</code>, <code>run git from windows command prompt</code>, or <code>run git and included unix tools from windows command prompt</code>. You have to choose <code>run git from windows command prompt</code> or <code>run git and included unix tools from windows command prompt</code> in order for Aurelia CLI to work.</p>
 </div>
 <p>Once you have the prerequisites installed, you can install the Aurelia CLI itself. From the command line, use npm to install the CLI globally:</p>
-<pre><code>npm install aurelia-cli -g
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install aurelia<span class="token operator">-</span>cli <span class="token operator">-</span>g
+</code></pre></source-code></code-listing>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Always run commands from a Bash prompt. Depending on your environment, you may need to use <code>sudo</code> when executing npm global installs.</p>
 </div>
@@ -77,7 +77,7 @@ Before proceeding any further, please make sure you are familiar with the concep
   </code></pre></source-code>
   <source-code lang="TypeScript"><pre class="language-typescript"><code>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>Router<span class="token punctuation">,</span> RouterConfiguration<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
-
+       
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
       router<span class="token punctuation">:</span> Router<span class="token punctuation">;</span>
 
@@ -126,14 +126,14 @@ Before proceeding any further, please make sure you are familiar with the concep
 <p>The <code>router-view</code> is provided by Aurelia and is a placeholder that indicated where the router should render the current route. This allows you to structure your application layout however you want, simply placing the <code>router-view</code> wherever you want to see the current page rendered. Whenever you have a <code>configureRouter</code> method, the view must also contain a <code>router-view</code>.</p>
 <p>We're almost done setting up the application shell. Before we're done, we need to install Bootstrap. We'll be using that in this tutorial in order to give our application a decent appearance. In your own apps, you can use any CSS framework you like.</p>
 <p>To get Bootstrap setup, we begin by installing the library itself with NPM. Execute the following on the command line to do this:</p>
-<pre><code>npm install bootstrap --save
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install bootstrap <span class="token operator">--</span>save
+</code></pre></source-code></code-listing>
 <p>Next, because Bootstrap uses jQuery, we want to install jQuery as well, like this:</p>
-<pre><code>npm install jquery@^2.2.4 --save
-</code></pre>
-<blockquote>
-<p>Whenever you install new dependencies used in your app, make sure to restart the <code>au run</code> or respectivley the <code>au run --watch</code> command, in order to have the CLI rebundle your freshly added dependecies.</p>
-</blockquote>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install jquery@<span class="token operator">^</span><span class="token number">2.2</span><span class="token punctuation">.</span><span class="token number">4</span> <span class="token operator">--</span>save
+</code></pre></source-code></code-listing>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Whenever you install new dependencies used in your app, make sure to restart the <code>au run</code> or respectively the <code>au run --watch</code> command, in order to have the CLI re-bundle your freshly added dependencies.</p>
+</div>
 <p>With these libraries installed, we now need to tell Aurelia which application bundle they should be included in and how to properly configure them with the module system. To do this, look in the <code>aurelia_project</code> folder and open up the <code>aurelia.json</code> file. This file contains all the information that the Aurelia CLI uses to build our project. If you scroll down, you will see a <code>bundles</code> section. There are two bundles defined by default: <code>app-bundle.js</code>, which contains your code and <code>vendor-bundle.js</code> which contains all 3rd party libraries. We need to add some new items to the <code>dependencies</code> array of the <code>vendor-bundle.js</code> bundle. Add the following two entries for jQuery and Bootstrap:</p>
 <code-listing heading="jQuery and Bootstrap Bundle Config">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
@@ -158,9 +158,9 @@ Before proceeding any further, please make sure you are familiar with the concep
 <p>After you have modified the aurelia.json file, it is necessary to restart the <code>au run --watch</code> process in order for the changes to be picked up.</p>
 </section>
 <section><h2 id="building-out-the-default-route">Building Out the Default Route</h2><p>If you run the application now, you'll see a blank screen and the browser's console will display the following message:</p>
-<pre><code>Failed to load resource: the server responded with a status of 404 (Not Found) http://localhost:9000/src/no-selection.js
-ERROR [app-router] Error: Script error for &quot;no-selection&quot;
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>Failed to load resource<span class="token punctuation">:</span> the server responded <span class="token keyword">with</span> a status <span class="token keyword">of</span> <span class="token number">404</span> <span class="token punctuation">(</span>Not Found<span class="token punctuation">)</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">9000</span><span class="token operator">/</span>src<span class="token operator">/</span>no<span class="token operator">-</span>selection<span class="token punctuation">.</span>js
+ERROR <span class="token punctuation">[</span>app<span class="token operator">-</span>router<span class="token punctuation">]</span> Error<span class="token punctuation">:</span> Script error <span class="token keyword">for</span> <span class="token string">"no-selection"</span>
+</code></pre></source-code></code-listing>
 <p>This is actually expected. Why? Well, we have now configured a router, that router is matching on the empty route pattern we defined and it's trying to load the <code>no-selection</code> module, but we haven't created that yet. Let's do that now. Create a new file under <code>src</code> named <code>no-selection${context.language.fileExtension}</code> and give it the following code:</p>
 <code-listing heading="no-selection${context.language.fileExtension}">
   <source-code lang="ES 2015/ES Next"><pre class="language-javascript"><code>
@@ -256,9 +256,9 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<blockquote>
-<p>Note that we use a dashed naming convention to separate the words <em>contact-list</em> as our custom element name. The name of the class instead should be defined by using the UpperCamelCase version <em>ContactList</em></p>
-</blockquote>
+<div class="info"><div class="icon"> <i></i> </div><p>
+We use a dashed naming convention to separate the words <em>contact-list</em> as our custom element name. The name of the class instead should be defined by using the UpperCamelCase version <em>ContactList</em>.</p>
+</div>
 <p>The view-model for our custom element has a few notable characteristics. First, we're using dependency injection. Aurelia has its own dependency injection container, which it uses to instantiate classes in your app. Classes can declare constructor dependencies through <em>inject metadata</em>. This looks a bit different depending on what language you are using. In ES 2015, you can declare an <code>inject</code> static method that returns an array of constructor dependencies while in ES Next and TypeScript, you can use an <code>inject</code> decorator to declare those dependencies. As you can see here, our <code>ContactList</code> class has a dependency on our <code>WebAPI</code> class. When Aurelia instantiates the contact list, it will first instantiate (or locate) an instance of the web API and &quot;inject&quot; that into the contact list's constructor.</p>
 <p>The second thing to notice is the <code>created</code> method. All Aurelia components follow a component life-cycle. A developer can opt into any stage of the life-cycle by implementing the appropriate methods. In this case, we're implementing the <code>created</code> hook which gets called after both the view-model and the view are created. We're using this as an opportunity to call our API and get back the list of contacts, which we then store in our <code>contacts</code> property so we can bind it in the view.</p>
 <p>Finally, we have a <code>select</code> method for selecting a contact. We'll revisit this shortly, after we take a look at how it's used in the view. On that note, create a <code>contact-list.html</code> file and use the following code for the view:</p>
@@ -311,8 +311,8 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 <p><img src="docs/tutorials/creating-a-contact-manager/img/contact-app-contact-list.png" alt="The Contact List" /></p>
 </section>
 <section><h2 id="building-out-the-contact-detail-screen">Building Out the Contact Detail Screen</h2><p>Ok, things are starting to come together, but we still can't view an individual contact. If you try selecting something from the list, you'll see an error like the following in the console:</p>
-<pre><code>ERROR [app-router] Error: Script error for &quot;contact-detail&quot;
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>ERROR <span class="token punctuation">[</span>app<span class="token operator">-</span>router<span class="token punctuation">]</span> Error<span class="token punctuation">:</span> Script error <span class="token keyword">for</span> <span class="token string">"contact-detail"</span>
+</code></pre></source-code></code-listing>
 <p>Again, this is because the router is trying to route to the detail screen, but we have not yet created the component. So, let's do that next. Create a new file named <code>contact-detail${context.language.fileExtension}</code> and add the following code:</p>
 <code-listing heading="contact-detail${context.language.fileExtension}">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -819,8 +819,8 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 </section>
 <section><h2 id="adding-a-loading-indicator">Adding A Loading Indicator</h2><p>Let's add one more final touch to this application. Whenever we're navigating from screen to screen or making a <code>WebAPI</code> request, let's show a loading indicator at the top of our app. To do this, we'll use a 3rd party library and create a custom Aurelia element to wrap it up.</p>
 <p>Begin by installing the <code>nprogress</code> library with the following command:</p>
-<pre><code>npm install nprogress --save
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>npm install nprogress <span class="token operator">--</span>save
+</code></pre></source-code></code-listing>
 <p>Once this is installed, we'll need to make sure it gets configured in the proper bundle. Open your <code>aurelia.json</code> file again, find the bundles section and add the following entry to the dependencies array of the <code>vendor-bundle.js</code> bundle:</p>
 <code-listing heading="NProgress Bundle Config">
   <source-code lang="JavaScript"><pre class="language-javascript"><code>
@@ -840,7 +840,7 @@ ERROR [app-router] Error: Script error for &quot;no-selection&quot;
 </code-listing>
 <p>As you can see, we've configured the standard JavaScript main but are also including an additional CSS resource, just like we did with Bootstrap.</p>
 <div class="info"><div class="icon"> <i></i> </div><h4>TypeScript Definition Files</h4><p>
-TypeScript users should note that when using 3rd party libraries, in order to make them work in a TypeScript project, you will either need to install the d.ts files or create them for yourself. In the case of NProgress, there are definition files available via Definitely Typed which can be installed with the Typings CLI. Assuming you have the Typings tool installed, you would install the definition files for NProgress with the following command: <code>typings install dt~nprogress --global --save</code></p>
+TypeScript users should note that when using 3rd party libraries, in order to make them work in a TypeScript project, you will either need to install the d.ts files or create them for yourself. In the case of NProgress, there are definition files available via Definitely Typed which can be installed with the Typings CLI. Assuming you have the Typings tool installed, you would install the definition files for NProgress with the following command: <code>typings install dt~nprogress --global --save</code> (or <code>npm install @types/nprogress --global --save</code> for TypeScript &gt;= 2.0)</p>
 </div>
 <p>With that in place, let's create our <code>loading-indicator</code> custom element. In the <code>src/resources/elements</code> folder create a file named <code>loading-indicator${context.language.fileExtension}</code> and use the code below for its implementation:</p>
 <code-listing heading="loading-indicator${context.language.fileExtension}">
@@ -1017,12 +1017,12 @@ TypeScript users should note that when using 3rd party libraries, in order to ma
 </section>
 <section><h2 id="next-steps">Next Steps</h2><p>Now that you've completed the tutorial, you may want to consider doing some additional research or development exercises to continue your learning and hone your skills. Here are a few ideas:</p>
 <ul>
-<li>Create a real backend for the app and use the <a href="#/doc/article/aurelia/fetch-client/latest/http-services">http-client or fetch-client</a> to retrieve the data.</li>
+<li>Create a real backend for the app and use the <a href="docs/plugins/http-services">http-client or fetch-client</a> to retrieve the data.</li>
 <li>Extend that application so that new contacts can be added.</li>
 <li>Extend the contact detail form with data validation.</li>
-<li>Learn more about <a href="#/doc/article/aurelia/framework/latest/creating-components/1">the component life-cycle</a>.</li>
-<li>Learn more about <a href="#/doc/article/aurelia/framework/latest/cheat-sheet/7">the navigation life-cycle and routing</a>.</li>
-<li>Expand your knowledge of <a href="#/doc/article/aurelia/binding/latest/binding-basics">binding</a> and <a href="#/doc/article/aurelia/templating/latest/templating-basics">templating</a>.</li>
+<li>Learn more about <a href="docs/fundamentals/components#the-component-lifecycle">the component life-cycle</a>.</li>
+<li>Learn more about <a href="docs/fundamentals/cheat-sheet#routing">the navigation life-cycle and routing</a>.</li>
+<li>Expand your knowledge of <a href="docs/binding/basics">binding</a> and <a href="docs/templating/basics">templating</a>.</li>
 </ul>
 </section>
 <section><h2 id="conclusion">Conclusion</h2><p>This tutorial presents a fairly simple application, but it provides an opportunity to demonstrate a number of interesting techniques. We hope it's helped you along in the process of learning Aurelia and we look forward to seeing what things you will build next.</p>

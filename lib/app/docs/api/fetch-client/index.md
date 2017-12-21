@@ -15,7 +15,7 @@ An HTTP client based on the Fetch API.
 Requests being processed by interceptors are considered active.
 * `baseUrl: string` - The base URL set by the config.
 * `defaults: RequestInit` - The default request init to merge with values specified at request time.
-* `interceptors: Interceptor` - The interceptors to be run during requests.
+* `interceptors: ` - The interceptors to be run during requests.
 * `isConfigured: boolean` - Indicates whether or not the client has been configured.
 * `isRequesting: boolean` - Indicates whether or not the client is currently making one or more requests.
 
@@ -49,7 +49,7 @@ A class for configuring HttpClients.
 defaults cannot be applied when Request objects are manually created because
 Request provides its own defaults and discards the original init object.
 See also https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
-* `interceptors: Interceptor` - Interceptors to be added to the HttpClient.
+* `interceptors: ` - Interceptors to be added to the HttpClient.
 
 #### Methods
 
@@ -136,7 +136,8 @@ See https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 ## Functions
 
 
-* `json(body: any): Blob` - Create a Blob containing JSON-serialized data.
+* `json(body: any, replacer?: any): Blob` - Create a Blob containing JSON-serialized data.
 Useful for easily creating JSON fetch request bodies.
   * `body: any` - The object to be serialized to JSON.
+  * `replacer?: any` - The JSON.stringify replacer used when serializing.
 

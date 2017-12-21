@@ -17,21 +17,21 @@ A logger logs messages to a set of appenders, depending on the log level that is
 #### Methods
 
 
-* `debug(message: string, rest: any): void` - Logs a debug message.
+* `debug(message: string, rest: ): void` - Logs a debug message.
   * `message: string` - The message to log.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
-* `error(message: string, rest: any): void` - Logs an error.
+* `error(message: string, rest: ): void` - Logs an error.
   * `message: string` - The message to log.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
-* `info(message: string, rest: any): void` - Logs info.
+* `info(message: string, rest: ): void` - Logs info.
   * `message: string` - The message to log.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
@@ -40,9 +40,9 @@ A logger logs messages to a set of appenders, depending on the log level that is
 
 
 
-* `warn(message: string, rest: any): void` - Logs a warning.
+* `warn(message: string, rest: ): void` - Logs a warning.
   * `message: string` - The message to log.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
@@ -60,27 +60,27 @@ Implemented by classes which wish to append log data to a target data store.
 #### Methods
 
 
-* `debug(logger: Logger, rest: any): void` - Appends a debug log.
+* `debug(logger: Logger, rest: ): void` - Appends a debug log.
   * `logger: Logger` - The source logger.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
-* `error(logger: Logger, rest: any): void` - Appends an error log.
+* `error(logger: Logger, rest: ): void` - Appends an error log.
   * `logger: Logger` - The source logger.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
-* `info(logger: Logger, rest: any): void` - Appends an info log.
+* `info(logger: Logger, rest: ): void` - Appends an info log.
   * `logger: Logger` - The source logger.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
-* `warn(logger: Logger, rest: any): void` - Appends a warning log.
+* `warn(logger: Logger, rest: ): void` - Appends a warning log.
   * `logger: Logger` - The source logger.
-  * `rest: any` - The data to log.
+  * `rest: ` - The data to log.
 
 
 
@@ -113,6 +113,19 @@ Specifies the available logging levels.
 
 
 
+* `addCustomLevel(name: string, value: number): void` - Adds a custom log level that will be added as an additional method to Logger.
+Logger will call the corresponding method on any appenders that support it.
+  * `name: string` - The name for the new log level.
+  * `value: number` - The numeric severity value for the level (higher is more severe).
+
+
+
+* `clearAppenders(): void` - Removes all appenders.
+
+
+* `getAppenders(): any` - Gets an array of all appenders.
+
+
 * `getLevel(): number` - Gets the level of logging of ALL the application loggers.
 
 
@@ -120,8 +133,13 @@ Specifies the available logging levels.
   * `id: string` - The id of the logger you wish to get an instance of.
 
 
-* `removeAppender(appender: Appender): void` - Removes an appender
+* `removeAppender(appender: Appender): void` - Removes an appender.
   * `appender: Appender` - An appender that has been added previously.
+
+
+
+* `removeCustomLevel(name: string): void` - Removes a custom log level.
+  * `name: string` - The name of a custom log level that has been added previously.
 
 
 

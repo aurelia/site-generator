@@ -728,10 +728,10 @@ No description available.
 #### Methods
 
 
-* `bind(binding?: any, source?: any, events: any): any` - 
+* `bind(binding?: any, source?: any, events: ): any` - 
   * `binding?: any` - No description available
   * `source?: any` - No description available
-  * `events: any` - No description available
+  * `events: ` - No description available
 
 
 * `unbind(binding?: any, source?: any): any` - 

@@ -28,8 +28,8 @@ For command-line operations, we recommend Windows users to use Git Bash or Git S
 <li>Open a console and change directory into your app's directory.</li>
 <li>Execute the following command to install the dependencies listed in the <em>dependencies</em> and <em>devDependencies</em> sections of the package manifest:</li>
 </ol>
-<pre><code class="language-shell">npm install
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install
+</code></pre></source-code></code-listing>
 <p>Everything we've done so far is standard Node.js build and package management procedures. It doesn't have anything specific to do with Aurelia itself. We're just walking you through setting up a modern ${context.language.name} project and build configuration from scratch.</p>
 <div class="info"><div class="icon"> <i></i> </div><p>
 Bootstrap and Font-Awesome are <strong>not</strong> dependencies of Aurelia. We only leverage them as part of the starter kit in order to help you quickly achieve a decent look out-of-the-box. You can easily replace them with whatever your favorite CSS framework and/or icon library is.
@@ -37,8 +37,8 @@ Similarly, Bluebird is recommended, but not required. Note however that the <cod
 </div>
 </section>
 <section><h2 id="running-the-app">Running The App</h2><p>If you've followed along this far, you now have all the libraries, build configuration and tools you need to create amazing ${context.language.name} apps with Aurelia. The next thing to do is run the sample app. To see this in action, on your console, use the following command to build and launch the server:</p>
-<pre><code class="language-shell">npm start
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm <span class="token function">start</span>
+</code></pre></source-code></code-listing>
 <p>You can now browse to 
 <a href="http://localhost:9000/" target="_blank">http://localhost:9000/</a>
  to see the app.</p>
@@ -47,8 +47,8 @@ The Skeleton App uses Webpack's Development Server for automated page refreshes 
 </div>
 </section>
 <section><h2 id="running-the-unit-tests">Running The Unit Tests</h2><p>To run the unit tests, first ensure that you have followed the steps above in order to install all dependencies and successfully build the library. Once you have done that, you may run the tests with the following command:</p>
-<pre><code class="language-shell">npm test
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm test
+</code></pre></source-code></code-listing>
 </section>
 <section><h2 id="running-the-e2e-tests">Running The E2E Tests</h2><p>Integration tests are performed with 
 <a href="http://angular.github.io/protractor/#/" target="_blank">Protractor</a>
@@ -61,19 +61,19 @@ The Skeleton App uses Webpack's Development Server for automated page refreshes 
 <p>Run the tests by invoking</p>
 </li>
 </ol>
-<pre><code class="language-shell">npm run e2e
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run e2e
+</code></pre></source-code></code-listing>
 </section>
 <section><h2 id="running-e2e-tests-manually">Running E2E Tests Manually</h2><ol>
 <li>Make sure your app runs and is accessible:</li>
 </ol>
-<pre><code class="language-shell">WEBPACK_PORT=19876 npm start
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>WEBPACK_PORT=19876 npm <span class="token function">start</span>
+</code></pre></source-code></code-listing>
 <ol start="2">
 <li>Once bundle is ready, run the E2E-Tests in another console:</li>
 </ol>
-<pre><code class="language-shell">npm run e2e:start
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm run e2e:<span class="token function">start</span>
+</code></pre></source-code></code-listing>
 </section>
 
   </article>

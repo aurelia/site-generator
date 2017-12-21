@@ -36,61 +36,56 @@ We'll discuss TypeScript specifics in a later section.</p>
 As an example we're going to leverage the i18next-xhr-backend:</p>
 <p><code>npm install i18next i18next-xhr-backend --save</code></p>
 <p>After that we need to tell our CLI App about the new dependencies. To do so we're going to open the file <em>aurelia_project/aurelia.json</em> and scroll down to the section named <em>dependencies</em>. In there add the following three entries:</p>
-<pre><code>{
-  &quot;name&quot;: &quot;i18next&quot;,
-  &quot;path&quot;: &quot;../node_modules/i18next/dist/umd&quot;,
-  &quot;main&quot;: &quot;i18next&quot;
-},
-{
-  &quot;name&quot;: &quot;aurelia-i18n&quot;,
-  &quot;path&quot;: &quot;../node_modules/aurelia-i18n/dist/amd&quot;,
-  &quot;main&quot;: &quot;aurelia-i18n&quot;
-},
-{
-  &quot;name&quot;: &quot;i18next-xhr-backend&quot;,
-  &quot;path&quot;: &quot;../node_modules/i18next-xhr-backend/dist/umd&quot;,
-  &quot;main&quot;: &quot;i18nextXHRBackend&quot;
-}
-</code></pre>
-<blockquote>
-<p>If you're planning to use the built-in aurelia-i18n-loader there is no need for an additional configuration and you're fine with the first two entries.</p>
-</blockquote>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"i18next"</span><span class="token punctuation">,</span>
+  <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/i18next/dist/umd"</span><span class="token punctuation">,</span>
+  <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"i18next"</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-i18n"</span><span class="token punctuation">,</span>
+  <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/aurelia-i18n/dist/amd"</span><span class="token punctuation">,</span>
+  <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-i18n"</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"i18next-xhr-backend"</span><span class="token punctuation">,</span>
+  <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/i18next-xhr-backend/dist/umd"</span><span class="token punctuation">,</span>
+  <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"i18nextXHRBackend"</span>
+<span class="token punctuation">}</span>
+</code></pre></source-code></code-listing>
+<div class="info"><div class="icon"> <i></i> </div><p>
+If you're planning to use the built-in <code>aurelia-i18n-loader</code> there is no need for an additional configuration and you're fine with the first two entries.</p>
+</div>
 <h3>JSPM</h3>
 <p>In your project install the plugin via <code>jspm</code> using the following command:</p>
-<pre><code class="language-shell">jspm install aurelia-i18n
-</code></pre>
+<p><code>jspm install aurelia-i18n</code></p>
 <p>And optionally install the backend service using:</p>
-<pre><code class="language-shell">jspm install npm:i18next-xhr-backend
-</code></pre>
-<blockquote>
-<p>You can skip this part if you're planning to use the built-in aurelia-i18n-loader</p>
-</blockquote>
+<p><code>jspm install npm:i18next-xhr-backend</code></p>
+<div class="info"><div class="icon"> <i></i> </div><p>
+You can skip this part if you're planning to use the built-in aurelia-i18n-loader</p>
+</div>
 <h3>Webpack</h3>
 <p>Install the <code>aurelia-i18n</code> plugin in your project using <code>npm</code> and the following command:</p>
-<pre><code class="language-shell">npm install aurelia-i18n --save
-</code></pre>
+<p><code>npm install aurelia-i18n --save</code></p>
 <p>Also optionally install the <code>i18next-xhr-backend</code> plugin:</p>
-<pre><code class="language-shell">npm install i18next-xhr-backend --save
-</code></pre>
-<blockquote>
-<p>You can skip this part if you're planning to use the built-in aurelia-i18n-loader</p>
-</blockquote>
+<p><code>npm install i18next-xhr-backend --save</code></p>
+<div class="info"><div class="icon"> <i></i> </div><p>
+You can skip this part if you're planning to use the built-in aurelia-i18n-loader</p>
+</div>
 <p>Optionally, but recommended, add <code>aurelia-i18n</code> to your project's <code>Aurelia</code> bundles list in the <code>webpack.config.babel.js</code> (assuming you used the <code>skeleton-navigation</code> webpack build as your base). This will put the plugin in the <code>Aurelia</code> chunk, not the <code>App</code> chunk.</p>
 <p>An example based directly on <code>skeleton-navigation</code>:</p>
-<pre><code class="language-shell">const coreBundles = {
-  bootstrap: [/* snip (to keep example short) */],
-  aurelia: [
-    /* snip (to keep example short) */
-    'aurelia-i18n' // add aurelia-i18n to the array
-  ]
-}
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token keyword">const</span> coreBundles <span class="token operator">=</span> <span class="token punctuation">{</span>
+  bootstrap<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token comment" spellcheck="true">/* snip (to keep example short) */</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  aurelia<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token comment" spellcheck="true">/* snip (to keep example short) */</span>
+    <span class="token string">'aurelia-i18n'</span> <span class="token comment" spellcheck="true">// add aurelia-i18n to the array</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></source-code></code-listing>
 </section>
 <section><h2 id="setting-up-the-plugin">Setting up the Plugin</h2><p>Now that you have installed and configured your loader, these are the steps to get started with the plugin.</p>
 <p>First, use Manual Boostrapping. Open your <code>index.html</code> and locate the element with the attribute aurelia-app. Change it to look like this:</p>
 <code-listing heading="Setting up Aurelia Bootstrapping">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span> <span class="token attr-name">aurelia-app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>main<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
       ...
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
@@ -108,29 +103,27 @@ If you're using one of the
 <p>Fourth, in those subfolders create a file named <code>translation.json</code> which contains your language specific translations. Below you can find a sample <code>en-EN</code> translation file. The full potential of i18next is achieved through a specific translation-file schema. Consult the 
 <a href="http://i18next.com/docs/" target="_blank">i18next docs</a>
  to find out more about it.</p>
-<pre><code class="language-json">{
-    &quot;score&quot;: &quot;Score: {{score}}&quot;,
-    &quot;lives&quot;: &quot;{{count}} life remaining&quot;,
-    &quot;lives_plural&quot;: &quot;{{count}} lives remaining&quot;,
-    &quot;lives_indefinite&quot;: &quot;a life remaining&quot;,
-    &quot;lives_plural_indefinite&quot;: &quot;some lives remaining&quot;,
-    &quot;friend&quot;: &quot;A friend&quot;,
-    &quot;friend_male&quot;: &quot;A boyfriend&quot;,
-    &quot;friend_female&quot;: &quot;A girlfriend&quot;
-}
-</code></pre>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+  <span class="token string">"score"</span><span class="token punctuation">:</span> <span class="token string">"Score: {{score}}"</span><span class="token punctuation">,</span>
+  <span class="token string">"lives"</span><span class="token punctuation">:</span> <span class="token string">"{{count}} life remaining"</span><span class="token punctuation">,</span>
+  <span class="token string">"lives_plural"</span><span class="token punctuation">:</span> <span class="token string">"{{count}} lives remaining"</span><span class="token punctuation">,</span>
+  <span class="token string">"lives_indefinite"</span><span class="token punctuation">:</span> <span class="token string">"a life remaining"</span><span class="token punctuation">,</span>
+  <span class="token string">"lives_plural_indefinite"</span><span class="token punctuation">:</span> <span class="token string">"some lives remaining"</span><span class="token punctuation">,</span>
+  <span class="token string">"friend"</span><span class="token punctuation">:</span> <span class="token string">"A friend"</span><span class="token punctuation">,</span>
+  <span class="token string">"friend_male"</span><span class="token punctuation">:</span> <span class="token string">"A boyfriend"</span><span class="token punctuation">,</span>
+  <span class="token string">"friend_female"</span><span class="token punctuation">:</span> <span class="token string">"A girlfriend"</span>
+<span class="token punctuation">}</span>
+</code></pre></source-code></code-listing>
 <p>Fifth, create (if you haven't already) a file <code>main.js</code> in your <code>src</code> folder to configure the plugin. Depending on which backend you've chosen there might
 be slight differences. The following listings show the configuration for first the built-in aurelia loader, the second using i18next-xhr-backend.</p>
-<blockquote>
-<p>Notice that Aurelia I18N makes use of a non-standard attributes option, which is used to define custom aliases besides the default ones, being <code>t</code> and <code>i18n</code>. Calling <code>TCustomAttribute.configureAliases</code> is currently necessary in order make sure that the aliases are defined before view templates are fully processed.</p>
-</blockquote>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Notice that Aurelia I18N makes use of a non-standard attributes option, which is used to define custom aliases besides the default ones, being <code>t</code> and <code>i18n</code>. Calling <code>TCustomAttribute.configureAliases</code> is currently necessary in order make sure that the aliases are defined before view templates are fully processed.</p>
+</div>
 <code-listing heading="Registering the Plugin - using the built-in aurelia loader backed:">
-    <source-code lang="ES 2015"><pre class="language-javascript"><code>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">,</span> Backend<span class="token punctuation">,</span> TCustomAttribute<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
-      <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">,</span> Backend<span class="token punctuation">,</span> TCustomAttribute<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
-
-      <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       aurelia<span class="token punctuation">.</span>use
         <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -138,7 +131,7 @@ be slight differences. The following listings show the configuration for first t
           <span class="token keyword">let</span> aliases <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'t'</span><span class="token punctuation">,</span> <span class="token string">'i18n'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
           <span class="token comment" spellcheck="true">// add aliases for 't' attribute</span>
           TCustomAttribute<span class="token punctuation">.</span><span class="token function">configureAliases</span><span class="token punctuation">(</span>aliases<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          
+
           <span class="token comment" spellcheck="true">// register backend plugin</span>
           instance<span class="token punctuation">.</span>i18next<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Backend<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">.</span>loader<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -157,11 +150,10 @@ be slight differences. The following listings show the configuration for first t
 
       aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre></source-code>
+  </code></pre></source-code>
 </code-listing>
 <code-listing heading="Registering the Plugin - using the i18next-xhr-backend">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">,</span> TCustomAttribute<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> Backend <span class="token keyword">from</span> <span class="token string">'i18next-xhr-backend'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// &lt;-- your previously installed backend plugin</span>
 
@@ -177,7 +169,7 @@ be slight differences. The following listings show the configuration for first t
             <span class="token keyword">let</span> aliases <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'t'</span><span class="token punctuation">,</span> <span class="token string">'i18n'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
             <span class="token comment" spellcheck="true">// add aliases for 't' attribute</span>
             TCustomAttribute<span class="token punctuation">.</span><span class="token function">configureAliases</span><span class="token punctuation">(</span>aliases<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            
+
             <span class="token comment" spellcheck="true">// register backend plugin</span>
             instance<span class="token punctuation">.</span>i18next<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Backend<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -193,8 +185,9 @@ be slight differences. The following listings show the configuration for first t
               debug <span class="token punctuation">:</span> <span class="token boolean">false</span>
             <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
@@ -203,7 +196,6 @@ When using namespaces, you will need to prepend string references with <code>ns:
 defaultNS. For example <code>t='nav:profile'</code> would access the <code>profile</code> string in <code>nav.json</code>.</p>
 <code-listing heading="Setting up Multiple Namespaces">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     instance<span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       <span class="token operator">...</span>
       ns<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'translation'</span><span class="token punctuation">,</span><span class="token string">'nav'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -219,13 +211,11 @@ defaultNS. For example <code>t='nav:profile'</code> would access the <code>profi
  which is resolved by ensuring <code>reflect-metadata</code> is loaded before Aurelia is initialized. If you are using SystemJS, this can be achieved in your <code>index.html</code> as follows:</p>
 <code-listing heading="Ensuring reflect-metadata is loaded first">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
       System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'reflect-metadata'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-
   </code></pre></source-code>
 </code-listing>
 </section>
@@ -239,39 +229,38 @@ should be applicable to every other backend choice.</p>
 You can install the typings for 
 <a href="http://i18next.com/" target="_blank">i18next</a>
  using this command:</p>
-<pre><code>typings install dt~i18next --save --global
-</code></pre>
-<blockquote>
-<p>Alternatively, you can find this file in the plugins repository doc folder: <code>doc/i18next.d.ts</code></p>
-</blockquote>
+<p><code>typings install dt~i18next --save --global</code></p>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Alternatively, you can find this file in the plugins repository doc folder: <code>doc/i18next.d.ts</code></p>
+</div>
 <p>As for the XHR-Backend you'll be using:</p>
-<pre><code>typings install dt~i18next-xhr-backend --save --global
-</code></pre>
-<blockquote>
-<p>Alternative, you can find this file in the plugins repository doc folder: <code>doc/i18next-xhr-backend.d.ts</code></p>
-</blockquote>
+<p><code>typings install dt~i18next-xhr-backend --save --global</code></p>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Alternative, you can find this file in the plugins repository doc folder: <code>doc/i18next-xhr-backend.d.ts</code></p>
+</div>
 <p>Note: if you decide to use the <code>doc/*.d.ts</code> files, you should copy them to another folder, e.g. <code>custom_typings</code>.</p>
 <p>If you're running a JSPM setup, in order to properly find the <code>aurelia-i18n.d.ts</code> file, you can alternatively install it via typings as well.</p>
-<pre><code>typings install github:aurelia/i18n
-</code></pre>
-<p>The next step is to let the compiler know about your <code>*.d.ts</code> files. Add the following section to your <code>tsconfig.json</code> file.
+<p><code>typings install github:aurelia/i18n</code></p>
+<p>The next step is to let the compiler know about your <code>*.d.ts</code> files. Add the following section to your <code>tsconfig.json</code> file.</p>
 <code-listing heading="Configuring custom typings in tsconfig.json">
-<source-code lang="ES 2015">%3Cpre%20class%3D%22language-javascript%22%3E%3Ccode%3E%0A%0A%20%20%20%20%3Cspan%20class%3D%22token%20comment%22%20spellcheck%3D%22true%22%3E//%20...%20existing%20configuration%20code%3C/span%3E%0A%20%20%20%20%3Cspan%20class%3D%22token%20string%22%3E%22filesGlob%22%3C/span%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3A%3C/span%3E%20%3Cspan%20class%3D%22token%20punctuation%22%3E%5B%3C/span%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22token%20string%22%3E%22./typings/browser.d.ts%22%3C/span%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%2C%3C/span%3E%20%3Cspan%20class%3D%22token%20comment%22%20spellcheck%3D%22true%22%3E//%20this%20must%20be%20specified%20in%20case%20you%20use%20typings%28https%3A//github.com/typings/typings%29%3C/span%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22token%20string%22%3E%22./your_custom_typings_folder_path/**/<em>.d.ts%22%3C/span%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%2C%3C/span%3E%20%3Cspan%20class%3D%22token%20comment%22%20spellcheck%3D%22true%22%3E//%20if%20you%20use%20both%20typings%20files%20from%20this%20repository%20%28%60doc/</em>.d.ts%60%29%3C/span%3E%0A%20%20%20%20%20%20%3Cspan%20class%3D%22token%20punctuation%22%3E%5D%3C/span%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%2C%3C/span%3E%0A%20%20%20%20%3Cspan%20class%3D%22token%20comment%22%20spellcheck%3D%22true%22%3E//%20...%20other%20existing%20configuration%20code%3C/span%3E%0A%20%20%3C/code%3E%3C/pre%3E</source-code>
-</code-listing></p>
-<blockquote>
-<p>Note that TypeScript will throw errors like <code>Module xxx not found</code> either for aurelia-i18n or one of the backends. This is due to the fact
-that TypeScript does not see proper ES6 exported defaults. So you can now either switch to alias imports:</p>
-</blockquote>
-<pre><code>import * as Backend from 'i18next-xhr-backend'
-</code></pre>
-<p>or update your tsconfig with <code>&quot;allowSyntheticDefaultImports&quot;: true</code> to maintain the same import style.</p>
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token operator">...</span> existing configuration code
+    <span class="token string">"filesGlob"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"./typings/browser.d.ts"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// this must be specified in case you use typings(https://github.com/typings/typings)</span>
+        <span class="token string">"./your_custom_typings_folder_path/**/*.d.ts"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// if you use both typings files from this repository (`doc/*.d.ts`)</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span> other existing configuration code
+  </code></pre></source-code>
+</code-listing>
+<div class="warning"><div class="icon"> <i></i> </div><p>
+TypeScript will throw errors like <code>Module xxx not found</code> either for aurelia-i18n or one of the backends. This is due to the fact that TypeScript does not see proper ES6 exported defaults. So you can now either switch to alias imports <code>import * as Backend from 'i18next-xhr-backend'</code> or update your tsconfig with <code>&quot;allowSyntheticDefaultImports&quot;: true</code> to maintain the same import style.</p>
+</div>
 </section>
 <section><h2 id="using-the-plugin">Using the Plugin</h2><p>i18next translations work by setting up an active locale, which you've setup above in the init phase with the property <code>lng</code>.</p>
 <h3>Setting the active locale</h3>
 <p>In order to change the active language you'd have to call the function <code>setLocale(localeName)</code> via code.</p>
 <code-listing heading="Setting the active locale with setLocale">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token punctuation">{</span>
@@ -292,7 +281,6 @@ that TypeScript does not see proper ES6 exported defaults. So you can now either
 <p>To get the active locale you'd go with <code>getLocale()</code>:</p>
 <code-listing heading="Getting the active locale using getLocale">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token punctuation">{</span>
@@ -311,7 +299,6 @@ that TypeScript does not see proper ES6 exported defaults. So you can now either
  for a detailed list of those:</p>
 <code-listing heading="Translating using the i18n.tr function">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token punctuation">{</span>
@@ -330,7 +317,6 @@ This can be configured during the plugin registration using the <code>TCustomAtt
 property plugin <code>instance.setup</code> function parameter.</p>
 <code-listing heading="Configuring translation attributes">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-  
     <span class="token operator">...</span>
     <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">"aurelia-i18n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>instance<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
       <span class="token operator">...</span>
@@ -345,13 +331,11 @@ property plugin <code>instance.setup</code> function parameter.</p>
       <span class="token operator">...</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token operator">...</span>
-    
   </code></pre></source-code>
 </code-listing>
 <p>Any element in your views that has one of those attributes, will be translated when the locale is changed.</p>
 <code-listing heading="Attribute based translation with the TCustomAttribute">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   </code></pre></source-code>
 </code-listing>
@@ -359,14 +343,12 @@ property plugin <code>instance.setup</code> function parameter.</p>
 Other attributes, specified in the <code>attributes</code> option, may be used as well.</p>
 <code-listing heading="Attribute based translation with optionally registered I18NCustomAttribute">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">i18n</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>home.title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   </code></pre></source-code>
 </code-listing>
 <p>Notice in the above example that the key was set to <code>home.title</code>. This will make the plugin look for a translation with nested objects in your translation json, ie:</p>
 <code-listing heading="Nested object translation">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token punctuation">{</span>
       <span class="token string">"home"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">"title"</span><span class="token punctuation">:</span> <span class="token string">"Title"</span><span class="token punctuation">,</span>
@@ -378,7 +360,6 @@ Other attributes, specified in the <code>attributes</code> option, may be used a
 The following example shows how a view model can be configured to update it's contents when the view is attached and every time a locale is changed.</p>
 <code-listing heading="Updating translations manually">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> <span class="token punctuation">{</span>EventAggregator<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-event-aggregator'</span><span class="token punctuation">;</span>
 
@@ -402,7 +383,6 @@ The following example shows how a view model can be configured to update it's co
 <p>Alternatively you may extend your VM with the provided Base-I18N-VM, which will set that up for you automatically.</p>
 <code-listing heading="Automatic locale changed subscription using the Base-I18N-VM">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>BaseI18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token keyword">extends</span> <span class="token class-name">BaseI18N</span> <span class="token punctuation">{</span>
@@ -410,25 +390,25 @@ The following example shows how a view model can be configured to update it's co
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<blockquote>
-<p>Just remember in case you define your own <code>constructor</code>, to call <code>this.super</code> and pass it the instances of its
+<div class="info"><div class="icon"> <i></i> </div><p>
+Just remember in case you define your own <code>constructor</code>, to call <code>this.super</code> and pass it the instances of its
 dependencies as described in the previous example. Same applies to <code>attached</code>, although nothing needs to be passed
 in here</p>
-</blockquote>
+</div>
 <h4>Specifying attributes</h4>
 <p>By default the plugin will set the <code>textContent</code> property of an element.</p>
-<pre><code class="language-markup">//translation
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code>//translation
 {
-  &quot;title&quot;: &quot;Title &lt;b&gt;bold&lt;/b&gt;&quot;
+  "title": "Title <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>b</span><span class="token punctuation">></span></span>bold<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>b</span><span class="token punctuation">></span></span>"
 }
 
 //markup
-&lt;span t=&quot;title&quot;&gt;Title&lt;/span&gt;
-</code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>So in above example the html tags will be escaped and the output will be <code>&amp;lt;b&amp;gt;bold&amp;lt;/b&amp;gt;</code>.
 To allow html-markup to be used, the <code>[html]</code> attribute needs to be added before the translation key.</p>
-<pre><code class="language-markup">&lt;span t=&quot;[html]title&quot;&gt;Title&lt;/span&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[html]title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>This will set the <code>innerHTML</code> of the element instead of the <code>textContent</code> property, so html-markup won't be escaped.
 There are 4 special attributes including the shown <code>[html]</code>:</p>
 <ul>
@@ -439,41 +419,40 @@ There are 4 special attributes including the shown <code>[html]</code>:</p>
 </ul>
 <p>If the element is a custom element and the value relates to a bindable property of that, then the properties value itself will
 be updated.</p>
-<pre><code class="language-markup">// Custom Element ViewModel
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code>// Custom Element ViewModel
 export class Foo {
-  @bindable() mybindable = &quot;abc&quot;;
+  @bindable() mybindable = "abc";
 }
 
 // Custom Element View
-&lt;template&gt;
-  &lt;span&gt;${'mybindable'}&lt;/span&gt;
-&lt;/template&gt;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>${'mybindable'}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
 
 // Rendering the Custom Element and passing validations to custom bindable properties
-&lt;foo t=&quot;[mybindable]bar&quot;&gt;&lt;/foo&gt;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>foo</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[mybindable]bar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>foo</span><span class="token punctuation">></span></span>
 
 // Result
-&lt;foo&gt;
-  &lt;span&gt;[TRANSLATED VALUE OF BAR KEY]&lt;/span&gt;
-&lt;/foo&gt;
-</code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>foo</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>[TRANSLATED VALUE OF BAR KEY]<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>foo</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>Any other values will be used as actual attributes on the element itself.
 The following example will not change the content of the element, but will set its <code>alt</code> attribute to the translated value of <code>title</code> when the locale changes.</p>
-<pre><code class="language-markup">&lt;span t=&quot;[alt]title&quot;&gt;Title&lt;/span&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[alt]title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <h4>Specifying multiple attributes</h4>
 <p>Multiple attributes can be specified by separating them with a semicolon.</p>
-<pre><code class="language-markup">&lt;span t=&quot;[html]title;[class]title-class&quot;&gt;Title&lt;/span&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[html]title;[class]title-class<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>When the locale changes it will set the <code>innerHTML</code> to the translated value of <code>title</code> due to the <code>[html]</code> attribute and the <code>class</code> property to the translated value of <code>title-class</code>.</p>
 <h4>Using nested and combined translations</h4>
 <p>In order to combine two or more translations, just include them with the <code>$t(yourkey)</code> markup</p>
-<pre><code class="language-markup">&lt;span t=&quot;$t(title) $t(subtitle)&quot;&gt;Title subtitle&lt;/span&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>$t(title) $t(subtitle)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title subtitle<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>Nested keys may also be referenced and will be properly translated:</p>
 <code-listing heading="Nested combined translations">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token punctuation">{</span>
       <span class="token string">"translation"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">"title"</span><span class="token punctuation">:</span> <span class="token string">"Title"</span><span class="token punctuation">,</span>
@@ -483,42 +462,41 @@ The following example will not change the content of the element, but will set i
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<pre><code class="language-markup">&lt;span t=&quot;nested_referencing&quot;&gt;Nested text&lt;/span&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nested_referencing<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Nested text<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <h4>Translating images</h4>
 <p>Images can be translated as well, for when a different image needs to be displayed in another language.</p>
-<pre><code class="language-markup">&lt;img t=&quot;home.image&quot;&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>home.image<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>The plugin will automatically change the <code>src</code> attribute of the image when the locale changes.</p>
 <p>You may specify a default value for images as well. In order to do so just define an attribute called <code>data-src</code> with the default value.</p>
-<pre><code class="language-markup">&lt;img data-src=&quot;path/to/image.jpg&quot; t=&quot;home.image&quot;&gt;
-</code></pre>
+<code-listing><source-code lang="HTML"><pre class="language-markup"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">data-src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>path/to/image.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>home.image<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+</code></pre></source-code></code-listing>
 <p>This will be picked up by the CLI when translations are extracted from the source files. (see the section on <a href="#cli-integration">CLI Integration</a>)</p>
 <h4>Passing parameters to the attribute</h4>
 <p>In order to use parameters for replaceable parts in your translation key, you can provide an additional <code>t-params</code> attribute and bind it to the object containing the replacement values.
 Also note that for whatever attribute you registered, the corresponding *-params attribute will get registered as well automatically.</p>
-<pre><code class="language-javascript">// Translation file
-{
-  &quot;paramstest&quot;: &quot;Some text with &lt;strong&gt;{{content}}&lt;/strong&gt;&quot;
-}
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token comment" spellcheck="true">// Translation file</span>
+<span class="token punctuation">{</span>
+  <span class="token string">"paramstest"</span><span class="token punctuation">:</span> <span class="token string">"Some text with &lt;strong>{{content}}&lt;/strong>"</span>
+<span class="token punctuation">}</span>
+</code></pre></source-code></code-listing>
 <code-listing heading="View for parameter passing to attributes">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
      View 
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[html]paramstest<span class="token punctuation">"</span></span> <span class="token attr-name">t-params.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>params<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   </code></pre></source-code>
 </code-listing>
-<pre><code class="language-javascript">// ViewModel
-class MyVM {
-  params = { content: 'ABC' }
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token comment" spellcheck="true">// ViewModel</span>
+<span class="token keyword">class</span> <span class="token class-name">MyVM</span> <span class="token punctuation">{</span>
+  params <span class="token operator">=</span> <span class="token punctuation">{</span> content<span class="token punctuation">:</span> <span class="token string">'ABC'</span> <span class="token punctuation">}</span>
 
-  [...]
-}
-</code></pre>
-<blockquote>
-<p>The object passed to <code>t-params</code> is a complex object explained <a href="/doc/article/aurelia/i18n/latest/i18n-with-aurelia/5">in the next section</a></p>
-</blockquote>
+  <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></source-code></code-listing>
+<div class="info"><div class="icon"> <i></i> </div><p>
+The object passed to <code>t-params</code> is a complex object explained <a href="/doc/article/aurelia/i18n/latest/i18n-with-aurelia/5">in the next section</a>. To use it via code, see <a href="/doc/article/en-US/i18n-with-aurelia.md#complex-objects-for-variables">Complex objects for variables via code</a>.</p>
+</div>
 <h3>Translating with the TValueConverter</h3>
 <p>In order to do translations in a more declarative way from within your HTML markup you can use a custom ValueConverter named <code>t</code>. It takes exactly the same <code>options</code> as the code translation method <code>tr</code> but of course provides the key automatically.</p>
 <p>You will find below a few examples of the available 
@@ -526,7 +504,6 @@ class MyVM {
 </p>
 <code-listing heading="Declarative translation using the TValueConverter">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -584,7 +561,6 @@ class MyVM {
 <p>Now aurelia-i18n will automatically emit signals when internal changes happen and you can do so as well by emiting a <code>aurelia-translation-signal</code>. The following example depicts how this is done internally when the current locale changes. First you need to get hold of the <code>BindingSignaler</code> exported by the <code>aurelia-templating-resources</code> module and inject it either in your constructor or via the static <code>$inject</code> property. Next when you want to trigger the signal just use the signalers <code>signal</code> method and pass it the predefined string.</p>
 <code-listing heading="Signaling a change to the TBindingBehavior">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>BindingSignaler<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-templating-resources'</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// inject signaler to constructor ...</span>
     <span class="token operator">...</span>
@@ -601,12 +577,14 @@ class MyVM {
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<h3>Complex objects for variables</h3>
+<div class="info"><div class="icon"> <i></i> </div><p>
+If you want to only update your relative time binding behaviors, you may use the signal <code>aurelia-relativetime-signal</code> which will only trigger those and safe unnecessary update roundtrips</p>
+</div>
+<h3>Complex objects for variables via code</h3>
 <p>In some cases it might be useful to define variables via complex objects. Let's take a look at below example. It shows a validation message to hint the user that a given field should be in range of min and max.
 Now we could easily pass min and max as separate variables but on the other hand that involves more work you'd have to do manually if the source is a object.</p>
 <code-listing heading="Complex objects for variables">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">var</span> resources <span class="token operator">=</span> <span class="token punctuation">{</span>
       en<span class="token punctuation">:</span> <span class="token punctuation">{</span>
         translation<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -620,7 +598,6 @@ Now we could easily pass min and max as separate variables but on the other hand
 You can also mix and match it with simple variables.</p>
 <code-listing heading="Mixing complex and simple variables">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">var</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
       <span class="token string">'threshold'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token string">'min'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -641,7 +618,6 @@ You can also mix and match it with simple variables.</p>
 <p>Below is an example how to access the NumberFormat via code:</p>
 <code-listing heading="Number formatting via Code">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token punctuation">{</span>
@@ -663,7 +639,7 @@ You can also mix and match it with simple variables.</p>
         <span class="token keyword">var</span> result <span class="token operator">=</span> nf<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token number">123456.123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// output => 123.456,123 €  	  </span>
+        <span class="token comment" spellcheck="true">// output => 123.456,123 €</span>
       <span class="token punctuation">}</span>
       <span class="token operator">...</span>
     <span class="token punctuation">}</span>
@@ -673,7 +649,6 @@ You can also mix and match it with simple variables.</p>
 <p>A more declarative way is to use the <code>nf</code> ValueConverter from within your HTML markup. It essentially works the same way as the code version. Take a look at the following example:</p>
 <code-listing heading="Declarative formatting of numbers with the NfValueConverter">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>ValueConverter Number Examples<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>list-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -693,9 +668,9 @@ You can also mix and match it with simple variables.</p>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
   </code></pre></source-code>
 </code-listing>
-<blockquote>
-<p>Note that if you provide the active locale as a bound VM property, the ValueConverter will be re-evaluated as soon as the property value changes, resulting in automatic re-formatting of your number.</p>
-</blockquote>
+<div class="info"><div class="icon"> <i></i> </div><p>
+If you provide the active locale as a bound VM property, the ValueConverter will be re-evaluated as soon as the property value changes, resulting in automatic re-formatting of your number.</p>
+</div>
 <h3>Formatting dates via code</h3>
 <p>The Intl. API provides means to 
 <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat" target="_blank">format DateTimes</a>
@@ -703,7 +678,6 @@ You can also mix and match it with simple variables.</p>
 Below you'll find an example how to use those via code:</p>
 <code-listing heading="Formatting Dates via Code">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>I18N<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token punctuation">{</span>
@@ -730,20 +704,19 @@ Below you'll find an example how to use those via code:</p>
         <span class="token keyword">var</span> result <span class="token operator">=</span> df<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// output => 01.01.2000 00:00:01  	  </span>
+        <span class="token comment" spellcheck="true">// output => 01.01.2000 00:00:01</span>
       <span class="token punctuation">}</span>
       <span class="token operator">...</span>
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
-<blockquote>
-<p>Remember that if you pass in <code>undefined</code> for the options parameter you'll get the default formatting options</p>
-</blockquote>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Remember that if you pass in <code>undefined</code> for the options parameter you'll get the default formatting options</p>
+</div>
 <h3>Formatting dates with DfValueConverter</h3>
 <p>A more declarative way is to use the <code>df</code> ValueConverter from within your HTML markup. It essentially works the same way as the code version. Take a look at the following example, which defines a VM property myDate:</p>
 <code-listing heading="Declarative formatting of dates with the DfValueConverter">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>ValueConverter Date Examples<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>list-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -768,7 +741,6 @@ Below you'll find an example how to use those via code:</p>
 To use it via code get hold of the service via injection and call the method as needed:</p>
 <code-listing heading="Rendering relative time via Code">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> <span class="token punctuation">{</span>RelativeTime<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-i18n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyDemoVM</span> <span class="token punctuation">{</span>
@@ -782,7 +754,7 @@ To use it via code get hold of the service via injection and call the method as 
         <span class="token keyword">var</span> result <span class="token operator">=</span> relativeTime<span class="token punctuation">.</span><span class="token function">getRelativeTime</span><span class="token punctuation">(</span>myDate<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// output => 2 hours ago  	  </span>
+        <span class="token comment" spellcheck="true">// output => 2 hours ago</span>
       <span class="token punctuation">}</span>
       <span class="token operator">...</span>
     <span class="token punctuation">}</span>
@@ -793,7 +765,6 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
 <p>A more declarative approach is to use the RtValueConverter directly in your HTML markup. It doesn't take any additional parameters, so just drop it in and you're good to go:</p>
 <code-listing heading="Declarative relative time using the RtValueConverter">
   <source-code lang="HTML"><pre class="language-markup"><code>
-
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>ValueConverter Relative Time Examples<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>list-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -807,40 +778,38 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
 </code-listing>
 </section>
 <section><h2 id="bundle-translation-files">Bundle Translation Files</h2><p>When bundling is used, the built-in backend will read the translations from the bundle with the aurelia loader. Make sure that the <code>translation.json</code> files are packed in the bundle using the text module, by changing the <code>aurelia.json</code> and adding <code>.json</code> as an extension for the text plugin:</p>
-<pre><code class="language-json">&quot;loader&quot;: {
-			&quot;type&quot;: &quot;require&quot;,
-			&quot;configTarget&quot;: &quot;vendor-bundle.js&quot;,
-			&quot;includeBundleMetadataInConfig&quot;: &quot;auto&quot;,
-			&quot;plugins&quot;: [
-				{
-					&quot;name&quot;: &quot;text&quot;,
-					&quot;extensions&quot;: [
-						&quot;.html&quot;,
-						&quot;.css&quot;,
-						&quot;.json&quot;
-					],
-					&quot;stub&quot;: true
-				}
-			]
-		},
-</code></pre>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token string">"loader"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+	<span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"require"</span><span class="token punctuation">,</span>
+	<span class="token string">"configTarget"</span><span class="token punctuation">:</span> <span class="token string">"vendor-bundle.js"</span><span class="token punctuation">,</span>
+	<span class="token string">"includeBundleMetadataInConfig"</span><span class="token punctuation">:</span> <span class="token string">"auto"</span><span class="token punctuation">,</span>
+	<span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+		<span class="token punctuation">{</span>
+			<span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span>
+			<span class="token string">"extensions"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+				<span class="token string">".html"</span><span class="token punctuation">,</span>
+				<span class="token string">".css"</span><span class="token punctuation">,</span>
+				<span class="token string">".json"</span>
+			<span class="token punctuation">]</span><span class="token punctuation">,</span>
+			<span class="token string">"stub"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre></source-code></code-listing>
 <h3>Using JSPM</h3>
 <p>If you're using JSPM as your module loader, the bundle configuration might look like.</p>
-<pre><code class="language-json">
-    &quot;bundles&quot;: {
-       &quot;dist/app-build&quot;: {
-         &quot;includes&quot;: [
-           &quot;[*.js]&quot;,
-           &quot;*.html!text&quot;,
-           &quot;*.css!text&quot;,  
-           &quot;*.json!text&quot;      
-         ],
-</code></pre>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token string">"bundles"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token string">"dist/app-build"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+   <span class="token string">"includes"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+     <span class="token string">"[*.js]"</span><span class="token punctuation">,</span>
+     <span class="token string">"*.html!text"</span><span class="token punctuation">,</span>
+     <span class="token string">"*.css!text"</span><span class="token punctuation">,</span>
+     <span class="token string">"*.json!text"</span>
+   <span class="token punctuation">]</span><span class="token punctuation">,</span>
+</code></pre></source-code></code-listing>
 <h3>Using Aurelia CLI</h3>
 <p>Same would apply to the Aurelia CLI. In order to tell it to process the locales you can create a new task <code>process-locales.js</code>, located in the <code>aurelia_project/tasks</code> folder with the contents:</p>
 <code-listing heading="Processing locales with a custom task">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">import</span> gulp <span class="token keyword">from</span> <span class="token string">'gulp'</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> changedInPlace <span class="token keyword">from</span> <span class="token string">'gulp-changed-in-place'</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> project <span class="token keyword">from</span> <span class="token string">'../aurelia.json'</span><span class="token punctuation">;</span>
@@ -854,20 +823,18 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
   </code></pre></source-code>
 </code-listing>
 <p>With that in place, edit your <code>aurelia_project/aurelia.json</code> file and add the task right after the <code>markupProcessor</code> configuration, where the source property should reflect your previously setup locales folder:</p>
-<pre><code class="language-json">
-    ...
-    &quot;localesProcessor&quot;: {
-      &quot;id&quot;: &quot;none&quot;,
-      &quot;displayName&quot;: &quot;None&quot;,
-      &quot;fileExtension&quot;: &quot;.json&quot;,
-      &quot;source&quot;: &quot;src/locales/**/*.json&quot;
-    },
-    ...
-</code></pre>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token operator">...</span>
+<span class="token string">"localesProcessor"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"none"</span><span class="token punctuation">,</span>
+  <span class="token string">"displayName"</span><span class="token punctuation">:</span> <span class="token string">"None"</span><span class="token punctuation">,</span>
+  <span class="token string">"fileExtension"</span><span class="token punctuation">:</span> <span class="token string">".json"</span><span class="token punctuation">,</span>
+  <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token string">"src/locales/**/*.json"</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">...</span>
+</code></pre></source-code></code-listing>
 <p>Also, edit your <code>aurelia_project/tasks/run.js</code> (or .ts if you're using Typescript) file and add a new gulp.watch task to the <code>watch</code> function:</p>
 <code-listing heading="Add a locales watch task the watch function">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token keyword">let</span> watch <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span>project<span class="token punctuation">.</span>transpiler<span class="token punctuation">.</span>source<span class="token punctuation">,</span> refresh<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'change'</span><span class="token punctuation">,</span> onChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
       gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span>project<span class="token punctuation">.</span>markupProcessor<span class="token punctuation">.</span>source<span class="token punctuation">,</span> refresh<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'change'</span><span class="token punctuation">,</span> onChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -878,33 +845,33 @@ translations. If you're missing yours, I welcome you to provide a PR so everybod
 </code-listing>
 <p>By doing this, if you're running your project with the --watch flag, your bundles will be rebuilt whenever your change something in your translation files. In the same way that happens with your .html, .js and .css files.</p>
 <p>Last but not least search for the build/bundles/source section for the app-bundle and update the configuration to include json files.</p>
-<pre><code class="language-json">
-    ...
-    &quot;bundles&quot;: [
-      {
-        &quot;name&quot;: &quot;app-bundle.js&quot;,
-        &quot;source&quot;: [
-          &quot;[**/*.js]&quot;,
-          &quot;**/*.{css,html,json}&quot;
-        ]
-      }
-      ...
-</code></pre>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token operator">...</span>
+<span class="token string">"bundles"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"app-bundle.js"</span><span class="token punctuation">,</span>
+    <span class="token string">"source"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"[**/*.js]"</span><span class="token punctuation">,</span>
+      <span class="token string">"**/*.{css,html,json}"</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</code></pre></source-code></code-listing>
 <p>and inlcude the json extension in the loader plugin part build/loader/plugins/extensions</p>
-<pre><code class="language-json">     ...
-     &quot;plugins&quot;: [
-        {
-          &quot;name&quot;: &quot;text&quot;,
-          &quot;extensions&quot;: [
-            &quot;.html&quot;,
-            &quot;.css&quot;,
-            &quot;.json&quot;
-          ],
-          &quot;stub&quot;: true
-        }
-      ]
-      ...
-</code></pre>
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token operator">...</span>
+<span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span>
+    <span class="token string">"extensions"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token string">".html"</span><span class="token punctuation">,</span>
+      <span class="token string">".css"</span><span class="token punctuation">,</span>
+      <span class="token string">".json"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"stub"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+<span class="token operator">...</span>
+</code></pre></source-code></code-listing>
 </section>
 <section><h2 id="internationalization-api-polyfill">Internationalization API Polyfill</h2><p>The plugin leverages the JavaScript Internationalization API to perform certain tasks. Since not all browsers do fully support it (
 <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl#Browser_compatibility" target="_blank">compatibility table</a>
@@ -920,49 +887,47 @@ have to opt-in and bundle the Polyfill manually.</p>
 <p>To do so first install the Polyfill as part of your project using npm:</p>
 <p><code>npm install intl --save</code></p>
 <p>After that open up the <em>aurelia_project/aurelia.json</em> file and add the following dependency:</p>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;intl&quot;,
-  &quot;path&quot;: &quot;../node_modules/intl/dist&quot;,
-  &quot;main&quot;: &quot;Intl.min&quot;  // or Intl.complete
-},
-</code></pre>
-<blockquote>
-<p>Instead of referencing the min file you could also reference <code>Intl.complete</code> to include the Unicode CLDR locale data. For
+<code-listing><source-code lang="JSON"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+  <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"intl"</span><span class="token punctuation">,</span>
+  <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/intl/dist"</span><span class="token punctuation">,</span>
+  <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"Intl.min"</span>  <span class="token comment" spellcheck="true">// or Intl.complete</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre></source-code></code-listing>
+<div class="info"><div class="icon"> <i></i> </div><p>
+Instead of referencing the min file you could also reference <code>Intl.complete</code> to include the Unicode CLDR locale data. For
 more info about that consult the 
 <a href="https://github.com/andyearnshaw/Intl.js/#locale-data" target="_blank">official Polyfill docs</a>
-</p>
-</blockquote>
+.</p>
+</div>
 <h3>Use Internationalization API Polyfill with Webpack</h3>
 <p>In order to use the Polyfill with Webpack, you will have to adapt your <code>bootstrap</code> function.</p>
 <code-listing heading="Using the polyfill with Webpack">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token function">bootstrap</span><span class="token punctuation">(</span>aurelia <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>global<span class="token punctuation">.</span>Intl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Intl not present'</span><span class="token punctuation">)</span>
-            require<span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
-                <span class="token string">'intl'</span><span class="token punctuation">,</span>
-                <span class="token string">'intl/locale-data/jsonp/en.js'</span>
-            <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>require<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'intl'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'intl/locale-data/jsonp/en.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token function">boot</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token function">boot</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>global<span class="token punctuation">.</span>Intl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Intl not present'</span><span class="token punctuation">)</span>
+        require<span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token string">'intl'</span><span class="token punctuation">,</span>
+          <span class="token string">'intl/locale-data/jsonp/en.js'</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>require<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'intl'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'intl/locale-data/jsonp/en.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">boot</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">boot</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-
     <span class="token keyword">function</span> <span class="token function">boot</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        aurelia<span class="token punctuation">.</span>use
-            <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-i18n'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>instance<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                <span class="token comment" spellcheck="true">// code to setup aurelia-i18n</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-i18n'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>instance<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// code to setup aurelia-i18n</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> aurelia<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token string">'app'</span><span class="token punctuation">,</span> document<span class="token punctuation">.</span>body<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> aurelia<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token string">'app'</span><span class="token punctuation">,</span> document<span class="token punctuation">.</span>body<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
   </code></pre></source-code>
 </code-listing>
@@ -972,7 +937,6 @@ more info about that consult the
 <p>On top of that if you need the Intl polyfill included you have to manualy require and bundle it. To do so add the following import statement at the begin of your <code>main.js/ts</code> file:</p>
 <code-listing heading="Manually requiering the Intl Polyfill">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
-
     <span class="token comment" spellcheck="true">//main.js</span>
     <span class="token keyword">import</span> <span class="token string">'intl'</span><span class="token punctuation">;</span>
   </code></pre></source-code>

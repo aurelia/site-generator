@@ -417,16 +417,16 @@ Dispatches subscribets to and publishes events in the DOM.
 
 
 
-* `subscribe(eventName: string, handler: Function, bubbles?: boolean): EventHandler` - Adds and Event Listener on the context element.
+* `subscribe(eventName: string, handler: Function, captureOrOptions?: boolean): EventHandler` - Adds and Event Listener on the context element.
   * `eventName: string` - No description available
   * `handler: Function` - No description available
-  * `bubbles?: boolean` - No description available
+  * `captureOrOptions?: boolean` - No description available
 
 
-* `subscribeOnce(eventName: String, handler: Function, bubbles?: Boolean): EventHandler` - Adds an Event Listener on the context element, that will be disposed on the first trigger.
-  * `eventName: String` - No description available
+* `subscribeOnce(eventName: string, handler: Function, captureOrOptions?: boolean): EventHandler` - Adds an Event Listener on the context element, that will be disposed on the first trigger.
+  * `eventName: string` - No description available
   * `handler: Function` - No description available
-  * `bubbles?: Boolean` - No description available
+  * `captureOrOptions?: boolean` - No description available
 
 
 
@@ -454,11 +454,11 @@ attribute functionality.
   * `parentNode?: Node` - The parent node of the current node.
 
 
-* `create(container: Container, instruction?: BehaviorInstruction, element?: Element, bindings?: Binding): Controller` - Creates an instance of this behavior.
+* `create(container: Container, instruction?: BehaviorInstruction, element?: Element, bindings?: ): Controller` - Creates an instance of this behavior.
   * `container: Container` - The DI container to create the instance in.
   * `instruction?: BehaviorInstruction` - The instruction for this behavior that was constructed during compilation.
   * `element?: Element` - The element on which this behavior exists.
-  * `bindings?: Binding` - The bindings that are associated with the view in which this behavior exists.
+  * `bindings?: ` - The bindings that are associated with the view in which this behavior exists.
 
 
 * `initialize(container: Container, target: Function): void` - Provides an opportunity for the resource to initialize iteself.
@@ -1041,9 +1041,9 @@ Controls the view resource loading pipeline.
   * `moduleMember: string` - The export from the module to generate the resource for.
 
 
-* `importViewResources(moduleIds: string, names: string, resources: ViewResources, compileInstruction?: ViewCompileInstruction, loadContext?: ResourceLoadContext): Promise` - Imports the specified resources with the specified names into the view resources object.
-  * `moduleIds: string` - The modules to load.
-  * `names: string` - The names associated with resource modules to import.
+* `importViewResources(moduleIds: , names: , resources: ViewResources, compileInstruction?: ViewCompileInstruction, loadContext?: ResourceLoadContext): Promise` - Imports the specified resources with the specified names into the view resources object.
+  * `moduleIds: ` - The modules to load.
+  * `names: ` - The names associated with resource modules to import.
   * `resources: ViewResources` - The resources lookup to add the loaded resources to.
   * `compileInstruction?: ViewCompileInstruction` - The compilation instruction associated with the resource imports.
   * `loadContext?: ResourceLoadContext` - No description available
@@ -1304,8 +1304,8 @@ Manages the view lifecycle for its children.
   * `skipAnimation?: boolean` - Should the removal animation be skipped?
 
 
-* `removeMany(viewsToRemove: View, returnToCache?: boolean, skipAnimation?: boolean): ` - Removes many views from the slot.
-  * `viewsToRemove: View` - The array of views to remove.
+* `removeMany(viewsToRemove: , returnToCache?: boolean, skipAnimation?: boolean): ` - Removes many views from the slot.
+  * `viewsToRemove: ` - The array of views to remove.
   * `returnToCache?: boolean` - Should the views be returned to the view cache?
   * `skipAnimation?: boolean` - Should the removal animation be skipped?
 
@@ -1464,6 +1464,7 @@ No description available.
 #### Properties
 
 * `bubbles: boolean` - No description available.
+* `capture: boolean` - No description available.
 * `dispose: Function` - No description available.
 * `eventName: string` - No description available.
 * `handler: Function` - No description available.
@@ -1580,10 +1581,10 @@ element container.
   * `target?: any` - No description available.
 
 
-* `customAttribute(name: string, defaultBindingMode?: number, aliases?: string): any` - Decorator: Indicates that the decorated class is a custom attribute.
+* `customAttribute(name: string, defaultBindingMode?: number, aliases?: ): any` - Decorator: Indicates that the decorated class is a custom attribute.
   * `name: string` - The name of the custom attribute.
   * `defaultBindingMode?: number` - The default binding mode to use when the attribute is bound with .bind.
-  * `aliases?: string` - The array of aliases to associate to the custom attribute.
+  * `aliases?: ` - The array of aliases to associate to the custom attribute.
 
 
 
@@ -1659,8 +1660,8 @@ DOM. This decorator may change slightly when Aurelia updates to Shadow DOM v1.
   * `target?: any` - No description available.
 
 
-* `viewResources(resources: any): any` - Decorator: Provides the ability to add resources to the related View
+* `viewResources(resources: ): any` - Decorator: Provides the ability to add resources to the related View
 Same as: &lt;require from&#x3D;&quot;...&quot;&gt;&lt;/require&gt;
-  * `resources: any` - Either: strings with moduleIds, Objects with &#x27;src&#x27; and optionally &#x27;as&#x27; properties or one of the classes of the module to be included.
+  * `resources: ` - Either: strings with moduleIds, Objects with &#x27;src&#x27; and optionally &#x27;as&#x27; properties or one of the classes of the module to be included.
 
 

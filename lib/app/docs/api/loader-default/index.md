@@ -31,8 +31,8 @@ A default implementation of the Loader abstraction which works with SystemJS, Re
   * `address: string` - The address of the template.
 
 
-* `loadAllModules(ids: string): Promise` - Loads a collection of modules.
-  * `ids: string` - The set of module ids to load.
+* `loadAllModules(ids: ): Promise` - Loads a collection of modules.
+  * `ids: ` - The set of module ids to load.
 
 
 * `loadModule(id: string): Promise` - Loads a module.

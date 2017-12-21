@@ -10,14 +10,14 @@
 <section><h2 id="installing-the-plugin">Installing The Plugin</h2><ol>
 <li>In your <strong>JSPM</strong>-based project install the plugin via <code>jspm</code> with following command</li>
 </ol>
-<pre><code class="language-shell">jspm install aurelia-dialog
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>jspm install aurelia<span class="token operator">-</span>dialog
+</code></pre></source-code></code-listing>
 <p>If you use <strong>Webpack</strong>, install the plugin with the following command</p>
-<pre><code class="language-shell">npm install aurelia-dialog --save
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install aurelia<span class="token operator">-</span>dialog <span class="token operator">--</span>save
+</code></pre></source-code></code-listing>
 <p>If you use the <strong>Aurelia CLI</strong>, install the plugin with the following command</p>
-<pre><code class="language-shell">npm install aurelia-dialog --save
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>npm install aurelia<span class="token operator">-</span>dialog <span class="token operator">--</span>save
+</code></pre></source-code></code-listing>
 <p>and then add a section in your <code>aurelia.json</code> for the plugin</p>
 <code-listing heading="aurelia.json">
   <source-code lang="ES 2015"><pre class="language-javascript"><code>
@@ -35,8 +35,8 @@
   </code></pre></source-code>
 </code-listing>
 <p>If you use TypeScript, install the plugin's typings with the following command</p>
-<pre><code class="language-shell">typings install github:aurelia/dialog --save
-</code></pre>
+<code-listing><source-code lang="shell"><pre class="language-powershell"><code>typings install github:aurelia<span class="token operator">/</span>dialog <span class="token operator">--</span>save
+</code></pre></source-code></code-listing>
 <ol start="2">
 <li>Make sure you use 
 <a href="http://aurelia.io/docs#startup-and-configuration" target="_blank">manual bootstrapping</a>
@@ -207,15 +207,15 @@
 <ul>
 <li>
 <p>url - path relative to the application root.</p>
-<pre><code>.
-+-- app.js
-+-- forms
-    +-- consent-form.js
-    +-- consent-form.html
-+-- prompts
-    +-- prompt.js
-    +-- prompt.html
-</code></pre>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code><span class="token punctuation">.</span>
+<span class="token operator">+</span><span class="token operator">--</span> app<span class="token punctuation">.</span>js
+<span class="token operator">+</span><span class="token operator">--</span> forms
+    <span class="token operator">+</span><span class="token operator">--</span> consent<span class="token operator">-</span>form<span class="token punctuation">.</span>js
+    <span class="token operator">+</span><span class="token operator">--</span> consent<span class="token operator">-</span>form<span class="token punctuation">.</span>html
+<span class="token operator">+</span><span class="token operator">--</span> prompts
+    <span class="token operator">+</span><span class="token operator">--</span> prompt<span class="token punctuation">.</span>js
+    <span class="token operator">+</span><span class="token operator">--</span> prompt<span class="token punctuation">.</span>html
+</code></pre></source-code></code-listing>
 <p>If you want to open a <code>prompt</code> from <code>consent-form</code> the path will be <code>prompts/prompt</code>.</p>
 <div class="warning"><div class="icon"> <i></i> </div><h4>Webpack users should</h4><p><em>always</em> mark dynamically loaded dependencies with <code>PLATFORM.moduleName</code>. For more details do check the <code>aurelia-webpack-plugin</code> 
 <a href="https://github.com/aurelia/webpack-plugin/wiki" target="_blank">wiki</a>

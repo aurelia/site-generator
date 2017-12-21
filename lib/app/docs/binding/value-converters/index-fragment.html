@@ -93,6 +93,7 @@
 <li>In Aurelia, converter parameters can be data-bound.  This is something that was missing in Xaml and enables more advanced binding scenarios.</li>
 <li>Aurelia value converter methods can accept multiple parameters.</li>
 <li>Multiple value converters can be composed using pipes (<code>|</code>).</li>
+<li>Aurelia value converter can have a class field named <code>signals</code>, which accepts an array of string that will be used to manually trigger updating the view. This is to handle the situations where the value converter relies on variables that are defined outside of Aurelia application, such as language, locale etc.</li>
 </ol>
 </section>
 <section><h2 id="simple-converters">Simple Converters</h2><p>Before we get too far into the details, let's rework the previous example to use a couple of basic value converters.  Aurelia and the popular 
@@ -502,7 +503,7 @@ The name that a resource is referenced by in a view derives from its export name
 </au-demo>
 <p>There are a couple of advantages to this approach: you don't need to remember the order of the converter parameter arguments, and anyone reading the markup can easily tell what each converter parameter represents.</p>
 </section>
-<section><h2 id="bi-directional-value-converters">Bi-directional Value Converters</h2><p>So far we've been using converters with one-way bindings. The data flows in a single direction, from the model to the view.  When using a converter in an input element's <code>value</code> binding, we need a way to convert the user's data entry to the format expected by the view-model. This is where the value converter's <code>fromView</code> method comes into play, taking the element's value and converting it to the format expected by the view-model.</p>
+<section><h2 id="bi-directional-value-converters">Bi-directional Value Converters</h2><p>So far we've been using converters with to-view bindings. The data flows in a single direction, from the model to the view.  When using a converter in an input element's <code>value</code> binding, we need a way to convert the user's data entry to the format expected by the view-model. This is where the value converter's <code>fromView</code> method comes into play, taking the element's value and converting it to the format expected by the view-model.</p>
 <p>In the example below, we have a view-model that exposes colors in an object format, with properties for the red, green and blue components. In the view, we want to bind this color object to an HTML5 color input. The color input expects hex format text, so we'll use an <code>RgbToHexValueConverter</code> to facilitate the binding.</p>
 <code-listing heading="rgb-to-hex${context.language.fileExtension}">
   <source-code lang="ES 2015/ES 2016/TypeScript"><pre class="language-javascript"><code>
@@ -555,6 +556,90 @@ The name that a resource is referenced by in a view derives from its export name
 </au-demo>
 </section>
 <section><h2 id="globally-accessible-value-converters">Globally Accessible Value Converters</h2><p>In all of our examples, we've been using the <code>require</code> element to import converters we need into our view.  There's an easier way.  If you have some commonly used value converters that you'd like to make globally available, use Aurelia's <code>globalResources</code> function to register them.  This will eliminate the need for <code>require</code> elements at the top of every view.</p>
+</section>
+<section><h2 id="signalable-value-converters">Signalable Value Converters</h2><p>In some scenarios, a global parameter that is unobservable by Aurelia is used inside a value converter, such as timezone, or a new USB was connected to the device etc. In some other scenarios, we need to update all bindings that use a certain value converter at once, for example: language translation value converters when application language has changed. Aurelia value converters have an API to trigger the bindings, with value converters that have signals property declared on it, to update.</p>
+<p>In the example below, we have a view-model that exposes a list of flights with information of each flight. In the view, we want to bind display each of those flights, as a <code>clock</code>, with correct date format based on global variable name <code>currentLocale</code>. We can trigger all of the flight display to change based on <code>signals</code> of the value converter. We do this via export <code>signalBindings</code> of the framework.</p>
+<code-listing heading="How To Signal Bindings">
+  <source-code lang="ES 2015/ES 2016/TypeScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>signalBindings<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    <span class="token function">signalBindings</span><span class="token punctuation">(</span><span class="token string">'locale-changed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Following is the example code</p>
+<code-listing heading="flight-time-value-converter${context.language.fileExtension}">
+  <source-code lang="ES 2015/ES 2016/TypeScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">FlightTimeValueConverter</span> <span class="token punctuation">{</span>
+      signals <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'locale-changed'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      <span class="token function">toView</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> date<span class="token punctuation">.</span><span class="token function">toLocaleString</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>currentLocale<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing heading="flight-dashboard${context.language.fileExtension}">
+  <source-code lang="ES 2015"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">FlightDashboard</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>flights <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token string">'Los Angeles'</span><span class="token punctuation">,</span> to<span class="token punctuation">:</span> <span class="token string">'San Fran'</span><span class="token punctuation">,</span> depart<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2017-10-09'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> arrive<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2017-10-10'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token string">'Melbourne'</span><span class="token punctuation">,</span> to<span class="token punctuation">:</span> <span class="token string">'Sydney'</span><span class="token punctuation">,</span> depart<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2017-10-11'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> arrive<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2017-10-12'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token string">'Hawaii'</span><span class="token punctuation">,</span> to<span class="token punctuation">:</span> <span class="token string">'Crescent'</span><span class="token punctuation">,</span> depart<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2017-10-13'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> arrive<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2017-10-14'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing heading="clock.html">
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">bindable</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>time<span class="token punctuation">'</span></span>
+      <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>display: inline-block;
+      width: 200px;
+      padding: 4px 6px;
+      border-radius: 10px;
+      border: 2px solid #1e1e1e;
+      font-size: 16px;
+      text-align: center;<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>./flight-time-value-converter<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+      ${time | flightTime}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing heading="flight-dashboard.html">
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./clock.html<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Flights<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>flight of flights<span class="token punctuation">'</span></span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>margin-bottom: 15px<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>
+            From ${flight.from}
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>width: 10px<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>
+              To ${flight.to}
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>clock</span> <span class="token attr-name">time.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>flight.depart<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>clock</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>width: 10px<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>clock</span> <span class="token attr-name">time.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>flight.arrive<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>clock</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<au-demo heading="Flight Dashboard with Signalable Value Converter Demo">
+  <source-code src="example/binding-value-converters/flight-dashboard/app.js"><pre class="language-markup"><code></code></pre></source-code>
+</au-demo>
 </section>
 
   </article>

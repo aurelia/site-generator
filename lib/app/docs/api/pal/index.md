@@ -145,7 +145,7 @@ Options used during the static analysis that inform how to process a given modul
 #### Properties
 
 * `chunk: string` - Add the module to a chunk by name
-* `exports: string` - Optionally declare which exports are used. This enables tree-shaking when only few out of many exports are used.
+* `exports: ` - Optionally declare which exports are used. This enables tree-shaking when only few out of many exports are used.
 
 #### Methods
 
