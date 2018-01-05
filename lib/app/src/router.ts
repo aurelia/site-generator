@@ -76,10 +76,10 @@ export class Router {
       this.ea.publish(new ShowMenu(helpToc));
       this.history.setTitle('Help | Aurelia');
       this.trackPageView(url);
-    } else if (url === 'blog') {
-      //TODO: Implement Blog. Currently the sidebar links to Ghost.
+    } else if (url.indexOf('blog') === 0) {
+      var blogItem = { dest: url };
       this.ea.publish(new ActivateTab('blog'));
-      this.ea.publish(new ActivateScreen(this.container.get(BlogScreen).withItem(this.config.blog)));
+      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(blogItem)));
       this.ea.publish(new HideMenu());
       this.history.setTitle('Blog | Aurelia');
       this.trackPageView(url);

@@ -23,6 +23,10 @@ section.article, section.article-group {
   }
 }
 
+section.article.blog {
+  margin-left: 0;
+}
+
 section.article-group-root {
   margin-left: $sidebar-width;
 
