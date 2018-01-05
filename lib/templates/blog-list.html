@@ -1,0 +1,18 @@
+<section class="article-group">
+  <header>
+    <h1>{{name}}</h1>
+  </header>
+
+  <section>
+    <ul class="article-list">
+      {{#each posts}}
+      <li>
+        <a href="{{links.static}}">
+          <h3>{{name}}</h3>
+          <p>{{description}}</p>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+</section>
