@@ -79,7 +79,7 @@ export class Router {
     } else if (url.indexOf('blog') === 0) {
       var blogItem = { dest: url };
       this.ea.publish(new ActivateTab('blog'));
-      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(blogItem)));
+      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(blogItem)), fragment);
       this.ea.publish(new HideMenu());
       this.history.setTitle('Blog | Aurelia');
       this.trackPageView(url);
