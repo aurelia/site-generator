@@ -10,7 +10,7 @@
     <item>
       <title><![CDATA[{{name}}]]></title>
       <link>{{links.static}}</link>
-      <description><![CDATA[{{description}}]]></description>
+      <description><![CDATA[{{{description}}}]]></description>
       <pubDate>{{publishedAt}}</pubDate>
     </item>
     {{/each}}
