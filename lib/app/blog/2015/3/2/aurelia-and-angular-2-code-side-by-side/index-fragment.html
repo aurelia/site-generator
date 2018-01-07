@@ -1,0 +1,94 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia &amp; Angular 2.0 Code Side by Side</h1>
+  </header>
+
+  <article class="markdown">
+    <section><h2 id="showing-the-same-code-for-the-same-tasks-side-by-side-in-aurelia-and-angular-20">Showing the same code for the same tasks, side-by-side in Aurelia and Angular 2.0.</h2><div>
+<div style="float: left; width: 50%">
+<h3>Angular 2.0</h3>
+<strong>app.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Component<span class="token punctuation">,</span> Template<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/angular2'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>selector<span class="token punctuation">:</span> <span class="token string">'my-app'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    @<span class="token function">Template</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span> <span class="token string">'app.html'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">updateFullname</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">updateFullname</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>fullName <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">firstNameChanged</span><span class="token punctuation">(</span>$event<span class="token punctuation">,</span> first<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> first<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">updateFullname</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">lastNameChanged</span><span class="token punctuation">(</span>$event<span class="token punctuation">,</span> last<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> last<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">updateFullname</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+<div style="float: right; width: 48%">
+<h3>Aurelia</h3>
+<strong>app.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyApp</span><span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> <span class="token string">'John'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> <span class="token string">'Doe'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+</div>
+<div style="clear: both;"></div>
+<p>Note: Additional code is needed for Angular 2.0 if ES6/ES5/CoffeeScript is used rather than AtScript since annotations must be &quot;manually transpiled&quot; by the developer.</p>
+<div>
+<div style="float: left; width: 50%">
+<strong>app.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    First Name<span class="token punctuation">:</span>
+    <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token punctuation">[</span>value<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"firstName"</span> #first <span class="token punctuation">(</span>change<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"firstNameChanged($event, first)"</span> <span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"firstNameChanged($event, first)"</span><span class="token operator">></span>
+    Last Name<span class="token punctuation">:</span>
+    <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token punctuation">[</span>value<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"lastName"</span> #last <span class="token punctuation">(</span>change<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"lastNameChanged($event, last)"</span> <span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"lastNameChanged($event, last)"</span><span class="token operator">></span>
+    Full Name<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">{</span>fullName<span class="token punctuation">}</span><span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+<div style="float: right; width: 48%">
+<strong>app.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      First Name<span class="token punctuation">:</span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"firstName"</span><span class="token operator">></span>
+      Last Name<span class="token punctuation">:</span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"lastName"</span><span class="token operator">></span>
+      Full Name<span class="token punctuation">:</span> $<span class="token punctuation">{</span>fullName<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+</div>
+<div style="clear: both;"></div>
+<p>Note: Both the <code>change</code> and <code>input</code> events are needed in the Angular 2.0 example in order to have correct functionality across all input scenarios and browsers.</p>
+<p>To see Angular 2.0's alternative binding mechanism, Forms Model, compared to Aurelia, see 
+<a href="http://blog.durandal.io/2015/03/17/aurelia-angular-2-0-code-side-by-side-part-2/" target="_blank">Part 2</a>
+ of this comparison.</p>
+</section>
+
+  </article>
+</section>

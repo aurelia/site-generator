@@ -1,0 +1,114 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Early September Release Notes</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We've got new releases for you today! This update brings significant new capabilities to the view engine as well as making Aurelia smaller and faster. Read on for the details and how to update.</p>
+<section><h2 id="breaking-changes">Breaking Changes</h2><ul>
+<li>We are constantly tracking various browser specs. Web Components represents a critical set of specs that Aurelia has particular interest in. Recently it has become clear that the HTML Imports part of the specs is not going to become standardized. We have felt for a long time that there were significant problems with the spec and it turns out that several browser vendors agree. In light of that we have changed how views are loaded in Aurelia. Previously we used HTML Imports to load all views. With this new release we have removed that and replaced it with a simple text-based loader. What are the implications of this upon your code? Firstly, if you had previously used <code>link</code> tags with <code>rel=&quot;import&quot;</code>, those will no longer work. That is part of HTML Imports and is not going to be standardized. How should you then import css? See below in the &quot;New Features&quot; section for a better, more powerful alternative that we have introduced via the <code>require</code> element you already know. That said, you can still opt in to using HTML Imports for view loading if you desire. In fact, if you are using Polymer extensively, you may prefer this. To do that, we've authored a new plugin which swaps out the text-based loading with the original HTML Import-based loading. The plugin you need to install to accomplish this is called 
+<a href="https://github.com/aurelia/html-import-template-loader" target="_blank">aurelia-html-import-template-loader</a>
+.</li>
+<li>Inside the templating engine, we previously had a property known as <code>executionContext</code>. This has been renamed to <code>bindingContext</code>. It's doubtful this will affect anyone at all, since it is a semi-private API, but it is a breaking change.</li>
+</ul>
+</section>
+<section><h2 id="new-features">New Features</h2><ul>
+<li>
+<p>In preparation for our new docs, we are now generating an api.json file for each library which contains the documentation information. This is generated from the d.ts files, so full type information can be provided in our documentation. This also serves to validate the correctness of the d.ts files we generate.</p>
+</li>
+<li>
+<p>We now have a cross-loader plugin abstraction that works for system.js, require.js and dojo. This core plugin architecture enables higher level features as well as simplification of code.</p>
+</li>
+<li>
+<p>Every template in Aurelia is compiled into a ViewFactory which can then be used to create live View instances based on the original template. We've added a new feature to these ViewFactories, one that we've wanted to add for many months but only now got to: caching. The factory itself now has the ability to re-use View instances, binding them to different data as needed. By default, there is no caching, but you can now opt into it on a per template basis by setting the <code>view-cache</code> attribute on the template. You can set this attribute to a number to indicate the size of the cache or <code>*</code> to indicate that all created instances should be cached. We have started plumbing this new capability into Aurelia's constructs. There's more work to come, but the fundamental enabler is now in place.</p>
+</li>
+<li>
+<p>The ViewEngine now has a new extensible pipeline. This allows you to create plugins to load resources for views declared with the <code>require</code> element. What does this mean? One great way to understand what it can do is to look at two new capabilities we've been able to build on top of this core extensibility point:</p>
+</li>
+<li>
+<p>Per-View-CSS - You can now use the <code>require</code> element to bring CSS into a view. The css will be loaded along with the view and injected into the dom before the view renders. All you have to do is require it like this:</p>
+</li>
+</ul>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"bootstrap.css"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+There's a plugin that recognizes css and knows how to interact with the view loading and compilation process to make sure this css is available for your view. You can also use this to handle shadow dom or scoped css like this:
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"my-view.css"</span> <span class="token keyword">as</span><span class="token operator">=</span><span class="token string">"scoped"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+This will make sure the css is injected into the shadow dom or if that is not available, it will mark the style element as scoped.
+<ul>
+<li>HTML-Only Custom Elements - We can now turn any HTML file into a re-usable custom element. No JS is required. Here's how you do it:</li>
+</ul>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"nav-bar.html"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>	
+    
+    <span class="token operator">&lt;</span>nav<span class="token operator">-</span>bar<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>nav<span class="token operator">-</span>bar<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+Pretty cool right? You can also add bindable properties to your simple html component by adding a `bindable` attribute to the template of your view. Here's what that might look like:
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// nav-bar.html</span>
+    <span class="token operator">&lt;</span>template bindable<span class="token operator">=</span><span class="token string">"router"</span><span class="token operator">></span>
+      $<span class="token punctuation">{</span>router<span class="token punctuation">.</span>title<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+    
+    <span class="token comment" spellcheck="true">// app.html</span>
+    <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"nav-bar.html"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>	
+    <span class="token operator">&lt;</span>nav<span class="token operator">-</span>bar router<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"router"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>nav<span class="token operator">-</span>bar<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+If you need more than one bindable property on your element, you just provide a comma-separated list in the `bindable` attribute. This makes it even easier to build simple custom elements and to create re-usable views. Both of these scenarios work seamlessly with bundling and are based on top of a core extensibility point that anyone can leverage. As a challenge to the experienced reader, perhaps you could create a plugin that automatically generates custom elements from markdown files? If you want to see how our own simple html elements are built, have a look in the [templating-resources](https://github.com/aurelia/templating-resources/blob/master/src/aurelia-templating-resources.js#L34) repo and you'll find out implementations for both the above features.
+<blockquote>
+<p>Note: We have a major update to bundling coming soon. Please stay tuned for another blog post soon on this topic. If you are deploying and bundling with Aurelia currently, you may want to wait to update until after we release the new bundler and provide the accompanying blog post.</p>
+</blockquote>
+</section>
+<section><h2 id="improvements">Improvements</h2><ul>
+<li>Tons of improvements to d.ts generation across all libraries. This includes some bug fixes but also greater fidelity of many d.ts files.</li>
+<li>Query string helper methods have been moved out of the router and into the <code>path</code> module where they are more generally accessible.</li>
+<li>Linting is now set up across all repos, enforcing a consistent set of styles for ES6/7 code.</li>
+<li>With the removal of HTML Imports we no longer have a dependency on webcomponentsjs (though you can optionally add it if you like). This means that Aurelia now only has one external polyfill: core-js. The result is a reduction in the size of Aurelia and a more maintainable code base.</li>
+</ul>
+</section>
+<section><h2 id="bug-fixes">Bug Fixes</h2><ul>
+<li>The path library now respects file protocol with empty host. This was previously causing issues with PhoneGap/Cordova.</li>
+<li>Fixed a memory leak in the binding engine.</li>
+<li>More correct handling of <code>undefined</code> in the binding engine.</li>
+<li>Various fixes in the templating engine.</li>
+<li>Various other random fixes.</li>
+</ul>
+</section>
+<section><h2 id="performance">Performance</h2><ul>
+<li>Performance improvements to event dispatching in the event aggregator.</li>
+<li>Performance improvements to task execution in the task queue.</li>
+</ul>
+</section>
+<section><h2 id="updating">Updating</h2><p>These releases contain breaking changes. Therefor, you must run <code>jspm install</code> for each top level repo in your project. This will force the upgrade. Here's a command that has helped to make this process simpler for some:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    jspm install aurelia<span class="token operator">-</span>animator<span class="token operator">-</span>css aurelia<span class="token operator">-</span>binding aurelia<span class="token operator">-</span>bootstrapper aurelia<span class="token operator">-</span>dependency<span class="token operator">-</span>injection aurelia<span class="token operator">-</span>framework aurelia<span class="token operator">-</span>http<span class="token operator">-</span>client aurelia<span class="token operator">-</span>router aurelia<span class="token operator">-</span>event<span class="token operator">-</span>aggregator aurelia<span class="token operator">-</span>history<span class="token operator">-</span>browser aurelia<span class="token operator">-</span>loader<span class="token operator">-</span><span class="token keyword">default</span> aurelia<span class="token operator">-</span>loader aurelia<span class="token operator">-</span>metadata aurelia<span class="token operator">-</span>route<span class="token operator">-</span>recognizer aurelia<span class="token operator">-</span>templating<span class="token operator">-</span>binding aurelia<span class="token operator">-</span>templating<span class="token operator">-</span>resources aurelia<span class="token operator">-</span>templating<span class="token operator">-</span>router aurelia<span class="token operator">-</span>templating aurelia<span class="token operator">-</span>logging aurelia<span class="token operator">-</span>task<span class="token operator">-</span>queue aurelia<span class="token operator">-</span>history aurelia<span class="token operator">-</span>path  
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="what">What</h2><p>Ok, where are we at with this release, what are we working on now and what can you expect next?</p>
+<h3>Performance</h3>
+<p>The next iteration will include two critical performance updates:</p>
+<ul>
+<li>Dependency Injection - We've got a major overhaul to the internals of the dependency injection library which we believe will improve both the performance and memory consumption of the library. Since DI is so foundational to Aurelia, we expect these improvements to affect performance of almost everything.</li>
+<li>Binding - We've got a bunch of improvements planned for binding. Our first set of improvements focuses on reducing array usage and closure counts during the process of setting up bindings. We believe our solution will improve performance of observable subscription as well as reduce memory pressure.</li>
+</ul>
+<h3>Documentation</h3>
+<p>As part of this last iteration we added the ability to extract doc comments from code and generate an api.json file from them. This is based on the d.ts files so it can be used to create fully-typed, linkable docs. Now that this is in place we can work out the details of our API doc reference. Core team member Patrick Walters is working on getting that base infrastructure in place for that.</p>
+<p>In addition to API docs, we'll have many articles, how to's and other topical narrative docs. If you have any inclination to participate in open source, helping us document Aurelia is a fantastic way to get your feet wet. There are several ways. First, you may have heard that community member @adriatic has been working on an “Aurelia Guides” project. Writing content to assist in his effort is one easy way to help us out. We intend to use Aurelia Guides as a feed into our official guides. So, we will take relevant content from his guides project, work with the authors to incorporate it and then “upgrade” it with some cool technology we are working on. Another way you can get involved is to help us by submitting PRs to our source which add doc comments. This will ultimately become part of the reference docs i described above. As of this week, we have the process in place to build that data from those comments, so helping us to fill that out makes a big difference. Thirdly, you should know about the https://github.com/aurelia/documentation repo. This contains the source of our current docs. You can feel free to submit PRs to add additional content or corrections there. You can also create issues for topics you would like to see covered in the official docs. If in a fit of writing fury you produce all new documentation materials one day on a particular feature, you can even feel free to submit a PR there with a new markdown document containing the content, and we will figure out how to incorporate it.</p>
+<h3>Beta</h3>
+<p>All this is leading up to our official Beta. Probably the most important part of that is the documentation I just mentioned. Once we feel that has a good solid start, and the first version is deployed, we'll announce our public beta. We hope that will be in about 4 weeks.</p>
+</section>
+
+  </article>
+</section>

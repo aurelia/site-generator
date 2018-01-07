@@ -1,0 +1,130 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia May Status and Releases</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today's release comes with what we believe is the final set of big breaking changes. We've also got new features, improvements and a few other goodies.</p>
+<section><h2 id="changes">Changes</h2><h3>ES2016 Metadata</h3>
+<p>There's currently work being done to standardize how <em>metadata</em> is attached to classes, members, etc. In this release, we remove Aurelia's metadata implementation and replace it with the emerging ES2016 standard. This causes breaking changes if you were working directly with metadata. However, if you were using Aurelia's decorators or the fallback apis, you should not see any changes, since this is mostly an implementation detail. If you are interested in the emerging Metadata Reflection API, you can read 
+<a href="https://github.com/jonathandturner/decorators/blob/master/specs/metadata.md" target="_blank">the detailed spec</a>
+ and 
+<a href="https://github.com/rbuckton/ReflectDecorators" target="_blank">have a look at the polyfill</a>
+ that we've incorporated.</p>
+<h4>Positive Side Effects</h4>
+<p>Now that we've changed the way that metadata works, we've been able to remove some inheritance that was previously required by the framework. For example, in the dependency injection library, we were able to remove the base classes <code>InstanceActivator</code> and <code>Registration</code>. Now, if you want to customize how DI works using these extensibility points, you just implement a class with a particular api and then use the decorator api to associate it with a class. A related benefit is that, by removing some inheritance throughout the framework, we do get a performance increase in certain areas.</p>
+<p>There's another benefit to this that relates to 
+<a href="http://blogs.msdn.com/b/typescript/archive/2015/04/30/announcing-typescript-1-5-beta.aspx" target="_blank">yesterday</a>
+. The latest version of TypeScript will emit type metadata for classes using the Reflect Metadata API if you compile your code with the <code>--emitDecoratorMetadata</code> flag. To support this, there's a new decorator we've added which you can use on your TypeScript classes:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    @<span class="token function">autoinject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">public</span> bar<span class="token punctuation">:</span>Bar<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>By using <code>@autoinject</code> on a class in combination with the <code>--emitDecoratorMetadata</code> compiler flag, Aurelia's dependency injection system will be able to automatically determine the constructor types. Sweet!</p>
+<h3>Enumerations</h3>
+<p>While JavaScript doesn't have an enumeration type, there are several areas in Aurelia where we use enumeration-ish values. We've made a couple of breaking changes in order to make this consistent across all our libraries. All enumerations are now named using singular words. This means that the <code>levels</code> enum in the logging library is now named <code>logLevel</code> and is exported as follows:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">var</span> logLevel <span class="token operator">=</span> <span class="token punctuation">{</span>
+      none<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      error<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      warn<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      info<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+      debug<span class="token punctuation">:</span> <span class="token number">4</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The binding modes, which were not grouped together at all, are now grouped under the export <code>bindingMode</code> as follows:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">var</span> bindingMode <span class="token operator">=</span> <span class="token punctuation">{</span>
+      oneTime<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      oneWay<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      twoWay<span class="token punctuation">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The same type of change was made to the router's, also formerly ungrouped, activation strategies:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">var</span> activationStrategy <span class="token operator">=</span> <span class="token punctuation">{</span>
+      noChange<span class="token punctuation">:</span> <span class="token string">'no-change'</span><span class="token punctuation">,</span>
+      invokeLifecycle<span class="token punctuation">:</span> <span class="token string">'invoke-lifecycle'</span><span class="token punctuation">,</span>
+      replace<span class="token punctuation">:</span> <span class="token string">'replace'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Naming Consistency</h3>
+<p>There were a few places across the libraries where different naming schemes were being used. We've tried to patch those up. In particular, we've replaced the use of &quot;uri&quot;  through our APIs with a consistent use of &quot;url&quot;. This is a breaking API change to <code>HttpRequestBuilder</code> and <code>HttpRequestMessage</code>. To update, replace uses of <code>withUri</code>, <code>withBaseUri</code>, and <code>uri</code> with <code>withUrl</code>, <code>withBaseUrl</code>, and <code>url</code>, as appropriate. Another place was our plugin API. Previously plugins needed to implement an <code>install</code> method but everything else in Aurelia used a <code>configure</code> terminology. We've change plugins to now use a <code>configure</code> method so that it's the same everywhere.</p>
+<h3>Routing</h3>
+<p>By far, the biggest set of changes in these releases are to the router. There were a number of long-standing issues with the router that have now been resolved, thanks to the excellent work of core team member 
+<a href="https://github.com/bryanrsmith" target="_blank">Bryan Smith</a>
+.</p>
+<h4>Router Configuration</h4>
+<p>Prior to this release, configuring the router has been a bit odd. One needed to have a router injected and then set it as a property named &quot;router&quot;. Additionally, if you wanted to inject a router to control navigation but not to set up a child navigation, there were problems. To address these issues, we've changed the way configuring routers works. To configure a router, you now implement a <code>configureRouter</code> method. The method will receive the configuration object as its first parameter and the router instance as is second parameter. If you need the router, perhaps because you want to use the navigation model, then you can just store it, but if not, you can ignore it. Here's a look at the navigation skeleton's app class after this change:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      <span class="token function">configureRouter</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> router<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Aurelia'</span><span class="token punctuation">;</span>
+        config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span><span class="token string">'welcome'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  moduleId<span class="token punctuation">:</span> <span class="token string">'./welcome'</span><span class="token punctuation">,</span>      nav<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'flickr'</span><span class="token punctuation">,</span>        moduleId<span class="token punctuation">:</span> <span class="token string">'./flickr'</span><span class="token punctuation">,</span>       nav<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'child-router'</span><span class="token punctuation">,</span>  moduleId<span class="token punctuation">:</span> <span class="token string">'./child-router'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">this</span><span class="token punctuation">.</span>router <span class="token operator">=</span> router<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>As as result of this change, you can now have a router injected into any class without accidentally creating a new child navigation system. The router that is injected will be the closest router in the navigation hierarchy and can be used to do programmatic navigation or route generation.</p>
+<h4>Route Generation</h4>
+<p>The latest version of the router now has full support for route generation so that you no longer need to hard-code route patterns in your HTML or construct them in your JavaScript. To leverage this, simply name the route in your configuration. If you want to generate a route based on data in JavaScript, you use the <code>generate</code> method like so:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">let</span> href <span class="token operator">=</span> router<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span>routeName<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+The generation mechanism understands whether you are running in hash change or push state mode, how your routes are parameterized and how to construct query strings. Just give it the name and a params object with key/value pairs for the route parameters and query string data.
+<p>You will often want to generate routes in your HTML so that you can link to different app states, but without hardcoding the route patterns. Aurelia now provides a <code>route-href</code> custom attribute that you can use to accomplish this. It takes <code>route</code> and <code>params</code> properties. Here's an example using it, based on our contact app sample:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>a route<span class="token operator">-</span>href<span class="token operator">=</span><span class="token string">"route: contacts; params.bind: {id:contact.id}"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>This will generate the route named &quot;contacts&quot; based on the provided &quot;id&quot; parameter.</p>
+<h4>Activation Parameters</h4>
+<p>As part of the work on route generation, and in an effort to encapsulate knowledge of route patterns, we've changed the way the <code>canActivate</code> and <code>activate</code> hooks receive data. We've simplified the provided data by combining the route parameters and query string values into a single key/value pair object. This makes the api mirror the generation api and allows the developer to not need to remember or lookup wether a given input is coming from a route parameter or a query string. The updated lifecycle method signature is as follows:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">activate</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> config<span class="token punctuation">,</span> instruction<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="updating-aurelia">Updating Aurelia</h2><p>As a reminder, these releases have breaking changes, so you cannot do a simple <code>jspm update</code>. JSPM is smart in the way that it follows semver, and it won't let you break your app on accident. I recommend using <code>jspm install</code> for each &quot;top level&quot; Aurelia library. Just look in your <code>package.json</code> file, in the <code>jspm</code> section and be sure to re-install all the Aurelia dependencies listed there.</p>
+</section>
+<section><h2 id="status">Status</h2><p>This has been a big release, and over the last month or so we've been making regular breaking changes. We believe that this release marks the end of the sweeping breaking changes to common use APIs. We are still in a pre-beta state, so we do expect there to be more changes, but changes after this point are likely to be much smaller and perhaps not effect you at all. As has been our practice, we will continue to communicate openly with you about everything we've been doing.</p>
+<h3>Performance</h3>
+<p>This release is both smaller and faster than previous releases. While we haven't done most of our serious perf work yet, we have optimized our compiler options to reduce code size and use more performant transpilation strategies. We've also been doing some work in our templating engine to optimize specific use cases which occur frequently.</p>
+<p>There is major work still coming up here. First you will see the introduction of the &quot;view cache&quot;...or rather I should say the re-introduction of it. This is a concept from Durandal, circa 2012, where we had the idea to re-use view instances. In Durandal the implementation had some quirks and wasn't quite as flexible as needed due to our reliance on 3rd party libraries. In Aurelia, we don't have that problem and will be able to implement something quite powerful. Be on the lookout for that soon.</p>
+<p>The second major advance that is coming is in our databinding system. We are going to rework portions of the internal implementation to drastically improve performance and reduce memory. Once that is complete, we'll be able to add a 
+<a href="http://www.danyow.net/extending-aurelias-binding-language/" target="_blank">few more features</a>
+ to the binding engine that we really want to add.</p>
+<h3>Continued Communication</h3>
+<p>We've made it a goal to have at least one blog post here every week, so you have constant content informing you of the project status, releases and cool features. You've had the opportunity to hear from various members of our core team on a variety of topics from adaptive databinding to custom element creation. We're going to continue right along this path and next week you'll get to hear from core team member Mike Graham about how we are enabling TypeScript developers to have an awesome experience with Aurelia.</p>
+<p>This isn't good enough though. We want to take it up a notch. In an effort to improve our project organization and give you further visibility into our work, we've adopted  
+<a href="https://zenhub.io" target="_blank">ZenHub</a>
+. If you would like to have deeper insight into our development process, you can now install the 
+<a href="https://zenhub.io" target="_blank">ZenHub</a>
+ Chrome Extension and visit any of our repository's &quot;boards&quot;. These boards will show you who is working on what, what is planned next, what is under review and what is recently finished. You can get an overview of all Aurelia work by visiting 
+<a href="https://github.com/aurelia/framework#boards" target="_blank">the framework board</a>
+ and selecting &quot;show all&quot; in the upper left corner of the board.</p>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,113 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia-Computed</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week, Core Team Member 
+<a href="https://github.com/jdanyow" target="_blank">Jeremy Danyow</a>
+ shows us a new plugin to Aurelia's binding engine that he's been working on: 
+<a href="https://github.com/jdanyow/aurelia-computed/" target="_blank">aurelia-computed</a>
+.</p>
+<hr />
+<p>
+<a href="https://github.com/jdanyow/aurelia-computed/" target="_blank">null</a>
+ is a plugin for the 
+<a href="http://www.aurelia.io/" target="_blank">Aurelia</a>
+ platform that improves the efficiency of data-binding computed properties.  Binding to computed properties (properties with getter functions) typically requires dirty-checking.  This plugin uses Aurelia's javascript parser to parse the body of the property's getter function and check the resulting 
+<a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">abstract syntax tree (AST)</a>
+ for &quot;observability&quot;.  If the getter function is observable, a specialized observer is returned to Aurelia's 
+<a href="http://www.danyow.net/aurelia-property-observation/" target="_blank">pluggable binding system</a>
+.  The observer publishes change events when properties accessed by the getter function change.</p>
+<h4>What types of properties can aurelia-computed observe?</h4>
+<p>One-liners that access members that are accessible from the binding scope are good candidates for observation by this plugin.  Here's a few examples:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// "firstName" and "lastName" will be observed.</span>
+    <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// "isLoggedIn", "user" and "user.name" will be observed.</span>
+    <span class="token keyword">get</span> <span class="token function">userName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>isLoggedIn <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>user<span class="token punctuation">.</span>name <span class="token punctuation">:</span> <span class="token string">'(Anonymous)'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// "count" will be observed.</span>
+    <span class="token keyword">get</span> <span class="token function">shoppingCartDescription</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token string">' '</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">pluralize</span><span class="token punctuation">(</span><span class="token string">'item'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">var</span> _bar <span class="token operator">=</span> <span class="token string">'baz'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">{</span>
+    
+      <span class="token comment" spellcheck="true">// This property cannot be observed by aurelia-computed.</span>
+      <span class="token comment" spellcheck="true">// Dirty-checking will be required.</span>
+      <span class="token comment" spellcheck="true">// "_bar" can't be accessed from the binding scope.</span>
+      <span class="token keyword">get</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> _bar<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h4>Other options</h4>
+<p>Aurelia's binding system already has a method for observing computed properties- the <code>@computedFrom</code> decorator.  Simply decorate any property with <code>@computedFrom(propertyName1[, propertyName2..., propertyNameN])</code> and Aurelia's binding system will observe the specified properties and re-evaluate bindings when any of the properties change.  The aurelia-computed plugin simply automates the dependency identification and is able to support more complex scenarios such as observing property paths (<code>this.aurelia.computed.supports.me</code>).  There's also the dirty-checking fallback which isn't anything to worry about most of the time.</p>
+<h4>Development Logging</h4>
+<p>Enable debug logging in your application (see below for instructions) to view aurelia-computed's log messages.  Aurelia-computed logs when it's not able to parse a property getter function or when the function's logic is not observable.  This will tell you when Aurelia is going to use dirty-checking.  Here's an example:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      Thanos wants $<span class="token punctuation">{</span>whatThanosWants<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">var</span> infinityStones <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Soul'</span><span class="token punctuation">,</span><span class="token string">'Time'</span><span class="token punctuation">,</span><span class="token string">'Space'</span><span class="token punctuation">,</span><span class="token string">'Mind'</span><span class="token punctuation">,</span><span class="token string">'Reality'</span><span class="token punctuation">,</span><span class="token string">'Power'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Thanos</span> <span class="token punctuation">{</span>
+      <span class="token keyword">get</span> <span class="token function">whatThanosWants</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> infinityStones<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Since <code>infinityStones</code> is declared in the module scope, which binding cannot access, aurelia-computed logs the following message:</p>
+<p><img src="http://i.imgur.com/c0euMic.png" alt="console" /></p>
+<section><h2 id="get-started">Get Started</h2><ol>
+<li>Install aurelia-computed:</li>
+</ol>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    jspm install aurelia<span class="token operator">-</span>computed
+  </code></pre></source-code>
+</code-listing>
+2) Use the plugin in your app's main.js:
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true">// enable debug logging to see aurelia-computed's messages.</span>
+        <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true">// install the plugin</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-computed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+
+  </article>
+</section>

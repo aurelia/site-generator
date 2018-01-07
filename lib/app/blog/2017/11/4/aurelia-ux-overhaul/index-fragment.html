@@ -1,0 +1,74 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia UX Overhaul</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We've been doing some major work on Aurelia UX, both in terms of building out components and refining the core capabilities and approach. In this post, we'd like to share a bit about the details of our most recent set of releases.</p>
+<section><h2 id="monorepo">Monorepo</h2><p>One of the most noticeable changes in <code>0.4.0</code> is that Aurelia UX has moved to use a Monorepo approach. We have implemented 
+<a href="https://github.com/lerna/lerna" target="_blank">Lerna</a>
+, letting us split out the various components into self-contained packages within a single repo.</p>
+<p>This has several advantages:</p>
+<ul>
+<li>We now have a single repository for the Aurelia UX core and all official components.</li>
+<li>All issues are now tracked against a single repository.</li>
+<li>Development, dependency management, setup, testing and releasing are made simpler for both our core team and community.</li>
+<li>It's now easier to choose which components you wish to include in your own projects.</li>
+</ul>
+</section>
+<section><h2 id="style-engine-overhaul">Style Engine Overhaul</h2><p>One of the many ongoing issues we've had was that the JavaScript interpolation style system did not work well with a variety of tools. First, code editors did not like this and it would cause issues with auto formatting features as well as issues with syntax highlighting. Second, it would never work out of the box with Webpack. The reason for all of this is that the binding syntax that was used was not valid CSS.</p>
+<p>Enter CSS Variables. We have completely rewritten the style engine to use CSS Variables out of the box. This gives us a fast and native solution to theming that will work great with existing tools. Now, each component in Aurelia is associated with a TypeScript class that defines the theme. Each property on the class is automatically turned into a CSS variable by the framework. The framework then works to keep the variable values in sync with the theme instance. By default, most theme properties are set to design-language-specific values, such as <code>control-background</code> or <code>control-foreground</code>. This allows for a great deal of flexibility:</p>
+<ul>
+<li>You can change all components across your app, by simply changing the design language properties.</li>
+<li>You can change the details of all components of a type by changing the component's theme properties.</li>
+<li>You can create new instances of themes and associate them with individual components or groups of components. Themes are not just global, but can be scoped and assigned in any number of ways.</li>
+<li>Themes are &quot;plain old JavaScript objects&quot; so they can be updated and manipulated like any object, allowing for real-time or data-driven theming.</li>
+</ul>
+<h3>Key New APIs</h3>
+<h4><code>applyTheme</code></h4>
+<p>Processes a UxTheme into the corresponding CSS Variables and applies them to the provided element. If no theme is provided then the theme will be setup as a default theme and set CSS Variables in the document head.</p>
+<h4><code>applyThemeGroup</code></h4>
+<p>Applies an array of themes. This is to enable the creation of large theme sets that can be easily applied with one call.</p>
+</section>
+<section><h2 id="design-language-improvements">Design Language Improvements</h2><p>All swatches and design variables are now exposed as CSS variables. They are given a prefix of <code>--ux-swatch--</code> and <code>--ux-design--</code>. For example the following CSS variables are just some that are exposed to be used anywhere you use Aurelia UX.</p>
+<p>Design</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">--</span>ux<span class="token operator">-</span>design<span class="token operator">--</span>app<span class="token operator">-</span>background
+    <span class="token operator">--</span>ux<span class="token operator">-</span>design<span class="token operator">--</span>app<span class="token operator">-</span>foreground
+    <span class="token operator">--</span>ux<span class="token operator">-</span>design<span class="token operator">--</span>control<span class="token operator">-</span>background
+    <span class="token operator">--</span>ux<span class="token operator">-</span>design<span class="token operator">--</span>control<span class="token operator">-</span>foreground
+    <span class="token operator">--</span>ux<span class="token operator">-</span>design<span class="token operator">--</span>primary
+    <span class="token operator">--</span>ux<span class="token operator">-</span>design<span class="token operator">--</span>primary<span class="token operator">-</span>foreground
+  </code></pre></source-code>
+</code-listing>
+<p>Swatches</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p50
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p100
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p200
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p300
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p400
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p500
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p600
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p700
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p800
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>blue<span class="token operator">-</span>grey<span class="token operator">-</span>p900
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>black
+    <span class="token operator">--</span>ux<span class="token operator">-</span>swatch<span class="token operator">--</span>white
+    <span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="new-publish-location">New Publish Location</h2><p>Finally, as part of this overhaul, we've moved to publishing all Aurelia UX packages under the 
+<a href="https://www.npmjs.com/org/aurelia-ux" target="_blank">aurelia-ux NPM organization</a>
+. As mentioned above, we've split the 10 current components into their own packages, so you can easily pick which ones you want to use. We've also split out 
+<a href="https://www.npmjs.com/package/@aurelia-ux/core" target="_blank">the core</a>
+ so that you can use the style engine independently of the components.</p>
+</section>
+<section><h2 id="final-thoughts">Final Thoughts</h2><p>These improvements bring Aurelia UX into better alignment with web standards and evolve our repository factoring, development and release in ways that we believe will foster easier contribution from both our core team and community. We're greatly looking forward to delivering more components, additional themes and empowering new user experiences as we move forward.</p>
+</section>
+
+  </article>
+</section>

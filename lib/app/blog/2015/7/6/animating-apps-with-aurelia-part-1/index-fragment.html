@@ -1,0 +1,404 @@
+<section class="article blog">
+  <header>
+    <h1>Animating Apps with Aurelia - Part 1</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week core team member Vildan Softic shares with us how the Aurelia animation system works as well as how you can get started using animation in your apps today.</p>
+<hr />
+<p>Simple, yet effective animations can bring your app to life. Remember the ominous <code>&lt;blink&gt;</code> tag? That was clearly too much. In this article we'll explain how Aurelia's animation architecture is designed. We'll then leverage the official Animator-CSS plugin to see how to create subtle animations. In a followup article, we'll introduce a more sophisticated implementation, built upon 
+<a href="http://julian.com/research/velocity" target="_blank">VelocityJS</a>
+.</p>
+<section><h2 id="how-does-aurelia-support-animations">How does Aurelia support animations?</h2><p>A key goal in building animation support for Aurelia was to enable a flexible solution that allows you to choose whatever library you like. As a result, you're neither limited to a proprietary API nor to a certain style for how to implement your animations.</p>
+<p>To enable this flexibility, Aurelia's animation system is built around a simple interface, which is part of the templating repository:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Animator</span> <span class="token punctuation">{</span>
+        <span class="token keyword">static</span> <span class="token function">configureDefault</span><span class="token punctuation">(</span>container<span class="token punctuation">,</span> animatorInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token function">move</span><span class="token punctuation">(</span>element<span class="token punctuation">:</span>Element<span class="token punctuation">)</span><span class="token punctuation">:</span>Promise<span class="token punctuation">;</span>
+        <span class="token function">enter</span><span class="token punctuation">(</span>element<span class="token punctuation">:</span>Element<span class="token punctuation">)</span><span class="token punctuation">:</span>Promise<span class="token punctuation">;</span>
+        <span class="token function">leave</span><span class="token punctuation">(</span>element<span class="token punctuation">:</span>Element<span class="token punctuation">)</span><span class="token punctuation">:</span>Promise<span class="token punctuation">;</span>
+        
+        <span class="token function">removeClass</span><span class="token punctuation">(</span>element<span class="token punctuation">:</span>Element<span class="token punctuation">,</span> className<span class="token punctuation">:</span>string<span class="token punctuation">)</span><span class="token punctuation">:</span>Promise<span class="token punctuation">;</span>
+        <span class="token function">addClass</span><span class="token punctuation">(</span>element<span class="token punctuation">:</span>Element<span class="token punctuation">,</span> className<span class="token punctuation">:</span>string<span class="token punctuation">)</span><span class="token punctuation">:</span>Promise<span class="token punctuation">;</span>
+        
+        <span class="token function">animate</span><span class="token punctuation">(</span>element<span class="token punctuation">:</span>Element<span class="token punctuation">,</span> className<span class="token punctuation">:</span>string<span class="token punctuation">,</span> options<span class="token punctuation">:</span>Object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">runSequence</span><span class="token punctuation">(</span>sequence<span class="token punctuation">:</span>string<span class="token punctuation">)</span><span class="token punctuation">:</span>Promise<span class="token punctuation">;</span>
+       
+        <span class="token comment" spellcheck="true">/** (for JS based animators) **/</span>
+        <span class="token function">registerEffect</span><span class="token punctuation">(</span>effectName<span class="token punctuation">:</span>string<span class="token punctuation">,</span> properties<span class="token punctuation">:</span>Object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">unregisterEffect</span><span class="token punctuation">(</span>effectName<span class="token punctuation">:</span>string<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>  
+  </code></pre></source-code>
+</code-listing>
+<p><em>
+<a href="https://github.com/aurelia/templating/blob/master/src/animator.js" target="_blank">https://github.com/aurelia/templating/blob/master/src/animator.js</a>
+</em></p>
+<p>As you can see, the interface just declares available animation methods which return promises. Also note the <code>configureDefault</code> method which is used to register a default instance of the Animator with the framework.</p>
+<p>The Animator interface methods are called from various places within the framework, most notably the templating engine's <code>ViewSlot</code> class. The <code>ViewSlot</code> is used by the framework to abstract the idea of a &quot;location&quot; or &quot;slot&quot; in the DOM where views can be added or removed. This abstraction allows the framework to enforce lifecycle hooks, play animations and more. The following listing depicts parts of the <code>ViewSlot.add</code> function, showing how a View is added into the DOM:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">var</span> element <span class="token operator">=</span> view<span class="token punctuation">.</span>firstChild <span class="token operator">?</span> <span class="token function">nextElementSibling</span><span class="token punctuation">(</span>view<span class="token punctuation">.</span>firstChild<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>view<span class="token punctuation">.</span>firstChild <span class="token operator">&amp;&amp;</span>
+      view<span class="token punctuation">.</span>firstChild<span class="token punctuation">.</span>nodeType <span class="token operator">===</span> <span class="token number">8</span> <span class="token operator">&amp;&amp;</span>
+      element <span class="token operator">&amp;&amp;</span>
+      element<span class="token punctuation">.</span>nodeType <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span>
+      element<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token string">'au-animate'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>animator<span class="token punctuation">.</span><span class="token function">enter</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p><em>
+<a href="https://github.com/aurelia/templating/blob/master/src/view-slot.js#L75-L82" target="_blank">https://github.com/aurelia/templating/blob/master/src/view-slot.js#L75-L82</a>
+</em></p>
+<p>What you see here is that Aurelia essentially calls the proper methods at various positions in the code base and thus <em>hints</em> the execution of potential animations. We say <em>hints</em> because of two reasons explained next.</p>
+<h3>Exchangeable Implementations</h3>
+<p>The default implementation of <code>Animator</code> does not do anything besides immediately resolving a promise. The reason for this is to not burden your app with something you might not need at all while still supporting a base for other implementations. Those other implementations can be provided as Aurelia Plugins. Throughout the rest of this article we're going to take a look at the official Plugin leveraging CSS3-Animations, but know that there are already several other implementations available and many more to come.</p>
+<h3>Opt-In Animations</h3>
+<p>Even when you use animations, you might just want to use them only for specific elements. This is very true for business applications, where animations are rarely used and only need to highlight specific actions. In order to provide an efficent mechanism for Aurelia, preventing it from needing to observe every potential element, you must be specific about which elements should be animated. This is done by placing a special class called <code>au-animate</code> on your desired element.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>au-animate<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>If you take a look at the previous <code>ViewSlot.add</code> function, you'll see that it checks whether the inspected element does contain the class <code>au-animate</code> and only then continues firing the respective animation method.</p>
+</section>
+<section><h2 id="a-concrete-implementation-with-css-animations">A Concrete Implementation with CSS-Animations</h2><p>There are multiple ways to create animations of all kinds, whether by leveraging large Frameworks like 
+<a href="http://famo.us/" target="_blank">Famo.us</a>
+ or 
+<a href="https://greensock.com/" target="_blank">GreenSock</a>
+, more specific libraries like 
+<a href="http://julian.com/research/velocity/" target="_blank">Velocity.js</a>
+ or even simple jQuery wrappers like 
+<a href="http://ricostacruz.com/jquery.transit/" target="_blank">Transit</a>
+. Each of them focus on providing animations via JavaScript code. This approach offers you the most flexibility and control over how your animations are executed. But sometimes it feels like a lot of overhead if all you want is to change the color or the visibility of an element. So instead of touching the code base, an alternative approach is to use CSS3-Animations, which are completely handled by CSS-Markup.</p>
+<p>As a rule of thumb you would use the CSS-Animator if:</p>
+<ul>
+<li>
+<p>all you need are subtle and sparse animations</p>
+</li>
+<li>
+<p>you don't want to touch an existing code base</p>
+</li>
+<li>
+<p>you'd like to utilize existing CSS3 code snippets</p>
+</li>
+</ul>
+<blockquote>
+<p>Please note that the CSS-Animator only supports animations through the <code>animation</code> property and NO <code>transitions</code>. Be assured though, that there are tons of possibilities you can achieve with CSS-Animations alone. Take a look at the following tutorials for more info: 
+<a href="http://www.w3schools.com/css/css3_animations.asp" target="_blank">W3School</a>
+, 
+<a href="http://webdesign.tutsplus.com/tutorials/a-beginners-introduction-to-css-animation--cms-21068" target="_blank">TutsPlus</a>
+</p>
+</blockquote>
+<h3>How the Animation Process Works</h3>
+<p>Essentially, all that is needed to make an animation work is to define CSS classes with special predefined suffixes. You get the chance to use preparation classes, added before the actual animation starts as well as activation classes, used to trigger the actual animation. Take a look at the following table for all available options.</p>
+<style>
+.pretty-table
+{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-collapse: collapse;
+  border: 1px solid #333;
+}
+
+.pretty-table th, .pretty-table td
+{
+  border: 1px dotted #666;
+  padding: 0.5em;
+  text-align: left;
+}
+</style>
+<table class="pretty-table">
+	<thead>
+		<th>Method</th>
+		<th>Description</th>
+		<th>Preparation</th>
+		<th>Activation</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Enter</td>
+			<td>Element enters the DOM</td>
+			<td>au-enter</td>
+			<td>au-enter-active</td>
+		</tr>
+		<tr>
+			<td>Leave</td>
+			<td>Element leaves the DOM</td>
+			<td>au-leave</td>
+			<td>au-leave-active</td>
+		</tr>
+		<tr>
+			<td>addClass</td>
+			<td>Adds a CSS class</td>
+			<td>n/a</td>
+			<td>[className]-add</td>
+		</tr>
+		<tr>
+			<td>removeClass</td>
+			<td>Removes a CSS class</td>
+			<td>n/a</td>
+			<td>[className]-remove</td>
+		</tr>
+	</tbody>
+</table>
+<p>In order to understand how the CSS-Animator works, lets take a look at the <code>enter</code> method. We'll just highlight the most important parts but you can find the full source code 
+<a href="https://github.com/aurelia/animator-css/blob/master/src/animator.js#L182-L279" target="_blank">here</a>
+.</p>
+<p>All animation methods are supposed to return a Promise in order to allow async execution of logic after the animation completes.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">enter</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    	<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    	<span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Next, a unique animation id is created to identify the current animation:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Step 1: generate animation id</span>
+    <span class="token keyword">var</span> animId <span class="token operator">=</span> element<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    	classList <span class="token operator">=</span> element<span class="token punctuation">.</span>classList<span class="token punctuation">;</span>
+    	<span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>In order to allow the developer to setup CSS-properties before the actual animation runs, the Animator will add the class <code>au-enter</code> to the element.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">//Step 2: Add animation preparation class</span>
+    classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'au-enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>To handle the animation flow, the Animator will listen for the <code>animationstart</code> event, fired on the specific element. Notice the use of multiple events since browsers may fire vendor-specific events.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Step 3: setup event to check whether animations started</span>
+    <span class="token keyword">var</span> animStart<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_addMultipleEventListener</span><span class="token punctuation">(</span>
+    	element<span class="token punctuation">,</span> 
+    	<span class="token string">"webkitAnimationStart animationstart"</span><span class="token punctuation">,</span> 
+    	animStart <span class="token operator">=</span> <span class="token punctuation">(</span>evAnimStart<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    	<span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Now that we know that the animation actually started, add it to the stack and start listening for its completion.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Step 3.1: Animation exists, put on stack</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_addAnimationToStack</span><span class="token punctuation">(</span>animId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	
+    <span class="token comment" spellcheck="true">// Step 3.2: Wait for animation to finish</span>
+    <span class="token keyword">var</span> animEnd<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_addMultipleEventListener</span><span class="token punctuation">(</span>
+    	element<span class="token punctuation">,</span>
+    	<span class="token string">"webkitAnimationEnd animationend"</span><span class="token punctuation">,</span>
+    	animEnd <span class="token operator">=</span> <span class="token punctuation">(</span>evAnimEnd<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    	<span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>When the animation ends, remove the activation/preparation classes and the animation id from the stack. Then resolve the promise with <code>true</code>.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Step 3.2.1: remove animation classes</span>
+    classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'au-enter-active'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'au-enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	
+    <span class="token comment" spellcheck="true">// Step 3.2.2 remove animation from stack</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_removeAnimationFromStack</span><span class="token punctuation">(</span>animId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">...</span>          
+    <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>In order to get the animation triggered, the animator adds the activation class.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Step 4: trigger animation      </span>
+    <span class="token operator">...</span>      
+    classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'au-enter-active'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>But perhaps that class is not defined in your stylesheet. In that case the Animator will wait for a certain timeout to run out and cleanup the element classes, resolving the promise with <code>false</code> to indicate that no animation happened.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Step 5: if no animations happened cleanup animation classes</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>animationStack<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>animId<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'au-enter-active'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    		classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'au-enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    		<span class="token operator">...</span>
+    		<span class="token function">resolve</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_getElementAnimationDelay</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>animationTimeout <span class="token operator">+</span> delay<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Working with Default Animation Triggers</h3>
+<p>Enough theory. Let's get our hands dirty and create a simple list of elements, where each element is going to be animated separately. We start out with the following VM. It contains an array of strings which is going to be rendered and a function to remove a specific animator from that list.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AnimationDemo</span><span class="token punctuation">{</span>
+    	animators <span class="token operator">=</span> <span class="token punctuation">[</span>
+    		<span class="token string">'Base-Animator'</span><span class="token punctuation">,</span>
+    		<span class="token string">'CSS-Animator'</span><span class="token punctuation">,</span>
+    		<span class="token string">'Velocity-Animator'</span><span class="token punctuation">,</span>
+    		<span class="token string">'TinyAnimate-Animator'</span><span class="token punctuation">,</span>
+    		<span class="token string">'GreenSock-Animator'</span>
+    	<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    	
+    	<span class="token function">removeAnimator</span><span class="token punctuation">(</span>animator<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		<span class="token keyword">var</span> index <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>animators<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>animator<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    		<span class="token keyword">this</span><span class="token punctuation">.</span>animators<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The view is rendered by using an unordered-list. We'll give it the class <code>aurelia-animators</code> to reference it later in our stylesheet. Now we scaffold each animator as a list-item. First we need to give them the class <code>au-animate</code> to tell Aurelia that those elements can be animated. Inside each item we display an icon, bound to the <code>removeAnimator</code> function.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+    	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span><span class="token punctuation">></span></span>
+    		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>aurelia-animators<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>au-animate<span class="token punctuation">"</span></span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>anim of animators<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fa fa-trash<span class="token punctuation">"</span></span> <span class="token attr-name">click.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>$parent.removeAnimator(anim)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span> ${anim}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Finally we need to implement the animations by creating the necessary CSS-classes. We start off first with some general design of the list. Next we define the enter animations for each item. To do so we utilize the selector <code>.aurelia-animators&gt;li.au-enter</code> added automatically during the preparation phase. Since some browsers may not accept having new element enter invisible we should force it by using the <code>!important</code> override. The actual animation will be fired by adding the <code>au-enter-active</code> class to the element. In there, we leverage the animation property and its vendor-specific pendant, referencing a fadeIn-animation with a duration of two seconds. We do the same for the leave animation but may skip the preparation class and only define <code>au-leave-active</code>. Last but not least, we create the Animation-Keyframes and tell it to animate the element's opacity.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">.</span>aurelia<span class="token operator">-</span>animators <span class="token punctuation">{</span>
+    	padding<span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+    	list<span class="token operator">-</span>style<span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    	
+    <span class="token punctuation">.</span>aurelia<span class="token operator">-</span>animators<span class="token operator">></span>li<span class="token punctuation">.</span>au<span class="token operator">-</span>enter <span class="token punctuation">{</span>
+    	opacity<span class="token punctuation">:</span> <span class="token number">0</span><span class="token operator">!</span>important<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    	
+    <span class="token punctuation">.</span>aurelia<span class="token operator">-</span>animators<span class="token operator">></span>li<span class="token punctuation">.</span>au<span class="token operator">-</span>enter<span class="token operator">-</span>active <span class="token punctuation">{</span>
+    	<span class="token operator">-</span>webkit<span class="token operator">-</span>animation<span class="token punctuation">:</span> fadeIn 2s<span class="token punctuation">;</span>
+    	animation<span class="token punctuation">:</span> fadeIn 2s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    	
+    <span class="token punctuation">.</span>aurelia<span class="token operator">-</span>animators<span class="token operator">></span>li<span class="token punctuation">.</span>au<span class="token operator">-</span>leave<span class="token operator">-</span>active <span class="token punctuation">{</span>
+    	<span class="token operator">-</span>webkit<span class="token operator">-</span>animation<span class="token punctuation">:</span> fadeOut 2s<span class="token punctuation">;</span>
+    	animation<span class="token punctuation">:</span> fadeOut 2s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    	
+    <span class="token comment" spellcheck="true">/* CSS3-Animations */</span>
+    @<span class="token operator">-</span>webkit<span class="token operator">-</span>keyframes fadeIn <span class="token punctuation">{</span>
+    	<span class="token number">0</span><span class="token operator">%</span>   <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    	
+    @keyframes fadeIn <span class="token punctuation">{</span>
+    	<span class="token number">0</span><span class="token operator">%</span>   <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    	
+    @<span class="token operator">-</span>webkit<span class="token operator">-</span>keyframes fadeOut <span class="token punctuation">{</span>
+    	<span class="token number">0</span><span class="token operator">%</span>   <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    	
+    @keyframes fadeOut <span class="token punctuation">{</span>
+    	<span class="token number">0</span><span class="token operator">%</span>   <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">{</span> opacity<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>So we end up with the following result.</p>
+<p><img src="blog/2015/7/6/animating-apps-with-aurelia-part-1/content/images/2015/07/list-animate.gif" alt="" /></p>
+<p>Now that's nice but wouldn't it be better if all of the items would get rendered one after each other instead of in parallel? Those kind of animations are called staggered animations, where a series of elements is simply executed with a short timeout in between each one. The CSS-Animator does this by adding a class <code>au-stagger</code> to the parent of the elements.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>aurelia-animators au-stagger<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Additionally, we need to define a new CSS-class called, you guessed it <code>au-stagger</code> and in there define the timeout to be used in between each item.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">.</span>aurelia<span class="token operator">-</span>animators<span class="token punctuation">.</span>au<span class="token operator">-</span>stagger <span class="token punctuation">{</span>
+    	<span class="token operator">-</span>webkit<span class="token operator">-</span>animation<span class="token operator">-</span>delay<span class="token punctuation">:</span>50ms<span class="token punctuation">;</span>
+    	animation<span class="token operator">-</span>delay<span class="token punctuation">:</span>50ms<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>And the result looks like this.</p>
+<p><img src="blog/2015/7/6/animating-apps-with-aurelia-part-1/content/images/2015/07/list-staggered-animate.gif" alt="" /></p>
+<h3>Implementing Custom Animation Triggers</h3>
+<p>We've seen how to animate using pure CSS. But sometimes you'd like to trigger animations after certain actions. To do so, you can access all the animation methods via JavaScript inside your VM as well. In order to show that, lets animate the background of the list. We're adding a new button which is going to trigger the function <code>animateBackground</code>.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">click.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>animateBackground()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Animate Background<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Inside our VM we first need to request the animator and inject it into the constructor. We'll then store it for later use alongside the view's DOM-Element in the <code>animateBackground</code> method. When animating the background, we first get the list. Now we can call the <code>animate</code> Method of the CSS-Animator. It expects the element as first parameter, followed by a <code>className</code> which it's going to add and after successful animation remove afterwards. What happens behind the scenes is that <code>animate</code> just acts as an alias, which will call the methods <code>addClass</code> and <code>removeClass</code> sequentially.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>CssAnimator<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-animator-css'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">inject</span><span class="token punctuation">(</span>CssAnimator<span class="token punctuation">,</span> Element<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AnimationDemo</span><span class="token punctuation">{</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span>animator<span class="token punctuation">,</span> element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>animator <span class="token operator">=</span> animator<span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    	
+        <span class="token operator">...</span>
+    	
+        <span class="token function">animateBackground</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> list <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.aurelia-animators'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>animator<span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> <span class="token string">'background-animation'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>This gives us a chance to define a two-fold animation, when the class is added and when it's removed. We're actually not even forced to define the class <code>background-animation</code> itself but just its activation classes, which are shown next. Note how we use a more detailed KeyFrame definition this time, to switch through multiple background-colors.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">.</span>background<span class="token operator">-</span>animation<span class="token operator">-</span>add <span class="token punctuation">{</span>
+    	<span class="token operator">-</span>webkit<span class="token operator">-</span>animation<span class="token punctuation">:</span> changeBack 2s<span class="token punctuation">;</span>
+    	animation<span class="token punctuation">:</span> changeBack 2s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    	
+    <span class="token punctuation">.</span>background<span class="token operator">-</span>animation<span class="token operator">-</span>remove <span class="token punctuation">{</span>
+    	<span class="token operator">-</span>webkit<span class="token operator">-</span>animation<span class="token punctuation">:</span> fadeIn 2s<span class="token punctuation">;</span>
+    	animation<span class="token punctuation">:</span> fadeIn 2s<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    @<span class="token operator">-</span>webkit<span class="token operator">-</span>keyframes changeBack <span class="token punctuation">{</span>
+    	<span class="token number">0</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> green<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">25</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> red<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">50</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> blue<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">75</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> violet<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> yellow<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    	
+    @keyframes changeBack <span class="token punctuation">{</span>
+    	<span class="token number">0</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> green<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">25</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> red<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">50</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> blue<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">75</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> violet<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    	<span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">{</span> background<span class="token operator">-</span>color<span class="token punctuation">:</span> yellow<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>And again, here is the result.</p>
+<p><img src="blog/2015/7/6/animating-apps-with-aurelia-part-1/content/images/2015/07/animate-custom.gif" alt="" /></p>
+</section>
+<section><h2 id="summary">Summary</h2><p>We hope you enjoyed this introduction to working with Animation in the Aurelia Framework. There is much more to be told though. We'll continue this discussion in part 2 where we'll be presenting an alternative implementation via a JS-based Animator. Now go out and animate all the things! If you encounter any problems join us in 
+<a href="https://gitter.im/Aurelia/Discuss" target="_blank">our gitter channel</a>
+.</blink></p>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,299 @@
+<section class="article blog">
+  <header>
+    <h1>Introducing SpoonX Community Plugins</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, I'm happy to introduce to you another Aurelia community group that's built at least a dozen amazing plugins for our community. Read on to learn more...</p>
+<p>SpoonX is a company that has its focus mainly on architecture and infrastructure in a consulting fashion, open source work and supplying commercial support.</p>
+<section><h2 id="community">Community</h2><p>SpoonX has a lot of open source projects, and has chosen Aurelia as their framework of choice when it comes to front-end application development. With this in mind, they set out to supply some essential plugins to the community. They're a company with dedicated focus on the community, including a full-time community manager who helps actively maintain the projects.</p>
+<p>They've spent almost a year on developing, perfecting, testing and documenting their plugins, which are now stable and available to use.</p>
+</section>
+<section><h2 id="essential-plugins">Essential Plugins</h2><p>The following plugins are considered the most matured, and essential plugins. They have been used in production for at least 6 months now, are fully documented and have support for all bundling techniques.</p>
+<h3>aurelia-api</h3>
+<p>Talking to your API shouldn't be difficult. You shouldn't have to repeat yourself. You shouldn't need nuclear power plants to make it easier. You should just be able to say &quot;give me that thing!&quot; and be done with it.</p>
+<p><code>aurelia-api</code> comes with a set of cool features that makes talking to APIs easy and fun. <code>aurelia-api</code> is a module wrapped around aurelia-fetch-client that allows you to:</p>
+<ul>
+<li>Perform the usual CRUD</li>
+<li>Supply criteria for your API</li>
+<li>Manage more than one endpoint</li>
+<li>Add defaults</li>
+<li>Add interceptors</li>
+<li>More!</li>
+</ul>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-api" target="_blank">Github</a>
+ | 
+<a href="https://aurelia-api.spoonx.org" target="_blank">Docs</a>
+</em></p>
+<h3>aurelia-orm</h3>
+<p>Working with endpoints and client-side entities is unavoidable when doing API driven development. You end up writing a small wrapper for your XHRs / websocket events and putting your request methods in one place. Even though your endpoints are important, you still end up neglecting them. Enter <code>aurelia-orm</code>. This module provides you with some useful and cool features, such as:</p>
+<ul>
+<li>Entity definitions</li>
+<li>Repositories</li>
+<li>Associations</li>
+<li>Simple decorators</li>
+<li>Validation</li>
+<li>Type casting</li>
+<li>Self-populating (multi/single) select element</li>
+<li>Uses aurelia-api, so those benefits apply here as well</li>
+<li>More!</li>
+</ul>
+<p>This makes it easier to focus on your application and organize your code.</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-orm" target="_blank">Github</a>
+ | 
+<a href="https://aurelia-orm.spoonx.org" target="_blank">Docs</a>
+</em></p>
+<h3>aurelia-authentication</h3>
+<p><code>aurelia-authentication</code> makes local and third-party authentication easy. If your server is setup right, it can be as simple selecting your server endpoint from your 
+<a href="https://github.com/SpoonX/aurelia-api" target="_blank">aurelia-api</a>
+ setup and adding your third-party client id. Then you are ready to go. Basically, <code>aurelia-authentication</code> does not use any cookies but relies on a JWT (json web token; other token formats have basic support) stored in the local storage of the browser.</p>
+<p>Do you have multiple endpoints? No problem! In the recommended setting, <code>aurelia-authentication</code> makes use of aurelia-api which sets up multiple endpoints easily. Just specify in your aurelia-authentication configuration which endpoints you want to use and your access token will be sent along with your requests automatically.</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-authentication" target="_blank">Github</a>
+ | 
+<a href="https://aurelia-authentication.spoonx.org" target="_blank">Docs</a>
+</em></p>
+<h3>aurelia-notification</h3>
+<p><code>aurelia-notification</code> is a very simple plugin which allows you to display notifications in your application. It translates messages using <code>aurelia-i18n</code> and setting it up is as simple as configuring notification types and setting the style to use.</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-notification" target="_blank">Github</a>
+ | 
+<a href="https://github.com/SpoonX/aurelia-notification/blob/master/doc/notification.md" target="_blank">Docs</a>
+</em></p>
+</section>
+<section><h2 id="shiny-plugins">Shiny Plugins</h2><p>These modules are newer, but also already being used in production. Most of them also come with a fair amount of documentation. The community members responsible for the plugins have written a small introduction for each.</p>
+<h3>swan-example</h3>
+<p><strong><em>By 
+<a href="https://github.com/doktordirk" target="_blank">@doktordirk</a>
+ and 
+<a href="https://github.com/RWOverdijk" target="_blank">@RWOverdijk</a>
+.</em></strong></p>
+<p>We needed a place to demo our plugins, and so we created swan-example.</p>
+<p>
+<a href="https://github.com/SpoonX/swan-cli" target="_blank">SWAN</a>
+ is a nifty little stack, which stands for Sails Waterline Aurelia and Node. It comes with a 
+<a href="https://github.com/SpoonX/swan-cli" target="_blank">cli tool</a>
+, which isn't much yet, but does help you define a project structure and get started quickly using our opinionated 
+<a href="https://github.com/SpoonX/aurelia-skeleton" target="_blank">aurelia-skeleton</a>
+ and auth-ready node server. We've used this tool to build the swan-example, which you can see 
+<a href="http://swan-example.spoonx.org" target="_blank">by clicking here</a>
+.</p>
+<ul>
+<li><strong>Username</strong>: example</li>
+<li><strong>Password</strong>: example</li>
+</ul>
+<p><em>
+<a href="https://github.com/SpoonX/swan-example" target="_blank">Github</a>
+</em></p>
+<h3>aurelia-view-manager</h3>
+<p><strong><em>By 
+<a href="https://github.com/bas080" target="_blank">@bas080</a>
+.</em></strong></p>
+<p>Components often require some HTML. We at <code>SpoonX</code> tend to use bootstrap for styling and templating. But we also want to make it easy for people that might use other CSS frameworks. <code>aurelia-view-manager</code> allows you to easily overwrite the HTML template of components that use aurelia-view-manager's <code>@resolvedView</code> decorator. If you want to make your component CSS framework independent, head over to the 
+<a href="https://aurelia-view-manager.spoonx.org/usage.html" target="_blank">usage</a>
+ section.</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-view-manager" target="_blank">Github</a>
+ | 
+<a href="https://github.com/SpoonX/swan-example" target="_blank">Docs</a>
+</em></p>
+<h3>aurelia-form</h3>
+<p><strong><em>By 
+<a href="https://github.com/bas080" target="_blank">@bas080</a>
+.</em></strong></p>
+<p><code>aurelia-form</code> makes your life easier by letting you define and generate forms based on data. It does so by using something named a schema.</p>
+<p>A schema is a collection of objects that describes the form you want. The schema consists out of basic javascript data types which every programmer understands and knows how to manipulate. A simple example:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>loginSchema <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">'email'</span><span class="token punctuation">,</span>
+      key <span class="token punctuation">:</span> <span class="token string">'email'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">'password'</span><span class="token punctuation">,</span>
+      key <span class="token punctuation">:</span> <span class="token string">'password'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">this</span><span class="token punctuation">.</span>credentials <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>You can then use this schema and the object that holds the data like this:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>schema-form</span> <span class="token attr-name">schema.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>schema<span class="token punctuation">"</span></span> <span class="token attr-name">model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>credentials<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>schema-form</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>This plugin is especially useful when combined with 
+<a href="https://aurelia-orm.spoonx.org" target="_blank">aurelia-orm</a>
+, as it generates the form based on your entity schema using the custom component <code>&lt;entity-form&gt;</code>.</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-form" target="_blank">Github</a>
+ | 
+<a href="https://aurelia-form.spoonx.org/" target="_blank">Docs</a>
+</em></p>
+<h3>aurelia-pager</h3>
+<p><strong><em>By 
+<a href="https://github.com/VMBindraban" target="_blank">@VMBindraban</a>
+.</em></strong></p>
+<p><code>aurelia-pager</code> is a component that handles pagination for your application.</p>
+<p>Besides the basic functionality of a paginator like setting the amount of items for each page, it also supports:</p>
+<ul>
+<li>Data from an array</li>
+<li>Data from a resource (using 
+<a href="https://github.com/SpoonX/aurelia-orm" target="_blank">aurelia-orm</a>
+)</li>
+<li>Criteria (using a resource with sailsjs/waterline or express)</li>
+<li>Page range, for example <code>3 4 [5] 6 7</code></li>
+<li>Your own custom template (defaults to bootstrap)</li>
+</ul>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-pager" target="_blank">Github</a>
+</em></p>
+<h3>aurelia-filter</h3>
+<p><strong><em>By 
+<a href="https://github.com/VMBindraban" target="_blank">@VMBindraban</a>
+.</em></strong></p>
+<p><code>aurelia-filter</code> is a basic GUI criteria selector, it generates a search/filter criteria object. You can easily generate criteria based on <code>AND</code> or <code>OR</code> conditional blocks. Based on the field you have selected, it can transform the input field into the proper type, for example a number or date. It supports all the 
+<a href="http://sailsjs.org/documentation/concepts/models-and-orm/query-language" target="_blank">sailsJS/waterline</a>
+ operators. There is also support for entities (using 
+<a href="https://github.com/SpoonX/aurelia-orm" target="_blank">aurelia-orm</a>
+).</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-filter" target="_blank">Github</a>
+</em></p>
+<h3>aurelia-datatable</h3>
+<p><strong><em>By 
+<a href="https://github.com/jeremyvergnas" target="_blank">@jeremyvergnas</a>
+.</em></strong></p>
+<p><code>aurelia-datatable</code> is probably one the most common components you can find within interactive applications. It allows you to have an overview of your data and manipulate them, in a user-friendly manner.</p>
+<p><code>aurelia-datatable</code> has been made to provide you an easy and powerful way to implement datatables in your Aurelia application(s). In combination with aurelia-orm, aurelia-view-manager and aurelia-pager, you will get, out of the box, a datatable component ready to use, with the following features:</p>
+<ul>
+<li>Custom columns (with aliases and value converter)</li>
+<li>Sorting</li>
+<li>Searching</li>
+<li>Pagination</li>
+<li>Custom criteria</li>
+<li>Optional edit/remove actions on your rows</li>
+<li>Custom actions on your rows</li>
+<li>Custom footer on your datatable</li>
+</ul>
+<p><em>
+<a href="https://github.com/spoonx/aurelia-datatable" target="_blank">Github</a>
+ | 
+<a href="https://aurelia-datatable.spoonx.org/" target="_blank">Docs</a>
+</em></p>
+<h3>aurelia-config</h3>
+<p><strong><em>By 
+<a href="https://github.com/doktordirk" target="_blank">@doktordirk</a>
+.</em></strong></p>
+<p>With the increasing number of plugins, plugin initialization and configuration has become somewhat tedious. Currently, one might have something like this, a long list of plugins and their configs:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-api'</span><span class="token punctuation">,</span> aureliaApiConfig<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-authentication'</span><span class="token punctuation">,</span> aureliaAuthenticationConfig<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-notification'</span><span class="token punctuation">,</span> aureliaNotificationConfig<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//      ...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Using aurelia-config, that becomes easier and more organized. We have just a single namespaced config object with all the configuration options and aurelia-config does all those plugin calls for us with the appropriate namespace section. Here's a simple example:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// Example config</span>
+    <span class="token keyword">let</span> appConfigOverwrites <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token string">'aurelia-api'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        endpoints<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">'api'</span><span class="token punctuation">,</span> url<span class="token punctuation">:</span> <span class="token string">'http://127.0.0.1:1337/'</span><span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">'aurelia-authentication'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        endpoint<span class="token punctuation">:</span> <span class="token string">'api'</span>
+      <span class="token punctuation">}</span>
+      <span class="token string">'aurelia-notification'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        baseClass<span class="token punctuation">:</span> <span class="token string">'custom-notifications'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// Configure function</span>
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-config'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
+          <span class="token string">'aurelia-api'</span><span class="token punctuation">,</span>
+          <span class="token string">'aurelia-authentication'</span><span class="token punctuation">,</span>
+          <span class="token string">'aurelia-notification'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span> appConfigOverwrites<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>That's the main feature of aurelia-config, but there's more to it.</p>
+<ul>
+<li>Initialize and configure you plugins in one place with a single namespaced configuration object.</li>
+<li>Automatically load and merge defaults which can be directly loaded from plugins by aurelia-config itself.</li>
+<li>Access the merged config by using our resolver or injecting aurelia-config everywhere.</li>
+<li>Since the merged settings are an instance of homefront, all it's method are available, too.</li>
+</ul>
+<h3>Homefront</h3>
+<p><strong><em>By 
+<a href="https://github.com/Rawphs" target="_blank">@Rawphs</a>
+.</em></strong></p>
+<p>Homefront is a module that allows you to merge, flatten, expand, search in, fetch from, remove from, put in and work with objects easily. It was started as an educational project but has made its way into wetland, aurelia-config and 
+<a href="https://github.com/SpoonX/json-statham" target="_blank">json-statham</a>
+. It is fully tested, and makes working with objects a lot more fun.</p>
+<p><em>
+<a href="https://github.com/SpoonX/homefront" target="_blank">Github</a>
+</em></p>
+<h3>aurelia-charts</h3>
+<p><strong><em>By 
+<a href="https://github.com/bas080" target="_blank">@bas080</a>
+.</em></strong></p>
+<p><code>aurelia-charts</code> is a plugin that allows you to use the chart library you like most. It has a simple API and standardizes the way charts are used in your projects. It does so by letting others define sane defaults.</p>
+<p>It allows for you to write your own plugins, or use an existing one (for example 
+<a href="https://github.com/SpoonX/aurelia-charts-c3" target="_blank">aurelia-charts-c3</a>
+).</p>
+<p>This project is being used by us, <strong>but isn't labeled &quot;stable&quot;</strong> yet, as is visible by the lack of documentation.</p>
+<p><em>
+<a href="https://github.com/SpoonX/aurelia-charts" target="_blank">Github</a>
+</em></p>
+<h3>Bonus: Wetland</h3>
+<p><strong><em>By 
+<a href="https://github.com/RWOverdijk" target="_blank">@RWOverdijk</a>
+.</em></strong></p>
+<p>For the past two months we've been working on a brand new nodeJS orm. For now it lacks documentation, but has neat features. It's based on the 
+<a href="https://en.wikibooks.org/wiki/Java_Persistence/What_is_JPA%3F" target="_blank">JPA spec</a>
+ (which took 
+<a href="https://jcp.org/en/jsr/detail?id=338" target="_blank">some reading</a>
+) and took inspiration from the way 
+<a href="http://www.doctrine-project.org/projects/orm.html" target="_blank">doctrine</a>
+ implemented it. It obviously required some changes to fit the node.js world, but those were kept to a minimum.</p>
+<p>A glossary of its features to date:</p>
+<ul>
+<li>Abstracted principles (repositories, entities, hydrators)</li>
+<li>Unit of work using proxies</li>
+<li>Nested joins</li>
+<li>Nested persist</li>
+<li>Mapping</li>
+<li>Transactions</li>
+<li>Migrations</li>
+<li>Great performance (smart hydrator and state management)</li>
+<li>Strict typing (written in typescript)</li>
+</ul>
+<p>Feel free to 
+<a href="https://github.com/spoonx/wetland" target="_blank">browse the code</a>
+, and if you're interested leave a star so you can track the progress.</p>
+<p><em>
+<a href="https://github.com/spoonx/wetland" target="_blank">Github</a>
+</em></p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>We're very happy with the work we've done. The plugins are stable and the documentation has proven to be very helpful.</p>
+<ul>
+<li>If you have questions, suggestions, wish to contribute, add a plugin to the stack or if you have a need for banter, feel free to join us on 
+<a href="https://gitter.im/SpoonX/Dev" target="_blank">gitter</a>
+.</li>
+<li>If you like our work, help us out and star our repositories.</li>
+</ul>
+</section>
+
+  </article>
+</section>

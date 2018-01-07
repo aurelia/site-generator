@@ -1,0 +1,174 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Authentication Using Firebase</h1>
+  </header>
+
+  <article class="markdown">
+    <p>As a recovering full-stack developer who went the specialised front-end route a few years ago, the one aspect I have always hated about building any feature-rich web application is authentication. Thankfully a lot of convenient options have popped up over the last couple of years like 
+<a href="https://auth0.com/" target="_blank">Auth0</a>
+.</p>
+<p>In this post, we are going to be using Firebase's fantastic authentication functionality in an Aurelia CLI application.</p>
+<section><h2 id="pre-configure-firebase">Pre-configure Firebase.</h2><p>Firstly, create a new Firebase project via the 
+<a href="https://console.firebase.google.com" target="_blank">Firebase developer console</a>
+.</p>
+<p>Now let's enable authentication. On the left-hand side in the project pane, you'll see &quot;Authentication&quot; click that and then at the top, choose the &quot;Sign-in method&quot; tab where you'll see a list of providers. For the sake of this article, let's just enable Google because we don't need to provide tokens or application ID's like we do for other providers such as Facebook or Twitter.</p>
+<p>The sample application in the Github repository provided (at the end of this post) has the other providers wired up, but you'll need to get app credentials and then enable these providers yourself. Once you've done that, click on the name of your app in the left-hand pane at the top. I called my app &quot;Aurelia Auth App.&quot;</p>
+<p>Then you'll see three icons; Add Firebase to your iOS app, Add Firebase to your Android app and Add Firebase to your web app. Choose the last one, &quot;Add Firebase to your web app&quot;, and you'll see a popup which contains the SDK script and some configuration details.</p>
+<p><strong>Mine looked similar to the following:</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">"https://www.gstatic.com/firebasejs/3.6.1/firebase.js"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+    <span class="token operator">&lt;</span>script<span class="token operator">></span>
+      <span class="token comment" spellcheck="true">// Initialize Firebase</span>
+      <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+        apiKey<span class="token punctuation">:</span> <span class="token string">"AIzaSyD450934850934805934095834095"</span><span class="token punctuation">,</span>
+        authDomain<span class="token punctuation">:</span> <span class="token string">"aurelia-auth-app.firebaseapp.com"</span><span class="token punctuation">,</span>
+        databaseURL<span class="token punctuation">:</span> <span class="token string">"https://aurelia-auth-app.firebaseio.com"</span><span class="token punctuation">,</span>
+        storageBucket<span class="token punctuation">:</span> <span class="token string">"aurelia-auth-app.appspot.com"</span><span class="token punctuation">,</span>
+        messagingSenderId<span class="token punctuation">:</span> <span class="token string">"567567"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      firebase<span class="token punctuation">.</span><span class="token function">initializeApp</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Don't use my snippet, make sure you get your own, or this tutorial might not work properly for you. Hold onto it; we'll need it soon.</p>
+</section>
+<section><h2 id="generating-an-aurelia-app">Generating an Aurelia app.</h2><p>Using Aurelia CLI, we are going to scaffold a new Aurelia application.</p>
+<p>Make sure you have 
+<a href="http://nodejs.org" target="_blank">Node.js</a>
+ installed and then open up a terminal window and install the CLI as a global dependency:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    npm install aurelia<span class="token operator">-</span>cli <span class="token operator">-</span>g
+  </code></pre></source-code>
+</code-listing>
+<p>Once this completes, test the CLI installed correctly by typing: <code>au -v</code> and a version number should be displayed.</p>
+<p>Now, let's create our project. We'll call it &quot;aurelia-secured&quot; for the sake of this article, but you can call it whatever you want.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    au <span class="token keyword">new</span> <span class="token class-name">aurelia</span><span class="token operator">-</span>secured
+  </code></pre></source-code>
+</code-listing>
+<p>Go through the prompts and choose whatever works for you. I favour using TypeScript, so I selected TypeScript over Babel. Keep in mind code snippets you might encounter in this post are TypeScript, but can be quickly changed to be plain old Javascript.</p>
+<p>During the prompts, make sure you choose to install the dependencies as well. This will just run <code>npm install</code>, but it is one less step to worry about if you do it during the CLI process.</p>
+</section>
+<section><h2 id="coding-our-app">Coding our app.</h2><p>Firstly, in the newly created application folder, open up <code>index.html</code> and above the script which imports <code>scripts/vendor-bundle.js</code> paste in your provided SDK code from Firebase. We do this to ensure Firebase's SDK loads before Aurelia code.</p>
+<p>Your <code>index.html</code> file should resemble closely to the following:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>body aurelia<span class="token operator">-</span>app<span class="token operator">=</span><span class="token string">"main"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">"https://www.gstatic.com/firebasejs/3.6.1/firebase.js"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+        <span class="token operator">&lt;</span>script<span class="token operator">></span>
+          <span class="token comment" spellcheck="true">// Initialize Firebase</span>
+          <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+            apiKey<span class="token punctuation">:</span> <span class="token string">"AIzaSyD450934850934805934095834095"</span><span class="token punctuation">,</span>
+            authDomain<span class="token punctuation">:</span> <span class="token string">"aurelia-auth-app.firebaseapp.com"</span><span class="token punctuation">,</span>
+            databaseURL<span class="token punctuation">:</span> <span class="token string">"https://aurelia-auth-app.firebaseio.com"</span><span class="token punctuation">,</span>
+            storageBucket<span class="token punctuation">:</span> <span class="token string">"aurelia-auth-app.appspot.com"</span><span class="token punctuation">,</span>
+            messagingSenderId<span class="token punctuation">:</span> <span class="token string">"567567"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+          firebase<span class="token punctuation">.</span><span class="token function">initializeApp</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+        <span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">"scripts/vendor-bundle.js"</span> data<span class="token operator">-</span>main<span class="token operator">=</span><span class="token string">"aurelia-bootstrapper"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Congratulations, you just added Firebase into your app. If you're wondering why we are not using third party plugins like Aurelia Firebase, it is because I think Firebase already provides an excellent SDK that does not need to be over-complicated or abstracted.</p>
+<p>If you want to use a third-party plugin, nothing is stopping you. However, this article will be focusing on the official SDK only.</p>
+<p>If you thought that was easy, now we're going to add in authentication, which isn't any harder. Rather than make you write code step-by-step, line-by-line, <strong>just copy/paste the following well-documented code into <code>src/app.ts</code>:</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// For TypeScript, because Firebase is a global variable</span>
+    declare <span class="token keyword">var</span> firebase<span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span>
+            <span class="token keyword">private</span> userLoggedIn <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token keyword">private</span> authToken <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+            <span class="token keyword">private</span> user <span class="token operator">=</span> <span class="token keyword">null</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// This mostly gets called on subsequent page loads to determine</span>
+            <span class="token comment" spellcheck="true">// what the current status of the user is with "user" being an object</span>
+            <span class="token comment" spellcheck="true">// return by Firebase with credentials and other info inside of it</span>
+            firebase<span class="token punctuation">.</span><span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">onAuthStateChanged</span><span class="token punctuation">(</span>user <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>userLoggedIn <span class="token operator">=</span> user <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>user <span class="token operator">=</span> user<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    
+        <span class="token function">login</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">let</span> provider<span class="token punctuation">;</span>
+    
+            <span class="token comment" spellcheck="true">// Determine which provider to use depending on provided type</span>
+            <span class="token comment" spellcheck="true">// which is passed through from app.html</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'google'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                provider <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">firebase<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>GoogleAuthProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'facebook'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                provider <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">firebase<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>FacebookAuthProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'twitter'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                provider <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">firebase<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>TwitterAuthProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            
+            <span class="token comment" spellcheck="true">// Call the Firebase signin method for our provider</span>
+            <span class="token comment" spellcheck="true">// then take the successful or failed result and deal with</span>
+            <span class="token comment" spellcheck="true">// it accordingly.</span>
+            firebase<span class="token punctuation">.</span><span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">signInWithPopup</span><span class="token punctuation">(</span>provider<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>result<span class="token punctuation">:</span> any<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// The token for this session</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>authToken <span class="token operator">=</span> result<span class="token punctuation">.</span>credential<span class="token punctuation">.</span>accessToken<span class="token punctuation">;</span>
+    
+                <span class="token comment" spellcheck="true">// The user object containing information about the current user</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>user <span class="token operator">=</span> result<span class="token punctuation">.</span>user<span class="token punctuation">;</span>
+    
+                <span class="token comment" spellcheck="true">// Set a class variable to true to state we are logged in</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>userLoggedIn <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token keyword">let</span> errorCode <span class="token operator">=</span> error<span class="token punctuation">.</span>code<span class="token punctuation">;</span>
+                <span class="token keyword">let</span> errorMessage <span class="token operator">=</span> error<span class="token punctuation">.</span>message<span class="token punctuation">;</span>
+                <span class="token keyword">let</span> email <span class="token operator">=</span> error<span class="token punctuation">.</span>email<span class="token punctuation">;</span>
+                <span class="token keyword">let</span> credential <span class="token operator">=</span> error<span class="token punctuation">.</span>credential<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    
+        <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// Self-explanatory signout code</span>
+            firebase<span class="token punctuation">.</span><span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">signOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>userLoggedIn <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>If you would like to know how you can configure the scope to request additional information from a provider or other configuration options, the Firebase documentation has you covered 
+<a href="https://firebase.google.com/docs/reference/" target="_blank">here</a>
+.</p>
+</blockquote>
+<p><strong>Lastly, add the following into <code>app.html</code>:</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+        <span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"javascript:void(0);"</span> click<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"login('google')"</span> <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"!userLoggedIn"</span><span class="token operator">></span>Login via Google<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+        <span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"javascript:void(0);"</span> click<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"login('twiter')"</span> <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"!userLoggedIn"</span><span class="token operator">></span>Login via Twitter<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+        <span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"javascript:void(0);"</span> click<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"login('facebook')"</span> <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"!userLoggedIn"</span><span class="token operator">></span>Login via Facebook<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+        <span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"javascript:void(0);"</span> click<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"logout()"</span> <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"userLoggedIn"</span><span class="token operator">></span>Logout<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"profile"</span> <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"userLoggedIn &amp;&amp; user"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>h1<span class="token operator">></span>$<span class="token punctuation">{</span>user<span class="token punctuation">.</span>displayName<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+            <span class="token operator">&lt;</span>h2<span class="token operator">></span>$<span class="token punctuation">{</span>user<span class="token punctuation">.</span>email<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span>
+            <span class="token operator">&lt;</span>img src<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"user.photoURL"</span> <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"user.photoURL"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>We are only showing login links if we are not already logged in using Aurelia's <code>if.bind</code> which conditionally adds and removes the element from the DOM. We could also use <code>show.bind</code> to achieve the same thing, but the element does not get removed.</p>
+<p>Lastly, we have a profile DIV which only gets shown if we are logged in, and we have a user object. Then inside we display some values.</p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>Firebase is great. Aurelia's CLI is fantastic and combining the two allows you to create a fully-fledged client-side application with almost no work. If you would like the source code for the above example, you can find it on Github 
+<a href="https://github.com/Vheissu/aurelia-firebase-authentication" target="_blank">here</a>
+.</p>
+</section>
+
+  </article>
+</section>

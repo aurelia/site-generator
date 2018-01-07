@@ -1,0 +1,116 @@
+<section class="article blog">
+  <header>
+    <h1>Release Update - 9/29/2016</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week we've got more improvements and fixes in the core. We've also got some sweet new features for the validation library.</p>
+<section><h2 id="validation">Validation</h2><p>The validation library is almost ready for beta. We're really happy with how it has evolved and are grateful for the amazing feedback and contributions from the community, under the humble leadership of core team member Jeremy Danyow.</p>
+<p>Some of the new features are:</p>
+<ul>
+<li>Add a new <code>changeOrBlur</code> trigger.</li>
+<li>Enable specifying a validate trigger on individual bindings.</li>
+<li>Rule prioritization and bailing.</li>
+</ul>
+</section>
+<section><h2 id="changelog">Changelog</h2><p>As mentioned above, in addition to the validation feature updates, we continue to make improvements throughout all Aurelia libraries. You can read the detailed list of changes below.</p>
+<h3>
+<a href="https://github.com/aurelia/path/compare/1.1.0...v1.1.1" target="_blank">aurelia-path 1.1.1</a>
+ (2016-09-23)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> ensure new traditional param is marked as optional (
+<a href="https://github.com/aurelia/path/commit/fc600e5" target="_blank">fc600e5</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/router/compare/1.0.4...v1.0.5" target="_blank">aurelia-router 1.0.5</a>
+ (2016-09-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>typings:</strong> RoutableComponentCanActivate.canActivate should accept <code>Promise&lt;navigationcommand&gt;</code> as return type. (
+<a href="https://github.com/aurelia/router/commit/4460100" target="_blank">4460100</a>
+), closes 
+<a href="https://github.com/aurelia/router/issues/401" target="_blank">#401</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/task-queue/compare/1.0.0...v1.1.0" target="_blank">aurelia-task-queue 1.1.0</a>
+ (2016-09-29)</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>TaskQueue:</strong> expose flushing status (
+<a href="https://github.com/aurelia/task-queue/commit/fdf0bd7" target="_blank">fdf0bd7</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/binding/compare/1.0.4...v1.0.5" target="_blank">aurelia-binding 1.0.6</a>
+ (2016-09-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>AST:</strong> remove evalList array cache (
+<a href="https://github.com/aurelia/binding/commit/73f1a3e" target="_blank">73f1a3e</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/495" target="_blank">#495</a>
+</li>
+<li><strong>observable:</strong> enable chaining, enumerating (
+<a href="https://github.com/aurelia/binding/commit/6586cd2" target="_blank">6586cd2</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/501" target="_blank">#501</a>
+</li>
+<li><strong>ObserverLocator:</strong> use correct observer for aria role (
+<a href="https://github.com/aurelia/binding/commit/ca1dd60" target="_blank">ca1dd60</a>
+), closes 
+<a href="https://github.com/aurelia/framework/issues/582" target="_blank">aurelia/framework#582</a>
+ 
+<a href="https://github.com/aurelia/binding/issues/486" target="_blank">#486</a>
+</li>
+<li><strong>Parser:</strong> fix object literal parsing with (
+<a href="https://github.com/aurelia/binding/commit/52d01dd" target="_blank">52d01dd</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/502" target="_blank">#502</a>
+</li>
+<li><strong>StyleObserver:</strong> enable !important override (
+<a href="https://github.com/aurelia/binding/commit/0872d12" target="_blank">0872d12</a>
+), closes 
+<a href="https://github.com/aurelia/templating-resources/issues/251" target="_blank">aurelia/templating-resources#251</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating/compare/1.1.0...v1.1.1" target="_blank">aurelia-templating 1.1.1</a>
+ (2016-09-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>BehaviorPropertyObserver:</strong> publish immediately when TaskQueue already flushing (
+<a href="https://github.com/aurelia/templating/commit/06be105" target="_blank">06be105</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/496" target="_blank">aurelia/binding#496</a>
+ 
+<a href="https://github.com/aurelia/binding/issues/479" target="_blank">aurelia/binding#479</a>
+ 
+<a href="https://github.com/aurelia/templating/issues/363" target="_blank">#363</a>
+</li>
+</ul>
+<h3>aurelia-validation 0.13.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>ValidationParser: handle props that are only accessible via bracket syntax</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>validation-rules: permit uppercase email</li>
+<li>validateTrigger: add changeOrBlur trigger</li>
+<li>ValidateBindingBehavior: enable specifying validate trigger on individual bindings</li>
+<li>Validator: rule prioritization and bailing</li>
+<li>ValidationControllerFactory: add validator arg to createForCurrentScope</li>
+</ul>
+<h3>aurelia-skeleton-navigation 1.0.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Fix tslint config</li>
+<li>esnext-webpack: lock webpack version</navigationcommand></li>
+</ul>
+</section>
+
+  </article>
+</section>

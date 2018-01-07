@@ -1,0 +1,29 @@
+<section class="article blog">
+  <header>
+    <h1>Getting Prepared for Aurelia 1.0.0-rc</h1>
+  </header>
+
+  <article class="markdown">
+    <p>The release candidate of Aurelia is fast approaching. We're just wrapping up a few final things now, so we wanted to give you a quick update on how to get ready.</p>
+<section><h2 id="breaking-changes">Breaking Changes</h2><p>We will re-iterate the breaking change info when we actually release, but we wanted to give you this information in advance.</p>
+<h3>Shadow DOM</h3>
+<p>Many of you know that our custom element content projection system was originally based on what has come to be known as &quot;Shadow DOM v0&quot;. This involved using the <code>&lt;content&gt;&lt;/content&gt;</code> element to designate content projection sites within the view of a component. The v0 version of the spec was not fully agreed upon by all the major players and underwent a series of design changes, resulting in the &quot;Shadow DOM v1&quot; spec, which has gained consensus and is being implemented by browser manufacturers now. In response to this, we've taken the beta period to update our own Shadow DOM and fallback support to match the new spec. You can read more about the changes on 
+<a href="http://blog.durandal.io/2016/05/23/aurelia-shadow-dom-v1-slots-prerelease/" target="_blank">our blog post announcement</a>
+.</p>
+<p>The new Shadow DOM v1 spec has support for slot &quot;fallback content&quot;. As a result, our <code>replaceable</code> attribute is no longer needed and has been removed in favor of slot fallbacks. However, slots do not solve the problem of replacing a template that is used by a <code>repeat</code>, <code>if</code> or other template controller. So, we still support placing the <code>part</code> attribute on a template controller's element and overriding it by using <code>replace-part</code> in the element's content.</p>
+<h3>Testing</h3>
+<p>The <code>aurelia-templating</code> library previously contained two helper methods for unit testing: <code>createControllerForUnitTest()</code> and <code>createViewModelForUnitTest()</code>. We've removed these methods in favor or our new <code>aurelia-testing</code> library, which contains the <code>ComponentTester</code>. This new testing helper features a fluent interface capable of handling many more testing scenarios with ease and is our preferred approach going forward. If you require the previous mechanism in order to help you migrate, consider monkey-patching the <code>TemplatingEngine.prototype</code> by adding the methods back in your test setup. You can find the source code for the removed methods 
+<a href="https://github.com/aurelia/templating/blob/1.0.0-beta.1.2.7/src/templating-engine.js#L109" target="_blank">here</a>
+.</p>
+<p>The <code>aurelia-templating-resources</code> library previously contained the <code>view-spy</code> and <code>compile-spy</code> custom attributes, used for debugging. We've moved these out of this library and into <code>aurelia-testing</code>. You can now install this library as a plugin if you wish to use these debugging features.</p>
+<p>The above changes ultimately remove test-specific features out of the core framework, allowing us to reduce Aurelia's footprint by not shipping test code in production apps.</p>
+<h3>Releases</h3>
+<p>Since the above changes can potentially break your app, we've done them out-of-band by only releasing to Github. Over the next couple weeks, as we prepare for RC, we'll pre-release some of these libraries under the <code>beta.2</code> designation. This will make it easy for you to update your codebase a bit early if you like or simply not update if you'd like to wait.</p>
+</section>
+<section><h2 id="improvements">Improvements</h2><p>During the beta period we've made an extensive set of improvements to Aurelia. This includes everything from performance to polyfills, standards compliance and tooling. We've got a few more things we'd like to get in place for the release candidate such as improved support for both Webpack and TypeScript as well as a new CLI-based development process. Everything is coming together nicely and we look forward to sharing the RC with you soon.</p>
+</section>
+<section><h2 id="after-the-release-candidate">After the Release Candidate</h2><p>After we get the RC out, we'll have a brief period to address any last minute critical issues and improve tooling. We've been in Beta for about 7 months but we don't intend RC to extend to a period of time anywhere near that. It is our desire to turn around RTM very quickly.</p>
+</section>
+
+  </article>
+</section>

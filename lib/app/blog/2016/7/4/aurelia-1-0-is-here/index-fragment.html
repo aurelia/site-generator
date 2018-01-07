@@ -1,0 +1,117 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia 1.0 is Here!!!</h1>
+  </header>
+
+  <article class="markdown">
+    <p>It's been an amazing journey to get here and it couldn't have happened without the feedback of thousands of community members, the contributions from hundreds of developers and the guidance of our core team. It's a special day in the history of our project. Today I'm proud to announce the official Aurelia 1.0 Release!</p>
+<section><h2 id="what-is-it">What is it?</h2><p>Perhaps you're hearing about Aurelia for the first time today and you're wondering &quot;What is it exactly?&quot; Well, in short, Aurelia is a platform for building apps, based on top of open web technologies. You can build browser apps, you can build mobile apps and you can build desktop apps. Aurelia stays very close to web standards by embracing ES 2015+, Web Components and the modern DOM. It's also uniquely unobtrusive, allowing it to stay out of your JavaScript code while you focus on your app. For an example, check out this introductory video:</p>
+<iframe src="https://player.vimeo.com/video/117778145" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<p>We hope you'll give Aurelia a try and join the thousands of developers who are creating awesome businesses, apps and experiences on top of the platform.</p>
+</section>
+<section><h2 id="some-basic-stats">Some Basic Stats</h2><p>A lot of work has gone into Aurelia 1.0. Here are a few fun facts:</p>
+<ul>
+<li>21 Team Members</li>
+<li>Almost 500,000 views/mo on our sites and blogs</li>
+<li>Over 240,000 views of our videos</li>
+<li>Closed 3,270+ Issues</li>
+<li>Merged 1,730+ Pull Requests</li>
+<li>Delivered 1,410+ Releases</li>
+<li>3,790+ People Chatting on Gitter</li>
+<li>Almost 9,000 GitHub Stars</li>
+</ul>
+<p>Wow! Thanks again to everyone who made this release possible!</p>
+</section>
+<section><h2 id="how-to-get-aurelia">How to Get Aurelia</h2><p>Now that Aurelia is available, you're going to want to know how to get it. We've made it available through a variety of outlets.</p>
+<ul>
+<li><strong>Aurelia CLI</strong> - You can run <code>npm install -g aurelia-cli</code> to get our new CLI tool. Then just run <code>au new</code> and the CLI will setup your project and you'll have an app, ready for deploy, within a few minutes. You can read more about it in the new 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli" target="_blank">CLI documentation</a>
+.</li>
+<li><strong>Webpack</strong> - Lots of work has recently gone into supporting Webpack. As a result, we have two Webpack skeletons, one for Babel and one for TypeScript. You can simply download one of those and follow the instructions in its readme to get going or read about it in our 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/setup-webpack" target="_blank">new Webpack documentation</a>
+;</li>
+<li><strong>JSPM</strong> - All libraries are configured to work with JSPM. We've got four skeletons available for you that have both Babel and TypeScript setups ready to go for vanilla web projects as well as ASP.NET Core. You can 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/setup-jspm" target="_blank">read about those here</a>
+.</li>
+<li><strong>NPM</strong> - If you have NPM 3.x installed, you can use NPM for front-end development. All Aurelia libraries are available on NPM so you can get started by simply running <code>npm install aurelia-bootstrapper</code>.</li>
+<li><strong>GitHub &amp; Bower</strong> - All libraries are available as GitHub releases and are registered with Bower. You can simply run <code>bower install aurelia-boostrapper</code> to get setup.</li>
+<li><strong>Script Tags and CDNs</strong> - We've got a new build of Aurelia we've put together for this release. It's a build that's designed to let you include the core as a single script tag include. We've created a new basic aurelia project setup that uses this. You can 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/quick-start" target="_blank">read about that in our new Quick Start guide</a>
+. Over the coming weeks, we'll work towards getting our script tag builds up on a CDN.</li>
+</ul>
+</section>
+<section><h2 id="what">What</h2><p>The 1.0 release includes the following Aurelia libraries and plugins:</p>
+<ul>
+<li>animator-css</li>
+<li>animator-velocity</li>
+<li>binding</li>
+<li>boostrapper</li>
+<li>bootstrapper-webpack</li>
+<li>dependency-injection</li>
+<li>event-aggregator</li>
+<li>fetch-client</li>
+<li>framework</li>
+<li>history</li>
+<li>history-browser</li>
+<li>html-import-template-loader</li>
+<li>http-client</li>
+<li>loader</li>
+<li>loader-default</li>
+<li>loader-webpack</li>
+<li>logging</li>
+<li>logging-console</li>
+<li>metadata</li>
+<li>i18n</li>
+<li>pal</li>
+<li>pal-browser</li>
+<li>path</li>
+<li>polyfills</li>
+<li>route-recognizer</li>
+<li>router</li>
+<li>task-queue</li>
+<li>templating</li>
+<li>templating-binding</li>
+<li>templating-resources</li>
+<li>templating-router</li>
+<li>webpack-plugin</li>
+</ul>
+<p>The following libraries are in Beta:</p>
+<ul>
+<li>dialog</li>
+<li>testing</li>
+<li>ui-virtualization</li>
+</ul>
+<p>The following libraries are in Alpha:</p>
+<ul>
+<li>cli</li>
+<li>pal-nodejs</li>
+<li>pal-worker</li>
+<li>validatejs</li>
+<li>validation</li>
+<li>web-components</li>
+</ul>
+</section>
+<section><h2 id="documentation-update">Documentation Update</h2><p>We've also got a major update to the docs as part of this release. The docs now support mobile devices and include a ton of new content. The content includes a massive section on data-binding, more information on templating, new details on router configuration, a new quick start, a new tutorial and much more.</p>
+</section>
+<section><h2 id="what">What</h2><p>You don't think we're stopping here do you? Of course not! We've got lots of things that we're working on. Here are a few:</p>
+<ul>
+<li><strong>CLI</strong> - The CLI is off to a great start, but there's much more we can do with it, including Webpack integration, Electron and Cordova support and many more features. Look for continual improvements in this area.</li>
+<li><strong>Hot Module Loading</strong> - The dev experience with our CLI, Webpack and Skeletons is pretty solid, but it can be even better. We're working on technology that will enable hot HTML/JS/CSS update on live apps across our CLI and Webpack tooling options.</li>
+<li><strong>Validation</strong> - We've got an alpha of the new validation API today. We're planning to invest a lot of work into filling this out by handling a number of additional use cases over the coming months.</li>
+<li><strong>Server-Side Rendering</strong> - We've already got a start on running Aurelia on the server (and in a worker). We're working towards server-render for SEO next and after that, pick-up-and-continue on the client.</li>
+</ul>
+<p>In addition to the items listed above, we'll be continuing work on Aurelia itself. This includes fixes to bugs as well as adding new features. We're working to build a stable application platform, so you can expect us to grow Aurelia in a way that is semantically compatible with the 1.0 version for quite some time. If we need to make a breaking change, Aurelia is modular enough to make that easier on us and on you. Any changes of that nature will be announced well in advance and will always be designated by a major version change in the associated library. Any removal of features will be proceeded by a deprecation period. We're invested and we know you are invested, so we're making strong efforts to maintain stability and predictability for the platform.</p>
+</section>
+<section><h2 id="aurelia-virtual-training-is-now-available">Aurelia Virtual Training Is Now Available</h2><p>As of today, we're launching official Aurelia Virtual Training. We've split the training into three segments so you can purchase and attend whichever segments you feel are most helpful for you. Each segment is split into two, four-hour sessions, making available a total of 24 hours of training if you go all out.</p>
+<a href="https://www.picatic.com/modern-javascript-and-aurelia">
+![Modern JavaScript and Aurelia Training](/content/images/2016/07/training_banner.png)
+</a>
+<p>You can read all the details 
+<a href="https://www.picatic.com/modern-javascript-and-aurelia" target="_blank">on the training event site</a>
+ as well as purchase tickets.</p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>Aurelia 1.0 is finally here!!! This is a special day for us and we're glad to share it with such a great community. We look forward to seeing all the amazing things you create.</p>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,84 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Oslo Video, Pluralsight, New Releases, TypeScript Support &amp; MORE</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We're happy to deliver to you a new set of Aurelia releases today. As usual, these releases involve new capabilities, usability improvements, bug fixes and performance work. We've also got new learning materials and a few other fun items for you.</p>
+<section><h2 id="new-features">New Features</h2><ul>
+<li>Official WIP TypeScript definition files for every library!</li>
+<li>New APIs for creating binding expressions, particularly useful in unit tests</li>
+<li>New APIs for testing HTML behaviors</li>
+<li>All behaviors now support the generic <code>propertyChanged(property, newValue, oldValue)</code> callback</li>
+<li>Multiple <code>@sync</code> properties can now exist on a single behavior</li>
+</ul>
+</section>
+<section><h2 id="breaking-changes">Breaking Changes</h2><ul>
+<li>The names and arguments of the events published by the router during navigation have changed.</li>
+<li>Dynamic options custom attribute's <code>dynamicPropertyChanged</code> callback has been renamed to <code>propertyChanged</code>.</li>
+<li>The <code>@syncChildren</code> decorator has been renamed to <code>@sync</code> and can now be placed on properties. The signature has also changed.</li>
+</ul>
+</section>
+<section><h2 id="performance-enhancements">Performance Enhancements</h2><p>You should see a significant improvement in load time for all Aurelia apps, both in bundled and unbundled scenarios. Here's why:</p>
+<ul>
+<li>Each library is now deployed as a single module. For unbundled dev scenarios, this reduces the number of requests, making development refreshes snappier. For bundled scenarios, this reduces the number of dynamic module lookups needed by the ES6 loader, thereby reducing app load times. Additionally, each library is smaller in size due to the reduction of module wrapper and compiler generated code needed to build a single module vs. multiple.</li>
+<li>We recently discovered a flaw in the system.register module format that we were using to compile our modules with. This design flaw caused certain ES6 code scenarios to result in an exponential number of module linkage operations. The design flaw was quickly addressed by Guy Bedford in his update to the spec and implementation in SystemJS and Tracuer. However, the Babel and TypeScript teams have not yet fixed the issue in their compilers. TypeScript has scheduled the fix for a future milestone, but the Babel team has simply stated that they don't have time to make the fix. That is unfortunate, given that this bug affects <em>all</em> ES6 compiled into the system.register format, independent of app, framework or library. As a result, we've switched the module format we use from system.register to AMD. This results in no changes to behavior or code, but removes the load performance issues caused by the system.register flaw. The result of this change is that load times are <em>much</em> faster. If you have experience or interest in compilers, you may wish to assist the Babel team in 
+<a href="https://github.com/babel/babel/pull/1722" target="_blank">addressing their issue</a>
+.</li>
+<li>We've also made minor performance enhancements throughout the code base. In this iteration there have been improvements to metadata lookup speed as well as dynamic composition module Id lookups.</li>
+</ul>
+</section>
+<section><h2 id="typescript-support">TypeScript Support</h2><p>With this set of releases, we're happy to finally provide official, TypeScript definition files for each of our libraries. These libraries are generated directly from our source code and will be included with every release from here on out and always kept up to date. You will get them automatically through jspm and bower.</p>
+<h3>Approach</h3>
+<p>We've been experimenting with a number of different approaches to delivering high-fidelity, accurate TypeScript definition files. Our current approach utilizes 
+<a href="https://github.com/YoloDev/babel-dts-generator" target="_blank">a Babel plugin</a>
+. Part of Babel's architecture allows it to correctly parse TypeScript type syntax, including interfaces and generics. However, Babel doesn't do anything with this information. The plugin we've been contributing to hooks into the compilation process and uses the type information to generate our d.ts files. As a result, we can stay as close to the most up-to-date ES Next standards but augment our code with types for d.ts generation.</p>
+<p>This approach appears to be working well. However, most of our definition files should be considered a &quot;work in progress&quot; for the moment because we have not finished adding all the type information. This should happen over the next couple of weeks and we invite you, as always, to send pull requests to assist us if this is of interest to you.</p>
+<p>Correspondent to this, Core Aurelia Team Member Michael Graham is investigating cross-compile with TypeScript. We think it would be very interesting if we could establish a technique by which we could compile our source with both compilers.</p>
+</section>
+<section><h2 id="new-plugins">New Plugins</h2><p>We're working on a number of optional plugins for Aurelia. They aren't all ready yet but we wanted to provide a brief list here so you know what is being worked on:</p>
+<ul>
+<li><strong>animator-css</strong>, <strong>animator-velocity</strong>, <strong>animator-greensock</strong>, <strong>animator-tinyanimate</strong> - Aurelia supports a pluggable animation system and we're providing out-of-the-box support for the most popular animation libraries today.</li>
+<li><strong>http-client</strong> - A leight-weight service for making HTTP requests. It includes a fluent configuration and request API as well as strong testability support.</li>
+<li><strong>fetch-client</strong> - An alternative to http-client based on the upcoming Fetch standard. It has many of the same benefits as http-client but is more forward-looking and gains the benefits associated with the Fetch spec.</li>
+<li><strong>validation</strong> - Provides a fluent API for adding validation logic to models and connecting that to view feedback.</li>
+<li><strong>i18n</strong> - Adds strong support for internationalization to your apps. Integrates with the validation library and the router.</li>
+<li><strong>ui-virtualization</strong> - Services, custom elements and custom attributes that enable list virtualization, providing high performance and memory efficient rendering of infinite or extremely large lists. Includes scrolling and touch support.</li>
+<li><strong>modal</strong> - Provides support for modal dialogs.</li>
+<li><strong>computed</strong> - Automatically detects dependencies in getter-based properties and configures optimized observation for the binding system, which doesn't use dirty checks.</li>
+<li>and more coming...</li>
+</ul>
+<p>These are just the official plugins being created by our team. Many other are being created by the community. We hope to highlight several of those in the future.</p>
+</section>
+<section><h2 id="updating">Updating</h2><p>If you want to update to the latest versions of Aurelia libraries, one of our team members has constructed the following JSPM command to assist you.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    jspm install aurelia<span class="token operator">-</span>animator<span class="token operator">-</span>css aurelia<span class="token operator">-</span>binding aurelia<span class="token operator">-</span>bootstrapper aurelia<span class="token operator">-</span>dependency<span class="token operator">-</span>injection aurelia<span class="token operator">-</span>framework aurelia<span class="token operator">-</span>http<span class="token operator">-</span>client aurelia<span class="token operator">-</span>router aurelia<span class="token operator">-</span>event<span class="token operator">-</span>aggregator aurelia<span class="token operator">-</span>history<span class="token operator">-</span>browser aurelia<span class="token operator">-</span>loader<span class="token operator">-</span><span class="token keyword">default</span> aurelia<span class="token operator">-</span>loader aurelia<span class="token operator">-</span>metadata aurelia<span class="token operator">-</span>route<span class="token operator">-</span>recognizer aurelia<span class="token operator">-</span>templating<span class="token operator">-</span>binding aurelia<span class="token operator">-</span>templating<span class="token operator">-</span>resources aurelia<span class="token operator">-</span>templating<span class="token operator">-</span>router aurelia<span class="token operator">-</span>templating aurelia<span class="token operator">-</span>logging aurelia<span class="token operator">-</span>task<span class="token operator">-</span>queue aurelia<span class="token operator">-</span>history aurelia<span class="token operator">-</span>path
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="learning-and-training">Learning and Training</h2><p>The last two weeks have yielded great opportunities to learn Aurelia. If you want a one-hour introduction to Aurelia, including a discussion of philosophy, strategy, app building and roadmap, check out 
+<a href="https://vimeo.com/131641012" target="_blank">this presentation from NDC Oslo</a>
+. If you are a Pluralsight subscriber, you also now have access to a new course by Core Aurelia Team Member, K. Scott Allen, 
+<a href="http://www.pluralsight.com/courses/building-applications-aurelia" target="_blank">Building Applications with Aurelia</a>
+. We're also pleased to share that there are more Pluralsight courses presently in development, so you can look forward to additional materials in the coming months.</p>
+<p>If you need additional or more in-depth training, mentoring, code-review or development support, either remote or on-site, please don't hesitate to 
+<a href="mailto:info@durandal.io" target="_blank">contact Durandal Inc.</a>
+. Our company, core contributors and strategic partners would be happy to assist your team in any way we can.</p>
+<p>In the coming months there will be additional opportunities. Please 
+<a href="http://durandal.us10.list-manage1.com/subscribe?u=dae7661a3872ee02b519f6f29&id=3de6801ccc" target="_blank">sign up for our  mailing list</a>
+ as that will help us to keep you informed as well as provide you with some special benefits down the road.</p>
+</section>
+<section><h2 id="next-steps">Next Steps</h2><p>As you can see, our march towards beta is continuing steadily. We are shrinking the number of breaking changes with each release, improving performance and language support and helping to enhance the ecosystem with a solid collection of optional modules.</p>
+<p>Our core remaining goals between now and Beta are as follows:</p>
+<ul>
+<li><strong>Bug Fixes</strong> - We'll continue to squash bugs as they arise.</li>
+<li><strong>New Features</strong> - The bulk of our v1 feature set is complete now. There are a couple of additional scenarios we want to open up in our templating library such as progressive enhancement and using aurelia for Web Components apart from the framework. You'll see these types of final use-case-oriented features coming one at a time over the next couple of releases.</li>
+<li><strong>Performance</strong> - We are working on benchmarking and have a comprehensive strategy to make Aurelia blazingly fast. Each release you see from now on out will include explicit performance enhancements, starting with today's improvements to load time.</li>
+<li><strong>Documentation</strong> - We are currently developing a rich documentation platform for Aurelia and its ecosystem. Along with this platform, we'll be greatly expanding our documentation.</li>
+</ul>
+<p>You can expect Beta to hit in about 2 months or so.</p>
+</section>
+
+  </article>
+</section>

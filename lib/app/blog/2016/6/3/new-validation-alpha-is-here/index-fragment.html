@@ -1,0 +1,375 @@
+<section class="article blog">
+  <header>
+    <h1>New Validation Alpha is Here!</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We've been working hard on a validation rewrite and today we're excited to announce the Aurelia validation libraries are in alpha! Read on to get the scoop from core team member Jeremy Danyow...</p>
+<p>After gathering all your feedback and use-cases we've refactored validation into two separate libraries with a robust set of standard behaviors and a simpler, more flexible API surface for easier customization:</p>
+<ul>
+<li><code>aurelia-validation</code> - a generic validation library that provides a <code>ValidationController</code>, a <code>validate</code> binding behavior, a <code>Validator</code> interface and more.</li>
+<li><code>aurelia-validatejs</code> - a 
+<a href="https://validatejs.org/" target="_blank">validatejs</a>
+ powered implementation of the <code>Validator</code> interface along with fluent and decorator based APIs for defining rules for your components and data.</li>
+</ul>
+<section><h2 id="example">Example</h2><p>Let's put together a simple registration form to demonstrate the new validation APIs.</p>
+<h4>1) Create a new module that exports a <code>RegistrationForm</code> class:</h4>
+<p><em>registration-form.js</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RegistrationForm</span> <span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      email <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      <span class="token function">submit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// todo: call server...</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h4>2) Create a registration form view:</h4>
+<blockquote>
+<p>NOTE: I'm using bootstrap markup in this example.  Bootstrap is not required.  You can use whatever you want.</p>
+</blockquote>
+<p><em>registration-form.html</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>form submit<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"submit()"</span><span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"first"</span><span class="token operator">></span>First Name<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> id<span class="token operator">=</span><span class="token string">"first"</span> placeholder<span class="token operator">=</span><span class="token string">"First Name"</span>
+                 value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"firstName"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"last"</span><span class="token operator">></span>Last Name<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> id<span class="token operator">=</span><span class="token string">"last"</span> placeholder<span class="token operator">=</span><span class="token string">"Last Name"</span>
+                 value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"lastName"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"email"</span><span class="token operator">></span>Email<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> id<span class="token operator">=</span><span class="token string">"email"</span> placeholder<span class="token operator">=</span><span class="token string">"Email"</span>
+                 value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"email"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>button type<span class="token operator">=</span><span class="token string">"submit"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn btn-primary"</span><span class="token operator">></span>Submit<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h4>3) Install <code>aurelia-validation</code>:</h4>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    jspm install aurelia<span class="token operator">-</span>validation
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h4>4) Give our view-model an instance of a <code>ValidationController</code>:</h4>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">,</span> NewInstance<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-dependency-injection'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>ValidationController<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validation'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">inject</span><span class="token punctuation">(</span>NewInstance<span class="token punctuation">.</span><span class="token keyword">of</span><span class="token punctuation">(</span>ValidationController<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RegistrationForm</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>controller<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>controller <span class="token operator">=</span> controller<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The <code>ValidationController</code> manages a set of bindings and a set of renderers, controlling when to tell the renderers to render or unrender validation errors.  The <code>@inject(NewInstance.of(ValidationController))</code> line of code is important.  I'm going to skip discussing it for now and revisit it later in this post.</p>
+<h4>5) Configure the <code>ValidationController</code>:</h4>
+<p>The default &quot;trigger&quot; that tells the validation controller to validate bindings is the DOM <code>blur</code> event.  All in all there are three standard &quot;validation triggers&quot; to choose from:</p>
+<ol>
+<li><code>blur</code>: Validate the binding when the binding's target element fires a DOM &quot;blur&quot; event.</li>
+<li><code>change</code>: Validate the binding when it updates the model due to a change in the view.</li>
+<li><code>manual</code>: Manual validation.  Use the controller's <code>validate()</code> and  <code>reset()</code> methods to validate all bindings.</li>
+</ol>
+<p>To configure the controller's validateTrigger trigger, import the <code>validateTrigger</code> enum: <code>import {validateTrigger} from 'aurelia-validation';</code> and assign the controller's <code>validateTrigger</code> property:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    controller<span class="token punctuation">.</span>validateTrigger <span class="token operator">=</span> validateTrigger<span class="token punctuation">.</span>manual<span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h4>6) Implement the view-model's submit method.</h4>
+<p>No matter which validation trigger you chose, you're probably going to want to validate all bindings when the form is submitted.  Use the controller's <code>validate()</code> method to do this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">submit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> errors <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>controller<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h4>7) Define validation rules:</h4>
+<p>At this point your view-model should look like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">,</span> NewInstance<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-dependency-injection'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>ValidationController<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validation'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">inject</span><span class="token punctuation">(</span>NewInstance<span class="token punctuation">.</span><span class="token keyword">of</span><span class="token punctuation">(</span>ValidationController<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RegistrationForm</span> <span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      email <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>controller<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>controller <span class="token operator">=</span> controller<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">submit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> errors <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>controller<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// todo: call server...</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Let's bring in the <code>aurelia-validatejs</code> plugin which has APIs for defining rules and an implementation of the <code>Validator</code> interface that the <code>ValidationController</code> depends on to validate bindings.  You can of course build your own implementation of <code>Validator</code>; one is in the works for breeze.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    jspm install aurelia<span class="token operator">-</span>validatejs
+  </code></pre></source-code>
+</code-listing>
+<p>Now lets define some rules on our RegistrationForm class.  You could use the decorator API:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>required<span class="token punctuation">,</span> email<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validatejs'</span>
+    <span class="token operator">...</span>
+    <span class="token operator">...</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RegistrationForm</span> <span class="token punctuation">{</span>
+      @required
+      firstName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      @required
+      lastName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      @required
+      @email
+      email <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+  </code></pre></source-code>
+</code-listing>
+<p>Or you can use the fluent API:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>ValidationRules<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validatejs'</span>
+    <span class="token operator">...</span>
+    <span class="token operator">...</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RegistrationForm</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+    
+    ValidationRules
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'lastName'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">email</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span>RegistrationForm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h4>8) Add validation to our bindings</h4>
+<p>Now that the view-model has been implemented and rules are defined, it's time to add validation to the view.</p>
+<p>First, let's use the <code>validate</code> binding behavior to all of the input value bindings on our form to indicate these bindings require validation...</p>
+<p>Change <code>value.bind=&quot;someProperty&quot;</code> to <code>value.bind=&quot;someProperty &amp; validate&quot;</code>.</p>
+<p>The binding behavior will obey the controller's validation trigger configuration and notify the controller when the binding instance requires validation.  In turn, the controller will validate the object/property combination used in the binding and instruct the renderers to render or unrender errors accordingly.</p>
+<h4>9) Create a ValidationRenderer</h4>
+<p>We're almost done.  One of the last things we need to do is define how validation errors will be rendered.  This is done by creating one or more 
+<a href="https://github.com/aurelia/validation/blob/master/src/validation-renderer.js" target="_blank">ValidationRenderer</a>
+ implementations.  A validation renderer implements a simple API <code>render(error, target)</code> and <code>unrender(error, target)</code> (error is a 
+<a href="https://github.com/aurelia/validation/blob/master/src/validation-error.js" target="_blank">ValidationError</a>
+ instance and target is the binding's DOM element).</p>
+<p>Since we're using bootstrap, we'll create a renderer that adds the <code>has-error</code> css class to the <code>form-group</code> div of fields that have errors.  We'll also add a <code>&lt;span class=&quot;help-text&quot;&gt;</code> elements to the form-group div, listing each of the field's errors.  
+<a href="https://gist.github.com/jdanyow/ea843c24956cfffff48bb21776291f6a" target="_blank">Here</a>
+ the BootstrapFormValidationRenderer code and this is what a rendered error will look like:</p>
+<p><img src="http://i.imgur.com/1igykkW.png" alt="last name is required" /></p>
+<h5>10) Register the validation renderer with the component's controller.</h5>
+<p>Now that we have a render implementation we need to tell the controller to use the renderer.  The <code>aurelia-validate</code> library ships with a <code>validation-renderer</code> custom attribute you can use for this purpose:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>form submit<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"submit()"</span>
+          validation<span class="token operator">-</span>renderer<span class="token operator">=</span><span class="token string">"bootstrap-form"</span><span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>You give the attribute the name of a renderer registration and it will resolve the renderer from the container and register it with the nearest controller instance.</p>
+<p>At this point the view looks like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>form submit<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"submit()"</span>
+            validation<span class="token operator">-</span>renderer<span class="token operator">=</span><span class="token string">"bootstrap-form"</span><span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"first"</span><span class="token operator">></span>First Name<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> id<span class="token operator">=</span><span class="token string">"first"</span> placeholder<span class="token operator">=</span><span class="token string">"First Name"</span>
+                 value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"firstName &amp; validate"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"last"</span><span class="token operator">></span>Last Name<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> id<span class="token operator">=</span><span class="token string">"last"</span> placeholder<span class="token operator">=</span><span class="token string">"Last Name"</span>
+                 value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"lastName &amp; validate"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"email"</span><span class="token operator">></span>Email<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"email"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> id<span class="token operator">=</span><span class="token string">"email"</span> placeholder<span class="token operator">=</span><span class="token string">"Email"</span>
+                 value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"email &amp; validate"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    
+        <span class="token operator">&lt;</span>button type<span class="token operator">=</span><span class="token string">"submit"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn btn-primary"</span><span class="token operator">></span>Submit<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+</section>
+<section><h2 id="try-it">Try It</h2><p>Here's a live demo that includes an example  &quot;validation summary&quot; component using aurelia-validation.</p>
+<p>Exercises for the reader:</p>
+<ol>
+<li>Edit registration-form.js... uncomment the code to change the validation trigger to &quot;manual&quot; or &quot;change&quot;</li>
+<li>In registration-form.js, remove the validation decorators on the class properties and uncomment the fluent rule definitions at the bottom of the file.</li>
+</ol>
+<p></span><iframe src="https://gist.run/embed.html?id=381fdb1a4b0865a4c25026187db865ce" frameborder="0" width="100%" height="550"></iframe></p>
+<hr />
+<h1>Further Reading</h1>
+<p>We'll be providing more in-depth information in the docs however there's a few more things I want to cover in this post:</p>
+<h3>Fluent rule definition</h3>
+<p>The sample above demonstrates the fluent API and applying the rules to a class definition using the <code>.on(RegistrationForm)</code> method.  You can also use the <code>.on()</code> method with POJOs:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token punctuation">{</span>
+      firstName<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+      lastName<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+      email<span class="token punctuation">:</span> <span class="token string">''</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+    ValidationRules
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'lastName'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">email</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// &lt;-- define rules on the instance</span>
+  </code></pre></source-code>
+</code-listing>
+<p>There's no requirement to use the <code>.on()</code> method however.  You can capture the ruleset in a property and pass it into the <code>validate</code> decorator as a parameter if you prefer:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RegistrationForm</span> <span class="token punctuation">{</span>
+      rules <span class="token operator">=</span> ValidationRules
+        <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'lastName'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'email'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">email</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+      person <span class="token operator">=</span> <span class="token punctuation">{</span>
+        firstName<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+        lastName<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+        email<span class="token punctuation">:</span> <span class="token string">''</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+     pass ruleset to decorator via parameter<span class="token punctuation">:</span> 
+    <span class="token operator">&lt;</span>input value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"person.firstName &amp; validate:rules"</span><span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h3>The <code>validation-errors</code> attribute</h3>
+<p>You may want to data-bind to the current set of &quot;broken rules&quot;.  The <code>aurelia-validation</code> library ships with a custom attribute called <code>validation-errors</code> that will populate the property it's bound to with the current set of validation errors.</p>
+<p>Here's how you could use the <code>validation-errors</code> attribute to display the list of errors with links that will focus the input element that has the error.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>form validation<span class="token operator">-</span>errors<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"myErrors"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>ul<span class="token operator">></span>
+          <span class="token operator">&lt;</span>li repeat<span class="token punctuation">.</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"errorInfo of myErrors"</span><span class="token operator">></span>
+            $<span class="token punctuation">{</span>errorInfo<span class="token punctuation">.</span>error<span class="token punctuation">.</span>message<span class="token punctuation">}</span>
+            <span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"#"</span> click<span class="token punctuation">.</span>delegate<span class="token operator">=</span><span class="token string">"errorInfo.target.focus()"</span><span class="token operator">></span> Fix it<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+        <span class="token operator">...</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h3>What is <code>NewInstance.of(ValidationController)</code> ???</h3>
+<p><code>NewInstance.of</code> is a dependency-injection <strong>resolver</strong> that ships with <code>aurelia-dependency-injection</code>.  Resolvers tell the container <em>how</em> to resolve a particular key.  In this case it's telling the container to always retrieve a <em>new instance</em> of a ValidationController.  This does a couple things:</p>
+<ol>
+<li>
+<p>It ensures the registration form gets it's own instance of a ValidationController rather than sharing one with another component.  Most of the time this is the behavior you'll want.</p>
+</li>
+<li>
+<p>When Aurelia instantiates components it uses <em>a child container of the outer component</em>.  This is important because it means behind your component hierarchy is a hierarchy of container instances.  Our validation controller instance is installed in that hierarchy, making it easy for downstream renderer instances and validate binding behaviors to locate the relevant validation controller.</p>
+</li>
+</ol>
+<h3>My form inputs are custom elements... is that supported?</h3>
+<p><strong>Yes</strong>.  The <code>validate</code> binding behavior works with custom elements however there are a couple best practices:</p>
+<ol>
+<li>If you're using <code>validateTrigger.blur</code> (the default), you'll want to make sure your custom element publishes DOM <code>blur</code> events.</li>
+<li>Your custom element should expose a <code>focus</code> method <em>on it's DOM element</em> if you plan on building a validation summary that calls <code>focus()</code> on the validation error's target element.</li>
+</ol>
+<p>Here's an example of a widget that might appear in a form:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>widget id<span class="token operator">=</span><span class="token string">"first"</span> label<span class="token operator">=</span><span class="token string">"First Name"</span>
+            value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"firstName &amp; validate"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>widget<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>A widget implementation that would work well with the validation system would look like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>label <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"control-label"</span> <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"${id}"</span><span class="token operator">></span>$<span class="token punctuation">{</span>label<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span>
+               id<span class="token operator">=</span><span class="token string">"${id}"</span> ref<span class="token operator">=</span><span class="token string">"input"</span> placeholder<span class="token operator">=</span><span class="token string">"${label}"</span>
+               value<span class="token punctuation">.</span>two<span class="token operator">-</span>way<span class="token operator">=</span><span class="token string">"value"</span>
+               blur<span class="token punctuation">.</span>trigger<span class="token operator">=</span><span class="token string">"blur()"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">,</span> inject<span class="token punctuation">,</span> DOM<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Element<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Widget</span> <span class="token punctuation">{</span>
+      @bindable id<span class="token punctuation">;</span>
+      @bindable label<span class="token punctuation">;</span>
+      @bindable value<span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+    
+        <span class="token comment" spellcheck="true">// ensure the element exposes a "focus" method</span>
+        element<span class="token punctuation">.</span>focus <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>input<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">blur</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// forward "blur" events to the custom element</span>
+        <span class="token keyword">const</span> event <span class="token operator">=</span> DOM<span class="token punctuation">.</span><span class="token function">createCustomEvent</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">dispatchEvent</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<br>
+<h3>I don't like the way all this works.  It's not meeting my requirements.</h3>
+<p>Let us know!  File a github issue.  Worst case scenario is you'll need to implement your own <code>validate</code> binding behavior, which isn't hard to do.</p>
+<h1>Next Steps</h1>
+<p>We're going to be working on <strong>more docs</strong>, <strong>localization/i18n</strong> and cleaning up the list of <strong>issues</strong> in the validation repositories.  Keep sending your feedback!</p>
+</section>
+
+  </article>
+</section>

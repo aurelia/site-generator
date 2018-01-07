@@ -1,0 +1,83 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release for JSPM Beta</h1>
+  </header>
+
+  <article class="markdown">
+    <p>The spec for the standard JS module loader has recently been changing. The JSPM and SystemJS teams have been working hard to align with the new specs. And as of this release, Aurelia is now aligned with the new JSPM and SystemJS Beta.</p>
+<section><h2 id="breaking-changes">Breaking Changes</h2><p>The new module loader spec treats module ids differently. As a result, you may need to update some of your import statements in your code. This mostly affects relative ids. For example <code>System.import('./x')</code> is no longer baseURL-relative. It is baseURI-relative instead in order to enable matching URLs, per the new spec.</p>
+<p>Due to some of these changes, you will need to update your path config. Here's the config block from the skeleton app:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    System<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token string">"defaultJSExtensions"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token string">"transpiler"</span><span class="token punctuation">:</span> <span class="token string">"babel"</span><span class="token punctuation">,</span>
+      <span class="token string">"babelOptions"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"optional"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"es7.decorators"</span><span class="token punctuation">,</span>
+          <span class="token string">"es7.classProperties"</span><span class="token punctuation">,</span>
+          <span class="token string">"runtime"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">"paths"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"*"</span><span class="token punctuation">:</span> <span class="token string">"dist/*"</span><span class="token punctuation">,</span>
+        <span class="token string">"github:*"</span><span class="token punctuation">:</span> <span class="token string">"jspm_packages/github/*"</span><span class="token punctuation">,</span>
+        <span class="token string">"npm:*"</span><span class="token punctuation">:</span> <span class="token string">"jspm_packages/npm/*"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>There are two things to notice. First, make sure you have <code>defaultJSExtensions:true</code>. Second, look at the paths. Make sure you do not have file extensions there. If you have <code>“*”:”dist/*.js”</code> as was previously required, that is going to mess a lot of things up. Just remove the &quot;.js&quot; part.</p>
+<p>Another place that was affected by this is internal plugin loading. Several complexities arise due to the nature of internal vs. external plugins. In order to properly handle both scenarios with the new loader, a new API has been added: <code>feature</code>. Have a look at the custom startup code below:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-animator-css'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">feature</span><span class="token punctuation">(</span><span class="token string">'resources'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>External, 3rd party plugins use the <code>plugin</code> API, in the same way as before. But, if you have an internal plugin, you now use the <code>feature</code> API. A &quot;feature&quot; is simply a folder in your app with an <code>index.js</code> file that exports a <code>configure</code> function. It works the same as a plugin. It's just directly inside your app, rather than installed from an external source.</p>
+</section>
+<section><h2 id="new-features">New Features</h2><p>This release also contains some new features.</p>
+<ul>
+<li>Surrogate Behaviors - For custom elements, you can now place attributes, bindings and custom attributes directly on the <code>&lt;template&gt;</code> element itself. In this case, the template element will serve as a surrogate or stand-in for the actual custom element itself. Any behaviors you add to the template will be &quot;copied&quot; to the actual custom HTML element at runtime. This makes it exceedingly simple to handle common accessibility scenarios for custom elements. Here's an example of a hypothetical progress bar element that uses this technique in its view:</li>
+</ul>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>progress-bar<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuenow.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>progress<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuemin</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">aria-valuemax</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>progress<span class="token punctuation">"</span></span> <span class="token attr-name">css</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width:${progress}%<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+* `@processContent(false|Function)` - Previously, you could add the `@skipContentProcessing` decorator to a custom element to tell the ViewCompiler not to process the content that a consumer placed inside your custom element tag. However, we have deprecated that in place of the new, more powerful `@processContent` decorator. This decorator lets you specify `false` to skip content processing, but also enables you to supply a custom function which will run during the view compilation and allow you to perform custom transformations on the element content. This function can then return true or false to indicate whether the compiler should then continue to process the transformed content.
+* `@inlineView(markup, dependencies?)` - Components can now use a new view strategy that allows inlining of the view markup directly in the JS file. I do not recommend this to be used in a general purpose way. It is designed for specific use cases such as server loaded views and very, small templates.
+* `Aurelia.prototype.enhance(...)` and `ViewEngine.prototype.enhance(...)` - We've added progressive enhancement to Aurelia. Most apps use `aurelia.setRoot()` in their startup code to create and display the root component. But you can now use `aurelia.enhance()` to "enhance" or "turn on" custom elements, attributes and bindings which exist in the DOM prior to starting Aurelia, such as those that may have been generated on the server. This new optional startup functionality is built on the core view engine feature which can be used at will to "enhance" any DOM content. This feature is new and will probably change over the next few weeks in preparation for Beta. So, if you choose to use it now, be prepared to deal with potential changes.
+* Improved Aurelia Framework API - We have moved some of the code that was in the bootstrapper into the Aurelia Framework itself so that we can provide a better documented and more standard API. We've also extended the startup hooks as part of enabling this and in preparation for some future plugins.
+* Updated Skeleton - We've updated our navigation skeleton to demonstrate the new `aurelia-fetch-client` plugin. It also shows how to use custom attributes and ref bindings.
+</section>
+<section><h2 id="fixes">Fixes</h2><p>As always, we are squashing bugs with each release. There's no shortage of fixes today. Here are a few notable fixes though:</p>
+<ul>
+<li>The <code>delegate</code> binding command didn't previously work from within the ShadowDOM. We have fixed this and aligned our code with the upcoming v1 ShadowDOM spec. Our code also takes into account previous versions of the spec and non-standard implementations which some browsers have.</li>
+<li>There were a number of bugs in template parts, view slots and content reprojection. Those have now been addressed.</li>
+<li>Various bugs in &quot;re binding&quot; <code>ref</code> and <code>call</code> bindings have been resolved.</li>
+<li>Some fixes to the <code>if</code> and <code>repeat</code> behaviors.</li>
+<li>Better web components compatibility.</li>
+</ul>
+</section>
+<section><h2 id="updating">Updating</h2><p>First, you need to actually update to jspm beta. To do that use <code>npm install -g jspm@beta</code>. After you do that, you will need to re-install all of your packages, since the way that jspm transforms them as part of the installation process has changed.</p>
+</section>
+<section><h2 id="road-map">Road Map</h2><p>We are working towards Beta, which we are planning for 6-8 weeks out. This Beta will include a couple of additional features, mostly surrounding web components and dynamic HTML enhancement. The Beta will also feature our new documentation solution, which will enable us to provide a richer documentation experience as well as enable the community to document their own plugins and libraries better.</p>
+<p>We've been working hard on our benchmarking, which is now almost complete. As a result, the Beta will also include a number of performance optimizations and memory usage improvements. We'll continue this work after the Beta along with additional bug fixes.</p>
+<p>We're trying hard to stabilize the API. If you've been following our progress, you can see that there are still some changes, but they are usually pretty easy to fix. Nothing major. Today's breaking changes are related entirely to changes in web standards. As we move forward, we want to try to provide as stable of a platform as we can. But bear in mind that several specs such as the loader and web components specs are still in flux. As they change, we will have to adapt, and this may result in some breaking changes on our end. We'll do our best to communicate those and when possible to shield you from those side effects.</template></p>
+</section>
+
+  </article>
+</section>

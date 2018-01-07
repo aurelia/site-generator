@@ -1,0 +1,45 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Mid-August Release Notes</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today we've got a host of updates to Aurelia, many of which involve opening up additional extensibility and power in the platform. Read on for the details...</p>
+<section><h2 id="breaking-changes">Breaking Changes</h2><ul>
+<li>FrameworkConfiguration - The way that Aurelia is configured during custom bootstrapping has changed. This also affects how plugins interact with Aurelia during their configuration phase. The Plugins object has been renamed to FrameworkConfiguration. It still hangs off of the <code>use</code> property of the Aurelia object. All configuration methods have been moved to this object. Before some, such as those for the container and resources, were on the Aurelia object and some were on the Plugins object. Now, they are all in the same place. The best way to see the API changes is to take a look at the d.ts files for the 
+<a href="https://github.com/aurelia/framework/blob/master/dist/aurelia-framework.d.ts#L181" target="_blank">Aurelia</a>
+ object and the 
+<a href="https://github.com/aurelia/framework/blob/master/dist/aurelia-framework.d.ts#L17" target="_blank">FrameworkConfiguration</a>
+ object. This likely affects you, so please check out these APIs.</li>
+<li>There has been a minor change in spelling to a Router event for any code inspecting instruction pipeline status. To update, change uses of the property or string value <code>cancelled</code> to <code>canceled</code>. (Likely requires no changes in your code.)</li>
+<li>If you were using the ViewCompiler or InlineView to compile  strings into ViewFactories, you now must include the <code>&lt;template&gt;</code> tag in your markup. It will no longer be automatically wrapped since this would dis-allow certain scenarios such as surrogate behaviors. (Likely requires no changes in your code.)</li>
+<li>Previously the <code>created</code> callback in the view lifecycle received the binding context for the view. However, this was not always available, so it wasn't a very useful piece of information. Now, the <code>created</code> callback receives the View instance, a previously unavailable piece of information. (Likely requires no changes in your code since most people didn't know about this hook.)</li>
+<li>The ResourceRegistry type has been removed. We've simplified things so that there is only ViewResources now which covers all scenarios that these two classes did previously. (Likely requires no changes in your code.)</li>
+</ul>
+</section>
+<section><h2 id="new-features">New Features</h2><ul>
+<li>As part of our work on the new documentation for Aurelia, we have devised a way to generate our API docs from our d.ts files. The first bit of that work is starting to show up in these releases.</li>
+<li>Router configurations can now specify an <code>activationStrategy</code> as an alternative to implementing <code>getActivationStrategy()</code> on a view-model.</li>
+<li>The Router's RouteLoader now receives the <code>navigationContext</code> object in addition to the previous arguments, allowing it to make more contextual loading decisions if needed.</li>
+<li>You may not know it, but Aurelia's binding syntax is decoupled from its binding capabilities. We think our binding syntax is nice, clean and intuitive, but if you wanted to change it you could. With this release we've exposed the binding language to the view resource pipeline so it's now possible to specify different binding syntaxes per view. A 3rd party plugin could use its own syntax for example and not affect any other components in the app.</li>
+<li>Lots of cleanup and standardization of data structures inside the ViewCompiler. Now we expose some of those types. For example you can have the TargetInstruction for any element injected into a behavior and inspect all the compiler data structures or alter them.</li>
+<li>The newly exposed TargetInstruction and View (via the created callback) enable very advanced scenarios but they also provide the hooks to begin working on better debugging and introspection. This release contains two new simple custom attributes: <code>compile-spy</code>, which can be placed on any element to have it emit the TargetInstruction into the debug console, giving you insight into all the parsed bindings, behaviors and event handers for the targeted element; and <code>view-spy</code> which can be placed on any html element in a view to emit the View instance to the debug console, giving you insight into the live View instance, including all child views, live bindings, behaviors and more.</li>
+<li>You can now make multiple calls to the <code>setRoot</code> method of the Aurelia app, enabling simple app-level view replacement.</li>
+<li>We've also updated our CLI with improvements to the bundling process. As part of that our standard navigation skeleton has been updated to include bundling configuration out-of-the-box.</li>
+</ul>
+</section>
+<section><h2 id="fixes">Fixes</h2><ul>
+<li>Lots of improvements to the generated d.ts files for TypeScript users. This also serves as a datasource for our API docs.</li>
+<li>Addressed some issues related to Metadata and class inheritance.</li>
+<li>Fixed an issue with router-href not being able to generate routes due to a non-yet-configured router.</li>
+<li>Plenty of random fixes along the way...</li>
+</ul>
+</section>
+<section><h2 id="performance-work">Performance Work</h2><p>In this iteration we began some work on performance optimizing the internals of the ViewCompiler and ViewFactory. We started by changing our adhoc JavaScript data structures into Classes. The funny thing about JavaScript is that even though it is a dynamic language, modern JavaScript VMs can optimize code better when it's written in a static fashion. So, actually converting our adhoc internal objects to classes, improves the performance. This isn't something you normally need to worry much about in standard application code, but it can make an noticeable difference in a framework.</p>
+</section>
+<section><h2 id="updating">Updating</h2><p>Remember, you need to actually update to jspm beta if you haven't already. To do that use <code>npm install -g jspm@beta</code>. After you do that, you will need to re-install all of your packages, since the way that jspm transforms them as part of the installation process has changed.</p>
+<p>Stay tuned...more great stuff coming.</template></p>
+</section>
+
+  </article>
+</section>

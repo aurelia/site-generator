@@ -1,0 +1,172 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release Notes - Late August 2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We've got a number of bug fixes, enhancements and perf improvements this time around. In particular, we've made some substantial fixes to our CLI Webpack support.</p>
+<p>After the release of the Webpack feature in the Aurelia CLI last week, we found several issues. We have worked hard on these issues since then and they have now been resolved in version 0.31.3 of the Aurelia CLI. If your Webpack project was created with Aurelia CLI 0.31.2 or earlier, we recommend you take the following action...</p>
+<p>First, update the CLI globally using <code>npm install aurelia-cli@latest -g</code> and locally using <code>npm install aurelia-cli@latest --save-dev</code> in the project directory. Second, create a new project using <code>au new</code> and choose the same options as for the existing project. After this completes copy the following files from the new project, into your existing project:</p>
+<ul>
+<li>the gulp tasks in the aurelia_project/tasks folder</li>
+<li>aurelia_project/aurelia.json</li>
+<li>webpack.config.js</li>
+<li>package.json</li>
+</ul>
+<p>Next, run <code>npm install</code> inside your existing project.</p>
+<p>If you are using TypeScript, you should also:</p>
+<ul>
+<li>copy over the tsconfig.json file</li>
+<li>copy over the tests/e2e folder if you use Protractor</li>
+</ul>
+<p>These steps are not necessary for new projects created with aurelia-cli 0.31.3. For the full list of features, fixes and other enhancements, please see the release notes below.</p>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/pal/compare/1.3.0...v1.4.0" target="_blank">aurelia-pal 1.4.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> add missing semicolon (
+<a href="https://github.com/aurelia/pal/commit/f5336ab" target="_blank">f5336ab</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>dom:</strong> add createAttribute function (
+<a href="https://github.com/aurelia/pal/commit/a785008" target="_blank">a785008</a>
+)</li>
+<li><strong>dom:</strong> add createTemplateElement (
+<a href="https://github.com/aurelia/pal/commit/03ae1cc" target="_blank">03ae1cc</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/pal-browser/compare/1.2.1...v1.3.0" target="_blank">aurelia-pal-browser 1.3.0</a>
+</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>dom:</strong> add createAttribute function (
+<a href="https://github.com/aurelia/pal-browser/issues/21" target="_blank">#21</a>
+) (
+<a href="https://github.com/aurelia/pal-browser/commit/6759618" target="_blank">6759618</a>
+)</li>
+<li><strong>dom:</strong> add createTemplateElement (
+<a href="https://github.com/aurelia/pal-browser/commit/a04ca40" target="_blank">a04ca40</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/pal-nodejs/compare/1.0.0-beta.1.0.0...1.0.0-beta.2.0.0" target="_blank">aurelia-pal-nodejs 1.0.0-beta.2.0.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>whole-text:</strong> remove unnecessary wholeText polyfill (
+<a href="https://github.com/aurelia/pal-nodejs/commit/348a272" target="_blank">348a272</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>dom:</strong> add createTemplateElement (
+<a href="https://github.com/aurelia/pal-nodejs/commit/8158b02" target="_blank">8158b02</a>
+)</li>
+<li><strong>dom:</strong> implement createAttribute (
+<a href="https://github.com/aurelia/pal-nodejs/commit/e926bd9" target="_blank">e926bd9</a>
+)</li>
+<li><strong>index:</strong> add reset function (
+<a href="https://github.com/aurelia/pal-nodejs/commit/a33a116" target="_blank">a33a116</a>
+)</li>
+<li><strong>jsdom:</strong> update jsdom (
+<a href="https://github.com/aurelia/pal-nodejs/commit/d8e6239" target="_blank">d8e6239</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/pal-worker/compare/0.1.0...v0.2.0" target="_blank">aurelia-pal-worker 0.2.0</a>
+</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>dom:</strong> add createTemplateElement (
+<a href="https://github.com/aurelia/pal-worker/commit/5143e8c" target="_blank">5143e8c</a>
+)</li>
+<li><strong>dom:</strong> implement createAttribute (
+<a href="https://github.com/aurelia/pal-worker/commit/27327a8" target="_blank">27327a8</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>aurelia-cli 
+<a href="https://github.com/aurelia/cli/compare/0.31.0...0.31.1" target="_blank">0.31.1</a>
+, 
+<a href="https://github.com/aurelia/cli/compare/0.31.1...0.31.2" target="_blank">0.31.2</a>
+ and 
+<a href="https://github.com/aurelia/cli/compare/0.31.2...0.31.3" target="_blank">0.31.3</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>webpack:</strong> explicitly load the webpack typings (
+<a href="https://github.com/aurelia/cli/commit/2357a62" target="_blank">2357a62</a>
+)</li>
+<li>
+<ul>
+<li><strong>deps:</strong> update esprima to 4.0.0 (
+<a href="https://github.com/aurelia/cli/commit/48d2a48" target="_blank">48d2a48</a>
+)</li>
+</ul>
+</li>
+<li><strong>favicon:</strong> resolve favicon error in firefox (
+<a href="https://github.com/aurelia/cli/commit/01a5bb6" target="_blank">01a5bb6</a>
+)</li>
+<li><strong>jest:</strong> resolve babel-jest error (
+<a href="https://github.com/aurelia/cli/commit/3cfd956" target="_blank">3cfd956</a>
+)</li>
+<li><strong>loader:</strong> rev should be applied to bundle for systemjs (
+<a href="https://github.com/aurelia/cli/commit/691eec8" target="_blank">691eec8</a>
+)</li>
+<li><strong>watch:</strong> resolve issue where changes are not detected (
+<a href="https://github.com/aurelia/cli/commit/9146da2" target="_blank">9146da2</a>
+)</li>
+<li><strong>watch:</strong> support array of source files (
+<a href="https://github.com/aurelia/cli/commit/22a257e" target="_blank">22a257e</a>
+)</li>
+<li><strong>webpack:</strong> clean dist folder before build (
+<a href="https://github.com/aurelia/cli/commit/053ad98" target="_blank">053ad98</a>
+)</li>
+<li><strong>webpack:</strong> copy environment file on build (
+<a href="https://github.com/aurelia/cli/commit/b9c76e5" target="_blank">b9c76e5</a>
+)</li>
+<li><strong>webpack:</strong> enable sourcemaps by default (
+<a href="https://github.com/aurelia/cli/commit/0525dca" target="_blank">0525dca</a>
+)</li>
+<li><strong>webpack:</strong> pass env to webpack correctly (
+<a href="https://github.com/aurelia/cli/commit/4880c19" target="_blank">4880c19</a>
+)</li>
+<li><strong>webpack:</strong> resolve typings issues (
+<a href="https://github.com/aurelia/cli/commit/efcbc27" target="_blank">efcbc27</a>
+)</li>
+<li><strong>webpack:</strong> support au build --watch (
+<a href="https://github.com/aurelia/cli/commit/4d31ce7" target="_blank">4d31ce7</a>
+)</li>
+<li><em>protractor:</em>* typescript errors when not using jest typings (
+<a href="https://github.com/aurelia/cli/commit/1ee7b91" target="_blank">1ee7b91</a>
+)</li>
+<li><strong>webpack:</strong> remove comma from arguments (
+<a href="https://github.com/aurelia/cli/commit/666d7c0" target="_blank">666d7c0</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/fetch-client/compare/1.1.2...v1.1.3" target="_blank">aurelia-fetch-client 1.1.3</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>fix style typo in error message that affected links displayed in editors</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/dependency-injection/compare/1.3.1...v1.3.2" target="_blank">aurelia-dependency-injection 1.3.2</a>
+</h3>
+<h4>Performance Improvements</h4>
+<ul>
+<li><strong>container:</strong> improve dynamic construction of static depencies (
+<a href="https://github.com/aurelia/dependency-injection/commit/01b2988" target="_blank">01b2988</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

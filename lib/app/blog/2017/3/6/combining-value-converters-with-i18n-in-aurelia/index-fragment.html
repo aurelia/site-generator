@@ -1,0 +1,134 @@
+<section class="article blog">
+  <header>
+    <h1>Combining Value Converters with i18n in Aurelia</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, I'd like to introduce you to Peter Vermeulen, an Aurelia community member with some great thoughts on Aurelia Value Converters and i18n. Peter, take it away....</p>
+<hr />
+<p>My name is Peter Vermeulen, a freelance Front-End engineer and UX/UI designer with several years of experience in enterprise software. I spend my time helping forward-thinking companies building software with a strong focus on experiences.</p>
+<p>Most if not all projects at one point or another will have to provide multilingual support.</p>
+<p>Adding i18n support in aurelia is as easy as adding the 
+<a href="https://github.com/aurelia/i18n" target="_blank">aurelia-i18n</a>
+ plugin and 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/i18n/latest/i18n-with-aurelia" target="_blank">configuring it</a>
+.</p>
+<p>But as a project becomes larger, centralizing your logic into reusable components is the way to go.</p>
+<p>This article describes a way of combining aurelia's value-converters with i18n, to allow reusing them in your locales.</p>
+<p>A live preview can be found 
+<a href="https://peterver.github.io/aurelia-i18n-value-converters/" target="_blank">here</a>
+.</p>
+<section><h2 id="0-getting-started">0. Getting Started</h2><p>Create a new aurelia project by running <code>au new</code> (assuming you are using the 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli/1" target="_blank">aurelia-cli</a>
+).</p>
+<p>After this has completed, follow the steps at the 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/i18n/latest/i18n-with-aurelia/1" target="_blank">i18n-with-aurelia hub section</a>
+ to configure your aurelia project for internationalization.</p>
+</section>
+<section><h2 id="1-adjust-the-i18n-configuration">1. Adjust the i18n Configuration</h2><p>Aurelia-i18n is a wrapper that does two things, and does them well:</p>
+<ul>
+<li>It acts as a proxy around 
+<a href="https://www.i18next.com" target="_blank">i18next</a>
+ to allow you to configure an aurelia application for i18next support.</li>
+<li>It provides some syntactic sugar to allow for easier translations</li>
+</ul>
+<p>The fact that it acts as a proxy, allows us to still hook into the <strong>i18next instance</strong> without too much hassle.</p>
+<p>i18next provides 
+<a href="http://i18next.com/translate/interpolation/" target="_blank">interpolation</a>
+ support. This is a way of defining how the specific key-value pairs in your locale file should be processed.</p>
+<p>Aurelia provides thin wrappers such as the <code>df</code> <em>(dateFormat)</em> value converter for hooking into this. But what if we wanted to add our own custom value converters into the mix?</p>
+<p>A very interesting configuration option for i18next's interpolation feature is the 
+<a href="http://i18next.com/translate/formatting/" target="_blank">format</a>
+ property. This provides us with a hook into the processing pipeline of i18next. Go ahead and extend your i18n configuration like so:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">return</span> instance<span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+      interpolation <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        format <span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>value<span class="token punctuation">,</span> format<span class="token punctuation">,</span> lng<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> parts <span class="token operator">=</span> format<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+          <span class="token comment" spellcheck="true">//  Check if the value converter is registered as a resource</span>
+          <span class="token keyword">const</span> vc <span class="token operator">=</span> aurelia<span class="token punctuation">.</span>resources<span class="token punctuation">.</span>valueConverters<span class="token punctuation">[</span>parts<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+          <span class="token keyword">return</span> vc <span class="token operator">?</span> vc<span class="token punctuation">.</span><span class="token function">toView</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> <span class="token operator">...</span>parts<span class="token punctuation">)</span> <span class="token punctuation">:</span> value<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>There's a couple of things going on here, let's use an example to explain this step by step.</p>
+</section>
+<section><h2 id="2-using-value-converters-in-your-locales-an-example">2. Using Value Converters In Your Locales, An Example</h2><p>Let's consider a value converter called <code>formatDate</code>. All this value converter does is receive a date and a format, and return a string representation of that date in the provided format. To make that easier, we're using the date manipulation library 
+<a href="https://momentjs.com/" target="_blank">Moment.js</a>
+</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> moment <span class="token keyword">from</span> <span class="token string">'moment'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">FormatDateValueConverter</span> <span class="token punctuation">{</span>
+      toView <span class="token punctuation">(</span>value<span class="token punctuation">,</span> format<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">moment</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> <span class="token string">'YYYY-MM-DD'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>format<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+  </code></pre></source-code>
+</code-listing>
+<p>To use this in your view you could have a setup like so:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">t</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span> <span class="token attr-name">t-params.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{date: <span class="token punctuation">'</span>2017-02-20}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>And your locale file could look like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+      <span class="token string">"a"</span> <span class="token punctuation">:</span> <span class="token string">"Today's date is : {{date, formatDate:MMMM D YYYY}}"</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>When executed, i18next will recognize that the key you're trying to translate contains a section that needs to be interpolated (because of the default prefix and suffix <code>{{ ... }}</code> in your locale file).</p>
+<blockquote>
+<p>Make sure to visit the i18next 
+<a href="http://i18next.com/docs/options/#interpolation-options" target="_blank">docs section</a>
+ targeting the interpolation options for further info.</p>
+</blockquote>
+<p>As such it will execute the <em>interpolation.format</em> function that we configured in the previous step. This function will receive a <code>value</code>, <code>format</code> and an optional <code>lng</code> parameter.</p>
+<ul>
+<li>Value : The date that we passed; in this case it will be <code>2017-02-20</code></li>
+<li>Format : Our locale file will define this as being <code>formatDate:MMMM D YYYY</code></li>
+</ul>
+<p>Our interpolation function will split the format on the <code>:</code> character to become <code>['formatDate', 'MMMM D YYYY']</code> where the first part (<em>formatDate</em>) would be the name of the value converter we want to use, and the second part (<em>MMMM D YYYY</em>) would be the format parameter our value converter requires. Our format function will then look for the value converter in aurelia's registered resources, and will execute the <code>toView</code> function with the provided parameters.</p>
+<p>And behold, the eventual result would be &quot;Today's date is : February 20 2017&quot;.</p>
+</section>
+<section><h2 id="take-note">Take note</h2><ul>
+<li>If no value converter was registered under the name that you're trying to format, it will simply render the value of the variable you passed to it.</li>
+<li>This approach will only work if the value converter that you are trying to use is registered as a global resource.</li>
+<li>Using this approach, you could easily pass in additional parameters to your value converter by doing the following : <code>valueConverterName:param1:param2:param3</code></li>
+</ul>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>Extending aurelia-i18n is extremely easy, and i'd definitely encourage anyone to try this for him/herself.</p>
+<p>For example try writing any of the following and see for yourselves:</p>
+<ul>
+<li>A value converter to render out currency values using something like 
+<a href="http://numeraljs.com/" target="_blank">numeral</a>
+!</li>
+<li>A value converter to automatically render out a person's fullname, when provided with an object containing personal details</li>
+<li>Automatically prefix the correct title (Miss/Mr./...) based on the locale</li>
+</ul>
+<ul>
+<li>... Anything you can imagine :)</li>
+</ul>
+<p>But most of all, have fun and be creative!</p>
+<hr />
+<p>If you'd like to get in touch with Peter, you can visit his company web site 
+<a href="https://www.valkyriestudios.be" target="_blank">Valkyrie Studios</a>
+ or contact him on 
+<a href="https://github.com/peterver" target="_blank">Github</a>
+ or through his personal Twitter handle <code>dragovianDesign</code> or his company Twitter handle <code>valkyrie_be</code>.</p>
+</section>
+
+  </article>
+</section>

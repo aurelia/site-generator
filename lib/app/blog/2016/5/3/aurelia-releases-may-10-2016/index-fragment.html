@@ -1,0 +1,162 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Releases - May 10, 2016</h1>
+  </header>
+
+  <article class="markdown">
+    <p>In our last full team meeting, we made a goal to have weekly releases, targeting Tuesday. Each release should, naturally, be accompanied by release notes tracking everything contained in the day's releases along with any notes on emergency patch releases done out-of-band in the previous week.</p>
+<p>This week's release notes can be found below. Here's a few high level general notes on important issues:</p>
+<h3>Validation</h3>
+<p>We're continuing to work on the new validation library we announced last Tuesday. Each of our releases to this plugin will likely contain breaking changes for a little while. So, remember, to get these updates you need to <code>jspm install</code> rather than <code>jspm update</code> (if you are using jspm). Here's some notes from Patrick Walters on the changes in this release.</p>
+<h4>Breaking Changes</h4>
+<p>The Validator class for the fluent API should not be injected because it should not be a singleton.  Developers should switch this...</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">static</span> inject <span class="token operator">=</span> <span class="token punctuation">[</span>Validator<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>validator<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>validator <span class="token operator">=</span> validator
+        <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">,</span> <span class="token string">'firstName'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>to this...</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>validator <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Validator</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>You can also see that the fluent API has been refactored to reduce duplication and clean up usage.  More information available 
+<a href="https://github.com/aurelia/validatejs/issues/17" target="_blank">here</a>
+.</p>
+<h4>New Features</h4>
+<p>You can now manually validate instances that use decorators like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">class</span> <span class="token class-name">Model</span> <span class="token punctuation">{</span>
+      @required firstName <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">this</span><span class="token punctuation">.</span>model <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Model</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>validator <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Validator</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>validator<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<h4>Fixes</h4>
+<p>You can now pass configuration objects to <em>all</em> validation rules.  There was previously an issue with a few of the rules mentioned 
+<a href="https://github.com/aurelia/validatejs/issues/41" target="_blank">here</a>
+.</p>
+<h3>Dialog</h3>
+<p>Core team member Jedd Ahyoung is taking over working on the dialog library now that Patrick Walters is focusing in on Validation. We like to have at least two (or more) core team members with intimate knowledge of every part of Aurelia, with one taking the leader role on each library. This helps in code review, knowledge transfer and vision casting.</p>
+<h3>Router</h3>
+<p>Thanks to the work of community member Javier Ros, the router now has the ability to handle both case-sensitive and case-insensitive routes. The router is case-insensitive by default. You can change this by setting the <code>caseSensitive</code> property on the <code>config</code> object during router configuration.</p>
+<section><h2 id="all-the-rest-release-notes">All the Rest (Release Notes)</h2><p>Below you can find the release notes relating to other patch releases. As part of this set of patches, we also updated each library's <code>bower.json</code> file to better work with those using Webpack with bower.</p>
+<h3>aurelia-history 1.0.0-beta.1.2.1</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>history:</strong> add getAbsoluteRoot method (
+<a href="http://github.com/aurelia/history/commit/96b5e6eda58cb20f0b058dd2369959e0b8d10abf" target="_blank">96b5e6ed</a>
+)</li>
+</ul>
+<h3>aurelia-history-browser 1.0.0-beta.1.2.1 (2016-05-10)</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>history-browser:</strong> add getAbsoluteRoot method (
+<a href="http://github.com/aurelia/history-browser/commit/c5bb68117e7b663b1e09d83e31812193c137ba7a" target="_blank">c5bb6811</a>
+)</li>
+</ul>
+<h3>aurelia-metadata 1.0.0-beta.1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>metadata:</strong> targetKey in Reflect.defineMetadata is optional (
+<a href="https://github.com/aurelia/metadata/commit/fa861f7c8fd867331b607021ec3b0e871262990f" target="_blank">fa861f7c</a>
+)</li>
+</ul>
+<h3>aurelia-route-recognizer 1.0.0-beta.1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>route-recognizer:</strong> route recognizer is case insensitive by default (
+<a href="http://github.com/aurelia/route-recognizer/commit/d89cde4c8abd104f8c8dcbdc4aed799be3b78555" target="_blank">d89cde4c</a>
+)</li>
+</ul>
+<h3>aurelia-router 1.0.0-beta.1.2.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>router:</strong> router is case sensitive by default (
+<a href="http://github.com/aurelia/router/commit/b7cd6f05512457dcff90264b4cdd611ab9741e80" target="_blank">b7cd6f05</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>router:</strong> generate absolute URI from router (
+<a href="http://github.com/aurelia/router/commit/6c46826524e8cabd70c9828daa243b5b9eb5bc81" target="_blank">6c468265</a>
+, closes 
+<a href="http://github.com/aurelia/router/issues/88" target="_blank">#88</a>
+)</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.1.2.5</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>view-compiler:</strong> add element to processAttributes (
+<a href="http://github.com/aurelia/templating/commit/d753e672b2a0ca6069e9fdfcd1a71458ee9c30e0" target="_blank">d753e672</a>
+)</li>
+</ul>
+<h3>aurelia-validatejs 0.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>deps: fix other polyfills version (aurelia/validatejs@f6038df)</li>
+</ul>
+<h3>aurelia-templating-binding 1.0.0-beta.1.2.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>AttributeMap:</strong> handle standard SVG attributes (
+<a href="http://github.com/aurelia/templating-binding/commit/288ba120b4a093350b5385b8d657bd5bd5c34b3b" target="_blank">288ba120</a>
+)</li>
+</ul>
+<h3>templating-resources 1.0.0-beta.1.2.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>analyze-view-factory:</strong> prevent infinite recursion (
+<a href="http://github.com/aurelia/templating-resources/commit/e9797aa1eca167b9aba535f692e57f84c1b6de85" target="_blank">e9797aa1</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/219" target="_blank">#219</a>
+)</li>
+</ul>
+<h3>aurelia-ui-virtualization 0.4.5</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> import from root of dependencies (
+<a href="http://github.com/aurelia/ui-virtualization/commit/6c41804f54e7951115f433b13fc2ab79ad20ae15" target="_blank">6c41804f</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/48" target="_blank">#48</a>
+)</li>
+<li><strong>array-virtual-repeat-strategy:</strong> error when deleting a lot of items (
+<a href="http://github.com/aurelia/ui-virtualization/commit/b35135dba7bd473a88383cbfc52e44e41000211b" target="_blank">b35135db</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/49" target="_blank">#49</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-dialog-060">aurelia-dialog 0.6.0</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog.css:</strong> fix close button positioning (
+<a href="https://github.com/aurelia/dialog/commit/ca7af613be6f7c820d3493fe448314ac8c34887e" target="_blank">ca7af613</a>
+, closes 
+<a href="https://github.com/aurelia/dialog/issues/128" target="_blank">#128</a>
+)</li>
+<li><strong>renderer:</strong> modal scrolling, close behavior (
+<a href="https://github.com/aurelia/dialog/commit/75f9606adf1671da3e4846c6ad9faca3253357a1" target="_blank">75f9606a</a>
+, closes 
+<a href="https://github.com/aurelia/dialog/issues/125" target="_blank">#125</a>
+, 
+<a href="https://github.com/aurelia/dialog/issues/103" target="_blank">#103</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

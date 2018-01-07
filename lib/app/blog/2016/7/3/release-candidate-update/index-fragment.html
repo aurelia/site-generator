@@ -1,0 +1,228 @@
+<section class="article blog">
+  <header>
+    <h1>Release Candidate Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>In the last couple of weeks since we announced the Aurelia Release Candidate, we've closed over 150 issues. So, today we're pushing out patch releases which reflect those fixes.</p>
+<section><h2 id="skeletons-and-the-cli">Skeletons and The CLI</h2><p>We've done major updates to all the skeletons, cleaning them up and making them more consistent and correct. We've got a brand new Webpack solution for both ESNext and TypeScript based on 
+<a href="https://github.com/easy-webpack" target="_blank">Easy Webpack</a>
+, a new project created by Aurelia Core Team Member, Bazyli Brzóska, to simplify and modularize Webpack configuration. We've also updated our ASP.NET Core skeletons to the .NET Core release versions. 
+<a href="http://madskristensen.net" target="_blank">Mads Kristensen</a>
+ of Microsoft graciously lent his time to review the skeletons, ensuring that they are correct.</p>
+<p>The CLI is gearing up for some major work over the next couple of weeks. A big thanks goes out to everyone in the community that has been trying it out, reporting issues and expanding the use cases for us. We're excited about what we're going to be able to do with this tool.</p>
+</section>
+<section><h2 id="using-aurelia-with-script-tags">Using Aurelia with Script Tags</h2><p>We've got some new beginner kits we're working on. These new kits are based on a new Aurelia build we've created: a pre-concatenated version of Aurelia designed to be used without a build system. We're working out the final details and will have these new builds up on CDN soon. This will make progressive enhancement, hybrid app scenarios and &quot;getting started&quot; much simpler going forward.</p>
+</section>
+<section><h2 id="one-minor-breaking-change">One Minor Breaking Change</h2><p>There was one minor breaking change we had to make in these releases. It was the result of a minor oversight during the Beta period. It's unlikely to affect you at all. If you used the <code>Optional.of()</code> helper to indicate optional dependencies, the default was that it would only check the child container for the optional dependency, not the container hierarchy. We have switched the default to check the hierarchy instead. Again, this is unlikely to affect you at all, but we're calling it out here in case you made use of that capability.</p>
+</section>
+<section><h2 id="wrap-up">Wrap Up</h2><p>Thanks to everyone in the community that is helping to make Aurelia great. We're on schedule for release this month and can't wait to &quot;put a ribbon on it&quot; for you.</p>
+</section>
+<section><h2 id="changelog">Changelog</h2><p>In addition to the list below, various fixes were made througout to dts files and documentation. Additional performance optimization has been done as well.</p>
+<h3>
+<a href="https://github.com/aurelia/pal-browser/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">pal-browser 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dom:</strong> only use parentNode is provided (
+<a href="https://github.com/aurelia/pal-browser/commit/eff0211" target="_blank">eff0211</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/route-recognizer/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">route-recognizer 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>route-recognizer:</strong> respect explicit href during generation (
+<a href="https://github.com/aurelia/route-recognizer/commit/335f2a7" target="_blank">335f2a7</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/dependency-injection/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">dependency-injection 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>Optional:</strong> change checkParent default to true (
+<a href="https://github.com/aurelia/dependency-injection/commit/a8a8620" target="_blank">a8a8620</a>
+), closes 
+<a href="https://github.com/aurelia/dependency-injection/issues/94" target="_blank">#94</a>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>container:</strong> return Resolvers from registration methods (
+<a href="https://github.com/aurelia/dependency-injection/commit/3fc10cb" target="_blank">3fc10cb</a>
+), closes 
+<a href="https://github.com/aurelia/dependency-injection/issues/82" target="_blank">#82</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/binding/compare/1.0.0-rc.1.0.2...v1.0.0-rc.1.0.3" target="_blank">binding 1.0.0-rc.1.0.3</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>CheckedObserver:</strong> handle falsey model (
+<a href="https://github.com/aurelia/binding/commit/9d39a1a" target="_blank">9d39a1a</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/router/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">router 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>navigation-instruction:</strong> incorrect base url extraction (
+<a href="https://github.com/aurelia/router/commit/b8036e4" target="_blank">b8036e4</a>
+), closes 
+<a href="https://github.com/aurelia/router/issues/309" target="_blank">#309</a>
+</li>
+<li><strong>router:</strong> navigation model explicit href normalization (
+<a href="https://github.com/aurelia/router/commit/e80a16c" target="_blank">e80a16c</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>nav-model:</strong> add router property to dts (
+<a href="https://github.com/aurelia/router/commit/fe0070c" target="_blank">fe0070c</a>
+), closes 
+<a href="https://github.com/aurelia/router/issues/359" target="_blank">#359</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">templating 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>double-uid:</strong> (
+<a href="https://github.com/aurelia/templating/issues/412" target="_blank">#412</a>
+) (
+<a href="https://github.com/aurelia/templating/commit/37d282d" target="_blank">37d282d</a>
+)</li>
+<li><strong>module-analyzer:</strong> address circular refs in non-globals (
+<a href="https://github.com/aurelia/templating/commit/78cd3d3" target="_blank">78cd3d3</a>
+), closes 
+<a href="https://github.com/aurelia/templating/issues/350" target="_blank">#350</a>
+</li>
+<li><strong>view-factory:</strong> handle instructions directly on enhanced element (
+<a href="https://github.com/aurelia/templating/commit/b6630a9" target="_blank">b6630a9</a>
+), closes 
+<a href="https://github.com/aurelia/templating/issues/318" target="_blank">#318</a>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>decorators:</strong> log exception in process attributes and process content (
+<a href="https://github.com/aurelia/templating/commit/a15773f" target="_blank">a15773f</a>
+), closes 
+<a href="https://github.com/aurelia/templating/issues/330" target="_blank">#330</a>
+</li>
+<li><strong>view:</strong> add more typing info (
+<a href="https://github.com/aurelia/templating/commit/1221383" target="_blank">1221383</a>
+), closes 
+<a href="https://github.com/aurelia/templating/issues/370" target="_blank">#370</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating-binding/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">templating-binding 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>InterpolationBinding:</strong> regression issue in array handling (
+<a href="https://github.com/aurelia/templating-binding/commit/5d772ca" target="_blank">5d772ca</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating-resources/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">templating-resources 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>ArrayRepeatStrategy:</strong> standard mutation processing (
+<a href="https://github.com/aurelia/templating-resources/commit/34111cd" target="_blank">34111cd</a>
+), closes 
+<a href="https://github.com/aurelia/framework/issues/408" target="_blank">aurelia/framework#408</a>
+ 
+<a href="https://github.com/aurelia/templating/issues/349" target="_blank">aurelia/templating#349</a>
+</li>
+</ul>
+<h4>Performance Improvements</h4>
+<ul>
+<li><strong>repeat:</strong> provide skipAnimation hint to ViewSlot (
+<a href="https://github.com/aurelia/templating-resources/commit/48dbc02" target="_blank">48dbc02</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating-router/compare/1.0.0-rc.1.0.0...v1.0.0-rc.1.0.1" target="_blank">templating-router 1.0.0-rc.1.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>route-href:</strong> return null from promises (
+<a href="https://github.com/aurelia/templating-router/commit/fd1b2fc" target="_blank">fd1b2fc</a>
+), closes 
+<a href="https://github.com/aurelia/templating-router/issues/31" target="_blank">#31</a>
+</li>
+<li><strong>router-view:</strong> correct relative view strategies (
+<a href="https://github.com/aurelia/templating-router/commit/3f92470" target="_blank">3f92470</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/framework/compare/1.0.0-rc.1.0.1...v1.0.0-rc.1.0.2" target="_blank">framework 1.0.0-rc.1.0.2</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>framework-configuration:</strong> bug in path joining for resources (
+<a href="https://github.com/aurelia/framework/commit/b462a79" target="_blank">b462a79</a>
+), closes 
+<a href="https://github.com/aurelia/framework/issues/434" target="_blank">#434</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/ui-virtualization/compare/1.0.0-beta.1.0.1...v1.0.0-beta.1.0.2" target="_blank">ui-virtualization v1.0.0-beta.1.0.2</a>
+</h3>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>dist:</strong> restore release dist folder (
+<a href="https://github.com/aurelia/ui-virtualization/commit/45f74be" target="_blank">45f74be</a>
+)</li>
+<li><strong>table-strategy:</strong> move buffer elements outside of table (
+<a href="https://github.com/aurelia/ui-virtualization/commit/1fe64a6" target="_blank">1fe64a6</a>
+), closes 
+<a href="https://github.com/aurelia/ui-virtualization/issues/46" target="_blank">#46</a>
+</li>
+<li><strong>template-strategy:</strong> move views correctly (
+<a href="https://github.com/aurelia/ui-virtualization/commit/5b5e6e6" target="_blank">5b5e6e6</a>
+), closes 
+<a href="https://github.com/aurelia/ui-virtualization/issues/68" target="_blank">#68</a>
+</li>
+</ul>
+<h3>Features</h3>
+<ul>
+<li><strong>all:</strong> support infinite scroll (
+<a href="https://github.com/aurelia/ui-virtualization/commit/9a3b965" target="_blank">9a3b965</a>
+)</li>
+<li><strong>virtual-repeat:</strong> pass location state to scroll callback (
+<a href="https://github.com/aurelia/ui-virtualization/commit/29418bf" target="_blank">29418bf</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/dialog/compare/1.0.0-beta.1.1.0...v1.0.0-beta.2.0.0" target="_blank">dialog 1.0.0-beta.2.0.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog-configuration:</strong> setup default renderer (
+<a href="https://github.com/aurelia/dialog/commit/2c4c1fb" target="_blank">2c4c1fb</a>
+), closes 
+<a href="https://github.com/aurelia/dialog/issues/129" target="_blank">#129</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/webpack-plugin/compare/1.0.0-beta.4.0.0...v1.0.0-beta.4.0.1" target="_blank">webpack-plugin 1.0.0-beta.4.0.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>build-resources:</strong> Fix module resolution for symlinks (
+<a href="https://github.com/aurelia/webpack-plugin/commit/4a5536d" target="_blank">4a5536d</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

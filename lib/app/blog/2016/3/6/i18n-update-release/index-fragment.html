@@ -1,0 +1,21 @@
+<section class="article blog">
+  <header>
+    <h1>i18n Update Release</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week we launched updates of Aurelia libraries built with Babel 6. We had one library that we weren't able to update at that time: aurelia-i18n.</p>
+<p>Today we have an update release of the <code>aurelia-i18n</code> library. It includes two important changes:</p>
+<ol>
+<li>We have updated our internal dependency on <code>i18next</code> to v2.</li>
+<li>We have updated the build process to use Babel 6.</li>
+</ol>
+<p>These changes bump the <code>aurelia-i18n</code> library version to <code>0.5.0</code>. As usual, per semver, because this is a change to a minor version number, prior to a major v1, this constitutes a breaking change version. As a result, you cannot simply &quot;update&quot;. Package managers won't give you the latest version because they don't want you to break your code unknowingly. Here's how you can get the latest:</p>
+<ul>
+<li>If using JSPM, <code>jspm install aurelia-i18n</code> to overwrite the current version with a new install.</li>
+<li>If using NPM, change the version of the <code>aurelia-i18n</code> package in your package.json file to <code>^0.5.0</code> and then run <code>npm install</code>.</li>
+</ul>
+<p>Thanks for your patience as we worked out the last few issues with our i18n library!</p>
+
+  </article>
+</section>

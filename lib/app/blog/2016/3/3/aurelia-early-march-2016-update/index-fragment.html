@@ -1,0 +1,494 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Early March 2016 Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Lots of exciting things are happening with Aurelia these days. We've got a new set of updates that bring along many bug fixes as well as a few new features. We've also managed to decrease the minimal size of the library by a significant amount.</p>
+<section><h2 id="new-features">New Features</h2><p>Most of the new features in this release deal with edge cases or will be transparent or indirectly used by most developers. Here's a few brief explanations:</p>
+<ul>
+<li><code>as-element</code> - In certain circumstances you may need to write a <code>tr</code> element or even a <code>div</code> but you would like it to act as if it were a particular custom element. You can now accomplish this with the <code>as-element</code> attribute, by providing the custom element tag name as its value. Here's a simple example:</li>
+</ul>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name">as-element</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>grid-row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+* `processAttributes` - We've added a new hook into the custom element compilation process, similar to `processContent`. The `processAttributes` hook allows a developer to see the HTML attribute values before the compiler does. This enables altering the attributes and their values based on run-time conditions.
+* `CompositionTransaction` - Since the days of Durandal v1.0, we've been wanting to find a way to eliminate the visual "popping" that happens when `compose` is used. Because it can asynchronously render dynamic content, the DOM can sometimes "pop" visually in an undesired way. The new CompositionTransaction has been plumbed into the core of the templating engine and is used by app startup, the `compose` element and the `router-view`. It allows asynchronous UI composition events to enlist in the overall composition and tell it when they have completed thier work. This ensures that a root level composition will not be rendered until all child compositions are complete. Developers don't need to do anything for this to work. It's a new internal capability that should improve these scenarios overall.
+* `ref` bindings - You can now use assignable binding expressions in ref bindings. This means that you can do something like this `ref="$.foo"` if you want to place your references on a sub object of your component view model, for example. This works for all reference binding types.
+* Improved Router Pipeline - We've made the router pipeline easier to plug custom steps into by standardizing the plugin points and providing discreet API calls to add steps into each stage.
+<h3>Experimental Features</h3>
+<p>Thanks to the great community effort of 
+<a href="https://github.com/martijnboland" target="_blank">Martijn Boland</a>
+ we've got some new experimental support for Webpack (both v1 and v2). We're still working out the final details, but we wanted to let you know that is coming very, very soon :)</p>
+</section>
+<section><h2 id="improvements">Improvements</h2><p>As usual, there have been lots of bugs fixed in this release. However, there's one major improvement I'm very happy about...</p>
+<p>From the early days of Aurelia, almost all of our libraries have had a hard-dependency on CoreJS. CoreJS provides a full es5/es6/es7 set of polyfills along with helper methods. It can be quite large, anywhere from roughly 60k to 100k minified. With this set of releases, we've made some important changes:</p>
+<ul>
+<li>We've removed all hard dependencies on CoreJS. No Aurelia library references CoreJS any longer.</li>
+<li>We've analyzed our codebase to determine the minimal set of JS polyfills required for Aurelia to run. The list of polyfills is quite small and includes only the following:
+<ul>
+<li>Object.assign</li>
+<li>Array.from</li>
+<li>Array.prototype.find</li>
+<li>Array.prototype.includes</li>
+<li>Number.isNaN</li>
+<li>Number.isFinite</li>
+<li>String.prototype.endsWith</li>
+<li>String.prototype.startsWith</li>
+<li>Reflect.getOwnMetadata</li>
+<li>Reflect.defineMetadata</li>
+<li>Reflect.metadata</li>
+<li>Reflect.construct</li>
+<li>Map</li>
+<li>Set</li>
+</ul>
+</li>
+<li>We've created a new library, aurelia-polyfills, which includes only the minimal set of polyfills listed above. When minified, this library is less than 6kb.</li>
+<li>We've configured Aurelia's bootstrapper to load aurelia-polyfills before initializing the platform.</li>
+<li>We've configured our unit tests to use our own polyfills (via a dev dependency).</li>
+</ul>
+<p>The result of all this is that Aurelia now has no hard depdencies on any external library. If you don't need additional polyfills, Aurelia's size just got significantly reduced as well. This also opens up new possibilities for developers. Since we don't have the hard dependency on CoreJS, if you want to add more polyfills, you now can choose your favorite library. If you like, you can add CoreJS back in and use all of its features. You could also use ES6 Shim instead. As always, you can create your own collection of polyfills to suit the unique needs of your app.</p>
+<p>This isn't technically a breaking change in Aurelia, however, if you were using additional polyfills from CoreJS, then after updating, you may see some errors. To remove those errors, simply add CoreJS to your index.html or import it in your main.js file. You may want to work through any &quot;errors&quot; to discover what polyfills you may be using that you weren't aware of. Perhaps there's only one or two. You may want to manually polyfill those with your own code rather than taking a library dependency.</p>
+</section>
+<section><h2 id="next-steps">Next Steps</h2><p>In our march towards Beta 2, there are now only three items left:</p>
+<ul>
+<li>JSPM 0.17 Update - As mentioned in a previous post, JSPM 0.17.x is a major breaking change from 0.16.x. We've been working hard to make sure our libraries are configured to work with either 0.16.x or 0.17.x. We believe we have worked out the configuration issues and that we have solutions for the final set of runtime issues. We'll be updating you shortly once everything is confirmed and we're ready for you to give JSPM 0.17 a try. It shouldn't be long.</li>
+<li>Babel 6 - Also as previously mentioned, the Babel 6 release caused a lot of problems for a lot of projects. Thus far we haven't been able to update to the new version. However, we are very close to getting all tooling updates and infrastructure updated. We expect to begin work on updating our codebase very soon.</li>
+<li>Shadow DOM v1 - All major vendors have finally reached consensus on the Shadow DOM v1 specification. Once our updates to JSPM and Babel are complete, this will be the final feature update which will mark the Beta 2 release. We've been waiting a bit for the spec to solidify while making implementation plans. Things are just about settled and we'll begin work on this soon.</li>
+</ul>
+</section>
+<section><h2 id="community-and-traction-update">Community and Traction Update</h2><p>The Aurelia community is growing at an astounding rate. It's really exciting! In the last week, we crossed 3,000 developers in our Gitter chat room with almost 223k messages. We're the seventh largest room in the world with the second highest amount of activity. Additionally, we crossed 300 unique contributors to the Aurelia project. This is in addition to our core team. To put it in perspective, this is over 100 contributors more than Angular 2 and about half as many as Ember and React, which have been around for much longer. Keep in mind, Aurelia was only first announced as alpha about one year ago.</p>
+<p>2016 is going to be a very exciting year!</p>
+</section>
+<section><h2 id="summary">Summary</h2><p>As we move closer to Beta 2, Aurelia is getting smaller, faster and more rich in its capabilities. We're really excited about what the future holds. More exciting news is coming in the next few months. Stay tuned and 
+<a href="http://durandal.us10.list-manage1.com/subscribe?u=dae7661a3872ee02b519f6f29&id=3de6801ccc" target="_blank">don</a>
+.</p>
+</section>
+<section><h2 id="release-notes">Release Notes</h2><h3>aurelia-logging 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>logging:</strong> fix the interface (
+<a href="http://github.com/aurelia/logging/commit/6276c3b0e89e2ecb37c873f467a47499c60386ed" target="_blank">6276c3b0</a>
+)</li>
+</ul>
+<h3>aurelia-path 1.0.0-beta.1.1.1</h3>
+<h4>Features</h4>
+<p><strong>buildQueryString, parseQueryString:</strong> object serialization/deserialization 
+This allows using buildQueryString and parseQueryString methods to
+serialize and deserialize complex objects and arrays with multiple
+levels of nesting.</p>
+<h3>aurelia-fetch-client 1.0.0-beta.1.1.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/fetch-client/commit/f91bd742ebb9377904d202e689af3df6fe1a2a7d" target="_blank">f91bd742</a>
+)</li>
+<li><strong>http-client:</strong>
+<ul>
+<li>don't combine request url with base url when request url is absolute (
+<a href="http://github.com/aurelia/fetch-client/commit/d1be3b4e75fd9d65efac2b2b29bb52f5b4959e01" target="_blank">d1be3b4e</a>
+)</li>
+<li>handle last null param in fetch method (
+<a href="http://github.com/aurelia/fetch-client/commit/5b5d13331d425c8988fd28d3b7245734bffa6188" target="_blank">5b5d1333</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-polyfills 1.0.0-beta.1.0.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>reflect:</strong>
+<ul>
+<li>incorrect arg casing (
+<a href="http://github.com/aurelia/polyfills/commit/52f06db5682042ee1b3c4601a4133b10e446e7b4" target="_blank">52f06db5</a>
+)</li>
+<li>missing bind reference (
+<a href="http://github.com/aurelia/polyfills/commit/89964a1602ad216ef1db0f04823f62dd04a67dca" target="_blank">89964a16</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-pal-browser 1.0.0-beta.1.1.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js (
+<a href="http://github.com/aurelia/pal-browser/commit/7eb2303de6b066aa051906b9959d6b96b2e1e09e" target="_blank">7eb2303d</a>
+)</li>
+</ul>
+<h3>aurelia-metadata 1.0.0-beta.1.1.5</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="https://github.com/aurelia/metadata/commit/3a300a87126ccf1ab2656c3a09a983a72316d9c9" target="_blank">3a300a87</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> remove duplicate code and use new polyfills (
+<a href="https://github.com/aurelia/metadata/commit/ec2b65ee17db5e24b050fca3ea1e088f8ca7aff7" target="_blank">ec2b65ee</a>
+)</li>
+</ul>
+<h3>aurelia-history-browser 1.0.0-beta.1.1.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/history-browser/commit/209629f8b611449bcdf950faf50f2e1856c2174b" target="_blank">209629f8</a>
+)</li>
+</ul>
+<h3>aurelia-http-client 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/http-client/commit/9fbd7413058b53c2b98e51b952e869ca0b1c4b26" target="_blank">9fbd7413</a>
+)</li>
+<li><strong>http-client:</strong> declare replacer property (
+<a href="http://github.com/aurelia/http-client/commit/0080eaae426073a065bbf5f3d87b05f225c2a65c" target="_blank">0080eaae</a>
+)</li>
+</ul>
+<h3>aurelia-route-recognizer 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/route-recognizer/commit/7f97b08711f0b89e86b9a09d399f6e026685c200" target="_blank">7f97b087</a>
+)</li>
+<li><strong>bower:</strong> remove core-js (
+<a href="http://github.com/aurelia/route-recognizer/commit/12879fa754cc0b0503e066b84bc234b9ab9863cb" target="_blank">12879fa7</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>route-recognizer:</strong> Support multiple names per route (
+<a href="http://github.com/aurelia/route-recognizer/commit/6b5637d296af90127dd293d975592c7e62182a2f" target="_blank">6b5637d2</a>
+)</li>
+</ul>
+<h3>aurelia-dependency-injection 1.0.0-beta.1.1.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/dependency-injection/commit/4dff5f15761485ca744f82b950f9b6e9e719350e" target="_blank">4dff5f15</a>
+)</li>
+</ul>
+<h3>aurelia-binding 1.0.0-beta.1.2.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>*<strong>-observation:</strong> allow binding extended Map/Set (
+<a href="http://github.com/aurelia/binding/commit/a79f1486fe5d2a93ed6346133121fb16bcaa700b" target="_blank">a79f1486</a>
+)</li>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/binding/commit/a48268dfdfe31cf4b2201c170d6b79139c6280a2" target="_blank">a48268df</a>
+)</li>
+<li><strong>bower:</strong> remove core-js (
+<a href="http://github.com/aurelia/binding/commit/3076972b38a028d4d901f092f11aa72c3ad3e377" target="_blank">3076972b</a>
+)</li>
+<li><strong>decorator-observable:</strong> TypeScript (
+<a href="http://github.com/aurelia/binding/commit/98219be8533aded633c5391964ef73ec85ea669b" target="_blank">98219be8</a>
+)</li>
+<li><strong>definitions:</strong>
+<ul>
+<li>observable decorator definition (
+<a href="http://github.com/aurelia/binding/commit/d6244f222e80bd37f3a72af71465860af80a0dad" target="_blank">d6244f22</a>
+)</li>
+<li>addEventListener function definition (
+<a href="http://github.com/aurelia/binding/commit/206e342282dfceaed0bfbde78220084ea836420d" target="_blank">206e3422</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/317" target="_blank">#317</a>
+)</li>
+</ul>
+</li>
+<li><strong>element-observation:</strong> handle extra spacing around css properties (
+<a href="http://github.com/aurelia/binding/commit/cb8a9074784206f285ee7d373eb90f1296c31366" target="_blank">cb8a9074</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/325" target="_blank">#325</a>
+)</li>
+</ul>
+<h3>aurelia-loader-webpack 0.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/loader-webpack/commit/dfb7784a622604a31a99f605692b5db5916d5750" target="_blank">dfb7784a</a>
+)</li>
+</ul>
+<h3>aurelia-router 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js (
+<a href="http://github.com/aurelia/router/commit/44c5e848e2ffe233930de0b852fbe8663bc67cbb" target="_blank">44c5e848</a>
+)</li>
+<li><strong>bower:</strong> remove core-js (
+<a href="http://github.com/aurelia/router/commit/52fe3fef588e36044cfc8097d3e8a90cdac61df9" target="_blank">52fe3fef</a>
+)</li>
+<li><strong>router:</strong>
+<ul>
+<li>log helpful error on missing viewport (
+<a href="http://github.com/aurelia/router/commit/224f5ace08b9359d1c035b42f1ae0a9e6f74652b" target="_blank">224f5ace</a>
+, closes 
+<a href="http://github.com/aurelia/router/issues/241" target="_blank">#241</a>
+)</li>
+<li>add NavModel to RouteConfig interface (
+<a href="http://github.com/aurelia/router/commit/064fbca58f6654daa866075fa7a6157c6e13467e" target="_blank">064fbca5</a>
+, closes 
+<a href="http://github.com/aurelia/router/issues/285" target="_blank">#285</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js (
+<a href="http://github.com/aurelia/templating/commit/0e264f853f28fdbf4f497e9b14c93d1a120d41f9" target="_blank">0e264f85</a>
+)</li>
+<li><strong>bower:</strong> remove core-js (
+<a href="http://github.com/aurelia/templating/commit/942c4b66f4c3d62aed0977ebfd4eca18cf64ddb9" target="_blank">942c4b66</a>
+)</li>
+<li><strong>composition-transaction:</strong> simplify (
+<a href="http://github.com/aurelia/templating/commit/82f52aaad7ea91d2688d9a257525abf0b4df393b" target="_blank">82f52aaa</a>
+)</li>
+<li><strong>decorators:</strong> hyphenate behavior names with warning (
+<a href="http://github.com/aurelia/templating/commit/473ca6afd2fd5d830acadd873710d62f8799ca34" target="_blank">473ca6af</a>
+, closes 
+<a href="http://github.com/aurelia/templating/issues/279" target="_blank">#279</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>
+<p><strong>composition:</strong></p>
+<ul>
+<li>enable composition transaction use (
+<a href="http://github.com/aurelia/templating/commit/b8e51df0c2d94254172eca53b66031a37664bc91" target="_blank">b8e51df0</a>
+)</li>
+<li>introduce composition transaction (
+<a href="http://github.com/aurelia/templating/commit/2f2e156fbe1983f9d600345a5afd3a5054e5ba21" target="_blank">2f2e156f</a>
+)</li>
+</ul>
+<h3>aurelia-templating-binding 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+</li>
+<li>
+<p><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/templating-binding/commit/213fbfe4257c9e47dd97d14f61443f6d03337c13" target="_blank">213fbfe4</a>
+)</p>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>
+<p><strong>InterpolationBinding:</strong> add method to update one-time children (
+<a href="http://github.com/aurelia/templating-binding/commit/243aa759f096fabc33d61f1f6ca6925b63a1d16f" target="_blank">243aa759</a>
+)</p>
+</li>
+<li>
+<p><strong>ref:</strong> support expressions (
+<a href="http://github.com/aurelia/templating-binding/commit/a98860b6a9a7be65b24a74b61af7f8b585b2e5fb" target="_blank">a98860b6</a>
+)</p>
+<h3>aurelia-templating-resources 1.0.0-beta.1.1.2</h3>
+</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/templating-resources/commit/54e09743ab42bd98fab6d9714c169456cf681430" target="_blank">54e09743</a>
+)</li>
+<li><strong>bower:</strong> remove core-js (
+<a href="http://github.com/aurelia/templating-resources/commit/3cf2c8d99f09c5f0ab70be8af45562157ce63e0e" target="_blank">3cf2c8d9</a>
+)</li>
+<li><strong>hide:</strong> export hide (
+<a href="http://github.com/aurelia/templating-resources/commit/e48cec4e3f4f8f2f6277900f023bc019b81169c4" target="_blank">e48cec4e</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/192" target="_blank">#192</a>
+)</li>
+<li><strong>repeat:</strong> ensure one-time interpolation bindings update (
+<a href="http://github.com/aurelia/templating-resources/commit/a280d27fa9eef6fbd980928ff462cdd9fbeccdab" target="_blank">a280d27f</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/templating-resources/commit/f3f0ffac37121803f30306c19b23e940e2edc549" target="_blank">f3f0ffac</a>
+)</li>
+<li><strong>signal:</strong> allow multiple names (
+<a href="http://github.com/aurelia/templating-resources/commit/620614ed3901388039c9c66e00f5f44404b60d93" target="_blank">620614ed</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/170" target="_blank">#170</a>
+, 
+<a href="http://github.com/aurelia/templating-resources/issues/172" target="_blank">#172</a>
+)</li>
+</ul>
+<h3>aurelia-templating-router 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>router-view:</strong> simplify composition transaction use (
+<a href="http://github.com/aurelia/templating-router/commit/76cdc9780c58ecc3fc8114eb80808abcfbf6f6c8" target="_blank">76cdc978</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>router-view:</strong> connect to composition transaction (
+<a href="http://github.com/aurelia/templating-router/commit/b95667e0c4d8bbc5b2d4621157ccc191891245cd" target="_blank">b95667e0</a>
+)</li>
+</ul>
+<h3>aurelia-framework 1.0.0-beta.1.1.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js dependency (
+<a href="http://github.com/aurelia/framework/commit/968d6c22cab3ddbd03a0104565b178ea2904e189" target="_blank">968d6c22</a>
+)</li>
+<li><strong>bower:</strong> remove core-js (
+<a href="http://github.com/aurelia/framework/commit/dd9e082f9f230802b084f47a20ba4262579b1221" target="_blank">dd9e082f</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>aurelia:</strong> integrate composition transaction (
+<a href="http://github.com/aurelia/framework/commit/38851185b57d4b775e8952cff028cb450f0b0d7b" target="_blank">38851185</a>
+)</li>
+</ul>
+<h3>aurelia-animator-css 1.0.0-beta.1.1.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>CssAnimator:</strong> stagger only child elements (
+<a href="https://github.com/aurelia/animator-css/commit/219b5c791209c70b78e287dc7654eb174f1e00d2" target="_blank">219b5c79</a>
+)</li>
+</ul>
+<h3>aurelia-validation 0.6.3</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>I18N:</strong>
+<ul>
+<li>update pt-BR (
+<a href="https://github.com/aurelia/validation/commit/f0dd26d4545ce378bd297d69b03c60e1be2157d7" target="_blank">f0dd26d4</a>
+)</li>
+<li>add pt-BR (
+<a href="https://github.com/aurelia/validation/commit/f684272ef9fa32a1e2a8970426526d3c01e4ef67" target="_blank">f684272e</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-bootstrapper 1.0.0-beta.1.1.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> remove core-js (
+<a href="http://github.com/aurelia/bootstrapper/commit/60ef61a5f6cd83ce0f29c0b9242ee2aae7a47f8c" target="_blank">60ef61a5</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>index:</strong> use aurelia polyfills (
+<a href="http://github.com/aurelia/bootstrapper/commit/c77c982ba24a01bf3528d887898f0895784d74ca" target="_blank">c77c982b</a>
+)</li>
+</ul>
+<p>aurelia-uii-virtualization 0.3.2</p>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>ScrollHandler:</strong> make ScrollHandler transient (
+<a href="http://github.com/aurelia/ui-virtualization/commit/afd6436ba02ebde9e4ccafda8f9759488895609a" target="_blank">afd6436b</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/15" target="_blank">#15</a>
+)</li>
+<li><strong>all:</strong> remove core-js and fix package for jspm (
+<a href="http://github.com/aurelia/ui-virtualization/commit/4cec9f13987eb03c032bc74b5861223d803dd07c" target="_blank">4cec9f13</a>
+)</li>
+<li><strong>array-virtual-repeat-array-strategy:</strong> support iterating custom elements (
+<a href="http://github.com/aurelia/ui-virtualization/commit/6381eb271249817d22fcf546fb0e54ad50d5a9de" target="_blank">6381eb27</a>
+)</li>
+<li><strong>array-virtual-repeat-strategy:</strong>
+<ul>
+<li>get first index by looking at view index (
+<a href="http://github.com/aurelia/ui-virtualization/commit/bd52bc9ddccf3c5308942c7893b437d20916731e" target="_blank">bd52bc9d</a>
+)</li>
+<li>update to work with latest templating-resources (
+<a href="http://github.com/aurelia/ui-virtualization/commit/0b442c1180a71119dfdf572e5a4063596b6bb338" target="_blank">0b442c11</a>
+)</li>
+</ul>
+</li>
+<li><strong>virtual-repeat:</strong>
+<ul>
+<li>correctly remove EventListener (
+<a href="http://github.com/aurelia/ui-virtualization/commit/fd39c2115549c3fce3c9ff4d4e91e3e6d4bd5f0c" target="_blank">fd39c211</a>
+)</li>
+<li>blank rows when swapping arrays with different lengths (
+<a href="http://github.com/aurelia/ui-virtualization/commit/2eadedefc9a3f785eec56518f21eb9a5e5784a6f" target="_blank">2eadedef</a>
+)</li>
+<li>issue when scrolled to bottom and new items added (
+<a href="http://github.com/aurelia/ui-virtualization/commit/561e142258e607c98f7b919c624d4e444c7909a8" target="_blank">561e1422</a>
+)</li>
+<li>set isLastIndex to false on detached (
+<a href="http://github.com/aurelia/ui-virtualization/commit/4ff76899ed2e781cdd072d2c0f6e133f788c9a15" target="_blank">4ff76899</a>
+)</li>
+<li>reset sizes on deteched (
+<a href="http://github.com/aurelia/ui-virtualization/commit/cdee18db44a53d5460f7d8ed5c7581b31e1ed581" target="_blank">cdee18db</a>
+)</li>
+<li>sync scroll margin with scroll animation (
+<a href="http://github.com/aurelia/ui-virtualization/commit/e9a27a6085d89aaf7615a9dee6efbfafd69f62f3" target="_blank">e9a27a60</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong>
+<ul>
+<li>introduce strategy pattern (
+<a href="http://github.com/aurelia/ui-virtualization/commit/b8f23ea18ff292620b857c2ba461b744c3dd6b87" target="_blank">b8f23ea1</a>
+)</li>
+<li>update to use override context (
+<a href="http://github.com/aurelia/ui-virtualization/commit/0e0f3e65529d455544f820e96e940bf084c8ce84" target="_blank">0e0f3e65</a>
+)</li>
+</ul>
+</li>
+<li><strong>virtual-repeat:</strong>
+<ul>
+<li>implement native scrolling (
+<a href="http://github.com/aurelia/ui-virtualization/commit/dc486a9ee43d7f7e4893f688d8be2b56b5910b4c" target="_blank">dc486a9e</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/14" target="_blank">#14</a>
+)</li>
+<li>add support for iterating tables (
+<a href="http://github.com/aurelia/ui-virtualization/commit/54ad2fb8b08ffa4d0a0999b38554505896a00571" target="_blank">54ad2fb8</a>
+)</li>
+<li>handle instance change (
+<a href="http://github.com/aurelia/ui-virtualization/commit/9aae011272b7b8ba55a68ef471701e084a26778b" target="_blank">9aae0112</a>
+)</li>
+<li>handle changes better (
+<a href="http://github.com/aurelia/ui-virtualization/commit/69814309909385fb9a7c58e1ba42af75b4a35f7c" target="_blank">69814309</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/19" target="_blank">#19</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-dialog 0.5.7</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog:</strong>
+<ul>
+<li>allow response to click events (
+<a href="https://github.com/aurelia/dialog/commit/1fd3bfc89d736fdbf4f7fc407a2fbb7630ab5e7e" target="_blank">1fd3bfc8</a>
+)</li>
+<li>allow response to click events (
+<a href="https://github.com/aurelia/dialog/commit/ec8a8ce0aba4965e7793a9aa074c5e3074b85570" target="_blank">ec8a8ce0</a>
+)</li>
+<li>accessibility fixes (
+<a href="https://github.com/aurelia/dialog/commit/79a796da73ce94336e0d1eaf28acb964247dec8c" target="_blank">79a796da</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>use attach-focus attribute value to decide if the element is to be focused (
+<a href="https://github.com/aurelia/dialog/commit/ceb7196fbb226ae1f6de25222460ebb6fddaa8e5" target="_blank">ceb7196f</a>
+)</li>
+<li><strong>z-index:</strong> make z-index configurable (
+<a href="https://github.com/aurelia/dialog/commit/e9d164f592a5409785ef94b9590ae689c3115485" target="_blank">e9d164f5</a>
+, closes 
+<a href="https://github.com/aurelia/dialog/issues/90" target="_blank">#90</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

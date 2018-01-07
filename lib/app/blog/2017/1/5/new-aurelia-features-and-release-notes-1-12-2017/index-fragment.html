@@ -1,0 +1,171 @@
+<section class="article blog">
+  <header>
+    <h1>New Aurelia Features and Release Notes - 1/12/2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week's releases contain the usual bug fixes as well as a few performance enhancements. Additionally, a couple of new features have landed.</p>
+<h3>Option Attribute Primary Properties</h3>
+<p>Thanks to the hard work of community member 
+<a href="https://github.com/dkent600" target="_blank">Doug Kent</a>
+, a single bindable property can now be made the primary among all the options in an Options Attribute.  Thus, when you use a custom attribute that would otherwise require using the options HTML syntax, and you want to provide a value or binding only for the primary property, you can use the simpler HTML syntax of a single value binding.</p>
+<p>With Options Attributes, each bindable property must be decorated with the <code>bindable</code> decorator.  To specify that you want a bindable property to be the primary among all the other bindable properties, use the <code>primaryProperty</code> configuration parameter of the <code>bindable</code> decorator, as shown below:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">,</span> inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Element<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">SquareCustomAttribute</span> <span class="token punctuation">{</span>
+      @bindable sideLength<span class="token punctuation">;</span>
+      @<span class="token function">bindable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> primaryProperty<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> color<span class="token punctuation">;</span>
+
+      <span class="token function">constructor</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Then, when you use the custom attribute, instead of writing this:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">square</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>color.bind: squareColor<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>You can write this:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">square.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>squareColor<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<h3>aurelia-i18n-loader</h3>
+<p>Aurelia's i18n plugin is built on i18next which works with various backends to load translation files. As of our latest release, we now ship with a backend built on top of Aurelia's <code>Loader</code> abstraction. This enables our translation loading backend to leverage whichever module loader you've configured with aurelia. Thanks to 
+<a href="https://github.com/mcginkel" target="_blank">Kees van Ginkel</a>
+ for working on this!</p>
+<p>Below you can find releases notes for the rest of the fixes and performance improvements.</p>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/dependency-injection/compare/1.2.1...v1.3.0" target="_blank">aurelia-dependency-injection 1.3.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>registrations:</strong> incorrect behavior for auto resolution when... (
+<a href="https://github.com/aurelia/dependency-injection/commit/708b5fd" target="_blank">708b5fd</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>Added <code>getHandler</code> method retrieve the handler associated with a key.</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating/compare/1.1.4...v1.2.0" target="_blank">aurelia-templating 1.2.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Add return to hasAttribute and getAttribute (
+<a href="https://github.com/aurelia/templating/commit/1f8bb3a" target="_blank">1f8bb3a</a>
+)</li>
+<li><strong>composition-engine:</strong> add &quot;host&quot; to CompositionContext (
+<a href="https://github.com/aurelia/templating/commit/b9d927c" target="_blank">b9d927c</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>HtmlBehavior:</strong> primary property/bindable (
+<a href="https://github.com/aurelia/templating/commit/dd5ddfa" target="_blank">dd5ddfa</a>
+), closes 
+<a href="https://github.com/aurelia/templating-binding/issues/56" target="_blank">aurelia/templating-binding#56</a>
+</li>
+</ul>
+<h4>Performance Improvements</h4>
+<ul>
+<li><strong>view-factory:</strong> Avoid creating anonymous function for each containerless anchor.</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating-binding/compare/1.1.0...v1.2.0" target="_blank">aurelia-templating-binding 1.2.0</a>
+</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>options:</strong> default property support (
+<a href="https://github.com/aurelia/templating-binding/commit/e422b6c" target="_blank">e422b6c</a>
+)</li>
+</ul>
+<h4>Performance Improvements</h4>
+<ul>
+<li><strong>AttributeMap:</strong> use non-capturing regex group (
+<a href="https://github.com/aurelia/templating-binding/commit/fd4a7e7" target="_blank">fd4a7e7</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/i18n/compare/1.2.3...v1.3.0" target="_blank">aurelia-i18n 1.3.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>attr:</strong> fix camel-casing attributes (
+<a href="https://github.com/aurelia/i18n/commit/8a458a8" target="_blank">8a458a8</a>
+)</li>
+<li><strong>attribute:</strong> bindable attribute check (
+<a href="https://github.com/aurelia/i18n/commit/2c45b08" target="_blank">2c45b08</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>aurelia-i18n-loader:</strong> Added backend for i18next to use aurelia's loader (
+<a href="https://github.com/aurelia/i18n/commit/eb5909a" target="_blank">eb5909a</a>
+)</li>
+<li><strong>aurelia-i18n-loader:</strong> Added backend for i18next to use aurelia's loader (
+<a href="https://github.com/aurelia/i18n/commit/f4d3166" target="_blank">f4d3166</a>
+)</li>
+</ul>
+<h3>aurelia-cli 0.24.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>typescript:</strong> set lib to es2017 for upcoming js features</li>
+<li><strong>new command:</strong> enable configuration of html minification</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>transform:</strong> enable wrap shim for shimmed definitions</li>
+<li><strong>build:</strong> update babel presets to avoid deprecated module</li>
+<li><strong>package-analyzing:</strong> allow deeper levels for source root</li>
+<li><strong>src/main:</strong> remove bluebird config that causes Edge issue</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/binding/compare/1.1.0...v1.1.1" target="_blank">aurelia-binding 1.1.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>array-observation:</strong> coerce splice args (
+<a href="https://github.com/aurelia/binding/issues/552" target="_blank">#552</a>
+) (
+<a href="https://github.com/aurelia/binding/commit/94899e0" target="_blank">94899e0</a>
+), closes 
+<a href="https://github.com/aurelia/templating/issues/470" target="_blank">aurelia/templating#470</a>
+</li>
+<li><strong>map-observation:</strong> change &quot;add&quot; property to &quot;set&quot; (
+<a href="https://github.com/aurelia/binding/commit/1fd7ebd" target="_blank">1fd7ebd</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/549" target="_blank">#549</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/http-client/compare/1.0.3...v1.0.4" target="_blank">aurelia-http-client 1.0.4</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Improve dts files.</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/router/compare/1.1.0...v1.1.1" target="_blank">aurelia-router 1.1.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>Router:</strong> fix an error when updateTitle is called but there is not current instruction (
+<a href="https://github.com/aurelia/router/commit/872fda1" target="_blank">872fda1</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

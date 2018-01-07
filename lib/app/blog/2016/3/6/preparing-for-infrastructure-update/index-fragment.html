@@ -1,0 +1,53 @@
+<section class="article blog">
+  <header>
+    <h1>Preparing for Infrastructure Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Finally...we are almost ready to release an update to Aurelia which moves us onto Babel 6.x. At the same time, we've got fixes and have done testing to enable preliminary support for JSPM 0.17.x soon too.</p>
+<section><h2 id="babel-6">Babel 6</h2><p>The road to Babel 6 has been long and fraught with many perils. When the new version was released last year there were many breaking changes. We've had to wait until not only several core issues were fixed, but also until all the plugins we require were updated to the latest version as well. In some cases this required authors to completely re-write their plugins.</p>
+<p>At the time of this writing, we've converted every Aurelia library (except i18n) over to using Babel 6. These changes have not yet been released. They will be in the early part of next week. At that time, we'll also release new versions of the skeletons, updated to Babel 6. Naturally, we'll have a blog post once the releases are ready and we'll include in that post, some instructions to help you update your own codebase to Babel 6 as well.</p>
+</section>
+<section><h2 id="jspm">JSPM</h2><p>JSPM is also moving from 0.16.x to 0.17.x. This is a set of major breaking changes. We first started preparing for this by updating our package metadata. Lately, we've also made some code fixes in the framework and tested several apps with JSPM 0.17.x and its corresponding SystemJS version. Everything seems to be working fine. In next week's release, we'll include this final set of fixes and invite you to test out your apps with JSPM 0.17.x.</p>
+<p>You may not want to update JSPM right away. There may be some additional issues. However, we would love it if some brave members of the community could give it a try so we can address any issues before we make a hard switch to 0.17.x. As part of the upcoming release post, we'll have instructions on how you can do this. In a future release, we'll update the skeletons to use 0.17.x as well.</p>
+</section>
+<section><h2 id="i18n">i18n</h2><p>I mentioned above that we hadn't yet updated i18n to Babel 6. The reason for this is that we're first updating that library to use the latest version of <code>i18next</code>. In the same branch, we'll be updating to Babel 6. Once those two things have been tested, we'll do an updated release of that library and post here with relevant information. You should still be able to use the current version of i18n with the new Aurelia libs that have been updated to Babel 6. In the end, it all compiles down to known module formats and ES5 code.</p>
+</section>
+<section><h2 id="validation">Validation</h2><p>We're still doing some serious re-working in the Validation library. It's a lot of work but it is coming along well. The idea is to separate out several things:</p>
+<ul>
+<li>A pure ESNext validation library with no dependencies on Aurelia's templating engine.</li>
+<li>An abstraction for Aurelia that allows <em>any</em> validation library to communicate with Aurelia's templating engine.</li>
+<li>An implementation of the &quot;bridge&quot; which allows Aurelia's validation library to talk to Aurelia's templating engine.</li>
+<li>An abstraction for error rendering which allows the templating engine to talk to various CSS frameworks to properly render errors.</li>
+<li>One or two basic rendering implementations so that validation works correctly with common CSS frameworks like Bootstrap.</li>
+</ul>
+<p>The idea is to have a system by which you can use whatever validation library you want along with whatever CSS framework you want, and you can vary the two independently of one another. Of course, we'll always have our own validation library and support several CSS frameworks, so if you don't want to worry about hunting down and assembling all the pieces, you can just use our defaults.</p>
+<p>##Aurelia Interface</p>
+<p>Our commercial component and hybrid mobile app development toolkit is progressing well. It's a challenging project but we're excited about how it has evolved and how it compares to &quot;similar attempts&quot;. We know we've got something unique and awesome brewing. It's not ready yet. Believe us though, we can't wait to share it with you. Stay tuned for more information.</p>
+</section>
+<section><h2 id="package-management-module-loading-and-bundling-in-the-future">Package Management, Module Loading and Bundling In the Future</h2><p>When we started building Aurelia almost 18 months ago, we thought that the WHATWG standard module loader spec would be complete by now. However, even after that much time has passed, I'm not sure the spec is anywhere near ready. The churn in the spec has caused churn in SystemJS and JSPM. Some of that has been very painful for us and our community.</p>
+<p>Beyond that, we've recently uncovered a string of longstanding issues in SystemJS which cause the loader to fail intermittently on IE and Edge. For many of our customers (and for us) this just isn't something we can go to production with.</p>
+<p>So, what do we do? Fortunately, we've got options. Here are a few notes on what we're up to:</p>
+<ul>
+<li>As mentioned above, even though there are issues with JSPM and SystemJS, we are still supporting those technologies with Aurelia. We won't be removing support for that and we'll try to stay up to date as these things change. So, don't worry about us pulling that out from underneath you.</li>
+<li>If/When the WHATWG standard module loader spec stabilizes we'll move to support that directly. Aurelia has a Loader abstraction, so we can support as many options as our community needs.</li>
+<li>We've recently added preliminary support for Webpack. We'll continue to evolve that and make that a first-class solution for bundling. We hope you'll give it a try and help us with that effort.</li>
+<li>We've always had support for RequireJS but it's been difficult to setup. We're currently working on a new development workflow which would use NPM for package management and RequireJS for module loading. Preliminary experiments show that this is massively faster than SystemJS. For example, one of our core team members clocked a real-world, bundled and optimized app with SystemJS taking 450ms to load while the same app, not bundled or optimized at all, took 100ms with RequireJS. Stay tuned for more news on this as we bring tooling online and guidance for this approach. We hope to have something in a couple of weeks.</li>
+</ul>
+</section>
+<section><h2 id="release-candidate">Release Candidate</h2><p>We've spoken about doing a Beta 2, but we've decided to upgrade that to a Release Candidate. After the Babel 6 and JSPM updates release next week, the only major piece left is the update to ShadowDOM v1. We're going to do that as fast as we can as well as squash a few more bugs, then try to get the Release Candidate out to you.</p>
+<p>The time between RC and Release will depend on what you all think. We want to get to release as fast as we can, but we want to make sure it's high quality. Once the RC is out, we'll continue fixing bugs and look to you, our community, to help us gauge the readiness of the platform for v1. Hopefully it will be a swift turn around.</p>
+</section>
+<section><h2 id="after-releasethen-what">After Release...then what?</h2><p>Well, there are lots of things we have planned for this year. For starters, we'll continue to fix bugs and work on performance optimization. Those are always ongoing. There will be a number of features to the core framework that will improve various scenarios. We'll always strive to do this work in a non-breaking way so you can simply update and take advantage of the new capabilities.</p>
+<p>There are a few big ticket items we hope to do post release this year:</p>
+<ul>
+<li>Server Render - We would like to enable server-side rendering of Aurelia applications. We've put the preliminary abstraction in place to make this possible. Soon, we'll start working on the implementation.</li>
+<li>Hot Reload - Wouldn't it be cool if any time you changed a view or a class the app running in the browser just updated without losing its state? We think that would be great for development so we'd like to build that out soon too.</li>
+<li>Tooling - We've already got a Chrome plugin, but there are lots of improvements we can make to that. We'd also like to have nice plugins for code editors like VSCode, where appropriate. Additionally, we think we can massively improve the &quot;getting started&quot; story for developers, especially those unfamiliar with node for the future.</li>
+<li>The Hub - That thing we call &quot;The Docs&quot; is soon going to be transforming into something we call &quot;The Hub&quot;. All kinds of goodness for you will be happening there, not just docs.</li>
+</ul>
+<p>We're excited about 2016 and what it will bring for Aurelia and her community. We're looking forward to continuing to work with you.</p>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,144 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Mid April 2016 Patch Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>In our continued march towards RC, we've released a number of patches to Aurelia libraries. For the most part, these improve support for Webpack, TypeScript and various cross-browser scenarios. For more details, we provide the changelog below.</p>
+<p>Happy coding!</p>
+<section><h2 id="change-log">Change Log</h2><h3>aurelia-fetch-client</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>http-client:</strong> Don't create a new request when one is passed to fetch but do apply any default headers</li>
+</ul>
+<h3>aurelia-path</h3>
+<ul>
+<li>Fix for query string return true for param with equal sign on the end</li>
+<li>Added Unit tests for Fix for query string return true for param with equal sign on the end</li>
+</ul>
+<h3>aurelia-i18n</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>relative time:</strong> Use the fallback language if needed (
+<a href="http://github.com/aurelia/i18n/commit/10ef19c082bd2c4311e254e67d7a3422dee0efb2" target="_blank">10ef19c0</a>
+)</li>
+<li><strong>translation:</strong>
+<ul>
+<li>Add italian translation (
+<a href="http://github.com/aurelia/i18n/commit/d610aeb9da8b12cc82a53108a736697cf4d50760" target="_blank">d610aeb9</a>
+)</li>
+<li>Add italian translation (
+<a href="http://github.com/aurelia/i18n/commit/0d8e65b108bce4d75c3cbc0ecdafedf8b39cbab6" target="_blank">0d8e65b1</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>i18n:</strong> use a promise to wait for i18next to be ready before updating value (
+<a href="http://github.com/aurelia/i18n/commit/2b69cfeb09e017209b3510daccd68c7e91dcb7f5" target="_blank">2b69cfeb</a>
+)</li>
+<li><strong>relativeTime:</strong> prevent relativeTime to add resources to soon (
+<a href="http://github.com/aurelia/i18n/commit/21a37e62814280601a5fc6e0a23ae3764a126cf6" target="_blank">21a37e62</a>
+)</li>
+</ul>
+<h3>aurelia-ui-virtualization</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>array-virtual-repeat-strategy:</strong> handle instance changes with less items than in view slot (
+<a href="http://github.com/aurelia/ui-virtualization/commit/4eb9ca00587739ecb9446d82d779913303a146c9" target="_blank">4eb9ca00</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/41" target="_blank">#41</a>
+)</li>
+<li><strong>virtual-repeat:</strong> calculate the list's distance to top (
+<a href="http://github.com/aurelia/ui-virtualization/commit/7e9c035255abc287a516624f0e4bb5b3901b7f5e" target="_blank">7e9c0352</a>
+)</li>
+</ul>
+<h3>aurelia-loader-default</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> ensure correct cache lookup (
+<a href="http://github.com/aurelia/loader-default/commit/b32ff61a5fc00eb995bb008d7c1f83fdffa71d7d" target="_blank">b32ff61a</a>
+)</li>
+</ul>
+<h3>aurelia-loader-webpack</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> ensure correct cache lookup (
+<a href="http://github.com/aurelia/loader-webpack/commit/b9c9aa5511df0b3b7f5615d5368e6c34e96a0175" target="_blank">b9c9aa55</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>index:</strong> implement PLATFORM.eachModule for webpack (
+<a href="http://github.com/aurelia/loader-webpack/commit/9bd90f47f83f848f11106b2f3996125b37be7997" target="_blank">9bd90f47</a>
+)</li>
+</ul>
+<h3>aurelia-polyfills</h3>
+<ul>
+<li>fix: Object.getOwnPropertyNames: argument is not an Object error in symbol.js</li>
+</ul>
+<h3>aurelia-router</h3>
+<h4>Features</h4>
+<ul>
+<li>add support for RedirectToRoute (
+<a href="http://github.com/aurelia/router/commit/778fbc8146afe81f37fd7aff79d1c9c8e519df3f" target="_blank">778fbc81</a>
+)</li>
+</ul>
+<h3>aurelia-templating</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>module-analyzer:</strong> ensure correct cache lookup (
+<a href="http://github.com/aurelia/templating/commit/eefd4c69a27d058e607b94e1d1b99582411d021b" target="_blank">eefd4c69</a>
+)</li>
+<li><strong>view-resources:</strong> ensure correct cache lookup (
+<a href="http://github.com/aurelia/templating/commit/53b519021e0890f2ec045597ee7ef04f49bf283a" target="_blank">53b51902</a>
+)</li>
+</ul>
+<h3>aurelia-templating-resources</h3>
+<ul>
+<li>fix(index): export repeat strategies</li>
+</ul>
+<h3>aurelia-validation</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>loader:</strong> switch to using apps loader (
+<a href="https://github.com/aurelia/validation/commit/a10cfb1edc70868c6d738c82e68654703ac9f41b" target="_blank">a10cfb1e</a>
+, closes 
+<a href="https://github.com/aurelia/validation/issues/226" target="_blank">#226</a>
+)</li>
+<li><strong>resources:</strong>
+<ul>
+<li>fixed a message (
+<a href="https://github.com/aurelia/validation/commit/9c4135463ecd572fcb336717d30b3a28810ffcbe" target="_blank">9c413546</a>
+)</li>
+<li>fixed a message (
+<a href="https://github.com/aurelia/validation/commit/cc1319dde091c7b903408d0d794dc19598b20bf6" target="_blank">cc1319dd</a>
+)</li>
+<li>update format (
+<a href="https://github.com/aurelia/validation/commit/ab2770edfc172a55bfa59d49c9f2398ddfc87d1b" target="_blank">ab2770ed</a>
+)</li>
+<li>update format (
+<a href="https://github.com/aurelia/validation/commit/d4b3a2ec13facff1564c371efc4e64047ae6b8b8" target="_blank">d4b3a2ec</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>resources:</strong> create ja-JP (
+<a href="https://github.com/aurelia/validation/commit/242f15c5b4f7b60377d7929fb5824dde39e3d8ca" target="_blank">242f15c5</a>
+)</li>
+</ul>
+<h3>aurelia-webpack-plugin</h3>
+<ul>
+<li>feat(package): change <code>webpack</code> to <code>peerDependencies</code></li>
+</ul>
+<h3>aurelia-skeleton-navigation</h3>
+<ul>
+<li>various updates and fixes particular to TypeScript kits and Webpack kits</li>
+</ul>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,169 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release Notes - Late April 2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Our most recent set of Aurelia releases includes the Aurelia Dialog Release Candidate. We have a post dedicated to the details of that release, which 
+<a href="http://blog.aurelia.io/2017/04/27/aurelia-dialog-release-candidate/" target="_blank">you can read here</a>
+. You'll also see that Aurelia UX is moving ahead steadily, with new components and capabilities being added every one to two weeks.</p>
+<section><h2 id="major-releases">Major Releases</h2><p>Major updates may include breaking changes, new features, fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/dialog/compare/1.0.0-beta.3.0.1...v1.0.0-rc.1" target="_blank">aurelia-dialog 1.0.0-rc.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog-configuration:</strong> fix 
+<a href="https://github.com/aurelia/dialog/issues/264" target="_blank">#264</a>
+ add missing padding unit (
+<a href="https://github.com/aurelia/dialog/commit/902c921" target="_blank">902c921</a>
+)</li>
+<li><strong>dialog-configuration:</strong> use PLATFORM.moduleName (
+<a href="https://github.com/aurelia/dialog/commit/9dc62ff" target="_blank">9dc62ff</a>
+)</li>
+<li><strong>dialog-renderer:</strong> check for transitions (
+<a href="https://github.com/aurelia/dialog/commit/ed77c85" target="_blank">ed77c85</a>
+)</li>
+<li><strong>dialog-renderer:</strong> let click events bubble (
+<a href="https://github.com/aurelia/dialog/commit/6a03bbd" target="_blank">6a03bbd</a>
+)</li>
+<li><strong>enableescclose:</strong> default to true (
+<a href="https://github.com/aurelia/dialog/commit/58bfc88" target="_blank">58bfc88</a>
+)</li>
+<li><strong>lefecycle:</strong> handle thrown errors (
+<a href="https://github.com/aurelia/dialog/commit/e7f1284" target="_blank">e7f1284</a>
+)</li>
+<li><strong>lifecycle:</strong> fix lifecycle methods default value (
+<a href="https://github.com/aurelia/dialog/commit/67a5c64" target="_blank">67a5c64</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> migrate to TS (
+<a href="https://github.com/aurelia/dialog/commit/5a68ca3" target="_blank">5a68ca3</a>
+)</li>
+<li><strong>all:</strong> remove &quot;lock&quot; setting (
+<a href="https://github.com/aurelia/dialog/commit/a0fd54a" target="_blank">a0fd54a</a>
+)</li>
+<li><strong>all:</strong> switch prefix - &quot;ai&quot; =&gt; &quot;ux&quot; (
+<a href="https://github.com/aurelia/dialog/commit/817be7f" target="_blank">817be7f</a>
+)</li>
+<li><strong>dialog options:</strong> allow esc to close dialog without lock: false (
+<a href="https://github.com/aurelia/dialog/commit/c0baaf5" target="_blank">c0baaf5</a>
+)</li>
+<li><strong>dialog-service:</strong> add .closeAll() (
+<a href="https://github.com/aurelia/dialog/commit/76048e6" target="_blank">76048e6</a>
+)</li>
+<li><strong>dialog-service:</strong> add .closeAll() (
+<a href="https://github.com/aurelia/dialog/commit/f59dfc7" target="_blank">f59dfc7</a>
+)</li>
+<li><strong>dialog-service:</strong> refactor consolidate open methods in one (
+<a href="https://github.com/aurelia/dialog/commit/676ee58" target="_blank">676ee58</a>
+)</li>
+<li><strong>dialog-service:</strong> refactor consolidate open methods in one (
+<a href="https://github.com/aurelia/dialog/commit/dc44a34" target="_blank">dc44a34</a>
+)</li>
+<li><strong>dialog-service, dialog-controller:</strong> add &quot;rejectOnCancel&quot; (
+<a href="https://github.com/aurelia/dialog/commit/e8cd8e5" target="_blank">e8cd8e5</a>
+)</li>
+<li><strong>dialog-settings, dialog-renderer:</strong> add host (
+<a href="https://github.com/aurelia/dialog/commit/4aebd63" target="_blank">4aebd63</a>
+)</li>
+<li><strong>dialog-settings, dialog-service:</strong> add childContainer (
+<a href="https://github.com/aurelia/dialog/commit/db0aca5" target="_blank">db0aca5</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance</p>
+<h3>
+<a href="https://github.com/aurelia/i18n/compare/1.5.1...v1.6.0" target="_blank">aurelia-i18n 1.6.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>df:</strong> Number.isInteger helper (
+<a href="https://github.com/aurelia/i18n/commit/8bb1a87" target="_blank">8bb1a87</a>
+)</li>
+</ul>
+<h3>aurelia-ux 0.1.19</h3>
+<ul>
+<li>refactor(index): wrap exports in PLATFORM.moduleName (
+<a href="https://github.com/aurelia/ux/commit/345ccc1" target="_blank">345ccc1</a>
+)</li>
+<li>fix(chip-input): add value changed back (
+<a href="https://github.com/aurelia/ux/commit/30c2f75" target="_blank">30c2f75</a>
+)</li>
+<li>fix(chip-input): check for value on left arrow (
+<a href="https://github.com/aurelia/ux/commit/cc0bd39" target="_blank">cc0bd39</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/64" target="_blank">#64</a>
+</li>
+<li>fix(chipinput): add transparent background (
+<a href="https://github.com/aurelia/ux/commit/d2ebeb5" target="_blank">d2ebeb5</a>
+)</li>
+<li>fix(chips): correctly delete single chip in input (
+<a href="https://github.com/aurelia/ux/commit/0aeba74" target="_blank">0aeba74</a>
+)</li>
+<li>fix(chips): remove last chip without freezing browser (
+<a href="https://github.com/aurelia/ux/commit/78b224c" target="_blank">78b224c</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/60" target="_blank">#60</a>
+</li>
+<li>fix(readme): correct test-watch command (
+<a href="https://github.com/aurelia/ux/commit/3e5cbd7" target="_blank">3e5cbd7</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/58" target="_blank">#58</a>
+</li>
+<li>style(input-info): change error display (
+<a href="https://github.com/aurelia/ux/commit/ad5d9ad" target="_blank">ad5d9ad</a>
+)</li>
+<li>feat(checkbox): accessibility (
+<a href="https://github.com/aurelia/ux/commit/3504664" target="_blank">3504664</a>
+)</li>
+<li>feat(checkbox): add binding support (
+<a href="https://github.com/aurelia/ux/commit/67d73ff" target="_blank">67d73ff</a>
+)</li>
+<li>feat(checkbox): add disabled state (
+<a href="https://github.com/aurelia/ux/commit/fbcf50b" target="_blank">fbcf50b</a>
+)</li>
+<li>feat(checkbox): add label attribute binding (
+<a href="https://github.com/aurelia/ux/commit/c989f32" target="_blank">c989f32</a>
+)</li>
+<li>feat(checkbox): add ux-checkbox (
+<a href="https://github.com/aurelia/ux/commit/a417b46" target="_blank">a417b46</a>
+)</li>
+<li>feat(checkbox): focus state ripple and selection (
+<a href="https://github.com/aurelia/ux/commit/6367b16" target="_blank">6367b16</a>
+)</li>
+<li>feat(checkbox): simple checkbox features (
+<a href="https://github.com/aurelia/ux/commit/fde48f4" target="_blank">fde48f4</a>
+)</li>
+<li>feat(label): add label attribute binding (
+<a href="https://github.com/aurelia/ux/commit/8e06eac" target="_blank">8e06eac</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/cli/compare/0.28.0...v0.29.0" target="_blank">aurelia-cli 0.29.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>package-analyzer:</strong> find location of packages outside of node_modules (
+<a href="https://github.com/aurelia/cli/commit/324f3e1" target="_blank">324f3e1</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>package-analyzer:</strong> support packages without package.json files (
+<a href="https://github.com/aurelia/cli/commit/c225bb7" target="_blank">c225bb7</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>aurelia-protractor-plugin 1.0.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>fix(index): synchronicity and asynchronicity problems - Note that waitForRouterComplete() should now preferably be called <em>before</em> you navigate, to ensure you do not experience a race condition described in #2. You may then await that Promise after navigation is dispatched/started.</li>
+</ul>
+</section>
+
+  </article>
+</section>

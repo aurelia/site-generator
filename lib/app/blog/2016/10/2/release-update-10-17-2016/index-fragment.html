@@ -1,0 +1,62 @@
+<section class="article blog">
+  <header>
+    <h1>Release Update - 10/17/2016</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Aurelia continues to make fixes and improvements throughout. Read below for the details of this week's releases.</p>
+<section><h2 id="new-features">New Features</h2><ul>
+<li><code>aurelia-logging</code> now supports setting log levels on individuals loggers by using the <code>level</code> property thanks to community contributor 
+<a href="https://github.com/ShawnTalbert" target="_blank">Shawn Talbert</a>
+.</li>
+<li><code>aurelia-cli</code> has improved its abstraction for module loader configuration generation which enables new scenarios, such as improved TDD workflows and future support for more module loaders. Thanks to Core Team member 
+<a href="https://github.com/AStoker" target="_blank">Andrew Stoker</a>
+.</li>
+</ul>
+<p>See below for the full list of fixes.</p>
+</section>
+<section><h2 id="full-release-notes">Full Release Notes</h2><h3>aurelia-logging 1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li>Individual loggers now have a <code>level</code> property that can be used to override the default log level.</li>
+</ul>
+<h3>aurelia-dependency-injection 1.2.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>autoinject</strong>: merge issue caused incorrect branching logic</li>
+<li><strong>invokers:</strong> remove duplicate export name; <code>factory</code> is now a parameter decorator for TS and <code>invokeAsFactory</code> decorates a function to control how the container invokes it.</li>
+</ul>
+<h3>aurelia-http-client 1.0.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>headers:</strong> #152 - Made header treatment case insensitive</li>
+</ul>
+<h3>aurelia-bootstrapper 1.0.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>bootstrapper:</strong> Check module function configure before execute it</li>
+</ul>
+<h3>aurelia-dialog 1.0.0-beta.3.0.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog-service:</strong> .open() proper error propagation</li>
+<li><strong>dialog-controller:</strong> clear close promise when canDeactivate=&gt;false</li>
+<li><strong>dialog-renderer, dialog-service:</strong> fix settings merging</li>
+<li><strong>dialog-renderer:</strong> do not track controllers per renderer instance</li>
+<li><strong>dialog-service:</strong> fix remove controllers closed with .error</li>
+<li><strong>styles:</strong> make ai-dialog display:table</li>
+</ul>
+<h3>aurelia-cli 0.21.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dependency-inclusion:</strong> wait until all resources are traced before bundling</li>
+<li><strong>aurelia-karma:</strong> make it compatible with PhantomJS</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>bundler, bundle:</strong> abstract out loader config generator</li>
+</ul>
+</section>
+
+  </article>
+</section>

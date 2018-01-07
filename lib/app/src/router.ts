@@ -6,7 +6,6 @@ import {ShowMenu, HideMenu, ActivateScreen, ActivateTab, ActivateSection} from '
 import {ArticleScreen} from './screens/article-screen';
 import {APIScreen} from './screens/api-screen';
 import {HomeScreen} from './screens/home-screen';
-import {BlogScreen} from './screens/blog-screen';
 import {NotFoundScreen} from './screens/not-found';
 import {Configuration} from './configuration';
 import environment from './environment';

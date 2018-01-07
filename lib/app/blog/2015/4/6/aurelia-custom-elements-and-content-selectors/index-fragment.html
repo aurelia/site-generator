@@ -1,0 +1,231 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Custom Elements &amp; Content Selectors</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week, Core Aurelia Team member, 
+<a href="https://github.com/PWKad" target="_blank">Patrick Walters</a>
+, shows us how to create custom elements that leverage content selectors.</p>
+<blockquote>
+<p><strong>Warning:</strong> This blog post covers a deprecated version of Shadow DOM, known as Shadow DOM v0. Aurelia 1.0 and beyond uses the current specification, known as Shadow DOM v1, which leverages <em>slots</em>. 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/templating/latest/templating-content-projection" target="_blank">Please read our official documentation for more information</a>
+.</p>
+</blockquote>
+<h3>About the Author</h3>
+<p>Patrick is a developer living in the DFW area and is passionate about making the developer experience as seamless and easy as possible in Aurelia, based on leveraging ideas from studying many other languages and frameworks.  His preferred stack is Aurelia with Ruby on Rails and his preferred development environment is Sublime Text 3 with iTerm2 and Chrome.</p>
+<p><strong>Code samples</strong>: 
+<a href="https://github.com/PWKad/aurelia-modal.git" target="_blank">aurelia-modal on github</a>
+</p>
+<section><h2 id="the-problem">The Problem</h2><p>Imagine that you want to have a modal dialog in your application but you don't want to have to include a ton of HTML every time you use it. You also might want to toggle the visibility of different sections of the modal, depending on its use. Perhaps you also want to be able to skin it differently based on its content.</p>
+</section>
+<section><h2 id="the-solution">The Solution</h2><p>With Aurelia we can create custom elements that take advantage of Content Selectors to solve these problems. Aurelia uses concepts from the 
+<a href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/#toc-separation" target="_blank">Shadow DOM</a>
+ to separate content and presentation. To see how this works we'll build a single, shared modal dialog that dynamically changes its content as needed. This will give us a single visibility property to manage.  We will use Aurelia's <code>compose</code> and <code>custom elements</code> to swap out the content. Finally, we'll leverage content selectors to allow re-skinning the modal more easily and further abstracting style-specific logic out of our view, making it is easier to adjust styling.</p>
+</section>
+<section><h2 id="starting-out">Starting Out</h2><p>As always let's get an Aurelia app running. To begin, download the 
+<a href="https://github.com/aurelia/skeleton-navigation/releases" target="_blank">navigation skeleton</a>
+ and unzip it. After that, we need to do some basic setup at the root of that project directory.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    $ npm install
+    $ jspm install <span class="token operator">-</span>y
+    
+    $ gulp watch
+  </code></pre></source-code>
+</code-listing>
+<p>Now we have our app being served at 
+<a href="http://localhost:9000" target="_blank">localhost:9000</a>
+.</p>
+</section>
+<section><h2 id="using-our-modal-dialog">Using our Modal Dialog</h2><p>In our <code>src/app.html</code> file, let's add a basic usage of the modal dialog that we want to create:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal-header</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Edit Person<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal-header</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal-body</span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>person-information<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal-body</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal-footer</span> <span class="token attr-name">buttons.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[<span class="token punctuation">'</span>Cancel<span class="token punctuation">'</span>]<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal-footer</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Here we are using a <code>modal</code> custom element and and setting the <code>header</code>, <code>body</code>, and <code>footer</code> of it.  So far we haven't actually created these custom elements, but I wanted to show you first how they would be used, so you can understand the purpose of the following steps which describe their creation.</p>
+</section>
+<section><h2 id="creating-the-modal-element">Creating the Modal Element</h2><p>Let's create the <code>modal</code> element first. There are two parts for each of the elements we will create, the View (HTML) and the View-Model (JS). Let's start with the view.</p>
+<p><strong>View</strong> - <em>modal.html</em></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal fade<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-dialog<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-content<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>content</span> <span class="token attr-name">select</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-header<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>content</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>content</span> <span class="token attr-name">select</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-body<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>content</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>content</span> <span class="token attr-name">select</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-footer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>content</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Here we are using Bootstrap's default modal implementation.  Did you notice the <code>content selectors</code> in the <code>modal-content</code> div?  That is how we tell our modal element where to render the different content types that we defined in the app.html. The value of the <code>select</code> attribute is actually a CSS Selector. Cool isn't it?</p>
+<p>Here's the View-Model that encapsulates the behavior of the modal:</p>
+<p><strong>View-Model</strong> - <em>modal.js</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Modal</span> <span class="token punctuation">{</span>
+      <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>modal<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">modal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>You can see in our <em>attached</em> callback that all we are doing is passing our referenced modal to the Bootstrap modal plugin.</p>
+</section>
+<section><h2 id="creating-the-header-and-footer">Creating The Header and Footer</h2><p>Now, let's create the header and footer elements. We'll start with the header's view:</p>
+<p><strong>View</strong> - <em>modal-header.html</em></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-header<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>close<span class="token punctuation">"</span></span> <span class="token attr-name">data-dismiss</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal<span class="token punctuation">"</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Close<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token entity" title="&times;">&amp;times;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${title}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+Again, this is just a base Bootstrap modal header.  The only adjustment we've made is to add a string interpolation binding to render the title into the `h4` element. Here's how we define the accompanying view-model:
+<p><strong>View-Model</strong> - <em>modal-header.js</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ModalHeader</span> <span class="token punctuation">{</span>
+      @bindable title <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>We create the bindable property <code>title</code> with a default value of <code>''</code> (empty string).  Also, note that we are using ES7 property initializers to create the property.  If we didn't want to (or couldn't) use ES7 property initializers, we could always write that same code using class decorators, like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">bindable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'title'</span><span class="token punctuation">,</span> defaultValue<span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ModalHeader</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>And, just for the sake of completeness, if you didn't want to use any ES7 features, you could use pure ES6 like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Decorators<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ModalHeader</span><span class="token punctuation">{</span>
+      <span class="token keyword">static</span> <span class="token function">decorators</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+        <span class="token keyword">return</span> Decorators<span class="token punctuation">.</span><span class="token function">bindable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'title'</span><span class="token punctuation">,</span> defaultValue<span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Remember though, in all cases, this creates a custom element with a single HTML bindable property &quot;title&quot; that has a default value of the empty string.</p>
+<p>The footer is constructed in a similar way. Let's see the view first:</p>
+<p><strong>View</strong> - <em>modal-footer.html</em></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-footer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-default<span class="token punctuation">"</span></span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button of buttons<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${button}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Again, it's just the base bootstrap footer, but we've changed the button so we can display more, based on what is bound.</p>
+<p><strong>View-model</strong> - <em>modal-footer.js</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ModalFooter</span> <span class="token punctuation">{</span>
+      @bindable buttons <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Again we create a buttons property that is bindable and is an array which will contain the labels for our buttons.</p>
+</section>
+<section><h2 id="creating-the-body">Creating the Body</h2><p>Now we need our modal-body template. It will be in charge of what gets shown in the main content area.</p>
+<p><strong>View</strong> - <em>modal-body.html</em></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>modal-body<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>compose</span> <span class="token attr-name">view-model.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>content<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>compose</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+It is the base bootstrap body, but we've added Aurelia's `compose` element with a binding so that it renders whatever gets set for the content property. Here's the view-model:
+<p><strong>View-model</strong> - <em>modal-body.js</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ModalBody</span> <span class="token punctuation">{</span>
+      @bindable content<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Our content will be a string property which tells the view what to compose into the body.</p>
+</section>
+<section><h2 id="content-to-render">Content to Render</h2><p>We need to have some content to dynamically compose into the body of our modal.  Let's just steal from the starter kit's welcome.html in order to keep things simple:</p>
+<p><strong>View</strong> - <em>person-information.html</em></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>First Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>person.firstName<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fn<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>first name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ln<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Last Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>person.lastName<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ln<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>last name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p><strong>View-Model</strong> - <em>person-information.js</em></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">PersonInformation</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">{</span>
+      firstName <span class="token operator">=</span> <span class="token string">'Patrick'</span><span class="token punctuation">;</span>
+      lastName <span class="token operator">=</span> <span class="token string">'Patrick'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+Here we just create a person class and instantiate it to be our 'person'.  This will provide some demo data for our `person-information.html` 
+</section>
+<section><h2 id="summary">Summary</h2><p>Now, we have all the pieces for a functioning modal dialog which can dynamically display different content! To use it, don't forget to <code>require</code> the elements in your view or register them globally at startup (this is what my plugin does). As a reminder, here's the html you can now write to build a modal:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal-header</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Edit Person<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal-header</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal-body</span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>person-information<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal-body</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modal-footer</span> <span class="token attr-name">buttons.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>[<span class="token punctuation">'</span>Cancel<span class="token punctuation">'</span>]<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal-footer</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modal</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>For the title we just used a string.  The modal-body has a content property that tells it which template to render as the body.  You can see this in our <code>modal-body.html</code> where we used the <code>compose</code> binding to render some content.  Finally, buttons is an array of button labels to show in our modal.</p>
+<p>We've separated our template logic that is specific to bootstrap out of our main app.  Now if we wanted to we could switch from Bootstrap to Semantic-ui or some other CSS framework and swap it in and out as needed. That's it!</p>
+</section>
+
+  </article>
+</section>

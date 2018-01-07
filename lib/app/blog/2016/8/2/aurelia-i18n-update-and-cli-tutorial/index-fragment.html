@@ -1,0 +1,187 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia i18n Update and CLI Tutorial</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, Core Team Member Vildan Softic gives us an update on Aurelia's i18n library and explains how to configure it for an Aurelia CLI project as well as TypeScript. Take it away Vildan...</p>
+<p>Aurelia-CLI is alive and kicking. Lot's of you have already jumped onboard and enjoy the easy way to get started with Aurelia. It helps you to create a new project easily by just asking you a few questions and on you go. Since I (Vildan) have seen this request a few times, here is a short intro on how to install the aurelia-i18n plugin into your newly created CLI Application.</p>
+<section><h2 id="installing-aurelia-i18n">Installing aurelia-i18n</h2><p>First you want to install the plugin via npm, from within the root folder of your project:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    npm install aurelia<span class="token operator">-</span>i18n
+  </code></pre></source-code>
+</code-listing>
+<p>Since aurelia-i18n is backed by i18next, you should install it and a backend plugin of your choice. As an example we're going to leverage the i18next-xhr-backend:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    npm install i18next i18next<span class="token operator">-</span>xhr<span class="token operator">-</span>backend
+  </code></pre></source-code>
+</code-listing>
+<p>After that we need to tell our CLI App about the new dependencies. To do so we're going to open the file <em>aurelia_project/aurelia.json</em> and scroll down to section named <em>dependencies</em>. In there add the following three entries:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"i18next"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/i18next/dist/umd"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"i18next"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-i18n"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/aurelia-i18n/dist/amd"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"aurelia-i18n"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"i18next-xhr-backend"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/i18next-xhr-backend/dist/umd"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"i18nextXHRBackend"</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>Note: A future version of the CLI will automate this last step by introducing a new command, <code>au import</code>, which will attempt to auto-configure the libraries for you.</p>
+</blockquote>
+</section>
+<section><h2 id="setting-up-your-project">Setting up your Project</h2><p>Great! Now, following the official 
+<a href="https://github.com/aurelia/i18n#how-to-install-this-plugin" target="_blank">Aurelia-I18N Guide</a>
+, we create a folder
+in the root of your app named <em>locales</em>.</p>
+<blockquote>
+<p>Note: You have to put the folder into the root (on same level as <em>src</em>) as this is the hosted root of your app.</p>
+</blockquote>
+<p>Within this folder, add subfolders for each language you'd like to support. e.g. <em>en</em> and <em>de</em> for English and German language.</p>
+<p>Inside of each of those folders create a file named <em>translation.json</em> with your translation keys and values. Follow the official guide for detailed info.</p>
+<p>Last but not least, it's time to wire up the plugin inside your app. Therefore go to your <em>src/main.js</em> file and configure it as follows (don't forget to add the imports).</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">//add the imports</span>
+    <span class="token keyword">import</span> environment <span class="token keyword">from</span> <span class="token string">'./environment'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> Backend <span class="token keyword">from</span> <span class="token string">'i18next-xhr-backend'</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">//Configure Bluebird Promises.</span>
+    <span class="token comment" spellcheck="true">//Note: You may want to use environment-specific configuration.</span>
+    Promise<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      warnings<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        wForgottenReturn<span class="token punctuation">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">feature</span><span class="token punctuation">(</span><span class="token string">'resources'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>environment<span class="token punctuation">.</span>debug<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>environment<span class="token punctuation">.</span>testing<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-testing'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token comment" spellcheck="true">//register the plugin</span>
+      aurelia<span class="token punctuation">.</span>use<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-i18n'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>instance<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// register backend plugin</span>
+        instance<span class="token punctuation">.</span>i18next<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Backend<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">return</span> instance<span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          backend<span class="token punctuation">:</span> <span class="token punctuation">{</span>                                  
+            loadPath<span class="token punctuation">:</span> <span class="token string">'./locales/{{lng}}/{{ns}}.json'</span><span class="token punctuation">,</span> 
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          lng <span class="token punctuation">:</span> <span class="token string">'de'</span><span class="token punctuation">,</span>
+          attributes <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'t'</span><span class="token punctuation">,</span><span class="token string">'i18n'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          fallbackLng <span class="token punctuation">:</span> <span class="token string">'en'</span><span class="token punctuation">,</span>
+          debug <span class="token punctuation">:</span> <span class="token boolean">false</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> aurelia<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Now you should be all set to start using the features of aurelia-i18n inside your app.</p>
+</section>
+<section><h2 id="bundling-the-intl-polyfill">Bundling the Intl Polyfill</h2><p>aurelia-i18n uses a polyfill to provide Intl.API support for browsers currently not implementing the feature. Amongst those are Safari for Mac and iOS. The Polyfill will be lazy loaded in dev mode as needed but won't be included automatically as part of the bundle. The reason is the file size of ~50k in minified mode. As such, you as the developer have to opt-in and bundle the Polyfill manually (if you don't want it lazy loaded).</p>
+<p>To do so, first install the Polyfill as part of your project using npm:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    npm install intl
+  </code></pre></source-code>
+</code-listing>
+<p>After that, open up the <em>aurelia_project/aurelia.json</em> file and add the following dependency:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"intl"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/intl/dist"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"Intl.min"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>Note: Instead of using a main of <code>Intl.min</code> you could also reference <code>Intl.complete</code> to include the Unicode CLDR locale data. For more info about this option consult the 
+<a href="https://github.com/andyearnshaw/Intl.js/#locale-data" target="_blank">official Polyfill docs</a>
+.</p>
+</blockquote>
+</section>
+<section><h2 id="i18n-and-typescript">I18N and TypeScript</h2><p>Clearly a major goal of the CLI is to also easily provide support for TypeScript-based apps. For quite some time, the TypeScript issue with the I18N plugin wasn't related to the plugin itself, but to the way the dependencies offer their definition files. In order to get started with a TS app, first follow all the steps as described in the <em>Setting up your Project</em> section.</p>
+<p>Next install the already preconfigured typings by executing:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    typings install
+  </code></pre></source-code>
+</code-listing>
+<p>Additionally add the <code>i18next.d.ts</code> by calling:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    typings install dt<span class="token operator">~</span>i18next <span class="token operator">--</span>save <span class="token operator">--</span>global
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>Note: I18Next is hosted on DefinitlyTyped, as such you need to use the --global modifier to target typings to said source. This modfier used to be named --ambient.</p>
+</blockquote>
+<p>The next thing that is missing is the <code>i18next-xhr-backend.d.ts</code> file. Since this file is neither available from the typings registry nor DefinitlyTyped, you should install it using a local link.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    typings install <span class="token operator">--</span>save <span class="token operator">--</span>global file<span class="token punctuation">:</span><span class="token punctuation">.</span><span class="token operator">/</span>node_modules<span class="token operator">/</span>i18next<span class="token operator">-</span>xhr<span class="token operator">-</span>backend<span class="token operator">/</span>typings<span class="token operator">/</span>i18next<span class="token operator">-</span>xhr<span class="token operator">-</span>backend<span class="token punctuation">.</span>d<span class="token punctuation">.</span>ts
+  </code></pre></source-code>
+</code-listing>
+<p>The last thing left is to handle an issue with the way TS resolves the default exported class. As such, you need to change the import statement of the Backend in your <code>main.ts</code> file to:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> environment <span class="token keyword">from</span> <span class="token string">'./environment'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> Backend <span class="token keyword">from</span> <span class="token string">'i18next-xhr-backend'</span><span class="token punctuation">;</span>  <span class="token operator">&lt;</span><span class="token operator">--</span><span class="token operator">-</span> see <span class="token keyword">this</span> changed line <span class="token keyword">in</span> order to make TS compiler shut up
+  </code></pre></source-code>
+</code-listing>
+<p>After that you should be ready to use aurelia-i18n with your TypeScript-based CLI-App.</p>
+</section>
+<section><h2 id="what">What</h2><p>If you have followed the progress of the aurelia-i18n library you have seen that a lot of issues have been fixed and closed, new features such as the missing NfBindingBehavior and DfBindingBehavior have been added, as well as support for custom elements and much more.</p>
+<p>We'd like to encourage everyone to give aurelia-i18n a try and support your visitor's experience with a seamless international appearance. Last but not least, we'd also like to see what you've built using aurelia-i18n. A great opportunity to showcase your app is the Built With Aurelia site mentioned in a 
+<a href="http://blog.durandal.io/2016/08/15/built-with-aurelia-2/" target="_blank">previous post</a>
+. For further details on today's aurelia-i18n release update, we provide the release notes below.</p>
+</section>
+<section><h2 id="release-notes">Release Notes</h2><h3>
+<a href="https://github.com/aurelia/i18n/compare/1.0.0...v1.1.0" target="_blank">aurelia-i18n 1.1.0</a>
+ (2016-08-22)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>eslint:</strong> fix linting issues (
+<a href="https://github.com/aurelia/i18n/commit/0ddf93d" target="_blank">0ddf93d</a>
+)</li>
+<li><strong>ts:</strong> declare missing props (
+<a href="https://github.com/aurelia/i18n/commit/c8102c8" target="_blank">c8102c8</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>i18n:</strong> add dependency injection (
+<a href="https://github.com/aurelia/i18n/commit/0545999" target="_blank">0545999</a>
+)</li>
+<li><strong>TCustomAttribute:</strong> support custom-elements (
+<a href="https://github.com/aurelia/i18n/commit/06373f0" target="_blank">06373f0</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

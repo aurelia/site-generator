@@ -1,0 +1,84 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Early June Release</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We've been working hard on Aurelia and this release brings a number of bug fixes, improvements and new features. There are a few breaking changes, but those are relatively minor and easy to fix. Read on for the details...</p>
+<section><h2 id="breaking-changes">Breaking Changes</h2><ul>
+<li>You can now access all the parent router parameters directly through the <code>params</code> object in the activate callback. As a result, the <code>params</code> of the activate callback now contains all parent route parameters, the current route parameters and all query string values.The parent params are no longer available via the $parent property. Parent params can be accessed via navigationInstruction.parentInstruction.params in the odd case where this is needed. The injected *childRoute param is no longer available on the params object either.</li>
+<li><code>ref</code> bindings now work differently. Rather than <code>ref.*</code>, the pattern is now <code>*.ref</code> which improves consistency and makes the <code>ref</code> binding work like all the rest of Aurelia's binding commands. Here are the available options:
+<ul>
+<li><code>attribute-name.ref=&quot;someIdentifier&quot;</code>- create a reference to a custom attribute's class instance.</li>
+<li><code>element-name.ref=&quot;someIdentifier&quot;</code> - create a reference to a custom element's class instance</li>
+<li><code>ref=&quot;someIdentifier&quot;</code> - create a reference to the HTMLElement in the DOM</li>
+</ul>
+</li>
+<li>If you are manually bootstrapping Aurelia (usually because you are installing custom plugins) but you are not using the <code>standardConfiguration</code> helper method, then you may need to add some additional configuration. In order to make Aurelia more flexible, we split out the history configuration from the router configuration so that different implementations of history can be used. So, if you are using the router but not the <code>standardConfiguration</code> helper you need to specify to use the history plugin or else it won’t be properly installed. To do that, just add <code>aurelia.use.history()</code>.</li>
+</ul>
+</section>
+<section><h2 id="new-features">New Features</h2><ul>
+<li>Deeper integration with the module loader allows us to determine the module id of any export, thus enabling better convention-based composition of UIs.</li>
+<li>The Dependency Injection system can now auto-register non-functions and provides better errors when instantiation fails.</li>
+<li>The HttpClient now supports interceptors on all requests (Thanks 
+<a href="https://github.com/Mordred" target="_blank">@mordred</a>
+!!!) and automatically adds the application/json content type when serializing content to json.</li>
+<li>Support for view bundles has been added to the loader. The next version of the CLI will support not only bundling JS but also bundling HTML.</li>
+<li>Enable multiple class bindings on the same element, which don't interfere with one another.</li>
+<li>Enable two-way binding to scrollTop and scrollLeft</li>
+<li>Enable ref bindings to work with all API properties for behaviors; both custom elements and custom attributes</li>
+<li>Enable custom observer location through getters and setters</li>
+<li>Massively expanded support for databinding to SVG</li>
+<li>Containerless custom elements</li>
+<li>Template part replacement in custom elements allows a custom element to specify certain parts of its view which can be replaced with alternate markup at runtime on a per-instance basis.</li>
+<li>New animation methods and events</li>
+<li>Default binding modes for custom attributes</li>
+<li>SyncChildren now works on view-models that are dynamically composed via the <code>compose</code> or <code>router-view</code> custom elements</li>
+<li>Support compiling templates from strings</li>
+<li>New <code>focus</code> custom attribute (Nice work 
+<a href="https://github.com/manuel-guilbault" target="_blank">@manuel-guilbault</a>
+!!!) Read more about how it was built 
+<a href="http://blog.durandal.io/2015/06/05/building-aurelias-focus-attribute/" target="_blank">here</a>
+.</li>
+</ul>
+</section>
+<section><h2 id="bug-fixes">Bug Fixes</h2><ul>
+<li>History now properly handles scheme-relative URLs and properly normalizes all history url fragments.</li>
+<li>The EventAggregator catches errors thrown by subscribers, preventing a misbehaving subscriber from killing event propagation.</li>
+<li>Route generation no longer encodes $ in query strings, thus enabling certain special parameter naming schemes used by various APIs</li>
+<li>Correct type conversion behavior in boolean binding expressions</li>
+<li>Fix memory leak in array observation</li>
+<li>Fix swapped trigger and delegate events.</li>
+<li>Fix Object.observe memory leak</li>
+<li>Polyfill ClassList for IE</li>
+<li>Query string no longer causes errors in child routers, Child routers with redirects now work properly, and 
+<a href="https://github.com/aurelia/router/releases/tag/0.9.0" target="_blank">lots more router fixes</a>
+</li>
+<li>Template anchors use comments to no longer affect CSS selectors.</li>
+<li>Various cross-browser fixes</li>
+<li>Fixed some async resource loading issues</li>
+<li>Fix binding to rowspan and colspan</li>
+<li>Correct destructuring syntax parsing in repeat.for</li>
+<li>Various fixes to the <code>if</code> and <code>repeat</code> behaviors</li>
+<li>Framework now properly exports the path module</li>
+<li>Improved error messages during startup failure</li>
+</ul>
+</section>
+<section><h2 id="updating">Updating</h2><p>I recommend using <code>jspm install</code> for each &quot;top level&quot; Aurelia library. Just look in your package.json file, in the jspm section and be sure to re-install all the Aurelia dependencies listed there.</p>
+</section>
+<section><h2 id="what">What</h2><p>We are moving quickly towards our Beta. Here's what we are working on now:</p>
+<ul>
+<li>CLI - In the next week you will see a new release of our CLI along with an accompanying blog post detailing how you can bundle both your JS and HTML for application deploy. The CLI we are working on is going to be amazing, featuring the same sorts of patterns and extensibility model as Aurelia itself. This initial release focuses primarily on our core infrastructure and bundling.</li>
+<li>Documentation - We're currently designing a new documentation experience that we're pretty excited about. The new docs are a major goal of the Beta and we're starting major work on them now. Just like Aurelia and the CLI are being designed for extensibility and customization, so are the docs.</li>
+<li>Performance - We've now begun serious work improving performance and reducing memory utilization and GC pressure. Today's release has a few improvements in this area, related to memory leaks. We've also helped track down a major performance issue in the ES6 system.register module format which affects all major transpilers: Babel, Tracuer and TypeScript. We've begun work on our benchmarking suite and will be using that to measure Aurelia as we put it through a number of implementation transforms designed to make it lightning fast. You'll be hearing more about that as we progress.</li>
+</ul>
+</section>
+<section><h2 id="stay-tuned">Stay Tuned</h2><p>Thanks for joining us on this adventure and being part of our community! We treasure you and look forward to sharing even more cool stuff we've got planned. If you haven't 
+<a href="https://github.com/aurelia/framework" target="_blank">starred us on GitHub</a>
+ yet, please do! We'd also love for you to 
+<a href="http://durandal.us10.list-manage1.com/subscribe?u=dae7661a3872ee02b519f6f29&id=3de6801ccc" target="_blank">sign up for our newsletter</a>
+. Newsletter subscribers will get the first opportunity to participate in some of our upcoming online events. You won't want to miss out!</p>
+</section>
+
+  </article>
+</section>

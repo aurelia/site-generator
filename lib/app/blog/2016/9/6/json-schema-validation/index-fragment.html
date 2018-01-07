@@ -1,0 +1,144 @@
+<section class="article blog">
+  <header>
+    <h1>json-schema validation</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Like many of you, I have been keeping a close eye on the development of Aurelia's validation plugin(s) for some time now. This truly was the last missing piece of the puzzle for me in terms of being able to fully drop external JavaScript dependencies, and a notable gap in Aurelia's stable offering during the 1.0 release.</p>
+<p>So it was a pleasant surprise to receive a gitter notification last weekend about a new release of the plugin. Recently I have been using a lot of 
+<a href="http://json-schema.org/" target="_blank">json-schema</a>
+ for data validation before dumping it into a NoSQL database (
+<a href="https://rethinkdb.com/" target="_blank">RethinkDB</a>
+), so I decided to see how hard it would be to implement an <code>aurelia-validation</code> plugin using 
+<a href="https://github.com/epoberezkin/ajv" target="_blank">ajv</a>
+.</p>
+<p>Turns out it was delightfully easy! Below is the code in its nascent form. It took about 10 minutes to implement and it &quot;Just Worked™&quot;.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>ValidationError<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validation'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AjvValidator</span> <span class="token punctuation">{</span>
+      cache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">;</span>
+      ajv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Ajv</span><span class="token punctuation">(</span><span class="token punctuation">{</span> v5<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> allErrors<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> format<span class="token punctuation">:</span> <span class="token string">'full'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token function">validateObject</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">parseSchema</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> schemaId <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_schemaId</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'no schema defined for object'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">let</span> validate <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">)</span><span class="token punctuation">.</span>validate<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> valid <span class="token operator">=</span> <span class="token function">validate</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> valid <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">:</span> validate<span class="token punctuation">.</span>errors
+          <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> dataPath<span class="token punctuation">,</span> keyword<span class="token punctuation">,</span> message<span class="token punctuation">,</span> params<span class="token punctuation">,</span> schemaPath <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+            <span class="token keyword">new</span> <span class="token class-name">ValidationError</span><span class="token punctuation">(</span>dataPath<span class="token punctuation">,</span> message<span class="token punctuation">,</span> object<span class="token punctuation">,</span> propertyName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">validateProperty</span><span class="token punctuation">(</span>object<span class="token punctuation">,</span> propertyName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">parseSchema</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> schemaId <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_schemaId</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'no schema defined for object'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>propertyName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'property not defined in schema: '</span><span class="token punctuation">,</span> propertyName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">let</span> definition <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> validate <span class="token operator">=</span> definition<span class="token punctuation">[</span>propertyName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> valid <span class="token operator">=</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token punctuation">[</span>propertyName<span class="token punctuation">]</span><span class="token punctuation">:</span> object<span class="token punctuation">[</span>propertyName<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> valid <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">:</span> validate<span class="token punctuation">.</span>errors
+          <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> dataPath<span class="token punctuation">,</span> keyword<span class="token punctuation">,</span> message<span class="token punctuation">,</span> params<span class="token punctuation">,</span> schemaPath <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+            <span class="token keyword">new</span> <span class="token class-name">ValidationError</span><span class="token punctuation">(</span>dataPath<span class="token punctuation">,</span> message<span class="token punctuation">,</span> object<span class="token punctuation">,</span> propertyName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">_schemaId</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">!</span>object<span class="token punctuation">.</span>schema<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span>
+          object<span class="token punctuation">.</span>constructor<span class="token punctuation">.</span>name <span class="token punctuation">:</span> object<span class="token punctuation">.</span>schema<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">parseSchema</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> schema <span class="token operator">=</span> object<span class="token punctuation">.</span>schema<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>schema <span class="token operator">===</span> undefined <span class="token operator">||</span> schema <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'object lacks schema'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">let</span> schemaId <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_schemaId</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// schema has already been parsed</span>
+          <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>schema<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token string">'properties'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'only object schemas are current supported'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">let</span> definition <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        definition<span class="token punctuation">.</span>validate <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ajv<span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// split schema into individual properties</span>
+        <span class="token keyword">let</span> required <span class="token operator">=</span> schema<span class="token punctuation">.</span>required <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> property <span class="token keyword">in</span> schema<span class="token punctuation">.</span>properties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> subSchema <span class="token operator">=</span> <span class="token punctuation">{</span> type<span class="token punctuation">:</span> <span class="token string">'object'</span><span class="token punctuation">,</span> properties<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+          subSchema<span class="token punctuation">.</span>properties<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">=</span> schema<span class="token punctuation">.</span>properties<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>required<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>property<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> subSchema<span class="token punctuation">.</span>required <span class="token operator">=</span> <span class="token punctuation">[</span> property <span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token keyword">let</span> validator <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ajv<span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>subSchema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          definition<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">=</span> validator<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span>schemaId<span class="token punctuation">,</span> definition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Here's a live 
+<a href="https://gist.run/?id=4bec1022baac829e236e35892408ca67" target="_blank">demo</a>
+ to play around with.</p>
+<p>( Many thanks to core member 
+<a href="https://github.com/jdanyow" target="_blank">@jdanyow</a>
+ for putting together the initial 
+<a href="https://gist.run/" target="_blank">gist.run</a>
+ I based this off of. Have you taken a second today to thank him? You should! )</p>
+<p>That the implementation was so straightforward immediately indicates to me that <code>aurelia-validation</code> has finally found its legs. I had been a (somewhat passive) participant in a number of design discussions during the development of <code>aurelia-validation</code>, and was very pleased to see all of my concerns had been addressed in this release.</p>
+<p>Specifically, in previous iterations it would have been difficult to implement this plugin because it doesn't necessarily &quot;play by the rules&quot;:</p>
+<ul>
+<li>
+<p>validators are all self-contained in <code>ajv</code>, so completely opting out of the validators provided by Aurelia is a requirement</p>
+</li>
+<li>
+<p>&quot;rules&quot; here are just JSON objects, rather than annotations on properties, so this required a separation of concerns not previously possible with earlier versions of <code>aurelia-validation</code> (perhaps the biggest gripe/blocker/unicorn)</p>
+</li>
+<li>
+<p><code>ajv</code> has no concept of property-level validation, nor any plans to support such a feature, so the interface had to be flexible enough to allow me to implement that myself</p>
+</li>
+</ul>
+<p>Admittedly some of this was possible before but it was not obvious, and the implementations of <code>aurelia-validation</code> and <code>aurelia-validatejs</code> were closely coupled in a way that was difficult to reason about. No such trouble with this release! The new design is very intuitive and really comes down to implementing two functions. Rad.</p>
+<p>A few notes about the current implementation:</p>
+<ul>
+<li>
+<p>Rules are currently defined as a property called <code>schema</code> on the object being validated. This will likely be moved over to using the new <code>Rules</code> metadata introduced in this 
+<a href="https://github.com/aurelia/validation/commit/01d85010e7f435ebc4065257808f835c7a2a6a0e" target="_blank">commit</a>
+</p>
+</li>
+<li>
+<p><code>aurelia-validation</code>s default validator implementation uses a concept of <code>ValidationRules</code> to compile validators for your data. You'll note that for my initial implementation I chose to lazily compile validators at the moment of validation. There is definitely room for improvement here, and might actually be a use case for abstracting <code>ValidationRules</code> and providing them as a top-level export of the <code>aurelia-validation</code> plugin.</p>
+</li>
+<li>
+<p>I mentioned before that <code>ajv</code> does not support property-level validation out of the box, rather the suggested approach is to use subschemas for individual properties. I've provided a naive implementation of programmatically splitting a JSON schema into subschemas for this demo, however it is far from complete and will likely fail in more complicated cases. There is a lot of work to be done here, and I would love feedback from the community to develop the feature.</p>
+</li>
+</ul>
+<p>I hope this gives you a taste of how powerful the new <code>aurelia-validation</code> is. I'm eager to hear back from you all about how this plugin might be of use, and ideally how we might collaboratively improve it - so please leave your comments below or reach out on the project's gitter channels.</p>
+<p>All in all I'm quite pleased with the state of the art today, the new version of <code>aurelia-validation</code> is a powerful tool for an already great framework.</p>
+<p><em>Matt Broadstone is a Lead Software Architect for 
+<a href="https://hive-io.com/" target="_blank">hiveIO</a>
+, a NYC-based cloud computing company specializing in software-defined virtual infrastructure. Interested in aurelia, virtualization or node.js? We're 
+<a href="mailto:info@hive-io.com" target="_blank">hiring</a>
+!</em></p>
+
+  </article>
+</section>

@@ -1,0 +1,114 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia &amp; Angular 2.0 Code Side by Side - Part 2</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Yesterday 
+<a href="http://blog.durandal.io/2015/03/16/aurelia-and-angular-2-code-side-by-side/" target="_blank">I showed an example of Angular 2.0 code side-by-side with Aurelia</a>
+. I showed the &quot;reverse binding&quot; technique for Angular 2.0. Today I'm going to show how the 
+<a href="https://docs.google.com/document/d/1US9h0ORqBltl71TlEU6s76ix8SUnOLE2jabHVg9xxEA/" target="_blank">Angular 2.0 Forms Model</a>
+ can be used instead. I'll also show Aurelia next to it, so you can see the difference. Both examples will use the same Contact model.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">class</span> <span class="token class-name">Contact</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>firstName<span class="token punctuation">,</span> lastName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      
+      <span class="token keyword">get</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      	<span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<div>
+<div style="float: left; width: 50%">
+<h3>Angular 2.0</h3>
+<strong>app.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Component<span class="token punctuation">,</span> Template<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/angular2'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>selector<span class="token punctuation">:</span> <span class="token string">'my-app'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    @<span class="token function">Template</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span> <span class="token string">'app.html'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>contact <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Contact</span><span class="token punctuation">(</span><span class="token string">'John'</span><span class="token punctuation">,</span> <span class="token string">'Doe'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+        <span class="token keyword">this</span><span class="token punctuation">.</span>contactForm <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormControlGroup</span><span class="token punctuation">(</span><span class="token string">"form"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
+          <span class="token keyword">new</span> <span class="token class-name">FormControl</span><span class="token punctuation">(</span><span class="token string">"firstName"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token keyword">new</span> <span class="token class-name">FormControl</span><span class="token punctuation">(</span><span class="token string">"lastName"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>contactForm<span class="token punctuation">.</span><span class="token function">readFrom</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>contact<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+<div style="float: right; width: 48%">
+<h3>Aurelia</h3>
+<strong>app.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyApp</span><span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>contact <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Contact</span><span class="token punctuation">(</span><span class="token string">'John'</span><span class="token punctuation">,</span> <span class="token string">'Doe'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+</div>
+<div style="clear: both;"></div>
+<p>Note: Additional code is needed for Angular 2.0 if ES6/ES5/CoffeeScript is used rather than AtScript since annotations must be &quot;manually transpiled&quot; by the developer.</p>
+<div>
+<div style="float: left; width: 50%">
+<strong>app.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>form <span class="token punctuation">[</span>control<span class="token operator">-</span>group<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">'contactForm'</span><span class="token operator">></span>
+      First Name<span class="token punctuation">:</span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> control<span class="token operator">=</span><span class="token string">"firstName"</span><span class="token operator">></span>
+      Last Name<span class="token punctuation">:</span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> control<span class="token operator">=</span><span class="token string">"lastName"</span><span class="token operator">></span>
+      Full Name<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">{</span>contact<span class="token punctuation">.</span>fullName<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+<div style="float: right; width: 48%">
+<strong>app.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>form <span class="token keyword">with</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"contact"</span><span class="token operator">></span>
+      First Name<span class="token punctuation">:</span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"firstName"</span><span class="token operator">></span>
+      Last Name<span class="token punctuation">:</span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"lastName"</span><span class="token operator">></span>
+      Full Name<span class="token punctuation">:</span> $<span class="token punctuation">{</span>fullName<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+</div>
+</div>
+<div style="clear: both;"></div>
+<p>I wanted to let the code stand for itself, as in 
+<a href="http://blog.durandal.io/2015/03/16/aurelia-and-angular-2-code-side-by-side/" target="_blank">yesterday</a>
+, but there is something that needs to be clarified about the Angular 2.0 code. It doesn't entirely work. At the bottom of the HTML file you can see where I have <code>{{contact.fullName}}</code>. This will not update in sync with the input controls. The reason is that all of the editable data is stored inside of the FormControl instances and not inside of the Contact model. The data is read in from the model with a call to <code>this.contactForm.readFrom(this.contact);</code> but after that point all state exists external to the model and is not synchronized. After a thorough study of 
+<a href="https://docs.google.com/document/d/1US9h0ORqBltl71TlEU6s76ix8SUnOLE2jabHVg9xxEA/" target="_blank">the Angular 2.0 Form Model design document</a>
+, I could not determine how make this work without:</p>
+<ol>
+<li>Duplicating my model's internal logic by hard-coding it into the binding expressions inside the HTML form itself. So, we would have something like this <code>{{contactForm.controls.firstName.value}} {{contactForm.controls.lastName.value}}</code>. However, the design document explicitly calls this out as something that should not be done (because of implications on the binding system).</li>
+<li>Merging the Form Model code above, with the code from yesterday and manually calling <code>this.contactForm.writeTo(this.contact);</code> This will result in all the code used in &quot;reverse binding&quot; to be used to trigger calls to update the model. At this point, why use the Form Model?</li>
+</ol>
+<p>So, at present, there doesn't seem to be a solution for this in Angular 2.0.</p>
+<h4>Summary of Angular 2.0 Binding Approaches</h4>
+<p>If you've read both posts, you can see that there are two different approaches to databinding in Angular 2.0. Each requires using different APIs and binding techniques.</p>
+<p>While &quot;reverse binding&quot; appears to be capable of handling any input scenario, it requires authoring lots of code. In fact, what you have to place in your HTML is almost identical to what you would write in JavaScript if there was no binding system involved. This begs the question &quot;why do I need a framework if I have to write the same code anyway?&quot; Also you might be inclined to wonder why you now have to do it in HTML instead of JavaScript.</p>
+<p>On the other hand, the Form Model lets you avoid the manual event wirups, but you must abandon your own model. It only works by creating an Angular FormControl model that matches the HTML structure. It's not clear how this approach can handle logic inside any existing model or whether it can allow the creation of more dynamic, data-driven forms. It's also not obvious how a model can be read in that doesn't map nicely to the form structure or written back our correctly. What if the model contains complex logic or its own internal validation?</p>
+<h4>Summary of Aurelia Binding Approaches</h4>
+<p>Aurelia uses a single technique in all cases: binding commands. Whenever you see the dot, you know that's a binding. You can use <code>.bind</code> to invoke the default binding mode: one-way binding for everything except input controls, which are bound two-way by default. There's no need to use special models or manually wire events. Code is minimal and clean.</p>
+
+  </article>
+</section>

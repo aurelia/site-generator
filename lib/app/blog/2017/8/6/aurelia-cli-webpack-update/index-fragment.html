@@ -1,0 +1,108 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia CLI Webpack Update!</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, I'm thrilled to announce that we've added support for Webpack 3 to the Aurelia CLI. With this addition, the CLI supports project generation equally for Webpack, SystemJS and RequireJS.</p>
+<p>Thanks to the hard work of core team member 
+<a href="https://github.com/JeroenVinke" target="_blank">Jeroen Vinke</a>
+ and 
+<a href="https://github.com/aurelia/cli/graphs/contributors" target="_blank">many awesome members of our community</a>
+, the Aurelia CLI has been making fantastic advancements. With this release, we've added project generation, build, run and test support for Webpack 3. We've also made a ton of bug fixes and enhancements to the core tool along the way.</p>
+<p>Here is the list of what the CLI now supports for project generation, out of the box:</p>
+<h4>Build/Bundle Options</h4>
+<ul>
+<li>RequireJS</li>
+<li>SystemJS</li>
+<li><strong>Webpack!!!</strong></li>
+</ul>
+<h4>Transpiler Options</h4>
+<ul>
+<li>Babel</li>
+<li>Typescript</li>
+</ul>
+<h4>HTML Options</h4>
+<ul>
+<li>Normal</li>
+<li>Minimum Minification</li>
+<li>Maximum Minification</li>
+</ul>
+<h4>CSS Options</h4>
+<ul>
+<li>CSS</li>
+<li>Less</li>
+<li>Sass</li>
+<li>Stylus</li>
+<li>PostCSS</li>
+</ul>
+<h4>Unit Test Runner Options</h4>
+<ul>
+<li>None</li>
+<li>Karma</li>
+<li>Jest</li>
+</ul>
+<h4>Integration Test Options</h4>
+<ul>
+<li>None</li>
+<li>Protractor</li>
+</ul>
+<h4>Code Editor Options</h4>
+<ul>
+<li>Visual Studio Code</li>
+<li>Atom</li>
+<li>Sublime</li>
+<li>Webstorm</li>
+<li>Other</li>
+</ul>
+<p>Additionally, if you are a fan of ASP.NET JavascriptServices, the CLI can use the above options to set that up too!</p>
+<p><strong>The Aurelia CLI helps you get up and running quickly with your favorite technologies, making it the best way to start your new project.</strong></p>
+<p>The project setup that the CLI creates is similar to the Webpack Skeleton Navigation project. If you would like to migrate from the Webpack Skeleton Navigation project to the CLI, simply create a new project (<code>au new</code>) and copy over the source files and webpack configuration.</p>
+<p>We hope you enjoy this update to the CLI and we look forward to continuing to improve this great tool as we move steadily ahead.</p>
+<section><h2 id="release-notes">Release Notes</h2><h3>Bug Fixes</h3>
+<ul>
+<li><strong>bundle:</strong> support both Uglify v3 and v2. (
+<a href="https://github.com/aurelia/cli/commit/7b606ab" target="_blank">7b606ab</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/636" target="_blank">#636</a>
+</li>
+<li><strong>bundle:</strong> support quoteless script src attribute (
+<a href="https://github.com/aurelia/cli/commit/ffafbc9" target="_blank">ffafbc9</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/639" target="_blank">#639</a>
+</li>
+<li><strong>bundler:</strong> don't trace dependencies which have no main file (
+<a href="https://github.com/aurelia/cli/commit/a2cf32b" target="_blank">a2cf32b</a>
+), closes 
+<a href="https://github.com//github.com/aurelia/cli/issues/435/issues/issuecomment-293850306" target="_blank">/github.com/aurelia/cli/issues/435#issuecomment-293850306</a>
+</li>
+<li><strong>dependencies:</strong> update gulp-sass version (
+<a href="https://github.com/aurelia/cli/commit/75d331e" target="_blank">75d331e</a>
+)</li>
+<li><strong>dependencies:</strong> update karma-chrome-launcher (
+<a href="https://github.com/aurelia/cli/commit/6719a2d" target="_blank">6719a2d</a>
+)</li>
+<li><strong>importer:</strong> prevent duplicate dist (
+<a href="https://github.com/aurelia/cli/commit/a22dc3d" target="_blank">a22dc3d</a>
+)</li>
+<li><strong>systemjs-bundling:</strong> include dependency name in bundle config (
+<a href="https://github.com/aurelia/cli/commit/d36f2ae" target="_blank">d36f2ae</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/676" target="_blank">aurelia/cli#676</a>
+</li>
+</ul>
+<h3>Features</h3>
+<ul>
+<li><strong>all:</strong> add webpack (
+<a href="https://github.com/aurelia/cli/commit/2c08625" target="_blank">2c08625</a>
+)</li>
+<li><strong>sourcemaps:</strong> inlcude sourcemaps in karma configuration (
+<a href="https://github.com/aurelia/cli/commit/ebd79e8" target="_blank">ebd79e8</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/420" target="_blank">aurelia/cli#420</a>
+</li>
+</ul>
+</section>
+
+  </article>
+</section>

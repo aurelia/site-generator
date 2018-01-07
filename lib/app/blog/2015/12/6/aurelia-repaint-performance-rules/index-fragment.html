@@ -1,0 +1,76 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Repaint Performance Rules</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Yesterday's patch releases contain some exciting performance improvements! In today's post, Core Team Member Jeremy Danyow shares a bit about how he's worked to improve repaint scenarios.</p>
+<hr />
+<p>There's been a huge focus on performance in the months leading up to the beta-1 release. Back in June Rob put together an 
+<a href="https://github.com/aurelia/benchmarks/blob/master/optimization-plan.md" target="_blank">optimization plan</a>
+ and a 
+<a href="https://github.com/aurelia/benchmarks/blob/master/benchmark-plan.md" target="_blank">benchmarking plan</a>
+. These plans laid out the strategy for optimizing core framework components like the dependency-injection container, binding engine and the templating engine.</p>
+<p>The primary focus of these optimizations has been reducing object allocations, array allocations and closures to decrease memory pressure and improve garbage collection efficiency. In the binding system, this meant getting rid of things like the array of callbacks that a property observer used to notify its subscribers when properties changed. In fact, the binding system doesn't use callbacks, closures or arrays in any of the critical paths. If you want to learn more about the binding engine, and the techniques used to optimize it, tune in to 
+<a href="http://hangouts.readthesource.io/" target="_blank">readthesource.io</a>
+ on December 10th.</p>
+<section><h2 id="repeat">repeat</h2><p>With the core binding optimizations in place we've been able to add powerful 
+<a href="http://www.danyow.net/aurelia-binding-behaviors/" target="_blank">new features</a>
+ without impacting performance. We've also started performance tuning higher level parts of the framework such as the <code>repeat</code> template controller. In case you're not familiar with the <code>repeat</code>, it's a custom attribute shipped with Aurelia that enables &quot;repeating&quot; a template over a collection, similar to Knockout's <code>foreach</code> and Angular's <code>ng-repeat</code>.</p>
+<p>This round of performance tuning focused on optimizing the repeat's handling of collection changes. We looked at what the repeat does when the array it's bound to is replaced with a new array as well as what happens when the array is mutated via push/pop/splice/etc.</p>
+<p>At a high level, the steps involved for handling new items is to create new view instances for the items, invoke the <code>created</code>, <code>bind</code> and <code>attached</code> composition lifecycle callbacks, insert the new DOM nodes, and run the animation if necessary.  Removing items from a collection causes the reverse:  the <code>detached</code> and <code>unbind</code> lifecycle hooks are called and the view is animated out and removed from the DOM. Usually performing these steps isn't a huge performance bottleneck, especially if you've enabled view-caching, which allows Aurelia to save removed DOM nodes and reuse them when new items are added.</p>
+<p>This logic can become a bottleneck in scenarios where you're rapidly replacing the array with a new instance over and over. One could argue that if you're doing something like this you have bigger problems in terms of memory use and UI design, however it's still an interesting use-case to optimize around because it's what's used by the de-facto standard for testing a framework's rendering performance: <strong>dbmonster</strong>.</p>
+</section>
+<section><h2 id="dbmonster">dbmonster</h2><p>dbmonster is a rendering benchmark that was popularized in 
+<a href="https://twitter.com/ryanflorence" target="_blank">Ryan Florence</a>
+ 2015 react.js conf talk. In his talk 
+<a href="https://www.youtube.com/watch?v=z5e7kWSHWTg&feature=youtu.be&t=146" target="_blank">he demos</a>
+ three dbmonster implementations using Ember, Angular and React. Dbmonster involves rendering a two-dimensional array of fake database monitoring data and continually replacing the array of monitoring data to demonstrate a framework's &quot;repaint performance&quot;.  
+<a href="https://github.com/mathieuancelin" target="_blank">Mathieu Ancelin</a>
+ has put together 
+<a href="http://mathieuancelin.github.io/js-repaint-perfs/" target="_blank">a handy site</a>
+ that aggregates the dbmonster implementations of popular frameworks. There you can compare the dbmonster performance of 
+<a href="http://mathieuancelin.github.io/js-repaint-perfs/react/opt.html" target="_blank">react</a>
+, 
+<a href="http://mathieuancelin.github.io/js-repaint-perfs/angular/opt.html" target="_blank">angular 1</a>
+, 
+<a href="http://mathieuancelin.github.io/js-repaint-perfs/angular2/opt.html" target="_blank">angular 2</a>
+ and many others.</p>
+<p>Here's what the dbmonster demos look like:
+<img src="blog/2015/12/6/aurelia-repaint-performance-rules/content/images/2015/12/lbNkHBD.png" alt="dbmonster" /></p>
+<p>When looking at these demos here are some things to keep an eye on:</p>
+<ol>
+<li><strong>Smooth Scrolling:</strong> you should be able to scroll the page up and down without jankiness.</li>
+<li><strong>Popup Tracking:</strong> when moving the mouse over the grid, the popup should follow and update without delay.</li>
+<li><strong>Repaint Rate:</strong> At the bottom there's an indicator for repaint rate and memory usage. Repaint rate represents how often a new set of dbmonster data is being rendered. The higher the number the better.</li>
+<li><strong>Memory:</strong> Look for a sawtooth pattern that doesn't continue to climb.  The code to generate the dbmonster data contributes to the memory usage and GC activity so expect to see elevated memory usage with higher repaint rates.</li>
+<li><strong>Mutations Slider:</strong> At the top of each demo there's a slider. This controls the variability of the data. More variability equates to more DOM updates and visa-versa. When the variability is at 1% (very low) you should see an extremely high repaint rate because there aren't a lot of DOM updates to do.  If you don't see the repaint rate climb as the mutation rate is decreased it means the framework isn't efficient at tracking changes or identifying when to update the DOM.</li>
+</ol>
+<blockquote>
+<p>Note: These demos are not a precise measure of repaint rate.  Many factors can impact performance - other open browser tabs, etc.  For best results run these demos using chrome with the following command:</p>
+</blockquote>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token string">"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"</span> <span class="token operator">--</span>user<span class="token operator">-</span>data<span class="token operator">-</span>dir<span class="token operator">=</span><span class="token string">"C:\chrome\dev-sessions\perf"</span> <span class="token operator">--</span>enable<span class="token operator">-</span>precise<span class="token operator">-</span>memory<span class="token operator">-</span>info <span class="token operator">--</span>enable<span class="token operator">-</span>benchmarking <span class="token operator">--</span>js<span class="token operator">-</span>flags<span class="token operator">=</span><span class="token string">"--expose-gc"</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="aurelia">Aurelia</h2><p>While testing Aurelia with dbmonster we found that it performed well as long as view-caching was enabled and one-time bindings were used in places where the bound property wasn't going to change. To speed things up even more we've added logic to the repeat that analyzes the repeated template to determine whether it uses animation and whether it contains any components requiring the composition lifecycle. If those two things are not needed the repeat uses an optimized mode that skips unnecessary work related to adding/removing DOM elements and invoking bind/unbind/etc.</p>
+<blockquote>
+<p><strong>With these optimizations in place, Aurelia performs better at dbmonster than <em>all</em> other frameworks.</strong></p>
+</blockquote>
+<p><strong>Can't believe it?  See for yourself 
+<a href="http://jdanyow.github.io/aurelia-dbmonster/" target="_blank">here</a>
+</strong>.</p>
+<p>Chest pounding aside, performance is a moving target, browser vendors and framework implementors will continue to evolve their implementations. Keep an eye on the 
+<a href="https://github.com/aurelia/ui-virtualization" target="_blank">Aurelia UI Virtualization</a>
+ project 
+<a href="https://github.com/martingust" target="_blank">@martingust</a>
+ is working on. Using a virtualized repeater that renders only the table rows that are in the view-port will be a massive performance boost to the Aurelia version of the dbmonster demo as well.</p>
+<blockquote>
+<p>Editor's Note: Thanks Jeremy for the awesome work! After the updates, I was running dbmonster on Chrome and saw Aurelia performing 2-3x faster than React and 15-40% faster than Angular 2. Your mileage may vary (so many factors can affect this), but it's clear that Aurelia's repaint beats all other frameworks, and not by a small margin. I'm even more excited about the future performance enhancements we are working on which target other scenarios, while making general improvements to CPU usage, memory consumption and render time. Stay tuned for more speed!</p>
+</blockquote>
+</section>
+
+  </article>
+</section>

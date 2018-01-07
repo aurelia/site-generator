@@ -1,0 +1,514 @@
+<section class="article blog">
+  <header>
+    <h1>JWT Authentication in Aurelia</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week community member 
+<a href="https://twitter.com/ryanchenkie" target="_blank">Ryan Chenkie</a>
+ shows us how to implement JWT Authentication in Aurelia. Ryan is a full-stack developer from Canada who works for 
+<a href="https://auth0.com" target="_blank">Auth0</a>
+ as a Tech Writer where he provides in-depth tutorials and seed projects for the newest frameworks such as Angular 2, React, and Aurelia as well as other modern web technologies.</p>
+<hr />
+<p><strong>TL;DR</strong>: Aurelia is a great client-side JavaScript framework and adding JWT authentication to Aurelia apps is easy with the 
+<a href="https://github.com/paulvanbladel/aurelia-auth" target="_blank">aurelia-auth package</a>
+. Checkout the 
+<a href="https://github.com/chenkie/aurelia-jwt-auth" target="_blank">GitHub repo</a>
+ for this article to find out how to add authentication to your Aurelia app.</p>
+<hr />
+<section><h2 id="getting-started">Getting Started</h2><p>Getting started with Aurelia is a piece of cake. The framework's 
+<a href="http://aurelia.io/get-started.html" target="_blank">getting started guide</a>
+ offers an in-depth set of instructions along with a 
+<a href="https://github.com/aurelia/skeleton-navigation/releases" target="_blank">seed project</a>
+ that make it very simple to get up and running quickly.</p>
+<p>This tutorial will expand upon the seed project and show how to add JWT authentication to a random quote application. We'll be using the 
+<a href="https://github.com/auth0/nodejs-jwt-authentication-sample" target="_blank">NodeJS JWT Authentication Sample</a>
+ as our backend to show how we can retrieve a JWT upon login, save it in local storage, and send it along with every subsequent request. Our app will let all visitors retrieve a random quote, but logged-in users will be able to get a super-secret quote.</p>
+<p><img src="https://www.dropbox.com/s/lxzd6qeq69l0p6y/aurelia-welcome.png?dl=1" alt="" /></p>
+<h3>Two Ways to Get Going</h3>
+<p>You can go through the 
+<a href="http://aurelia.io/get-started.html" target="_blank">getting started</a>
+ guide that Aurelia provides and follow along, changing files in their seed project as we go. Alternatively, you can clone 
+<a href="https://github.com/chenkie/aurelia-jwt-auth" target="_blank">the project for this tutorial</a>
+ and follow along from there.</p>
+<p>If you are starting from Aurelia's seed project, be sure to split it out into two subdirectories, <code>client</code> and <code>server</code>. The <code>server</code> directory is where the 
+<a href="https://github.com/auth0/nodejs-jwt-authentication-sample" target="_blank">NodeJS JWT authentication sample</a>
+ will go.</p>
+<p>To get the server setup, you can follow the instructions in the readme for the 
+<a href="https://github.com/auth0/nodejs-jwt-authentication-sample" target="_blank">NodeJS JWT Authentication Sample</a>
+.</p>
+<h3>A Little Help From Aurelia-Auth</h3>
+<p>To help us with our token dealings on the front-end, we'll use the awesome 
+<a href="https://github.com/paulvanbladel/aurelia-auth" target="_blank">aurelia-auth plugin</a>
+ provided by Paul van Bladel, along with some pointers from his 
+<a href="https://github.com/paulvanbladel/aurelia-auth-sample" target="_blank">sample app repo</a>
+.</p>
+</section>
+<section><h2 id="setting-up-the-client-config-files">Setting Up the Client Config Files</h2><p>There's a bit of configuration setup to do, but once it's in place things will be a breeze.</p>
+<p>After doing <code>npm install</code> and <code>jspm install</code> to pull in all the dependencies, we'll need to also install the <code>aurelia-auth</code> plugin. We can do this with <code>jspm</code> within the client directory:</p>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>
+  jspm install github<span class="token punctuation">:</span>paulvanbladel<span class="token operator">/</span>aurelia<span class="token operator">-</span>auth
+  
+</code></pre></source-code></code-listing>
+<h3>Application Bootstap Config</h3>
+<p>Let's give our app a name of <code>quotes-app</code> and reflect this on the <code>body</code> tag of <code>index.html</code> where the app loads.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+     client/index.html 
+    
+    ...
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span> <span class="token attr-name">aurelia-app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>quotes-app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>jspm_packages/system.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>config.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+        System<span class="token punctuation">.</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+    
+    ...
+    
+  </code></pre></source-code>
+</code-listing>
+<p>Aurelia looks for a JavaScript file with the same name in the <code>src</code> directory for the main app config details. Let's create that now:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    
+    <span class="token comment" spellcheck="true">// client/src/quotes-app.js</span>
+    
+    <span class="token keyword">import</span> config <span class="token keyword">from</span> <span class="token string">'./auth-config'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+      <span class="token comment" spellcheck="true">// Here we provide configuration for our application and can</span>
+      <span class="token comment" spellcheck="true">// bring in the configuration settings we put within auth-config.js</span>
+      <span class="token comment" spellcheck="true">// that will tell the aurelia-auth plugin the specific settings</span>
+      <span class="token comment" spellcheck="true">// for our application's authentication context</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'paulvanbladel/aurelia-auth'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>baseConfig<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+             baseConfig<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>You can see here that we're importing a file called <code>auth-config.js</code> and that it's the export from this file that is passed to the <code>baseConfig</code> for the plugin. The <code>auth-config</code> file will let us override the aurelia-auth plugin's defaults with our own specifics. Let's create it now:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/auth-config.js</span>
+    
+    <span class="token comment" spellcheck="true">// Specific settings for our application's</span>
+    <span class="token comment" spellcheck="true">// authentication context. These will override</span>
+    <span class="token comment" spellcheck="true">// the default settings provided by aurelia-auth</span>
+    
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+    
+      <span class="token comment" spellcheck="true">// Our Node API is being served from localhost:3001</span>
+      baseUrl<span class="token punctuation">:</span> <span class="token string">'http://localhost:3001'</span><span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// The API specifies that new users register at the POST /users enpoint</span>
+      signupUrl<span class="token punctuation">:</span> <span class="token string">'users'</span><span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// Logins happen at the POST /sessions/create endpoint</span>
+      loginUrl<span class="token punctuation">:</span> <span class="token string">'sessions/create'</span><span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// The API serves its tokens with a key of id_token which differs from</span>
+      <span class="token comment" spellcheck="true">// aurelia-auth's standard</span>
+      tokenName<span class="token punctuation">:</span> <span class="token string">'id_token'</span><span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true">// Once logged in, we want to redirect the user to the welcome view</span>
+      loginRedirect<span class="token punctuation">:</span> <span class="token string">'#/welcome'</span><span class="token punctuation">,</span>
+    
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">default</span> config<span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The API is accessible at <code>localhost:3001</code>, so we set this as our <code>baseUrl</code>. Next, we setup the proper endpoints that we'll need for signing users up and logging them in. We also need to override the <code>tokenName</code> with what our API serves, which in this case is <code>id_token</code>. Finally we say that we want to redirect the user to the <code>welcome</code> view once they login.</p>
+<h3>Application Routing Config</h3>
+<p>We'll now need to setup the application's routing configuration. Let's first setup the HTML that will require and load our nav bar and other views:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+     client/src/app.html 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bootstrap/css/bootstrap.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>./nav-bar<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+    
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav-bar</span> <span class="token attr-name">router.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>router<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nav-bar</span><span class="token punctuation">></span></span>  
+    
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>      
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-view</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-view</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Here we are requiring the <code>nav-bar</code> and binding it to the router. We will serve our views from the <code>&lt;router-view&gt;</code> within our containing <code>&lt;div&gt;</code>.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/app.js</span>
+    
+    <span class="token keyword">import</span> <span class="token string">'bootstrap'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Router<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> HttpClientConfig <span class="token keyword">from</span> <span class="token string">'paulvanbladel/aurelia-auth/app.httpClient.config'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> AppRouterConfig <span class="token keyword">from</span> <span class="token string">'router-config'</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// Using Aurelia's dependency injection, we inject Aurelia's router,</span>
+    <span class="token comment" spellcheck="true">// the aurelia-auth http client config, and our own router config</span>
+    <span class="token comment" spellcheck="true">// with the @inject decorator</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Router<span class="token punctuation">,</span> HttpClientConfig<span class="token punctuation">,</span> AppRouterConfig<span class="token punctuation">)</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>router<span class="token punctuation">,</span> httpClientConfig<span class="token punctuation">,</span> appRouterConfig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        
+        <span class="token keyword">this</span><span class="token punctuation">.</span>router <span class="token operator">=</span> router<span class="token punctuation">;</span>
+    
+        <span class="token comment" spellcheck="true">// Client configuration provided by the aurelia-auth plugin</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>httpClientConfig <span class="token operator">=</span> httpClientConfig<span class="token punctuation">;</span>
+    
+        <span class="token comment" spellcheck="true">// The application's configuration, including the</span>
+        <span class="token comment" spellcheck="true">// route definitions that we've declared in router-config.js</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>appRouterConfig <span class="token operator">=</span> appRouterConfig<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      
+      <span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        
+        <span class="token comment" spellcheck="true">// Here we run the configuration when the app loads</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>httpClientConfig<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>appRouterConfig<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The HTTP configuration that <code>aurelia-auth</code> provides is what handles adding the JWT as a header if the user is authenticated. The <code>httpClientConfig</code> file has logic that checks for the existence of a token in <code>localstorage</code> and then adds an <code>Authorization</code> header with a value of <code>Bearer &lt;token&gt;</code> if one exists. The token will be sent for all HTTP requests to the API, but will obviously only be needed for protected resources.</p>
+<p><img src="https://www.dropbox.com/s/1hzmzsla8l1vm7d/aurelia-auth-bearer.png?dl=1" alt="" /></p>
+<p>We can keep our routing logic within the main <code>app.js</code> file, like is done in a lot of Aurelia projects, but in our case we'll put this configuration in a separate file called <code>router-config.js</code> which we are injecting. Let's setup this routing configuration:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/router-config.js</span>
+    
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>AuthorizeStep<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'paulvanbladel/aurelia-auth'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Router<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-router'</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// Using Aurelia's dependency injection, we inject Router</span>
+    <span class="token comment" spellcheck="true">// with the @inject decorator</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token punctuation">{</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>router<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>router <span class="token operator">=</span> router<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token function">configure</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+        <span class="token keyword">var</span> appRouterConfig <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          
+          config<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Random Quotes App'</span><span class="token punctuation">;</span>
+    
+          <span class="token comment" spellcheck="true">// Here we hook into the authorize extensibility point</span>
+          <span class="token comment" spellcheck="true">// to add a route filter so that we can require authentication</span>
+          <span class="token comment" spellcheck="true">// on certain routes</span>
+          config<span class="token punctuation">.</span><span class="token function">addPipelineStep</span><span class="token punctuation">(</span><span class="token string">'authorize'</span><span class="token punctuation">,</span> AuthorizeStep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+          <span class="token comment" spellcheck="true">// Here we describe the routes we want along with information about them</span>
+          <span class="token comment" spellcheck="true">// such as which they are accessible at, which module they use, and whether</span>
+          <span class="token comment" spellcheck="true">// they should be placed in the navigation bar</span>
+          config<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+              <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span><span class="token string">'welcome'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'welcome'</span><span class="token punctuation">,</span> moduleId<span class="token punctuation">:</span> <span class="token string">'./welcome'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span><span class="token string">'Welcome'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'random-quote'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'random-quote'</span><span class="token punctuation">,</span> moduleId<span class="token punctuation">:</span> <span class="token string">'./random-quote'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span><span class="token string">'Random Quote'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>          
+              <span class="token comment" spellcheck="true">// The secret-quote route is the only one that the user needs to be logged in to see,  so we set auth: true</span>
+              <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'secret-quote'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'secret-quote'</span><span class="token punctuation">,</span> moduleId<span class="token punctuation">:</span> <span class="token string">'./secret-quote'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span><span class="token string">'Super Secret Quote'</span><span class="token punctuation">,</span> auth<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'signup'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'signup'</span><span class="token punctuation">,</span> moduleId<span class="token punctuation">:</span> <span class="token string">'./signup'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span><span class="token string">'Signup'</span><span class="token punctuation">,</span> authRoute<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'login'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'login'</span><span class="token punctuation">,</span> moduleId<span class="token punctuation">:</span> <span class="token string">'./login'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span><span class="token string">'Login'</span><span class="token punctuation">,</span> authRoute<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> route<span class="token punctuation">:</span> <span class="token string">'logout'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'logout'</span><span class="token punctuation">,</span> moduleId<span class="token punctuation">:</span> <span class="token string">'./logout'</span><span class="token punctuation">,</span> nav<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span><span class="token string">'Logout'</span><span class="token punctuation">,</span> authRoute<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+        <span class="token comment" spellcheck="true">// The router is configured with what we specify in the appRouterConfig</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>router<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span>appRouterConfig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Aurelia gives us the ability to customize the navigation pipeline with some extensibility points, including an <code>authorize</code> route filter. Using this filter means we can specify which routes we would like authentication to be required for. Since our <code>super-secret-quotes</code> route needs to remain top secret until the user is logged in, we put <code>auth: true</code> on it. We hook into this filter by calling <code>addPipelineStep</code>, passing in the <code>AuthorizeStep</code> that is provided by the <code>aurelia-auth</code> plugin.</p>
+<p>With the configuration out of the way, let's get to coding the actual routes and their views! We'll need to have files that take care of each route in place before the app will work, so you can comment out the routes in <code>router-config.js</code> that aren't ready yet.</p>
+</section>
+<section><h2 id="setting-up-routes-and-views">Setting Up Routes and Views</h2><p>Two files are required for each route in Aurelia---a JavaScript file for the view model logic and an HTML file for the view itself. Views are enclosed within <code>&lt;template&gt;</code> tags but are otherwise made of normal HTML that can make use of Aurelia's databinding.</p>
+<h3>The Nav Bar and Welcome Route</h3>
+<p>Let's start at the top and setup the navigation bar.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+     nav-bar.html 
+    
+    ...
+        
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nav navbar-nav<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row of router.navigation | authFilter: isAuthenticated<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>${row.isActive ? <span class="token punctuation">'</span>active<span class="token punctuation">'</span> : <span class="token punctuation">'</span><span class="token punctuation">'</span>}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">data-toggle</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>collapse<span class="token punctuation">"</span></span> <span class="token attr-name">data-target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#bs-example-navbar-collapse-1.in<span class="token punctuation">"</span></span> <span class="token attr-name">href.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row.href<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${row.title}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>!isAuthenticated<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nav navbar-nav navbar-right<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/#/login<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Login<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/#/signup<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Signup<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>isAuthenticated<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nav navbar-nav navbar-right<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/#/logout<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Logout<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    
+    ...      
+  </code></pre></source-code>
+</code-listing>
+Notice here that we're running a filter on the repeated navigation items with `authFilter: isAuthenticated`. This allows us to hide any nav menu items that are to be protected if the user isn't authenticated and will be how we hide the `super-secret-quote` menu item when the user isn't logged in. We're also conditionally showing the Signup, Login and Logout links. See the [GitHub repo](https://github.com/chenkie/aurelia-jwt-auth/blob/master/client/src/nav-bar.html) for the rest of the markup.
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/nav-bar.js</span>
+    
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>AuthService<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'paulvanbladel/aurelia-auth'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">inject</span><span class="token punctuation">(</span>AuthService<span class="token punctuation">)</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">NavBar</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// User isn't authenticated by default</span>
+      _isAuthenticated <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      @bindable router <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>auth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>auth <span class="token operator">=</span> auth<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token comment" spellcheck="true">// We can check if the user is authenticated</span>
+      <span class="token comment" spellcheck="true">// to conditionally hide or show nav bar items</span>
+      <span class="token keyword">get</span> <span class="token function">isAuthenticated</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>auth<span class="token punctuation">.</span><span class="token function">isAuthenticated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Here in the <code>nav-bar.js</code> file we have a method that checks whether the user is logged in which is what we hook into in the view.</p>
+<p>The Aurelia seed comes with a welcome route, but in our case we can trim it down to be simpler.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+     client/src/welcome.html 
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>${heading}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>well<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span>${info}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+The JavaScript becomes simpler as well.
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/welcome.js</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Welcome</span> <span class="token punctuation">{</span>
+    
+      heading <span class="token operator">=</span> <span class="token string">'Welcome to the Random Quotes App!'</span><span class="token punctuation">;</span>
+      info <span class="token operator">=</span> <span class="token string">'You can get a random quote without logging in, but if you do login you can get a super secret quote!'</span><span class="token punctuation">;</span>
+    
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Signup, Login and Logout</h3>
+<p>Next, let's setup the <code>signup</code>, <code>login</code> and <code>logout</code> routes.</p>
+<h3>Signup</h3>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+     client/src/signup.html 
+    
+    ...
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span> <span class="token attr-name">submit.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>signup()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Email<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Email<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Password<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-default<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Signup<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hr</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>alert alert-danger<span class="token punctuation">"</span></span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>signupError<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${signupError}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    
+    ...
+  </code></pre></source-code>
+</code-listing>
+In this view we're providing two `<input>`s that take the user's email and password. We've also got an alert box at the bottom to show the user any errors that are returned. We'll need to setup the view models for these next.
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/signup.js</span>
+    
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>AuthService<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'paulvanbladel/aurelia-auth'</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// Using Aurelia's dependency injection, we inject the AuthService</span>
+    <span class="token comment" spellcheck="true">// with the @inject decorator</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>AuthService<span class="token punctuation">)</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Signup</span> <span class="token punctuation">{</span>
+      
+      heading <span class="token operator">=</span> <span class="token string">'Sign Up'</span><span class="token punctuation">;</span>
+    
+      <span class="token comment" spellcheck="true">// These view models will be given values</span>
+      <span class="token comment" spellcheck="true">// from the signup form user input</span>
+      email <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      password <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      <span class="token comment" spellcheck="true">// Any signup errors will be reported by</span>
+      <span class="token comment" spellcheck="true">// giving this view model a value in the</span>
+      <span class="token comment" spellcheck="true">// catch block within the signup method</span>
+      signupError <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>auth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>auth <span class="token operator">=</span> auth<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token function">signup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+        <span class="token comment" spellcheck="true">// Object to hold the view model values passed into the signup method</span>
+        <span class="token keyword">var</span> userInfo <span class="token operator">=</span> <span class="token punctuation">{</span> email<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>email<span class="token punctuation">,</span> password<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>password <span class="token punctuation">}</span>
+    
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>auth<span class="token punctuation">.</span><span class="token function">signup</span><span class="token punctuation">(</span>userInfo<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Signed Up!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>signupError <span class="token operator">=</span> error<span class="token punctuation">.</span>response<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+The `signup()` method uses `aurelia-auth` to send a POST request to the API which either creates a new user or returns an error if there was a problem.
+<h3>Login</h3>
+<p>The <code>login</code> route is pretty similar. You'll just need to swap out <code>submit.delegate=&quot;signup()&quot;</code> for<code>submit.delegate=&quot;login()&quot;</code> and adjust the other 
+<a href="https://github.com/chenkie/aurelia-jwt-auth/blob/master/client/src/login.html" target="_blank">pieces of markup</a>
+ appropriately</p>
+<p>The JavaScript for <code>login</code> looks similar as well, but this time we are sending the POST request to the <code>sessions/create</code> endpoint:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/login.js</span>
+    
+    <span class="token operator">...</span>
+    
+      <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>auth<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>email<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>password<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Login response: "</span> <span class="token operator">+</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>loginError <span class="token operator">=</span> error<span class="token punctuation">.</span>response<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+    <span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Logout</h3>
+<p>The <code>logout</code> route essentially follows the same pattern using <code>authService.logout()</code> to remove the user's JWT from <code>localstorage</code>. See 
+<a href="https://github.com/chenkie/aurelia-jwt-auth/blob/master/client/src/logout.js" target="_blank">the repo</a>
+ for further detail.</p>
+<p>With all this in place, we should now be able to signup, login and logout users. Test it out to make sure everything is running as expected. If everything is working properly, when the user logs in there will be a JWT set in <code>localstorage</code>.</p>
+<p><img src="https://www.dropbox.com/s/t6f3rzevv1kmd3d/aurelia-localstorage-token.png?dl=1" alt="" /></p>
+</section>
+<section><h2 id="the-random-quote-and-super-secret-quote-routes">The Random Quote and Super-Secret Quote Routes</h2><p>With signup, login and logout in place we now need to create the files for our quote routes. Let's first take care of the <code>random-quote</code> route.</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+     client/src/random-quote.js 
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-sm-12<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>${heading}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>well<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span>${randomQuote}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>This view simply displays the heading and the text of the quote that we retrieve.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/random-quote.js</span>
+    
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>HttpClient<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-http-client'</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// Using Aurelia's dependency injection, we inject HttpClient</span>
+    <span class="token comment" spellcheck="true">// with the @inject decorator to make HTTP requests</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>HttpClient<span class="token punctuation">)</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RandomQuote</span> <span class="token punctuation">{</span>
+    
+      heading <span class="token operator">=</span> <span class="token string">'Random Quote'</span><span class="token punctuation">;</span>
+    
+      <span class="token comment" spellcheck="true">// View model that will be populated with the </span>
+      <span class="token comment" spellcheck="true">// the random quote retrieved from the API and</span>
+      <span class="token comment" spellcheck="true">// displayed in the view</span>
+      randomQuote <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span>http<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>http <span class="token operator">=</span> http<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>http<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://localhost:3001/api/random-quote'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>randomQuote <span class="token operator">=</span> response<span class="token punctuation">.</span>content<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Error getting quote'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>We want to fetch the quote when the route is hit so within the <code>activate()</code> method we are making a GET request to our <code>random-quote</code> endpoint which is located at <code>localhost:3001/api/random-quote</code>. If we get a good response, we set the quote text onto <code>randomQuote</code> so that it can be accessed in the view.</p>
+<p>The <code>super-secret-quote</code> route is pretty much the same, except that we make our requests to a different endpoint. For the view in <code>secret-quote.html</code>, make sure to change <code>${randomQuote}</code> to <code>${secretQuote}</code></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token comment" spellcheck="true">// client/src/secret-quote.js</span>
+    
+    <span class="token operator">...</span>
+    
+    <span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>http<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://localhost:3001/api/protected/random-quote'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>secretQuote <span class="token operator">=</span> response<span class="token punctuation">.</span>content<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Error getting quote'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token operator">...</span>
+  </code></pre></source-code>
+</code-listing>
+<p>As you can see, the only real difference here is that the GET request we're making is going to the <code>protected/random-quote</code> endpoint. If there is no valid JWT in localstorage, we won't be able to get to this route. If somehow we got to it, the request will fail because no JWT will be sent to the server.</p>
+<p><img src="https://www.dropbox.com/s/r73f7iuf0srqfz8/aurelia-super-secret-quote.png?dl=1" alt="" /></p>
+</section>
+<section><h2 id="wrapping-up">Wrapping Up</h2><p>Protecting routes that we want to limit to logged-in users is actually quite simple with the <code>aurelia-auth</code> plugin because we can set the app up such that if a user isn't logged in they can't see or reach protected routes. If, for whatever reason, someone was able to get to a route they shouldn't be at and they don't have a valid JWT, any HTTP requests they make will be denied by the server. Properly authenticated users will have a valid JWT in <code>localstorage</code> which will be sent along as a header with all the requests they make which will give them access to protected resources.</p>
+<p>Aurelia is a great next-generation JavaScript framework with a growing user base. As we saw in this tutorial, we can easily get users signed up and authenticated using the <code>aurelia-auth</code> plugin.</template></token></div></router-view></p>
+</section>
+
+  </article>
+</section>

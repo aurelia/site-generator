@@ -1,0 +1,98 @@
+<section class="article blog">
+  <header>
+    <h1>Release Update - 11/10/2016</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Aurelia continues to push forward with regular releases that have fixes and improvements to various parts of the platform. Below are the release notes for this week.</p>
+<h3>aurelia-cli 0.22.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index.html:</strong> ensure charset is added to html page</li>
+<li><strong>build</strong> Fix #382 by catching errors with gulp-plumber</li>
+<li><strong>file-paths:</strong> don't use windows style path separators</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>autocomplete:</strong> disable built-in Angular1 auto-complete suggest</li>
+<li><strong>main:</strong> only use bluebird long stack traces during debug mode</li>
+<li><strong>build</strong> move require and text to external module</li>
+</ul>
+<h3>aurelia-bundler 0.5.0</h3>
+<h4>Features</h4>
+<ul>
+<li>Added revisioning to html import template bundler</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Fix condition for special handling in fetch hook.</li>
+<li>exlude removing redundant attrs</li>
+</ul>
+<h3>aurelia-validation 0.14.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>ValidationController:</strong> handle null objects</li>
+<li><strong>build:</strong> fix api.json generation</li>
+<li><strong>ValidationParser:</strong> handle parenthesis</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>validation-rules:</strong> validate email as per HTML standard</li>
+<li><strong>package:</strong> add tslint</li>
+</ul>
+<h3>aurelia-logging 1.1.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>logging:</strong> carry a globalDefaultLevel with which subsequent loggers are created (
+<a href="https://github.com/aurelia/logging/commit/ec9af2a" target="_blank">ec9af2a</a>
+)</li>
+<li><strong>logging:</strong> relax type on Logger.setLevel() for compatibility with TypeScript (
+<a href="https://github.com/aurelia/logging/commit/d52bec2" target="_blank">d52bec2</a>
+)</li>
+</ul>
+<h3>aurelia-http-client 1.0.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>http-response-message:</strong> handle empty responses (
+<a href="https://github.com/aurelia/http-client/commit/bae5188" target="_blank">bae5188</a>
+)</li>
+</ul>
+<h3>aurelia-protractor-plugin 1.0.0</h3>
+<ul>
+<li>Initial release to put Aurelia's protractor pluging into its own package.</li>
+</ul>
+<h3>aurelia-tools 1.0.0</h3>
+<ul>
+<li>Moved Aurelia's protractor plugin to its own package and bumped to 1.0.0.</li>
+</ul>
+<h3>aurelia-i18n 1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>attribute:</strong> TAttribute related fixes (
+<a href="https://github.com/aurelia/i18n/commit/d2f8d72" target="_blank">d2f8d72</a>
+)</li>
+<li><strong>doc:</strong> inject <code>RelativeTime</code> (
+<a href="https://github.com/aurelia/i18n/commit/8cb0bff" target="_blank">8cb0bff</a>
+)</li>
+<li><strong>rt:</strong> corrected French translations for relative time (
+<a href="https://github.com/aurelia/i18n/commit/b3142dc" target="_blank">b3142dc</a>
+)</li>
+<li><strong>attribute:</strong> fix support for dashed bindables (
+<a href="https://github.com/aurelia/i18n/commit/e70372c" target="_blank">e70372c</a>
+)</li>
+<li><strong>debug:</strong> remove debugger statement (
+<a href="https://github.com/aurelia/i18n/commit/1d5f312" target="_blank">1d5f312</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>df:</strong> add support for ISO8601 strings (
+<a href="https://github.com/aurelia/i18n/commit/e4771df" target="_blank">e4771df</a>
+)</li>
+<li><strong>rt:</strong> add support for rt value converter to accept ISO8601 strings and empty values (
+<a href="https://github.com/aurelia/i18n/commit/58e0b30" target="_blank">58e0b30</a>
+)</li>
+</ul>
+
+  </article>
+</section>

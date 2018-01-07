@@ -1,0 +1,246 @@
+<section class="article blog">
+  <header>
+    <h1>Getting Started with Aurelia and TypeScript</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, Core Aurelia Team member, Mike Graham, teaches us about combining Aurelia and TypeScript.</p>
+<h3>About The Author</h3>
+<p>Mike Graham (@cmichaelgraham) is a software architect with 25 years of experience designing and building extensible visualization platforms and solutions for the energy industry. He is working to help make Aurelia a first class development environment for building mapping applications using TypeScript.</p>
+<section><h2 id="introduction">Introduction</h2><p>Today, we will see how easy it is to get started developing on the Aurelia platform and how to leverage the power of TypeScript, a free and open source programming language developed and maintained by Microsoft.  We will focus on the main benefits and how to efficiently get going.</p>
+<p>As a note before we get started, one of the truly great things about the Aurelia platform is its ability to support a wide variety of development scenarios.  Choosing the TypeScript language for Aurelia development is one of several great development language choices.</p>
+</section>
+<section><h2 id="typescript-benefits">TypeScript Benefits</h2><p>In case you are wondering why you would want to look at using TypeScript, lets explore some of the features it provides.</p>
+<h3>JavaScript IS TypeScript</h3>
+<p>It is super easy to get started with TypeScript because JavaScript IS TypeScript.  This means we can just rename our <code>.js</code> files to <code>.ts</code> files and we are off and running.</p>
+<p>We will then immediately see TypeScript benefits before we've done anything to our code.</p>
+<h3>The Integrated Development Environment (or IDE)</h3>
+<p>TypeScript benefits show up at design time, when we are actually writing and compiling our code.  We gain access to these benefits through <code>tooling</code> exposed by the IDE of your choice.  We have many excellent choices for our IDE.  Here is a short list of options:</p>
+<ol>
+<li><a href="https://atom.io/" target="_blank">Atom</a> IDE with the 
+<a href="https://github.com/TypeStrong/atom-typescript" target="_blank">Atom-TypeScript</a>
+ extension</li>
+<li>
+<a href="https://www.jetbrains.com/webstorm/" target="_blank">WebStorm</a>
+ IDE</li>
+<li>
+<a href="http://www.sublimetext.com/" target="_blank">Sublime Text</a>
+ IDE with the 
+<a href="https://github.com/Microsoft/TypeScript-Sublime-Plugin" target="_blank">Sublime-TypeScript</a>
+ extension</li>
+<li>
+<a href="https://www.eclipse.org/downloads/" target="_blank">Eclipse</a>
+ IDE with the 
+<a href="https://github.com/palantir/eclipse-typescript" target="_blank">Eclipse-TypeScript</a>
+ extension</li>
+<li>
+<a href="https://msdn.microsoft.com/en-us/library/dd831853.aspx" target="_blank">Visual Studio 2013</a>
+ IDE</li>
+<li>
+<a href="https://www.visualstudio.com/en-us/downloads/visual-studio-2015-ctp-vs.aspx" target="_blank">Visual Studio 2015</a>
+ IDE</li>
+<li>
+<a href="https://code.visualstudio.com//" target="_blank">Visual Studio Code</a>
+ IDE</li>
+</ol>
+<h3>Type Inference</h3>
+<p>The TypeScript language service (which is leveraged by the IDE), can use 
+<a href="https://github.com/Microsoft/TypeScript/wiki/Type-Inference" target="_blank">type inference</a>
+ to make intelligent observations about our code and its expected types, before we ever add any type information ourselves.</p>
+<p>Some of the benefits are possible because there is additional information that the IDE tooling has about the code.</p>
+<p>Type inference might be relatively simple, like picking up the type of a constant that is assigned to a variable at initialization, and flowing that type through a function return.</p>
+<p>It may also be quite sophisticated like picking up a function signature from assignment to a known callback type, defined in a type definition file.</p>
+<h3>IntelliSense</h3>
+<p>When the IDE knows type information, it can offer statement completion, reducing typos and also making platforms like Aurelia EVEN easier to learn and use (we'll see examples of this when we start developing our application).</p>
+<p>The statement completion pop-up choices also includes any inline doc comments like descriptions, parameters and parameter descriptions and return types.</p>
+<p>It makes it so easy for developers to explore, experiment with, and discover the features of an API.</p>
+<h3>Intelligent Refactoring</h3>
+<p>As an application grows in size, renaming and other refactoring operations become necessary.  Without type information, error-prone search and replace options must be used, but with TypeScript, the language service knows where the renaming should occur and where it is a different identifier that happens to have the same name.</p>
+<h3>Code Generation</h3>
+<p>TypeScript type annotations <code>evaporate</code> when the code is compiled.  The generated JavaScript is canonical JavaScript, well formatted, and what an expert would write to implement the corresponding patterns.</p>
+<h3>Type Definition Files</h3>
+<p>One very important capability of TypeScript is the ability to wrap the API of an existing JavaScript library with defined types.  This is done by creating a file with a <code>.d.ts</code> extension that declares the types a developer can expect from the API.  Many, many JavaScript libraries have been wrapped by <code>.d.ts</code> files, created by the open source community and housed at 
+<a href="https://github.com/borisyankov/DefinitelyTyped" target="_blank">DefinitelyTyped</a>
+.</p>
+<p>Each Aurelia repo has a corresponding <code>.d.ts</code> file, as seen 
+<a href="https://github.com/cmichaelgraham/aurelia-typescript-atom/tree/900655787fc7775d87e79e061eb1539415b3b856/skel-nav-ts/typings/aurelia" target="_blank">here</a>
+.</p>
+</section>
+<section><h2 id="aurelia-typescript-application">Aurelia TypeScript Application</h2><p>Great!  You made it this far, and hopefully by now you're convinced that TypeScript might be able to help you.</p>
+<p>If you want to follow along, building and running as we go, you can read the 
+<a href="https://github.com/cmichaelgraham/aurelia-typescript-atom" target="_blank">steps outlined here</a>
+.  If not, no worries; you can just look at the code and screen shots below to get a more concrete feel for the benefits obtained by using TypeScript to build Aurelia applications.</p>
+<p>If you have trouble adapting the sample to your particular development environment, feel free to engage with the Aurelia community's vibrant 
+<a href="https://gitter.im/Aurelia/Discuss" target="_blank">gitter channel</a>
+ or post questions on 
+<a href="http://stackoverflow.com/questions/tagged/aurelia" target="_blank">Stack Overflow</a>
+, using the <code>aurelia</code> tag.</p>
+<p>There is an excellent 
+<a href="https://player.vimeo.com/video/117778145" target="_blank">getting started</a>
+ video that shows the basics of getting an Aurelia application up an running using ES6 development.</p>
+<p>Lets dive in and look at some code.</p>
+<h3>main.ts</h3>
+<p>The role of the <code>main.ts</code> file is to initialize Aurelia and then start up with the <code>app</code> view and view model.</p>
+<p>The first thing to notice is that the 
+<a href="https://github.com/cmichaelgraham/aurelia-typescript-atom/tree/900655787fc7775d87e79e061eb1539415b3b856/skel-nav-ts/views/main.ts" target="_blank">TypeScript version</a>
+ of this code and the 
+<a href="http://aurelia.io/docs.html#startup-and-configuration" target="_blank">JavaScript version</a>
+ are identical.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">developmentLogging</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>a <span class="token operator">=</span><span class="token operator">></span> a<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The reason this works is because JavaScript IS TypeScript.</p>
+<p>But now lets pretend that we didn't have the code to paste in from the Aurelia documentation.  This is where TypeScript begins to shine.</p>
+<p>Notice that the configure function accepts an <code>Aurelia</code> object as its parameter.  At this point no type has been specified, so the IDE tooling can't help us figure out how to use the object we've been passed.</p>
+<p>To obtain the <code>Aurelia</code> type, we need to import it from the <code>aurelia-framework</code> repo.  As we type the import statement, the IDE tooling suggests possible imports we might want:</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/main-01.jpg" alt="main01" /></p>
+<p>Now we can fill in the actual type we want to pull in from the <code>aurelia-framework</code> repo.  Again the IDE tooling leads the way, showing us the repo's exports, and helping us pick the one we are seeking:</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/main-02.jpg" alt="main 02" /></p>
+<p>The fact that we're picking the name from a list and not typing it out manually reduces typos.  But lets say we're feeling pretty good about our typing, and ignore the IDE tooling's helpful suggestion.  If we do make a typo, a friendly, unobtrusive red squiggly underline is presented to us.</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/Main-02B.jpg" alt="main 02B" /></p>
+<p>So at this point we have successfully imported the <code>Aurelia</code> type, and can now use it to annotate the parameter type in the <code>configure</code> function as shown below.  Type annotation allows the IDE tooling to help us discover and chose valid members of the object.</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/main-03.jpg" alt="main 03" /></p>
+<p>At this point you may be wondering how the IDE actually knew about the types in the <code>aurelia-framework</code> import.  Let's talk about that next.</p>
+<h3>TypeScript Type Definition (<code>.d.ts</code>) Files</h3>
+<p>Each Aurelia repo has a corresponding <code>.d.ts</code> file that declares the type information exposed by that repo's public API.  Our project's Aurelia <code>.d.ts</code> files can be found 
+<a href="https://github.com/cmichaelgraham/aurelia-typescript/tree/master/master/typings/aurelia" target="_blank">here</a>
+.</p>
+<p>You can inspect the 
+<a href="https://github.com/cmichaelgraham/aurelia-typescript/blob/master/master/typings/aurelia/aurelia-framework.d.ts" target="_blank">aurelia-framework.d.ts</a>
+ if you'd like a glimpse at the syntax that defined the <code>Aurelia</code> type we used in our example above.</p>
+<p>But how does the IDE know which <code>.d.ts</code> files to include in our project?  The next section explains that very mechanism.</p>
+<h3>The <code>tsconfig.json</code> Project File</h3>
+<p>The <code>tsconfig.json</code> file is a universal project format for TypeScript.  Our project's <code>tsconfig.json</code> file is located 
+<a href="https://github.com/cmichaelgraham/aurelia-typescript-atom/tree/900655787fc7775d87e79e061eb1539415b3b856/skel-nav-ts/tsconfig.json" target="_blank">here</a>
+.</p>
+<p>This is the tsconfig.json file in our project (with the files property stripped down to save space).</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+        <span class="token string">"version"</span><span class="token punctuation">:</span> <span class="token string">"1.5.1"</span><span class="token punctuation">,</span>
+        <span class="token string">"compilerOptions"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"target"</span><span class="token punctuation">:</span> <span class="token string">"es5"</span><span class="token punctuation">,</span>
+            <span class="token string">"module"</span><span class="token punctuation">:</span> <span class="token string">"amd"</span><span class="token punctuation">,</span>
+            <span class="token string">"declaration"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">"noImplicitAny"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">"removeComments"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token string">"noLib"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token string">"emitDecoratorMetadata"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"filesGlob"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"./**/*.ts"</span><span class="token punctuation">,</span>
+            <span class="token string">"!./node_modules/**/*.ts"</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token string">"files"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token comment" spellcheck="true">// ...</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The <code>files</code> property is filled in automatically by Atom-TypeScript using the <code>filesGlob</code> property's patterns.  This occurs when saving <code>tsconfig.json</code>.</p>
+<p>For a description of the <code>compilerOptions</code>, please refer to the 
+<a href="https://github.com/Microsoft/TypeScript/wiki/Compiler-Options" target="_blank">TypeScript wiki Compiler-Options page</a>
+.  <code>emitDecoratorMetadata</code> is an experimental compiler option that allows the @autoinject decorator to do its job (described in the next section).</p>
+<p>Atom-TypeScript has an excellent description of the tsconfig.json details 
+<a href="https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md" target="_blank">here</a>
+</p>
+<p>So the answer to the question about how Atom-TypeScript knows which files to include comes from (in our case) the expression: <code>./**/*.ts</code>, which says start in the root folder of the project and pull in any files ending in <code>.ts</code> (which includes files that end in <code>.d.ts</code>), so all of our <code>.d.ts</code> files in the typings folder will be included.</p>
+<p>The final concept we'll explore before we wrap up (and provide you with a list related resources), is the topic of <code>decorators</code></p>
+<h3>Decorators</h3>
+<p>From the excellent 
+<a href="https://github.com/wycats/javascript-decorators" target="_blank">decorator description</a>
+ by Mr. 
+<a href="http://yehudakatz.com/" target="_blank">Yehuda Katz</a>
+:</p>
+<blockquote>
+<p>Decorators make it possible to annotate and modify classes and properties at design time.</p>
+<p>While ES5 object literals support arbitrary expressions in the value position, ES6 classes only support literal functions as values. Decorators restore the ability to run code at design time, while maintaining a declarative syntax.</p>
+<p>A decorator is:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>an expression</li>
+<li>that evaluates to a function</li>
+<li>that takes the target, name, and property descriptor as arguments and</li>
+<li>optionally returns a property descriptor to install on the target object</li>
+</ul>
+</blockquote>
+<p>Lets make that abstract concept more concrete by looking at some specific ways that Aurelia uses decorators.</p>
+<p>First off, decorators are actually part of the ES7 (a.k.a ES2016) spec, but are available for your use today through the the TypeScript 1.5 Compiler (here's a TypeScript 
+<a href="https://github.com/Microsoft/TypeScript/wiki/Roadmap#15" target="_blank">roadmap</a>
+).</p>
+<p>Now lets look at some code that shows how easy it is for you to use decorators.</p>
+<h4>dependency injection</h4>
+<p>We are going to look at a simple example of dependency injection. You may be very familiar with the concept of dependency injection, but if you're not, think about the flickr view and view model in our sample application.  The view model needs to retrieve a collection of images from the Flickr web services.</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/flickr-ui.jpg" alt="flickr ui" /></p>
+<p>We are going to &quot;separate our concerns&quot; into separate responsibilities - our flickr view model will worry only about how to display the results that come back from the web service, and the Aurelia <code>HttpClient</code> will be responsible for managing the HTTP retrieval of data from the web service.</p>
+<p>We really don't want our flickr view model to even worry about how to obtain the Aurelia <code>HttpClient</code>.  We just want to specify in our constructor that we need it and we'll let the framework take care of the rest.</p>
+<p>All we have to do to get the Aurelia framework to &quot;inject&quot; the Aurelia Http Client into our constructor is to first import and then place the <code>@autoinject</code> decorator on the class.</p>
+<p>IntelliSense will help us discover and correctly type the text as before.</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/autoinject-decorator.jpg" alt="autoinject intellisense" /></p>
+<p>So you can see, we just ask for the <code>HttpClient</code> and then we use its public API.  In fact, our flickr view model will be happy with any object that provides the same (polymorphic) API - that is one of the very powerful aspects of dependency injection.</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/autoinject-decorator-2-1.jpg" alt="autoinject 2" /></p>
+<p>Now lets dive a little deeper.  Don't worry if you don't understand everything going on in the next section as we talk about the decorator called <code>bindable</code>.</p>
+<h4>bindable</h4>
+<p>Before we talk about the <code>bindable</code> decorator, we'll need a little bit of background.</p>
+<p>First, a <code>custom element</code> is a reusable view / view model pair that can be embedded in another view.</p>
+<p>In our sample project, we have a <code>custom element</code> called <code>nav-bar</code>:</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/nav-bar.jpg" alt="nav-bar" /></p>
+<p>The <code>nav-bar</code> custom element gives us a great way to &quot;encapsulate&quot; the layout and functionality of our navigation menu in a single unit that can be included with a clean, understandable syntax:</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/nav-bar-binding-2.jpg" alt="nav-bar binding 2" /></p>
+<p>Notice in the code above that our <code>custom element</code> (the <code>nav-bar</code>) has a router property that we are able to set (<code>bind</code>) to the router in our main application.  This works because the Aurelia framework supports bindable properties in <code>custom elements</code>.  But how does the Aurelia framework know which properties are to be exposed as such?  (hopefully you are thinking DECORATORS !!).</p>
+<p>Within the <code>nav-bar</code> view model, the <code>@bindable</code> decorator is used to alert the Aurelia framework that we want the <code>router</code> property to be bindable.</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/bindable-decorator.jpg" alt="bindable decorator" /></p>
+<p>So in the outer code that embeds the <code>nav-bar</code>, we bound it to the router, and now router is accessible to the <code>nav-bar</code>'s view.  Notice how clean and expressive the <code>nav-bar</code>'s view template is, when referencing the router object's properties:</p>
+<p><img src="blog/2015/5/4/getting-started-with-aurelia-and-typescript/content/images/2015/05/nav-bar-binding-1.jpg" alt="nav-bar binding" /></p>
+<p>I'm sure at this point you're ready to start building great applications in TypeScript and Aurelia.  Here are a few resources you can utilize as you start down the path.  Thanks for your interest and we look forward to seeing you online !!</p>
+<h3>Resources</h3>
+<ul>
+<li>
+<a href="http://www.typescriptlang.org/" target="_blank">TypeScript Website</a>
+</li>
+<li>
+<a href="https://github.com/microsoft/TypeScript" target="_blank">TypeScript on GitHub</a>
+</li>
+<li>
+<a href="https://github.com/Microsoft/TypeScript/wiki/Roadmap#15" target="_blank">TypeScript Roadmap</a>
+</li>
+<li>
+<a href="https://github.com/cmichaelgraham/aurelia-typescript#aurelia-typescript" target="_blank">Aurelia TypeScript Samples</a>
+</li>
+<li>
+<a href="https://gitter.im/Aurelia/Discuss" target="_blank">Aurelia Gitter Channel</a>
+</li>
+<li>
+<a href="http://aurelia.io/" target="_blank">Aurelia Website</a>
+</li>
+<li>
+<a href="http://aurelia.io/docs.html" target="_blank">Aurelia Docs</a>
+</li>
+<li>
+<a href="http://blog.durandal.io/" target="_blank">Aurelia Blog</a>
+</li>
+</ul>
+</section>
+<section><h2 id="editor">Editor</h2><p>Thanks Mike for sharing with us about using TypeScript with Aurelia today!</p>
+<p>Now, let me extend an invitation to our community to help us by providing some additional feedback. One thing that helps to make TypeScript development much nicer is having a TypeScript Definition File. These can be tedious and time-consuming to create, especially when you want them to be accurate across multiple libraries and releases. Our current definition files are manually synced and lack some of the type information we think would be nice to have. We are investigating several options to improve this. Here are a few things we could do:</p>
+<ul>
+<li><strong>Convert to TypeScript</strong> - We could convert Aurelia's codebase to TypeScript. This would allow us to use the TypeScript compiler to generate pure ES5 output code in the same way that we use Babel today, but we would also be able to generate a good Definition File.</li>
+<li><strong>Leverage Flow Types + Babel Plugin</strong> - We could keep our existing ES6/7 codebase and continue to compile it with Babel, but we can decorate the code with 
+<a href="http://flowtype.org/" target="_blank">Flow</a>
+ types. A community member has written a Babel plugin that can generate a TypeScript definition file using the ES6 code and Flow type annotations.</li>
+<li><strong>Dual Compilation</strong> - Write Aurelia in a way that it can be compiled by both Babel and TypeScript. Babel can ignore Flow types and interfaces, so this should be possible. Then, we can use the Babel compiler to generate our JavaScript build and the TypeScript compiler to generate the Definition Files.</li>
+</ul>
+<p>Note, that none of these options affects how you, developers of apps, write your code. It only affects the development of Aurelia itself. We'd love to hear what you think of these options and/or if you have any ideas of your own. Thanks!</p>
+</section>
+
+  </article>
+</section>

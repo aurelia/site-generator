@@ -1,0 +1,124 @@
+<section class="article blog">
+  <header>
+    <h1>Projects That Make Aurelia Shine</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week, Aurelia community member and author, Sean Hunter, shares a section from his book &quot;Aurelia in Action&quot;.</p>
+<p>To understand what kind of projects Aurelia works best with, this article (excerpted from 
+<a href="https://livebook.manning.com/#!/book/aurelia-in-action/chapter-1/1" target="_blank">Chapter 1 - Aurelia in Action</a>
+) looks at several web development models in the context of a sample application. With each model, we'll review the strengths and weaknesses, and see where Aurelia fits.</p>
+<hr />
+<p>Save <strong>40%</strong> off 
+<a href="https://www.manning.com/books/aurelia-in-action" target="_blank">Aurelia in Action</a>
+ with our special Aurelia community discount code <code>aureliash40</code> at 
+<a href="https://www.manning.com/" target="_blank">manning.com</a>
+.</p>
+<hr />
+<p>Aurelia is a front-end JavaScript framework focused on building rich web applications. Like other frameworks such as Angular and EmberJS, Aurelia is a single-page application development framework (SPA). This means that Aurelia applications deliver the entire user experience on one page without requiring the page to be reloaded during use. At its core, writing an Aurelia application is just writing a JavaScript application. But, Aurelia applications are written with the latest versions of JavaScript (ES2015 and beyond or Typescript). The Aurelia framework has all the tools that you need to build the rich and responsive web applications that users expect today, using coding conventions closely aligned to web standards.</p>
+<p>Let’s take a look at the types of projects where Aurelia really shines!</p>
+<p>Imagine that you are tasked with building an ecommerce system: <em>buy-stuff.com</em>. This system consists of a set of the following distinct groups of functionalities:</p>
+<ul>
+<li><strong>Blog</strong>: News and updates about new products or events. This needs to be searchable and is mainly a read-only system.</li>
+<li><strong>Product List</strong>: A listing of all the products that your company has on offer.</li>
+<li><strong>Administration</strong>: Administrators need to be able to add new products and view statistics of what users are doing on the site.</li>
+</ul>
+<p>SPAs can be structured in several ways, but for our purposes, we can split these into the following four main categories:</p>
+<ol>
+<li>Server-side application with a sprinkling of JavaScript</li>
+<li>Client-side-rendered SPA</li>
+<li>Hybrid SPA</li>
+<li>Server-side-rendered SPA with client-side continuation.</li>
+</ol>
+<section><h2 id="server-side-application-with-a-sprinkling-of-javascript">Server-side application with a sprinkling of JavaScript</h2><p>Figure 1 represents your traditional PHP/JSP/ ASP.NET/ Ruby on Rails-style website. In this model, the user requests the product list, and then the server is responsible for rendering it into an HTML file and returning it to the user. Once the page has reached the client side you may have some simple JavaScript for things, such showing a lightbox image of a product.</p>
+<p><img src="https://sean-hunter.io/wp-content/uploads/2017/11/aurelia_server_side_app.png" alt="Figure 1" />
+<sup>*Figure 1 Server-side applications retrieve the entire page load as one rendered resource from the server (in addition to any CSS and JS that would typically be loaded separately).*</sup></p>
+<h3>Benefits</h3>
+<ul>
+<li>The entire page load is rendered on the server, so scaling the server allows us to improve page load times without us needing to be concerned with the performance of the device used to render the page client side.</li>
+<li>Page crawlers can effectively crawl our site for products and blog entries because JavaScript (which has patchy support from these technologies at best) is not required to render the page.</li>
+<li>Initial page load is generally fast. The user isn’t returned our page by the server until the page is ready to go.</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li>Though the initial page load time is relatively quick, subsequent interactions with the page also go through the same life-cycle of a full HTTP request to the server and re-render of the entirely new page in the browser. This is ok for the features such as the Blog and Product List but is not as ideal when the user needs to perform a set of interactions on the site and receive rapid feedback (such as commenting on a blog or creating a new product).</li>
+</ul>
+</section>
+<section><h2 id="client-side-rendered-spa">Client-side-rendered SPA</h2><p>In contrast to the server-side application, the entire payload is loaded up front and returned to the browser in a single batch in a client-side SPA. This payload contains the application scripts and templates along with (optionally) some seed data required on the initial page load. In this case, the page is rendered on the client side rather than the server side. Traditionally, in this model, we’d have the entire e-commerce website returned when the user visited the initial page. Following this, as the user browsed through various pages such as products and blog entries, we’d re-render the page client side, based on AJAX data we’d received back from the server.</p>
+<p><img src="https://sean-hunter.io/wp-content/uploads/2017/11/aurelia_full_client_side.png" alt="Figure 2" />
+<sup>*Figure 2 Full client-side SPA. Entire application bundled and returned in one or two responses from the server and rendered in the browser. Subsequent Ajax requests completed to populate data are not required in the initial page load.*</sup></p>
+<h3>Benefits</h3>
+<ul>
+<li>As the user clicks around, viewing products and comments on blog threads, the response times are lightning fast. The only time the client needs to talk to the server is when it needs data that the user hasn’t seen before. This is generally optional data that may not need to be loaded at all. In these cases, it’s generally easy to show a spinner or a similar indicator to give the user instant feedback that the data they want is being fetched, and then proceed to show them the re-rendered UI once the data has been received.</li>
+<li>After initial page load, you can also make the page feel more responsive by executing multiple concurrent asynchronous calls to the back-end API. When these asynchronous calls are completed you can provide the results to the user by re-rendering only the impacted DOM fragment. An example of this would be retrieving the list of products as JSON from an HTTP response and re-rendering only the product-list while leaving the rest of the page intact.</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li><strong>Large response payload</strong>: Because we are loading the entire page in one request, users are forced to wait while the page loads. Typically, a spinner or a similar indicator would also be shown in this case. But with large applications, this can be time-consuming. Because 47% of users expect a website to load in 2 seconds or less, there is a risk that you may lose some of the visitors to your site if this initial application load exceeds this boundary.</li>
+<li><strong>Unpredictable Page Load Times</strong>: Because we are delivering a big chunk of JavaScript and state to the application, page render times can also be unpredictable. If you’re visiting the page from a modern device with a fast processor and high internet bandwidth, there is a good chance you’ll have the lightning fast experience we’ve come to expect from SPAs. However, what if you’re in outback Australia attempting to load the application on a 5-year-old smart-phone over a flaky 3G connection? The experience will be altogether different. Conversely, a traditional server-rendered web application is more predictable (at least in terms of the time required to render the application before it is returned to the user). HTTP servers can be more easily updated and scaled to improve these render times, bringing the issue back into something that we can control, rather than being subject to whatever device the user happens to be visiting the page from.</li>
+<li><strong>The crawler issue</strong>: Some technologies such as web crawlers are not built with the ability to process JavaScript. This is a significant issue if we’re attempting to build a public-facing SPA that we want to appear in search engine results.</li>
+</ul>
+<h4>Best of Both Worlds</h4>
+<p>A good option would be to split the application into several separate sites. The blog might still be done in the traditional server-side rendered style (mainly for SEO purposes). But, you could potentially develop the administrative site and shopping cart as separate micro-sites, providing the user with that rich interaction needed for this style of user interface.</p>
+</section>
+<section><h2 id="the-hybrid-approach-server-side-spa-islands">The hybrid approach: server side SPA islands</h2><p>Imagine a new set of requirements have come down from management. After great initial success, the company is looking to expand the use of the site and sell direct. As such, the site needs some interactive pieces like a shopping cart and order screen. Taking the hybrid approach, you’d create the following three new routes in the website:</p>
+<ul>
+<li><code>site/store/cart</code></li>
+<li><code>site/store/order</code></li>
+<li><code>site/admin</code></li>
+</ul>
+<p><img src="https://sean-hunter.io/wp-content/uploads/2017/11/hybrid_spas.png" alt="Figure 3" />
+<sup>*Figure 3 Hybrid SPA approach. In this model, the main content parts of the site would be done in the traditional server-side approach. The product-list and blog endpoints would return the relevant HTML rendered from the server. However, we’d then create multiple smaller SPAs to add rich interaction to the parts of the site that need it such as the store.*</sup></p>
+<p>Each of these new routes would host an entire SPA. This approach avoids the need to immediately re-write the entire site as an SPA, but still gives you the benefit of building the rich interactive parts of the site in a technology designed for that purpose. It also avoids the large payload size to some extent by splitting the SPA into smaller chunks that can be more quickly retrieved from the server and rendered.</p>
+<h3>Benefits</h3>
+<ul>
+<li>Resolves the SEO and unpredictable page-load issues while still providing an interactive experience.</li>
+<li>If you’ve already got a server-side application, you don’t need to re-write it as an SPA from the ground up, but instead can break out components of the application that are good candidates for SPA-style interaction over time.</li>
+</ul>
+<h3>Drawbacks</h3>
+<ul>
+<li><strong>Added complexity</strong>: Managing application state and page navigation can get tricky when these concerns are dealt with both at the client-side and server-side levels. Each time a new feature is made, there is a cognitive burden of deciding where something would fit best. These styles of application can get messy if the team doesn’t establish some clear guidelines up front for how these decisions should be made.</li>
+</ul>
+</section>
+<section><h2 id="server-side-rendered-spa">Server-side-rendered SPA</h2><p>The Aurelia team is working on a technology called Server Render. Like the name implies, the application is rendered on the server side before it’s returned to the browser. This technology resolves both the unpredictable page load times and crawler issues. This is not yet ready for production use but goes a long way toward expanding the set of applications that fall into Aurelia’s sweet spot. According to Ashley Grant (Aurelia community lead), at the time of writing, the Aurelia core team is working on this as a top priority, so I would expect to see a release very soon.</p>
+<p><img src="https://sean-hunter.io/wp-content/uploads/2017/11/server_side_rendered_spa-1.png" alt="Figure 4" />
+<sup>*Figure 4 In this server-side-rendered SPA model, the initial page render is done on the server side, but once the application has been loaded into the browser, the SPA framework takes over and subsequent interactions are done client side.*</sup></p>
+<h3>Benefits</h3>
+<p>In a way, this model gives us the best of both worlds. The initial render can be done server side, which resolves the issues of unpredictable page-load times and crawler accessibility, but still provides the rich interactive experience that users expect when the page is loaded.</p>
+<h3>Drawbacks</h3>
+<p>At the time of writing this is still under development for Aurelia. There is also a possibility that this approach will add more complexity to the system architecture by requiring the setup of additional components on the server side.</p>
+</section>
+<section><h2 id="so-where-does-aurelia-sit">So where does Aurelia sit?</h2><p>At its heart, Aurelia is designed to manage your entire web application in the style of: client-side rendered SPA. Any web application where you need a high level of interaction from the user that goes beyond simple content consumption is a good fit for Aurelia. Some example applications that would be a great fit for Aurelia include:</p>
+<ul>
+<li>A messaging client</li>
+<li>A reporting/analytics portal for a website</li>
+<li>A CRUD (create, read, update, delete) application (like the typical invoice/invoice line example)</li>
+<li>An office style application (such as Google Docs)</li>
+<li>An admin portal for a website (like the WordPress admin panel)</li>
+</ul>
+<p>What these have in common is a user interaction model that is more like a traditional desktop application than what you’d historically think of as a website. In our e-commerce example buy-stuff.com, a great candidate would be a separate side-kick site to the main website that would be used to handle the administrative operations. You might also use Aurelia to build the shopping cart or blog comment website components as modules of the larger site.</p>
+</section>
+<section><h2 id="what-makes-aurelia-different">What makes Aurelia different?</h2><p>With the substantial number of SPA frameworks available today, from the heavy hitters like Angular and React to up-and-comers like to Vue and Mithril, it’s important to consider what makes Aurelia different. What unique value does Aurelia provide that makes it a stand-out choice for building your web applications? I present you with the Aurelia cheat-sheet, four reasons that you can give to your teammates when they ask you this question.</p>
+<h3>1 - It gets out of your way</h3>
+<p>Aurelia applications are built by composing together components built with plain JavaScript and HTML. In contrast, many other MV* frameworks today require a comparatively large amount of framework specific code in both the view layer and the Model/Controller layer. This increases the concept count, making them more difficult to master and maintain.</p>
+<h3>2 - Convention over Configuration</h3>
+<p>Aurelia is developed following the philosophy of Convention over Configuration (one of the key reasons why it’s clean and simple – see point 1). Convention over Configuration means having reasonable defaults rather than requiring developers to manually specify every option. But what if the convention doesn’t suit you? Aurelia makes it easy to override the default conventions when necessary.</p>
+<h3>3 - When it comes to web standards, Aurelia is a pro</h3>
+<p>While other frameworks may pay lip-service to web standards, Aurelia has them at its core—in its bones. Wherever possible, Aurelia adopts the standard browser implementation of a feature, rather than creating a framework specific abstraction. A simple example of this is Aurelia’s HTML templates, which come directly out of the Web Components Specifications (you can find out more about templates and the Web Components specifications on the 
+<a href="https://developer.mozilla.org/en/docs/Web/HTML/Element/template" target="_blank">Mozilla Developer Network</a>
+).</p>
+<h3>4 - When it comes to open source, community is king</h3>
+<p>Aurelia has a thriving open source community. With core team members, and other Aurelia aficionados available on 
+<a href="https://aurelia-js.slack.com/" target="_blank">Slack</a>
+, Gitter (a Slack-like messaging tool for GitHub projects), StackOverflow, and GitHub, and with the recent addition of the 
+<a href="https://discourse.aurelia.io/" target="_blank">Aurelia Discourse forum</a>
+, you can always get the help you need to keep up the momentum while building your Aurelia applications.</p>
+<p>Hopefully, this article has ignited your interest in Aurelia. To learn more, download the free first chapter of 
+<a href="https://www.manning.com/books/aurelia-in-action" target="_blank">Aurelia in Action</a>
+ and see 
+<a href="https://www.slideshare.net/ManningBooks/aurelia-in-action" target="_blank">this teaser slide deck</a>
+ on slideshare.net.</p>
+</section>
+
+  </article>
+</section>

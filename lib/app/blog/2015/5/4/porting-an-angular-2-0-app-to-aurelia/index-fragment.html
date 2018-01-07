@@ -1,0 +1,347 @@
+<section class="article blog">
+  <header>
+    <h1>Porting an Angular 2.0 App to Aurelia</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Recently, 
+<a href="https://twitter.com/josepheames" target="_blank">Joe Eames</a>
+ had a nice 
+<a href="http://www.pluralsight.com" target="_blank">PluralSight</a>
+ webinar demonstrating some of the features of Angular 2.0.  We thought &quot;Wouldn't it be cool to see the same app built with Aurelia?&quot; It seemed like a good opportunity to show what we feel makes Aurelia so easy-to-use and efficient.</p>
+<h4>The Rules</h4>
+<p>In order to ensure that this is an even and accurate comparison, we set some ground rules:</p>
+<ol>
+<li>The code should be a direct port unless there is a blaring issue or error in the source.</li>
+<li>The code should use all of the same variables and names in order to avoid confusion.</li>
+<li>We'll use the standard Aurelia 
+<a href="https://github.com/aurelia/skeleton-navigation" target="_blank">skeleton</a>
+ as our starting point.</li>
+</ol>
+<h3>Getting Started</h3>
+<p>Looking at 
+<a href="https://github.com/joeeames/ng2-ps-webinar" target="_blank">Joe</a>
+, the most logical place to start would be the &quot;TodoApp&quot; component. Let's see both versions side-by-side:</p>
+<div>
+  <div style="float: left; width: 50%;">
+    <h4>Angular 2.0</h4>
+    <strong>app.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Component<span class="token punctuation">,</span> View<span class="token punctuation">,</span> bootstrap<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/angular2'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>NewItem<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'components/new-item'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>TodoList<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'components/todo-list'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    	selector<span class="token punctuation">:</span> <span class="token string">'todo-app'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    @<span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    	templateUrl<span class="token punctuation">:</span> <span class="token string">'components/app.html'</span><span class="token punctuation">,</span>
+    	directives<span class="token punctuation">:</span> <span class="token punctuation">[</span>NewItem<span class="token punctuation">,</span> TodoList<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoApp</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token function">bootstrap</span><span class="token punctuation">(</span>TodoApp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+  <div style="float: right; width: 48%;">  
+    <h4>Aurelia</h4>
+    <strong>app.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoApp</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<div>
+  <div style="float: left; width: 50%">  
+	<h4>Angular 2.0</h4>
+    <strong>app.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+    	<span class="token operator">&lt;</span>todo<span class="token operator">-</span>list<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>todo<span class="token operator">-</span>list<span class="token operator">></span>
+    	<span class="token operator">&lt;</span><span class="token keyword">new</span><span class="token operator">-</span>item<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">new</span><span class="token operator">-</span>item<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+  <div style="float: right; width: 48%">  
+    <h4>Aurelia</h4>
+    <strong>app.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"./todo-list"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>
+      <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"./new-item"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>
+
+      <span class="token operator">&lt;</span>todo<span class="token operator">-</span>list<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>todo<span class="token operator">-</span>list<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token keyword">new</span><span class="token operator">-</span>item<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">new</span><span class="token operator">-</span>item<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<h4>Commentary</h4>
+<p>In order to port the JS code, all we had to do was delete code from the Angular version. This is a nice little example of how Aurelia's support of simple conventions drastically reduces the boiler plate code developers need to write.</p>
+<p>If you look at the HTML, you'll see that the Aurelia version has a little more markup than the Angular 2.0 version. To understand why, take a look back at the Angular 2.0 JS code. You will see that developers must list all <code>directives</code> that their view will use there.</p>
+<p><strong>Aurelia makes a fundamentally different choice.</strong></p>
+<p>With Aurelia, we chose to support Separation of Concerns and believe strongly that details regarding a view's implementation should not be found inside of a Controller or ViewModel.  Aurelia accomplishes this by allowing the view to declare its internal dependencies using <code>require</code> elements. There are a number of important positive side-effects from this choice:</p>
+<ul>
+<li>Separation of Concerns - As already mentioned, the details of a view's implementation stay inside the view and aren't leaked into the Controller or View-Model.</li>
+<li>Multiple Views Per Controller/View-Model- You can now more easily have different views for the same Controller/View-Model and they can be implemented drastically differently, with each one loading only the resources it needs.</li>
+<li>Sharing a View Between Controllers/View-Models - You can more easily have multiple View-Models use the same view. There's no need to duplicate the view's resources in every JS file.</li>
+<li>Improved Readability/Understandability - If you look at a view's source, you know exactly what behaviors are active in that view. You don't have to hunt down a JS file, open it and examine it's directive list and then correlate those back to the view.</li>
+</ul>
+<p>Ultimately, this important design difference, placing view resource declaration in the view where it belongs, allows developers greater flexibility, reduction in code duplication and an overall improvement in maintainability.</p>
+<p><em>Next we'll look at the &quot;TodoList&quot; component:</em></p>
+<div>
+  <div style="float: left; width: 50%">  
+    <h4>Angular 2.0</h4>
+    <strong>todo-list.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Component<span class="token punctuation">,</span> View<span class="token punctuation">,</span> For<span class="token punctuation">,</span> If<span class="token punctuation">,</span> EventEmitter<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/angular2'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Inject<span class="token punctuation">,</span> bind<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/di'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>todoItems<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'services/todoItems'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    	selector<span class="token punctuation">:</span> <span class="token string">'todo-list'</span><span class="token punctuation">,</span>
+      injectables<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'todoItems'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toValue</span><span class="token punctuation">(</span>todoItems<span class="token punctuation">)</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    @<span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    	templateUrl<span class="token punctuation">:</span> <span class="token string">'components/todo-list.html'</span><span class="token punctuation">,</span>
+    	directives<span class="token punctuation">:</span> <span class="token punctuation">[</span>For<span class="token punctuation">,</span> If<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoList</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>@<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token string">'todoItems'</span><span class="token punctuation">)</span> todoItems<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		<span class="token keyword">this</span><span class="token punctuation">.</span>items <span class="token operator">=</span> todoItems<span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    	<span class="token function">setCompleted</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> checked<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		item<span class="token punctuation">.</span>completed <span class="token operator">=</span> checked<span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    	<span class="token function">completeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		<span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    			<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setCompleted</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    	<span class="token function">removeItem</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		<span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+  </code></pre></source-code>
+</code-listing>
+  </div>
+  <div style="float: right; width: 48%">  
+    <h4>Aurelia</h4>
+    <strong>todo-list.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>TodoItems<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'services/todo-items'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoList</span> <span class="token punctuation">{</span>
+      <span class="token keyword">static</span> inject <span class="token operator">=</span> <span class="token punctuation">[</span>TodoItems<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>todoitems<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>items <span class="token operator">=</span> todoitems<span class="token punctuation">.</span>items<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">completeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item<span class="token punctuation">.</span>completed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">removeItem</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<br>
+<br>
+<div>
+  <div style="float: left; width: 50%">  
+    <h4>Angular 2.0</h4>
+    <strong>todo-list.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token string">"margin-bottom:10px"</span><span class="token operator">></span>
+    	<span class="token operator">&lt;</span>h1<span class="token operator">></span>To Do<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+    	<span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token string">"padding:5px"</span> <span class="token operator">*</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"var item of items"</span><span class="token operator">></span>
+    			<span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"checkbox"</span> #chkbox <span class="token punctuation">[</span>checked<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"item.completed"</span> <span class="token punctuation">(</span>click<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"setCompleted(item, chkbox.value)"</span><span class="token operator">></span>
+    			<span class="token punctuation">{</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>text<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">&lt;</span>a <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"glyphicon glyphicon-remove"</span> <span class="token punctuation">(</span>click<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"removeItem(item)"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+    	<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    	<span class="token operator">&lt;</span>button <span class="token operator">*</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"items.length > 1"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn btn-xs btn-warning"</span> <span class="token punctuation">(</span>click<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"completeAll()"</span><span class="token operator">></span>Complete All<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+  <div style="float: right; width: 48%">  
+    <h4>Aurelia</h4>
+    <strong>todo-list.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template style<span class="token operator">=</span><span class="token string">"margin-bottom:10px"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">></span>To Do<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token string">"padding:5px"</span> repeat<span class="token punctuation">.</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"item of items"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"checkbox"</span> checked<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"item.completed"</span> <span class="token operator">/</span><span class="token operator">></span>
+          $<span class="token punctuation">{</span>item<span class="token punctuation">.</span>text<span class="token punctuation">}</span> <span class="token operator">&lt;</span>a <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"glyphicon glyphicon-remove"</span> click<span class="token punctuation">.</span>trigger<span class="token operator">=</span><span class="token string">"$parent.removeItem(item)"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span>button <span class="token keyword">if</span><span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"items.length"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn btn-xs btn-warning"</span> click<span class="token punctuation">.</span>trigger<span class="token operator">=</span><span class="token string">"completeAll()"</span><span class="token operator">></span>Complete All<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<h4>Commentary</h4>
+<p>Again, the primary change we made was to delete a bunch of code. Aurelia's conventions just don't require you to do all that work. We were also able to delete the <code>setCompleted</code> method, since Aurelia has Two-Way Databinding. The manual synchronization work required by Angular 2.0 can be automatically handled by Aurelia.</p>
+<p>In this component, you also see the introduction of Dependency Injection. With Aurelia, you can simply create a static member named <code>inject</code> to declare your class's dependencies. If you prefer, 
+<a href="http://blog.durandal.io/2015/04/09/aurelia-update-with-decorators-ie9-and-more/#decorators" target="_blank">you can also use an ES7 decorator to accomplish the same thing</a>
+. In the Angular 2.0 version, for some reason, the DI has to be configured in two places. Once in the Component decorator and once on the constructor.</p>
+<p>Looking at the HTML, we see two completely different approaches to syntax. The Angular 2.0 version relies on special characters: *, (), [] and #. The Aurelia version relies on binding commands, designated with the dot (.) character.</p>
+<p><strong>Again, this is an important design difference with serious ramifications.</strong></p>
+<p>While the special characters that Angular chooses for its templating language are technically valid in HTML, they are not valid in SVG nor can they be used directly with DOM APIs. The browser will not allow it. To get around this, you have to use a secondary syntax. So, all Angular 2.0 developers must learn two syntaxes for templating instead of one. On the other hand, Aurelia's templating syntax works in all scenarios without any issue: one, consistent syntax for everything. Additionally, using the dot as a separator allows us to make our binding language fully extensible.</p>
+<p>There's another important side-effect of this design choice as well. If you've never seen Angular 2.0 before, you probably have no clue what those symbols mean. It's cryptic and requires even knowledgable developers to keep a constant mental map between the symbol and it's meaning. Aurelia, on the other hand, uses human-readable binding commands. Even developers who have never seen it before can often understand what it means. This results in improvements in learnability, readability and maintenance.</p>
+<p>A few more quick notes:</p>
+<ul>
+<li>Angular uses <code>{{}}</code> and Aurelia uses <code>${}</code>. There's no real technical reason behind Aurelia's difference in choice here. It's more related to consistency. In ES 2015, JavaScript string interpolation is done with the <code>${}</code> syntax. Throughout Aurelia, wherever possible, we've constantly tried to adopt the same syntax and concepts as the native platform, including bridging similar ideas into our templating language.</li>
+<li>Aurelia's templating language can leverage Two-Way binding on the <code>input</code> element, allowing us to remove Angular's manual event wireup in the view as well as the previously mentioned function from JavaScript.</li>
+<li>We used Aurelia's <code>trigger</code> command for events in order to match Angular 2.0 behavior as much as possible. However, particularly in the case of the repeater, we would normally use <code>delegate</code> to enable event delegation and reduce event handler wire-ups. I believe that Angular also supports this with the <code>(^event)</code> syntax, but that may have changed.</li>
+</ul>
+<p><em>Now, let's port the last piece, the NewItem component:</em></p>
+<div>
+  <div style="float: left; width: 50%">  
+    <h4>Angular 2.0</h4>
+    <strong>new-item.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Component<span class="token punctuation">,</span> View<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/angular2'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Inject<span class="token punctuation">,</span> bind<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'angular2/di'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>todoItems<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'services/todoItems'</span><span class="token punctuation">;</span>
+
+    @<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    	selector<span class="token punctuation">:</span> <span class="token string">'new-item'</span><span class="token punctuation">,</span>
+      injectables<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token function">bind</span><span class="token punctuation">(</span><span class="token string">'todoItems'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toValue</span><span class="token punctuation">(</span>todoItems<span class="token punctuation">)</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    @<span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    	templateUrl<span class="token punctuation">:</span> <span class="token string">'components/new-item.html'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">NewItem</span> <span class="token punctuation">{</span>
+    	<span class="token function">constructor</span><span class="token punctuation">(</span>@<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token string">'todoItems'</span><span class="token punctuation">)</span> todoItemList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>items <span class="token operator">=</span> todoItemList
+    	<span class="token punctuation">}</span>
+    	<span class="token function">keyPressed</span><span class="token punctuation">(</span>$event<span class="token punctuation">,</span> input<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		<span class="token keyword">if</span><span class="token punctuation">(</span>$event<span class="token punctuation">.</span>which <span class="token operator">===</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    			<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addItem</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    		<span class="token punctuation">}</span>
+    	<span class="token punctuation">}</span>
+    	<span class="token function">addItem</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    		<span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    			text<span class="token punctuation">:</span> input<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+    			completed<span class="token punctuation">:</span> <span class="token boolean">false</span>
+    		<span class="token punctuation">}</span><span class="token punctuation">)</span>
+    		input<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    	<span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+  <div style="float: right; width: 48%">  
+    <h4>Aurelia</h4>
+    <strong>new-item.js</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>TodoItems<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'services/todo-items'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">NewItem</span> <span class="token punctuation">{</span>
+      <span class="token keyword">static</span> inject <span class="token operator">=</span> <span class="token punctuation">[</span>TodoItems<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>todoitems<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>items <span class="token operator">=</span> todoitems<span class="token punctuation">.</span>items<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">keyPressed</span><span class="token punctuation">(</span>$event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>$event<span class="token punctuation">.</span>which <span class="token operator">===</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addItem</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">addItem</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          text<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+          completed<span class="token punctuation">:</span> <span class="token boolean">false</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<br>
+<br>
+<div>
+  <div style="float: left; width: 50%">  
+    <h4>Angular 2.0</h4>
+    <strong>new-item.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-inline"</span><span class="token operator">></span>
+    	<span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+    		<span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"description"</span><span class="token operator">></span>New <span class="token class-name">Item</span><span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+    		<span class="token operator">&lt;</span>input id<span class="token operator">=</span><span class="token string">"description"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> #desc <span class="token punctuation">(</span>keyup<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"keyPressed($event, desc)"</span><span class="token operator">></span>
+    	<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    	<span class="token operator">&lt;</span>button <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn btn-primary"</span> type<span class="token operator">=</span><span class="token string">"button"</span> <span class="token punctuation">(</span>click<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"addItem(desc)"</span><span class="token operator">></span>Add Item<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+  <div style="float: right; width: 48%">  
+    <h4>Aurelia</h4>
+    <strong>new-item.html</strong>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-inline"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-group"</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"description"</span><span class="token operator">></span>New <span class="token class-name">Item</span><span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+          <span class="token operator">&lt;</span>input id<span class="token operator">=</span><span class="token string">"description"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"form-control"</span> value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"value"</span> keyup<span class="token punctuation">.</span>trigger<span class="token operator">=</span><span class="token string">"keyPressed($event)"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>button <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"btn btn-primary"</span> type<span class="token operator">=</span><span class="token string">"button"</span> click<span class="token punctuation">.</span>trigger<span class="token operator">=</span><span class="token string">"addItem()"</span><span class="token operator">></span>Add Item<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<h4>Commentary</h4>
+<p>As in the previous examples, we begin the porting by deleting a lot of Angular 2.0 code which is just not needed. Dependency Injection takes on the same form here as previously with a single declaration in Aurelia vs. two for Angular.</p>
+<p>There's a slightly different sort of interplay here between the ways the two versions interact with their views. In the Angular version, there's no Two-Way Databinding, so again the HTML must be manually wired up to shuffle data in both directions. In this case, it creates a direct coupling between the view and view-model in the Angular version because the lack of Two-Way Databinding forces the developer to pass the HTMLInputElement instance to the view-model in order to retrieve it's value. In the Aurelia version, we just bind the value. This results in more re-usable code, but also a much easier to test interface, as no faking/mocking of HTML elements is required for the Aurelia version.</p>
+<h3>Conclusion</h3>
+<p>Porting the Angular 2.0 app to Aurelia was pretty straight forward. Aurelia Core Team Member, 
+<a href="https://github.com/PWKad" target="_blank">Patrick Walters</a>
+, who helped to put this article together, said it took him about 8 minutes to do the port. As you can see, in every case we deleted great swathes of JavaScript code. If you look back over the Aurelia versions, you'll also notice something I think is very important. There's not a single reference to the Aurelia framework in any of the JavaScript. It's all just plain ES2015. No framework intrusion. That's a big contrast to the Angular version.</p>
+<p>Hopefully you can also see how Aurelia's templating language ports in a pretty straight forward manner, but that doing so improves the readability and platform compatibility of the markup. Even though this example uses very little in terms of forms input, you can start to get the feel for how modern Two-Way Databinding can also reduce code and markup and simplify the implementation process.</p>
+<p>We hope this has been informative. We didn't fabricate any examples for this post, but instead started with a recent Angular 2.0 sample app. We then ported it to see what the process was like, hoping to show you the elegance of Aurelia as well as the rationale and side-effects of some of the different design decisions we've made along the way.</p>
+<h4>Project Links</h4>
+<ul>
+<li>
+<a href="https://github.com/joeeames/ng2-ps-webinar" target="_blank">The Original Angular 2.0 Version</a>
+</li>
+<li>
+<a href="https://github.com/PWKad/au-ps-comparison" target="_blank">The Aurelia Port</a>
+</li>
+</ul>
+<h4>Footnote</h4>
+<p>We don't intend to constantly do these sorts of Angular comparison posts. It's not fun for us and we don't want to have a reputation for doing this all the time. If you are wondering why we have done this, it's very simple. There's a huge demand for it. We receive a constant stream of requests through email, at conferences and in person to talk about how Aurelia differs from Angular 2.0. We get asked to come to conferences and user groups to speak about this, asked to write blog posts and asked to prepare private internal presentations for various organizations. This post is an attempt to provide some simple answers to a large group of people who has a critical interest in this topic.</p>
+
+  </article>
+</section>

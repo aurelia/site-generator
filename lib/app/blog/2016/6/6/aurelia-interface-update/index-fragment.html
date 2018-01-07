@@ -1,0 +1,87 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Interface Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>For some time, we've been working on a component library for Aurelia: a suite of controls that would enable hybrid mobile development on iOS and Android, as well as desktop and browser-based development by leveraging Material Design. In today's update, we'd like to share with you a bit about our journey, where we're at and what the future looks like.</p>
+<section><h2 id="the-aurelia-interface-story">The Aurelia Interface Story</h2><p>From the beginning, we knew we wanted a first-class component library for Aurelia, something that would rival the native platforms for customization, ease of development and match them for performance. It is an ambitious project but we felt it was of great value to us and our community. So, we brought together a team:</p>
+<ul>
+<li>Rob - An experienced UI architect and engineer; leader of the Aurelia Project.</li>
+<li>Scott - An experienced UI/UX design expert on iOS, Android, Windows, Mac and the Web.</li>
+<li>Joel - A talented UI engineer with experience building rich component libraries.</li>
+<li>Patrick - A non-UI-oriented developer, mostly familiar with backend systems.</li>
+</ul>
+<p>Each person has a critical part to play. Rob ensures the components are built the best possible way to take advantage of Aurelia while ensuring that Aurelia itself has the core capabilities to enable such a library. Scott meticulously guides the UX of each component and UI paradigm so that they match the native UI Design Guidelines of each platform and meet or exceed native capabilities and experience. He also makes sure that the final API is easy enough for designers with a limited development background. Joel implements many component internals while imagining new capabilities and APIs that aren't even easily handled in native. He’s come up with some really exciting concepts that will be part of Aurelia Interface. Patrick. Well, you may be wondering, what does he do? It's very important actually. He helps to ensure that, while we build a crazy, awesome, highly customizable toolkit...it remains usable not only for UI experts (Rob), UX Experts (Scott) and expert developers (Joel) but also for backend developers, those new to front-end development and...well...those who don't care about any of that and just want to get stuff done and for it to look professional out-of-the-box. (Ok, there's a bit more to Patrick's job than that...he's basically our project manager, handles business development and on top of that he’s our Services Architect.)</p>
+<p>So, with our team in place, we started on our journey...</p>
+<h3>Phase 1</h3>
+<p>Phase 1 was an exploratory phase. We went crazy building all sorts of components: inputs, lists, cards, navigation, toolbars, tabs, search, action buttons, dialogs, gestures...the list goes on and on. We wanted to get as broad a set of components implemented as we could. However, we didn't implement any one component to 100%. We just wanted to get enough done so that we could stand back and look at all the pieces, understand the unique challenges of such an undertaking and then make a plan to bring it all together in a unified core component library for you.</p>
+<h3>Phase 2</h3>
+<p>Once we had everything on the table, we wanted to strategize about how to bring these components into a production-quality state. Phase two is where we're at now. We see our march towards release as having several stages in this part of the development, each one building on the last. I think of them using the following metaphor:</p>
+<h4>Stage 0 - Fabric</h4>
+<p>Our own universe has certain fundamental laws. Aurelia interface also has such a foundation. I think of it as the &quot;fabric&quot; that holds everything together. What are those pieces?</p>
+<ul>
+<li>Web Standards - Aurelia Interface (AI) is built on web standards and needed to have a strategy for leveraging semantic markup.</li>
+<li>Accessibility - There should be a consistent mechanism that enables all components to handle accessibility requirements.</li>
+<li>Aurelia - Naturally, Aurelia itself provides the core upon which AI is built.</li>
+<li>Cross-Platform Strategy - There needed to be a way to handle correct UI and UX cross-platform for each component, including per-platform overrides and customizations. It should be consistent throughout the library.</li>
+<li>Themes - AI needed a consistent way to handle styles and theming across all its components, including color palettes and advanced end-user theming.</li>
+<li>Layers - High performance rendering requires a careful approach to HTML content construction and css techniques. Our layers mechanism encapsulates this and makes it available to all components.</li>
+</ul>
+<h4>Stage 1 - Elements</h4>
+<p>Once you've got a core component fabric, you can begin to create fundamental elements, building blocks for constructing UI. Many of these are actual Aurelia Custom Elements, and include things like:</p>
+<ul>
+<li>ai-button</li>
+</ul>
+<ul>
+<li>ai-radio</li>
+<li>ai-checkbox</li>
+<li>ai-input</li>
+<li>ai-switch</li>
+<li>ai-field</li>
+<li>ai-slider</li>
+<li>ai-progress</li>
+</ul>
+<h4>Stage 2 - Molecules</h4>
+<p>The fundamental elements then start to come together in various structures, forming more complex arrangements. Examples of these are:</p>
+<ul>
+<li>ai-card</li>
+<li>ai-list</li>
+<li>ai-search-bar</li>
+<li>ai-status-bar</li>
+<li>ai-segment</li>
+</ul>
+<h4>Stage 3 - Organs</h4>
+<p>These molecules can then start interacting to enable higher functionality, such as navigation and dialogs. For example:</p>
+<ul>
+<li>ai-navbar</li>
+<li>ai-tabbar</li>
+<li>ai-dialog</li>
+<li>gestures</li>
+</ul>
+<h4>Stage 4 - Organisms</h4>
+<p>With these organs properly functioning, we can then bring something to life...a real application.</p>
+</section>
+<section><h2 id="status-report">Status Report</h2><p>So, where are we in all this? As I mentioned, we started by building everything I've talked about above in the beginning, but it wasn't shippable. Right now, we are in Phase Two. Specifically, we are nearing the end of the second Stage of Phase Two - Molecules. We've put the fabric in place, created our v1 elements and are nearing completion of the core structural components. The full Aurelia Core Team is now involved in the process and is using, testing and building with Aurelia Interface. They've been providing great feedback, which we are using to refine the library.</p>
+</section>
+<section><h2 id="let">Let</h2><p>You would probably like to see what some of this looks like. We could show you many, many things, but that would be quite tedious at this point, so we've selected two things from our Elements stage (ai-switch and ai-checkbox) and two things from our Molecules stage (ai-card and ai-list.)</p>
+<h3>ai-switch and ai-checkbox</h3>
+<p>In each of these videos we show the same basic features. First, you can see both the Android and iOS versions, side-by-side. At the top, we start out by showing the default theme of each element. Below that you see a series of ai-slider elements which are data-bound to various visual properties on the element above. You can see that as we drag the ai-slider we are able to change, in real-time, every aspect of the element's style.</p>
+<iframe src="https://player.vimeo.com/video/172146824" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<br>
+<iframe src="https://player.vimeo.com/video/172146825" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<br>
+<p>What's really neat about AI is that we've got a powerful theming system. It can be as simple as changing the color palette across the entire library, to as customized as changing individual styles on each control and applying various combinations of themes and styles throughout your app. Beyond that, not only are visual styles bindable, but the themes themselves are. This means that if you create an <code>ai-switch</code> theme, applied to all switches in your app, then change a property of that theme, all associated switches will update their appearance in realtime. We've built our styling and theming fabric to rival that of the most powerful native platforms today.</p>
+<h3>ai-card and ai-list</h3>
+<p>Next, in each of these videos, we demonstrate structural components. Both the <code>ai-card</code> and the <code>ai-list</code> bring together many other components into a standard UX structure. These videos show scrolling over a series of card and as well as a list.</p>
+<iframe src="https://player.vimeo.com/video/172151120" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<br>
+<iframe src="https://player.vimeo.com/video/172151121" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<br>
+<p>As you might expect, these structural components also have interaction patterns, such as the one demonstrated in the <code>ai-card</code> transition animation. In our up-coming Stage 3 of development, we'll be adding a number of additional interactions throughout, including gesture support.</p>
+</section>
+<section><h2 id="wrapping-up">Wrapping Up</h2><p>I know you want to know when you can get your hands on it. We're not quite ready to announce a date just yet. As you can see, things are proceeding quite well. We've got our core team testing the bits that are complete. We're continuing to polish and work through our final stages of development. We'll keep you posted as we progress and look forward eagerly to getting you building amazing apps with Aurelia Interface soon.</p>
+</section>
+
+  </article>
+</section>

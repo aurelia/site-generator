@@ -1,0 +1,217 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release Notes - Early April 2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>As always, we continue to make improvements to Aurelia's core as well as its most popular plugins. This set of releases includes not only bug fixes, but substantial improvements to the Aurelia Webpack Plugin, Aurelia UX, Aurelia CLI and our UI Virtualization Library.</p>
+<p>In addition to the improvements we're announcing today, in the next week we'll be making announcements around new Webpack skeletons and our new dialog plugin.</p>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance</p>
+<h3>
+<a href="https://github.com/aurelia/router/compare/1.2.1...v1.3.0" target="_blank">aurelia-router 1.3.0</a>
+</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>viewport:</strong> add viewport name to life cycle arguments (
+<a href="https://github.com/aurelia/router/commit/34ef2c4" target="_blank">34ef2c4</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating-resources/compare/1.3.1...v1.4.0" target="_blank">aurelia-templating-resources 1.4.0</a>
+</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>templating:</strong> support popular CSS transpiler file extensions in the require element (
+<a href="https://github.com/aurelia/templating-resources/commit/901cfd8" target="_blank">901cfd8</a>
+)</li>
+</ul>
+<h3>aurelia-webpack-plugin 2.0.0-rc.2</h3>
+<h4>Features</h4>
+<ul>
+<li>flag to opt-out of IE support</li>
+<li>support module.loaders</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>errors might crash SubFolderPlugin</li>
+<li>compat with IE &lt; 11</li>
+<li>support more CommonJS import styles</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/cli/compare/0.27.0...v0.28.0" target="_blank">aurelia-cli 0.28.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> improved error reporting (
+<a href="https://github.com/aurelia/cli/commit/4060148" target="_blank">4060148</a>
+)</li>
+<li><strong>build:</strong> enforce strict mode (
+<a href="https://github.com/aurelia/cli/commit/1694290" target="_blank">1694290</a>
+)</li>
+<li><strong>bundle:</strong> ensure that dependencies are added in order (
+<a href="https://github.com/aurelia/cli/commit/51a2cce" target="_blank">51a2cce</a>
+)</li>
+<li><strong>project-template:</strong> paths should be relatively from src (
+<a href="https://github.com/aurelia/cli/commit/b23c8dd" target="_blank">b23c8dd</a>
+)</li>
+<li><strong>sourcemap:</strong> use src as the sourceroot for sourcemaps (
+<a href="https://github.com/aurelia/cli/commit/87ca276" target="_blank">87ca276</a>
+)</li>
+<li><strong>test:</strong> resolve join of undefined error (
+<a href="https://github.com/aurelia/cli/commit/0207c78" target="_blank">0207c78</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>index.html:</strong> add viewport meta element (
+<a href="https://github.com/aurelia/cli/commit/96ce8a9" target="_blank">96ce8a9</a>
+)</li>
+</ul>
+<h3>aurelia-ux 0.1.18</h3>
+<ul>
+<li>chore(all): lint (
+<a href="https://github.com/aurelia/ux/commit/8d3a53a" target="_blank">8d3a53a</a>
+)</li>
+<li>chore(form): prepare for pr (
+<a href="https://github.com/aurelia/ux/commit/f4ac0f7" target="_blank">f4ac0f7</a>
+)</li>
+<li>chore(lint): remove uses of Function type (
+<a href="https://github.com/aurelia/ux/commit/b02205d" target="_blank">b02205d</a>
+)</li>
+<li>chore(vscode): turn off format on save (
+<a href="https://github.com/aurelia/ux/commit/25f7473" target="_blank">25f7473</a>
+)</li>
+<li>feat(form): add ux form and form-row utility (
+<a href="https://github.com/aurelia/ux/commit/8ed6f83" target="_blank">8ed6f83</a>
+)</li>
+<li>feat(form): add ux-field component (
+<a href="https://github.com/aurelia/ux/commit/d20e78b" target="_blank">d20e78b</a>
+)</li>
+<li>feat(form): submit (
+<a href="https://github.com/aurelia/ux/commit/0bc8799" target="_blank">0bc8799</a>
+)</li>
+<li>feat(form): submit-on-enter attribute (
+<a href="https://github.com/aurelia/ux/commit/6d44f7e" target="_blank">6d44f7e</a>
+)</li>
+<li>feat(formField): add label by attribute (
+<a href="https://github.com/aurelia/ux/commit/7aaae37" target="_blank">7aaae37</a>
+)</li>
+<li>feat(input-info): find &amp; set target automatically (
+<a href="https://github.com/aurelia/ux/commit/0143c93" target="_blank">0143c93</a>
+)</li>
+<li>feat(input): add input types (
+<a href="https://github.com/aurelia/ux/commit/056ff7c" target="_blank">056ff7c</a>
+)</li>
+<li>style(button): remove left and right margin (
+<a href="https://github.com/aurelia/ux/commit/7b4254d" target="_blank">7b4254d</a>
+)</li>
+<li>style(input): change input textarea margins (
+<a href="https://github.com/aurelia/ux/commit/88b3d54" target="_blank">88b3d54</a>
+)</li>
+<li>style(input): further refactor style controls (
+<a href="https://github.com/aurelia/ux/commit/4ea3248" target="_blank">4ea3248</a>
+)</li>
+<li>Fix #30 (#42) (
+<a href="https://github.com/aurelia/ux/commit/c9166dd" target="_blank">c9166dd</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/30" target="_blank">#30</a>
+ 
+<a href="https://github.com/aurelia/ux/issues/42" target="_blank">#42</a>
+</li>
+<li>refactor(chip): code cleanup (
+<a href="https://github.com/aurelia/ux/commit/971c1f2" target="_blank">971c1f2</a>
+)</li>
+<li>refactor(chip): code cleanup (
+<a href="https://github.com/aurelia/ux/commit/6767f1b" target="_blank">6767f1b</a>
+)</li>
+<li>refactor(chips): refactor chips (
+<a href="https://github.com/aurelia/ux/commit/62e6391" target="_blank">62e6391</a>
+)</li>
+<li>fix(chip-input): null check (
+<a href="https://github.com/aurelia/ux/commit/b026e70" target="_blank">b026e70</a>
+)</li>
+<li>fix(chip): more value checking (
+<a href="https://github.com/aurelia/ux/commit/b981456" target="_blank">b981456</a>
+)</li>
+<li>feat(chip): add closeable chip and final size (
+<a href="https://github.com/aurelia/ux/commit/3b73225" target="_blank">3b73225</a>
+)</li>
+<li>feat(chip): add tag closing and finish styling (
+<a href="https://github.com/aurelia/ux/commit/085273d" target="_blank">085273d</a>
+)</li>
+<li>feat(chips): add chip input (
+<a href="https://github.com/aurelia/ux/commit/32c5792" target="_blank">32c5792</a>
+)</li>
+<li>feat(tag-input): add implimentation for tag components (
+<a href="https://github.com/aurelia/ux/commit/38c945e" target="_blank">38c945e</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/ui-virtualization/compare/1.0.0-beta.3.0.2...v1.0.0-beta.3.1.0" target="_blank">aurelia-ui-virtualization 1.0.0-beta.3.1.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>virtual-repeat:</strong> handle array changes correctly (
+<a href="https://github.com/aurelia/ui-virtualization/commit/b861aa6" target="_blank">b861aa6</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/i18n/compare/1.4.0...v1.5.0" target="_blank">aurelia-i18n 1.5.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>rt:</strong> default interpolation as fallback (
+<a href="https://github.com/aurelia/i18n/commit/9407c58" target="_blank">9407c58</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>relative-time:</strong> relative time bindingbehavior (
+<a href="https://github.com/aurelia/i18n/commit/fdddded" target="_blank">fdddded</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/pal-browser/compare/1.2.0...v1.2.1" target="_blank">aurelia-pal-browser 1.2.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>pal-browser:</strong> regression in Function.name polyfill on iOS (
+<a href="https://github.com/aurelia/pal-browser/issues/20" target="_blank">#20</a>
+) (
+<a href="https://github.com/aurelia/pal-browser/commit/17d2eb7" target="_blank">17d2eb7</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/http-client/compare/1.1.0...v1.1.1" target="_blank">aurelia-http-client 1.1.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>xhr-transformers:</strong> fix sending ArrayBuffer type (
+<a href="https://github.com/aurelia/http-client/commit/4d957f8" target="_blank">4d957f8</a>
+), closes 
+<a href="https://github.com/aurelia/http-client/issues/161" target="_blank">#161</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/animator-css/compare/1.0.1...v1.0.2" target="_blank">aurelia-animator-css 1.0.2</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>lint:</strong> fixes linting issues (
+<a href="https://github.com/aurelia/animator-css/commit/80ce3d1" target="_blank">80ce3d1</a>
+)</li>
+<li><strong>stagger:</strong> delay calculation (
+<a href="https://github.com/aurelia/animator-css/commit/6112d34" target="_blank">6112d34</a>
+), closes 
+<a href="https://github.com/aurelia/animator-css/issues/55" target="_blank">#55</a>
+</li>
+<li><strong>types:</strong> switch to Element interface (
+<a href="https://github.com/aurelia/animator-css/commit/de66cf0" target="_blank">de66cf0</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

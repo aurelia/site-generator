@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38441871-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+  <meta charset="utf-8">
+  <title>Aurelia Big February Status Update | Aurelia</title>
+  <base href="/aurelia-docs-test/">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  
+  <meta name="description" content="We&#x27;ve released updates for all Aurelia libraries, and made a major step towards our Beta 2. We&#x27;ll talk about what&#x27;s in these patches and what is in store next below. If you have high level questions not covered here, we&#x27;d love for you to join us in our first ever Aurelia AMA [https://hashnode.com/ama/with-aurelia-team-cijv67apt000o535313ewe3qo?utm_source&#x3D;AMA%20Reminder%20Email&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;Notification%20Email], starting shortly at 2pm Eastern."/>
+  <meta name="robots" content="index,follow"/>
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:200,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
+</head>
+
+<body aurelia-app="main" id="app-host">
+  <header class="app-header"> 
+    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <search-trigger></search-trigger>
+  </header>
+
+  <main ref="main">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
+      <section class="article blog">
+  <header>
+    <h1>Aurelia Big February Status Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>We've released updates for all Aurelia libraries, and made a major step towards our Beta 2. We'll talk about what's in these patches and what is in store next below. If you have high level questions not covered here, we'd love for you to join us in our first ever 
+<a href="https://hashnode.com/ama/with-aurelia-team-cijv67apt000o535313ewe3qo?utm_source=AMA%20Reminder%20Email&utm_medium=email&utm_campaign=Notification%20Email" target="_blank">Aurelia AMA</a>
+, starting shortly at 2pm Eastern.</p>
+<section><h2 id="the-patches">The Patches</h2><p>As usual, these patch releases contain bug fixes and a few minor new features (such as es6 shorthand object initialization in binding expressions). However, the most important aspect of this release is that we've begun moving towards supporting jspm 0.17.x beta. This was one of our main goals in moving towards Beta 2 and now that the new jspm is available, we've been able to get that moving ahead.</p>
+<p>There are no breaking changes in Aurelia. The jspm changes were all related to configuration across our libraries. For the moment, we would like to ask that our community not use jspm 0.17.x just yet. We've made this big update so that we can begin doing thorough testing of 0.17.x ourselves, while allowing the community to remain on 0.16.x. Once we are satisfied, we'll post asking you to upgrade to 0.17.x. A couple weeks after that we will release some new patches to Aurelia which will require jspm users to be on 0.17.x. So, in this way, we can smoothly move the community over.</p>
+<blockquote>
+<p>There are some bugs in jspm, both 0.16 and 0.17 that we've discovered. If you are starting a new project, you are going to want to use 0.16.15 to properly install. If you already have a project that is set up with Aurelia, just make sure you are on the latest 0.16.x and you should be able to update just fine. Again, do not use 0.17.x yet.</p>
+</blockquote>
+</section>
+<section><h2 id="update-on-beta-2">Update on Beta 2</h2><p>Aurelia is solid and we've had no breaking changes since Beta 1 release. We've been working steadily on improving performance, with some amazing results. We've also been addressing bugs and adding a few new features. All of this will continue through Beta and past release into 1.1, 1.2, etc. These sorts of tasks are ongoing.</p>
+<p>So, why aren't we in Beta 2 or released yet?</p>
+<p>This is almost entirely related to synchronizing with external libraries, tools and standards. I'd like to discuss below the remaining milestones we want to hit before we announce Beta 2.</p>
+<h3>JSPM and the Standard Loader</h3>
+<p>As mentioned, we wanted to be compatible with jspm 0.17.x or above and the latest accompanying version of SystemJS before our Beta 2. These updates to the package manager and loader are significant and we wanted to get them in before our official v1 release. They have just become available in the beta channel recently, so we have started moving ahead with that.</p>
+<p>Along these lines, the API of the standard module loader is changing. Aurelia will shield you from that entirely via its loader abstraction. The only place you may see the API is in your initial bootstrapping from your HTML page. In order to prevent breaking changes we are now showing the SystemJS specific API in our docs and starter kits which will shield you 100% from changes to the underlying spec.</p>
+<p>After we help the community migrate to JSPM 0.17.x everyone should be shielded from any major changes for quite a while.</p>
+<h3>Babel 6 and Decorators</h3>
+<p>We've discussed Babel 6 in the past. It's the latest major upgrade to the compiler we use to compile Aurelia and that many members of our community use to compile their apps. The initial release of Babel 6 had some issues that prevented many code-bases from being updated, including Aurelia. We've been tracking progress on Babel 6 and the tools we need that surround that. We're running experiments now and we hope to be able to update everything to Babel 6 soon. Once that is done we can check off another major requirement for our Beta 2.</p>
+<p>Aurelia and our community relies on the ES 2016 Decorators spec. That specification is changing. Unfortunately, that process is going slowly. We are skeptical that it will be done in time for a Beta 2 or even our Release. Our plan is to use Babel 6 with a special plugin that supports the current spec and to continue to use that until both Babel and TypeScript update to the new spec. Fortunately, this shouldn't affect Aurelia app developers. The way that decorators are used doesn't appear to be changing, just the way they are implemented. So, this wouldn't constitute a breaking change to your app, but we would need to update our own internal implementations and once we do we would then require specific Babel plugins or a specific version of TypeScript. When that time comes, we'll communicate very clearly about that process and help ensure a smooth transition.</p>
+<h3>Shadow DOM v1</h3>
+<p>When we released our Beta 1, we mentioned that there were changes coming to the Shadow DOM Web Components specification. We provided some guidance about how to use Aurelia so that it would be easy to migrate when our Beta 2 released with the Shadow DOM update. Now that the Shadow DOM v1 spec has reached consensus, it's almost time for us to make this update. Since this is the only real API-breaking change planned for Beta 2, it will be the last work we do. We'll begin this development after the move to JSPM 0.17 and Babel 6 are complete. Design work on this implementation is already in progress.</p>
+<h3>CoreJS</h3>
+<p>Currently almost all of our libraries have a hard dependency on CoreJS. We don't think that's the best way to handle polyfills so we are planning to remove all these hard dependencies. Instead, each library will use our platform abstraction layer to assert the presence of a necessary standard implementation. The developer will then have the flexibility to choose how he wishes to meet these requirements. For exmaple, perhaps the only browsers being targeted already support all the necessary APIs. In that case, no polyfill is necessary. Perhaps the developer wishes to use ES6Shim instead of CoreJS. They will be free to do so. The Aurelia team may even craete our own, minimal polyfill, so that broad browser reach can be supported, without having to take the almost 100k hit to include CoreJS. Of course, if you want a full ES 2015 library polyfill, you would always still have the flexibility to choose CoreJS, and for compatibility reasons, that will remain our default configuration for v1.</p>
+</section>
+<section><h2 id="update-on-aurelia-interface">Update on Aurelia Interface</h2><p>When we released the Beta we also previewed a component library we are working on called <em>Aurelia Interface</em>. I'm happy to report that development of the library is going very well. We've made massive improvements in the last couple months and our APIs and feature-set are finally stabilizing. This week we started to put together a &quot;skeleton&quot; that takes our standard navigation skeleton and re-builds it with Aurelia Interface. With no changes to JavaScript code and only changing the HTML to use Aurelia Interface elements in place of basic elements, we're able to create a simple Material Design-based app in just a few minutes. Here's a screenshot:</p>
+<p><img src="blog/2016/2/2/big-february-status-update/content/images/2016/02/skelton-interface.png" alt="skeleton-interface" /></p>
+<p>And here's the markup that we used to create the welcome screen:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>au-animate<span class="token punctuation">"</span></span> <span class="token attr-name">halign-center</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ai-card</span> <span class="token attr-name">z</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>8dp<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>${heading}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span> <span class="token attr-name">submit.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ai-switch</span> <span class="token attr-name">checked.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>edit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>Edit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ai-switch</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ai-input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>edit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">float</span><span class="token punctuation">></span></span>First Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>help</span><span class="token punctuation">></span></span>Please input your first name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>help</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ai-input</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ai-input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lastName<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lastName<span class="token punctuation">"</span></span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>edit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">float</span><span class="token punctuation">></span></span>Last Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>help</span><span class="token punctuation">></span></span>Please input your last name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>help</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ai-input</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span> <span class="token attr-name">flex-column</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>${fullName | upper}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ai-button</span> <span class="token attr-name">if.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>edit<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ai-button</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ai-card</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Hopefully you can see that Aurelia Interface is going to be just as simple to use as normal HTML and that you'll be able to make beautiful applications with ease.</p>
+<p>We'll have more information about Aurelia Interface as we get close to release. We're not quite ready to announce the release date or the price but we're getting close. Stay tuned...</p>
+</section>
+<section><h2 id="what-else-are-you-working-on">What else are you working on?</h2><p>We've been real busy lately. We've got a number of interesting things that the core team is working on. Here are just a few things...</p>
+<h3>aurelia-validation</h3>
+<p>Some of you have been using the aurelia-validation plugin since the early days. Unfortunately, I've got a bit of bad news. The developer who originally joined the team to work on validation left the team several months ago and hasn't really been heard from since. When that happened we attempted to shuffle team members around to continue development of aurelia-validation since we have always wanted a strong validation library. Over the last couple of months we've come to realize that in order for us to continue development of aurelia-validation, we're going to have to re-write it.</p>
+<p>We'd like to ask for your patience in this matter. We're beginning efforts to author a new validation library this week and I'm confident we'll be able to build something even better without taking too long. We're going to use the documentation for the existing library as a guide to help us build something that meets and exceeds the current feature set. However, we're going to solve a bunch of problems that exist in the current library...problems we found that we couldn't really address incrementally.</p>
+<ul>
+<li>The current test suite is constructed in a very non-traditional way and is hard to understand. We're going to have a simple, clear set of tests for the new library that will make it easier to manage and extend.</li>
+<li>The current library is strongly-coupled to Aurelia's templating engine. We're going to split the valiation library into multiple parts so that the validation portion will be usable in Node apps on the server, independent of Aurelia. There will then be a plugin for Aurelia that enables the validation engine to talk to the View to display validation errors.</li>
+<li>The current library doesn't interact with Views using a mechanism that is based on Aurelia's knowledge of bindings. Rather, it uses some very non-standard mechanisms that aren't always sure to work. The new version will enable connecting validation rules based on the Aurelia view engine's own internal data structures and knowledge of binding.</li>
+<li>The refactoring and re-design is going to enable us to get more re-use out of various portions of the library allowing it to integrate with other solutions better such as BreezeJS and Aurelia Interface.</li>
+<li>And much more...</li>
+</ul>
+<p>While the aurelia-validation library was not yet released to Beta...and was technically still subject to major break changes, we still deeply regret that we have to do this. We're going to try hard to build a nice API, one that either matches the current API or that is easy to migrate to.</p>
+<p>Thanks for your understanding and your patience. This is a <em>top priority</em> item for us. We'll keep you posted along the way.</p>
+<h3>aurelia-cache</h3>
+<p>An important plugin we've been missing is a simple cache. It's common to want to cache data client-side or cache responses from backend services. Often times you want that data to be cached for certain amounts of time or to be stored in different ways. We're working on a nice solution to this and hope to have something to show you soon.</p>
+<h3>aurelia-web-components</h3>
+<p>Aurelia supports various Web Component specs already. For example, all views are created using the HTML Template Element and you can optionally have your component's view rendered into ShadowDOM. You can also use any 3rd party Web Components Custom Element inside an Aurelia app. However, Aurelia's native custom elements don't use the Web Components Custom Element spec. There are various reasons for this...but the simplest explanation is that, within the context of an application framework, it's easier and more efficient to handle custom elements directly. That said, we've always planned from the beginning to support taking any Aurelia custom element and &quot;exporting&quot; it as a Web Component Custom Element. That would enable any custom element written in Aurelia to be used inside plain web pages or even inside other frameworks. We've started the work on a plugin to enable this and we expect to have a first version ready pretty soon.</p>
+<h3>aurelia-testing</h3>
+<p>Supporting unit testing with Aurelia has always been important. If your architecture is based on the MVVM pattern, you can easily test your view-models just like any other class. However, if you want to unit test a custom component in its entirety, including checking the view for state and structural changes, that's been a little bit more difficult. Recently we've been putting together a pretty cool component test helper that we're excited about. It lets you create components in a test environment and assert how they respond to databinding and lifecycle changes, taking into account the async nature of these processes. Here's a quick sample of the API we're working on:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'my component'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> component<span class="token punctuation">;</span>
+    
+      <span class="token function">beforeAll</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> 
+        component <span class="token operator">=</span> StageComponent
+          <span class="token punctuation">.</span><span class="token function">withResources</span><span class="token punctuation">(</span><span class="token string">'src/my-component'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">usedAs</span><span class="token punctuation">(</span><span class="token string">'&lt;my-component foo.bind="firstName">&lt;/my-component>'</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">boundTo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> firstName<span class="token punctuation">:</span> <span class="token string">'Rob'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'does something...'</span><span class="token punctuation">,</span> done <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        component<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">expect</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+               <span class="token function">expect</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+               <span class="token function">expect</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token operator">...</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token operator">...</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">unbind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token operator">...</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>done<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>It's not quote ready yet, but we expect to have an initial release pretty soon.</p>
+<h3>aurelia-ui-virtualization</h3>
+<p>What if you wanted to use Aurelia's <code>repeat.for</code> over an array with tens of thousands of data items or more? Any framework would struggle to generate such a list quickly and to enable performant scrolling. For large lists, we've created a new plugin <code>ui-virtualization</code> that enables &quot;virtualization&quot; of list through a new <code>virtual-repeat.for</code>. When used, the list &quot;virtually&quot; as tens of thousands of rows, but the DOM only actually has rows for what is visible...so it could be only tens of items. This allows rendering of massive lists of data with amazing performance. It works exactly like <code>repeat.for</code>, it just creates a scrolling area and manages the list using UI virtualization techniques.</p>
+<p>This plugin has not yet been released to its initial version, but we are really excited about the progress and expect an initial usable release very soon. Stay tuned!</p>
+</section>
+<section><h2 id="cool-community-work">Cool Community Work</h2><p>Not only is the core team doing a bunch of great work, but there have been some amazing developments in the community.</p>
+<h3>Aurelia UI Toolkits</h3>
+<p>Last week 
+<a href="http://blog.durandal.io/2016/01/28/aurelia-and-kendo-ui/" target="_blank">we had a guest post from the team that created the Aurelia UI Toolkits</a>
+. They've been doing some fantastic work to bring Kendo UI components to Aurelia as native Aurelia components. They're also working on other popular UI toolkits like Materialize. It's very cool stuff. So, keep an eye on them.</p>
+<h3>Webpack</h3>
+<p>In the last few weeks a group of developers from the community have begun working on getting Aurelia working with Webpack, as a modern alternative to jspm/system.js. We're really excited about the work they are doing and the progress they are making. We're hoping to integrate their work in the future so that Webpack can become an officially supported solution.</p>
+<h3>Hashnode AMA</h3>
+<p>Today, at 2pm Eastern Time, members of the Aurelia team 
+<a href="https://hashnode.com/ama/with-aurelia-team-cijv67apt000o535313ewe3qo" target="_blank">will be participating in an </a>
+. We'd love it if you can come out. If you can't make it, I'm sure you'll be able to review the Q&amp;A afterwards. It should be fun.</p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>As you can see...there's lots going on. New releases, new plugins, great community contributions and more. We're quite excited about what 2016 means for Aurelia and the Aurelia community. Seeing what has already happened in January gives you a just a little hint of the fun things to come...</p>
+</section>
+<section><h2 id="change-log">Change Log</h2><h3>aurelia-pal 1.0.0-beta.1.1.0</h3>
+<ul>
+<li>add typings</li>
+</ul>
+<h3>aurelia-pal-browser 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> add core-js import (
+<a href="http://github.com/aurelia/pal-browser/commit/162cfbf3208b0123a9860f4a3b2dbfd4559d9b40" target="_blank">162cfbf3</a>
+, closes 
+<a href="http://github.com/aurelia/pal-browser/issues/2" target="_blank">#2</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update for jspm; update core-js and aurelia deps (
+<a href="http://github.com/aurelia/pal-browser/commit/9d870d2948ba93706fce9053c979bf8ebe5a5b0b" target="_blank">9d870d29</a>
+)</li>
+<li><strong>feature:</strong> add mutation observer feature detection (
+<a href="http://github.com/aurelia/pal-browser/commit/3add002e5531401cf7e97f46d411225c6ad9621e" target="_blank">3add002e</a>
+)</li>
+</ul>
+<h3>aurelia-logging 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update for jspm and core-js (
+<a href="http://github.com/aurelia/logging/commit/d71d0a4aa5db4e5697f91dc16e021c0796cf8fa5" target="_blank">d71d0a4a</a>
+)</li>
+</ul>
+<h3>aurelia-logging-console 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong>  update for jspm; update core-js (
+<a href="http://github.com/aurelia/logging-console/commit/baa3622aa2a907eaee6cdea8306eab66503966be" target="_blank">baa3622a</a>
+)</li>
+</ul>
+<h3>aurelia-metadata 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update for jspm; update core-js; update aurelia deps (
+<a href="https://github.com/aurelia/metadata/commit/01aa7e404834a5d1824501108fc17bce98536a8c" target="_blank">01aa7e40</a>
+)</li>
+</ul>
+<h3>aurelia-dependency-injection 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>container:</strong> correct inconsistent return type from getAll (
+<a href="http://github.com/aurelia/dependency-injection/commit/bbbef9e582e4a81497db5655c7a7e9d2d1e5c10a" target="_blank">bbbef9e5</a>
+, closes 
+<a href="http://github.com/aurelia/dependency-injection/issues/71" target="_blank">#71</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update for jspm; update core-js; update aurelia deps (
+<a href="http://github.com/aurelia/dependency-injection/commit/11d1686765c626896dbb3d5edb7f5b40da9dd5ca" target="_blank">11d16867</a>
+)</li>
+</ul>
+<h3>aurelia-history 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>package:</strong> update metadata for jspm (
+<a href="http://github.com/aurelia/history/commit/e754d509beacbdf41799db73e9490a069de3ff76" target="_blank">e754d509</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-http-client-100-beta110">aurelia-http-client 1.0.0-beta.1.1.0</h2><h4>Features</h4>
+<ul>
+<li><strong>package:</strong> update metadata for jspm; core-js; deps (
+<a href="http://github.com/aurelia/http-client/commit/9b0e4272ac4b784642d49aba87f206a949023868" target="_blank">9b0e4272</a>
+)</li>
+</ul>
+<h3>aurelia-fetch 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>http-client:</strong> ensure default content-type is respected (
+<a href="http://github.com/aurelia/fetch-client/commit/f001ebafe47ecc0ebbc74f597ac7ee904194b734" target="_blank">f001ebaf</a>
+, closes 
+<a href="http://github.com/aurelia/fetch-client/issues/32" target="_blank">#32</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js (
+<a href="http://github.com/aurelia/fetch-client/commit/dd62f23099f3e6851eb394b57de6d4da121a241c" target="_blank">dd62f230</a>
+)</li>
+<li><strong>interceptors:</strong> provide Request to response interceptors (
+<a href="http://github.com/aurelia/fetch-client/commit/2d24beaa39104074a3c094f5544afc3d7d8ace75" target="_blank">2d24beaa</a>
+, closes 
+<a href="http://github.com/aurelia/fetch-client/issues/33" target="_blank">#33</a>
+)</li>
+</ul>
+<h3>aurelia-loader 1.0.0-beta.1.1.0</h3>
+<ul>
+<li>update jspm metadata; core-js; aurelia-deps</li>
+</ul>
+<h3>aurelia-loader-default 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/loader-default/commit/7777dfcca39fb610b7dd66bad868133b2d0c9962" target="_blank">7777dfcc</a>
+)</li>
+</ul>
+<h3>aurelia-event-aggregator 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/event-aggregator/commit/05e6674d13d393e6813dda656a8e79ba75b85aa8" target="_blank">05e6674d</a>
+)</li>
+</ul>
+<h3>aurelia-task-queue 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> enable running without mutation observers (
+<a href="http://github.com/aurelia/task-queue/commit/7d0c133647f06f0ce81b833342f514f567c9f8b1" target="_blank">7d0c1336</a>
+, closes 
+<a href="http://github.com/aurelia/task-queue/issues/10" target="_blank">#10</a>
+)</li>
+<li><strong>package:</strong> correct missed dependency update (
+<a href="http://github.com/aurelia/task-queue/commit/896972b36c814e0140c7f4106586ab0866099517" target="_blank">896972b3</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/task-queue/commit/38b78a66c643d0056efdcd0abf5a0ac0a83a3b84" target="_blank">38b78a66</a>
+)</li>
+</ul>
+<h3>aurelia-route-recognizer 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/route-recognizer/commit/59b295320c66d2757cbeda708f09e2c49940214f" target="_blank">59b29532</a>
+)</li>
+</ul>
+<h3>aurelia-binding 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>AccessKeyed:</strong> avoid dirty-checking keyed array access (
+<a href="http://github.com/aurelia/binding/commit/7d01567a00f5b0bb334b48614300273f7a99caed" target="_blank">7d01567a</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/289" target="_blank">#289</a>
+)</li>
+<li><strong>StyleObserver:</strong> set style properties individually (
+<a href="http://github.com/aurelia/binding/commit/8e9a2eb5b55106c32d6c4b1c6d60af5de6d9f4b1" target="_blank">8e9a2eb5</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/290" target="_blank">#290</a>
+)</li>
+<li><strong>choice-observers:</strong> notify on setValue (
+<a href="http://github.com/aurelia/binding/commit/86722faf435ca9b667c28d0ced4235b06c88e30c" target="_blank">86722faf</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/251" target="_blank">#251</a>
+)</li>
+<li><strong>definitions:</strong> no implicit any (
+<a href="http://github.com/aurelia/binding/commit/eff3162efedff7af4ef1b772e61ff49ce6f28460" target="_blank">eff3162e</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/286" target="_blank">#286</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>Parser:</strong> parse es6 shorthand initializers (
+<a href="http://github.com/aurelia/binding/commit/0d28ff91686853baacb583fa824618409ed4d1d4" target="_blank">0d28ff91</a>
+)</li>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/binding/commit/b93daa4681ea970b5310fa5bef3e63a55788cc3e" target="_blank">b93daa46</a>
+)</li>
+</ul>
+<h3>aurelia-router 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/router/commit/b473fec110d27e5572c1e094f20755fd5eeb7fd6" target="_blank">b473fec1</a>
+)</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>Controller:</strong> handle scope inheritance in template part with repeat Related to #244 (
+<a href="http://github.com/aurelia/templating/commit/9a488c44e86872c91b2f86953519c8ef7308a262" target="_blank">9a488c44</a>
+)</li>
+<li><strong>controller:</strong> stop element from inheriting scope (
+<a href="http://github.com/aurelia/templating/commit/a3ced53d67749244a6ea61d5193b04330e392bfc" target="_blank">a3ced53d</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia-deps (
+<a href="http://github.com/aurelia/templating/commit/bdff323282ebd7228063cb08a961a3258215fcea" target="_blank">bdff3232</a>
+)</li>
+</ul>
+<h3>aurelia-templating-binding 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong>  update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/templating-binding/commit/de63b6c594b31505f2f4f7fabf093fb6b0c6c06c" target="_blank">de63b6c5</a>
+)</li>
+</ul>
+<h3>aurelia-templating-resources 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/templating-resources/commit/c30927e3c81818daaefdc47fe418ca13611bfed9" target="_blank">c30927e3</a>
+)</li>
+<li><strong>hide:</strong> add hide binding (
+<a href="http://github.com/aurelia/templating-resources/commit/38760b6ba00774a7e75572baef0021d8c1c45096" target="_blank">38760b6b</a>
+)</li>
+</ul>
+<h3>aurelia-templating-router 1.0.0-beta.1.1.0 (2016-01-29)</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia-dps (
+<a href="http://github.com/aurelia/templating-router/commit/e26b67e7ef9a4a6e66ebef8b01eb154e63ce21ba" target="_blank">e26b67e7</a>
+)</li>
+</ul>
+<h3>aurelia-framework 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>bundle config (
+<a href="http://github.com/aurelia/framework/commit/1bb9e69b8b209690c20812a5b24d0a0f7c9e4a8a" target="_blank">1bb9e69b</a>
+)</li>
+<li><strong>docs:</strong> fix GiHub typo (
+<a href="http://github.com/aurelia/framework/commit/6adea3637f2c1da64cc76f9b0fba3973bb3c726f" target="_blank">6adea363</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/framework/commit/be9776e3fb0ce94fe8c1539965112ee16fb2d323" target="_blank">be9776e3</a>
+)</li>
+</ul>
+<h3>aurelia-bootstrapper 1.0.0-beta.1.1.0 (2016-01-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> change loader detection to work in more environments (
+<a href="http://github.com/aurelia/bootstrapper/commit/9a5c169afa1d72814c9b04c735b3e448d5e3430f" target="_blank">9a5c169a</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/bootstrapper/commit/65079e9135576a7a71226034f2af6ed728946e16" target="_blank">65079e91</a>
+)</li>
+</ul>
+<h3>aurelia-animator-css 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="https://github.com/aurelia/animator-css/commit/b6f0a247f73264d21f2d23f960fe7c3263bab121" target="_blank">b6f0a247</a>
+)</li>
+</ul>
+<h3>aurelia-animator-velocity 1.0.0-beta.1.1.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>animator:</strong> mark animate params as optional (
+<a href="https://github.com/aurelia/animator-velocity/commit/b6888ba645810911ac490d7b8ee121574500700d" target="_blank">b6888ba6</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="https://github.com/aurelia/animator-velocity/commit/aa84d30d3cc1b63eee633d105289af768eb4deaf" target="_blank">aa84d30d</a>
+)</li>
+</ul>
+<h3>aurelia-html-import-template-loader 1.0.0-beta.1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/html-import-template-loader/commit/b4faa50ee4457710e6d488d66fba373479b4b96b" target="_blank">b4faa50e</a>
+)</li>
+</ul>
+<h3>aurelia-i18n 0.4.7 (2016-01-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>attribute:</strong> removed timeout usage (
+<a href="http://github.com/aurelia/i18n/commit/019fd7bd6b21f917f8e59b2adda81e5c5784d1e0" target="_blank">019fd7bd</a>
+)</li>
+<li><strong>i18next:</strong> missing default export (
+<a href="http://github.com/aurelia/i18n/commit/3aafbdeda6c1653efe7aa4db3dcebd74df2ededa" target="_blank">3aafbded</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="http://github.com/aurelia/i18n/commit/8360ceaf4426efde40bfa9222663c0c21d6d2dcc" target="_blank">8360ceaf</a>
+)</li>
+<li><strong>unformat:</strong> unformat numbers using locale (
+<a href="http://github.com/aurelia/i18n/commit/1da0817c4588059d67ef93d1606235f637f30d95" target="_blank">1da0817c</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-dialog-054">aurelia-dialog 0.5.4</h2><ul>
+<li>feat(all): update jspm meta; core-js; aurelia deps</li>
+<li>fix(deps): move aurelia-pal to dev-dep</li>
+<li>disable pointer events on ai-dialog-container</li>
+<li>fix(dialog): use CSS auto margins instead of JS</li>
+</ul>
+<h3>aurelia-validation 0.6.1</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> update jspm meta; core-js; aurelia deps (
+<a href="https://github.com/aurelia/validation/commit/c109bdc6170f200b0e7034d726077da08159ba3a" target="_blank">c109bdc6</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>
+
+    </div>
+
+    <footer class="content-footer" id="app-footer">
+      <div class="links">
+        <div class="link-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/overview/what-is-aurelia">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
+            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
+            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/aurelia">GitHub</a></li>
+            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
+            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">
+        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+      </p>
+    </footer>
+  </main>
+
+  <side-bar></side-bar>
+
+  <nav>
+    <ul>
+      <li class="home ${activeTab === 'home' ? 'active' : ''}">
+        <a href="home">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+            height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <g>
+              <path d="M20.5,13.5c-0.276,0-0.5,0.224-0.5,0.5v9h-5v-6.5c0-0.276-0.224-0.5-0.5-0.5h-5C9.224,16,9,16.224,9,16.5V23H4v-9.5
+                C4,13.224,3.776,13,3.5,13S3,13.224,3,13.5v10C3,23.777,3.224,24,3.5,24h6c0.276,0,0.5-0.224,0.5-0.5V17h4v6.5
+                c0,0.276,0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5V14C21,13.724,20.776,13.5,20.5,13.5z"/>
+              <path d="M23.854,12.647l-11.5-11.5c-0.195-0.195-0.512-0.195-0.707,0l-11.5,11.5c-0.195,0.195-0.195,0.512,0,0.707
+                s0.512,0.195,0.707,0L12,2.208l11.146,11.146c0.098,0.098,0.226,0.146,0.354,0.146s0.256-0.049,0.354-0.146
+                C24.049,13.159,24.049,12.842,23.854,12.647z"/>
+              <path d="M16,3h3v3c0,0.276,0.224,0.5,0.5,0.5S20,6.277,20,6V2.5C20,2.224,19.776,2,19.5,2H16c-0.276,0-0.5,0.224-0.5,0.5
+                S15.724,3,16,3z"/>
+            </g>
+          </g>
+          <g id="invisible_shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Home</div>
+        </a>
+      </li>
+
+      <li class="article ${activeTab === 'article' ? 'active' : ''}">
+        <a href="docs">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g>
+              <path d="M23.5,1H12V0.5C12,0.224,11.776,0,11.5,0h-8C3.224,0,3,0.224,3,0.5V1H0.5C0.224,1,0,1.224,0,1.5v22
+                C0,23.776,0.224,24,0.5,24h23c0.276,0,0.5-0.224,0.5-0.5v-22C24,1.224,23.776,1,23.5,1z M4,1h7v11.293L7.854,9.146
+                c-0.195-0.195-0.512-0.195-0.707,0L4,12.293V1z M23,23H1V2h2v11.5c0,0.446,0.542,0.668,0.854,0.354L7.5,10.207l3.646,3.646
+                C11.459,14.166,12,13.948,12,13.5V2h11V23z"/>
+              <path d="M14.5,8h6C20.776,8,21,7.776,21,7.5S20.776,7,20.5,7h-6C14.224,7,14,7.224,14,7.5S14.224,8,14.5,8z"/>
+              <path d="M14.5,11h6c0.276,0,0.5-0.224,0.5-0.5S20.776,10,20.5,10h-6c-0.276,0-0.5,0.224-0.5,0.5S14.224,11,14.5,11z"/>
+              <path d="M20.5,13h-6c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S20.776,13,20.5,13z"/>
+              <path d="M20.5,16h-17C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h17c0.276,0,0.5-0.224,0.5-0.5S20.776,16,20.5,16z"/>
+              <path d="M16.5,19h-13C3.224,19,3,19.224,3,19.5S3.224,20,3.5,20h13c0.276,0,0.5-0.224,0.5-0.5S16.776,19,16.5,19z"/>
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Guides</div>
+        </a>
+      </li>
+
+      <li class="api ${activeTab === 'api' ? 'active' : ''}">
+        <a href="docs/api">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <path d="M21.945,15.283c-0.009-0.02-0.022-0.034-0.034-0.052c-0.031-0.048-0.068-0.089-0.114-0.123
+              c-0.011-0.008-0.015-0.021-0.026-0.029L17,12.011V7.5c0-0.082-0.024-0.156-0.059-0.224c-0.01-0.02-0.023-0.035-0.036-0.053
+              c-0.033-0.049-0.072-0.089-0.12-0.124c-0.012-0.007-0.017-0.022-0.028-0.029l-5-3c-0.158-0.095-0.355-0.095-0.514,0l-5,3
+              C6.231,7.078,6.227,7.093,6.215,7.1c-0.048,0.035-0.087,0.075-0.12,0.124C6.082,7.241,6.068,7.257,6.059,7.276
+              C6.024,7.344,6,7.418,6,7.5v4.511L1.229,15.08c-0.012,0.007-0.016,0.021-0.026,0.029c-0.046,0.034-0.083,0.075-0.114,0.123
+              c-0.012,0.018-0.025,0.032-0.034,0.052C1.022,15.349,1,15.421,1,15.5v4.784c0,0.17,0.087,0.329,0.229,0.421l5,3.216
+              c0.009,0.006,0.021,0.003,0.029,0.009C6.331,23.971,6.411,24,6.5,24s0.169-0.029,0.241-0.07c0.009-0.006,0.021-0.003,0.029-0.009
+              l4.729-3.042l4.729,3.042c0.009,0.006,0.021,0.003,0.029,0.009C16.331,23.971,16.411,24,16.5,24s0.169-0.029,0.241-0.07
+              c0.009-0.006,0.021-0.003,0.029-0.009l5-3.216C21.913,20.613,22,20.454,22,20.284V15.5C22,15.421,21.978,15.349,21.945,15.283z
+              M16.5,17.917l-4.053-2.432l4.053-2.606l4.053,2.606L16.5,17.917z M7,18.783l4-2.4v3.628l-4,2.573V18.783z M16,12.011l-4,2.573
+              v-3.801l4-2.4V12.011z M11,14.584l-4-2.573V8.383l4,2.4V14.584z M11.5,5.083L15.528,7.5L11.5,9.917L7.472,7.5L11.5,5.083z
+              M6.5,12.879l4.053,2.606L6.5,17.917l-4.053-2.432L6.5,12.879z M2,16.383l4,2.4v3.801l-4-2.573V16.383z M12,16.383l4,2.4v3.801
+              l-4-2.573V16.383z M17,22.584v-3.801l4-2.4v3.628L17,22.584z"/>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">APIs</div>
+        </a>
+      </li>
+
+      <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
+        <a href="https://discourse.aurelia.io">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M7.508,14.318c-0.465-0.063-0.923-0.163-1.362-0.297c-0.109-0.034-0.227-0.029-0.331,0.015l-3.669,1.467l1.289-2.255
+                  c0.122-0.214,0.07-0.484-0.122-0.639C1.843,11.434,1,9.729,1,7.935C1,4.387,4.589,1.5,9,1.5s8,2.887,8,6.435
+                  c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5c0-4.1-4.038-7.435-9-7.435S0,3.835,0,7.935c0,1.962,0.855,3.827,2.36,5.178
+                  l-1.794,3.14c-0.105,0.185-0.083,0.416,0.057,0.576C0.72,16.939,0.858,17,1,17c0.062,0,0.125-0.012,0.186-0.036l4.839-1.936
+                  c0.438,0.124,0.891,0.219,1.348,0.28c0.274,0.048,0.526-0.154,0.563-0.428S7.781,14.355,7.508,14.318z"/>
+                <path d="M22.123,20.627C23.353,19.517,24,18.098,24,16.5c0-3.523-3.435-6.5-7.5-6.5S9,12.977,9,16.5
+                  c0,2.125,1.152,4.144,3.083,5.397c2.073,1.349,4.649,1.582,6.93,0.642l3.812,1.429C22.882,23.989,22.941,24,23,24
+                  c0.139,0,0.275-0.058,0.372-0.165c0.138-0.153,0.167-0.375,0.076-0.559L22.123,20.627z M19.176,21.532
+                  C19.119,21.511,19.06,21.5,19,21.5c-0.069,0-0.139,0.015-0.203,0.043c-2.018,0.898-4.324,0.717-6.169-0.484
+                  C10.982,19.99,10,18.285,10,16.5c0-2.981,2.977-5.5,6.5-5.5s6.5,2.519,6.5,5.5c0,1.433-0.61,2.647-1.812,3.609
+                  c-0.184,0.147-0.24,0.403-0.135,0.614l0.931,1.861L19.176,21.532z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">Discourse</div>
+        </a>
+      </li>
+
+      <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
+        <a href="blog">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M14.5,3h-11C3.224,3,3,3.224,3,3.5S3.224,4,3.5,4h11C14.776,4,15,3.776,15,3.5S14.776,3,14.5,3z"/>
+                <path d="M3.5,13h5C8.776,13,9,12.776,9,12.5v-6C9,6.224,8.776,6,8.5,6h-5C3.224,6,3,6.224,3,6.5v6C3,12.776,3.224,13,3.5,13z
+                  M4,7h4v5H4V7z"/>
+                <path d="M14.5,8h-3C11.224,8,11,8.224,11,8.5S11.224,9,11.5,9h3C14.776,9,15,8.776,15,8.5S14.776,8,14.5,8z"/>
+                <path d="M14.5,10h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,10,14.5,10z"/>
+                <path d="M14.5,12h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,12,14.5,12z"/>
+                <path d="M14.5,14h-11C3.224,14,3,14.224,3,14.5S3.224,15,3.5,15h11c0.276,0,0.5-0.224,0.5-0.5S14.776,14,14.5,14z"/>
+                <path d="M14.5,16h-11C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h11c0.276,0,0.5-0.224,0.5-0.5S14.776,16,14.5,16z"/>
+                <path d="M14.5,18h-11C3.224,18,3,18.224,3,18.5S3.224,19,3.5,19h11c0.276,0,0.5-0.224,0.5-0.5S14.776,18,14.5,18z"/>
+                <path d="M23.5,3H20V2c0-0.276-0.224-0.5-0.5-0.5H18v-1C18,0.224,17.776,0,17.5,0h-17C0.224,0,0,0.224,0,0.5v20
+                  C0,22.43,1.57,24,3.5,24h17c1.93,0,3.5-1.57,3.5-3.5v-17C24,3.224,23.776,3,23.5,3z M20,6h1v14.5c0,0.276-0.225,0.5-0.5,0.5
+                  S20,20.776,20,20.5V6z M3.5,23C2.121,23,1,21.878,1,20.5V1h16v1v2v16.5c0,0.979,0.403,1.865,1.053,2.5H3.5z M23,20.5
+                  c0,1.378-1.121,2.5-2.5,2.5S18,21.878,18,20.5V4V2.5h1v18c0,0.827,0.673,1.5,1.5,1.5s1.5-0.673,1.5-1.5v-15
+                  C22,5.224,21.776,5,21.5,5H20V4h3V20.5z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Blog</div>
+        </a>
+      </li>
+      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+        <a href="help">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                  C5.71,23,1,18.29,1,12.5C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"/>
+                <path d="M11.5,6.5C9.57,6.5,8,8.07,8,10c0,0.276,0.224,0.5,0.5,0.5S9,10.276,9,10c0-1.378,1.121-2.5,2.5-2.5S14,8.622,14,10
+                  s-1.121,2.5-2.5,2.5c-0.276,0-0.5,0.224-0.5,0.5v3c0,0.276,0.224,0.5,0.5,0.5S12,16.276,12,16v-2.535
+                  c1.694-0.244,3-1.704,3-3.465C15,8.07,13.43,6.5,11.5,6.5z"/>
+                <circle cx="11.5" cy="18.5" r="1"/>
+              </g>
+            </g>
+          </g>
+          </svg>
+          <div class="label">Help</div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <search-panel></search-panel>
+
+  <script>
+    window.aureliaDocConfiguration = {"name":"Aurelia","siteUrl":"http://aurelia.io","baseUrl":"/aurelia-docs-test/","outDir":"./","trackingID":"UA-38441871-6","home":{"dest":"home"},"blog":{"dest":"blog","src":"./src/blog","postsPerPage":7,"author":"AureliaEffect","migration":{"src":"./src/blog/ghost.json"}},"help":{"name":"Help","src":"./src/help.md","dest":"help"},"notFound":{"name":"404","description":"Not Found"},"docs":{"article":[{"name":"Overview","description":"Discover what Aurelia is along with its business and technical advantages.","dest":"docs/overview","items":[{"name":"What is Aurelia?","src":"../framework/doc/article/en-US/what-is-aurelia.md","dest":"docs/overview/what-is-aurelia","featured":true,"personas":["developer","new-developer","architect","manager"]},{"name":"Technical Benefits","src":"../framework/doc/article/en-US/technical-benefits.md","dest":"docs/overview/technical-benefits","personas":["developer","architect","manager"]},{"name":"Business Advantages","src":"../framework/doc/article/en-US/business-advantages.md","dest":"docs/overview/business-advantages","personas":["developer","architect","manager"]}]},{"name":"Tutorials","description":"Step-by-step tutorials teaching you how to build your first Aurelia applications.","dest":"docs/tutorials","items":[{"name":"Creating a Todo App","src":"../framework/doc/article/en-US/quick-start.md","dest":"docs/tutorials/creating-a-todo-app","featured":true,"personas":["developer","new-developer"]},{"name":"Creating a Contact Manager","src":"../framework/doc/article/en-US/contact-manager-tutorial.md","dest":"docs/tutorials/creating-a-contact-manager","featured":true,"personas":["developer","new-developer"]}]},{"name":"Fundamentals","description":"After you've completed the quick starts, learn more about Aurelia's app model, components, dependency injection and more.","dest":"docs/fundamentals","items":[{"name":"App Config and Startup","src":"../framework/doc/article/en-US/app-configuration-and-startup.md","dest":"docs/fundamentals/app-configuration-and-startup","personas":["developer"]},{"name":"Creating Components","src":"../framework/doc/article/en-US/creating-components.md","dest":"docs/fundamentals/components","personas":["developer"]},{"name":"Dependency Injection","src":"../dependency-injection/doc/article/en-US/dependency-injection-basics.md","dest":"docs/fundamentals/dependency-injection","personas":["developer"]},{"name":"Securing Your App","src":"../framework/doc/article/en-US/securing-your-app.md","dest":"docs/fundamentals/security","personas":["developer"]},{"name":"Cheat Sheet","src":"../framework/doc/article/en-US/cheat-sheet.md","dest":"docs/fundamentals/cheat-sheet","personas":["developer","new-developer"]}]},{"name":"Binding","description":"Learn all about Aurelia's powerful data-binding engine.","dest":"docs/binding","items":[{"name":"Binding Basics","src":"../binding/doc/article/en-US/binding-basics.md","dest":"docs/binding/basics","personas":["developer"]},{"name":"Class and Style","src":"../binding/doc/article/en-US/binding-class-and-style.md","dest":"docs/binding/class-and-style","personas":["developer"]},{"name":"Binding Checkboxes","src":"../binding/doc/article/en-US/binding-checkboxes.md","dest":"docs/binding/checkboxes","personas":["developer"]},{"name":"Binding Radios","src":"../binding/doc/article/en-US/binding-radios.md","dest":"docs/binding/radios","personas":["developer"]},{"name":"Binding Selects","src":"../binding/doc/article/en-US/binding-selects.md","dest":"docs/binding/selects","personas":["developer"]},{"name":"Delegate vs. Trigger","src":"../binding/doc/article/en-US/binding-delegate-vs-trigger.md","dest":"docs/binding/delegate-vs-trigger","personas":["developer"]},{"name":"Computed Properties","src":"../binding/doc/article/en-US/binding-computed-properties.md","dest":"docs/binding/computed-properties","personas":["developer"]},{"name":"Value Converters","src":"../binding/doc/article/en-US/binding-value-converters.md","dest":"docs/binding/value-converters","personas":["developer"]},{"name":"Binding Behaviors","src":"../binding/doc/article/en-US/binding-binding-behaviors.md","dest":"docs/binding/binding-behaviors","personas":["developer"]},{"name":"Observable Properties","src":"../binding/doc/article/en-US/binding-observable-properties.md","dest":"docs/binding/binding-observable-properties","personas":["developer"]},{"name":"How it Works","src":"../binding/doc/article/en-US/binding-how-it-works.md","dest":"docs/binding/how-it-works","personas":["developer"]}]},{"name":"Templating","description":"Learn all about Aurelia's powerful templating engine.","dest":"docs/templating","items":[{"name":"Templating Basics","src":"../templating/doc/article/en-US/templating-basics.md","dest":"docs/templating/basics","personas":["developer"]},{"name":"HTML Behaviors","src":"../templating/doc/article/en-US/templating-html-behaviors-introduction.md","dest":"docs/templating/html-behaviors-introduction","personas":["developer"]},{"name":"Custom Attributes","src":"../templating/doc/article/en-US/templating-custom-attributes.md","dest":"docs/templating/custom-attributes","personas":["developer"]},{"name":"Custom Elements","src":"../templating/doc/article/en-US/templating-custom-elements.md","dest":"docs/templating/custom-elements","personas":["developer"]},{"name":"Content Projection","src":"../templating/doc/article/en-US/templating-content-projection.md","dest":"docs/templating/content-projection","personas":["developer"]},{"name":"Dynamic UI Composition","src":"../templating/doc/article/en-US/templating-dynamic-ui-composition.md","dest":"docs/templating/dynamic-ui-composition","personas":["developer"]}]},{"name":"Routing","description":"Learn how to setup and configure Aurelia's router.","dest":"docs/routing","items":[{"name":"Router Configuration","src":"../router/doc/article/en-US/router-configuration.md","dest":"docs/routing/configuration","personas":["developer"]}]},{"name":"Plugins","description":"Learn about Aurelia's officially supported plugins and how to use them.","dest":"docs/plugins","items":[{"name":"HTTP","src":"../fetch-client/doc/article/en-US/http-services.md","dest":"docs/plugins/http-services","personas":["developer"]},{"name":"Validation","src":"../validation/doc/article/en-US/validation-basics.md","dest":"docs/plugins/validation","personas":["developer"]},{"name":"I18N","src":"../i18n/doc/article/en-US/i18n-with-aurelia.md","dest":"docs/plugins/i18n","personas":["developer"]},{"name":"Dialog","src":"../dialog/doc/article/en-US/dialog-basics.md","dest":"docs/plugins/dialog","personas":["developer"]}]},{"name":"Integration","description":"Learn how to integrate Aurelia with various other libraries and frameworks.","dest":"docs/integration","items":[{"name":"Integrating with Polymer","src":"../framework/doc/article/en-US/integrating-with-polymer.md","dest":"docs/integration/polymer","personas":["developer"]}]},{"name":"Testing","description":"Learn all about testing Aurelia apps, including component testing and e2e testing.","dest":"docs/testing","items":[{"name":"Testing Components","src":"../testing/doc/article/en-US/testing-components.md","dest":"docs/testing/components","personas":["developer"]},{"name":"End-to-End Testing","src":"../testing/doc/article/en-US/end-to-end-testing.md","dest":"docs/testing/end-to-end","personas":["developer"]}]},{"name":"Build Systems","description":"Learn about the various build setups that Aurelia supports out-of-the-box.","dest":"docs/build-systems","items":[{"name":"The Aurelia CLI","src":"../framework/doc/article/en-US/the-aurelia-cli.md","dest":"docs/build-systems/aurelia-cli","personas":["developer","new-developer"]},{"name":"Webpack","description":"Setup and bundling using the Webapck system.","dest":"docs/build-systems/webpack","items":[{"name":"Webpack Setup","src":"../framework/doc/article/en-US/setup-webpack.md","dest":"docs/build-systems/webpack/setup","personas":["developer"]},{"name":"Webpack Bundling","src":"../framework/doc/article/en-US/bundling-webpack.md","dest":"docs/build-systems/webpack/bundling","personas":["developer","new-developer"]}]},{"name":"JSPM","description":"Setup and bundling using the JSPM system.","dest":"docs/build-systems/jspm","items":[{"name":"JSPM Setup","src":"../framework/doc/article/en-US/setup-jspm.md","dest":"docs/build-systems/jspm/setup","personas":["developer"]},{"name":"JSPM Bundling","src":"../framework/doc/article/en-US/bundling-jspm.md","dest":"docs/build-systems/jspm/bundling","personas":["developer"]}]}]}],"api":[{"name":"Binding","package":"../binding/package.json","src":"../binding/dist/aurelia-binding.d.ts","dest":"docs/api/binding","exampleSrc":"../binding/doc/example-dist","exampleDest":"example"},{"name":"Bootstrapper","package":"../bootstrapper/package.json","src":"../bootstrapper/dist/aurelia-bootstrapper.d.ts","dest":"docs/api/bootstrapper"},{"name":"Dependency Injection","package":"../dependency-injection/package.json","src":"../dependency-injection/dist/aurelia-dependency-injection.d.ts","dest":"docs/api/dependency-injection"},{"name":"Event Aggregator","package":"../event-aggregator/package.json","src":"../event-aggregator/dist/aurelia-event-aggregator.d.ts","dest":"docs/api/event-aggregator"},{"name":"Fetch","package":"../fetch-client/package.json","src":"../fetch-client/dist/aurelia-fetch-client.d.ts","dest":"docs/api/fetch-client"},{"name":"Framework","package":"../framework/package.json","src":"../framework/dist/aurelia-framework.d.ts","dest":"docs/api/framework"},{"name":"History","package":"../history/package.json","src":"../history/dist/aurelia-history.d.ts","dest":"docs/api/history"},{"name":"History-Browser","package":"../history-browser/package.json","src":"../history-browser/dist/aurelia-history-browser.d.ts","dest":"docs/api/history-browser"},{"name":"I18N","package":"../i18n/package.json","src":"../i18n/dist/aurelia-i18n.d.ts","dest":"docs/api/i18n"},{"name":"Loader","package":"../loader/package.json","src":"../loader/dist/aurelia-loader.d.ts","dest":"docs/api/loader"},{"name":"Loader-Default","package":"../loader-default/package.json","src":"../loader-default/dist/aurelia-loader-default.d.ts","dest":"docs/api/loader-default"},{"name":"Logging","package":"../logging/package.json","src":"../logging/dist/aurelia-logging.d.ts","dest":"docs/api/logging"},{"name":"Logging-Console","package":"../logging-console/package.json","src":"../logging-console/dist/aurelia-logging-console.d.ts","dest":"docs/api/logging-console"},{"name":"Metadata","package":"../metadata/package.json","src":"../metadata/dist/aurelia-metadata.d.ts","dest":"docs/api/metadata"},{"name":"Platform Abstraction Layer (PAL)","package":"../pal/package.json","src":"../pal/dist/aurelia-pal.d.ts","dest":"docs/api/pal"},{"name":"PAL-Browser","package":"../pal-browser/package.json","src":"../pal-browser/dist/aurelia-pal-browser.d.ts","dest":"docs/api/pal-browser"},{"name":"Path","package":"../path/package.json","src":"../path/dist/aurelia-path.d.ts","dest":"docs/api/path"},{"name":"Router","package":"../router/package.json","src":"../router/dist/aurelia-router.d.ts","dest":"docs/api/router"},{"name":"Task Queue","package":"../task-queue/package.json","src":"../task-queue/dist/aurelia-task-queue.d.ts","dest":"docs/api/task-queue"},{"name":"Templating","package":"../templating/package.json","src":"../templating/dist/aurelia-templating.d.ts","dest":"docs/api/templating"},{"name":"Templating-Binding","package":"../templating-binding/package.json","src":"../templating-binding/dist/aurelia-templating-binding.d.ts","dest":"docs/api/templating-binding"},{"name":"Templating-Resources","package":"../templating-resources/package.json","src":"../templating-resources/dist/aurelia-templating-resources.d.ts","dest":"docs/api/templating-resources"},{"name":"Templating-Router","package":"../templating-router/package.json","src":"../templating-router/dist/aurelia-templating-router.d.ts","dest":"docs/api/templating-router"},{"name":"Testing","package":"../testing/package.json","src":"../testing/dist/commonjs/aurelia-testing.d.ts","dest":"docs/api/testing"}]}};
+  </script>
+
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+</body>
+
+</html>

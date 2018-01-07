@@ -1,0 +1,213 @@
+<section class="article blog">
+  <header>
+    <h1>Building Aurelia&#x27;s Focus Attribute</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week we are really excited to have our first community member highlight post! 
+<a href="https://github.com/manuel-guilbault/" target="_blank">Manuel Guilbault</a>
+ is a Canadian-born, Paris-based developer, where he works as a consultant in the financial sector. Passionate about software craftsmanship, agility and lean principles, he loves to learn and debate about how we do things, why we do them this way and how they can be improved. This week we've invited Manuel to guest blog with us and share the work he did implementing a new custom attribute that's shipping in the next Aurelia update.</p>
+<p>Take it away Manuel....</p>
+<section><h2 id="introduction">Introduction</h2><p>I've been a huge fan of 
+<a href="http://durandaljs.com/" target="_blank">Durandal</a>
+ and 
+<a href="http://knockoutjs.com/" target="_blank">Knockout JS </a>
+ for many years now, and I've been closely following Aurelia since I first heard about it. After playing with it for a while, I noticed that one of the features I used with Knockout was missing from Aurelia: a <code>focus</code>binding. I decided to take advantage of the 
+<a href="http://aurelia.io/docs.html#custom-attributes" target="_blank">Custom Attribute</a>
+ API to develop a <code>focus</code> custom attribute for Aurelia.</p>
+<h3>Requirements</h3>
+<p>The custom attribute I have in mind would be used this way:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ViewModel</span> <span class="token punctuation">{</span>
+      hasFocus <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">focus.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hasFocus<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>The requirements are as follows:</p>
+<ul>
+<li>When <code>hasFocus</code> is set to <code>true</code>, the input gets focus;</li>
+<li>When <code>hasFocus</code> is set to <code>false</code>, the input loses focus;</li>
+<li>When input gains focus following a user action, <code>hasFocus</code> is set to <code>true</code>;</li>
+<li>When input loses focus following a user action, <code>hasFocus</code> is set to <code>false</code>.</li>
+</ul>
+<p>So, what I want is basically a two-way binding between the bound property and the focus state of the input. You might think that this kind of two-way binding will trigger an infinite loop, but rest assured: Aurelia's binding module will take care of that.</p>
+</section>
+<section><h2 id="getting-started">Getting Started</h2><p>First, let's follow the 
+<a href="http://aurelia.io/docs.html#custom-attributes" target="_blank">documentation</a>
+ and create an empty custom attribute:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>customAttribute<span class="token punctuation">,</span> inject<span class="token punctuation">,</span> bindingMode<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">customAttribute</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> bindingMode<span class="token punctuation">.</span>twoWay<span class="token punctuation">)</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Element<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Focus</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      	<span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">valueChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The first and easiest step is to listen for changes of the <code>value</code> property, and to react accordingly, by focusing or bluring the target element. This is done inside the <code>valueChanged</code> method:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">valueChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      	<span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      	<span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">blur</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Pretty simple! Now, when our view model's <code>hasFocus</code> property changes, the input is properly focused or blured.</p>
+<p>Next, the attribute's <code>value</code> property needs to be updated when the input receives or loses focus after a user action. To do this, we need to register event listeners on the element. As mentioned in the 
+<a href="http://aurelia.io/docs.html#custom-attributes" target="_blank">documentation</a>
+, this should be done in the <code>attached()</code> method:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Still pretty straight forward, right? Yet, something's still missing: the event listeners need to be removed when the element is <code>detached()</code> from the document:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Now if you go and test what we have so far, and you are running this on a setup that doesn't fully support ECMAScript 6 and uses a transpiler (like 
+<a href="https://babeljs.io/" target="_blank">Babel</a>
+), you will see the <code>removeEventListener</code> calls don't work. This is because the <code>attached()</code> and <code>detached()</code> methods get transpiled this way:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">function</span> <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> _this2 <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span> _this2<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span> _this2<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">function</span> <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> _this3 <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span> _this3<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span> _this3<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>As you can see, the removed listeners are are not the same as the added ones. Let's try and make them methods, to see if it works:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">onFocus</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">onBlur</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onBlur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onFocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onBlur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>It still doesn't work: when the <code>onFocus</code> and <code>onBlur</code> listeners are called by the browser, <code>this</code> doesn't contain the <code>Focus</code> instance but the element that fired the event. That's actually a common mistake; I should have known better. Let's solve this issue by creating instance functions that capture <code>this</code> in their scope:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+    
+      <span class="token keyword">this</span><span class="token punctuation">.</span>focusListener <span class="token operator">=</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>blurListener <span class="token operator">=</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>focusListener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>blurListener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>focusListener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>blurListener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>That works fine now.</p>
+</section>
+<section><h2 id="fine-tuning">Fine-tuning</h2><p>We now have a <code>Focus</code> custom attribute that answers to all of our initial requirements. But if you play a little bit with it, you will see that there are still some edge cases that are not yet covered.</p>
+<h3>Interaction With Other Attributes</h3>
+<p>By definition, a custom attribute is used to decorate an element, so it has to work along fine with other custom attributes that can be on the same element.</p>
+<p>What if the view model property bound to our <code>focus</code> attribute is also bound to the <code>show</code> attribute? This will be problematic, because depending on the order of evaluation when the bound property turns to <code>true</code>, the target element may not be visible yet when our attribute tries to give it focus. We can solve this problem by using another part of Aurelia's API: the <code>TaskQueue</code> class.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>customAttribute<span class="token punctuation">,</span> inject<span class="token punctuation">,</span> bindingMode<span class="token punctuation">,</span> TaskQueue<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">customAttribute</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> bindingMode<span class="token punctuation">.</span>twoWay<span class="token punctuation">)</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Element<span class="token punctuation">,</span> TaskQueue<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Focus</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> taskQueue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>taskQueue <span class="token operator">=</span> taskQueue<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">giveFocus</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>taskQueue<span class="token punctuation">.</span><span class="token function">queueMicroTask</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          	<span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">valueChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">giveFocus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">blur</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> 
+  </code></pre></source-code>
+</code-listing>
+<p>In the above snippet, I first added injection of the <code>TaskQueue</code> instance into the <code>Focus</code> constructor. I also added a <code>giveFocus()</code> method, which will enqueue a microtask responsible for giving focus to the element. This will actually delay the <code>focus()</code> call by pushing it to the end of the binding queue. This will ensure that all queued events, including the bound property's value change, are processed before the focus is given.</p>
+<h3>Handling Window Change</h3>
+<p>You may have noticed that our <code>Focus</code> custom attribute does not react correctly when the element is focused and you change browser tabs. How can we fix that?</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>element <span class="token operator">=</span> element<span class="token punctuation">;</span>
+    
+      <span class="token keyword">this</span><span class="token punctuation">.</span>focusListener <span class="token operator">=</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>blurListener <span class="token operator">=</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>activeElement <span class="token operator">!==</span> <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>In the above code snippet, I changed the <code>blurListener</code> function, so that, when a <code>blur</code> event is triggered, the <code>value</code> is set to <code>false</code> only if the element is not the document's active element. This scenario occurs typically when you change tabs in the browser (or change window in the OS). By preventing setting <code>value</code> to <code>false</code>, we prevent <code>valueChanged(false)</code> from being called, which would call <code>element.blur()</code> and would make the document's active element to become the body, and therefore cause the element to have lost focus when you go back to the browser tab.</p>
+</section>
+<section><h2 id="summary">Summary</h2><p>As you can see, it is pretty easy to create new features for Aurelia. We were able to quickly come up with a new <code>focus</code> attribute, thanks to Aurelia's modular and extensible design.</p>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38441871-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+  <meta charset="utf-8">
+  <title>Aurelia and Kendo UI | Aurelia</title>
+  <base href="/aurelia-docs-test/">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  
+  <meta name="description" content="Today, I&#x27;m really excited to introduce to you three innovative community members: Nikolaj Ivancic, Charles Pockert and Jeroen Vinke. They&#x27;ve been working together to create native Aurelia components for the Kendo UI suite, as well as a number of other tools for &quot;bridging&quot; the gap between existing component libraries and Aurelia. I asked them to put together a blog post that we could share with you here, announcing and explaining their work. Read on to learn more about the Aurelia UI Toolkits project."/>
+  <meta name="robots" content="index,follow"/>
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:200,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
+</head>
+
+<body aurelia-app="main" id="app-host">
+  <header class="app-header"> 
+    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <search-trigger></search-trigger>
+  </header>
+
+  <main ref="main">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
+      <section class="article blog">
+  <header>
+    <h1>Aurelia and Kendo UI</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, I'm really excited to introduce to you three innovative community members: Nikolaj Ivancic, Charles Pockert and Jeroen Vinke. They've been working together to create native Aurelia components for the Kendo UI suite, as well as a number of other tools for &quot;bridging&quot; the gap between existing component libraries and Aurelia. I asked them to put together a blog post that we could share with you here, announcing and explaining their work. Read on to learn more about the Aurelia UI Toolkits project.</p>
+<hr />
+<section><h2 id="introduction">Introduction</h2><p>This article describes the <strong>motivation</strong> for, the <strong>work</strong> on and the <strong>structure</strong> of the project we named a <strong>bridge</strong> (Image 1 below) to indicate its primary purpose: <em>to create the interface (an alternative word for a bridge in this context) for Aurelia application developers to KendoUI toolkit</em>.</p>
+<p><img src="blog/2016/1/5/aurelia-and-kendo-ui/content/images/2016/01/image-1-1.png" alt="Image 1" /></p>
+<p>This bridge is a structured, configurable collection of JavaScript classes that &quot;wrap&quot; KendoUI native controls, presenting them to the Aurelia developer in the form of <strong>
+<a href="http://aurelia.io/docs.html#/aurelia/framework/1.0.0-beta.1.0.8/doc/article/creating-components" target="_blank">Aurelia components</a>
+</strong>.</p>
+<p>We started with the Aurelia standard <strong>
+<a href="https://github.com/aurelia/skeleton-plugin" target="_blank">plugin setup</a>
+</strong> as the skeleton for our bridge application, carefully reviewed all <strong>
+<a href="http://demos.telerik.com/kendo-ui/" target="_blank">KendoUI controls</a>
+</strong> and decided to present KendoUI to Aurelia Developers in the form of the <strong>
+<a href="http://aurelia-ui-toolkits.github.io/demo-kendo" target="_blank">KendoUI Components Catalog</a>
+</strong>. This <strong>catalog</strong> is an Aurelia application skilfully created to serve several important roles:</p>
+<ul>
+<li>
+<p>During the bridge development process it allows the bridge developer to immediately verify the correct function of the &quot;wrapper&quot; code which presents the KendoUI native control as an Aurelia component.</p>
+</li>
+<li>
+<p>It continuously shares the status of the project by providing rich navigation support demonstrating several different ways of using each component to render KendoUI controls (see image 2 below)</p>
+</li>
+</ul>
+<p><img src="blog/2016/1/5/aurelia-and-kendo-ui/content/images/2016/01/image-2.png" alt="Image 2" /></p>
+<ul>
+<li>By adding the extensive online help pages with installation instructions,  several tutorials and samples, this catalog can be used as a teaching tool (Image 3 below):</li>
+</ul>
+<p><img src="blog/2016/1/5/aurelia-and-kendo-ui/content/images/2016/01/image-3.png" alt="Image 3" /></p>
+<ul>
+<li>Offer a rich set of services that are used to simplify development of new bridges. See more at 
+<a href="https://github.com/aurelia-ui-toolkits/skeleton-bridge/wiki/Informal-definition-of-the-bridge-structure-and-development-process" target="_blank">Informal definition of the bridge structure and development process</a>
+ and other articles referenced from there.</li>
+</ul>
+<hr />
+</section>
+<section><h2 id="why-aurelia">Why Aurelia?</h2><p>Aurelia is a next generation UI framework. Whether you're building apps for the browser, mobile or desktop, Aurelia can enable you to not only create amazing UI, but do it in a way that is maintainable, testable and extensible.</p>
+<p>Aurelia is just JavaScript. However, it's not yesterday's JavaScript, but the JavaScript of tomorrow. By using modern tooling we've been able to write Aurelia from the ground up in ECMAScript 2016. This means we have native modules, classes, decorators and more at our disposal...and you have them too.</p>
+<p>Not only is Aurelia written in modern and future JavaScript, but it also takes a modern approach to architecture. In the past, frameworks have been monolithic beasts. Not Aurelia though. It's built as a series of collaborating libraries. Taken together, they form a powerful and robust framework for building Single Page Apps (SPAs). However, Aurelia's libraries can often be used individually, in traditional web sites or even on the server-side through technologies like NodeJS.</p>
+<p>Aurelia is open source, but unlike much open source in the JavaScript space, Aurelia is an official product with commercial backing. If your business is going to spend significant money building software, you want to do it on a platform that's committed to you as a customer. You want to be able to form a relationship with your technology provider to ensure that you and your developers have a solid platform upon which to build your business now and in the years to come.</p>
+</section>
+<section><h2 id="why-kendoui">Why KendoUI?</h2><p>Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications. The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS, Bootstrap - and soon Aurelia integration.</p>
+<p>Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.</p>
+<p>Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License. It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the Kendo UI Core GitHub repository. Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.</p>
+</section>
+<section><h2 id="how-did-this-project-start">How did this project start?</h2><ul>
+<li>(Charles:) I wanted a grid for a project rapidly prototyped in Aurelia. There's no reason why I couldn't pick up Kendo now and start using it in my project. In fact, Kendo even supports MVVM scenarios using observables that are built into the Kendo framework. However, these mechanisms do not integrate with Aurelia without the help of some plugin interface. You would need to use jQuery selectors to find your target element and initialize your widgets in JavaScript.</li>
+<li>(Jeroen): I used Kendo controls in a rather large ERP application (built on top of Aurelia) and noticed the large amount of code it took to instantiate even a simple Kendo control. I first created a couple of wrappers for these controls myself but then noticed that Charles was doing this as well. Charles and I wanted to team up and create this plugin but never really took the initiative until Nikolaj brought us together.</li>
+<li>(Nik) some 8 years ago, I wrote a complex Silverlight application using KendoUI as the user interface toolkit. Naturally once I discovered Aurelia and decided that this where I'd stay for a long time, my first move was to find out the means of getting hold of KendoUI in this new context.</li>
+</ul>
+</section>
+<section><h2 id="motivations-behind-this-project">Motivations behind this project.</h2><p>All three developers (Charles, Jeroen and Nik) discovered Aurelia the same way: after getting disappointed with the slow pace of evolution of Angular we all got excited hearing the news that Rob Eisenberg of Caliburn Micro fame (which we all knew) is joining the Angular team. Then, after a pretty long wait for Angular 2.0, we got hold of two pieces of news: Angular 2.0 is not going to be what we hoped for and more importantly, Rob left the Angular team and announced Aurelia - which we recognized in a few days as the framework we all waited for.</p>
+<p>The problem with Aurelia, however, was that it was very new. Don't get us wrong, the framework was impressive and really easy to work with, but it was lacking any out-of-the-box UI components. Rather than waiting to see someone else provide such UI components and having sufficiently good experience with KendoUI we decided to take a plunge and try to create a bridge that would make KendoUI controls shine as Aurelia Components.</p>
+<p>Take the following example that briefly explains our intentions:</p>
+<p><strong>In the KendoUI native programming model, a Kendo grid layout is defined in the view-model (JavaScript):</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">$</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">kendoGrid</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     columns<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+       <span class="token punctuation">{</span> field<span class="token punctuation">:</span> <span class="token string">"CustomerId"</span><span class="token punctuation">,</span> template<span class="token punctuation">:</span> <span class="token string">"Customer: ${ CustomerId }"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+       <span class="token punctuation">{</span> field<span class="token punctuation">:</span> <span class="token string">"CustomerName"</span><span class="token punctuation">,</span> template<span class="token punctuation">:</span> <span class="token string">"${ CustomerName }"</span> <span class="token punctuation">}</span>
+     <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p><strong>We wanted to express the same information as Aurelia components:</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>k<span class="token operator">-</span>grid<span class="token operator">></span>
+      <span class="token operator">&lt;</span>k<span class="token operator">-</span>col field<span class="token operator">=</span><span class="token string">"CustomerId"</span><span class="token operator">></span>Customer<span class="token punctuation">:</span> $<span class="token punctuation">{</span> CustomerId <span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>k<span class="token operator">-</span>col<span class="token operator">></span>
+      <span class="token operator">&lt;</span>k<span class="token operator">-</span>col field<span class="token operator">=</span><span class="token string">"CustomerName"</span><span class="token operator">></span>$<span class="token punctuation">{</span> CustomerName <span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>k<span class="token operator">-</span>col<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>k<span class="token operator">-</span>grid<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>This latter approach is more declarative and easier to visualize / understand. It also sits in the correct place in the MV* model -- and all these improvements are the consequences of using Aurelia's powerful <strong>
+<a href="https://github.com/aurelia/binding" target="_blank">binding</a>
+</strong> and <strong>
+<a href="https://github.com/aurelia/templating" target="_blank">templating</a>
+</strong> features.</p>
+</section>
+<section><h2 id="some-interesting-problems-we-encountered">Some interesting problems we encountered.</h2><h4>Repetitive Code</h4>
+<p>After implementing the first few wrappers, we started to see a pattern emerge. Our code contained a lot of <code>@bindable</code> property declarations in order to expose Kendo's API to Aurelia's binding system:</p>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>
+  <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Grid</span> <span class="token punctuation">{</span>
+  
+    @<span class="token function">children</span><span class="token punctuation">(</span><span class="token string">'k-col'</span><span class="token punctuation">)</span> columns<span class="token punctuation">;</span>
+  
+    @bindable autoBind <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    @bindable columnMenu<span class="token punctuation">;</span>
+    @bindable dataSource<span class="token punctuation">;</span>
+    @bindable editable<span class="token punctuation">;</span>
+    @bindable filterable<span class="token punctuation">;</span>
+    @bindable group<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// .. and more</span>
+  
+</code></pre></source-code></code-listing>
+<p>That wasn't all - our wrappers also contained what we called <em>&quot;event proxies&quot;</em> which delegate events raised by the Kendo control. Before the optimizations, we had to write an event proxy for every event in every wrapper:</p>
+<code-listing><source-code lang="JavaScript"><pre class="language-javascript"><code>
+  cancel<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'cancel'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  change<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'change'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  columnHide<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'column-hide'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  columnLock<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'column-lock'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  columnUnlock<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'column-unlock'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  columnMenuInit<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'column-menu-init'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  columnReorder<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'column-reorder'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  columnResize<span class="token punctuation">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">fireKendoEvent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">,</span> <span class="token string">'column-resize'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// .. and more</span>
+  
+</code></pre></source-code></code-listing>
+<p>It's safe to say that this was not optimal. If we missed an event or the Kendo API changed we would need to issue a new version of the plugin.</p>
+<p>A more robust approach was necessary.</p>
+<p>Fortunately, the KendoUI source contains a list of properties from which we can generate part of the wrapper implementation:</p>
+<p><img src="blog/2016/1/5/aurelia-and-kendo-ui/content/images/2016/01/image-4.png" alt="Image 4" /></p>
+<p>This gives us all possible properties and their default values for each KendoUI control.</p>
+<p>Because Aurelia is open source, we were able to take a peek into the implementation of the 
+<a href="https://github.com/aurelia/templating/blob/d02ac893c3e45dcf08d4098ca86f13115ee45c5a/src/decorators.js#L83-L109" target="_blank">@bindable</a>
+ decorator, and create a 
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-kendoui-bridge/blob/343767e7fe5e484e80d1541a28e7a8e75f52cf70/src/common/decorators.js#L11-L37" target="_blank">@generateBindables</a>
+ decorator. This makes the code much cleaner:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    @<span class="token function">customElement</span><span class="token punctuation">(</span><span class="token string">'k-grid'</span><span class="token punctuation">)</span>
+    @<span class="token function">generateBindables</span><span class="token punctuation">(</span><span class="token string">'kendoGrid'</span><span class="token punctuation">)</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Element<span class="token punctuation">,</span> WidgetBase<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Grid</span>  <span class="token punctuation">{</span>
+      @<span class="token function">children</span><span class="token punctuation">(</span><span class="token string">'k-col'</span><span class="token punctuation">)</span> columns<span class="token punctuation">;</span>
+      @bindable options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The event proxies mentioned earlier are also generated, reducing the size of our codebase even more and ensuring that the plugin is resilient to future API changes.</p>
+<h4>Inheritance</h4>
+<p>In order to extract some common logic between these wrappers, we started with a <code>WidgetBase</code> super class. This worked fine for a while, until we wanted to create a <code>@bindable</code> property on the <code>WidgetBase</code> to expose certain properties.</p>
+<p>This caused some very strange behavior - 
+<a href="https://github.com/aurelia/templating/issues/249" target="_blank">Aurelia doesn</a>
+</p>
+<p>In addition, it became increasingly difficult to unit test.</p>
+<p>The current implementation uses a composition based approach. <code>WidgetBase</code> still exists as a property on each wrapper, encapsulating any common functionality.</p>
+<h4>Template Compilation</h4>
+<p>One of the nicest features of this plugin has got to be the ability to use Aurelia templates in Kendo controls. We got some help from Telerik on how to approach this, and found that we could leverage the <code>angular</code> hook that Kendo controls call whenever they want to have a DOM element compiled.</p>
+<p>After we got that tip from Telerik, we began to search for a way to compile DOM elements (which the angular hook provides us) with Aurelia. We found Aurelia's enhance capability to be a great fit.</p>
+<p>When we had gathered all the information about the <code>angular</code> hook and Aurelia's enhance capability, it was not difficult to write a 
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-kendoui-bridge/blob/2f75abbc876a8e7e5282bfd54a4198bbbc9ba23e/src/common/template-compiler.js" target="_blank">template-compiler</a>
+. The template-compiler's responsibility is to compile DOM elements whenever a Kendo control asks for it. As every Kendo control calls this hook, Aurelia templates can now be used wherever you can supply a template.</p>
+<h4>File collisions in the dist folder</h4>
+<p>Every plugin has a <code>dist</code> folder that contains the transpiled code that is downloaded by the users of a plugin, so it is absolutely necessary to have this <code>dist</code> folder in the Git repository.</p>
+<p>The files in this dist folder are generated with the <code>gulp build</code> command, which is used a lot during development. The format and content of the <code>dist</code> folder can differ per machine. Different versions of gulp/npm can cause the content of these files to be different, even when the source is the same.</p>
+<p>Whenever someone pushed a change to the <code>dist</code> folder, the other developers were getting file collisions when they tried to pull the changes in. This happened quite often and got quite annoying.</p>
+<p>After a while we started to look for alternatives. We first tried to add the <code>dist</code> folder to the <code>.gitignore</code> file, but this didn't work out as we still needed to have the <code>dist</code> folder in the Git repository. Then we decided to not push any changes to the <code>dist</code> folder by excluding these files from any commit. This was not ideal because we sometimes wanted to push these changes in order to test the plugin in a seperate application.</p>
+<p>Then we came up with the idea to create two different <code>gulp build</code> commands: one for development and one for releasing. One command builds to the <code>dist</code> directory and the other builds to a <code>dev</code> directory which we added to the <code>.gitignore</code> file. Problem solved!</p>
+</section>
+<section><h2 id="moving-ahead">Moving ahead</h2><p>This current Alpha (0.1.0) release is provided as a &quot;pre-anouncement&quot; of the Beta version that will follow next, where we already offer several interesting features:</p>
+<h5>Feature 1</h5>
+<p>In order to help Aurelia Application developers get a solid understanding of what we did and how to use this <strong>Bridge</strong>, we packaged it as a relatively sophisticated Aurelia <strong>application</strong>, described as an  amalgamation of two standard Aurelia repositories: <strong>
+<a href="https://github.com/aurelia/skeleton-navigation" target="_blank">Skeleton Navigation</a>
+</strong> and <strong>
+<a href="https://github.com/aurelia/skeleton-plugin" target="_blank">Skeleton Plugin</a>
+</strong>. For the user's convenience, we are providing the Bridge <strong>
+<a href="http://aurelia-ui-toolkits.github.io/demo-kendo/" target="_blank">hosted in GitHub</a>
+</strong> in the form of Aurelia KendoUI components catalog. Each of the Aurelia components in that catalog (note that Aurelia component means the native KendoUI control wrapped in this <strong>
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-kendoui-bridge/tree/master/src" target="_blank">bridge</a>
+</strong>) illustrates several different examples showing how to use that component by showing the actual view, view model and eventual &quot;local&quot; css file. Here are the code snippets for Grid components:</p>
+<p><strong>view</strong></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>./basic-use.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+    
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>k-grid</span> <span class="token attr-name">k-data-source.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>datasource<span class="token punctuation">"</span></span> <span class="token attr-name">k-pageable.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pageable<span class="token punctuation">"</span></span> <span class="token attr-name">k-sortable.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>k-col</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Contact Name<span class="token punctuation">"</span></span> <span class="token attr-name">field</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ContactName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>customer-photo<span class="token punctuation">'</span></span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>customer-name<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>${ContactName}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>k-col</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>k-col</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Contact Name<span class="token punctuation">"</span></span> <span class="token attr-name">field</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ContactName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>k-col</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>k-col</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Contact Title<span class="token punctuation">"</span></span> <span class="token attr-name">field</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ContactTitle<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>k-col</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>k-col</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Company Name<span class="token punctuation">"</span></span> <span class="token attr-name">field</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>CompanyName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>k-col</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>k-col</span> <span class="token attr-name">field</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Country<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>k-col</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>k-grid</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p><strong>view model</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">BasicUse</span> <span class="token punctuation">{</span>
+    
+      pageable <span class="token operator">=</span> <span class="token punctuation">{</span>
+        refresh<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        pageSizes<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        buttonCount<span class="token punctuation">:</span> <span class="token number">10</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>datasource <span class="token operator">=</span> <span class="token punctuation">{</span>
+          type<span class="token punctuation">:</span> <span class="token string">'odata'</span><span class="token punctuation">,</span>
+          transport<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            read<span class="token punctuation">:</span> <span class="token string">'//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          pageSize<span class="token punctuation">:</span> <span class="token number">5</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p><strong>style.css</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">.</span>customer<span class="token operator">-</span>photo <span class="token punctuation">{</span>
+        display<span class="token punctuation">:</span> inline<span class="token operator">-</span>block<span class="token punctuation">;</span>
+        width<span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+        height<span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+        border<span class="token operator">-</span>radius<span class="token punctuation">:</span> <span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span>
+        background<span class="token operator">-</span>size<span class="token punctuation">:</span> 32px 35px<span class="token punctuation">;</span>
+        background<span class="token operator">-</span>position<span class="token punctuation">:</span> center center<span class="token punctuation">;</span>
+        vertical<span class="token operator">-</span>align<span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
+        line<span class="token operator">-</span>height<span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+        box<span class="token operator">-</span>shadow<span class="token punctuation">:</span> inset <span class="token number">0</span> <span class="token number">0</span> 1px #<span class="token number">999</span><span class="token punctuation">,</span> inset <span class="token number">0</span> <span class="token number">0</span> 10px <span class="token function">rgba</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        margin<span class="token operator">-</span>left<span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token punctuation">.</span>customer<span class="token operator">-</span>name <span class="token punctuation">{</span>
+        display<span class="token punctuation">:</span> inline<span class="token operator">-</span>block<span class="token punctuation">;</span>
+        vertical<span class="token operator">-</span>align<span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
+        line<span class="token operator">-</span>height<span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+        padding<span class="token operator">-</span>left<span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h5>Feature 2</h5>
+<p>Besides the hope that many Aurelia application developers will use this Bridge, we also hope to get more Aurelia enthusiast to help finish this drive (<strong>
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-kendoui-bridge/blob/master/CONTRIBUTING.md" target="_blank">here</a>
+</strong> is the description of the process to do that). We already know that this description of how to contribute is necessary - but not nearly sufficient as we realized in the phase of creating the current <strong>Aurelia Tools</strong> team. The Bridge / Aurelia KendoUI components catalog <strong>
+<a href="http://aurelia-ui-toolkits.github.io/demo-kendo/#/help" target="_blank">help</a>
+</strong> addresses this additional need, with <strong>
+<a href="http://aurelia-ui-toolkits.github.io/demo-kendo/#/help/docs/bridge_developers_tutorials/1._introduction" target="_blank">Bridge developers tutorials</a>
+</strong> and <strong>
+<a href="http://aurelia-ui-toolkits.github.io/demo-kendo/#/help/docs/bridge_developers_notes/1._introduction" target="_blank">Bridge developers notes</a>
+</strong> sections. All these documents are &quot;live&quot; in the sense that they will be always current with respect to the Bridge status (see the <strong>
+<a href="http://aurelia-ui-toolkits.github.io/demo-kendo/#/project-status" target="_blank">current status</a>
+</strong>).</p>
+<h5>Feature 3</h5>
+<p>We took the same approach to creating this Bridge that is often encountered in building complex applications meant to run  on a less capable OS - once the app is built, we look for everything that can be extracted to become the part of the OS. The most notorious example of such behavior is the very first instance of Word for Windows that was built on Microsoft's DOS.</p>
+<p>As a result, we created a new project, <strong>
+<a href="https://github.com/aurelia-ui-toolkits/skeleton-bridge" target="_blank">skeleton bridge</a>
+</strong>, which contains all &quot;platform independent&quot; infrastructure from an actual bridge. We have already proved the value of this tool (our experience transitioning from KendoUI bridge to <strong>
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-materialize-bridge" target="_blank">Materialize bridge</a>
+</strong> resulted in 5x &quot;compression of time&quot; as our team member @thanood happily reported).</p>
+<p>The skeleton bridge is at very early stage of its evolution (check <strong>
+<a href="https://github.com/aurelia-ui-toolkits/skeleton-bridge/issues/1" target="_blank">this article</a>
+</strong> for more details) -- and its core is the <strong>
+<a href="https://github.com/aurelia-ui-toolkits/plugin-builder" target="_blank">plugin builder</a>
+</strong> component, already used extensively in the KendoUI bridge <strong>
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-kendoui-bridge/blob/master/src/config-builder.js" target="_blank">here</a>
+</strong> and <strong>
+<a href="https://github.com/aurelia-ui-toolkits/aurelia-kendoui-bridge/blob/master/src/index.js" target="_blank">here</a>
+</strong>.</p>
+</section>
+<section><h2 id="editor">Editor</h2><p>Hats off to the great community efforts made by the Aurelia UI Toolkits team. They've managed to not only create Aurelia components for Kendo UI, but also to abstract infrastructure that will enable more easily integrating with other widget libraries in the future. They've even started work on others, such as MaterializeCSS. As I watched the project progress, I also became convinced of something else: Aurelia might well be the very best way to build Kendo UI applications today.</p>
+</section>
+
+  </article>
+</section>
+
+    </div>
+
+    <footer class="content-footer" id="app-footer">
+      <div class="links">
+        <div class="link-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/overview/what-is-aurelia">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
+            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
+            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/aurelia">GitHub</a></li>
+            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
+            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">
+        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+      </p>
+    </footer>
+  </main>
+
+  <side-bar></side-bar>
+
+  <nav>
+    <ul>
+      <li class="home ${activeTab === 'home' ? 'active' : ''}">
+        <a href="home">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+            height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <g>
+              <path d="M20.5,13.5c-0.276,0-0.5,0.224-0.5,0.5v9h-5v-6.5c0-0.276-0.224-0.5-0.5-0.5h-5C9.224,16,9,16.224,9,16.5V23H4v-9.5
+                C4,13.224,3.776,13,3.5,13S3,13.224,3,13.5v10C3,23.777,3.224,24,3.5,24h6c0.276,0,0.5-0.224,0.5-0.5V17h4v6.5
+                c0,0.276,0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5V14C21,13.724,20.776,13.5,20.5,13.5z"/>
+              <path d="M23.854,12.647l-11.5-11.5c-0.195-0.195-0.512-0.195-0.707,0l-11.5,11.5c-0.195,0.195-0.195,0.512,0,0.707
+                s0.512,0.195,0.707,0L12,2.208l11.146,11.146c0.098,0.098,0.226,0.146,0.354,0.146s0.256-0.049,0.354-0.146
+                C24.049,13.159,24.049,12.842,23.854,12.647z"/>
+              <path d="M16,3h3v3c0,0.276,0.224,0.5,0.5,0.5S20,6.277,20,6V2.5C20,2.224,19.776,2,19.5,2H16c-0.276,0-0.5,0.224-0.5,0.5
+                S15.724,3,16,3z"/>
+            </g>
+          </g>
+          <g id="invisible_shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Home</div>
+        </a>
+      </li>
+
+      <li class="article ${activeTab === 'article' ? 'active' : ''}">
+        <a href="docs">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g>
+              <path d="M23.5,1H12V0.5C12,0.224,11.776,0,11.5,0h-8C3.224,0,3,0.224,3,0.5V1H0.5C0.224,1,0,1.224,0,1.5v22
+                C0,23.776,0.224,24,0.5,24h23c0.276,0,0.5-0.224,0.5-0.5v-22C24,1.224,23.776,1,23.5,1z M4,1h7v11.293L7.854,9.146
+                c-0.195-0.195-0.512-0.195-0.707,0L4,12.293V1z M23,23H1V2h2v11.5c0,0.446,0.542,0.668,0.854,0.354L7.5,10.207l3.646,3.646
+                C11.459,14.166,12,13.948,12,13.5V2h11V23z"/>
+              <path d="M14.5,8h6C20.776,8,21,7.776,21,7.5S20.776,7,20.5,7h-6C14.224,7,14,7.224,14,7.5S14.224,8,14.5,8z"/>
+              <path d="M14.5,11h6c0.276,0,0.5-0.224,0.5-0.5S20.776,10,20.5,10h-6c-0.276,0-0.5,0.224-0.5,0.5S14.224,11,14.5,11z"/>
+              <path d="M20.5,13h-6c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S20.776,13,20.5,13z"/>
+              <path d="M20.5,16h-17C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h17c0.276,0,0.5-0.224,0.5-0.5S20.776,16,20.5,16z"/>
+              <path d="M16.5,19h-13C3.224,19,3,19.224,3,19.5S3.224,20,3.5,20h13c0.276,0,0.5-0.224,0.5-0.5S16.776,19,16.5,19z"/>
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Guides</div>
+        </a>
+      </li>
+
+      <li class="api ${activeTab === 'api' ? 'active' : ''}">
+        <a href="docs/api">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <path d="M21.945,15.283c-0.009-0.02-0.022-0.034-0.034-0.052c-0.031-0.048-0.068-0.089-0.114-0.123
+              c-0.011-0.008-0.015-0.021-0.026-0.029L17,12.011V7.5c0-0.082-0.024-0.156-0.059-0.224c-0.01-0.02-0.023-0.035-0.036-0.053
+              c-0.033-0.049-0.072-0.089-0.12-0.124c-0.012-0.007-0.017-0.022-0.028-0.029l-5-3c-0.158-0.095-0.355-0.095-0.514,0l-5,3
+              C6.231,7.078,6.227,7.093,6.215,7.1c-0.048,0.035-0.087,0.075-0.12,0.124C6.082,7.241,6.068,7.257,6.059,7.276
+              C6.024,7.344,6,7.418,6,7.5v4.511L1.229,15.08c-0.012,0.007-0.016,0.021-0.026,0.029c-0.046,0.034-0.083,0.075-0.114,0.123
+              c-0.012,0.018-0.025,0.032-0.034,0.052C1.022,15.349,1,15.421,1,15.5v4.784c0,0.17,0.087,0.329,0.229,0.421l5,3.216
+              c0.009,0.006,0.021,0.003,0.029,0.009C6.331,23.971,6.411,24,6.5,24s0.169-0.029,0.241-0.07c0.009-0.006,0.021-0.003,0.029-0.009
+              l4.729-3.042l4.729,3.042c0.009,0.006,0.021,0.003,0.029,0.009C16.331,23.971,16.411,24,16.5,24s0.169-0.029,0.241-0.07
+              c0.009-0.006,0.021-0.003,0.029-0.009l5-3.216C21.913,20.613,22,20.454,22,20.284V15.5C22,15.421,21.978,15.349,21.945,15.283z
+              M16.5,17.917l-4.053-2.432l4.053-2.606l4.053,2.606L16.5,17.917z M7,18.783l4-2.4v3.628l-4,2.573V18.783z M16,12.011l-4,2.573
+              v-3.801l4-2.4V12.011z M11,14.584l-4-2.573V8.383l4,2.4V14.584z M11.5,5.083L15.528,7.5L11.5,9.917L7.472,7.5L11.5,5.083z
+              M6.5,12.879l4.053,2.606L6.5,17.917l-4.053-2.432L6.5,12.879z M2,16.383l4,2.4v3.801l-4-2.573V16.383z M12,16.383l4,2.4v3.801
+              l-4-2.573V16.383z M17,22.584v-3.801l4-2.4v3.628L17,22.584z"/>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">APIs</div>
+        </a>
+      </li>
+
+      <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
+        <a href="https://discourse.aurelia.io">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M7.508,14.318c-0.465-0.063-0.923-0.163-1.362-0.297c-0.109-0.034-0.227-0.029-0.331,0.015l-3.669,1.467l1.289-2.255
+                  c0.122-0.214,0.07-0.484-0.122-0.639C1.843,11.434,1,9.729,1,7.935C1,4.387,4.589,1.5,9,1.5s8,2.887,8,6.435
+                  c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5c0-4.1-4.038-7.435-9-7.435S0,3.835,0,7.935c0,1.962,0.855,3.827,2.36,5.178
+                  l-1.794,3.14c-0.105,0.185-0.083,0.416,0.057,0.576C0.72,16.939,0.858,17,1,17c0.062,0,0.125-0.012,0.186-0.036l4.839-1.936
+                  c0.438,0.124,0.891,0.219,1.348,0.28c0.274,0.048,0.526-0.154,0.563-0.428S7.781,14.355,7.508,14.318z"/>
+                <path d="M22.123,20.627C23.353,19.517,24,18.098,24,16.5c0-3.523-3.435-6.5-7.5-6.5S9,12.977,9,16.5
+                  c0,2.125,1.152,4.144,3.083,5.397c2.073,1.349,4.649,1.582,6.93,0.642l3.812,1.429C22.882,23.989,22.941,24,23,24
+                  c0.139,0,0.275-0.058,0.372-0.165c0.138-0.153,0.167-0.375,0.076-0.559L22.123,20.627z M19.176,21.532
+                  C19.119,21.511,19.06,21.5,19,21.5c-0.069,0-0.139,0.015-0.203,0.043c-2.018,0.898-4.324,0.717-6.169-0.484
+                  C10.982,19.99,10,18.285,10,16.5c0-2.981,2.977-5.5,6.5-5.5s6.5,2.519,6.5,5.5c0,1.433-0.61,2.647-1.812,3.609
+                  c-0.184,0.147-0.24,0.403-0.135,0.614l0.931,1.861L19.176,21.532z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">Discourse</div>
+        </a>
+      </li>
+
+      <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
+        <a href="blog">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M14.5,3h-11C3.224,3,3,3.224,3,3.5S3.224,4,3.5,4h11C14.776,4,15,3.776,15,3.5S14.776,3,14.5,3z"/>
+                <path d="M3.5,13h5C8.776,13,9,12.776,9,12.5v-6C9,6.224,8.776,6,8.5,6h-5C3.224,6,3,6.224,3,6.5v6C3,12.776,3.224,13,3.5,13z
+                  M4,7h4v5H4V7z"/>
+                <path d="M14.5,8h-3C11.224,8,11,8.224,11,8.5S11.224,9,11.5,9h3C14.776,9,15,8.776,15,8.5S14.776,8,14.5,8z"/>
+                <path d="M14.5,10h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,10,14.5,10z"/>
+                <path d="M14.5,12h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,12,14.5,12z"/>
+                <path d="M14.5,14h-11C3.224,14,3,14.224,3,14.5S3.224,15,3.5,15h11c0.276,0,0.5-0.224,0.5-0.5S14.776,14,14.5,14z"/>
+                <path d="M14.5,16h-11C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h11c0.276,0,0.5-0.224,0.5-0.5S14.776,16,14.5,16z"/>
+                <path d="M14.5,18h-11C3.224,18,3,18.224,3,18.5S3.224,19,3.5,19h11c0.276,0,0.5-0.224,0.5-0.5S14.776,18,14.5,18z"/>
+                <path d="M23.5,3H20V2c0-0.276-0.224-0.5-0.5-0.5H18v-1C18,0.224,17.776,0,17.5,0h-17C0.224,0,0,0.224,0,0.5v20
+                  C0,22.43,1.57,24,3.5,24h17c1.93,0,3.5-1.57,3.5-3.5v-17C24,3.224,23.776,3,23.5,3z M20,6h1v14.5c0,0.276-0.225,0.5-0.5,0.5
+                  S20,20.776,20,20.5V6z M3.5,23C2.121,23,1,21.878,1,20.5V1h16v1v2v16.5c0,0.979,0.403,1.865,1.053,2.5H3.5z M23,20.5
+                  c0,1.378-1.121,2.5-2.5,2.5S18,21.878,18,20.5V4V2.5h1v18c0,0.827,0.673,1.5,1.5,1.5s1.5-0.673,1.5-1.5v-15
+                  C22,5.224,21.776,5,21.5,5H20V4h3V20.5z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Blog</div>
+        </a>
+      </li>
+      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+        <a href="help">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                  C5.71,23,1,18.29,1,12.5C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"/>
+                <path d="M11.5,6.5C9.57,6.5,8,8.07,8,10c0,0.276,0.224,0.5,0.5,0.5S9,10.276,9,10c0-1.378,1.121-2.5,2.5-2.5S14,8.622,14,10
+                  s-1.121,2.5-2.5,2.5c-0.276,0-0.5,0.224-0.5,0.5v3c0,0.276,0.224,0.5,0.5,0.5S12,16.276,12,16v-2.535
+                  c1.694-0.244,3-1.704,3-3.465C15,8.07,13.43,6.5,11.5,6.5z"/>
+                <circle cx="11.5" cy="18.5" r="1"/>
+              </g>
+            </g>
+          </g>
+          </svg>
+          <div class="label">Help</div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <search-panel></search-panel>
+
+  <script>
+    window.aureliaDocConfiguration = {"name":"Aurelia","siteUrl":"http://aurelia.io","baseUrl":"/aurelia-docs-test/","outDir":"./","trackingID":"UA-38441871-6","home":{"dest":"home"},"blog":{"dest":"blog","src":"./src/blog","postsPerPage":7,"author":"AureliaEffect","migration":{"src":"./src/blog/ghost.json"}},"help":{"name":"Help","src":"./src/help.md","dest":"help"},"notFound":{"name":"404","description":"Not Found"},"docs":{"article":[{"name":"Overview","description":"Discover what Aurelia is along with its business and technical advantages.","dest":"docs/overview","items":[{"name":"What is Aurelia?","src":"../framework/doc/article/en-US/what-is-aurelia.md","dest":"docs/overview/what-is-aurelia","featured":true,"personas":["developer","new-developer","architect","manager"]},{"name":"Technical Benefits","src":"../framework/doc/article/en-US/technical-benefits.md","dest":"docs/overview/technical-benefits","personas":["developer","architect","manager"]},{"name":"Business Advantages","src":"../framework/doc/article/en-US/business-advantages.md","dest":"docs/overview/business-advantages","personas":["developer","architect","manager"]}]},{"name":"Tutorials","description":"Step-by-step tutorials teaching you how to build your first Aurelia applications.","dest":"docs/tutorials","items":[{"name":"Creating a Todo App","src":"../framework/doc/article/en-US/quick-start.md","dest":"docs/tutorials/creating-a-todo-app","featured":true,"personas":["developer","new-developer"]},{"name":"Creating a Contact Manager","src":"../framework/doc/article/en-US/contact-manager-tutorial.md","dest":"docs/tutorials/creating-a-contact-manager","featured":true,"personas":["developer","new-developer"]}]},{"name":"Fundamentals","description":"After you've completed the quick starts, learn more about Aurelia's app model, components, dependency injection and more.","dest":"docs/fundamentals","items":[{"name":"App Config and Startup","src":"../framework/doc/article/en-US/app-configuration-and-startup.md","dest":"docs/fundamentals/app-configuration-and-startup","personas":["developer"]},{"name":"Creating Components","src":"../framework/doc/article/en-US/creating-components.md","dest":"docs/fundamentals/components","personas":["developer"]},{"name":"Dependency Injection","src":"../dependency-injection/doc/article/en-US/dependency-injection-basics.md","dest":"docs/fundamentals/dependency-injection","personas":["developer"]},{"name":"Securing Your App","src":"../framework/doc/article/en-US/securing-your-app.md","dest":"docs/fundamentals/security","personas":["developer"]},{"name":"Cheat Sheet","src":"../framework/doc/article/en-US/cheat-sheet.md","dest":"docs/fundamentals/cheat-sheet","personas":["developer","new-developer"]}]},{"name":"Binding","description":"Learn all about Aurelia's powerful data-binding engine.","dest":"docs/binding","items":[{"name":"Binding Basics","src":"../binding/doc/article/en-US/binding-basics.md","dest":"docs/binding/basics","personas":["developer"]},{"name":"Class and Style","src":"../binding/doc/article/en-US/binding-class-and-style.md","dest":"docs/binding/class-and-style","personas":["developer"]},{"name":"Binding Checkboxes","src":"../binding/doc/article/en-US/binding-checkboxes.md","dest":"docs/binding/checkboxes","personas":["developer"]},{"name":"Binding Radios","src":"../binding/doc/article/en-US/binding-radios.md","dest":"docs/binding/radios","personas":["developer"]},{"name":"Binding Selects","src":"../binding/doc/article/en-US/binding-selects.md","dest":"docs/binding/selects","personas":["developer"]},{"name":"Delegate vs. Trigger","src":"../binding/doc/article/en-US/binding-delegate-vs-trigger.md","dest":"docs/binding/delegate-vs-trigger","personas":["developer"]},{"name":"Computed Properties","src":"../binding/doc/article/en-US/binding-computed-properties.md","dest":"docs/binding/computed-properties","personas":["developer"]},{"name":"Value Converters","src":"../binding/doc/article/en-US/binding-value-converters.md","dest":"docs/binding/value-converters","personas":["developer"]},{"name":"Binding Behaviors","src":"../binding/doc/article/en-US/binding-binding-behaviors.md","dest":"docs/binding/binding-behaviors","personas":["developer"]},{"name":"Observable Properties","src":"../binding/doc/article/en-US/binding-observable-properties.md","dest":"docs/binding/binding-observable-properties","personas":["developer"]},{"name":"How it Works","src":"../binding/doc/article/en-US/binding-how-it-works.md","dest":"docs/binding/how-it-works","personas":["developer"]}]},{"name":"Templating","description":"Learn all about Aurelia's powerful templating engine.","dest":"docs/templating","items":[{"name":"Templating Basics","src":"../templating/doc/article/en-US/templating-basics.md","dest":"docs/templating/basics","personas":["developer"]},{"name":"HTML Behaviors","src":"../templating/doc/article/en-US/templating-html-behaviors-introduction.md","dest":"docs/templating/html-behaviors-introduction","personas":["developer"]},{"name":"Custom Attributes","src":"../templating/doc/article/en-US/templating-custom-attributes.md","dest":"docs/templating/custom-attributes","personas":["developer"]},{"name":"Custom Elements","src":"../templating/doc/article/en-US/templating-custom-elements.md","dest":"docs/templating/custom-elements","personas":["developer"]},{"name":"Content Projection","src":"../templating/doc/article/en-US/templating-content-projection.md","dest":"docs/templating/content-projection","personas":["developer"]},{"name":"Dynamic UI Composition","src":"../templating/doc/article/en-US/templating-dynamic-ui-composition.md","dest":"docs/templating/dynamic-ui-composition","personas":["developer"]}]},{"name":"Routing","description":"Learn how to setup and configure Aurelia's router.","dest":"docs/routing","items":[{"name":"Router Configuration","src":"../router/doc/article/en-US/router-configuration.md","dest":"docs/routing/configuration","personas":["developer"]}]},{"name":"Plugins","description":"Learn about Aurelia's officially supported plugins and how to use them.","dest":"docs/plugins","items":[{"name":"HTTP","src":"../fetch-client/doc/article/en-US/http-services.md","dest":"docs/plugins/http-services","personas":["developer"]},{"name":"Validation","src":"../validation/doc/article/en-US/validation-basics.md","dest":"docs/plugins/validation","personas":["developer"]},{"name":"I18N","src":"../i18n/doc/article/en-US/i18n-with-aurelia.md","dest":"docs/plugins/i18n","personas":["developer"]},{"name":"Dialog","src":"../dialog/doc/article/en-US/dialog-basics.md","dest":"docs/plugins/dialog","personas":["developer"]}]},{"name":"Integration","description":"Learn how to integrate Aurelia with various other libraries and frameworks.","dest":"docs/integration","items":[{"name":"Integrating with Polymer","src":"../framework/doc/article/en-US/integrating-with-polymer.md","dest":"docs/integration/polymer","personas":["developer"]}]},{"name":"Testing","description":"Learn all about testing Aurelia apps, including component testing and e2e testing.","dest":"docs/testing","items":[{"name":"Testing Components","src":"../testing/doc/article/en-US/testing-components.md","dest":"docs/testing/components","personas":["developer"]},{"name":"End-to-End Testing","src":"../testing/doc/article/en-US/end-to-end-testing.md","dest":"docs/testing/end-to-end","personas":["developer"]}]},{"name":"Build Systems","description":"Learn about the various build setups that Aurelia supports out-of-the-box.","dest":"docs/build-systems","items":[{"name":"The Aurelia CLI","src":"../framework/doc/article/en-US/the-aurelia-cli.md","dest":"docs/build-systems/aurelia-cli","personas":["developer","new-developer"]},{"name":"Webpack","description":"Setup and bundling using the Webapck system.","dest":"docs/build-systems/webpack","items":[{"name":"Webpack Setup","src":"../framework/doc/article/en-US/setup-webpack.md","dest":"docs/build-systems/webpack/setup","personas":["developer"]},{"name":"Webpack Bundling","src":"../framework/doc/article/en-US/bundling-webpack.md","dest":"docs/build-systems/webpack/bundling","personas":["developer","new-developer"]}]},{"name":"JSPM","description":"Setup and bundling using the JSPM system.","dest":"docs/build-systems/jspm","items":[{"name":"JSPM Setup","src":"../framework/doc/article/en-US/setup-jspm.md","dest":"docs/build-systems/jspm/setup","personas":["developer"]},{"name":"JSPM Bundling","src":"../framework/doc/article/en-US/bundling-jspm.md","dest":"docs/build-systems/jspm/bundling","personas":["developer"]}]}]}],"api":[{"name":"Binding","package":"../binding/package.json","src":"../binding/dist/aurelia-binding.d.ts","dest":"docs/api/binding","exampleSrc":"../binding/doc/example-dist","exampleDest":"example"},{"name":"Bootstrapper","package":"../bootstrapper/package.json","src":"../bootstrapper/dist/aurelia-bootstrapper.d.ts","dest":"docs/api/bootstrapper"},{"name":"Dependency Injection","package":"../dependency-injection/package.json","src":"../dependency-injection/dist/aurelia-dependency-injection.d.ts","dest":"docs/api/dependency-injection"},{"name":"Event Aggregator","package":"../event-aggregator/package.json","src":"../event-aggregator/dist/aurelia-event-aggregator.d.ts","dest":"docs/api/event-aggregator"},{"name":"Fetch","package":"../fetch-client/package.json","src":"../fetch-client/dist/aurelia-fetch-client.d.ts","dest":"docs/api/fetch-client"},{"name":"Framework","package":"../framework/package.json","src":"../framework/dist/aurelia-framework.d.ts","dest":"docs/api/framework"},{"name":"History","package":"../history/package.json","src":"../history/dist/aurelia-history.d.ts","dest":"docs/api/history"},{"name":"History-Browser","package":"../history-browser/package.json","src":"../history-browser/dist/aurelia-history-browser.d.ts","dest":"docs/api/history-browser"},{"name":"I18N","package":"../i18n/package.json","src":"../i18n/dist/aurelia-i18n.d.ts","dest":"docs/api/i18n"},{"name":"Loader","package":"../loader/package.json","src":"../loader/dist/aurelia-loader.d.ts","dest":"docs/api/loader"},{"name":"Loader-Default","package":"../loader-default/package.json","src":"../loader-default/dist/aurelia-loader-default.d.ts","dest":"docs/api/loader-default"},{"name":"Logging","package":"../logging/package.json","src":"../logging/dist/aurelia-logging.d.ts","dest":"docs/api/logging"},{"name":"Logging-Console","package":"../logging-console/package.json","src":"../logging-console/dist/aurelia-logging-console.d.ts","dest":"docs/api/logging-console"},{"name":"Metadata","package":"../metadata/package.json","src":"../metadata/dist/aurelia-metadata.d.ts","dest":"docs/api/metadata"},{"name":"Platform Abstraction Layer (PAL)","package":"../pal/package.json","src":"../pal/dist/aurelia-pal.d.ts","dest":"docs/api/pal"},{"name":"PAL-Browser","package":"../pal-browser/package.json","src":"../pal-browser/dist/aurelia-pal-browser.d.ts","dest":"docs/api/pal-browser"},{"name":"Path","package":"../path/package.json","src":"../path/dist/aurelia-path.d.ts","dest":"docs/api/path"},{"name":"Router","package":"../router/package.json","src":"../router/dist/aurelia-router.d.ts","dest":"docs/api/router"},{"name":"Task Queue","package":"../task-queue/package.json","src":"../task-queue/dist/aurelia-task-queue.d.ts","dest":"docs/api/task-queue"},{"name":"Templating","package":"../templating/package.json","src":"../templating/dist/aurelia-templating.d.ts","dest":"docs/api/templating"},{"name":"Templating-Binding","package":"../templating-binding/package.json","src":"../templating-binding/dist/aurelia-templating-binding.d.ts","dest":"docs/api/templating-binding"},{"name":"Templating-Resources","package":"../templating-resources/package.json","src":"../templating-resources/dist/aurelia-templating-resources.d.ts","dest":"docs/api/templating-resources"},{"name":"Templating-Router","package":"../templating-router/package.json","src":"../templating-router/dist/aurelia-templating-router.d.ts","dest":"docs/api/templating-router"},{"name":"Testing","package":"../testing/package.json","src":"../testing/dist/commonjs/aurelia-testing.d.ts","dest":"docs/api/testing"}]}};
+  </script>
+
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+</body>
+
+</html>

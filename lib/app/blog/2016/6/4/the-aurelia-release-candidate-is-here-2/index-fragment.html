@@ -1,0 +1,116 @@
+<section class="article blog">
+  <header>
+    <h1>The Aurelia Release Candidate is Here!!!</h1>
+  </header>
+
+  <article class="markdown">
+    <p>It's been an amazing journey since 
+<a href="http://blog.durandal.io/2015/01/26/introducing-aurelia/" target="_blank">we first announced Aurelia</a>
+ and now we're finally at our biggest milestone yet. Today we're happy to announce the full availability of the Aurelia Release Candidate. You can get the bits through npm, jspm, bower or directly on Github now.</p>
+<section><h2 id="the-release-candidate">The Release Candidate</h2><p>We had a beta period of almost 7 months. During that time we've made huge improvements to render performance, startup time and library size. We've also updated the library to run on the latest version of Babel, enabled compatibility with JSPM 0.16 and 0.17 and implemented the Shadow DOM v1 specification. Additionally, there have been dozens of small (and some large) features and improvements added, along with hundreds of fixes.</p>
+<p>A tremendous thank you goes out to the entire 20+ person Aurelia Team along with the almost 400 community members who contributed to Aurelia during the Alpha and Beta periods. It's been amazing working together with you to create something great!</p>
+<h3>What's included in the RC?</h3>
+<p>The RC includes the following Aurelia core libraries and plugins:</p>
+<ul>
+<li>animator-css</li>
+<li>animator-velocity</li>
+<li>binding</li>
+<li>boostrapper</li>
+<li>bootstrapper-webpack</li>
+<li>dependency-injection</li>
+<li>event-aggregator</li>
+<li>fetch-client</li>
+<li>framework</li>
+<li>history</li>
+<li>history-browser</li>
+<li>html-import-template-loader</li>
+<li>http-client</li>
+<li>loader</li>
+<li>loader-default</li>
+<li>loader-webpack</li>
+<li>logging</li>
+<li>logging-console</li>
+<li>metadata</li>
+<li>i18n</li>
+<li>pal</li>
+<li>pal-browser</li>
+<li>path</li>
+<li>polyfills</li>
+<li>route-recognizer</li>
+<li>router</li>
+<li>task-queue</li>
+<li>templating</li>
+<li>templating-binding</li>
+<li>templating-resources</li>
+<li>templating-router</li>
+</ul>
+<p>We're also moving the following libraries out of alpha and into beta:</p>
+<ul>
+<li>dialog</li>
+<li>testing</li>
+<li>ui-virtualization</li>
+</ul>
+<p>The following libraries are still considered alpha, but are progressing well and will likely move to beta soon:</p>
+<ul>
+<li>pal-nodejs</li>
+<li>validatejs</li>
+<li>validation</li>
+<li>web-components</li>
+<li>webpack-plugin</li>
+</ul>
+</section>
+<section><h2 id="breaking-changes">Breaking Changes</h2><h3>Shadow DOM</h3>
+<p>Aurelia's custom element content projection system was originally based on Shadow DOM v0. This involved using the <code>&lt;content&gt;&lt;/content&gt;</code> element to designate content projection sites within the view of a component. The v0 version of the spec was not fully agreed upon by all vendors and underwent a series of design changes, resulting in the Shadow DOM v1 spec, which has gained consensus and is being implemented by browser manufacturers now. The Aurelia RC ships with our new Shadow DOM v1 implementation. You can read more about the changes on 
+<a href="http://blog.durandal.io/2016/05/23/aurelia-shadow-dom-v1-slots-prerelease/" target="_blank">our original blog post announcement</a>
+.</p>
+<h3>Testing</h3>
+<p>The <code>aurelia-templating</code> library previously contained two helper methods for unit testing: <code>createControllerForUnitTest()</code> and <code>createViewModelForUnitTest()</code>. We've removed these methods in favor or our new <code>aurelia-testing</code> library, which contains the <code>ComponentTester</code>. This new testing helper features a fluent interface capable of handling many more testing scenarios with ease and is our preferred approach going forward. If you require the previous mechanism in order to help you migrate, consider monkey-patching the <code>TemplatingEngine.prototype</code> by adding the methods back in your test setup. You can find the source code for the removed methods 
+<a href="https://github.com/aurelia/templating/blob/1.0.0-beta.1.2.7/src/templating-engine.js#L109" target="_blank">here</a>
+.</p>
+<p>The <code>aurelia-templating-resources</code> library previously contained the <code>view-spy</code> and <code>compile-spy</code> custom attributes, used for debugging. We've moved these out of this library and into <code>aurelia-testing</code>. You can now install this library as a plugin if you wish to use these debugging features.</p>
+</section>
+<section><h2 id="typescript">TypeScript</h2><p>In the last two weeks we've made some major changes to how we handle TypeScript d.ts files. Previously, we had adopted a distribution mechanism which was not recommended or supported by Microsoft or the major TS tools. Today's release supports the standard TypeScript d.ts acquisition workflow. With this release, we provide two ways to get Aurelia's d.ts files:</p>
+<ul>
+<li>If you are using Aurelia in Node, Webpack, our CLI or any other NPM-based system, the d.ts files will work automatically when you install the Aurelia libraries. You simply need to set your <code>tsconfig</code> to use a <code>moduleResolution</code> mode of <code>node</code>.</li>
+<li>Users of non-NPM-based systems, such as JSPM or Bower, can get the d.ts files by using 
+<a href="https://github.com/typings/typings" target="_blank">the typings tool</a>
+. We've set up every repo with a <code>typings.json</code> file so you can simply run <code>typings install github:aurelia/library-name</code> to install the d.ts files.</li>
+</ul>
+<p>We've configured our skeletons to use this new technique, so those starting new projects shouldn't need to worry about it. Those with existing projects will need to update as part of the RC migration process.</p>
+<p>We're also directly in touch with Microsoft and have been discussing their 
+<a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">new strategy for dts acquisition</a>
+. We'll be moving to support this as well soon.</p>
+</section>
+<section><h2 id="introducing-aurelia-cli">Introducing Aurelia CLI</h2><p>Today we're pleased to introduce the Aurelia CLI Alpha. The Aurelia CLI is a standalone tool that handles the entire development process from end-to end. It's already packed with a lot of capabilities, but we've got even more planned. We'd love for you to try it out and see how it works for you. We've written 
+<a href="https://github.com/aurelia/cli" target="_blank">a short readme explaining how to set things up and use the commands</a>
+.</p>
+<h3>Features of the CLI</h3>
+<p>The CLI is already packed with a lot of capabilities, with more on the way. Here's a few interesting tidbits:</p>
+<ul>
+<li>Quickly create new projects with &quot;default&quot; setups similar to today's ESNext and TypeScript skeletons, or create a custom configuration.</li>
+<li>Choose from either Babel or TypeScript. Your project's full source will be output in your selected language, including app sources, tests, tasks and generators. We hook up the transpilers and d.ts files automatically in all places.</li>
+<li>Choose your favorite CSS pre-processor from 5 options.</li>
+<li>Choose to add unit tests...or not.</li>
+<li>Choose your preferred code editor and we'll setup the config for you.</li>
+<li>Supports multiple project layouts, so that platforms like ASP.NET Core can be easily supported. We'd love for you to help us add support for your favorite platform!</li>
+<li>Leverages NPM as its package manager. The module loader and bundler can automatically handle amd, commonjs and umd modules.</li>
+<li>A unified project configuration file controls the module loader, bundling process and all task configuration.</li>
+<li>A convention-based task system built on top of Gulp 4. No need for a gulp file, simply drop module files into the project's task folder and the functions exported immediately become available on the CLI. Write your tasks in your preferred language. We'll automatically use Babel or TS to run them.</li>
+<li>A streaming bundling system built on top of Gulp. No more bundle steps. Apps always run bundled with full source maps and auto-refresh of bundles when files change during watch mode. Leverage any gulp plugin as part of the streaming bundling process.</li>
+<li>A convention-based generator system. Simply drop module files into the project's generator folder and the generators become available on the CLI.</li>
+</ul>
+<h3>What's next for the CLI?</h3>
+<p>One of the first new features you'll see in the coming weeks is a new command to help you with 3rd party module installation. The command will inspect a previously npm-installed package, and make a configuration recommendation to you, automating the process if you desire. We'll also be adding support for adding new build targets to a project, such as Electron and Cordova/PhoneGap. Stay tuned. We're just getting started with this tool. If the CLI gets you excited, we'd love for you to join us in continuing to improve it.</p>
+</section>
+<section><h2 id="aurelia-skeletons">Aurelia Skeletons</h2><p>We've got the new CLI, but we know that many developers will prefer to use tools like JSPM and Webpack. Don't worry, we're keeping our skeletons alive. In fact, you may have noticed that we've been doing major updates to our skeletons, especially for Webpack. We've still got a lot of work we want to do for Webpack. It's coming along nicely but it's not quite where we want it yet. I wish we could give you the ultimate version today, but we need a little more time. Thank you to everyone who has been taking it for a test drive and helping us to drive out bugs (especially on Windows) and giving us ideas for how to modularize, simplify and improve the design. We are listening and working hard to get an amazing solution in place. As always, we'll keep you posted here on the blog.</p>
+</section>
+<section><h2 id="roadmap">Roadmap</h2><p>The RC isn't going to last long. We're going to RTM before the end of July. We're taking these next few weeks to squash bugs, enhance the CLI, perfect the skeletons and put some final polish on. But what then? What's next for Aurelia?</p>
+<p>Well, we've already started in on the next wave...and so have some amazing community members. For example, 
+<a href="https://github.com/aurelia/pal-nodejs/pull/2" target="_blank">here is a PR</a>
+ that implements Aurelia's platform abstraction layer for NodeJS...enabling Aurelia to run fully in Node without a browser. Community member Meirion Hughes has used this to run Aurelia's ViewCompiler on the server in order to lint Aurelia Views, providing verification of templating syntax and even binding expressions. Awesome! We hope to integrate this work into the CLI and skeletons eventually. The effort on the pal layer for node will also serve as the foundation of our server-side rendering technology, which you're going to be hearing about more in the coming months.</p>
+<p>We'll also have another announcement for you tomorrow, so stay tuned for more excellent news.</p>
+<p>Thanks again to our wonderful core team, contributors and the entire Aurelia Community. It's been amazing so far, but there's much more to come.</p>
+</section>
+
+  </article>
+</section>

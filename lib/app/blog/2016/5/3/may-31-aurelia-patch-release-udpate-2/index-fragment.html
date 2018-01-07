@@ -1,0 +1,123 @@
+<section class="article blog">
+  <header>
+    <h1>May 31 Aurelia Patch Release Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>It's release Tuesday again so we're pushing out incremental patches to our libraries. As usual, the change log is below for those who like to stay up to date on all the details. As we approach our Release Candidate, some of our libraries are available in a &quot;pre-release&quot; form now too.</p>
+<section><h2 id="pre-releases">Pre-releases</h2><p>Several of Aurelia's latest library updates are marked as &quot;Pre-release&quot; with a &quot;beta.2&quot; version designation. These libraries contain <em>breaking changes</em> which will be part of the upcoming Release Candidate happening in June. You won't get these breaking change versions by installing via jspm or npm. They are only available through Github releases for now. This is to ensure that there are no surprises for you until you are absolutely ready. If you desire, you can begin planning now. Below is a list of the affected libraries, along with a summary of the changes involved.</p>
+<h4>aurelia-templating</h4>
+<ul>
+<li>The pre-release version of templating contains our new Shadow DOM v1 Slot implementation. This replaces the previous <code>&lt;content&gt;</code>-based, v0 mechanism.</li>
+<li>Since we have a dedicated <code>aurelia-testing</code> library, the test helpers for <code>TemplatingEngine#createControllerForUnitTest</code> and <code>TemplatingEngine#createViewModelForUnitTest</code> have been removed. These scenarios our now covered by the <code>ComponentTester</code> in <code>aurelia-testing</code>.</li>
+</ul>
+<h4>aurelia-templating-resources</h4>
+<ul>
+<li>Now that we have the new Slots mechanism in templating, there's no longer a need for the <code>replaceable</code> custom attribute. This attribute was used to mark arbitrary parts of an element's template as replaceable by the consumer. This can now be accomplished with Shadow DOM Slot Fallback Content. The part replacement mechanism is still in place in templating though, since it's needed for replacing the template controller templates, such as <code>if</code>, <code>repeat</code>, etc. For these scenarios, you only need add a <code>part</code> attribute to template controller's element.</li>
+<li>Since we have a dedicated <code>aurelia-testing</code> library, the <code>view-spy</code> and <code>compile-spy</code> custom attributes have been moved out of <code>aurelia-templating-resources</code> and into the <code>aurelia-testing</code> library.</li>
+</ul>
+</section>
+<section><h2 id="notables">Notables</h2><ul>
+<li>The Router Lifecycle now works with both Promises and Rx Observables.</li>
+<li>TypeScript Skeletons have been updated to use the new Typings implementation.</li>
+<li>Skeleton Karma configurations have been updated to work OOTB with more complex project structures and with our new <code>aurelia-testing</code> library.</li>
+</ul>
+</section>
+<section><h2 id="change-log">Change Log</h2><h3>aurelia-router 1.0.0-beta.1.2.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>router:</strong>
+<ul>
+<li>change refresh navigation to check config for static href not nav model href (
+<a href="http://github.com/aurelia/router/commit/24de29274bed6521741856ed32932a410ad61897" target="_blank">24de2927</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>router:</strong>
+<ul>
+<li>observables in lifecycle (
+<a href="http://github.com/aurelia/router/commit/337d95abcdde9dd9275486269c11dfff1ec76380" target="_blank">337d95ab</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.2.0.1</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>view-resources:</strong> enable arbitrary named value resolution (
+<a href="http://github.com/aurelia/templating/commit/4f85ecf97a3176e6f3d61a554e5351562771af38" target="_blank">4f85ecf9</a>
+)</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>replaceable:</strong> removed replaceable (
+<a href="http://github.com/aurelia/templating-resources/commit/6ac5731e77099fb35606f1611d5e36073a64ee21" target="_blank">6ac5731e</a>
+)</li>
+<li><strong>spies:</strong> move compile-spy and view-spy (
+<a href="http://github.com/aurelia/templating-resources/commit/72c4433f08b4c2bdbdb06e11a69856b719cadab8" target="_blank">72c4433f</a>
+)</li>
+</ul>
+<h3>templating-resources 1.0.0-beta.2.0.0</h3>
+<h4>Breaking Changes</h4>
+<ul>
+<li>This commit removes the replaceable custom attribute.
+Now that Shadow DOM v1 Slots are implemented there is no more need for
+this. Replaceable parts for template controllers are still supported
+for if, repeat, etc. via the part attribute.</li>
+</ul>
+<p>(
+<a href="http://github.com/aurelia/templating-resources/commit/6ac5731e77099fb35606f1611d5e36073a64ee21" target="_blank">6ac5731e</a>
+)</p>
+<ul>
+<li>The compile-spy and view-spy custom attributes have
+been removed from this library. They are now part of the
+aurelia-testing library.</li>
+</ul>
+<p>(
+<a href="http://github.com/aurelia/templating-resources/commit/72c4433f08b4c2bdbdb06e11a69856b719cadab8" target="_blank">72c4433f</a>
+)</p>
+<h3>aurelia-validatejs 0.4.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>bindings:</strong> use binding engine to get target (#70)</li>
+<li><strong>dts:</strong> make key and descriptor optional (#64)</li>
+</ul>
+<h3>aurelia-testing 0.3.0</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> correct export strategy (
+<a href="http://github.com/aurelia/testing/commit/d1a0533f5a462f5df8f711798aab7a9b1ec95bdd" target="_blank">d1a0533f</a>
+)</li>
+<li><strong>package:</strong> add missing dependencies (
+<a href="http://github.com/aurelia/testing/commit/466971e9d5564756b2bbd7c22415de83e6e2b9cc" target="_blank">466971e9</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>spies:</strong> add view-spy and compile-spy (
+<a href="http://github.com/aurelia/testing/commit/fc81850f9f23a2131fc370d0b744f53ddb58374e" target="_blank">fc81850f</a>
+)</li>
+</ul>
+<h3>aurelia-ui-virtualization 0.4.6</h3>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>array-virtual-repeat-strategy:</strong> - optimize in-place mutation revised</li>
+</ul>
+<h3>aurelia-skeleton-navigation 1.0.0-beta.1.2.6</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>TypeScript projects updated to new typings system</li>
+<li>All projects improved source map generation</li>
+<li>All projects fix Karma configuration for use with new testing library</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>ES2016 project updated with improved export task</content></li>
+</ul>
+</section>
+
+  </article>
+</section>

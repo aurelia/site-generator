@@ -1,0 +1,114 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release Notes - Mid June 2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This year, Aurelia's theme has been one of building out our ecosystem by enhancing plugins, tools, learning and community opportunity. Our releases today reflect that focus by showcasing improvements to several plugins (UX, Dialog and i18n) and launching a big update to our CLI.</p>
+<p>If you've had your eyes on our tooling story, you've probably noticed the tremendous amount of work that core team member 
+<a href="https://github.com/JeroenVinke" target="_blank">Jeroen Vinke</a>
+ has been putting into the Aurelia CLI. We've also had some fantastic community contributions to the CLI by 
+<a href="https://github.com/simonfox" target="_blank">Simon Fox</a>
+ and 
+<a href="https://github.com/jwx" target="_blank">Jürgen Wenzel</a>
+.</p>
+<p>Today's release showcases some of this work by providing a new CLI ability to support multiple module loaders and bundlers. Previously, the CLI only supported bundling for the 
+<a href="http://www.requirejs.org" target="_blank">RequireJS</a>
+ module loader. Today, we're happy to announce that the Aurelia CLI now supports bundling for the 
+<a href="https://github.com/systemjs/systemjs" target="_blank">SystemJS</a>
+ module loader as well. We're also excited to share that Aurelia CLI support for Webpack bundling will be available in a near-future release too.</p>
+<p>On top of this core ability to support different loaders and bundlers, we've also done a ton of work to optimize build tasks, better handle concurrent builds and fix plenty of bugs throughout. <em>Current CLI users who wish to take advantage of the above optimizations should update their CLI version as well as the generated gulp tasks.</em></p>
+<p>Much more is going on within the Aurelia ecosystem, especially in our UX library and other core plugins. Please see the release notes below for further details.</p>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/cli/compare/0.29.0...v0.30.0" target="_blank">aurelia-cli 0.30.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>generators:</strong> create elements/attributes in correct location (
+<a href="https://github.com/aurelia/cli/commit/7400e71" target="_blank">7400e71</a>
+)</li>
+<li><strong>html-minify:</strong> ignore interpolation expressions (
+<a href="https://github.com/aurelia/cli/commit/803c904" target="_blank">803c904</a>
+)</li>
+<li><strong>package-analyzer:</strong> infer index.js as main (
+<a href="https://github.com/aurelia/cli/commit/f5c0ed1" target="_blank">f5c0ed1</a>
+)</li>
+<li><strong>project:</strong> only transpile aurelia_project in project root (
+<a href="https://github.com/aurelia/cli/commit/6fd3f7f" target="_blank">6fd3f7f</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>all:</strong> systemjs support (
+<a href="https://github.com/aurelia/cli/commit/36fa685" target="_blank">36fa685</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/198" target="_blank">aurelia/cli#198</a>
+</li>
+<li><strong>build:</strong> allow minify options to be supplied (
+<a href="https://github.com/aurelia/cli/commit/177b0c7" target="_blank">177b0c7</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/ux/releases/tag/0.2.0" target="_blank">aurelia-ux 0.2.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>fix delete this.checked issue (
+<a href="https://github.com/aurelia/ux/commit/007627d" target="_blank">007627d</a>
+)</li>
+<li>prepare for pr and fix logging (
+<a href="https://github.com/aurelia/ux/commit/2dd51b5" target="_blank">2dd51b5</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li>icon button type (
+<a href="https://github.com/aurelia/ux/commit/cf0fea8" target="_blank">cf0fea8</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/25" target="_blank">#25</a>
+</li>
+<li>add material icon set (
+<a href="https://github.com/aurelia/ux/commit/4da8ecf" target="_blank">4da8ecf</a>
+)</li>
+<li>add ux-icon component (
+<a href="https://github.com/aurelia/ux/commit/09ff549" target="_blank">09ff549</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/i18n/compare/1.6.0...v1.6.1" target="_blank">aurelia-i18n 1.6.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>t-attribute:</strong> warning when using reserved word (
+<a href="https://github.com/aurelia/i18n/commit/a5b833f" target="_blank">a5b833f</a>
+), closes 
+<a href="https://github.com//github.com/aurelia/i18n/issues/218/issues/issuecomment-304611266" target="_blank">/github.com/aurelia/i18n/issues/218#issuecomment-304611266</a>
+</li>
+<li><strong>uf:</strong> properly escape dot in RegExp (
+<a href="https://github.com/aurelia/i18n/commit/0ee7dbb" target="_blank">0ee7dbb</a>
+)</li>
+<li><strong>uf():</strong> remove all thousand separators (
+<a href="https://github.com/aurelia/i18n/commit/5741270" target="_blank">5741270</a>
+)</li>
+<li><strong>uf():</strong> remove all thousand seperators (
+<a href="https://github.com/aurelia/i18n/commit/40f549d" target="_blank">40f549d</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/dialog/compare/1.0.0-rc.1.0.2...v1.0.0-rc.1.0.3" target="_blank">aurelia-dialog 1.0.0-rc.1.0.3</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog-renderer:</strong> don't cancel events fix 
+<a href="https://github.com/aurelia/dialog/issues/281" target="_blank">#281</a>
+ (
+<a href="https://github.com/aurelia/dialog/commit/9a92123" target="_blank">9a92123</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

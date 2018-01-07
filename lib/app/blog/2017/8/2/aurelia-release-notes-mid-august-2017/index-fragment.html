@@ -1,0 +1,80 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release Notes - Mid August 2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, we have a small set of release to update you with. We're gearing up for some big releases next. Stay tuned for more...</p>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance improvements.</p>
+<h3>aurelia-webpack-plugin 2.0.0-rc.3</h3>
+<h4>Features</h4>
+<ul>
+<li>support Webpack 3 ModuleConcatenationPlugin</li>
+<li>support resources inside @inlineView</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>recognize router-view attributes</li>
+<li>better control over entry sequence</li>
+<li>chunk not supported by ModuleDependenciesPlugin</li>
+<li>no default entrypoint with DLLPlugin</li>
+<li>use browser-pal for electron-renderer (#100)</li>
+</ul>
+<h3>aurelia-ux 0.3.0</h3>
+<h4>Features</h4>
+<ul>
+<li>expose style engine (
+<a href="https://github.com/aurelia/ux/commit/f623c70" target="_blank">f623c70</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/73" target="_blank">#73</a>
+</li>
+<li>add ux-list control (#82) (
+<a href="https://github.com/aurelia/ux/commit/ee64238" target="_blank">ee64238</a>
+)</li>
+<li>add unchecked value (
+<a href="https://github.com/aurelia/ux/commit/88505d9" target="_blank">88505d9</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/69" target="_blank">#69</a>
+</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>disabled checkbox behavior (#80) (
+<a href="https://github.com/aurelia/ux/commit/32eb94c" target="_blank">32eb94c</a>
+)</li>
+<li>bundle all files with aurelia-cli (
+<a href="https://github.com/aurelia/ux/commit/c69c1ff" target="_blank">c69c1ff</a>
+), closes 
+<a href="https://github.com/aurelia/ux/issues/17" target="_blank">#17</a>
+</li>
+<li>add disable button behavior (#76) (
+<a href="https://github.com/aurelia/ux/commit/a16f47f" target="_blank">a16f47f</a>
+)</li>
+<li>remove quotes (
+<a href="https://github.com/aurelia/ux/commit/66966e4" target="_blank">66966e4</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/i18n/compare/1.6.1...v1.6.2" target="_blank">aurelia-i18n 1.6.2</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Don't try to parse translation json if already parsed.</li>
+</ul>
+<h3>aurelia-protractor-plugin 1.0.5</h3>
+<h4>Features</h4>
+<ul>
+<li>add i18n locators</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>loadAndWaitForAureliaPage wasn't looking for aurelia object</li>
+<li>re-setup after every test in case restartBrowserBetweenTests is enabled</li>
+<li>update @types/selenium-webdriver</li>
+</ul>
+</section>
+
+  </article>
+</section>

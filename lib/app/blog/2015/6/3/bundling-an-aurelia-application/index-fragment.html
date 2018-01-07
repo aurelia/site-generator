@@ -1,0 +1,183 @@
+<section class="article blog">
+  <header>
+    <h1>Bundling an Aurelia Application</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Aurelia is a next generation framework that promotes good design patterns and practices. The next version of HTTP, 
+<a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank">HTTP/2</a>
+, may very well obsolete the necessity of creating bundles in the future, but we are not there just yet. Nobody likes to see a production application making 256 requests when loading. That's why Aurelia takes bundling very seriously. Read on to find out how to get your app bundled up for deploy using our new CLI.</p>
+<blockquote>
+<p>Note: We've drastically improved our bundling technology. Please disregard this article and see the most up to date resources, found 
+<a href="http://blog.durandal.io/2015/09/11/bundling-aurelia-apps/" target="_blank">here</a>
+.</p>
+</blockquote>
+<section><h2 id="getting-started">Getting Started</h2><p>Let's begin by creating some bundles. We will use our 
+<a href="http://github.com/aurelia/skeleton-navigation" target="_blank">skeleton-navigation</a>
+ project as the basis of our work. First, we will run it as is and then we will bundle it to see the difference.</p>
+<blockquote>
+<p>Note: We assume you have downloaded and set up the navigation skeleton, per 
+<a href="http://aurelia.io/get-started.html" target="_blank">these instructions</a>
+.</p>
+</blockquote>
+<p>Once the project is set up, run the following gulp task to view the application in the browser.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+     gulp serve
+  </code></pre></source-code>
+</code-listing>
+<p>Up until now, we have not done any bundling. Let's say we decided to put our app into production as is. If we open the browser's dev tools we can see how many requests are being made by the application:</p>
+<p><img src="blog/2015/6/3/bundling-an-aurelia-application/content/images/2015/06/unbundled-aurelia-application.jpg" alt="No of requests made my the application" /></p>
+<p>258! Yep, that's a scary picture for a production scenario. We want to minimize the number of requests. So, let's call <code>Aurelia-CLI</code> to the rescue.</p>
+<p>Before we bundle our app, we need to change the <code>config.js</code> file a little bit to switch off building <code>css</code>. Add <code>buildCSS: false</code> in the <code>config.js</code>, so that the file looks something like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    System<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token string">"transpiler"</span><span class="token punctuation">:</span> <span class="token string">"babel"</span><span class="token punctuation">,</span>
+      <span class="token string">"babelOptions"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"optional"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"es7.decorators"</span><span class="token punctuation">,</span>
+          <span class="token string">"es7.classProperties"</span><span class="token punctuation">,</span>
+          <span class="token string">"runtime"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">"paths"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"*"</span><span class="token punctuation">:</span> <span class="token string">"dist/*.js"</span><span class="token punctuation">,</span>
+        <span class="token string">"github:*"</span><span class="token punctuation">:</span> <span class="token string">"jspm_packages/github/*.js"</span><span class="token punctuation">,</span>
+        <span class="token string">"npm:*"</span><span class="token punctuation">:</span> <span class="token string">"jspm_packages/npm/*.js"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">"buildCSS"</span><span class="token punctuation">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>Note: We have discovered a possible bug in JSPM related to bundling CSS at the moment. We will investigate further and let you know as soon as we find a solution.</p>
+</blockquote>
+</section>
+<section><h2 id="installing-aurelia-cli">Installing Aurelia CLI</h2><p>Bundling apps with the Aurelia CLI is a breeze. Let's begin by installing the CLI tool:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+     npm install <span class="token operator">-</span>g aurelia<span class="token operator">-</span>cli
+  </code></pre></source-code>
+</code-listing>
+<p>For bundling, we need to install the tool locally to our project too. To do so <code>cd</code> into the <code>skeleton-navigation</code> project's root and run:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+     npm install aurelia<span class="token operator">-</span>cli <span class="token operator">--</span>save<span class="token operator">-</span>dev
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="bundling-javascript">Bundling JavaScript</h2><p>Now we are all set to create our first bundle. Before running our bundle command we will tell the <code>cli</code> what to bundle. Let's add an <code>aureliafile.js</code> in the root of our project and use the configuration bellow:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+      <span class="token keyword">var</span> aurelia <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'aurelia-cli'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">command</span><span class="token punctuation">(</span><span class="token string">'bundle'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        js<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token string">"dist/app-bundle"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            modules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+              <span class="token string">'*'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-http-client'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-router'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-animator-css'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/templating-binding@0.12.0'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/templating-resources@0.12.1'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/templating-router@0.13.0'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/loader-default@0.8.0'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/history-browser@0.5.0'</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+              minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Next, let's run the command below from the shell:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    aurelia bundle
+  </code></pre></source-code>
+</code-listing>
+<p>Everything should go well and we now should have a file named <code>app-bundle.js</code> in the <code>dist</code> folder. As per the configuration in <code>aureliafile</code>, we have <code>inject</code> set to true. This injects the bundle into <code>config.js</code>. As a result, the bundle will be automatically loaded when the application requests any of the modules included in the bundle. We also have <code>minify</code> set to <code>true</code> to reduce the size of our bundle.</p>
+<p>Let's refresh our browser, keeping the dev tool open and see what happens.</p>
+<blockquote>
+<p>Note: Make sure you clear the browser cache to see the result.</p>
+</blockquote>
+<p><img src="blog/2015/6/3/bundling-an-aurelia-application/content/images/2015/06/after-js-bundling.jpg" alt="No of requests after bundling" /></p>
+<p>15 requests! That's a significant improvement over 256. But, we can make it even better. As we can see in the picture, we have some requests for templates like <code>app.html</code>, <code>nav-bar.html</code> etc. In skeleton-navigation we have only 5 templates. But, a non trivial application may have 100s or even more. So, we need a way to bundle them as well. Fortunately, <code>Aurelia CLI</code> does have an answer to that too!</p>
+</section>
+<section><h2 id="bundling-templates">Bundling Templates</h2><p>Let's teach the <code>cli</code> which templates to bundle. We will add a template configuration section in <code>aureliafile.js</code>. It should now look like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+      <span class="token keyword">var</span> aurelia <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'aurelia-cli'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      aurelia<span class="token punctuation">.</span><span class="token function">command</span><span class="token punctuation">(</span><span class="token string">'bundle'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        js<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token string">"dist/app-bundle"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            modules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+              <span class="token string">'*'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-bootstrapper'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-http-client'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-router'</span><span class="token punctuation">,</span>
+              <span class="token string">'aurelia-animator-css'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/templating-binding@0.12.0'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/templating-resources@0.12.1'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/templating-router@0.13.0'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/loader-default@0.8.0'</span><span class="token punctuation">,</span>
+              <span class="token string">'github:aurelia/history-browser@0.5.0'</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+              minify<span class="token punctuation">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        template<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token string">"dist/app-bundle"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            pattern<span class="token punctuation">:</span> <span class="token string">'dist/*.html'</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              inject<span class="token punctuation">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Let's run <code>aurelia bundle</code> again. This time a new file named <code>app-bundle.html</code> should be created in the <code>dist</code> folder. This bundle contains all our templates in a way that 
+<a href="http://github.com/aurelia/loader" target="_blank">aurelia-loader</a>
+ understands. Since we have set <code>inject</code> to true, a <code>link</code> tag has been injected at the end of the <code>body</code> in our <code>index.html</code>.</p>
+<blockquote>
+<p>Note: You may have to run <code>aurelia bundle --force</code> since we already have a JS bundle at this point in the <code>dist</code> folder. The cli <em>will not</em> overwrite a created bundle normally.</p>
+</blockquote>
+<p>Now, let's reload the application and see the request count again:</p>
+<p><img src="blog/2015/6/3/bundling-an-aurelia-application/content/images/2015/06/after-bundling-templates.jpg" alt="No of requests after bundling templates" /></p>
+<p>10 requests! That's better, isn't it?</p>
+<p>That's how easy it is to create bundles with Aurelia CLI. Once the <code>aureliafile.js</code> is in place with proper configuration, all we need to do is run <code>aurelia bundle</code>.</p>
+<h3>Important Notes When Bundling Templates</h3>
+<ul>
+<li>Glob patterns execute relative to <code>baseURL</code></li>
+<li>You can use patterns like <code>['dist/**/*.html', '!dist/about/*.html']</code> as well.</li>
+<li>Bundle files gets created relative to <code>baseURL</code>. So, according to the <code>aurelifile</code> config <code>dist/app-bundle</code> will be created as <code>baseURL/dist/app-bundle.js</code></li>
+</ul>
+<h3>Important Notes When Bundling JS</h3>
+<ul>
+<li>Unlike template bundling patterns, it does not glob files. Rather, it globs system.js <code>paths</code> like <code>*/**</code> or <code>*</code>.</li>
+<li>Bundle config should include proper <code>module names</code> instead of file names.</li>
+<li>Like templates in the bundle file, the JS bundle file also gets created relative to the <code>baseURL</code>.</li>
+</ul>
+</section>
+<section><h2 id="more-to-come">More to Come...</h2><p>Apart from bundling, the <code>Aurelia CLI</code> has some other really cool tricks up its sleave. It can make your development time more pleasing and interesting. The CLI team is working really hard to create a tool that everyone loves. Tell us what you want, what you like or even dislike on our gitter channel and please raise CLI related issues 
+<a href="https://github.com/aurelia/cli/issues" target="_blank">here</a>
+.</p>
+<p>Thanks to the CLI team and especially Core Team Member 
+<a href="https://github.com/ahmedshuhel" target="_blank">Shuhel Ahmed</a>
+ for putting together this post!</p>
+</section>
+
+  </article>
+</section>

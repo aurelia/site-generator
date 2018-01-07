@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38441871-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+  <meta charset="utf-8">
+  <title>Announcing &quot;Learning Aurelia&quot; from Packt Publishing | Aurelia</title>
+  <base href="/aurelia-docs-test/">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  
+  <meta name="description" content="I&#x27;m very pleased to announce that Packt has published Learning Aurelia [https://www.packtpub.com/web-development/learning-aurelia] by long-time Aurelia community member Manuel Guilbault [http://manuelguilbault.com]. In conjunction with the book release, Manuel put together a short excerpt from the book, which I&#x27;m sure the whole community will enjoy. Read on to learn more about Aurelia from Manuel and don&#x27;t forget to pick up your copy today [https://www.packtpub.com/web-development/learning-aurelia]."/>
+  <meta name="robots" content="index,follow"/>
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:200,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
+</head>
+
+<body aurelia-app="main" id="app-host">
+  <header class="app-header"> 
+    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <search-trigger></search-trigger>
+  </header>
+
+  <main ref="main">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
+      <section class="article blog">
+  <header>
+    <h1>Announcing &quot;Learning Aurelia&quot; from Packt Publishing</h1>
+  </header>
+
+  <article class="markdown">
+    <p>I'm very pleased to announce that Packt has published 
+<a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a>
+ by long-time Aurelia community member 
+<a href="http://manuelguilbault.com" target="_blank">Manuel Guilbault</a>
+. In conjunction with the book release, Manuel put together a short excerpt from the book, which I'm sure the whole community will enjoy. Read on to learn more about Aurelia from Manuel and 
+<a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">don</a>
+.</p>
+<hr />
+<p>In my book 
+<a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a>
+, you can see, among other things, how to build an image file picker component, supporting drag and drop and showing a preview of the selected image. In this post, we'll use the techniques described in the book to build a multi-select image file picker, also supporting drag and drop, with a gallery-style preview feature.</p>
+<section><h2 id="picking-files">Picking Files</h2><p>Let's start by creating a custom <code>file-picker</code> element, which will encapsulate an <code>&lt;input type=&quot;file&quot;&gt;</code> element:</p>
+<h5>resources/elements/file-picker.ts</h5>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>customElement<span class="token punctuation">,</span> useView<span class="token punctuation">,</span> bindable<span class="token punctuation">,</span> bindingMode<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">customElement</span><span class="token punctuation">(</span><span class="token string">'file-picker'</span><span class="token punctuation">)</span>
+    @<span class="token function">useView</span><span class="token punctuation">(</span><span class="token string">'./file-picker.html'</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">FilePicker</span> <span class="token punctuation">{</span>
+    
+      @bindable accept <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      @bindable multiple <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+      @<span class="token function">bindable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> defaultBindingMode<span class="token punctuation">:</span> bindingMode<span class="token punctuation">.</span>twoWay <span class="token punctuation">}</span><span class="token punctuation">)</span> files<span class="token punctuation">:</span> FileList<span class="token punctuation">;</span>
+    
+      input<span class="token punctuation">:</span> HTMLInputElement<span class="token punctuation">;</span>
+    
+      <span class="token function">filesChanged</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>files<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">clearSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">private</span> <span class="token function">clearSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>input<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>input<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token string">'file'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>This view-model declares three bindable properties:</p>
+<ul>
+<li><code>accept</code>: will be bound to the <code>input</code>'s <code>accept</code> attribute, which is used
+to limit the type of files the browser's dialog will show to the user.</li>
+<li><code>multiple</code>: will be bound to the <code>input</code>'s <code>multiple</code> attribute, which
+tells the browser's dialog if it should support selection of multiple files
+or not.</li>
+<li><code>files</code>: will be bound to the <code>input</code>'s <code>files</code> attribute. This property is
+bound two way by default, so the file(s) selected by the user are assigned
+back to the bound property.</li>
+</ul>
+<p>The view-model also declares an <code>input</code> property, to which the template will
+assign a reference on the <code>&lt;input type=&quot;file&quot;&gt;</code> element.</p>
+<p>Lastly, since the <code>input</code>'s <code>files</code> property is read-only and the DOM API doesn't expose a method to clear the <code>input</code>'s file selection (other than calling the <code>reset</code> method on the whole surrounding <code>form</code>), the view-model uses a hack to clear the selected files when an empty value is assigned to the <code>file-picker</code>'s <code>files</code> property: it sets the <code>input</code>'s <code>type</code> to an empty string then resets it back to <code>file</code>.</p>
+<h5>resources/elements/file-picker.html</h5>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">accept.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>accept<span class="token punctuation">"</span></span> <span class="token attr-name">multiple.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>multiple<span class="token punctuation">"</span></span> 
+             <span class="token attr-name">files.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span>
+             <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>visibility: hidden; width: 0; height: 0;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary<span class="token punctuation">"</span></span> <span class="token attr-name">click.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input.click()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span><span class="token punctuation">></span></span>Select<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slot</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>The <code>file-picker</code>'s template defines an <code>&lt;input type=&quot;file&quot;&gt;</code> element, styled so it is invisible and so it occupies no space in the DOM. Its <code>accept</code>, <code>multiple</code>, and <code>files</code> attributes are also properly bound to their corresponding property on the view-model. Lastly, it assigns a reference on the <code>input</code> to the view-model's <code>input</code>
+property.</p>
+<p>The template also declares a <code>button</code> element, styled using Bootstrap's classes. Inside it, there is a default content projection slot, with the <em>Select</em> text as its default content. Additionally, the <code>button</code>'s <code>click</code> event calls the <code>input</code>'s <code>click</code> method. Thanks to this, the browser's file dialog will show up when the user clicks the button, even though the <code>input</code> element is not visible.</p>
+<p>This component basically just replaces the ugly native file picker with a cleaner button.</p>
+</section>
+<section><h2 id="adding-a-file-drop-target">Adding a file drop target</h2><p>Next, let's create a custom attribute allowing to transform any element into a file drag and drop target:</p>
+<h5>resources/attributes/file-drop-target.ts</h5>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>customAttribute<span class="token punctuation">,</span> bindingMode<span class="token punctuation">,</span> autoinject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">customAttribute</span><span class="token punctuation">(</span><span class="token string">'file-drop-target'</span><span class="token punctuation">,</span> bindingMode<span class="token punctuation">.</span>twoWay<span class="token punctuation">)</span>
+    @autoinject
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">FileDropTarget</span> <span class="token punctuation">{</span>
+    
+      value<span class="token punctuation">:</span> FileList <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span>files<span class="token punctuation">:</span> FileList<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+      <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> element<span class="token punctuation">:</span> Element<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+      <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'dragover'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onDragOver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'drop'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onDrop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'dragend'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onDragEnd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">private</span> onDragOver <span class="token operator">=</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        e<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span>dropEffect <span class="token operator">=</span> <span class="token string">'copy'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword">private</span> onDrop <span class="token operator">=</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">{</span> files<span class="token punctuation">:</span> e<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span>files <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> e<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span>files<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword">private</span> onDragEnd <span class="token operator">=</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        e<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span><span class="token function">clearData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'dragend'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onDragEnd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'drop'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onDrop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'dragover'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onDragOver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The attribute's target element will be injected in the view-model's constructor. When the attribute is <code>attached</code> to the DOM, it starts listening for the <code>dragover</code>, <code>drop</code>, and <code>dragend</code> events on the target element. When the attribute is <code>detached</code> from the DOM, the
+event listeners are removed.</p>
+<p>The attribute is bound two way by default, so the file(s) assigned to its <code>value</code> when a user drops them on the target element are assigned back to the bounded property, if any. However, upon files being dropped on the target element, the view-model checks if the
+<code>value</code> is a function or not. This means that the attribute can be used either with the <code>.bind</code> command, so the dropped files are assigned to the bound expression, or with the <code>.call</code> command, so the bound expression is called and passed the dropped files whenever
+a <code>drop</code> event occurs.</p>
+</section>
+<section><h2 id="chunking-an-array">Chunking an Array</h2><p>In order to display the selected images as a gallery, we'll use Bootstrap's grid system. This means we'll need to break the files array down in chunks, so we can iterate on chunks to render rows, then on each chunk's files to render columns.</p>
+<p>The best way to do this in Aurelia is with a value converter:</p>
+<h5>resources/value-converters/chunk.ts</h5>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>valueConverter<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">valueConverter</span><span class="token punctuation">(</span><span class="token string">'chunk'</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Chunk</span> <span class="token punctuation">{</span>
+      <span class="token function">toView</span><span class="token punctuation">(</span>array<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> size<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> nbChunks <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>array<span class="token punctuation">.</span>length <span class="token operator">/</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nbChunks<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> offset <span class="token operator">=</span> i <span class="token operator">*</span> size<span class="token punctuation">;</span>
+          result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>array<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>offset<span class="token punctuation">,</span> offset <span class="token operator">+</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The <code>chunk</code> value converter expects an array and the chunks' size as its parameter and returns an array of array.</p>
+</section>
+<section><h2 id="displaying-a-blob-object-as-an-image">Displaying a Blob Object as an Image</h2><p>The last part we'll need is some way to display a <code>File</code> instance inside an <code>img</code> element. To do this, we'll leverage the browser's <code>URL.createObjectURL</code> function, which takes a <code>Blob</code> object as a parameter and returns a special URL leading to this resource. Our
+custom attribute, which will be used essentially on <code>img</code> elements, will be bound to a <code>Blob</code> object, will generate an object URL from it, and will assign this URL to the <code>img</code> element's <code>src</code> attribute.</p>
+<p>Some of you might think that a value converter would be a better fit for this type of feature, and I would absolutely agree. A value converter could take as an input a <code>Blob</code> object and return the object URL. It could then be used on a binding between an <code>img</code> element's <code>src</code> attribute and a property containing a <code>Blob</code> object.</p>
+<p>However, in this particular case, each object URL must be released after usage in order to prevent memory leaks, and value converters offer no mechanism to be notified when a value is no longer used. On the contrary, HTML behaviors offer a much richer workflow and a wider set of extension points. That's why we will create a custom attribute instead:</p>
+<h5>resources/attributes/blob-src.ts</h5>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>customAttribute<span class="token punctuation">,</span> inject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">customAttribute</span><span class="token punctuation">(</span><span class="token string">'blob-src'</span><span class="token punctuation">)</span>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>Element<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">BlobSrc</span> <span class="token punctuation">{</span>
+    
+      <span class="token keyword">private</span> objectUrl<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> element<span class="token punctuation">:</span> HTMLImageElement<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+      <span class="token keyword">private</span> <span class="token function">disposeObjectUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>objectUrl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+          URL<span class="token punctuation">.</span><span class="token function">revokeObjectURL</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>objectUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>objectUrl <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">valueChanged</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">disposeObjectUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token keyword">instanceof</span> <span class="token class-name">Blob</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>objectUrl <span class="token operator">=</span> URL<span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>element<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>objectUrl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">unbind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">disposeObjectUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="bringing-it-all-together">Bringing It All Together</h2><blockquote>
+<p>Each of the parts we saw up to this point is shown in the book,
+even though some have been modified to fit the current context.</p>
+</blockquote>
+<p>The last missing piece is the one that brings everything together: an <code>image-files-picker</code> custom element.</p>
+<h5>resources/elements/image-files-picker.html</h5>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>jumbotron jumbotron-fluid<span class="token punctuation">"</span></span> <span class="token attr-name">file-drop-target.call</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>add(files)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>You can drop image files anywhere inside this area<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row<span class="token punctuation">"</span></span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row of files | chunk:3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-4<span class="token punctuation">"</span></span> <span class="token attr-name">repeat.for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file of row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>card card-inverse<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>card-img img-fluid<span class="token punctuation">"</span></span>
+                    <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Preview for ${file.name &amp; oneTime}<span class="token punctuation">"</span></span>
+                    <span class="token attr-name">blob-src.one-time</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>card-img-overlay<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>close<span class="token punctuation">"</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Remove<span class="token punctuation">"</span></span> 
+                          <span class="token attr-name">click.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>remove($parent.$index * 3 + $index)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token entity" title="&times;">&amp;times;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>card-text<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>small</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-muted<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${file.name &amp; oneTime}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>small</span><span class="token punctuation">></span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>file-picker</span> <span class="token attr-name">accept.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>accept<span class="token punctuation">"</span></span> <span class="token attr-name">multiple.one-time</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> 
+                   <span class="token attr-name">files.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>selectedFiles<span class="token punctuation">"</span></span> 
+                   <span class="token attr-name">change.delegate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>addSelectedFiles()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Add
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>file-picker</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>The template starts with a <code>jumbotron</code> container, which acts as a <code>file-drop-target</code>. When files are dragged and dropped on this element, the view-model's <code>add</code> method will be called and passed the dropped <code>files</code>.</p>
+<p>Inside this container, the <code>files</code> array is rendered on three columns using the <code>chunk</code> value converter, each file displayed inside a Bootstrap <code>card</code> component. Each <code>card</code> displays the file in an <code>img</code> element using the <code>blob-src</code> attribute, a <code>button</code> whose <code>click</code> event calls the view-model's <code>remove</code> method, and the file's <code>name</code>.</p>
+<p>Lastly, underneath the image gallery, a <code>file-picker</code> element allows the user to select image files. The selected files are bound to the view-model's <code>selectedFiles</code> property, then the <code>change</code> event dispatched by the underlying <code>&lt;input type=&quot;file&quot;&gt;</code> element and bubbling up the DOM triggers a call to the <code>addSelectedFiles</code> method. The
+<code>file-picker</code>'s default projection slot is also overwritten with the text <em>Add</em>.</p>
+<h5>resources/elements/image-files-picker.ts</h5>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>customElement<span class="token punctuation">,</span> useView<span class="token punctuation">,</span> bindable<span class="token punctuation">,</span> bindingMode<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    @<span class="token function">customElement</span><span class="token punctuation">(</span><span class="token string">'image-files-picker'</span><span class="token punctuation">)</span>
+    @<span class="token function">useView</span><span class="token punctuation">(</span><span class="token string">'./image-files-picker.html'</span><span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ImageFilesPicker</span> <span class="token punctuation">{</span>
+    
+      @<span class="token function">bindable</span><span class="token punctuation">(</span><span class="token punctuation">{</span> defaultBindingMode<span class="token punctuation">:</span> bindingMode<span class="token punctuation">.</span>twoWay <span class="token punctuation">}</span><span class="token punctuation">)</span> files<span class="token punctuation">:</span> File<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+      selectedFiles<span class="token punctuation">:</span> FileList<span class="token punctuation">;</span>
+    
+      <span class="token function">add</span><span class="token punctuation">(</span>files<span class="token punctuation">:</span> FileList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> files<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> file <span class="token operator">=</span> files<span class="token punctuation">.</span><span class="token function">item</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>files<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">remove</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>files<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">addSelectedFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>selectedFiles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedFiles <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The view-model declares a <code>files</code> bindable property, which is bound two way by default. This property is expected to initially contain an empty array.</p>
+<p>When files are dropped on the drop target element, the <code>add</code> method is called and the dropped <code>files</code> are appended to the <code>files</code> property. When the user selects files using the <code>file-picker</code>, the selected files are assigned back to the <code>selectedFiles</code> property, then the <code>change</code> event handler calls the <code>addSelectedFiles</code>, which appends the <code>selectedFiles</code> to the <code>files</code> property, and finally assigns <code>null</code> to the <code>selectedFiles</code>.</p>
+<p>This last step makes sure that the underlying <code>&lt;input type=&quot;file&quot;&gt;</code> element has its selection cleared. Without it, if a user tries to add the same file twice in a row, the <code>change</code> event would not be triggered the second time, because the <code>input</code>'s value would not change, so the second file selection would fail from the user's perspective.</p>
+<h3>Using the Image Files Picker</h3>
+<p>Using the <code>image-files-picker</code> element is then pretty simple. We first need to declare a property hosting the array of files on the <code>App</code> view-model:</p>
+<h5>app.ts</h5>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">{</span>
+      files<span class="token punctuation">:</span> File<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Next, we simply need to add the custom element in the template of our <code>App</code> component:</p>
+<h5>app.html</h5>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>require</span> <span class="token attr-name">from</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bootstrap/css/bootstrap.min.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>require</span><span class="token punctuation">></span></span>
+      
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image-files-picker</span> <span class="token attr-name">files.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image-files-picker</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Of course, the various parts need to be loaded, either using the <code>require</code> statement in the <code>app.html</code> template, or in the <code>resources/index.ts</code> feature's <code>configure</code> function.</p>
+</section>
+<section><h2 id="filtering-out-non-image-files">Filtering out Non-Image Files</h2><p>At this point, a user can select or drop any type of files using our component. Some logic allowing only image files should be somehow added.</p>
+<p>A basic filtering logic, using the same syntax as the <code>&lt;input type=&quot;file&quot;&gt;</code> element's <code>accept</code> attribute, is implemented in the complete code sample, which you can find
+<a href="https://github.com/manuel-guilbault/learning-aurelia-image-files-picker" target="_blank">here</a>
+. A more complete solution, showing error messages to the user, can easily be implemented. I'll leave this as an exercise to the reader.</p>
+</section>
+<section><h2 id="exploiting-the-selected-images">Exploiting the Selected Images</h2><p>Typically, such a component would be used to first select a bunch of image files, then to upload those files to some remote endpoint. This is pretty easy to do with  Aurelia's Fetch client and the <code>FormData</code> class from the Fetch API.</p>
+<p>Here's an example of a client service used to upload an array of <code>File</code> instances to some remote endpoint:</p>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>autoinject<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>HttpClient<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-fetch-client'</span><span class="token punctuation">;</span>
+    
+    @autoinject
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">SomeAPI</span> <span class="token punctuation">{</span>
+      <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> http<span class="token punctuation">:</span> HttpClient<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+      <span class="token function">uploadFiles</span><span class="token punctuation">(</span>files<span class="token punctuation">:</span> File<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> body <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> files<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          body<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`files[</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">]`</span></span><span class="token punctuation">,</span> files<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>http<span class="token punctuation">.</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'some/url'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> method<span class="token punctuation">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span> body <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>The Mozilla Developer Network has 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects" target="_blank">some great docs</a>
+ about the <code>FormData</code> class.</p>
+</blockquote>
+</section>
+<section><h2 id="summary">Summary</h2><p>Once again, Aurelia makes things easy. Its various constructs, such as custom attributes,
+elements, and value converters, help us decompose a problem and solve each of its parts
+with a generic, reusable solution, and then recombine them together to address our initial,
+specific problem. <strong>Shameless plug alert</strong>: this aspect is one of the many topics addressed
+in 
+<a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a>
+. You should definitely give it a look!</p>
+</section>
+
+  </article>
+</section>
+
+    </div>
+
+    <footer class="content-footer" id="app-footer">
+      <div class="links">
+        <div class="link-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/overview/what-is-aurelia">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
+            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
+            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/aurelia">GitHub</a></li>
+            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
+            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">
+        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+      </p>
+    </footer>
+  </main>
+
+  <side-bar></side-bar>
+
+  <nav>
+    <ul>
+      <li class="home ${activeTab === 'home' ? 'active' : ''}">
+        <a href="home">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+            height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <g>
+              <path d="M20.5,13.5c-0.276,0-0.5,0.224-0.5,0.5v9h-5v-6.5c0-0.276-0.224-0.5-0.5-0.5h-5C9.224,16,9,16.224,9,16.5V23H4v-9.5
+                C4,13.224,3.776,13,3.5,13S3,13.224,3,13.5v10C3,23.777,3.224,24,3.5,24h6c0.276,0,0.5-0.224,0.5-0.5V17h4v6.5
+                c0,0.276,0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5V14C21,13.724,20.776,13.5,20.5,13.5z"/>
+              <path d="M23.854,12.647l-11.5-11.5c-0.195-0.195-0.512-0.195-0.707,0l-11.5,11.5c-0.195,0.195-0.195,0.512,0,0.707
+                s0.512,0.195,0.707,0L12,2.208l11.146,11.146c0.098,0.098,0.226,0.146,0.354,0.146s0.256-0.049,0.354-0.146
+                C24.049,13.159,24.049,12.842,23.854,12.647z"/>
+              <path d="M16,3h3v3c0,0.276,0.224,0.5,0.5,0.5S20,6.277,20,6V2.5C20,2.224,19.776,2,19.5,2H16c-0.276,0-0.5,0.224-0.5,0.5
+                S15.724,3,16,3z"/>
+            </g>
+          </g>
+          <g id="invisible_shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Home</div>
+        </a>
+      </li>
+
+      <li class="article ${activeTab === 'article' ? 'active' : ''}">
+        <a href="docs">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g>
+              <path d="M23.5,1H12V0.5C12,0.224,11.776,0,11.5,0h-8C3.224,0,3,0.224,3,0.5V1H0.5C0.224,1,0,1.224,0,1.5v22
+                C0,23.776,0.224,24,0.5,24h23c0.276,0,0.5-0.224,0.5-0.5v-22C24,1.224,23.776,1,23.5,1z M4,1h7v11.293L7.854,9.146
+                c-0.195-0.195-0.512-0.195-0.707,0L4,12.293V1z M23,23H1V2h2v11.5c0,0.446,0.542,0.668,0.854,0.354L7.5,10.207l3.646,3.646
+                C11.459,14.166,12,13.948,12,13.5V2h11V23z"/>
+              <path d="M14.5,8h6C20.776,8,21,7.776,21,7.5S20.776,7,20.5,7h-6C14.224,7,14,7.224,14,7.5S14.224,8,14.5,8z"/>
+              <path d="M14.5,11h6c0.276,0,0.5-0.224,0.5-0.5S20.776,10,20.5,10h-6c-0.276,0-0.5,0.224-0.5,0.5S14.224,11,14.5,11z"/>
+              <path d="M20.5,13h-6c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S20.776,13,20.5,13z"/>
+              <path d="M20.5,16h-17C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h17c0.276,0,0.5-0.224,0.5-0.5S20.776,16,20.5,16z"/>
+              <path d="M16.5,19h-13C3.224,19,3,19.224,3,19.5S3.224,20,3.5,20h13c0.276,0,0.5-0.224,0.5-0.5S16.776,19,16.5,19z"/>
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Guides</div>
+        </a>
+      </li>
+
+      <li class="api ${activeTab === 'api' ? 'active' : ''}">
+        <a href="docs/api">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <path d="M21.945,15.283c-0.009-0.02-0.022-0.034-0.034-0.052c-0.031-0.048-0.068-0.089-0.114-0.123
+              c-0.011-0.008-0.015-0.021-0.026-0.029L17,12.011V7.5c0-0.082-0.024-0.156-0.059-0.224c-0.01-0.02-0.023-0.035-0.036-0.053
+              c-0.033-0.049-0.072-0.089-0.12-0.124c-0.012-0.007-0.017-0.022-0.028-0.029l-5-3c-0.158-0.095-0.355-0.095-0.514,0l-5,3
+              C6.231,7.078,6.227,7.093,6.215,7.1c-0.048,0.035-0.087,0.075-0.12,0.124C6.082,7.241,6.068,7.257,6.059,7.276
+              C6.024,7.344,6,7.418,6,7.5v4.511L1.229,15.08c-0.012,0.007-0.016,0.021-0.026,0.029c-0.046,0.034-0.083,0.075-0.114,0.123
+              c-0.012,0.018-0.025,0.032-0.034,0.052C1.022,15.349,1,15.421,1,15.5v4.784c0,0.17,0.087,0.329,0.229,0.421l5,3.216
+              c0.009,0.006,0.021,0.003,0.029,0.009C6.331,23.971,6.411,24,6.5,24s0.169-0.029,0.241-0.07c0.009-0.006,0.021-0.003,0.029-0.009
+              l4.729-3.042l4.729,3.042c0.009,0.006,0.021,0.003,0.029,0.009C16.331,23.971,16.411,24,16.5,24s0.169-0.029,0.241-0.07
+              c0.009-0.006,0.021-0.003,0.029-0.009l5-3.216C21.913,20.613,22,20.454,22,20.284V15.5C22,15.421,21.978,15.349,21.945,15.283z
+              M16.5,17.917l-4.053-2.432l4.053-2.606l4.053,2.606L16.5,17.917z M7,18.783l4-2.4v3.628l-4,2.573V18.783z M16,12.011l-4,2.573
+              v-3.801l4-2.4V12.011z M11,14.584l-4-2.573V8.383l4,2.4V14.584z M11.5,5.083L15.528,7.5L11.5,9.917L7.472,7.5L11.5,5.083z
+              M6.5,12.879l4.053,2.606L6.5,17.917l-4.053-2.432L6.5,12.879z M2,16.383l4,2.4v3.801l-4-2.573V16.383z M12,16.383l4,2.4v3.801
+              l-4-2.573V16.383z M17,22.584v-3.801l4-2.4v3.628L17,22.584z"/>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">APIs</div>
+        </a>
+      </li>
+
+      <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
+        <a href="https://discourse.aurelia.io">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M7.508,14.318c-0.465-0.063-0.923-0.163-1.362-0.297c-0.109-0.034-0.227-0.029-0.331,0.015l-3.669,1.467l1.289-2.255
+                  c0.122-0.214,0.07-0.484-0.122-0.639C1.843,11.434,1,9.729,1,7.935C1,4.387,4.589,1.5,9,1.5s8,2.887,8,6.435
+                  c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5c0-4.1-4.038-7.435-9-7.435S0,3.835,0,7.935c0,1.962,0.855,3.827,2.36,5.178
+                  l-1.794,3.14c-0.105,0.185-0.083,0.416,0.057,0.576C0.72,16.939,0.858,17,1,17c0.062,0,0.125-0.012,0.186-0.036l4.839-1.936
+                  c0.438,0.124,0.891,0.219,1.348,0.28c0.274,0.048,0.526-0.154,0.563-0.428S7.781,14.355,7.508,14.318z"/>
+                <path d="M22.123,20.627C23.353,19.517,24,18.098,24,16.5c0-3.523-3.435-6.5-7.5-6.5S9,12.977,9,16.5
+                  c0,2.125,1.152,4.144,3.083,5.397c2.073,1.349,4.649,1.582,6.93,0.642l3.812,1.429C22.882,23.989,22.941,24,23,24
+                  c0.139,0,0.275-0.058,0.372-0.165c0.138-0.153,0.167-0.375,0.076-0.559L22.123,20.627z M19.176,21.532
+                  C19.119,21.511,19.06,21.5,19,21.5c-0.069,0-0.139,0.015-0.203,0.043c-2.018,0.898-4.324,0.717-6.169-0.484
+                  C10.982,19.99,10,18.285,10,16.5c0-2.981,2.977-5.5,6.5-5.5s6.5,2.519,6.5,5.5c0,1.433-0.61,2.647-1.812,3.609
+                  c-0.184,0.147-0.24,0.403-0.135,0.614l0.931,1.861L19.176,21.532z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">Discourse</div>
+        </a>
+      </li>
+
+      <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
+        <a href="blog">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M14.5,3h-11C3.224,3,3,3.224,3,3.5S3.224,4,3.5,4h11C14.776,4,15,3.776,15,3.5S14.776,3,14.5,3z"/>
+                <path d="M3.5,13h5C8.776,13,9,12.776,9,12.5v-6C9,6.224,8.776,6,8.5,6h-5C3.224,6,3,6.224,3,6.5v6C3,12.776,3.224,13,3.5,13z
+                  M4,7h4v5H4V7z"/>
+                <path d="M14.5,8h-3C11.224,8,11,8.224,11,8.5S11.224,9,11.5,9h3C14.776,9,15,8.776,15,8.5S14.776,8,14.5,8z"/>
+                <path d="M14.5,10h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,10,14.5,10z"/>
+                <path d="M14.5,12h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,12,14.5,12z"/>
+                <path d="M14.5,14h-11C3.224,14,3,14.224,3,14.5S3.224,15,3.5,15h11c0.276,0,0.5-0.224,0.5-0.5S14.776,14,14.5,14z"/>
+                <path d="M14.5,16h-11C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h11c0.276,0,0.5-0.224,0.5-0.5S14.776,16,14.5,16z"/>
+                <path d="M14.5,18h-11C3.224,18,3,18.224,3,18.5S3.224,19,3.5,19h11c0.276,0,0.5-0.224,0.5-0.5S14.776,18,14.5,18z"/>
+                <path d="M23.5,3H20V2c0-0.276-0.224-0.5-0.5-0.5H18v-1C18,0.224,17.776,0,17.5,0h-17C0.224,0,0,0.224,0,0.5v20
+                  C0,22.43,1.57,24,3.5,24h17c1.93,0,3.5-1.57,3.5-3.5v-17C24,3.224,23.776,3,23.5,3z M20,6h1v14.5c0,0.276-0.225,0.5-0.5,0.5
+                  S20,20.776,20,20.5V6z M3.5,23C2.121,23,1,21.878,1,20.5V1h16v1v2v16.5c0,0.979,0.403,1.865,1.053,2.5H3.5z M23,20.5
+                  c0,1.378-1.121,2.5-2.5,2.5S18,21.878,18,20.5V4V2.5h1v18c0,0.827,0.673,1.5,1.5,1.5s1.5-0.673,1.5-1.5v-15
+                  C22,5.224,21.776,5,21.5,5H20V4h3V20.5z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Blog</div>
+        </a>
+      </li>
+      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+        <a href="help">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                  C5.71,23,1,18.29,1,12.5C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"/>
+                <path d="M11.5,6.5C9.57,6.5,8,8.07,8,10c0,0.276,0.224,0.5,0.5,0.5S9,10.276,9,10c0-1.378,1.121-2.5,2.5-2.5S14,8.622,14,10
+                  s-1.121,2.5-2.5,2.5c-0.276,0-0.5,0.224-0.5,0.5v3c0,0.276,0.224,0.5,0.5,0.5S12,16.276,12,16v-2.535
+                  c1.694-0.244,3-1.704,3-3.465C15,8.07,13.43,6.5,11.5,6.5z"/>
+                <circle cx="11.5" cy="18.5" r="1"/>
+              </g>
+            </g>
+          </g>
+          </svg>
+          <div class="label">Help</div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <search-panel></search-panel>
+
+  <script>
+    window.aureliaDocConfiguration = {"name":"Aurelia","siteUrl":"http://aurelia.io","baseUrl":"/aurelia-docs-test/","outDir":"./","trackingID":"UA-38441871-6","home":{"dest":"home"},"blog":{"dest":"blog","src":"./src/blog","postsPerPage":7,"author":"AureliaEffect","migration":{"src":"./src/blog/ghost.json"}},"help":{"name":"Help","src":"./src/help.md","dest":"help"},"notFound":{"name":"404","description":"Not Found"},"docs":{"article":[{"name":"Overview","description":"Discover what Aurelia is along with its business and technical advantages.","dest":"docs/overview","items":[{"name":"What is Aurelia?","src":"../framework/doc/article/en-US/what-is-aurelia.md","dest":"docs/overview/what-is-aurelia","featured":true,"personas":["developer","new-developer","architect","manager"]},{"name":"Technical Benefits","src":"../framework/doc/article/en-US/technical-benefits.md","dest":"docs/overview/technical-benefits","personas":["developer","architect","manager"]},{"name":"Business Advantages","src":"../framework/doc/article/en-US/business-advantages.md","dest":"docs/overview/business-advantages","personas":["developer","architect","manager"]}]},{"name":"Tutorials","description":"Step-by-step tutorials teaching you how to build your first Aurelia applications.","dest":"docs/tutorials","items":[{"name":"Creating a Todo App","src":"../framework/doc/article/en-US/quick-start.md","dest":"docs/tutorials/creating-a-todo-app","featured":true,"personas":["developer","new-developer"]},{"name":"Creating a Contact Manager","src":"../framework/doc/article/en-US/contact-manager-tutorial.md","dest":"docs/tutorials/creating-a-contact-manager","featured":true,"personas":["developer","new-developer"]}]},{"name":"Fundamentals","description":"After you've completed the quick starts, learn more about Aurelia's app model, components, dependency injection and more.","dest":"docs/fundamentals","items":[{"name":"App Config and Startup","src":"../framework/doc/article/en-US/app-configuration-and-startup.md","dest":"docs/fundamentals/app-configuration-and-startup","personas":["developer"]},{"name":"Creating Components","src":"../framework/doc/article/en-US/creating-components.md","dest":"docs/fundamentals/components","personas":["developer"]},{"name":"Dependency Injection","src":"../dependency-injection/doc/article/en-US/dependency-injection-basics.md","dest":"docs/fundamentals/dependency-injection","personas":["developer"]},{"name":"Securing Your App","src":"../framework/doc/article/en-US/securing-your-app.md","dest":"docs/fundamentals/security","personas":["developer"]},{"name":"Cheat Sheet","src":"../framework/doc/article/en-US/cheat-sheet.md","dest":"docs/fundamentals/cheat-sheet","personas":["developer","new-developer"]}]},{"name":"Binding","description":"Learn all about Aurelia's powerful data-binding engine.","dest":"docs/binding","items":[{"name":"Binding Basics","src":"../binding/doc/article/en-US/binding-basics.md","dest":"docs/binding/basics","personas":["developer"]},{"name":"Class and Style","src":"../binding/doc/article/en-US/binding-class-and-style.md","dest":"docs/binding/class-and-style","personas":["developer"]},{"name":"Binding Checkboxes","src":"../binding/doc/article/en-US/binding-checkboxes.md","dest":"docs/binding/checkboxes","personas":["developer"]},{"name":"Binding Radios","src":"../binding/doc/article/en-US/binding-radios.md","dest":"docs/binding/radios","personas":["developer"]},{"name":"Binding Selects","src":"../binding/doc/article/en-US/binding-selects.md","dest":"docs/binding/selects","personas":["developer"]},{"name":"Delegate vs. Trigger","src":"../binding/doc/article/en-US/binding-delegate-vs-trigger.md","dest":"docs/binding/delegate-vs-trigger","personas":["developer"]},{"name":"Computed Properties","src":"../binding/doc/article/en-US/binding-computed-properties.md","dest":"docs/binding/computed-properties","personas":["developer"]},{"name":"Value Converters","src":"../binding/doc/article/en-US/binding-value-converters.md","dest":"docs/binding/value-converters","personas":["developer"]},{"name":"Binding Behaviors","src":"../binding/doc/article/en-US/binding-binding-behaviors.md","dest":"docs/binding/binding-behaviors","personas":["developer"]},{"name":"Observable Properties","src":"../binding/doc/article/en-US/binding-observable-properties.md","dest":"docs/binding/binding-observable-properties","personas":["developer"]},{"name":"How it Works","src":"../binding/doc/article/en-US/binding-how-it-works.md","dest":"docs/binding/how-it-works","personas":["developer"]}]},{"name":"Templating","description":"Learn all about Aurelia's powerful templating engine.","dest":"docs/templating","items":[{"name":"Templating Basics","src":"../templating/doc/article/en-US/templating-basics.md","dest":"docs/templating/basics","personas":["developer"]},{"name":"HTML Behaviors","src":"../templating/doc/article/en-US/templating-html-behaviors-introduction.md","dest":"docs/templating/html-behaviors-introduction","personas":["developer"]},{"name":"Custom Attributes","src":"../templating/doc/article/en-US/templating-custom-attributes.md","dest":"docs/templating/custom-attributes","personas":["developer"]},{"name":"Custom Elements","src":"../templating/doc/article/en-US/templating-custom-elements.md","dest":"docs/templating/custom-elements","personas":["developer"]},{"name":"Content Projection","src":"../templating/doc/article/en-US/templating-content-projection.md","dest":"docs/templating/content-projection","personas":["developer"]},{"name":"Dynamic UI Composition","src":"../templating/doc/article/en-US/templating-dynamic-ui-composition.md","dest":"docs/templating/dynamic-ui-composition","personas":["developer"]}]},{"name":"Routing","description":"Learn how to setup and configure Aurelia's router.","dest":"docs/routing","items":[{"name":"Router Configuration","src":"../router/doc/article/en-US/router-configuration.md","dest":"docs/routing/configuration","personas":["developer"]}]},{"name":"Plugins","description":"Learn about Aurelia's officially supported plugins and how to use them.","dest":"docs/plugins","items":[{"name":"HTTP","src":"../fetch-client/doc/article/en-US/http-services.md","dest":"docs/plugins/http-services","personas":["developer"]},{"name":"Validation","src":"../validation/doc/article/en-US/validation-basics.md","dest":"docs/plugins/validation","personas":["developer"]},{"name":"I18N","src":"../i18n/doc/article/en-US/i18n-with-aurelia.md","dest":"docs/plugins/i18n","personas":["developer"]},{"name":"Dialog","src":"../dialog/doc/article/en-US/dialog-basics.md","dest":"docs/plugins/dialog","personas":["developer"]}]},{"name":"Integration","description":"Learn how to integrate Aurelia with various other libraries and frameworks.","dest":"docs/integration","items":[{"name":"Integrating with Polymer","src":"../framework/doc/article/en-US/integrating-with-polymer.md","dest":"docs/integration/polymer","personas":["developer"]}]},{"name":"Testing","description":"Learn all about testing Aurelia apps, including component testing and e2e testing.","dest":"docs/testing","items":[{"name":"Testing Components","src":"../testing/doc/article/en-US/testing-components.md","dest":"docs/testing/components","personas":["developer"]},{"name":"End-to-End Testing","src":"../testing/doc/article/en-US/end-to-end-testing.md","dest":"docs/testing/end-to-end","personas":["developer"]}]},{"name":"Build Systems","description":"Learn about the various build setups that Aurelia supports out-of-the-box.","dest":"docs/build-systems","items":[{"name":"The Aurelia CLI","src":"../framework/doc/article/en-US/the-aurelia-cli.md","dest":"docs/build-systems/aurelia-cli","personas":["developer","new-developer"]},{"name":"Webpack","description":"Setup and bundling using the Webapck system.","dest":"docs/build-systems/webpack","items":[{"name":"Webpack Setup","src":"../framework/doc/article/en-US/setup-webpack.md","dest":"docs/build-systems/webpack/setup","personas":["developer"]},{"name":"Webpack Bundling","src":"../framework/doc/article/en-US/bundling-webpack.md","dest":"docs/build-systems/webpack/bundling","personas":["developer","new-developer"]}]},{"name":"JSPM","description":"Setup and bundling using the JSPM system.","dest":"docs/build-systems/jspm","items":[{"name":"JSPM Setup","src":"../framework/doc/article/en-US/setup-jspm.md","dest":"docs/build-systems/jspm/setup","personas":["developer"]},{"name":"JSPM Bundling","src":"../framework/doc/article/en-US/bundling-jspm.md","dest":"docs/build-systems/jspm/bundling","personas":["developer"]}]}]}],"api":[{"name":"Binding","package":"../binding/package.json","src":"../binding/dist/aurelia-binding.d.ts","dest":"docs/api/binding","exampleSrc":"../binding/doc/example-dist","exampleDest":"example"},{"name":"Bootstrapper","package":"../bootstrapper/package.json","src":"../bootstrapper/dist/aurelia-bootstrapper.d.ts","dest":"docs/api/bootstrapper"},{"name":"Dependency Injection","package":"../dependency-injection/package.json","src":"../dependency-injection/dist/aurelia-dependency-injection.d.ts","dest":"docs/api/dependency-injection"},{"name":"Event Aggregator","package":"../event-aggregator/package.json","src":"../event-aggregator/dist/aurelia-event-aggregator.d.ts","dest":"docs/api/event-aggregator"},{"name":"Fetch","package":"../fetch-client/package.json","src":"../fetch-client/dist/aurelia-fetch-client.d.ts","dest":"docs/api/fetch-client"},{"name":"Framework","package":"../framework/package.json","src":"../framework/dist/aurelia-framework.d.ts","dest":"docs/api/framework"},{"name":"History","package":"../history/package.json","src":"../history/dist/aurelia-history.d.ts","dest":"docs/api/history"},{"name":"History-Browser","package":"../history-browser/package.json","src":"../history-browser/dist/aurelia-history-browser.d.ts","dest":"docs/api/history-browser"},{"name":"I18N","package":"../i18n/package.json","src":"../i18n/dist/aurelia-i18n.d.ts","dest":"docs/api/i18n"},{"name":"Loader","package":"../loader/package.json","src":"../loader/dist/aurelia-loader.d.ts","dest":"docs/api/loader"},{"name":"Loader-Default","package":"../loader-default/package.json","src":"../loader-default/dist/aurelia-loader-default.d.ts","dest":"docs/api/loader-default"},{"name":"Logging","package":"../logging/package.json","src":"../logging/dist/aurelia-logging.d.ts","dest":"docs/api/logging"},{"name":"Logging-Console","package":"../logging-console/package.json","src":"../logging-console/dist/aurelia-logging-console.d.ts","dest":"docs/api/logging-console"},{"name":"Metadata","package":"../metadata/package.json","src":"../metadata/dist/aurelia-metadata.d.ts","dest":"docs/api/metadata"},{"name":"Platform Abstraction Layer (PAL)","package":"../pal/package.json","src":"../pal/dist/aurelia-pal.d.ts","dest":"docs/api/pal"},{"name":"PAL-Browser","package":"../pal-browser/package.json","src":"../pal-browser/dist/aurelia-pal-browser.d.ts","dest":"docs/api/pal-browser"},{"name":"Path","package":"../path/package.json","src":"../path/dist/aurelia-path.d.ts","dest":"docs/api/path"},{"name":"Router","package":"../router/package.json","src":"../router/dist/aurelia-router.d.ts","dest":"docs/api/router"},{"name":"Task Queue","package":"../task-queue/package.json","src":"../task-queue/dist/aurelia-task-queue.d.ts","dest":"docs/api/task-queue"},{"name":"Templating","package":"../templating/package.json","src":"../templating/dist/aurelia-templating.d.ts","dest":"docs/api/templating"},{"name":"Templating-Binding","package":"../templating-binding/package.json","src":"../templating-binding/dist/aurelia-templating-binding.d.ts","dest":"docs/api/templating-binding"},{"name":"Templating-Resources","package":"../templating-resources/package.json","src":"../templating-resources/dist/aurelia-templating-resources.d.ts","dest":"docs/api/templating-resources"},{"name":"Templating-Router","package":"../templating-router/package.json","src":"../templating-router/dist/aurelia-templating-router.d.ts","dest":"docs/api/templating-router"},{"name":"Testing","package":"../testing/package.json","src":"../testing/dist/commonjs/aurelia-testing.d.ts","dest":"docs/api/testing"}]}};
+  </script>
+
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Patch Updates (2015-12-03)</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Now that the Beta is out, we're focusing our time on bug fixes, performance and polish. This week we've released a number of patches to libraries that fix bugs and enhance performance in certain scenarios. To get the latest, simply run <code>jspm update</code>. You can find the release notes below. Stay tuned for tomorrow's post on performance...</p>
+<section><h2 id="aurelia-history-browser-100-beta101">aurelia-history-browser 1.0.0-beta.1.0.1</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>history-browser:</strong> open link in new tab when it clicked with middle button (
+<a href="http://github.com/aurelia/history-browser/commit/8acf18fe820bed72e6957ed2f7686d37430b178b" target="_blank">8acf18fe</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-fetch-client-100-beta101">aurelia-fetch-client 1.0.0-beta.1.0.1</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>build:</strong>
+<ul>
+<li>fix duplicate type definition error when building docs (
+<a href="http://github.com/aurelia/fetch-client/commit/15d7213cd2173b3cdb03c9267fb64112d7d978c9" target="_blank">15d7213c</a>
+)</li>
+<li>include fetch API typings with this library's typings (
+<a href="http://github.com/aurelia/fetch-client/commit/b2869d5741bccbea1e12a8d40e19d5f1fa1aedfa" target="_blank">b2869d57</a>
+, closes 
+<a href="http://github.com/aurelia/fetch-client/issues/15" target="_blank">#15</a>
+, 
+<a href="http://github.com/aurelia/fetch-client/issues/23" target="_blank">#23</a>
+)</li>
+</ul>
+</li>
+</ul>
+</section>
+<section><h2 id="aurelia-binding-100-beta102">aurelia-binding 1.0.0-beta.1.0.2</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>AccessKeyed:</strong> evaluate null/undefined object should return undefined (
+<a href="http://github.com/aurelia/binding/commit/be97c8b638e7316b6af9c543291280e8282b53ac" target="_blank">be97c8b6</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/241" target="_blank">#241</a>
+)</li>
+<li><strong>Parser:</strong> parse parent in LiteralObject (
+<a href="http://github.com/aurelia/binding/commit/c62280e40dc4634ad230112437c8223f474674e0" target="_blank">c62280e4</a>
+)</li>
+<li><strong>typings:</strong> add missing argument types (
+<a href="http://github.com/aurelia/binding/commit/2662f7f61b56c581ac7ee9670b9c4c1fd3f213f0" target="_blank">2662f7f6</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/232" target="_blank">#232</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>select:</strong> enable matcher functions (
+<a href="http://github.com/aurelia/binding/commit/c69aa683e5b0aff6745d88cbd8ff5ae35d34c34d" target="_blank">c69aa683</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/94" target="_blank">#94</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-templating-100-beta101">aurelia-templating 1.0.0-beta.1.0.1</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>composition:</strong> bindable bug on composed instances (
+<a href="http://github.com/aurelia/templating/commit/fea62558a63adf3da9f3df7d6944b8efd84e7016" target="_blank">fea62558</a>
+)</li>
+<li><strong>view-compiler:</strong> pass options info to binding lang (
+<a href="http://github.com/aurelia/templating/commit/435d1a155942f2cf49a9fcfd4e11ea78d57b31ca" target="_blank">435d1a15</a>
+, closes 
+<a href="http://github.com/aurelia/templating/issues/73" target="_blank">#73</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-templating-binding-100-beta101">aurelia-templating-binding 1.0.0-beta.1.0.1</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>binding-language:</strong> apply default modes to options props (
+<a href="http://github.com/aurelia/templating-binding/commit/d025af9b6f8a10cfda98ae87ae876ac9fff7b33c" target="_blank">d025af9b</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-templating-resources-100-beta102">aurelia-templating-resources 1.0.0-beta.1.0.2</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>repeat:</strong>
+<ul>
+<li>handle pass-through converters (
+<a href="http://github.com/aurelia/templating-resources/commit/b2741c9e437610991b71f769ee8f171352d4ad5e" target="_blank">b2741c9e</a>
+)</li>
+<li>fix context in getViewIndexByKey (
+<a href="http://github.com/aurelia/templating-resources/commit/7f245ce3b490fa82cae20103281b665a07cf3eb2" target="_blank">7f245ce3</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/156" target="_blank">#156</a>
+)</li>
+<li>obey one-time binding behavior (
+<a href="http://github.com/aurelia/templating-resources/commit/5fa32e90d394107d500383efa6306b5d8df43996" target="_blank">5fa32e90</a>
+)</li>
+</ul>
+</li>
+<li><strong>signal:</strong> missing this (
+<a href="http://github.com/aurelia/templating-resources/commit/078087ce375e4feb4fd34b83d8da4198527c5aa9" target="_blank">078087ce</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/157" target="_blank">#157</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-templating-router-100-beta102">aurelia-templating-router 1.0.0-beta.1.0.2</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>router-view:</strong> ensure unbind prev view (
+<a href="http://github.com/aurelia/templating-router/commit/a2197205e018f88778ac9d1afa2719429b0232db" target="_blank">a2197205</a>
+, closes 
+<a href="http://github.com/aurelia/templating-router/issues/16" target="_blank">#16</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-skeleton-navigation-100-beta102">aurelia-skeleton-navigation 1.0.0-beta.1.0.2</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>build:</strong> do not reload after CSS injection (
+<a href="http://github.com/aurelia/skeleton-navigation/commit/00bab07a8256556e96886ad586b14ae73990512b" target="_blank">00bab07a</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>build:</strong> add CSS injecting (
+<a href="http://github.com/aurelia/skeleton-navigation/commit/fb620e72e5dd532f7a0d7133c3c35e64be0d5b5f" target="_blank">fb620e72</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-dialog-051">aurelia-dialog 0.5.1</h2><h4>Bug Fixes</h4>
+<ul>
+<li>Destroy modal only when modalContainer ends its transition</li>
+<li>incorrect DialogFooter name</li>
+</ul>
+</section>
+
+  </article>
+</section>

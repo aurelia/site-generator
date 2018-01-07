@@ -1,0 +1,52 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Mid-October 2015 Releases: Performance and Portable JavaScript</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Wow. Wow. Wow. We are getting really close to our beta release! Today's releases bring you some major overhauls to performance, memory consumption, internal design consistency and platform portability. Read on to get the details.</p>
+<section><h2 id="new-features">New Features</h2><ul>
+<li>PAL - This release introduces a Platform Abstraction Layer (PAL) which enables Aurelia to remove all dependencies on browser globals and specific runtime environment capabilities. Different implementations of the PAL can be plugged in to enable Aurelia's libraries to run in the different environments available today. This is a fundamental enabler for view pre-compilation, browser-less testing and server-side rendering for SEO and isomorphic scenarios.</li>
+<li>New DI and Binding Engine Internals - The usage of DI and data-binding is the same as it's been for months, however, we've re-vamped the internals of these libraries in order to reduce memory pressure and improve performance. This releases contains some great improvements in these areas. We'll have a follow-up blog post to talk more about the performance work soon.</li>
+<li>New <code>bindingEngine</code> facade object enables easy use of various databinding APIs.</li>
+<li>New <code>templatingEngine</code> facade enables easy use of various templating APIs.</li>
+</ul>
+</section>
+<section><h2 id="improvements">Improvements</h2><ul>
+<li>The module loader abstraction has been significantly cleaned up and improved to shield developers from any future changes in the module loader specification.</li>
+<li>The new <code>bindingEngine</code> and <code>EventAggregator</code> follow the same pattern of returning subscription objects for event management.</li>
+</ul>
+</section>
+<section><h2 id="breaking-changes">Breaking Changes</h2><p>This looks like a lot of breaking changes, however most of these related to internal structures and shouldn't affect you much if at all.</p>
+<ul>
+<li>If you were using the <code>AggregateError</code> type, it is no longer in the <code>logging</code> library. It has been moved to the <code>pal</code> library. However, like before, it is also exported by the <code>framework</code> library.</li>
+<li>The <code>levels</code> enum in the <code>logging</code> library has been renamed to <code>logLevel</code> for consistency.</li>
+<li>The <code>metadata</code> library's exports <code>Decorators</code> and <code>Metadata</code> have been renamed to <code>decorators</code> and <code>metadata</code> respectively. Since these were object exports, not classes, we wanted to be consistent with standard JavaScript casing practice and lowercase their names.</li>
+<li>The DI library's <code>Container</code> has an instance method named <code>hasHandler()</code>. This method is being deprecated and will be removed for the beta release. It has been replaced with <code>hasResolver()</code>.</li>
+<li>The <code>EventAggregator</code> now returns a subscription object from its <code>subscribe</code> method. The subscription has a <code>dispose</code> method to unsubscribe from the original event.</li>
+<li><code>BehaviorInstance</code> has been renamed to <code>Controller</code>, to better reflect the templating engine's internal MVC architecture.</li>
+<li>The <code>BehaviorInstance</code>/<code>Controller</code>'s <code>bindingContext</code> property has been renamed to <code>model</code> to better reflect the templating engine's internal MVC architecture.</li>
+<li>The <code>primaryBehavior</code> property that used to be on custom HTML elements has been removed. Instead, there is a new <code>au</code> property. The object that is returned from accessing this property has one property for each Aurelia API associated with the element. There will be a <code>controller</code> property pointing to the <code>Controller</code> instance of the custom element. Each of the other properties point to <code>Controller</code> instances for each/any custom attributes found on the element.</li>
+<li>The templating engine's test helper APIs have been moved to the <code>templatingEngine</code> object. If you are using Aurelia APIs in a unit test, you will want to <code>jspm install aurelia-pal-browser --dev</code> and then import the <code>initialize</code> method from that library, invoking it in any test file. This will ensure that you have the browser implementation of the PAL present for your tests. If you wish to mock out aspects of the templating or binding engines, then you can call <code>templatingEngine.initialize(container)</code> providing a pre-configured container instance for it to use. You can create instances of your custom element or attribute models with for testing with <code>let instance = templateEngine.createModelForUnitTest(ModelType, optionalHTMLAttributeKeyValuePairs, optionalBindingContext);</code></li>
+<li>The view resource pipeline's <code>analyze</code> callback has been renamed to <code>initialize</code>.</li>
+</ul>
+</section>
+<section><h2 id="performance">Performance</h2><ul>
+<li>Dependency Injection - As mentioned above, the entire internal implementation of the DI library has been re-written in order to improve performance and reduce memory pressure. The new implementation is also more consistent internally and more flexible. Various parts of Aurelia are taking advantage of the new design flexibility.</li>
+<li>Databinding - As mentioned above, the internals of the binding engine have had a massive overhaul. The changes include a dramatic reduction of object/array/closure allocation, resulting in improved performance and lower memory consumption.</li>
+<li>The <code>repeat</code> attribute now has the ability to re-use views. The developer can set the view cache size on a per template basis with <code>view-cache=&quot;number|*&quot;</code> on any template.</li>
+<li>Some additional performance work was done in the templating engine.</li>
+</ul>
+</section>
+<section><h2 id="deprecations">Deprecations</h2><ul>
+<li>The <code>html-template-element</code> polyfill library is deprecated. The updated polyfill is now included in our <code>pal-browser</code> library as part of the core browser platform.</li>
+<li>The <code>global-behavior</code> is being removed in the next release. This was an experiment to see whether we could automatically generate jQuery behaviors on the fly. In retrospect, we don't think it was a good idea. If you like it, it can easily be added to your own project.</li>
+<li>The <code>with</code> custom attribute is being removed in the next release, most likely. We would like to have this long term, but currently there are some issues with it and we need to remove it until we fix a couple things inside that binding engine that would enable building this in a better way. Again, if it works for you, it's just a custom attribute, so you can add it to your own project.</li>
+</ul>
+</section>
+<section><h2 id="roadmap">Roadmap</h2><p>This is the last release we'll have before beta. We are planning Aurelia's Beta 1 to launch in about 2-3 weeks. The Beta 1 release will also include our new documentation.</p>
+<p>We also plan to do a Beta 2. The primary reason for this is that the Web Components specs have recently changed. We don't think we can address the spec changes in the Beta 1 timeframe and we don't want to &quot;spring&quot; it on our community for the final release. So, we're going to do a second beta release to address that. We'll also be able to make some other improvements as part of that as well. Once the Beta 2 is out, we're going to let the libraries &quot;simmer&quot; for a bit, while we fix issues and continue performance improvements. After a period of time (to be determined based on community feedback) we'll make the v1.0 release.</p>
+</section>
+
+  </article>
+</section>

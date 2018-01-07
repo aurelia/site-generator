@@ -1,0 +1,49 @@
+<section class="article blog">
+  <header>
+    <h1>May 24 Aurelia Patch Release Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Hopefully you saw 
+<a href="http://blog.durandal.io/2016/05/23/aurelia-shadow-dom-v1-slots-prerelease/" target="_blank">our big announcement yesterday</a>
+ about support for Shadow DOM v1 Slots in Aurelia. It's an exciting milestone for us on our road towards Release Candidate and as part of our commitment to web standards. Today, we have a number of patch releases to various Aurelia libraries. The list is relatively small. You can read the details below.</p>
+<section><h2 id="release-notes">Release Notes</h2><blockquote>
+<p>Note: The Shadow DOM v1 features are not included in the mainline releases. Those are an out-of-band release at the moment so that the community can choose whether to update now or wait.</p>
+</blockquote>
+<h3>aurelia-polyfills 1.0.0-beta.1.1.5</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>console:</strong> moved console fix from logging-console to polyfills (
+<a href="http://github.com/aurelia/polyfills/commit/6db2334a31e5d36f30e2dbda47bfaa2162f279bf" target="_blank">6db2334a</a>
+)</li>
+</ul>
+<h3>aurelia-logging-console 1.0.0-beta.1.2.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>index:</strong> moved console polyfill to aurelia-polyfills (
+<a href="http://github.com/aurelia/logging-console/commit/073d49dc51b8c1a1f5ce7dc59f136ea329c0a784" target="_blank">073d49dc</a>
+)</li>
+</ul>
+<h3>aurelia-http-client 1.0.0-beta.1.2.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Fix request-message to account for existing query strings in urls.</li>
+</ul>
+<h3>aurelia-dialog 0.6.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog-service:</strong> add host element to container (#152) (
+<a href="https://github.com/aurelia/dialog/commit/bcd2453248eada5c6595a53083bcc9dfacbec9e6" target="_blank">bcd24532</a>
+, closes 
+<a href="https://github.com/aurelia/dialog/issues/150" target="_blank">#150</a>
+)</li>
+<li><strong>dialogResult:</strong> export DialogResult for dts (#153) (
+<a href="https://github.com/aurelia/dialog/commit/736f6fa1eacc612d65c80ce66b577ef034c67f7b" target="_blank">736f6fa1</a>
+, closes 
+<a href="https://github.com/aurelia/dialog/issues/134" target="_blank">#134</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>

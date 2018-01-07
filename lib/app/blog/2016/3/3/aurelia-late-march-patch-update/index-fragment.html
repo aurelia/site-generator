@@ -1,0 +1,187 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Late March Patch Update</h1>
+  </header>
+
+  <article class="markdown">
+    <p>In the last month we've accomplished a couple of major goals on our way to the official v1 release of Aurelia: updating to Babel 6, removing required external polyfills and dual compatibility with JSPM 16 and 17. This week, we've got a few fixes and some extra goodies.</p>
+<section><h2 id="fixes">Fixes</h2><p>During the process of updating to support JSPM and removing the core-js dependency, a few regressions were introduced. Today's fixes address most of those. We've also continued our normal progress of fixing bugs reported by the community. See the change-log for further details.</p>
+</section>
+<section><h2 id="new-features">New Features</h2><ul>
+<li>Major improvements and capabilities for the <code>virtual-repeat</code>.</li>
+<li>A new TypeScript-Webpack skeleton.</li>
+<li>Support for databinding <code>accesskey</code></li>
+</ul>
+</section>
+<section><h2 id="what">What</h2><p>We're continuing to work on performance, size improvements and bug fixes. You can expect more improvements in those areas for release.</p>
+<p>The last major feature for the release candidate is updating our Shadow DOM to support the new v1 specification. As part of this, we'll also address a few bugs in our current Shadow DOM implementation and related <code>@child</code>/<code>@children</code> properties. This is a breaking change. Hopefully you've prepared for it by following the guidelines we gave in our Beta release of last year.</p>
+<p>For v1 and beyond we are continuing to work on various developer workflows. We tackled the jspm/system.js workflow first. We've recently added an npm/webpack worflow which is moving ahead nicely. Finally, we hope to have an npm/require.js workflow available in the near future as well.</p>
+</section>
+<section><h2 id="change-log">Change-log</h2><h3>aurelia-polyfills 1.0.0-beta.1.1.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>symbol:</strong> fix Object.defineProperties (
+<a href="http://github.com/aurelia/polyfills/commit/f548033d486a26770195daf95a94e905510106f1" target="_blank">f548033d</a>
+)</li>
+<li><strong>reflect:</strong>  Guard Reflect.getOwnMetadata key with hasOwnProperty check</li>
+</ul>
+<h3>aurelia-binding 1.0.0-beta.1.3.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>hasDeclaredDependencies:</strong> handle deps already converted to ComputedExpression (
+<a href="http://github.com/aurelia/binding/commit/7160248ac50fe5e385384a9196c9602ffd315693" target="_blank">7160248a</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/359" target="_blank">#359</a>
+)</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>BindableProperty:</strong> enable specifying oneTime default binding mode (
+<a href="http://github.com/aurelia/templating/commit/a557aade002133144fa2e2106066d26af2037d78" target="_blank">a557aade</a>
+, closes 
+<a href="http://github.com/aurelia/templating/issues/298" target="_blank">#298</a>
+)</li>
+<li><strong>View:</strong> preserve bindingContext while unbinding (
+<a href="http://github.com/aurelia/templating/commit/ae6feed008ee19dfb0ad9204c562a845c11213ef" target="_blank">ae6feed0</a>
+)</li>
+<li><strong>view:</strong> incorrect input to dynamic binding (
+<a href="http://github.com/aurelia/templating/commit/2069af0880057858b7758f67faf4f2f9ccdbc96f" target="_blank">2069af08</a>
+)</li>
+</ul>
+<h3>aurelia-templating-binding 1.0.0-beta.1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>SyntaxInterpreter:</strong> enable specifying oneTime default binding mode (
+<a href="http://github.com/aurelia/templating-binding/commit/74953349afb71538cbee4e73498ea5d3584f5f62" target="_blank">74953349</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>attributeMap:</strong> map accesskey (
+<a href="http://github.com/aurelia/templating-binding/commit/5d9b1315224cd737c5d613f42eee6bda6db9e858" target="_blank">5d9b1315</a>
+)</li>
+</ul>
+<h3>aurelia-templating-resources 1.0.0-beta.1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>exports:</strong> export RepeatStrategyLocator (
+<a href="http://github.com/aurelia/templating-resources/commit/1c3c4189eb983c4430d31a41e68f664116de1361" target="_blank">1c3c4189</a>
+)</li>
+<li><strong>html-resource-plugin:</strong> handle query string and mixed casing (
+<a href="http://github.com/aurelia/templating-resources/commit/86afdd8c76192b0adcfb670482ff9ee8f40d7a03" target="_blank">86afdd8c</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/203" target="_blank">#203</a>
+)</li>
+<li><strong>index:</strong> add missing import to re-export (
+<a href="http://github.com/aurelia/templating-resources/commit/1f9d44b3dc1d40e536ad414ec11be1811fafa565" target="_blank">1f9d44b3</a>
+)</li>
+</ul>
+<h3>aurelia-framework 1.0.0-beta.1.2.1 (2016-03-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>feature:</strong> use proper parameter to check extension (
+<a href="http://github.com/aurelia/framework/commit/c179a3e97565a55a059d86ebb73dcee18732ede1" target="_blank">c179a3e9</a>
+)</li>
+<li><strong>framework-configuration:</strong> getExt return invalid extension when relative path is supplied (
+<a href="http://github.com/aurelia/framework/commit/335f8559eafaf5df1884489d1e29850669fb2204" target="_blank">335f8559</a>
+)</li>
+<li><strong>global resource:</strong> load resources other than .ts or .js (
+<a href="http://github.com/aurelia/framework/commit/b57f290ab97d15cc9e0eedd18ec64af97c004e70" target="_blank">b57f290a</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="aurelia-ui-virtualization-040">aurelia-ui-virtualization 0.4.0</h2><h4>Bug Fixes</h4>
+<ul>
+<li><strong>array-virtual-repeat-strategy:</strong>
+<ul>
+<li>add new items to the distance to bottom view port (
+<a href="http://github.com/aurelia/ui-virtualization/commit/603831008f43fb1fb67a538b9191483c3a1259fc" target="_blank">60383100</a>
+)</li>
+<li>queue changes when animating (
+<a href="http://github.com/aurelia/ui-virtualization/commit/c4fff68b6403eca9a3802653f77d250ce749a1ab" target="_blank">c4fff68b</a>
+)</li>
+<li>do not remove views when less than max rendered (
+<a href="http://github.com/aurelia/ui-virtualization/commit/312f4caf2dac668225404e8d5dfa7602ffb87762" target="_blank">312f4caf</a>
+)</li>
+<li>handel added items when scrolled to bottom (
+<a href="http://github.com/aurelia/ui-virtualization/commit/ed3b014c63bcafc4df5f52ea72b4426c5f057260" target="_blank">ed3b014c</a>
+)</li>
+<li>handle remove from bottom and top (
+<a href="http://github.com/aurelia/ui-virtualization/commit/46c8ba711c0455a5ba461fe2134f1f14c7af4c9d" target="_blank">46c8ba71</a>
+)</li>
+</ul>
+</li>
+<li><strong>utilities:</strong> rename updateOverrideContexts to updateVirtualOverrideContexts (
+<a href="http://github.com/aurelia/ui-virtualization/commit/c879a08f6f6b693fe0e4e0ba74302199c64cd6ef" target="_blank">c879a08f</a>
+)</li>
+<li><strong>view-strategy:</strong>
+<ul>
+<li>keep anchor node at bottom (
+<a href="http://github.com/aurelia/ui-virtualization/commit/7857725f9293b05a3a3672d6ca4902a0f050218f" target="_blank">7857725f</a>
+)</li>
+<li>handle detached (
+<a href="http://github.com/aurelia/ui-virtualization/commit/4f10fcc5ed3a62cd6ea2b9a72327117c111221cc" target="_blank">4f10fcc5</a>
+)</li>
+</ul>
+</li>
+<li><strong>virtual-repeat:</strong>
+<ul>
+<li>initialize scroll at top to true (
+<a href="http://github.com/aurelia/ui-virtualization/commit/7264d3d6930293dc5bb869dd47ff464f070a333f" target="_blank">7264d3d6</a>
+)</li>
+<li>stop updating when scrolling passed the list (
+<a href="http://github.com/aurelia/ui-virtualization/commit/b7c19e6f111e4fa594d2f37d7b999039dd272a8b" target="_blank">b7c19e6f</a>
+)</li>
+<li>move views at top and bottom when virtualised (
+<a href="http://github.com/aurelia/ui-virtualization/commit/7775796eb2586bf27c3ed08ac8e5a420db97c6e0" target="_blank">7775796e</a>
+)</li>
+<li>remove resize handling (
+<a href="http://github.com/aurelia/ui-virtualization/commit/029e6efb21910c79a28ae6fe3c3968a39968da42" target="_blank">029e6efb</a>
+)</li>
+<li>support fixed height container (
+<a href="http://github.com/aurelia/ui-virtualization/commit/807040741d900e503ed205c7f2cd971110b42aeb" target="_blank">80704074</a>
+)</li>
+<li>do not move view when at top or bottom (
+<a href="http://github.com/aurelia/ui-virtualization/commit/dce3107a519c3d65a768b4c4221b8fa80f25b651" target="_blank">dce3107a</a>
+)</li>
+<li>handle bind with less items than whats fits in view port (
+<a href="http://github.com/aurelia/ui-virtualization/commit/9e6f121a26c5995ea4aa5ac262274e006db17683" target="_blank">9e6f121a</a>
+, closes 
+<a href="http://github.com/aurelia/ui-virtualization/issues/39" target="_blank">#39</a>
+)</li>
+<li>remove scrollList (
+<a href="http://github.com/aurelia/ui-virtualization/commit/05ecd2ff8371c46e448af12ef9c3a5bb2cd73029" target="_blank">05ecd2ff</a>
+)</li>
+<li>handle remove items from list (
+<a href="http://github.com/aurelia/ui-virtualization/commit/498296b1b785cbbaa0476ec0c6e932daaa00643f" target="_blank">498296b1</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>TableStrategy:</strong> remove need for surrounding container (
+<a href="http://github.com/aurelia/ui-virtualization/commit/617d7570627ae4b3ff63049a09237446f0623d52" target="_blank">617d7570</a>
+)</li>
+<li><strong>virtual-list:</strong> remove VirtualList (
+<a href="http://github.com/aurelia/ui-virtualization/commit/d52201c2cee28c25728fb1e00a9f6f90f9f8fc61" target="_blank">d52201c2</a>
+)</li>
+<li><strong>virtual-repeat:</strong>
+<ul>
+<li>support multiple virtual-repeat after each other (
+<a href="http://github.com/aurelia/ui-virtualization/commit/5e99c07e3a3a382f787d90eef27c0e39750e330a" target="_blank">5e99c07e</a>
+)</li>
+<li>no need for surrounding container (
+<a href="http://github.com/aurelia/ui-virtualization/commit/37c68bbd2c5fc1b141aa97a16e40f94fcc95368e" target="_blank">37c68bbd</a>
+)</li>
+<li>support inline virtualization (
+<a href="http://github.com/aurelia/ui-virtualization/commit/4805482ce46199abfef694a935e3f5e092dfcc80" target="_blank">4805482c</a>
+)</li>
+</ul>
+</li>
+</ul>
+</section>
+
+  </article>
+</section>

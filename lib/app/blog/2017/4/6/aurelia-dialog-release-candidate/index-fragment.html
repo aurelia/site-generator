@@ -1,0 +1,86 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Dialog Release Candidate</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Thanks to the hard work of Aurelia Core Team members, Strahil Kazlachev and Patrick Walters, we're proud to announce the Aurelia Dialog v1 Release Candidate.</p>
+<h3>Overview</h3>
+<p>We have an exciting release today that's been in the making for quite some time! Aurelia Dialog is hitting it's 1.0 Release Candidate. Below we've provided a list of all the new features and enhancements as well as a list of breaking changes. Finally, at the bottom you will find an upgrade path from our alpha release.</p>
+<h3>New Features and  Enhancements</h3>
+<h4>Keyboard Settings</h4>
+<p>We've created dialog settings that can be bound to keyboard events.  Currently only the Enter key, Escape key, or both are supported. Custom handlers and/or custom keys will be supported in future releases. This greatly improves the developer's ability to customize the user experience.</p>
+<h4>Closing All Open Dialogs</h4>
+<p>We've added the ability for the developer to close all open dialogs.  This can be helpful, for example, when many dialogs are open and the user initiates a route change.</p>
+<h4>Promise Handling</h4>
+<p>Previously, when a developer opened a dialog, it returned a promise and when the dialog was cancelled, we forced the developer to check every time whether the result was cancelled or not. We've now added the ability for the developer to define if they would instead like for the promise to reject in cancel-like events.  This means that each time the cancel event is fired the developer needs to handle the rejection, else the error will propogate and be thrown in the browser's console.</p>
+<h4>Settings</h4>
+<p>In general, we've tried to consolidate the settings that were available to the developer.  Over time many settings were added, some of which had conflicting behavior, so we took the time to document all intended behaviors and refactor them into more meaningful settings.</p>
+<h3>Breaking Changes</h3>
+<h4>New Settings</h4>
+<p>For all settings below, we are showing the setting name on the left and the default value on the right:</p>
+<ul>
+<li><code>host = document.querySelector('body')</code> - Defines where the dialog is inserted in the DOM.  Defaults to the <code>body</code> tag.</li>
+<li><code>childContainer = undefined</code> - Until now the container for the dialog was created in the <code>.open()</code> call, from the root container. With this new setting you can provide your own preconfigured container per .open() call. This enables tons of flexibility - a custom renderer per dialog, integrating a dialog with a custom element, etc. - so the developer can use the custom element container to create a new child container and pass it to <code>.open()</code>.</li>
+<li><code>keyboard = undefined</code> - Can be used to override behavior such as when the enter key is pressed.</li>
+<li><code>overlayDismiss = undefined</code> - Determines whether clicking on the overlay (the area outside of the dialog) invokes the close method.  If left unset, defaults to the existing <code>lock</code> setting.</li>
+<li><code>rejectOnCancel = false</code> - When a dialog is cancelled, should it reject the promise?</li>
+</ul>
+<h4>DialogService Methods</h4>
+<ul>
+<li><code>.closeAll()</code> - Closes all open dialogs</li>
+<li><code>.open()</code> - Clearly defined the behavior for what happens when <code>.canActivate</code> returns/resolves to <code>false</code></li>
+</ul>
+<h4>DialogController Changes</h4>
+<ul>
+<li><code>.ok()</code>/<code>.cancel()</code>/<code>.close()</code> - Clearly defined the behavior for what happens when <code>.canDeactivate</code> returns/resolves to <code>false</code></li>
+</ul>
+<h4>UxDialogHeader - ux-dialog-header</h4>
+<ul>
+<li><code>showCloseButton</code> - A bindable property indicating whether to show a close button in the dialog.</li>
+</ul>
+<h4>Prefix Schema - <code>ai-</code>/<code>Ai</code> changes to <code>ux-</code>/<code>Ux</code></h4>
+<ul>
+<li>css classes
+<ul>
+<li><code>.ai-dialog-open</code> =&gt; <code>.ux-dialog-open</code></li>
+</ul>
+</li>
+<li>elements
+<ul>
+<li><code>&lt;ai-dialog-container&gt;</code> =&gt; <code>&lt;ux-dialog-container&gt;</code></li>
+<li><code>&lt;ai-dialog-overlay&gt;</code> =&gt; <code>&lt;ux-dialog-overlay&gt;</code></li>
+</ul>
+</li>
+<li>custom elements
+<ul>
+<li><code>&lt;ai-dialog&gt;</code> =&gt; <code>&lt;ux-dialog&gt;</code></li>
+<li><code>&lt;ai-dialog-header&gt;</code> =&gt; <code>&lt;ux-dialog-header&gt;</code></li>
+<li><code>&lt;ai-dialog-body&gt;</code> =&gt; <code>&lt;ux-dialog-body&gt;</code></li>
+<li><code>&lt;ai-dialog-footer&gt;</code> =&gt; <code>&lt;ux-dialog-footer&gt;</code></li>
+<li><code>AiDialog</code> =&gt; <code>UxDialog</code></li>
+<li><code>AiDialogHeader</code> =&gt; <code>UxDialogHeader</code></li>
+<li><code>AiDialogBody</code> =&gt; <code>UxDialogBody</code></li>
+<li><code>AiDialogFooter</code> =&gt; <code>UxDialogFooter</code></li>
+</ul>
+</li>
+</ul>
+<h4>DialogService</h4>
+<ul>
+<li><code>.openAndYieldController()</code> - This method has been removed and now maps to the new <code>.open()</code> method via <code>.open().then(...)</code>.</li>
+<li><code>.open()</code> - Refactored - The old behaviour maps to <code>.open().whenClosed(...)</code>.
+<ul>
+<li>The returned promise resolves when the dialog is opened with a <code>DialogOpenResult</code></li>
+<li>The returned <code>Promise</code> has an additional <code>.whenClosed()</code> method. It has the same signature as <code>.then</code>. Use it when you want to follow when the dialog gets closed.</li>
+</ul>
+</li>
+</ul>
+<h4>DialogController</h4>
+<ul>
+<li><code>viewModel</code> - removed property - <em>previously undocumented</em></li>
+<li><code>view</code> - removed property - <em>previously undocumented</em></li>
+<li><code>viewSlot</code> - removed property - <em>previously undocumented</em></ux-dialog-footer></ai-dialog-footer></ux-dialog-body></ai-dialog-body></ux-dialog-header></ai-dialog-header></ux-dialog></ai-dialog></ux-dialog-overlay></ai-dialog-overlay></ux-dialog-container></ai-dialog-container></li>
+</ul>
+
+  </article>
+</section>

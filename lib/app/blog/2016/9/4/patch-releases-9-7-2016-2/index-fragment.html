@@ -1,0 +1,142 @@
+<section class="article blog">
+  <header>
+    <h1>Releases Notes Update - 9/7/2016</h1>
+  </header>
+
+  <article class="markdown">
+    <p>As always, we're working hard to squash bugs and make various improvements to Aurelia. We've had a number of minor and patch releases over the last week. Below you can read the details of what's been included in those releases.</p>
+<section><h2 id="aurelia-validation">Aurelia Validation</h2><p>Aurelia Validation continues it's march towards beta. Today's release includes bug-fixes, usability improvements and a long requested feature: validate binding behavior support in custom attribute bindings. You can view the complete list of updates 
+<a href="https://github.com/aurelia/validation/milestone/3?closed=1" target="_blank">here</a>
+.</p>
+</section>
+<section><h2 id="change-log">Change Log</h2><h3>
+<a href="https://github.com/aurelia/templating/compare/1.0.1...v1.1.0" target="_blank">aurelia-templating 1.1.0</a>
+ (2016-09-07)</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>controller:</strong> expose container (
+<a href="https://github.com/aurelia/templating/commit/8af0372" target="_blank">8af0372</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/i18n/compare/1.1.1...v1.1.2" target="_blank">aurelia-i18n 1.1.2</a>
+ (2016-09-05)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>attribute:</strong> check for undefined controller (
+<a href="https://github.com/aurelia/i18n/commit/8c6e6bc" target="_blank">8c6e6bc</a>
+)</li>
+<li><em>ts:</em>* fix wrong type information (
+<a href="https://github.com/aurelia/i18n/commit/c86cd3f" target="_blank">c86cd3f</a>
+), closes 
+<a href="https://github.com//github.com/aurelia/i18n/issues/136/issues/issuecomment-243419568" target="_blank">/github.com/aurelia/i18n/issues/136#issuecomment-243419568</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/ui-virtualization/compare/1.0.0-beta.3.0.0...v1.0.0-beta.3.0.1" target="_blank">aurelia-ui-virtualization 1.0.0-beta.3.0.1</a>
+ (2016-08-31)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>package.json:</strong> change package.json to properly define resources (
+<a href="https://github.com/aurelia/ui-virtualization/commit/4da877f" target="_blank">4da877f</a>
+)</li>
+<li><strong>virtual-repeat:</strong> make infinite scroll work with initial small page size (
+<a href="https://github.com/aurelia/ui-virtualization/commit/cb135a2" target="_blank">cb135a2</a>
+)</li>
+<li><strong>virtual-repeat:</strong> make initially hidden elements display correctly (
+<a href="https://github.com/aurelia/ui-virtualization/commit/319cc59" target="_blank">319cc59</a>
+)</li>
+<li><strong>virtual-repeat:</strong> check for infinite-scroll attribute (
+<a href="https://github.com/aurelia/ui-virtualization/commit/c779738" target="_blank">c779738</a>
+)</li>
+</ul>
+<h4>Code Refactoring</h4>
+<ul>
+<li><strong>all:</strong> rename <code>virtual-repeat-next</code> to <code>infinite-scroll-next</code> (
+<a href="https://github.com/aurelia/ui-virtualization/commit/b7ff555" target="_blank">b7ff555</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>virtual-repeat:</strong> allow use of <code>.call</code> on <code>virtual-repeat-next</code> (
+<a href="https://github.com/aurelia/ui-virtualization/commit/2d1789b" target="_blank">2d1789b</a>
+)</li>
+</ul>
+<h4>BREAKING CHANGES</h4>
+<ul>
+<li>all: Renamed <code>virtual-repeat-next</code> to
+<code>infinite-scroll-next</code> to provide more meaning to the attribute.</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/binding/compare/1.0.3...v1.0.4" target="_blank">aurelia-binding 1.0.4</a>
+ (2016-09-07)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>StyleObserver:</strong> parse complex styles (
+<a href="https://github.com/aurelia/binding/commit/044746f" target="_blank">044746f</a>
+)</li>
+<li><strong>typescript:</strong> fix doc generation and add missing classes (
+<a href="https://github.com/aurelia/binding/commit/347ac4f" target="_blank">347ac4f</a>
+)</li>
+<li><strong>typings:</strong> remove TypeScript 2.0 syntax (
+<a href="https://github.com/aurelia/binding/commit/e9003ee" target="_blank">e9003ee</a>
+)</li>
+<li><em>aurelia-binding.d.ts:</em>* improve TypeScript definitions (
+<a href="https://github.com/aurelia/binding/commit/604a6a9" target="_blank">604a6a9</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>observable:</strong> add propertyName argument (
+<a href="https://github.com/aurelia/binding/commit/e7825eb" target="_blank">e7825eb</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/animator-css/compare/1.0.0...v1.0.1" target="_blank">aurelia-anaimator-css 1.0.1</a>
+ (2016-09-05)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>CssAnimator:</strong> clear event handlers when there's no animation (
+<a href="https://github.com/aurelia/animator-css/commit/7683336" target="_blank">7683336</a>
+), closes 
+<a href="https://github.com/aurelia/animator-css/issues/47" target="_blank">#47</a>
+</li>
+<li><strong>cssRules:</strong> add additional try/catch (
+<a href="https://github.com/aurelia/animator-css/commit/4e21ea8" target="_blank">4e21ea8</a>
+), closes 
+<a href="https://github.com/aurelia/animator-css/issues/40" target="_blank">#40</a>
+</li>
+</ul>
+<h3>aurelia-polyfills 1.1.0</h3>
+<h4>Features</h4>
+<ul>
+<li>Add polyfill for Reflect.ownKeys</li>
+</ul>
+<h3>aurelia-validation 0.12.3</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>RenderInstruction:</strong> add 'kind' property</li>
+<li><strong>withMessage:</strong> provide access to getDisplayName</li>
+<li><strong>ValidationParser:</strong> caching and warnings</li>
+<li><strong>ValidateBindingBehavior:</strong> support custom attributes</li>
+<li><strong>ValidationRules:</strong> add equals rule</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>build:</strong> turn on declarations flag</li>
+<li><strong>ValidationParser:</strong> parse arrow functions</li>
+</ul>
+<h4>Code Refactoring</h4>
+<ul>
+<li><strong>ValidateBindingBehavior:</strong> use controller.container API</li>
+</ul>
+<h3>aurelia-cli 0.19.0</h3>
+<h4>Features</h4>
+<ul>
+<li>add exit error code</li>
+<li>allow <code>exclude</code> option in bundle source</li>
+</ul>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,65 @@
+<section class="article blog">
+  <header>
+    <h1>Releases - August 3, 2016</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Even though we released Aurelia 1.0 last week, we're not slowing down. We're continuing to make fixes and enhancements. In order to keep the community informed, we'll make sure to post these updates here each week as needed.</p>
+<section><h2 id="aurelia-and-semver">Aurelia and SemVer</h2><p>All Aurelia libraries strive to ahere to 
+<a href="http://semver.org" target="_blank">the SemVer spec</a>
+. A semantic version typically looks like this: <code>major.minor.patch</code>. The <code>patch</code> number changes when there are only fixes. The <code>minor</code> number changes when there are new features added (this also may include fixes). The <code>major</code> number only changes if there is a breaking change of some sort.</p>
+<p>We are striving not to make breaking changes in the core Aurelia libraries any time soon. However, if/when we do have to do this, we'll give ample warning, suggest migration strategies and do everything we can to make the process smooth. In any case, you can rest assured we aren't going to do a major re-write and then simply change the major version. Even major changes we may need to make will be incremental in nature.</p>
+</section>
+<section><h2 id="summary-of-releases">Summary of Releases</h2><p>During the last week we've primarily continued to improve the various libraries used by Webpack setups. We also made one fix in the Binding library related to correct delegated event propagation.</p>
+</section>
+<section><h2 id="minor-releases-notes">Minor Releases Notes</h2><h3>
+<a href="https://github.com/aurelia/webpack-plugin/compare/1.0.0...v1.1.0" target="_blank">webpack-plugin 1.1.0</a>
+ (2016-07-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>build-resources:</strong> fix a regression caused by scoping support (
+<a href="https://github.com/aurelia/webpack-plugin/commit/d7dec55" target="_blank">d7dec55</a>
+)</li>
+<li><strong>index:</strong> do not reassign moduleId when one with the same name exists already (
+<a href="https://github.com/aurelia/webpack-plugin/commit/fddd9e1" target="_blank">fddd9e1</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>index:</strong> add the option 'nameLocalModules' for manually disabling moduleId remapping (
+<a href="https://github.com/aurelia/webpack-plugin/commit/2f9c89a" target="_blank">2f9c89a</a>
+)</li>
+<li><strong>index:</strong> make naming external modules optional (
+<a href="https://github.com/aurelia/webpack-plugin/commit/af1a745" target="_blank">af1a745</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-release-notes">Patch Release Notes</h2><h3>
+<a href="https://github.com/aurelia/binding/compare/1.0.0...v1.0.1" target="_blank">aurelia-binding 1.0.1</a>
+ (2016-07-29)</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>event-manager:</strong> enable stopping propagation of delegated events (
+<a href="https://github.com/aurelia/binding/commit/91287cf" target="_blank">91287cf</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/467" target="_blank">#467</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/loader-webpack/compare/1.0.1...v1.0.2" target="_blank">loader-webpack 1.0.2</a>
+ (2016-07-29)</h3>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>index:</strong> incorrect contextual &quot;this&quot; reference (
+<a href="https://github.com/aurelia/loader-webpack/commit/bf29b49" target="_blank">bf29b49</a>
+)</li>
+<li><strong>index:</strong> cache loading Promises and fix lazy loading (
+<a href="https://github.com/aurelia/loader-webpack/commit/26e1a74" target="_blank">26e1a74</a>
+), closes 
+<a href="https://github.com/aurelia/loader-webpack/issues/15" target="_blank">#15</a>
+</li>
+</ul>
+</section>
+
+  </article>
+</section>

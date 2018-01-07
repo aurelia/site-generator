@@ -1,0 +1,267 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Release Notes - Early November 2017</h1>
+  </header>
+
+  <article class="markdown">
+    <p>As always, the Aurelia Team continues to fix bugs, add new features and make tons of improvements throughout the framework. In this set of releases, we've got a minor breaking change to our dialog plugin. We've also converted our testing library to TypeScript. While we've made no changes to the API or behavior, we've bumped the major version since the improved, more-accurate typings may affect some TypeScript users. Finally, we've launched another major set of enhancements to the CLI and made our initial launch of the HTTP Mocking library. Huge thanks to 
+<a href="https://github.com/fragsalat" target="_blank">Thomas Schlage</a>
+ for his work on the new library.</p>
+<section><h2 id="major-releases">Major Releases</h2><p>Major updates may include breaking changes, new features, fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/dialog/compare/1.0.0-rc.1.0.3...1.0.0-rc.2.0.0" target="_blank">aurelia-dialog 1.0.0-rc.2.0.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>dialog-configuration:</strong> set defaults for &quot;.renderer&quot; and &quot;.cssText&quot; (
+<a href="https://github.com/aurelia/dialog/commit/fd58f2a" target="_blank">fd58f2a</a>
+), closes 
+<a href="https://github.com/aurelia/dialog/issues/307" target="_blank">#307</a>
+</li>
+<li><strong>dialog-renderer:</strong> lazy DOM access fix 
+<a href="https://github.com/aurelia/dialog/issues/294" target="_blank">#294</a>
+ (
+<a href="https://github.com/aurelia/dialog/commit/f71ecf8" target="_blank">f71ecf8</a>
+)</li>
+<li><strong>dialog-service:</strong> fix no fail for undefined moduleId (
+<a href="https://github.com/aurelia/dialog/commit/e90a9d8" target="_blank">e90a9d8</a>
+), closes 
+<a href="https://github.com/aurelia/dialog/issues/312" target="_blank">#312</a>
+</li>
+<li><strong>typings:</strong> fix as it was in 
+<a href="https://github.com/aurelia/dialog/issues/280" target="_blank">#280</a>
+ (
+<a href="https://github.com/aurelia/dialog/commit/c6dd762" target="_blank">c6dd762</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>dialog-controller:</strong> add param to canDeactivate / deactivate functions. (
+<a href="https://github.com/aurelia/dialog/commit/42ad7f3" target="_blank">42ad7f3</a>
+)</li>
+<li><strong>dialog-controller:</strong> pass close result to lifecycle hooks (
+<a href="https://github.com/aurelia/dialog/commit/320504c" target="_blank">320504c</a>
+)</li>
+</ul>
+<h4>BREAKING CHANGES</h4>
+<ul>
+<li><strong>dialog-controller:</strong> - DialogController.prototype.error wraps the passed reason in DialogCloseError</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/testing/compare/1.0.0-beta.3.0.1...1.0.0-beta.4.0.0" target="_blank">aurelia-testing 1.0.0-beta.4.0.0</a>
+</h3>
+<p>This entire library was converted to TypeScript. This doesn't involve any breaking changes to the functionality, but the TypeScript definitions are now more accurate and could result in some required code fixups for TS consumers.</p>
+<h3>aurelia-http-client-mock 0.1.0</h3>
+<p>The initial release of an HTTP Client Mock library, thanks to the work of community member 
+<a href="https://github.com/fragsalat" target="_blank">Thomas Schlage</a>
+.</p>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>type-definition:</strong> Fixed wrong type definitions (
+<a href="https://github.com/aurelia/http-client-mock/commit/fc80903" target="_blank">fc80903</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>mock:</strong> Added mock for aurelia HttpClient (
+<a href="https://github.com/aurelia/http-client-mock/commit/39a3144" target="_blank">39a3144</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="minor-releases">Minor Releases</h2><p>Minor updates include new features, updates to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/cli/compare/0.31.3...0.32.0" target="_blank">aurelia-cli 0.32.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>bundle:</strong> exclude source-maps when applicable (
+<a href="https://github.com/aurelia/cli/commit/d94629f" target="_blank">d94629f</a>
+)</li>
+<li><strong>cli:</strong> add VSCode Chrome Debugger to RequireJS/SystemJS (
+<a href="https://github.com/aurelia/cli/commit/3f4efd9" target="_blank">3f4efd9</a>
+)</li>
+<li><strong>generator-ts:</strong> use .ts ending in template (
+<a href="https://github.com/aurelia/cli/commit/c10061f" target="_blank">c10061f</a>
+)</li>
+<li><strong>importer:</strong> search for resources from package dist (
+<a href="https://github.com/aurelia/cli/commit/71ad598" target="_blank">71ad598</a>
+)</li>
+<li><strong>importer:</strong> throw clear unsupported error for webpack projects (
+<a href="https://github.com/aurelia/cli/commit/5b23897" target="_blank">5b23897</a>
+)</li>
+<li><strong>javascriptservices:</strong> update for .net core 2.0 (
+<a href="https://github.com/aurelia/cli/commit/f41af63" target="_blank">f41af63</a>
+)</li>
+<li><strong>jsconfig:</strong> only create jsconfig for babel+vscode (
+<a href="https://github.com/aurelia/cli/commit/173898c" target="_blank">173898c</a>
+)</li>
+<li><strong>npm script:</strong> add required dependency to start npm task (
+<a href="https://github.com/aurelia/cli/commit/de33698" target="_blank">de33698</a>
+)</li>
+<li><strong>tasks:</strong> copy lint task to scaffolded app (
+<a href="https://github.com/aurelia/cli/commit/e16c216" target="_blank">e16c216</a>
+)</li>
+<li><strong>webpack:</strong> add tslint config (
+<a href="https://github.com/aurelia/cli/commit/668b2fb" target="_blank">668b2fb</a>
+)</li>
+<li><strong>webpack:</strong> linux case sensitivity (
+<a href="https://github.com/aurelia/cli/commit/2b2d3ce" target="_blank">2b2d3ce</a>
+)</li>
+<li><strong>webpack:</strong> uglify by default for production builds (
+<a href="https://github.com/aurelia/cli/commit/0732294" target="_blank">0732294</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>cli:</strong> add <code>au config</code> command (
+<a href="https://github.com/aurelia/cli/commit/5cd16f6" target="_blank">5cd16f6</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/629" target="_blank">aurelia/cli#629</a>
+</li>
+<li><strong>source-maps:</strong> bundling improvements (
+<a href="https://github.com/aurelia/cli/commit/abeba3d" target="_blank">abeba3d</a>
+), closes 
+<a href="https://github.com/aurelia/cli/issues/659" target="_blank">aurelia/cli#659</a>
+ 
+<a href="https://github.com/aurelia/cli/issues/624" target="_blank">aurelia/cli#624</a>
+</li>
+<li><strong>tasks:</strong> add lint tasks (
+<a href="https://github.com/aurelia/cli/commit/596442a" target="_blank">596442a</a>
+)</li>
+<li><strong>yarn:</strong> use yarn to install deps if possible (
+<a href="https://github.com/aurelia/cli/commit/460887e" target="_blank">460887e</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/binding/compare/1.3.0...v1.4.0" target="_blank">aurelia-binding 1.4.0</a>
+</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>ObserverLocator:</strong> special handling for src and href (
+<a href="https://github.com/aurelia/binding/commit/1c231ee" target="_blank">1c231ee</a>
+)</li>
+<li><strong>ValueConverter:</strong> enable signal (
+<a href="https://github.com/aurelia/binding/commit/f6ad52a" target="_blank">f6ad52a</a>
+), closes 
+<a href="https://github.com/aurelia/binding/issues/353" target="_blank">#353</a>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/hot-module-reload/compare/0.1.0...v0.2.0" target="_blank">aurelia-hot-module-reload 0.2.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>package:</strong> missing aurelia-path peer dependency (
+<a href="https://github.com/aurelia/hot-module-reload/issues/7" target="_blank">#7</a>
+) (
+<a href="https://github.com/aurelia/hot-module-reload/commit/9fc2398" target="_blank">9fc2398</a>
+), closes 
+<a href="https://github.com/aurelia/hot-module-reload/issues/6" target="_blank">#6</a>
+</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>hmr:</strong> support popular css transpilers (
+<a href="https://github.com/aurelia/hot-module-reload/issues/12" target="_blank">#12</a>
+) (
+<a href="https://github.com/aurelia/hot-module-reload/commit/71b70b7" target="_blank">71b70b7</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating/compare/1.5.0...v1.6.0" target="_blank">aurelia-templating 1.6.0</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>view-engine:</strong> define metadata for SlotCustomAttribute (
+<a href="https://github.com/aurelia/templating/commit/e3474bb" target="_blank">e3474bb</a>
+), closes 
+<a href="https://github.com/aurelia/templating/issues/566" target="_blank">#566</a>
+</li>
+<li><strong>view-engine:</strong> singleton instance of auSlotBehavior (
+<a href="https://github.com/aurelia/templating/commit/c08db20" target="_blank">c08db20</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>html-behavior:</strong> enable processContent via custom attributes (
+<a href="https://github.com/aurelia/templating/commit/7096e66" target="_blank">7096e66</a>
+)</li>
+</ul>
+</section>
+<section><h2 id="patch-releases">Patch Releases</h2><p>Patch updates include only fixes to bugs and performance improvements.</p>
+<h3>
+<a href="https://github.com/aurelia/http-client/compare/1.2.0...1.2.1" target="_blank">aurelia-pal 1.2.1</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>http-client:</strong> don't call withParams if there are no params (
+<a href="https://github.com/aurelia/http-client/commit/2cd076a" target="_blank">2cd076a</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/templating-resources/compare/1.5.3...1.5.4" target="_blank">aurelia-templating-resources 1.5.4</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>if-core.js:</strong> child view re-binding issue (
+<a href="https://github.com/aurelia/templating-resources/commit/82cb331" target="_blank">82cb331</a>
+)</li>
+<li><strong>if-core.js:</strong> child view re-binding issue (
+<a href="https://github.com/aurelia/templating-resources/commit/1c107ac" target="_blank">1c107ac</a>
+)</li>
+<li><strong>if-else:</strong> Fixed missing binding context when rendering else block (
+<a href="https://github.com/aurelia/templating-resources/commit/e55fdf9" target="_blank">e55fdf9</a>
+)</li>
+<li><strong>if-else:</strong> Fixed typo and removed obsolete error (
+<a href="https://github.com/aurelia/templating-resources/commit/18a4e7e" target="_blank">18a4e7e</a>
+)</li>
+<li><strong>if-else:</strong> Removed fit in tests (
+<a href="https://github.com/aurelia/templating-resources/commit/39fb831" target="_blank">39fb831</a>
+)</li>
+<li><strong>if-else:</strong> Simplified initial condition check (
+<a href="https://github.com/aurelia/templating-resources/commit/2103aca" target="_blank">2103aca</a>
+)</li>
+<li>
+<ul>
+<li><strong>if:</strong> nested ifs don't work properly (
+<a href="https://github.com/aurelia/templating-resources/commit/9548e16" target="_blank">9548e16</a>
+), closes 
+<a href="https://github.com/aurelia/templating-resources/issues/328" target="_blank">#328</a>
+ 
+<a href="https://github.com/aurelia/templating-resources/issues/327" target="_blank">#327</a>
+ 
+<a href="https://github.com/aurelia/templating-resources/issues/326" target="_blank">#326</a>
+ 
+<a href="https://github.com/aurelia/templating-resources/issues/322" target="_blank">#322</a>
+ 
+<a href="https://github.com/aurelia/templating-resources/issues/317" target="_blank">#317</a>
+ 
+<a href="https://github.com/aurelia/templating-resources/issues/315" target="_blank">#315</a>
+</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/ui-virtualization/compare/1.0.0-beta.3.1.1...v1.0.0-beta.3.1.2" target="_blank">aurelia-ui-virtualization 1.0.0-beta.3.1.2</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>virtual-repeat:</strong> Changing the items to emty array from scrollable list (
+<a href="https://github.com/aurelia/ui-virtualization/commit/0e0b702" target="_blank">0e0b702</a>
+)</li>
+</ul>
+<h3>
+<a href="https://github.com/aurelia/animator-css/compare/1.0.3...v1.0.4" target="_blank">aurelia-animator-css 1.0.4</a>
+</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Resolve a race condition with addClass/removeClass
+<ul>
+<li>Prematurely ends animations if their opposite is triggered</li>
+</ul>
+</li>
+</ul>
+</section>
+
+  </article>
+</section>

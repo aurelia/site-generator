@@ -1,0 +1,326 @@
+<section class="article blog">
+  <header>
+    <h1>End-to-End Testing with Aurelia and Protractor</h1>
+  </header>
+
+  <article class="markdown">
+    <p>This week Core Aurelia Team member in charge of testability, Vildan Softic, shows us how to write End-to-End tests with Aurelia and Protractor.</p>
+<h1>Introduction</h1>
+<p>Testing front-end applications has become an important task for today's <em>Full Stack Developers</em>. Not only do you want to ensure that your application's internal code operates correctly, but you also want to validate the in-browser behavior. This article will show you how to achieve this by combining Aurelia and Protractor.</p>
+<h4>About The Author</h4>
+<p><strong>Vildan Softic</strong> is a consultant and software developer from Graz/Austria. He is passionate about developing Single Page Applications, grinding LOB Apps with .NET and is pushing more and more towards Node.JS development. Moreover, he is hopelessly in love with the Durandal Framework and, while still using other libraries in his day job, he's working hard contributing as much as possible to Aurelia.</p>
+<p>You can find Vildan on 
+<a href="https://github.com/zewa666" target="_blank">GitHub</a>
+ and 
+<a href="https://www.linkedin.com/pub/vildan-softic/92/a03/635" target="_blank">LinkedIn</a>
+.</p>
+<h1>What is E2E testing?</h1>
+<p>End-To-End (E2E) testing is all about testing your application against specific <em>scenarios</em>. From a requirements-engineering-perspective you'd call those <em>User Stories</em>. Essentially, these stories describe a series of actions a user performs to achieve a certain goal. So by assembling a bunch of these - referred to as a <em>test suite</em> - you are able to verify that your web app acts as expected. The key to success, of course, lies in the amount and quality of tests written.</p>
+<p>With E2E testing you are not interacting with the app's code per se, but with the app's interface. This is different than unit tests, which take care of isolated parts of the application - called <em>units</em> - by verifying them through the removal or mocking of other parts. It's important to note that one method of testing does not replace the other, so don't take this article as an excuse to skip unit testing.</p>
+<section><h2 id="how-are-e2e-tests-different">How are E2E tests different?</h2><p>One of the key differences when working with E2E tests is that all of your work is located in the browser, which naturally leads to writing a lot of <em>asynchronous code</em>. It doesn't matter whether you request a DOM Element, send some fake keystrokes or trigger a click, each of these actions needs to be automatically translated to understandable instructions and sent to the browser under test. So working with <code>Promises</code> becomes a major enabler when keeping track of deferred executions and responses.</p>
+<p>Another important aspect already noted is the necessity to translate programmatic actions into browser understandable ones. Needless to say, variations exist between the different browsers...</p>
+<p>When performing E2E tests you also need to take into consideration that you are actually testing a real web page. So, compared to unit tests, you will additionally need your web page up and accessible by the browser during test execution. Keep in mind that E2E tests, sometimes also referred to as <em>integration tests</em>, test your app's system as a whole. Thus, modifications which get persisted to databases or local storage will stay that way and may produce side effects for your next test run.</p>
+<p>Last but not least, there is a much higher test code maintenance cost, compared to unit tests. The reason is that now, not only one component is tested exclusively, but rather the whole system at once. Imagine trying to fill out an input element with the id <code>txtFirstname</code>, just to realize the next day your tests fail because your fellow front-end designer decided to change the name to <code>txtFirstName</code>. This makes it clear that you must treat your test code like general application logic and give it all the love it deserves.</p>
+<h1>Protractor</h1>
+<p>Although the previous section may sound depressing, there is hope for developers by the name of 
+<a href="http://angular.github.io/protractor/#/" target="_blank">Protractor</a>
+. It is an End-To-End testing framework originally created for the JavaScript front-end framework 
+<a href="https://angularjs.org/" target="_blank">AngularJS</a>
+. Under the hood it's actually a Node.js application, which supports a wide variety of assertion/test libraries like 
+<a href="http://jasmine.github.io/" target="_blank">Jasmine</a>
+, 
+<a href="http://mochajs.org/" target="_blank">Mocha</a>
+ or 
+<a href="https://github.com/cucumber/cucumber-js" target="_blank">Cucumber</a>
+.</p>
+<blockquote>
+<p>The rest of the article will focus on the BDD Testing Framework Jasmine.  A nice tutorial on how to use it can be 
+<a href="http://code.tutsplus.com/tutorials/testing-your-javascript-with-jasmine--net-21229" target="_blank">found here</a>
+.</p>
+</blockquote>
+<p>Protractor acts as a wrapper on top of the WebDriverJS-API, which is used to communicate with a Selenium Server, either local (standalone) or remote. The picture below depicts the whole process. Protractor communicates via the WebDriverJS-API (the way to talk to Selenium's WebDriver API) which is used to translate user interactions into browser understandable instructions.</p>
+<p><img src="https://raw.githubusercontent.com/aurelia/documentation/master/images/protractor.png" alt="" /></p>
+<p>Now the interesting thing is that instead of manually testing your application in each of the major browsers, automated Protractor tests can run on multiple browsers at the same time, saving you valuable time and money. Support is wide-spread and even includes headless browsers like 
+<a href="http://phantomjs.org/" target="_blank">PhantomJS</a>
+.</p>
+<p>Besides that, being a wrapper, it offers additional convenience features, not present in vanilla WebDriverJS-API. One feature, perhaps the most important, is that it allows you to write asynchronous tests in a synchronous style. This means that Protractor will automatically execute the next task, the moment the previous pending tasks finish.</p>
+</section>
+<section><h2 id="a-basic-example">A Basic Example</h2><p>To get a basic idea of how this works, take a look at the following example.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'aurelia homepage'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should load page'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        browser<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://www.aurelia.io'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>browser<span class="token punctuation">.</span><span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span><span class="token string">'Home | Aurelia'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  </code></pre></source-code>
+</code-listing>
+<p>As you can see, the test utilizes Jasmine for BDD style testing which is placed in a separate JavaScript file and defines a scenario/suite by using a <code>describe</code> block. Each test then gets handled by a separate <code>it</code> function. In this one we'd like to verify that after loading the Aurelia Homepage, the title equals our expected page title. The first line will issue a general <code>browser</code> method <code>get</code> which loads the given URL. This function now returns a promise, to which you'd normally append a <code>then</code> function, which gets called after the promise successfully resolves. In this test case though, we don't need to care about that, because Protractor will execute the expectation only after the previous line has successfully resolved. Protractor also adapts the Jasmine expectations to work in an async way, so by the time matchers like <code>toEqual</code> are called, the previous expectation is already resolved.</p>
+<p>But sometimes you need to wait for a certain action to happen in the future. Again we can leverage the general browser object and utilize it's <code>sleep</code> method.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'aurelia homepage'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should navigate to a different subpage'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// load page</span>
+        <span class="token comment" spellcheck="true">// navigate to different subpage</span>
+        <span class="token comment" spellcheck="true">// wait for X to happen after 2 seconds</span>
+        browser<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>WHATEVER<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span>SOMETHING<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="accessing-dom-elements">Accessing DOM Elements</h2><p>Great! So we know how to load a page. But how do we find DOM Elements and see whether they are rendered properly? Protractor provides the global object <code>element</code>, an <code>EelementFinder</code>, which offers a <em>locator factory</em> <code>by</code> used to define a way to search for elements. Let's take a look at the following example.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'aurelia homepage'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        browser<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://www.aurelia.io'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>  
+      
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should have proper header text set'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">tagName</span><span class="token punctuation">(</span><span class="token string">'h2'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'EXPECTED HEADER'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should find an about section'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">id</span><span class="token punctuation">(</span><span class="token string">'about'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isPresent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+The first test is looking for an `<h2>` tag by utilizing the `tagName` *locator*. The second test looks for an element with the ID `about` and expects it to be rendered on the page. Here we use the `isPresent` method, provided by the `EelementFinder`. 
+<p>You may have noticed the method <code>beforeEach</code> at the top of the describe block. This is a setup method, which will get called before each test in the current scope, being the current describe block. To perform <em>tear down</em> operations, you'd simply define a function <code>afterEach</code>, which gets called after each test.</p>
+<blockquote>
+<p>You can find a full list of <em>locators</em> 
+<a href="http://angular.github.io/protractor/#/locators" target="_blank">here</a>
+. Just keep in mind that everything specific to AngularJS, like <code>binding</code> or <code>model</code> won't work with Aurelia Apps.</p>
+</blockquote>
+</section>
+<section><h2 id="interacting-with-forms">Interacting with Forms</h2><p>Now we know how to work with general elements, but what about inputs? Wouldn't it be nice to fake data entries in order to verify the logic of a form? To do so, let's look at the next example. Our test will navigate to the Google homepage, search for a specific keyword, trigger the search and expect to see an element containing the given value.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'google homepage'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        browser<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://www.google.com'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should load page'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sendKeys</span><span class="token punctuation">(</span><span class="token string">'Aurelia'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">name</span><span class="token punctuation">(</span><span class="token string">'btnG'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+          browser<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'h3 a'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toContain</span><span class="token punctuation">(</span><span class="token string">'Aurelia'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+First we navigate to the page using `browser.get` and look for an input with the name `q`. The `sendKeys` method now simulates the keystrokes for the keyword _Aurelia_. Afterwards we perform a search by clicking the button named `btnG`. Now we need to wait for Google to perform the search and render the result. We therefore leverage the `browser.sleep` method to give it some time. Finally we look for a link containing the word _Aurelia_. 
+<h1>Protractor and Aurelia</h1>
+<p>In order to work with Protractor, there is a little configuration that is necessary. This is done in a configuration file, e.g. protractor.conf.js, which sets up the basic information for Protractor so it can find our test files, start the standalone Selenium server and wire up the <code>JasmineOptions</code> for the console output. The Aurelia 
+<a href="https://github.com/aurelia/skeleton-navigation" target="_blank">Skeleton Navigation App</a>
+ thankfully already shares a preconfigured setup. Let's take a look at it.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    exports<span class="token punctuation">.</span>config <span class="token operator">=</span> <span class="token punctuation">{</span>
+      directConnect<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      capabilities<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">'browserName'</span><span class="token punctuation">:</span> <span class="token string">'chrome'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      onPrepare<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        browser<span class="token punctuation">.</span>ignoreSynchronization <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    
+        by<span class="token punctuation">.</span><span class="token function">addLocator</span><span class="token punctuation">(</span><span class="token string">'valueBind'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>bindingModel<span class="token punctuation">,</span> opt_parentElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">var</span> using <span class="token operator">=</span> opt_parentElement <span class="token operator">||</span> document<span class="token punctuation">;</span>
+          <span class="token keyword">var</span> matches <span class="token operator">=</span> using<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'*[value\\.bind="'</span> <span class="token operator">+</span> bindingModel <span class="token operator">+</span><span class="token string">'"]'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">var</span> result <span class="token operator">=</span> undefined<span class="token punctuation">;</span>
+    
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>matches<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>matches<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> matches<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> matches<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+    
+          <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    
+      <span class="token comment" spellcheck="true">//seleniumAddress: 'http://0.0.0.0:4444',</span>
+      <span class="token comment" spellcheck="true">//add proper version number</span>
+      seleniumServerJar<span class="token punctuation">:</span> <span class="token string">'./node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.44.0.jar'</span><span class="token punctuation">,</span>
+      specs<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'specs/e2e/dist/*.js'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    
+      <span class="token comment" spellcheck="true">//Options to be passed to Jasmine-node.</span>
+      jasmineNodeOpts<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        showColors<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        defaultTimeoutInterval<span class="token punctuation">:</span> <span class="token number">30000</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The first setting tells Protractor to directly connect to the Browser leveraging its WebDriver, in this case, Chrome, defined by the <code>capabilities</code> property. By doing so, Protractor won't need a Selenium Server and will talk directly to the mentioned Browser.</p>
+<p>The method <code>onPrepare</code> is useful for setting up code before Protractor starts. The first line tells Protractor not to expect an AngularJS homepage, but let ourselves do the checking for when a page is fully loaded. Afterwards we add an Aurelia specific Locator named <code>valueBind</code> which looks for elements binding their value to a specific model. The option <code>seleniumServerJar</code> now may be omitted since we are using <code>directConnect</code>. If specified together, it will simply be ignored by Protractor.</p>
+<p>The property <code>specs</code> takes the path to our spec files. Since Aurelia is built from ground up with full support for ES6, we encourage developers to write their tests using ES6 features.</p>
+<p>Since we'd like to start tests only when Aurelia is fully loaded, we leverage another feature of Protractor called <code>executeAsyncScript</code>.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      browser<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://localhost:9000'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      browser<span class="token punctuation">.</span><span class="token function">executeAsyncScript</span><span class="token punctuation">(</span>
+        <span class="token string">'var cb = arguments[arguments.length - 1];'</span> <span class="token operator">+</span>
+        <span class="token string">'document.addEventListener("aurelia-composed", function (e) {'</span> <span class="token operator">+</span>
+        <span class="token string">'  cb("Aurelia App composed")'</span> <span class="token operator">+</span>
+        <span class="token string">'}, false);'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+This method provides a way to execute JavaScript directly in the inspected Web page and work with the results after completion. We use this feature to listen for a DOM event fired by Aurelia after initial view composition. By placing this in a `beforeEach` section, we ensure that none of the tests will be started before the async script successfully finishes.
+</section>
+<section><h2 id="testing-the-aurelia-skeleton-navigation-app">Testing the Aurelia Skeleton Navigation App</h2><p>Besides having the configuration file set up, the Skeleton Navigation App also defines a set of demo tests to help you get started with testing your own page. First you'd need to download the App directly from our 
+<a href="https://github.com/aurelia/skeleton-navigation" target="_blank">Github-Repo</a>
+, or install it via 
+<a href="https://github.com/zewa666/generator-aurelia" target="_blank">Yeoman</a>
+ and follow the installation instruction. Afterwards, in order to start E2E testing, simply open up a console and run the following command to start up the built in web server:</p>
+<code-listing>
+  <source-code lang="Shell"><pre class="language-powershell"><code>
+    gulp watch
+  </code></pre></source-code>
+</code-listing>
+<p>After that, open another console and hit the following command to start up the E2E test run:</p>
+<code-listing>
+  <source-code lang="Shell"><pre class="language-powershell"><code>
+    gulp e2e
+  </code></pre></source-code>
+</code-listing>
+<p>You will find the demo spec in the folder <code>test/e2e/src/</code>.</p>
+<h3>Page Objects</h3>
+<p>To conclude this article we're going to quickly look at how to structure tests. We organize our test methods using a pattern called <em>Page Objects</em> (POs). What this means is that you try to group information about <em>how</em> you access parts of the application into a separate class. This makes it simple to access specific elements multiple times. Now instead of repeating the <code>element.by.xxx</code> code over and over across multiple tests, we unify the access making it easier to maintain and modify.</p>
+<p>Since Aurelia promotes the use of ES6, our page objects are simple ES6 classes, exposing functionality through methods. These methods contain the logic for how to interact with Protractor. The following example shows our main Skeleton PO, which takes care of general application information like the page title and page navigation.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">PageObject_Skeleton</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+      <span class="token function">getCurrentPageTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> browser<span class="token punctuation">.</span><span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">navigateTo</span><span class="token punctuation">(</span>href<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> deferred <span class="token operator">=</span> protractor<span class="token punctuation">.</span>promise<span class="token punctuation">.</span><span class="token function">defer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'a[href="'</span> <span class="token operator">+</span> href <span class="token operator">+</span> <span class="token string">'"]'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          browser<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          deferred<span class="token punctuation">.</span><span class="token function">fulfill</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">return</span> deferred<span class="token punctuation">.</span>promise<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The second PO is all about the Welcome page.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">PageObject_Welcome</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+      <span class="token function">getGreeting</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">tagName</span><span class="token punctuation">(</span><span class="token string">'h2'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">setFirstname</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">valueBind</span><span class="token punctuation">(</span><span class="token string">'firstName'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sendKeys</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">setLastname</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">valueBind</span><span class="token punctuation">(</span><span class="token string">'lastName'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sendKeys</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">getFullname</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'.help-block'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">pressSubmitButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">element</span><span class="token punctuation">(</span>by<span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">'button[type="submit"]'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">openAlertDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> browser<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">pressSubmitButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+          <span class="token keyword">return</span> browser<span class="token punctuation">.</span><span class="token function">switchTo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+            <span class="token keyword">function</span><span class="token punctuation">(</span>alert<span class="token punctuation">)</span> <span class="token punctuation">{</span> alert<span class="token punctuation">.</span><span class="token function">dismiss</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Test Specification</h3>
+<p>The previously defined page objects can now be imported into our test specification by leveraging the ES6 <code>import</code> syntax. Using <code>beforeEach</code> we can instantiate the POs, navigate to the Web app and wait for the previously mentioned <code>aurelia-composed</code> event to start testing.</p>
+<p>Our page object methods, in combination with Jasmine's BDD style assertions, make each test become an easy to read English sentence.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>PageObject_Welcome<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./welcome.po.js'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>PageObject_Skeleton<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./skeleton.po.js'</span><span class="token punctuation">;</span>
+    
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'aurelia skeleton app'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> po_welcome<span class="token punctuation">,</span>
+          po_skeleton<span class="token punctuation">;</span>
+    
+      <span class="token function">beforeEach</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        po_skeleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PageObject_Skeleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        po_welcome <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PageObject_Welcome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        browser<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'http://localhost:9000'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        browser<span class="token punctuation">.</span><span class="token function">executeAsyncScript</span><span class="token punctuation">(</span>
+          <span class="token string">'var cb = arguments[arguments.length - 1];'</span> <span class="token operator">+</span>
+          <span class="token string">'document.addEventListener("aurelia-composed", function (e) {'</span> <span class="token operator">+</span>
+          <span class="token string">'  cb("Aurelia App composed")'</span> <span class="token operator">+</span>
+          <span class="token string">'}, false);'</span>
+        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should load the page and display the initial page title'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>po_skeleton<span class="token punctuation">.</span><span class="token function">getCurrentPageTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Welcome | Aurelia'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should display greeting'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>po_welcome<span class="token punctuation">.</span><span class="token function">getGreeting</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Welcome to the Aurelia Navigation App!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should automatically write down the fullname'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        po_welcome<span class="token punctuation">.</span><span class="token function">setFirstname</span><span class="token punctuation">(</span><span class="token string">'Rob'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        po_welcome<span class="token punctuation">.</span><span class="token function">setLastname</span><span class="token punctuation">(</span><span class="token string">'Eisenberg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>po_welcome<span class="token punctuation">.</span><span class="token function">getFullname</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'ROB EISENBERG'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should show alert message when clicking submit button'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>po_welcome<span class="token punctuation">.</span><span class="token function">openAlertDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should navigate to flickr page'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        po_skeleton<span class="token punctuation">.</span><span class="token function">navigateTo</span><span class="token punctuation">(</span><span class="token string">'#/flickr'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>po_skeleton<span class="token punctuation">.</span><span class="token function">getCurrentPageTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Flickr | Aurelia'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<h1>Summary</h1>
+<p>We hope you enjoyed this introduction to E2E Testing with Protractor and the Aurelia Framework. Start writing tests and see how it feels. If you encounter any problems join us in 
+<a href="https://gitter.im/Aurelia/Discuss" target="_blank">our gitter channel</a>
+.</h2></p>
+</section>
+
+  </article>
+</section>

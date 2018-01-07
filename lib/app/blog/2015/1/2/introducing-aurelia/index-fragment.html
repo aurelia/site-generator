@@ -1,0 +1,93 @@
+<section class="article blog">
+  <header>
+    <h1>Introducing Aurelia</h1>
+  </header>
+
+  <article class="markdown">
+    <p>I'm totally stoked!!! Why? Because I finally get to share 
+<a href="http://aurelia.io/" target="_blank">Aurelia</a>
+ with the JavaScript world. What is it you might ask? It's a next generation JavaScript client framework unlike anything else available today.</p>
+<section><h2 id="cut-to-the-chase">Cut to The Chase</h2><p>Several months ago I left the Angular team to return to my own framework. I've been working relentlessly to bring it to you as soon as possible and as a result, today I'm announcing the early preview release of 
+<a href="http://aurelia.io/" target="_blank">Aurelia</a>
+. You can 
+<a href="http://aurelia.io/get-started.html" target="_blank">get started building apps now</a>
+! You won't be alone. We're already working with companies who have adopted the framework...and they love it!</p>
+<p>What's so special about Aurelia? Why should you take interest? Here's a few tidbits:</p>
+<ul>
+<li>Aurelia is written with vanilla ES6 and ES7 but transpiled and polyfilled to work on today’s Evergreen browsers. It may just be the most forward-thinking framework you've ever seen.</li>
+<li>Code is highly modularized, and comprised of mostly simple, small libraries. This allows several fundamental usage scenarios outside of what most frameworks can accommodate:
+<ul>
+<li>Use the entire framework to build apps.</li>
+<li>Use individual libraries to build traditional web sites.</li>
+<li>Use some of the libraries on the server with NodeJS. i.e. 
+<a href="https://github.com/aurelia/dependency-injection" target="_blank">DI</a>
+.</li>
+<li>Use it as a set of building blocks to create your own custom framework.</li>
+</ul>
+</li>
+<li>Aside from polyfills, Aurelia has no external dependencies.</li>
+<li>Its APIs have been designed carefully to be compatible with any modern transpiled language such as TypeScript, CoffeeScript and AtScript (including type and annotation support when present). Naturally, ES6 and ES5 work great too!</li>
+<li>Parts of Aurelia have a MicroJS feel to them. Several libraries are very small such as 
+<a href="https://github.com/aurelia/event-aggregator" target="_blank">event aggregator</a>
+, 
+<a href="https://github.com/aurelia/dependency-injection" target="_blank">dependency injection</a>
+, 
+<a href="https://github.com/aurelia/task-queue" target="_blank">task queue</a>
+ and 
+<a href="https://github.com/aurelia/http-client" target="_blank">HTTP client</a>
+.</li>
+<li>Aurelia has a first of its kind &quot;adaptive&quot; databinding engine allowing rich two-way databinding between vanilla JavaScript and DOM (including Web Components). When binding to an expression, the binding system can select an appropriate observation strategy on a per object, per property basis. It can use Object.observe and Array.observe if present, getters and setters if not and dirty checking as a last result fallback. The system is pluggable and will let developers teach it new ways of observing properties so you can easily plug in custom model/view-model libraries such as Knockout, Breeze, Backbone, etc. which may have their own mechanism for storing properties and raising change events.</li>
+<li>Leverage an extensible HTML compiler to customize your markup. There are three “categories” of extensions out of the box, for the most common scenarios, but you aren't limited to those. Here's what you get when starting out:
+<ul>
+<li>Custom Elements - Create re-usable custom elements by simply creating a class and providing some simple metadata. Basic conventions make the process very streamlined. Easily separate your element’s view and view-model for maintenance, testing, etc. Optionally leverage Shadow DOM and content selectors with native support and a performant fallback.</li>
+<li>Attached Behaviors - Create re-usable “behaviors” which can extend existing HTML elements with new functionality. They are attached by setting custom attributes in HTML. To create an attached behavior, just write a plain JS class. Basic conventions make this effortless.</li>
+<li>Template Controllers - Create new mechanisms for rendering templated UI. A template controller is a class that can dynamically create UI and inject it into the DOM. Key examples of this are the typical <code>if</code>  and <code>repeat</code> behaviors.</li>
+</ul>
+</li>
+<li>Aurelia uses simple conventions to eliminate boiler plate code. Naturally, you can write your own conventions or override conventions explicitly on a case-by-case basis.</li>
+<li>A core feature of the templating language is dynamic UI generation. Aurelia’s <code>compose</code> custom element lets you do ad-hoc UI generation by composing models, views and view-models on the fly based entirely on runtime data!</li>
+<li>Whether you are creating custom elements, attached behaviors or data-driven screens...Aurelia has a consistent mechanism for dependency injection, databinding, DOM lifecycle events and navigation flow.</li>
+<li>Aurelia has an advanced client-side router, based on Durandal 2.x’s router, but greatly enhanced with much richer support for child routers and an improved screen activation implementation.</li>
+<li>Aurelia is the next generation version of Durandal to which it bears a strong resemblance but improves and extends its capabilities.</li>
+<li>There is a direct migration path for Durandal 2.x users as well as Angular 1 and 2 users. We've successfully migrated some projects already and we'll provide docs to help you too.</li>
+<li>Aurelia targets 
+<a href="http://eisenbergeffect.bluespire.com/evergreen-browsers/" target="_blank">Evergreen Browsers</a>
+ only. However, some of our early adopters have reported that things appear to be working even on IE9...</li>
+</ul>
+</section>
+<section><h2 id="durandal-inc">Durandal Inc.</h2><p>Aurelia isn't just another framework. It's an official product of 
+<a href="http://durandal.io/" target="_blank">Durandal Inc.</a>
+, a tech startup dedicated to advancing rich web app development by creating powerful libraries, frameworks and tools.</p>
+<p><strong>We have a long term vision.</strong></p>
+<p>Aurelia is the first step in realizing that vision. We believe it's critical to start with a completely free, open source application framework. We want to enable anyone to build amazing apps for many years to come and to know that they are building on a platform that isn't just here today and gone tomorrow. We're investing heavily in both building and supporting Aurelia as well as creating additional offerings: open source, free and commerical. We're truly excited about what's in store!</p>
+</section>
+<section><h2 id="team-and-community">Team and Community</h2><p>This isn't one man's weekend project. There's 
+<a href="http://durandal.io/" target="_blank">a dedicated company</a>
+ and team behind Aurelia. We've put together 
+<a href="https://github.com/aurelia" target="_blank">a collection of passionate developers</a>
+ both from inside Durandal and out in the community. We're not only building Aurelia but we're already dogfooding it by building real apps and plugins with it.</p>
+<p><em>What is being built?</em></p>
+<p>There's already apps in development in both the energy and telecom spaces. Early adopters have started work on integrating with Breeze, Knockout, Kendo, jQuery, Bootstrap, Foundation, ESRI, DOJO and more. There are members working on touch libraries, custom widgets and platform-specific tooling such as Visual Studio integration and Sublime packages.</p>
+<p><em>What about training, consulting and support?</em></p>
+<p>We've partnered with several companies to begin providing training and consulting around Aurelia. You're going to begin seeing workshops show up at major conferences this year and soon we'll have virtual training available as well. Need commercial support? We'll be providing that too.</p>
+</section>
+<section><h2 id="get-started">Get Started</h2><p>Aurelia isn't done yet. We've got a few more features to add and a bunch of work around performance and testing. But it's far enough along right now that you can build just about any app you want...and probably do it easier and faster than with any other library today. We're really excited about the developer experience and hope you will 
+<a href="http://aurelia.io/get-started.html" target="_blank">try it out</a>
+.</p>
+<p>Don't have time to read documentation? No sweat. I prepared a nifty video for you...</p>
+<iframe src="//player.vimeo.com/video/117778145" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+</section>
+<section><h2 id="stay-up-to-date">Stay Up to Date</h2><p>
+<a href="http://aurelia.io/" target="_blank">Our new site</a>
+ has some 
+<a href="http://aurelia.io/docs.html" target="_blank">preliminary docs</a>
+ to help you get started and play around with the framework and its libraries. We're working on something quite a bit more extensive for the future though. If you want to learn more about Aurelia now, I would encourage you to subscribe to 
+<a href="http://blog.durandal.io/" target="_blank">the Durandal company blog</a>
+. Our blog will feature content written by core dev team members each week ranging from Aurelia usage to patterns and practices. It's a great way to keep up with the latest developments and not only learn about Aurelia, but also modern JavaScript development in general.</p>
+<p>In the next few months I'll be appearing on several podcasts, so you'll have an opportunity to hear a lot about Aurelia that way. If you have questions or topics you'd love to hear covered on those shows, feel free to post ideas below. I'll also personally be speaking in Florida, Texas, Georgia, Canada and Sweden over the next few months. Other community team members are submitting talks now as well.</p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>I'm really excited about Aurelia. We're just getting started, but we've got a lot planned. We'd love for you to take the early bits for a spin, send us feedback or get involved. I think you're really going to like it and I look forward to seeing what amazing things you'll build.</p>
+</section>
+
+  </article>
+</section>

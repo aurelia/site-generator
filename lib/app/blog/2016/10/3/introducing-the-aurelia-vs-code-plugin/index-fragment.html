@@ -1,0 +1,63 @@
+<section class="article blog">
+  <header>
+    <h1>Introducing The Aurelia VS Code Plugin</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Hello, everyone! My name is 
+<a href="https://www.eriklieben.com" target="_blank">Erik Lieben</a>
+, and I am a developer from the Netherlands working at 
+<a href="https://www.effectory.com" target="_blank">Effectory</a>
+ and co-organizer of the 
+<a href="https://www.meetup.com/Aurelia-Amsterdam-meetup/" target="_blank">Aurelia Amsterdam</a>
+ meetup. In my spare time, I will be working as a member of the Aurelia Core Team on the official 
+<a href="https://github.com/aurelia/vscode-extension/" target="_blank">vscode-extension</a>
+. With this extension, we hope to provide you with a pleasant development experience when building Aurelia applications using 
+<a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>
+.</p>
+<p>The extension is currently in Preview. We would love to receive early feedback and hear about the edge cases that may have been missed while writing the syntax highlighter.</p>
+<section><h2 id="features">Features</h2><p>The extension currently consists of the following features:</p>
+<h3>Syntax Highlighting</h3>
+<p>The syntax highlighting feature exists in 2 parts: a grammar file to define the Aurelia syntax used in HTML files and four customized themes (Dark, Dark+, Light, Light+). The Aurelia grammar extends the default HTML syntax, which allows tools like Emmet to stay working without adding any extra configuration for it.</p>
+<p>Visual Studio Code doesn't support extending themes without modifying them, like Atom does, which means that customized themes are required to see the Aurelia syntax highlighted correctly. I have taken the default themes and extended them with the Aurelia coloring scheme, so you can easily enable Aurelia highlighting.</p>
+<p>By default, every Aurelia syntax item will color purple, but you could also extend it by creating a custom theme. This allows you to, for example, color data bindings green, generate the <code>compose</code> element yellow and the <code>router-view</code> orange. You can use any other rainbow-like color scheme you like.</p>
+<p><img src="https://raw.githubusercontent.com/aurelia/vscode-extension/master/images/dark-aurelia-syntax.PNG" alt="Sample of syntax highlight" /></p>
+<h3>Autocomplete</h3>
+<p>The autocomplete feature helps you to write Aurelia code faster. It will give hints and allow you to tab to complete. The current implementation is a basic first version.</p>
+<p>If you look closely, you will see that on the <code>value.bind</code> it gives you extra information about the default binding (<code>two-way</code>), and in the case of the placeholder, it provides the default of <code>one-way</code>. This feature only works on some of the defaults for now and still needs to be extended to support more scenarios.</p>
+<p>You can read the full help description of the item to be auto-completed by pressing CTRL+SPACE. For example in the animation below, we show you the information of the <code>delegate</code> which was added to the <code>click</code> event.</p>
+<p><img src="https://raw.githubusercontent.com/aurelia/vscode-extension/master/images/aurelia-autocomplete.gif" alt="Aurelia auto complete" /></p>
+<blockquote>
+<p>This feature currently has an unresolved issue where it doesn't center the cursor between the &quot;&quot; on complete. I hope to resolve that soon.</p>
+</blockquote>
+<h3>Executing CLI Commands from the Command Palette</h3>
+<p>In Visual Studio Code you can press CTRL+P to open the commands palette to have access to all the functionally of VS Code from your keyboard. With this extension installed you will also be able to run the CLI tasks: build, generate, new and test from the same commands palette.</p>
+<p>It's as simple as typing <code>au generate</code> and answering the questions to create a custom element. The options are dynamic, so if you would, for example, create a new generator with the cli which is named <code>readme-file-generator</code> and then run the command again, it will show up as a template you could generate.
+<img src="https://raw.githubusercontent.com/aurelia/vscode-extension/master/images/aurelia-cli.gif" alt="Aurelia CLI commands" /></p>
+</section>
+<section><h2 id="what">What</h2><p>We are looking at integrating the fantastic work done by Core Team Member 
+<a href="https://github.com/MeirionHughes" target="_blank">Meirion Hughes</a>
+ on the 
+<a href="https://github.com/MeirionHughes/aurelia-template-lint" target="_blank">aurelia-templating-lint</a>
+ project into Visual Studio Code. When we have this working you will get squiggly lines on lint errors. For example when you have unclosed elements or self-closing elements you will get squiggly lines under them to warn you.</p>
+<p>We are also working on stabilizing the core so that it will be easier to add more amazing features later on.</p>
+</section>
+<section><h2 id="want-to-try-it">Want to try it?</h2><p>Open up Visual Studio Code and press CTRL+P and paste the following to install it.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    ext install aurelia
+  </code></pre></source-code>
+</code-listing>
+<p>Be sure to select one of the themes with Aurelia syntax support after it's installed. You can do this by going to File / Preferences / Color theme and picking one if the following themes:</p>
+<ul>
+<li>Aurelia Dark</li>
+<li>Aurelia Dark+</li>
+<li>Aurelia Light</li>
+<li>Aurelia Light+</li>
+</ul>
+<p>Kind regards,
+Erik Lieben</p>
+</section>
+
+  </article>
+</section>

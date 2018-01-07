@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38441871-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+  <meta charset="utf-8">
+  <title>Case Study: Ivee 3D Editor - Aurelia+Azure+ASP.NET+Redux+ThreeJS | Aurelia</title>
+  <base href="/aurelia-docs-test/">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  
+  <meta name="description" content="Today, I&#x27;m pleased to introduce you to Daniel Radu. Dan is a member of our Aurelia community who has been building some pretty awesome stuff by combining Aurelia [http://aurelia.io] with Microsoft Azure [https://azure.microsoft.com]. I&#x27;ll let Dan tell you about his experiences, in his own words..."/>
+  <meta name="robots" content="index,follow"/>
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:200,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
+</head>
+
+<body aurelia-app="main" id="app-host">
+  <header class="app-header"> 
+    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <search-trigger></search-trigger>
+  </header>
+
+  <main ref="main">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
+      <section class="article blog">
+  <header>
+    <h1>Case Study: Ivee 3D Editor - Aurelia+Azure+ASP.NET+Redux+ThreeJS</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today, I'm pleased to introduce you to Daniel Radu. Dan is a member of our Aurelia community who has been building some pretty awesome stuff by combining 
+<a href="http://aurelia.io" target="_blank">Aurelia</a>
+ with 
+<a href="https://azure.microsoft.com" target="_blank">Microsoft Azure</a>
+. I'll let Dan tell you about his experiences, in his own words...</p>
+<p>
+<a href="http://editor.ivee.tech" target="_blank">Ivee 3d Editor</a>
+ is an online editor which allows the creation of beautiful 3D presentations. It provides features like adding various 3D objects - cubes, spheres, torus, etc., configuring materials, textures, shaders, providing animations, tweening etc.</p>
+<p><img src="blog/2017/9/3/ivee-3d-editor-aurelia-microsoft-azure-case-study/content/images/2017/08/1.png" alt="Ivee 3D Editor" /></p>
+<p>In the following article I'm going to explain a bit about the internals of the editor and my journey of building Ivee using Aurelia and ThreeJS.</p>
+<p>On the server-side, Ivee 3D Editor uses a .NET Web API with a SQL Server database to store user authentication information. The editor output is stored as a JSON file on the server, in a dedicated user space. The database and web application is hosted on 
+<a href="https://azure.microsoft.com" target="_blank">Microsoft Azure</a>
+.</p>
+<section><h2 id="why-aurelia">Why Aurelia?</h2><p>I started working on Ivee on Dec 2016. It was a pet project, and I couldn't afford to dedicate a lot of time, only nights and weekends. My regular job is full stack .NET developer and the frontend framework I'm using at work is Angular. That means I didn't have much experience (even knowledge, to be honest) with Aurelia.</p>
+<p>I came across Aurelia by talking to my friend Dragos, who was disappointed by Angular and its awkward syntax - which I never liked myself. He started exploring Aurelia and I was interested to learn how to use it as well. I thought learning another framework would be beneficial to my technical knowledge.</p>
+<p>At that time, my thought was that if things are not working well with Aurelia, I can always go back to Angular.</p>
+</section>
+<section><h2 id="choosing-aurelia-cli">Choosing Aurelia CLI</h2><p>So I started looking at Rob's video on 
+<a href="http://aurelia.io" target="_blank">aurelia.io</a>
+ and from the first go I was impressed with the simplicity and naturalness of Aurelia. I installed 
+<a href="https://github.com/aurelia/cli" target="_blank">Aurelia CLI</a>
+ and in 10 minutes I had a fully running application, with routing, components, data binding and output events. From that point, I had no doubt about my choice, even though I had a little fear that along the way I will encounter difficulties. With this in mind, I set my expectation that my plans to integrate legacy or non-Aurelia libraries might not work as smoothly as I would like.</p>
+<p>Later on, it turned out that this is one of the features that sets Aurelia apart - the ease of integrating almost everything with Aurelia without spending hours and hours of research and bug chasing.</p>
+</section>
+<section><h2 id="integrating-threejs-and-other-libraries">Integrating ThreeJS (and other libraries)</h2><p>After setting up the app component and the routes, which was a breeze, I must say, my next concern was how I could integrate 
+<a href="https://threejs.org/" target="_blank">ThreeJS</a>
+. I was pretty familar with the library, as I had tried various JavaScript experiments, but never using TypeScript and Aurelia. After digging a little bit, I found that there was already an 
+<a href="https://www.npmjs.com/package/three" target="_blank">npm package for ThreeJS</a>
+. I installed it and I checked the Aurelia documentation about how to 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli/10" target="_blank">configure libraries</a>
+. In no time, I learned how to modify the <em>aurelia.json</em> file to include the client libraries and I had my little three js scene up and running - the little rotating cube at the XYZ axis that's on the Ivee 3D Editor 
+<a href="http://editor.ivee.tech" target="_blank">home page</a>
+.</p>
+<p>The configuration for ThreeJS in my <em>aurelia.json</em> file looks like this:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"three"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/three/build"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"three"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  </code></pre></source-code>
+</code-listing>
+<blockquote>
+<p>Note: The Aurelia CLI can automatically install and configure most libraries, but you can always do it manually, as shown above.</p>
+</blockquote>
+<p>The usage in the component is trivial:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> THREE <span class="token keyword">from</span> <span class="token string">'three'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Viewer</span> <span class="token punctuation">{</span>
+      <span class="token keyword">private</span> selectedObj<span class="token punctuation">:</span> THREE<span class="token punctuation">.</span>Object3D <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token keyword">protected</span> w<span class="token punctuation">:</span> WglUtil <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WglUtil</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">private</span> clock<span class="token punctuation">:</span> THREE<span class="token punctuation">.</span>Clock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Clock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword">private</span> <span class="token function">onDocumentMouseDown</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>w<span class="token punctuation">.</span><span class="token function">dndMouseDown</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>selectedObj <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>w<span class="token punctuation">.</span>dndSelectedObject<span class="token punctuation">;</span>
+    
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>selectedObj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> obj<span class="token punctuation">:</span> Iv3dObject <span class="token operator">=</span> <span class="token operator">&lt;</span>Iv3dObject<span class="token operator">></span><span class="token keyword">this</span><span class="token punctuation">.</span>selectedObj<span class="token punctuation">.</span>userData<span class="token punctuation">;</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">public</span> <span class="token function">animate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> elapsedTime <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>clock<span class="token punctuation">.</span><span class="token function">getElapsedTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>elapsedTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Other libraries I'm using:</p>
+<ul>
+<li>
+<a href="https://www.npmjs.com/package/three-orbitcontrols" target="_blank">OrbitControls</a>
+ - user interaction with the presentation via mouse and touch;</li>
+<li>
+<a href="https://www.npmjs.com/package/dat-gui" target="_blank">dat.GUI</a>
+ - a quick and easy to use GUI to configure properties;</li>
+<li>
+<a href="https://www.npmjs.com/package/expr-eval" target="_blank">expr-eval</a>
+ - a JavaScript expression evaluator;</li>
+<li>
+<a href="https://www.npmjs.com/package/tween.js" target="_blank">tween.js</a>
+ - a tweening engine for simple animations;</li>
+<li>
+<a href="https://www.npmjs.com/package/threeleapcontrols" target="_blank">threeleapcontrols</a>
+ - a package for 
+<a href="https://www.leapmotion.com/" target="_blank">VR Leap Motion</a>
+ integration;</li>
+<li>
+<a href="https://www.npmjs.com/package/three-stereoeffect" target="_blank">three-stereo-effect</a>
+ - stereo effect for VR visualization;</li>
+<li>
+<a href="https://www.npmjs.com/package/three-anaglypheffect" target="_blank">three-anaglypheffect</a>
+ - effect for 3D Anaglyph visualization;</li>
+<li>
+<a href="https://www.npmjs.com/package/three-asciieffect" target="_blank">three-asciieffect</a>
+ - effect for ASCII visualization.</li>
+</ul>
+</section>
+<section><h2 id="authentication">Authentication</h2><p>Authentication is a tricky part of single-page applications which use routes. You want to have authenticated pages, like user settings, as well as pages with anonymous access like home page, login, and signup pages. Aurelia helps a lot with its very own <strong>setRoot</strong> method which can be called conditionally:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">let</span> userSvc<span class="token punctuation">:</span> UserService <span class="token operator">=</span> aurelia<span class="token punctuation">.</span>container<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>UserService<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> url <span class="token operator">=</span> window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> noAuthPages<span class="token punctuation">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'home'</span><span class="token punctuation">,</span> <span class="token string">'editor'</span><span class="token punctuation">,</span> <span class="token string">'viewer'</span><span class="token punctuation">,</span> <span class="token string">'login'</span><span class="token punctuation">,</span> <span class="token string">'signup'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> isNoAuth <span class="token operator">=</span> noAuthPages<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> url<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span>
+      
+    aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>userSvc<span class="token punctuation">.</span>isAuthenticated <span class="token operator">||</span> isNoAuth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        aurelia<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token string">'app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        aurelia<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token string">'./components/pages/login-page/login-page'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>On the server side I use token authentication using 
+<a href="https://www.asp.net/identity" target="_blank">ASP.NET Identity Framework</a>
+. The token is passed with every authenticated call. On the client side, the token is stored in the browser's local storage, managed by the <strong>UserService</strong> service class.</p>
+</section>
+<section><h2 id="data">Data</h2><p>Integrating data with Aurelia was really easy and I loved that there are options to either use Fetch API, using <em>aurelia-fetch-client</em> or XMLHttpRequest API using <em>aurelia-http-client</em>. Preferable is Fetch 
+<a href="http://aurelia.io/hub.html#/doc/api/aurelia/fetch-client/latest/class/HttpClient" target="_blank">HttpClient</a>
+, however, for compatibility reasons, you can use the <em>xhr</em> plugin.</p>
+<p>
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/dependency-injection/latest/dependency-injection-basics/1" target="_blank">Dependency Injection</a>
+ works nicely with Aurelia and you can easily swap one plugin with another. I started with 
+<a href="https://github.com/aurelia/http-client" target="_blank">null</a>
+, but later on I moved to fetch client with minimal changes.</p>
+<p>Here is a sample code from my data service:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    @<span class="token function">inject</span><span class="token punctuation">(</span>HttpClient<span class="token punctuation">,</span> UserService<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">DataService</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> httpClient<span class="token punctuation">:</span> HttpClient<span class="token punctuation">,</span> <span class="token keyword">private</span> userSvc<span class="token punctuation">:</span> UserService<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    
+      <span class="token function">loadData</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> string<span class="token punctuation">,</span> addToken<span class="token operator">?</span><span class="token punctuation">:</span> boolean<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> headers<span class="token punctuation">:</span> Headers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Headers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>addToken<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          headers<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`Bearer </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>userSvc<span class="token punctuation">.</span>token<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>httpClient<span class="token punctuation">.</span><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          credentials<span class="token punctuation">:</span> <span class="token string">'include'</span><span class="token punctuation">,</span>
+          headers<span class="token punctuation">:</span> headers
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleResponse</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="forms">Forms</h2><p>I use forms in for user authentication (login, signup) and user space management (a feature where user can upload, rename, delete, download files, create, rename, delete folders). The two-way binding for controls is natural in Aurelia and you don't need to do anything special.</p>
+<p>How neat and tidy is this template, when you tell Aurelia to bind the <strong>userName</strong> property to your input and apply validation:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"user"</span><span class="token operator">></span>Username<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">></span>
+      <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"user"</span> value<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"userName &amp; validate"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Validation, which is a must when working with forms, was very easy to integrate thanks to the <em>aurelia-validation</em> plugin.</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    aurelia<span class="token punctuation">.</span>use
+      <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-validation'</span><span class="token punctuation">)</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The validation rules are simply added to the component early, somewhere in the constructor or <strong>attached</strong> hook. I really like the fluent validation API:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    ValidationRules
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">(</span>m<span class="token punctuation">:</span> LoginPage<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> m<span class="token punctuation">.</span>userName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">displayName</span><span class="token punctuation">(</span><span class="token string">"Username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">(</span>m<span class="token punctuation">:</span> LoginPage<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> m<span class="token punctuation">.</span>password<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">displayName</span><span class="token punctuation">(</span><span class="token string">"Password"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Then use <strong>ValidationController</strong> to apply the rules by calling the <strong>validate</strong> method which returns a promise:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>validationController
+      <span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>result <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>valid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>loginError <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>loginErrorMessage <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>loginError <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>loginErrorMessage <span class="token operator">=</span> <span class="token string">'Validaton error(s):'</span><span class="token punctuation">;</span>
+    
+          <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> error <span class="token keyword">of</span> <span class="token keyword">this</span><span class="token punctuation">.</span>validationController<span class="token punctuation">.</span>errors<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>loginErrorMessage <span class="token operator">+</span><span class="token operator">=</span> error<span class="token punctuation">.</span>message <span class="token operator">+</span> <span class="token string">' '</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>It can't be any cleaner than this.</p>
+</section>
+<section><h2 id="using-redux">Using Redux</h2><p>Given the fact that most of the user work is performed on the client side, I wanted to have a proper way to manage state in Ivee 3D Editor. One great pattern for managing application state is 
+<a href="http://redux.js.org/docs/introduction/" target="_blank">Redux</a>
+.</p>
+<p>Having used Redux in Angular 2, I was familiar with the patterns: actions, reducers, state, stores, effects, etc. However, Angular 2 takes advantage of 
+<a href="https://github.com/ngrx" target="_blank">ngrx</a>
+ library which does a lot of heavy lifting and returns Observables ready to use by Angular components.</p>
+<p>I couldn't find anything similar for Aurelia, however the standard 
+<a href="https://www.npmjs.com/package/redux" target="_blank">Redux NPM packages</a>
+ works without any issue. I spent a bit of time - one user story, about the whole 2 week sprint - to integrate the packages and create my own functionality for loading and saving editor data as JSON files, but it was really worth it.</p>
+<p>The Redux configuration in the <em>aurelia.json</em> file looks as follows (redux thunk is used for middleware associated with asynchronous calls, like Ajax or Fetch calls):</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"redux"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/redux/dist"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"redux.min"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"redux-thunk"</span><span class="token punctuation">,</span>
+      <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"../node_modules/redux-thunk/dist"</span><span class="token punctuation">,</span>
+      <span class="token string">"main"</span><span class="token punctuation">:</span> <span class="token string">"redux-thunk.min"</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>An example for load data 
+<a href="http://redux.js.org/docs/basics/Actions.html" target="_blank">actions</a>
+:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">DataMgrActions</span> <span class="token punctuation">{</span>
+      <span class="token keyword">static</span> actionTypes <span class="token operator">=</span> <span class="token punctuation">{</span>
+        LOAD_DATA<span class="token punctuation">:</span> <span class="token string">'LOAD_DATA'</span><span class="token punctuation">,</span>
+        LOAD_DATA_SUCCESS<span class="token punctuation">:</span> <span class="token string">'LOAD_DATA_SUCCESS'</span><span class="token punctuation">,</span>
+        LOAD_DATA_FAIL<span class="token punctuation">:</span> <span class="token string">'LOAD_DATA_FAIL'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> dataSvc<span class="token punctuation">:</span> DataService<span class="token punctuation">,</span> <span class="token keyword">private</span> userSvc<span class="token punctuation">:</span> UserService<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    
+      <span class="token comment" spellcheck="true">// action creators</span>
+      loadData <span class="token operator">=</span> <span class="token punctuation">(</span>fileName<span class="token punctuation">:</span> string<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+          type<span class="token punctuation">:</span> DataMgrActions<span class="token punctuation">.</span>actionTypes<span class="token punctuation">.</span>LOAD_DATA<span class="token punctuation">,</span>
+          payload<span class="token punctuation">:</span> fileName
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      loadDataSuccess <span class="token operator">=</span> <span class="token punctuation">(</span>data<span class="token punctuation">:</span> DataModel<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+          type<span class="token punctuation">:</span> DataMgrActions<span class="token punctuation">.</span>actionTypes<span class="token punctuation">.</span>LOAD_DATA_SUCCESS<span class="token punctuation">,</span>
+          payload<span class="token punctuation">:</span> data
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      loadDataError <span class="token operator">=</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+          type<span class="token punctuation">:</span> DataMgrActions<span class="token punctuation">.</span>actionTypes<span class="token punctuation">.</span>LOAD_DATA_FAIL<span class="token punctuation">,</span>
+          payload<span class="token punctuation">:</span> error
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      loadDataSvc <span class="token operator">=</span> <span class="token punctuation">(</span>fileName<span class="token punctuation">:</span> string<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>dispatch<span class="token punctuation">,</span> getState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">loadData</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>dataSvc<span class="token punctuation">.</span><span class="token function">loadFile</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span>
+              <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">:</span> any<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token keyword">let</span> result<span class="token punctuation">:</span> SvcResponse <span class="token operator">=</span> <span class="token operator">&lt;</span>SvcResponse<span class="token operator">></span>response<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  <span class="token keyword">return</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">loadDataSuccess</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                  <span class="token keyword">let</span> error <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  <span class="token keyword">return</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">loadDataError</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">loadDataError</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>
+              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The load data 
+<a href="http://redux.js.org/docs/basics/Reducers.html" target="_blank">reducers</a>
+:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">DataMgrState</span> <span class="token punctuation">{</span>
+      data<span class="token punctuation">:</span> DataModel <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      isError<span class="token punctuation">:</span> boolean <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      error<span class="token punctuation">:</span> any <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      actionState<span class="token punctuation">:</span> ActionState <span class="token operator">=</span> ActionState<span class="token punctuation">.</span>none<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">const</span> initialState<span class="token punctuation">:</span> DataMgrState <span class="token operator">=</span> <span class="token punctuation">{</span>
+      data<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> isError<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> error<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> actionState<span class="token punctuation">:</span> ActionState<span class="token punctuation">.</span>none
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">dataMgr</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> DataMgrState <span class="token operator">=</span> initialState<span class="token punctuation">,</span> action<span class="token punctuation">:</span> IvAction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> actions<span class="token punctuation">.</span>DataMgrActions<span class="token punctuation">.</span>actionTypes<span class="token punctuation">.</span>LOAD_DATA<span class="token punctuation">:</span>
+          <span class="token keyword">return</span> <span class="token operator">&lt;</span>DataMgrState<span class="token operator">></span><span class="token punctuation">{</span>
+            data<span class="token punctuation">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">.</span>data<span class="token punctuation">,</span>
+            actionState<span class="token punctuation">:</span> ActionState<span class="token punctuation">.</span>pending
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> actions<span class="token punctuation">.</span>DataMgrActions<span class="token punctuation">.</span>actionTypes<span class="token punctuation">.</span>LOAD_DATA_SUCCESS<span class="token punctuation">:</span>
+          <span class="token keyword">return</span> <span class="token operator">&lt;</span>DataMgrState<span class="token operator">></span><span class="token punctuation">{</span>
+            data<span class="token punctuation">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">,</span>
+            actionState<span class="token punctuation">:</span> ActionState<span class="token punctuation">.</span>completed
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> actions<span class="token punctuation">.</span>DataMgrActions<span class="token punctuation">.</span>actionTypes<span class="token punctuation">.</span>LOAD_DATA_FAIL<span class="token punctuation">:</span>
+          <span class="token keyword">return</span> <span class="token operator">&lt;</span>DataMgrState<span class="token operator">></span><span class="token punctuation">{</span>
+            data<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+            isError<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            error<span class="token punctuation">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">,</span>
+            actionState<span class="token punctuation">:</span> ActionState<span class="token punctuation">.</span>completed
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+          <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>I separated my components into container and presentation components. The containers are dealing with the store, despatching actions and handling responses, whereas the presentation components simply get data and output events to their parents, following the unbeatable one-way data flow pattern.</p>
+<p>Here is an example of my <em>editor-page</em> component which is the parent of the main 3D editor:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">EditorPage</span> <span class="token punctuation">{</span>
+      fileName<span class="token punctuation">:</span> string<span class="token punctuation">;</span>
+      data<span class="token punctuation">:</span> DataModel<span class="token punctuation">;</span>
+    
+      store<span class="token punctuation">:</span> Store<span class="token operator">&lt;</span>DataMgrState<span class="token operator">></span> <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>dataMgr<span class="token punctuation">,</span>
+        <span class="token function">applyMiddleware</span><span class="token punctuation">(</span>
+          thunk <span class="token comment" spellcheck="true">// lets us dispatch() functions</span>
+        <span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword">private</span> dataMgrActions<span class="token punctuation">:</span> DataMgrActions<span class="token punctuation">;</span>
+      <span class="token keyword">private</span> actionState<span class="token punctuation">:</span> ActionState <span class="token operator">=</span> ActionState<span class="token punctuation">.</span>none<span class="token punctuation">;</span>
+    
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> ea<span class="token punctuation">:</span> EventAggregator<span class="token punctuation">,</span>
+        <span class="token keyword">private</span> dialogService<span class="token punctuation">:</span> DialogService<span class="token punctuation">,</span>
+        <span class="token keyword">private</span> router<span class="token punctuation">:</span> Router<span class="token punctuation">,</span>
+        <span class="token keyword">private</span> dataSvc<span class="token punctuation">:</span> DataService<span class="token punctuation">,</span>
+        <span class="token keyword">private</span> userSvc<span class="token punctuation">:</span> UserService
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>dataMgrActions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DataMgrActions</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>dataSvc<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>userSvc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">activate</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>fileName <span class="token operator">=</span> params<span class="token punctuation">.</span>fn<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// from route</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">private</span> <span class="token function">loadFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>fileName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>actionState <span class="token operator">=</span> ActionState<span class="token punctuation">.</span>pending<span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>dataMgrActions<span class="token punctuation">.</span><span class="token function">loadDataSvc</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>fileName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token keyword">let</span> state<span class="token punctuation">:</span> DataMgrState <span class="token operator">=</span> <span class="token operator">&lt;</span>DataMgrState<span class="token operator">></span><span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>actionState <span class="token operator">=</span> state<span class="token punctuation">.</span>actionState<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>state<span class="token punctuation">.</span>isError<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">raiseOnError</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+              <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> state<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>This is the corresponding HTML template, where the <strong>data</strong> property (of <strong>DataModel</strong> type) is passed as input to the presentation component <strong>editor</strong>:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"../../editor/editor"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>
+      <span class="token operator">&lt;</span>editor data<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"data"</span>
+              save<span class="token operator">-</span>data<span class="token punctuation">.</span>call<span class="token operator">=</span><span class="token string">"saveData(data)"</span>
+              changed<span class="token punctuation">.</span>call<span class="token operator">=</span><span class="token string">"editorChanged(data)"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>editor<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>As usual, there are lots of shades of gray, and, depending on how complex your application is, soon you realise that input data and output events in a component structure of more than three levels is hard to follow, debug and maintain. But don't despair, the smart people behind Aurelia thought of that too and they introduced the 
+<a href="https://github.com/aurelia/event-aggregator" target="_blank">Event Aggregator</a>
+ which is a beautiful implementation of a well-known pattern. Used wisely, the event aggregator is a powerful tool which can make your code really tidy and easy to understand and maintain.</p>
+<p>For example, to manage errors in a central location in your app, you can use Redux and that works nicely. However, using the Event Agreggator you can publish a custom error (applicable at every component level) and let a central component (like <strong>App</strong>) handle it.</p>
+<p>A quick example is how I check if WebGL is enabled:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>WglUtil<span class="token punctuation">.</span><span class="token function">detectWebGL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>ea<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>CustomEventNames<span class="token punctuation">.</span>APP_ERROR<span class="token punctuation">,</span> <span class="token punctuation">{</span> message<span class="token punctuation">:</span> <span class="token string">'Your browser doesn\'t support WebGL.'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>In the root component, <em>app.ts</em>, I subscribe to my error custom event. Then I use a simple dismissable popup component to display the error message to the user:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>appErrorSubscr <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>eventAggregator<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>CustomEventNames<span class="token punctuation">.</span>APP_ERROR<span class="token punctuation">,</span> payload <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>showError <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>errorMessage <span class="token operator">=</span> payload<span class="token punctuation">.</span>message<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>The property <strong>errorMessage</strong> is passed in the template to the <strong>error</strong> component:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token operator">&lt;</span>require <span class="token keyword">from</span><span class="token operator">=</span><span class="token string">"./components/error/error"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>require<span class="token operator">></span>
+    <span class="token operator">&lt;</span>iv<span class="token operator">-</span>3d<span class="token operator">-</span>error show<span class="token operator">-</span>error<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"showError"</span> error<span class="token operator">-</span>message<span class="token punctuation">.</span>bind<span class="token operator">=</span><span class="token string">"errorMessage"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>iv<span class="token operator">-</span>3d<span class="token operator">-</span>error<span class="token operator">></span>
+  </code></pre></source-code>
+</code-listing>
+<p>To avoid memory leaks, I always dispose the subscription in the <strong>detached</strong> hook:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>appErrorSubscr<span class="token punctuation">.</span><span class="token function">dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+</section>
+<section><h2 id="dynamic-content">Dynamic Content</h2><p>Ivee 3D Editor is able to display HTML content in configurable panels. My intention was to leverage the power of HTML in the presentations created using the editor. To be honest, I was prepared to leave this feature out, thinking it might be difficult to integrate dynamic content in a component. Aurelia came to my rescue though, and this was an eye opener for how powerful Aurelia is. Behind its simplicity there are a lot of complex features which developers can reuse and take advantage of. After checking the documentation and after digging in a few Stack Overflow questions, I found that there is a neat way to override the view strategy of a component.</p>
+<p>This is the code of my <strong>ContentPanel</strong> component which uses the <strong>ViewCompiler</strong> service to create the component view at runtime, based on content provided by a custom model (<strong>AdditionalContent</strong>). If you check the code, there is a binding context hooked into the view, which means that even after the initial creation, the view will be updated if the content changes, as it happens with a normal, static template. These features are out of the box, without installing any additional plugin, 3rd party library or framework! I love Aurelia, because things just work!</p>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>inject<span class="token punctuation">,</span> noView<span class="token punctuation">,</span> ViewCompiler<span class="token punctuation">,</span> ViewSlot<span class="token punctuation">,</span> Container<span class="token punctuation">,</span> ViewResources<span class="token punctuation">,</span> bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> AdditionalContent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../models/additional-content'</span><span class="token punctuation">;</span>
+    
+    @noView
+    @<span class="token function">inject</span><span class="token punctuation">(</span>ViewCompiler<span class="token punctuation">,</span> ViewSlot<span class="token punctuation">,</span> Container<span class="token punctuation">,</span> ViewResources<span class="token punctuation">)</span>
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ContentPanel</span> <span class="token punctuation">{</span>
+      <span class="token keyword">private</span> viewCompiler<span class="token punctuation">:</span> ViewCompiler<span class="token punctuation">;</span>
+      <span class="token keyword">private</span> viewSlot<span class="token punctuation">:</span> ViewSlot<span class="token punctuation">;</span>
+      <span class="token keyword">private</span> container<span class="token punctuation">:</span> Container<span class="token punctuation">;</span>
+      <span class="token keyword">private</span> resources<span class="token punctuation">:</span> ViewResources<span class="token punctuation">;</span>
+      <span class="token keyword">private</span> bindingContext <span class="token operator">=</span> <span class="token punctuation">{</span>
+        content<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">AdditionalContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      @bindable content<span class="token punctuation">:</span> AdditionalContent<span class="token punctuation">;</span>
+    
+      <span class="token keyword">constructor</span><span class="token punctuation">(</span>vc<span class="token punctuation">,</span> vs<span class="token punctuation">,</span> container<span class="token punctuation">,</span> resources<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>viewCompiler <span class="token operator">=</span> vc<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>viewSlot <span class="token operator">=</span> vs<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>container <span class="token operator">=</span> container<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>resources <span class="token operator">=</span> resources<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">reloadView</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> AdditionalContent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> template <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+    &lt;template>
+        &lt;div class="panel panel-default" id.bind="content.name" css.bind="content.css" show.bind="content.showFlag">
+            &lt;div class="panel-heading">
+                &lt;h3 class="panel-title pull-left" inner-text.bind="content.title">&lt;/h3>
+                &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close" click.trigger="content.hide()">&lt;span aria-hidden="true">&amp;times;&lt;/span>&lt;/button>
+                &lt;div class="clearfix">&lt;/div>
+            &lt;/div>
+            &lt;div class="panel-body iv-3d-content-panel-body" innerhtml.bind="content.content | sanitizeHTML">
+            &lt;/div>
+        &lt;/div>
+    &lt;/template>`</span></span><span class="token punctuation">;</span>
+        content<span class="token punctuation">.</span>hide <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>content<span class="token punctuation">.</span>showFlag <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+        content<span class="token punctuation">.</span>show <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>content<span class="token punctuation">.</span>showFlag <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">this</span><span class="token punctuation">.</span>bindingContext <span class="token operator">=</span> <span class="token punctuation">{</span>
+          content<span class="token punctuation">:</span> content
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">let</span> viewFactory <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>viewCompiler<span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>template<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>resources<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> view <span class="token operator">=</span> viewFactory<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>container<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        view<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>bindingContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>viewSlot<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>viewSlot<span class="token punctuation">.</span><span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">contentChanged</span><span class="token punctuation">(</span>newValue<span class="token punctuation">:</span> AdditionalContent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">reloadView</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>You can see the dynamic content panels in action in my 
+<a href="http://editor.ivee.tech/#/viewer?d=1&fn=aurelia.json" target="_blank">Aurelia presentation</a>
+, created using Ivee. Click on the topics on the left and you can see the coresponding panel opening.</p>
+<p>Another win, I wanted to provide the user with a nice HTML editing experience and I looked for a nice HTML editor that I could integrate. I chose 
+<a href="https://github.com/neilj/Squire" target="_blank">squire-rte</a>
+. It almost goes without saying: to integrating the Squire editor was as easy as 1-2-3...</p>
+<p><img src="blog/2017/9/3/ivee-3d-editor-aurelia-microsoft-azure-case-study/content/images/2017/08/2.png" alt="HTML Editor" /></p>
+</section>
+<section><h2 id="exposing-viewer-api">Exposing Viewer API</h2><p>I always liked extensibility. The thought of exposing your own object model to the developer is fascinating. With Aurelia and TypeScript / ES6, I found that this is actually possible, providing you have designed a nice component structure and a properly written API. Ivee 3D Editor has two major features: the editor and the viewer. The editor is the tool that allows the users to create presentations, by adding objects, setting properties, creating animation timelines, etc. and the viewer is the tool that puts all the presentation parts together and executes them.</p>
+<p>But what if you want to interact with the presentation at runtime? No problem, Aurelia and TypeScript / ES6 work for you. The current instance of the <strong>Viewer</strong> type is available for scripting, using plain JavaScript:</p>
+<code-listing>
+  <source-code lang="TypeScript"><pre class="language-typescript"><code>
+    <span class="token keyword">private</span> <span class="token function">evaluateInitScripts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>script<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> scriptCode<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+    var viewer;
+    </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>script<span class="token punctuation">.</span>init <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>script<span class="token punctuation">.</span>init <span class="token punctuation">:</span> <span class="token string">''</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+    `</span></span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">createScript</span><span class="token punctuation">(</span>scriptCode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Init script creation failed. Check the error: '</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">createScript</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>script<span class="token punctuation">.</span>update<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Update script creation failed. Check the error: '</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> scriptCode<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+    viewer = this; // this line exposes the viewer for runtime use
+    </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>script<span class="token punctuation">.</span>execInit <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>script<span class="token punctuation">.</span>execInit <span class="token punctuation">:</span> <span class="token string">''</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+    `</span></span><span class="token punctuation">;</span>
+    
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>runExecInit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> fn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span>scriptCode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          fn<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Init script evaluation failed. Check the error: '</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Admittedly, exposing the API opens the door to vulnerabilities, but in my case, the <strong>Viewer</strong> only provides access to the presentation runtime objects. Examples of <strong>Viewer</strong> methods and properties that can be used at runtime:</p>
+<ul>
+<li><code>data: DataModel</code> - the presentation data object model;</li>
+<li><code>w: WglUtil</code> - an instance of the <strong>WglUtil</strong> class, which contains a set of helper functions for ThreeJS;</li>
+<li><code>findObjectById(uuid: string)</code> - finds a presentation object by its unique identifier;</li>
+<li><code>findObjectByName(name: string)</code> - finds a presentation object by its unique identifier;</li>
+<li><code>find3dObjectById(uuid: string)</code> - finds a 3D object by its unique identifier;</li>
+<li><code>find3dObjectByName(name: string)</code> - finds a 3D object by its name.</li>
+</ul>
+<p>Just as a quick test, I used this feature to create a panoramic image for the Aurelia presentation (this code is executed at runtime, when the presentation is loaded):</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">function</span> <span class="token function">addSkyBox</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> cfg <span class="token operator">=</span> <span class="token punctuation">{</span>
+        srcFile<span class="token punctuation">:</span> <span class="token string">'http://localhost/Iv3DEditorApi/data/ivusers/demo@ivee.tech/av8Rgdveqz/images/skyboxsun5deg2.png'</span><span class="token punctuation">,</span>
+        size<span class="token punctuation">:</span> <span class="token number">1024</span> 
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+      viewer<span class="token punctuation">.</span>w<span class="token punctuation">.</span><span class="token function">addSkyBoxFromFile</span><span class="token punctuation">(</span>cfg<span class="token punctuation">,</span> viewer<span class="token punctuation">.</span>mainGroup<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">addSkyBox</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p><img src="blog/2017/9/3/ivee-3d-editor-aurelia-microsoft-azure-case-study/content/images/2017/08/3.png" alt="Presentation modified at runtime" /></p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>The Ivee 3D Editor is still in alpha. It has many features, timelines, tweening, data sources, shaders, but it's still rough and needs a lot of refining. However, I think that for a one man job outside working hours, it is a pretty good achievement. All these features would have been much more painful to implement without Aurelia.</p>
+<p>Aurelia is beautiful because it doesn't get in your way; it guides you to do things then goes on the side, admitting that you need to focus on your business. It helps and it doesn't ask for anything in return. It is your quiet and supportive friend always close to you during your journey, ensuring that you have all the resources necessary to climb the highest peaks.</p>
+<p>We live in amazing times, where dreams get closer and closer to reality. Our job now is much simpler than before - we only need to learn and use these wonderful gems that people like the Aurelia team create. Aurelia is a gem that doesn't have a huge learning curve and the time invested to learn it is returned a thousandfold. If I had to add my own motto for Aurelia, it would be as simple as this: &quot;Aurelia - let amazing things happen&quot;.</p>
+</section>
+
+  </article>
+</section>
+
+    </div>
+
+    <footer class="content-footer" id="app-footer">
+      <div class="links">
+        <div class="link-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/overview/what-is-aurelia">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
+            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
+            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/aurelia">GitHub</a></li>
+            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
+            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">
+        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+      </p>
+    </footer>
+  </main>
+
+  <side-bar></side-bar>
+
+  <nav>
+    <ul>
+      <li class="home ${activeTab === 'home' ? 'active' : ''}">
+        <a href="home">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+            height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <g>
+              <path d="M20.5,13.5c-0.276,0-0.5,0.224-0.5,0.5v9h-5v-6.5c0-0.276-0.224-0.5-0.5-0.5h-5C9.224,16,9,16.224,9,16.5V23H4v-9.5
+                C4,13.224,3.776,13,3.5,13S3,13.224,3,13.5v10C3,23.777,3.224,24,3.5,24h6c0.276,0,0.5-0.224,0.5-0.5V17h4v6.5
+                c0,0.276,0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5V14C21,13.724,20.776,13.5,20.5,13.5z"/>
+              <path d="M23.854,12.647l-11.5-11.5c-0.195-0.195-0.512-0.195-0.707,0l-11.5,11.5c-0.195,0.195-0.195,0.512,0,0.707
+                s0.512,0.195,0.707,0L12,2.208l11.146,11.146c0.098,0.098,0.226,0.146,0.354,0.146s0.256-0.049,0.354-0.146
+                C24.049,13.159,24.049,12.842,23.854,12.647z"/>
+              <path d="M16,3h3v3c0,0.276,0.224,0.5,0.5,0.5S20,6.277,20,6V2.5C20,2.224,19.776,2,19.5,2H16c-0.276,0-0.5,0.224-0.5,0.5
+                S15.724,3,16,3z"/>
+            </g>
+          </g>
+          <g id="invisible_shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Home</div>
+        </a>
+      </li>
+
+      <li class="article ${activeTab === 'article' ? 'active' : ''}">
+        <a href="docs">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g>
+              <path d="M23.5,1H12V0.5C12,0.224,11.776,0,11.5,0h-8C3.224,0,3,0.224,3,0.5V1H0.5C0.224,1,0,1.224,0,1.5v22
+                C0,23.776,0.224,24,0.5,24h23c0.276,0,0.5-0.224,0.5-0.5v-22C24,1.224,23.776,1,23.5,1z M4,1h7v11.293L7.854,9.146
+                c-0.195-0.195-0.512-0.195-0.707,0L4,12.293V1z M23,23H1V2h2v11.5c0,0.446,0.542,0.668,0.854,0.354L7.5,10.207l3.646,3.646
+                C11.459,14.166,12,13.948,12,13.5V2h11V23z"/>
+              <path d="M14.5,8h6C20.776,8,21,7.776,21,7.5S20.776,7,20.5,7h-6C14.224,7,14,7.224,14,7.5S14.224,8,14.5,8z"/>
+              <path d="M14.5,11h6c0.276,0,0.5-0.224,0.5-0.5S20.776,10,20.5,10h-6c-0.276,0-0.5,0.224-0.5,0.5S14.224,11,14.5,11z"/>
+              <path d="M20.5,13h-6c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S20.776,13,20.5,13z"/>
+              <path d="M20.5,16h-17C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h17c0.276,0,0.5-0.224,0.5-0.5S20.776,16,20.5,16z"/>
+              <path d="M16.5,19h-13C3.224,19,3,19.224,3,19.5S3.224,20,3.5,20h13c0.276,0,0.5-0.224,0.5-0.5S16.776,19,16.5,19z"/>
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Guides</div>
+        </a>
+      </li>
+
+      <li class="api ${activeTab === 'api' ? 'active' : ''}">
+        <a href="docs/api">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <path d="M21.945,15.283c-0.009-0.02-0.022-0.034-0.034-0.052c-0.031-0.048-0.068-0.089-0.114-0.123
+              c-0.011-0.008-0.015-0.021-0.026-0.029L17,12.011V7.5c0-0.082-0.024-0.156-0.059-0.224c-0.01-0.02-0.023-0.035-0.036-0.053
+              c-0.033-0.049-0.072-0.089-0.12-0.124c-0.012-0.007-0.017-0.022-0.028-0.029l-5-3c-0.158-0.095-0.355-0.095-0.514,0l-5,3
+              C6.231,7.078,6.227,7.093,6.215,7.1c-0.048,0.035-0.087,0.075-0.12,0.124C6.082,7.241,6.068,7.257,6.059,7.276
+              C6.024,7.344,6,7.418,6,7.5v4.511L1.229,15.08c-0.012,0.007-0.016,0.021-0.026,0.029c-0.046,0.034-0.083,0.075-0.114,0.123
+              c-0.012,0.018-0.025,0.032-0.034,0.052C1.022,15.349,1,15.421,1,15.5v4.784c0,0.17,0.087,0.329,0.229,0.421l5,3.216
+              c0.009,0.006,0.021,0.003,0.029,0.009C6.331,23.971,6.411,24,6.5,24s0.169-0.029,0.241-0.07c0.009-0.006,0.021-0.003,0.029-0.009
+              l4.729-3.042l4.729,3.042c0.009,0.006,0.021,0.003,0.029,0.009C16.331,23.971,16.411,24,16.5,24s0.169-0.029,0.241-0.07
+              c0.009-0.006,0.021-0.003,0.029-0.009l5-3.216C21.913,20.613,22,20.454,22,20.284V15.5C22,15.421,21.978,15.349,21.945,15.283z
+              M16.5,17.917l-4.053-2.432l4.053-2.606l4.053,2.606L16.5,17.917z M7,18.783l4-2.4v3.628l-4,2.573V18.783z M16,12.011l-4,2.573
+              v-3.801l4-2.4V12.011z M11,14.584l-4-2.573V8.383l4,2.4V14.584z M11.5,5.083L15.528,7.5L11.5,9.917L7.472,7.5L11.5,5.083z
+              M6.5,12.879l4.053,2.606L6.5,17.917l-4.053-2.432L6.5,12.879z M2,16.383l4,2.4v3.801l-4-2.573V16.383z M12,16.383l4,2.4v3.801
+              l-4-2.573V16.383z M17,22.584v-3.801l4-2.4v3.628L17,22.584z"/>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">APIs</div>
+        </a>
+      </li>
+
+      <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
+        <a href="https://discourse.aurelia.io">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M7.508,14.318c-0.465-0.063-0.923-0.163-1.362-0.297c-0.109-0.034-0.227-0.029-0.331,0.015l-3.669,1.467l1.289-2.255
+                  c0.122-0.214,0.07-0.484-0.122-0.639C1.843,11.434,1,9.729,1,7.935C1,4.387,4.589,1.5,9,1.5s8,2.887,8,6.435
+                  c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5c0-4.1-4.038-7.435-9-7.435S0,3.835,0,7.935c0,1.962,0.855,3.827,2.36,5.178
+                  l-1.794,3.14c-0.105,0.185-0.083,0.416,0.057,0.576C0.72,16.939,0.858,17,1,17c0.062,0,0.125-0.012,0.186-0.036l4.839-1.936
+                  c0.438,0.124,0.891,0.219,1.348,0.28c0.274,0.048,0.526-0.154,0.563-0.428S7.781,14.355,7.508,14.318z"/>
+                <path d="M22.123,20.627C23.353,19.517,24,18.098,24,16.5c0-3.523-3.435-6.5-7.5-6.5S9,12.977,9,16.5
+                  c0,2.125,1.152,4.144,3.083,5.397c2.073,1.349,4.649,1.582,6.93,0.642l3.812,1.429C22.882,23.989,22.941,24,23,24
+                  c0.139,0,0.275-0.058,0.372-0.165c0.138-0.153,0.167-0.375,0.076-0.559L22.123,20.627z M19.176,21.532
+                  C19.119,21.511,19.06,21.5,19,21.5c-0.069,0-0.139,0.015-0.203,0.043c-2.018,0.898-4.324,0.717-6.169-0.484
+                  C10.982,19.99,10,18.285,10,16.5c0-2.981,2.977-5.5,6.5-5.5s6.5,2.519,6.5,5.5c0,1.433-0.61,2.647-1.812,3.609
+                  c-0.184,0.147-0.24,0.403-0.135,0.614l0.931,1.861L19.176,21.532z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">Discourse</div>
+        </a>
+      </li>
+
+      <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
+        <a href="blog">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M14.5,3h-11C3.224,3,3,3.224,3,3.5S3.224,4,3.5,4h11C14.776,4,15,3.776,15,3.5S14.776,3,14.5,3z"/>
+                <path d="M3.5,13h5C8.776,13,9,12.776,9,12.5v-6C9,6.224,8.776,6,8.5,6h-5C3.224,6,3,6.224,3,6.5v6C3,12.776,3.224,13,3.5,13z
+                  M4,7h4v5H4V7z"/>
+                <path d="M14.5,8h-3C11.224,8,11,8.224,11,8.5S11.224,9,11.5,9h3C14.776,9,15,8.776,15,8.5S14.776,8,14.5,8z"/>
+                <path d="M14.5,10h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,10,14.5,10z"/>
+                <path d="M14.5,12h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,12,14.5,12z"/>
+                <path d="M14.5,14h-11C3.224,14,3,14.224,3,14.5S3.224,15,3.5,15h11c0.276,0,0.5-0.224,0.5-0.5S14.776,14,14.5,14z"/>
+                <path d="M14.5,16h-11C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h11c0.276,0,0.5-0.224,0.5-0.5S14.776,16,14.5,16z"/>
+                <path d="M14.5,18h-11C3.224,18,3,18.224,3,18.5S3.224,19,3.5,19h11c0.276,0,0.5-0.224,0.5-0.5S14.776,18,14.5,18z"/>
+                <path d="M23.5,3H20V2c0-0.276-0.224-0.5-0.5-0.5H18v-1C18,0.224,17.776,0,17.5,0h-17C0.224,0,0,0.224,0,0.5v20
+                  C0,22.43,1.57,24,3.5,24h17c1.93,0,3.5-1.57,3.5-3.5v-17C24,3.224,23.776,3,23.5,3z M20,6h1v14.5c0,0.276-0.225,0.5-0.5,0.5
+                  S20,20.776,20,20.5V6z M3.5,23C2.121,23,1,21.878,1,20.5V1h16v1v2v16.5c0,0.979,0.403,1.865,1.053,2.5H3.5z M23,20.5
+                  c0,1.378-1.121,2.5-2.5,2.5S18,21.878,18,20.5V4V2.5h1v18c0,0.827,0.673,1.5,1.5,1.5s1.5-0.673,1.5-1.5v-15
+                  C22,5.224,21.776,5,21.5,5H20V4h3V20.5z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Blog</div>
+        </a>
+      </li>
+      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+        <a href="help">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                  C5.71,23,1,18.29,1,12.5C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"/>
+                <path d="M11.5,6.5C9.57,6.5,8,8.07,8,10c0,0.276,0.224,0.5,0.5,0.5S9,10.276,9,10c0-1.378,1.121-2.5,2.5-2.5S14,8.622,14,10
+                  s-1.121,2.5-2.5,2.5c-0.276,0-0.5,0.224-0.5,0.5v3c0,0.276,0.224,0.5,0.5,0.5S12,16.276,12,16v-2.535
+                  c1.694-0.244,3-1.704,3-3.465C15,8.07,13.43,6.5,11.5,6.5z"/>
+                <circle cx="11.5" cy="18.5" r="1"/>
+              </g>
+            </g>
+          </g>
+          </svg>
+          <div class="label">Help</div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <search-panel></search-panel>
+
+  <script>
+    window.aureliaDocConfiguration = {"name":"Aurelia","siteUrl":"http://aurelia.io","baseUrl":"/aurelia-docs-test/","outDir":"./","trackingID":"UA-38441871-6","home":{"dest":"home"},"blog":{"dest":"blog","src":"./src/blog","postsPerPage":7,"author":"AureliaEffect","migration":{"src":"./src/blog/ghost.json"}},"help":{"name":"Help","src":"./src/help.md","dest":"help"},"notFound":{"name":"404","description":"Not Found"},"docs":{"article":[{"name":"Overview","description":"Discover what Aurelia is along with its business and technical advantages.","dest":"docs/overview","items":[{"name":"What is Aurelia?","src":"../framework/doc/article/en-US/what-is-aurelia.md","dest":"docs/overview/what-is-aurelia","featured":true,"personas":["developer","new-developer","architect","manager"]},{"name":"Technical Benefits","src":"../framework/doc/article/en-US/technical-benefits.md","dest":"docs/overview/technical-benefits","personas":["developer","architect","manager"]},{"name":"Business Advantages","src":"../framework/doc/article/en-US/business-advantages.md","dest":"docs/overview/business-advantages","personas":["developer","architect","manager"]}]},{"name":"Tutorials","description":"Step-by-step tutorials teaching you how to build your first Aurelia applications.","dest":"docs/tutorials","items":[{"name":"Creating a Todo App","src":"../framework/doc/article/en-US/quick-start.md","dest":"docs/tutorials/creating-a-todo-app","featured":true,"personas":["developer","new-developer"]},{"name":"Creating a Contact Manager","src":"../framework/doc/article/en-US/contact-manager-tutorial.md","dest":"docs/tutorials/creating-a-contact-manager","featured":true,"personas":["developer","new-developer"]}]},{"name":"Fundamentals","description":"After you've completed the quick starts, learn more about Aurelia's app model, components, dependency injection and more.","dest":"docs/fundamentals","items":[{"name":"App Config and Startup","src":"../framework/doc/article/en-US/app-configuration-and-startup.md","dest":"docs/fundamentals/app-configuration-and-startup","personas":["developer"]},{"name":"Creating Components","src":"../framework/doc/article/en-US/creating-components.md","dest":"docs/fundamentals/components","personas":["developer"]},{"name":"Dependency Injection","src":"../dependency-injection/doc/article/en-US/dependency-injection-basics.md","dest":"docs/fundamentals/dependency-injection","personas":["developer"]},{"name":"Securing Your App","src":"../framework/doc/article/en-US/securing-your-app.md","dest":"docs/fundamentals/security","personas":["developer"]},{"name":"Cheat Sheet","src":"../framework/doc/article/en-US/cheat-sheet.md","dest":"docs/fundamentals/cheat-sheet","personas":["developer","new-developer"]}]},{"name":"Binding","description":"Learn all about Aurelia's powerful data-binding engine.","dest":"docs/binding","items":[{"name":"Binding Basics","src":"../binding/doc/article/en-US/binding-basics.md","dest":"docs/binding/basics","personas":["developer"]},{"name":"Class and Style","src":"../binding/doc/article/en-US/binding-class-and-style.md","dest":"docs/binding/class-and-style","personas":["developer"]},{"name":"Binding Checkboxes","src":"../binding/doc/article/en-US/binding-checkboxes.md","dest":"docs/binding/checkboxes","personas":["developer"]},{"name":"Binding Radios","src":"../binding/doc/article/en-US/binding-radios.md","dest":"docs/binding/radios","personas":["developer"]},{"name":"Binding Selects","src":"../binding/doc/article/en-US/binding-selects.md","dest":"docs/binding/selects","personas":["developer"]},{"name":"Delegate vs. Trigger","src":"../binding/doc/article/en-US/binding-delegate-vs-trigger.md","dest":"docs/binding/delegate-vs-trigger","personas":["developer"]},{"name":"Computed Properties","src":"../binding/doc/article/en-US/binding-computed-properties.md","dest":"docs/binding/computed-properties","personas":["developer"]},{"name":"Value Converters","src":"../binding/doc/article/en-US/binding-value-converters.md","dest":"docs/binding/value-converters","personas":["developer"]},{"name":"Binding Behaviors","src":"../binding/doc/article/en-US/binding-binding-behaviors.md","dest":"docs/binding/binding-behaviors","personas":["developer"]},{"name":"Observable Properties","src":"../binding/doc/article/en-US/binding-observable-properties.md","dest":"docs/binding/binding-observable-properties","personas":["developer"]},{"name":"How it Works","src":"../binding/doc/article/en-US/binding-how-it-works.md","dest":"docs/binding/how-it-works","personas":["developer"]}]},{"name":"Templating","description":"Learn all about Aurelia's powerful templating engine.","dest":"docs/templating","items":[{"name":"Templating Basics","src":"../templating/doc/article/en-US/templating-basics.md","dest":"docs/templating/basics","personas":["developer"]},{"name":"HTML Behaviors","src":"../templating/doc/article/en-US/templating-html-behaviors-introduction.md","dest":"docs/templating/html-behaviors-introduction","personas":["developer"]},{"name":"Custom Attributes","src":"../templating/doc/article/en-US/templating-custom-attributes.md","dest":"docs/templating/custom-attributes","personas":["developer"]},{"name":"Custom Elements","src":"../templating/doc/article/en-US/templating-custom-elements.md","dest":"docs/templating/custom-elements","personas":["developer"]},{"name":"Content Projection","src":"../templating/doc/article/en-US/templating-content-projection.md","dest":"docs/templating/content-projection","personas":["developer"]},{"name":"Dynamic UI Composition","src":"../templating/doc/article/en-US/templating-dynamic-ui-composition.md","dest":"docs/templating/dynamic-ui-composition","personas":["developer"]}]},{"name":"Routing","description":"Learn how to setup and configure Aurelia's router.","dest":"docs/routing","items":[{"name":"Router Configuration","src":"../router/doc/article/en-US/router-configuration.md","dest":"docs/routing/configuration","personas":["developer"]}]},{"name":"Plugins","description":"Learn about Aurelia's officially supported plugins and how to use them.","dest":"docs/plugins","items":[{"name":"HTTP","src":"../fetch-client/doc/article/en-US/http-services.md","dest":"docs/plugins/http-services","personas":["developer"]},{"name":"Validation","src":"../validation/doc/article/en-US/validation-basics.md","dest":"docs/plugins/validation","personas":["developer"]},{"name":"I18N","src":"../i18n/doc/article/en-US/i18n-with-aurelia.md","dest":"docs/plugins/i18n","personas":["developer"]},{"name":"Dialog","src":"../dialog/doc/article/en-US/dialog-basics.md","dest":"docs/plugins/dialog","personas":["developer"]}]},{"name":"Integration","description":"Learn how to integrate Aurelia with various other libraries and frameworks.","dest":"docs/integration","items":[{"name":"Integrating with Polymer","src":"../framework/doc/article/en-US/integrating-with-polymer.md","dest":"docs/integration/polymer","personas":["developer"]}]},{"name":"Testing","description":"Learn all about testing Aurelia apps, including component testing and e2e testing.","dest":"docs/testing","items":[{"name":"Testing Components","src":"../testing/doc/article/en-US/testing-components.md","dest":"docs/testing/components","personas":["developer"]},{"name":"End-to-End Testing","src":"../testing/doc/article/en-US/end-to-end-testing.md","dest":"docs/testing/end-to-end","personas":["developer"]}]},{"name":"Build Systems","description":"Learn about the various build setups that Aurelia supports out-of-the-box.","dest":"docs/build-systems","items":[{"name":"The Aurelia CLI","src":"../framework/doc/article/en-US/the-aurelia-cli.md","dest":"docs/build-systems/aurelia-cli","personas":["developer","new-developer"]},{"name":"Webpack","description":"Setup and bundling using the Webapck system.","dest":"docs/build-systems/webpack","items":[{"name":"Webpack Setup","src":"../framework/doc/article/en-US/setup-webpack.md","dest":"docs/build-systems/webpack/setup","personas":["developer"]},{"name":"Webpack Bundling","src":"../framework/doc/article/en-US/bundling-webpack.md","dest":"docs/build-systems/webpack/bundling","personas":["developer","new-developer"]}]},{"name":"JSPM","description":"Setup and bundling using the JSPM system.","dest":"docs/build-systems/jspm","items":[{"name":"JSPM Setup","src":"../framework/doc/article/en-US/setup-jspm.md","dest":"docs/build-systems/jspm/setup","personas":["developer"]},{"name":"JSPM Bundling","src":"../framework/doc/article/en-US/bundling-jspm.md","dest":"docs/build-systems/jspm/bundling","personas":["developer"]}]}]}],"api":[{"name":"Binding","package":"../binding/package.json","src":"../binding/dist/aurelia-binding.d.ts","dest":"docs/api/binding","exampleSrc":"../binding/doc/example-dist","exampleDest":"example"},{"name":"Bootstrapper","package":"../bootstrapper/package.json","src":"../bootstrapper/dist/aurelia-bootstrapper.d.ts","dest":"docs/api/bootstrapper"},{"name":"Dependency Injection","package":"../dependency-injection/package.json","src":"../dependency-injection/dist/aurelia-dependency-injection.d.ts","dest":"docs/api/dependency-injection"},{"name":"Event Aggregator","package":"../event-aggregator/package.json","src":"../event-aggregator/dist/aurelia-event-aggregator.d.ts","dest":"docs/api/event-aggregator"},{"name":"Fetch","package":"../fetch-client/package.json","src":"../fetch-client/dist/aurelia-fetch-client.d.ts","dest":"docs/api/fetch-client"},{"name":"Framework","package":"../framework/package.json","src":"../framework/dist/aurelia-framework.d.ts","dest":"docs/api/framework"},{"name":"History","package":"../history/package.json","src":"../history/dist/aurelia-history.d.ts","dest":"docs/api/history"},{"name":"History-Browser","package":"../history-browser/package.json","src":"../history-browser/dist/aurelia-history-browser.d.ts","dest":"docs/api/history-browser"},{"name":"I18N","package":"../i18n/package.json","src":"../i18n/dist/aurelia-i18n.d.ts","dest":"docs/api/i18n"},{"name":"Loader","package":"../loader/package.json","src":"../loader/dist/aurelia-loader.d.ts","dest":"docs/api/loader"},{"name":"Loader-Default","package":"../loader-default/package.json","src":"../loader-default/dist/aurelia-loader-default.d.ts","dest":"docs/api/loader-default"},{"name":"Logging","package":"../logging/package.json","src":"../logging/dist/aurelia-logging.d.ts","dest":"docs/api/logging"},{"name":"Logging-Console","package":"../logging-console/package.json","src":"../logging-console/dist/aurelia-logging-console.d.ts","dest":"docs/api/logging-console"},{"name":"Metadata","package":"../metadata/package.json","src":"../metadata/dist/aurelia-metadata.d.ts","dest":"docs/api/metadata"},{"name":"Platform Abstraction Layer (PAL)","package":"../pal/package.json","src":"../pal/dist/aurelia-pal.d.ts","dest":"docs/api/pal"},{"name":"PAL-Browser","package":"../pal-browser/package.json","src":"../pal-browser/dist/aurelia-pal-browser.d.ts","dest":"docs/api/pal-browser"},{"name":"Path","package":"../path/package.json","src":"../path/dist/aurelia-path.d.ts","dest":"docs/api/path"},{"name":"Router","package":"../router/package.json","src":"../router/dist/aurelia-router.d.ts","dest":"docs/api/router"},{"name":"Task Queue","package":"../task-queue/package.json","src":"../task-queue/dist/aurelia-task-queue.d.ts","dest":"docs/api/task-queue"},{"name":"Templating","package":"../templating/package.json","src":"../templating/dist/aurelia-templating.d.ts","dest":"docs/api/templating"},{"name":"Templating-Binding","package":"../templating-binding/package.json","src":"../templating-binding/dist/aurelia-templating-binding.d.ts","dest":"docs/api/templating-binding"},{"name":"Templating-Resources","package":"../templating-resources/package.json","src":"../templating-resources/dist/aurelia-templating-resources.d.ts","dest":"docs/api/templating-resources"},{"name":"Templating-Router","package":"../templating-router/package.json","src":"../templating-router/dist/aurelia-templating-router.d.ts","dest":"docs/api/templating-router"},{"name":"Testing","package":"../testing/package.json","src":"../testing/dist/commonjs/aurelia-testing.d.ts","dest":"docs/api/testing"}]}};
+  </script>
+
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+</body>
+
+</html>

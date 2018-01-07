@@ -1,0 +1,27 @@
+<section class="article blog">
+  <header>
+    <h1>Where did my TypeScript go!?</h1>
+  </header>
+
+  <article class="markdown">
+    <p>You've been diligent in keeping up with Aurelia updates, and so today you update your libraries. Or perhaps you just started using Aurelia today and are pulling down the latest release...but something's not right. Some d.ts files are missing. Things aren't compiling correctly and your app is broken. What do you do now!?</p>
+<section><h2 id="the-explanation">The Explanation</h2><p>For a long time the way that Aurelia has handled d.ts files for TypeScript users has been what you would call &quot;unorthodox.&quot; To be fair, the TypeScript ecosystem and its recommended approaches to library d.ts distribution have changed several times since we started our project. In preparation for our Release Candidate, we really wanted to get this fixed. Doing so would enable Visual Studio and Visual Studio Code to work better, a streamlined more standardized approach for typings and even better intellisense in supporting tools for vanilla JS users.</p>
+<p>Unfortunately, making these changes causes some incompatibilities between d.ts formats while the work is in progress and it changes the way projects are configured. We've started to push out these changes today and will continue the work a little while longer, so you may encounter some unexpected issues. Once we're all done, things will &quot;just work&quot; but for now you may need to make some quick fixes.</p>
+</section>
+<section><h2 id="the-fix">The Fix</h2><ol>
+<li>Make sure you have the latest version of the <code>typings</code> tool installed. This tool has gone through some major changes and you will need the latest version. To install the latest simply run the following command in your shell: <code>npm install -g typings</code>.</li>
+<li>Update your <code>typings.json</code>, <code>tsconfig.json</code> and the <code>build</code> folder from 
+<a href="https://github.com/aurelia/skeleton-navigation/pull/476" target="_blank">this pull request</a>
+.</li>
+<li>For Webpack users, refer to the skeleton's latest <code>package.json</code> file.</li>
+<li>Finally, remove the <code>typings</code> folder and run <code>typings install</code>.</li>
+</ol>
+<blockquote>
+<p>Note: This is a temporary fix. When all libraries are re-configured one final change will be required to update to the new system. We'll provide instructions here when that is ready.</p>
+</blockquote>
+</section>
+<section><h2 id="thank-you">Thank You</h2><p>We really appreciate you bearing with us in these final days as we prepare for our Release Candidate. As always, there are a few hiccups along the way. We're working hard to address the issues so that your tooling is automatically configured properly. We think these changes will make a big difference for you and we thank you in supporting us in our work.</p>
+</section>
+
+  </article>
+</section>

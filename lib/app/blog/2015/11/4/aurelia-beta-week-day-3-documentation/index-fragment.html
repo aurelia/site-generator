@@ -1,0 +1,40 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia Beta Week - Day 3 - Documentation</h1>
+  </header>
+
+  <article class="markdown">
+    <p>When we launched the alpha of Aurelia back in February, we did so with a set of very preliminary documentation. Today we're launching our new docs, which include an updated (simpler) getting started guide, various topical articles, a cheat sheet and a full API reference.</p>
+<section><h2 id="the-docs-tech">The Docs Tech</h2><p>Before we could create better documentation, we found that we had to build a better documentation solution. What we wanted and needed just wasn't available. So, we used Aurelia itself to create our own documentation technology. Here's some of the features:</p>
+<ul>
+<li>Docs are written in a combination of Markdown and Aurelia Custom HTML Elements.</li>
+<li>Custom Elements are provided for displaying source-code examples and running isolated, interactive demos inline.</li>
+<li>Source-code examples throughout the docs are synchronized with the user's preferred programming language. All source-code examples are provided in ES 2015, ES 2016 and TypeScript. Developers can select what language they prefer to see the docs in and all examples will display appropriately.</li>
+<li>Narrative content, written with Markdown, also utilizes a Custom Element which connects it to the reader's culture settings. This allows us to display docs in different written languages. Simply select the culture and the docs update.</li>
+<li>Narrative content, written as described above, is not only translatable, but we have a means to track the version of the content sections, so we can tell when a non-English translation is out-of-sync with the base English content. This allows us to tell the reader things like &quot;your content is correct, but there is additional content in English&quot; or &quot;the content in this section has significantly deviated from the original English, would you like to switch to reading this section in English?&quot;</li>
+<li>The new multi-culture docs solve a problem for us with respect to synchronizing code examples and demos contained within the docs. It allows us to keep these two separated so that a documentation translator doesn't have to worry about the example code or demos. We are able to &quot;merge&quot; the base example and demos with the translated narrative.</li>
+<li>We can run interactive demos inline. Each is its own, isolated Aurelia app instance. They share implementation code (meaning Aurelia's code is only loaded once in the browser) but instances of the services are unique and isolated to each demo. This allows for good memory characteristics as well as the necessary isolation...and no need for iframes.</li>
+<li>All docs are versioned and released along with their corresponding libraries. Updates to docs are virtually instantaneous, correspondent to a library release.</li>
+</ul>
+<p>We're planning a lot more features for the docs. Now that we have our core technology in place, you'll be seeing new feature roll-outs on a regular basis.</p>
+</section>
+<section><h2 id="the-docs-content">The Docs Content</h2><p>Today's launch of the docs comes with three primary content areas:</p>
+<ul>
+<li><strong>Beginner Kits</strong> - We've watched developers struggle a lot with the initial setup of the tooling that surrounds Aurelia. While these tools are usually necessary for building production-quality apps, they tend to get in the way when someone just wants to take Aurelia for a spin, learn some things and try out some ideas. In order to address that, we've added a new getting started guide that comes with two &quot;beginner kits&quot;. One is for ES 2016 and the other for TypeScript. These kits are just downloadable zips, with everything pre-configured. There's no need to install anything. Simply unzip it and serve it. You can even run them directly from the file system using FireFox.</li>
+<li><strong>Profile-Based Articles</strong> - We've got a series of topical articles now, rather than one gigantic docs page. The articles are based around the idea of &quot;profiles&quot;. So, when you come to the site, you select a profile that describes you. Are you a web developer? Are you new to SPAs? Are you a CTO? Are you an Architect? We'll use your self description to tailor a set of articles we think will be most appropriate for you. If you are looking for all the content from the old docs in one place, we've assembled that into a &quot;Cheat Sheet&quot;.</li>
+<li><strong>API Reference</strong> - The docs now have a full API reference. Every core library of Aruelia is represented, with all classes, interfaces, methods, etc. You can browse and discover the APIs to your heart's content.</li>
+</ul>
+<p>
+<a href="http://aurelia.io/docs.html" target="_blank">Check out the new docs now</a>
+</p>
+</section>
+<section><h2 id="moving-forward">Moving Forward</h2><p>Today we've launched only a few profiles and a subset of articles. We're planning a bunch of additional profiles as well as many, many more articles. You'll see new content and profiles rolling out on a regular basis, now that we've got the core technology in place. We're pretty excited about some of the content we've got planned. When we release new content, we'll be sure to mention it here on the blog, in the same way we announce library releases.</p>
+</section>
+<section><h2 id="how-you-can-help">How You Can Help</h2><p>We're building a robust documentation platform and we'd love for you to help us out. One of the profiles we'll be launching in coming weeks is the &quot;contributor&quot; profile. This will help our community get up to speed on how to contribute to Aurelia. Among the topics discussed will be how to contribute both new content, demos and translations to the docs.</p>
+</section>
+<section><h2 id="wrapping-up">Wrapping Up</h2><p>We hope these new docs will serve our community better going forward. Over the coming weeks you'll see tons more content releasing in the form of in-depth articles. You'll also continue to see the docs themselves come to life with more features. If you are interested in contributing to the docs, hang tight a bit longer. We'll launch the contributor profile in a few weeks which will help you understand the process.</p>
+<p>More awesome stuff to come!</p>
+</section>
+
+  </article>
+</section>

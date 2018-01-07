@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38441871-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+  <meta charset="utf-8">
+  <title>Aurelia 1.0 is Here!!! | Aurelia</title>
+  <base href="/aurelia-docs-test/">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  
+  <meta name="description" content="It&#x27;s been an amazing journey to get here and it couldn&#x27;t have happened without the feedback of thousands of community members, the contributions from hundreds of developers and the guidance of our core team. It&#x27;s a special day in the history of our project. Today I&#x27;m proud to announce the official Aurelia 1.0 Release!"/>
+  <meta name="robots" content="index,follow"/>
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:200,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
+</head>
+
+<body aurelia-app="main" id="app-host">
+  <header class="app-header"> 
+    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <search-trigger></search-trigger>
+  </header>
+
+  <main ref="main">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
+      <section class="article blog">
+  <header>
+    <h1>Aurelia 1.0 is Here!!!</h1>
+  </header>
+
+  <article class="markdown">
+    <p>It's been an amazing journey to get here and it couldn't have happened without the feedback of thousands of community members, the contributions from hundreds of developers and the guidance of our core team. It's a special day in the history of our project. Today I'm proud to announce the official Aurelia 1.0 Release!</p>
+<section><h2 id="what-is-it">What is it?</h2><p>Perhaps you're hearing about Aurelia for the first time today and you're wondering &quot;What is it exactly?&quot; Well, in short, Aurelia is a platform for building apps, based on top of open web technologies. You can build browser apps, you can build mobile apps and you can build desktop apps. Aurelia stays very close to web standards by embracing ES 2015+, Web Components and the modern DOM. It's also uniquely unobtrusive, allowing it to stay out of your JavaScript code while you focus on your app. For an example, check out this introductory video:</p>
+<iframe src="https://player.vimeo.com/video/117778145" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<p>We hope you'll give Aurelia a try and join the thousands of developers who are creating awesome businesses, apps and experiences on top of the platform.</p>
+</section>
+<section><h2 id="some-basic-stats">Some Basic Stats</h2><p>A lot of work has gone into Aurelia 1.0. Here are a few fun facts:</p>
+<ul>
+<li>21 Team Members</li>
+<li>Almost 500,000 views/mo on our sites and blogs</li>
+<li>Over 240,000 views of our videos</li>
+<li>Closed 3,270+ Issues</li>
+<li>Merged 1,730+ Pull Requests</li>
+<li>Delivered 1,410+ Releases</li>
+<li>3,790+ People Chatting on Gitter</li>
+<li>Almost 9,000 GitHub Stars</li>
+</ul>
+<p>Wow! Thanks again to everyone who made this release possible!</p>
+</section>
+<section><h2 id="how-to-get-aurelia">How to Get Aurelia</h2><p>Now that Aurelia is available, you're going to want to know how to get it. We've made it available through a variety of outlets.</p>
+<ul>
+<li><strong>Aurelia CLI</strong> - You can run <code>npm install -g aurelia-cli</code> to get our new CLI tool. Then just run <code>au new</code> and the CLI will setup your project and you'll have an app, ready for deploy, within a few minutes. You can read more about it in the new 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli" target="_blank">CLI documentation</a>
+.</li>
+<li><strong>Webpack</strong> - Lots of work has recently gone into supporting Webpack. As a result, we have two Webpack skeletons, one for Babel and one for TypeScript. You can simply download one of those and follow the instructions in its readme to get going or read about it in our 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/setup-webpack" target="_blank">new Webpack documentation</a>
+;</li>
+<li><strong>JSPM</strong> - All libraries are configured to work with JSPM. We've got four skeletons available for you that have both Babel and TypeScript setups ready to go for vanilla web projects as well as ASP.NET Core. You can 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/setup-jspm" target="_blank">read about those here</a>
+.</li>
+<li><strong>NPM</strong> - If you have NPM 3.x installed, you can use NPM for front-end development. All Aurelia libraries are available on NPM so you can get started by simply running <code>npm install aurelia-bootstrapper</code>.</li>
+<li><strong>GitHub &amp; Bower</strong> - All libraries are available as GitHub releases and are registered with Bower. You can simply run <code>bower install aurelia-boostrapper</code> to get setup.</li>
+<li><strong>Script Tags and CDNs</strong> - We've got a new build of Aurelia we've put together for this release. It's a build that's designed to let you include the core as a single script tag include. We've created a new basic aurelia project setup that uses this. You can 
+<a href="http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/quick-start" target="_blank">read about that in our new Quick Start guide</a>
+. Over the coming weeks, we'll work towards getting our script tag builds up on a CDN.</li>
+</ul>
+</section>
+<section><h2 id="what">What</h2><p>The 1.0 release includes the following Aurelia libraries and plugins:</p>
+<ul>
+<li>animator-css</li>
+<li>animator-velocity</li>
+<li>binding</li>
+<li>boostrapper</li>
+<li>bootstrapper-webpack</li>
+<li>dependency-injection</li>
+<li>event-aggregator</li>
+<li>fetch-client</li>
+<li>framework</li>
+<li>history</li>
+<li>history-browser</li>
+<li>html-import-template-loader</li>
+<li>http-client</li>
+<li>loader</li>
+<li>loader-default</li>
+<li>loader-webpack</li>
+<li>logging</li>
+<li>logging-console</li>
+<li>metadata</li>
+<li>i18n</li>
+<li>pal</li>
+<li>pal-browser</li>
+<li>path</li>
+<li>polyfills</li>
+<li>route-recognizer</li>
+<li>router</li>
+<li>task-queue</li>
+<li>templating</li>
+<li>templating-binding</li>
+<li>templating-resources</li>
+<li>templating-router</li>
+<li>webpack-plugin</li>
+</ul>
+<p>The following libraries are in Beta:</p>
+<ul>
+<li>dialog</li>
+<li>testing</li>
+<li>ui-virtualization</li>
+</ul>
+<p>The following libraries are in Alpha:</p>
+<ul>
+<li>cli</li>
+<li>pal-nodejs</li>
+<li>pal-worker</li>
+<li>validatejs</li>
+<li>validation</li>
+<li>web-components</li>
+</ul>
+</section>
+<section><h2 id="documentation-update">Documentation Update</h2><p>We've also got a major update to the docs as part of this release. The docs now support mobile devices and include a ton of new content. The content includes a massive section on data-binding, more information on templating, new details on router configuration, a new quick start, a new tutorial and much more.</p>
+</section>
+<section><h2 id="what">What</h2><p>You don't think we're stopping here do you? Of course not! We've got lots of things that we're working on. Here are a few:</p>
+<ul>
+<li><strong>CLI</strong> - The CLI is off to a great start, but there's much more we can do with it, including Webpack integration, Electron and Cordova support and many more features. Look for continual improvements in this area.</li>
+<li><strong>Hot Module Loading</strong> - The dev experience with our CLI, Webpack and Skeletons is pretty solid, but it can be even better. We're working on technology that will enable hot HTML/JS/CSS update on live apps across our CLI and Webpack tooling options.</li>
+<li><strong>Validation</strong> - We've got an alpha of the new validation API today. We're planning to invest a lot of work into filling this out by handling a number of additional use cases over the coming months.</li>
+<li><strong>Server-Side Rendering</strong> - We've already got a start on running Aurelia on the server (and in a worker). We're working towards server-render for SEO next and after that, pick-up-and-continue on the client.</li>
+</ul>
+<p>In addition to the items listed above, we'll be continuing work on Aurelia itself. This includes fixes to bugs as well as adding new features. We're working to build a stable application platform, so you can expect us to grow Aurelia in a way that is semantically compatible with the 1.0 version for quite some time. If we need to make a breaking change, Aurelia is modular enough to make that easier on us and on you. Any changes of that nature will be announced well in advance and will always be designated by a major version change in the associated library. Any removal of features will be proceeded by a deprecation period. We're invested and we know you are invested, so we're making strong efforts to maintain stability and predictability for the platform.</p>
+</section>
+<section><h2 id="aurelia-virtual-training-is-now-available">Aurelia Virtual Training Is Now Available</h2><p>As of today, we're launching official Aurelia Virtual Training. We've split the training into three segments so you can purchase and attend whichever segments you feel are most helpful for you. Each segment is split into two, four-hour sessions, making available a total of 24 hours of training if you go all out.</p>
+<a href="https://www.picatic.com/modern-javascript-and-aurelia">
+![Modern JavaScript and Aurelia Training](/content/images/2016/07/training_banner.png)
+</a>
+<p>You can read all the details 
+<a href="https://www.picatic.com/modern-javascript-and-aurelia" target="_blank">on the training event site</a>
+ as well as purchase tickets.</p>
+</section>
+<section><h2 id="conclusion">Conclusion</h2><p>Aurelia 1.0 is finally here!!! This is a special day for us and we're glad to share it with such a great community. We look forward to seeing all the amazing things you create.</p>
+</section>
+
+  </article>
+</section>
+
+    </div>
+
+    <footer class="content-footer" id="app-footer">
+      <div class="links">
+        <div class="link-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/overview/what-is-aurelia">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
+            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
+            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/aurelia">GitHub</a></li>
+            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
+            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">
+        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+      </p>
+    </footer>
+  </main>
+
+  <side-bar></side-bar>
+
+  <nav>
+    <ul>
+      <li class="home ${activeTab === 'home' ? 'active' : ''}">
+        <a href="home">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+            height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <g>
+              <path d="M20.5,13.5c-0.276,0-0.5,0.224-0.5,0.5v9h-5v-6.5c0-0.276-0.224-0.5-0.5-0.5h-5C9.224,16,9,16.224,9,16.5V23H4v-9.5
+                C4,13.224,3.776,13,3.5,13S3,13.224,3,13.5v10C3,23.777,3.224,24,3.5,24h6c0.276,0,0.5-0.224,0.5-0.5V17h4v6.5
+                c0,0.276,0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5V14C21,13.724,20.776,13.5,20.5,13.5z"/>
+              <path d="M23.854,12.647l-11.5-11.5c-0.195-0.195-0.512-0.195-0.707,0l-11.5,11.5c-0.195,0.195-0.195,0.512,0,0.707
+                s0.512,0.195,0.707,0L12,2.208l11.146,11.146c0.098,0.098,0.226,0.146,0.354,0.146s0.256-0.049,0.354-0.146
+                C24.049,13.159,24.049,12.842,23.854,12.647z"/>
+              <path d="M16,3h3v3c0,0.276,0.224,0.5,0.5,0.5S20,6.277,20,6V2.5C20,2.224,19.776,2,19.5,2H16c-0.276,0-0.5,0.224-0.5,0.5
+                S15.724,3,16,3z"/>
+            </g>
+          </g>
+          <g id="invisible_shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Home</div>
+        </a>
+      </li>
+
+      <li class="article ${activeTab === 'article' ? 'active' : ''}">
+        <a href="docs">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g>
+              <path d="M23.5,1H12V0.5C12,0.224,11.776,0,11.5,0h-8C3.224,0,3,0.224,3,0.5V1H0.5C0.224,1,0,1.224,0,1.5v22
+                C0,23.776,0.224,24,0.5,24h23c0.276,0,0.5-0.224,0.5-0.5v-22C24,1.224,23.776,1,23.5,1z M4,1h7v11.293L7.854,9.146
+                c-0.195-0.195-0.512-0.195-0.707,0L4,12.293V1z M23,23H1V2h2v11.5c0,0.446,0.542,0.668,0.854,0.354L7.5,10.207l3.646,3.646
+                C11.459,14.166,12,13.948,12,13.5V2h11V23z"/>
+              <path d="M14.5,8h6C20.776,8,21,7.776,21,7.5S20.776,7,20.5,7h-6C14.224,7,14,7.224,14,7.5S14.224,8,14.5,8z"/>
+              <path d="M14.5,11h6c0.276,0,0.5-0.224,0.5-0.5S20.776,10,20.5,10h-6c-0.276,0-0.5,0.224-0.5,0.5S14.224,11,14.5,11z"/>
+              <path d="M20.5,13h-6c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S20.776,13,20.5,13z"/>
+              <path d="M20.5,16h-17C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h17c0.276,0,0.5-0.224,0.5-0.5S20.776,16,20.5,16z"/>
+              <path d="M16.5,19h-13C3.224,19,3,19.224,3,19.5S3.224,20,3.5,20h13c0.276,0,0.5-0.224,0.5-0.5S16.776,19,16.5,19z"/>
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Guides</div>
+        </a>
+      </li>
+
+      <li class="api ${activeTab === 'api' ? 'active' : ''}">
+        <a href="docs/api">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <path d="M21.945,15.283c-0.009-0.02-0.022-0.034-0.034-0.052c-0.031-0.048-0.068-0.089-0.114-0.123
+              c-0.011-0.008-0.015-0.021-0.026-0.029L17,12.011V7.5c0-0.082-0.024-0.156-0.059-0.224c-0.01-0.02-0.023-0.035-0.036-0.053
+              c-0.033-0.049-0.072-0.089-0.12-0.124c-0.012-0.007-0.017-0.022-0.028-0.029l-5-3c-0.158-0.095-0.355-0.095-0.514,0l-5,3
+              C6.231,7.078,6.227,7.093,6.215,7.1c-0.048,0.035-0.087,0.075-0.12,0.124C6.082,7.241,6.068,7.257,6.059,7.276
+              C6.024,7.344,6,7.418,6,7.5v4.511L1.229,15.08c-0.012,0.007-0.016,0.021-0.026,0.029c-0.046,0.034-0.083,0.075-0.114,0.123
+              c-0.012,0.018-0.025,0.032-0.034,0.052C1.022,15.349,1,15.421,1,15.5v4.784c0,0.17,0.087,0.329,0.229,0.421l5,3.216
+              c0.009,0.006,0.021,0.003,0.029,0.009C6.331,23.971,6.411,24,6.5,24s0.169-0.029,0.241-0.07c0.009-0.006,0.021-0.003,0.029-0.009
+              l4.729-3.042l4.729,3.042c0.009,0.006,0.021,0.003,0.029,0.009C16.331,23.971,16.411,24,16.5,24s0.169-0.029,0.241-0.07
+              c0.009-0.006,0.021-0.003,0.029-0.009l5-3.216C21.913,20.613,22,20.454,22,20.284V15.5C22,15.421,21.978,15.349,21.945,15.283z
+              M16.5,17.917l-4.053-2.432l4.053-2.606l4.053,2.606L16.5,17.917z M7,18.783l4-2.4v3.628l-4,2.573V18.783z M16,12.011l-4,2.573
+              v-3.801l4-2.4V12.011z M11,14.584l-4-2.573V8.383l4,2.4V14.584z M11.5,5.083L15.528,7.5L11.5,9.917L7.472,7.5L11.5,5.083z
+              M6.5,12.879l4.053,2.606L6.5,17.917l-4.053-2.432L6.5,12.879z M2,16.383l4,2.4v3.801l-4-2.573V16.383z M12,16.383l4,2.4v3.801
+              l-4-2.573V16.383z M17,22.584v-3.801l4-2.4v3.628L17,22.584z"/>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">APIs</div>
+        </a>
+      </li>
+
+      <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
+        <a href="https://discourse.aurelia.io">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M7.508,14.318c-0.465-0.063-0.923-0.163-1.362-0.297c-0.109-0.034-0.227-0.029-0.331,0.015l-3.669,1.467l1.289-2.255
+                  c0.122-0.214,0.07-0.484-0.122-0.639C1.843,11.434,1,9.729,1,7.935C1,4.387,4.589,1.5,9,1.5s8,2.887,8,6.435
+                  c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5c0-4.1-4.038-7.435-9-7.435S0,3.835,0,7.935c0,1.962,0.855,3.827,2.36,5.178
+                  l-1.794,3.14c-0.105,0.185-0.083,0.416,0.057,0.576C0.72,16.939,0.858,17,1,17c0.062,0,0.125-0.012,0.186-0.036l4.839-1.936
+                  c0.438,0.124,0.891,0.219,1.348,0.28c0.274,0.048,0.526-0.154,0.563-0.428S7.781,14.355,7.508,14.318z"/>
+                <path d="M22.123,20.627C23.353,19.517,24,18.098,24,16.5c0-3.523-3.435-6.5-7.5-6.5S9,12.977,9,16.5
+                  c0,2.125,1.152,4.144,3.083,5.397c2.073,1.349,4.649,1.582,6.93,0.642l3.812,1.429C22.882,23.989,22.941,24,23,24
+                  c0.139,0,0.275-0.058,0.372-0.165c0.138-0.153,0.167-0.375,0.076-0.559L22.123,20.627z M19.176,21.532
+                  C19.119,21.511,19.06,21.5,19,21.5c-0.069,0-0.139,0.015-0.203,0.043c-2.018,0.898-4.324,0.717-6.169-0.484
+                  C10.982,19.99,10,18.285,10,16.5c0-2.981,2.977-5.5,6.5-5.5s6.5,2.519,6.5,5.5c0,1.433-0.61,2.647-1.812,3.609
+                  c-0.184,0.147-0.24,0.403-0.135,0.614l0.931,1.861L19.176,21.532z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">Discourse</div>
+        </a>
+      </li>
+
+      <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
+        <a href="blog">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M14.5,3h-11C3.224,3,3,3.224,3,3.5S3.224,4,3.5,4h11C14.776,4,15,3.776,15,3.5S14.776,3,14.5,3z"/>
+                <path d="M3.5,13h5C8.776,13,9,12.776,9,12.5v-6C9,6.224,8.776,6,8.5,6h-5C3.224,6,3,6.224,3,6.5v6C3,12.776,3.224,13,3.5,13z
+                  M4,7h4v5H4V7z"/>
+                <path d="M14.5,8h-3C11.224,8,11,8.224,11,8.5S11.224,9,11.5,9h3C14.776,9,15,8.776,15,8.5S14.776,8,14.5,8z"/>
+                <path d="M14.5,10h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,10,14.5,10z"/>
+                <path d="M14.5,12h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,12,14.5,12z"/>
+                <path d="M14.5,14h-11C3.224,14,3,14.224,3,14.5S3.224,15,3.5,15h11c0.276,0,0.5-0.224,0.5-0.5S14.776,14,14.5,14z"/>
+                <path d="M14.5,16h-11C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h11c0.276,0,0.5-0.224,0.5-0.5S14.776,16,14.5,16z"/>
+                <path d="M14.5,18h-11C3.224,18,3,18.224,3,18.5S3.224,19,3.5,19h11c0.276,0,0.5-0.224,0.5-0.5S14.776,18,14.5,18z"/>
+                <path d="M23.5,3H20V2c0-0.276-0.224-0.5-0.5-0.5H18v-1C18,0.224,17.776,0,17.5,0h-17C0.224,0,0,0.224,0,0.5v20
+                  C0,22.43,1.57,24,3.5,24h17c1.93,0,3.5-1.57,3.5-3.5v-17C24,3.224,23.776,3,23.5,3z M20,6h1v14.5c0,0.276-0.225,0.5-0.5,0.5
+                  S20,20.776,20,20.5V6z M3.5,23C2.121,23,1,21.878,1,20.5V1h16v1v2v16.5c0,0.979,0.403,1.865,1.053,2.5H3.5z M23,20.5
+                  c0,1.378-1.121,2.5-2.5,2.5S18,21.878,18,20.5V4V2.5h1v18c0,0.827,0.673,1.5,1.5,1.5s1.5-0.673,1.5-1.5v-15
+                  C22,5.224,21.776,5,21.5,5H20V4h3V20.5z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Blog</div>
+        </a>
+      </li>
+      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+        <a href="help">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                  C5.71,23,1,18.29,1,12.5C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"/>
+                <path d="M11.5,6.5C9.57,6.5,8,8.07,8,10c0,0.276,0.224,0.5,0.5,0.5S9,10.276,9,10c0-1.378,1.121-2.5,2.5-2.5S14,8.622,14,10
+                  s-1.121,2.5-2.5,2.5c-0.276,0-0.5,0.224-0.5,0.5v3c0,0.276,0.224,0.5,0.5,0.5S12,16.276,12,16v-2.535
+                  c1.694-0.244,3-1.704,3-3.465C15,8.07,13.43,6.5,11.5,6.5z"/>
+                <circle cx="11.5" cy="18.5" r="1"/>
+              </g>
+            </g>
+          </g>
+          </svg>
+          <div class="label">Help</div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <search-panel></search-panel>
+
+  <script>
+    window.aureliaDocConfiguration = {"name":"Aurelia","siteUrl":"http://aurelia.io","baseUrl":"/aurelia-docs-test/","outDir":"./","trackingID":"UA-38441871-6","home":{"dest":"home"},"blog":{"dest":"blog","src":"./src/blog","postsPerPage":7,"author":"AureliaEffect","migration":{"src":"./src/blog/ghost.json"}},"help":{"name":"Help","src":"./src/help.md","dest":"help"},"notFound":{"name":"404","description":"Not Found"},"docs":{"article":[{"name":"Overview","description":"Discover what Aurelia is along with its business and technical advantages.","dest":"docs/overview","items":[{"name":"What is Aurelia?","src":"../framework/doc/article/en-US/what-is-aurelia.md","dest":"docs/overview/what-is-aurelia","featured":true,"personas":["developer","new-developer","architect","manager"]},{"name":"Technical Benefits","src":"../framework/doc/article/en-US/technical-benefits.md","dest":"docs/overview/technical-benefits","personas":["developer","architect","manager"]},{"name":"Business Advantages","src":"../framework/doc/article/en-US/business-advantages.md","dest":"docs/overview/business-advantages","personas":["developer","architect","manager"]}]},{"name":"Tutorials","description":"Step-by-step tutorials teaching you how to build your first Aurelia applications.","dest":"docs/tutorials","items":[{"name":"Creating a Todo App","src":"../framework/doc/article/en-US/quick-start.md","dest":"docs/tutorials/creating-a-todo-app","featured":true,"personas":["developer","new-developer"]},{"name":"Creating a Contact Manager","src":"../framework/doc/article/en-US/contact-manager-tutorial.md","dest":"docs/tutorials/creating-a-contact-manager","featured":true,"personas":["developer","new-developer"]}]},{"name":"Fundamentals","description":"After you've completed the quick starts, learn more about Aurelia's app model, components, dependency injection and more.","dest":"docs/fundamentals","items":[{"name":"App Config and Startup","src":"../framework/doc/article/en-US/app-configuration-and-startup.md","dest":"docs/fundamentals/app-configuration-and-startup","personas":["developer"]},{"name":"Creating Components","src":"../framework/doc/article/en-US/creating-components.md","dest":"docs/fundamentals/components","personas":["developer"]},{"name":"Dependency Injection","src":"../dependency-injection/doc/article/en-US/dependency-injection-basics.md","dest":"docs/fundamentals/dependency-injection","personas":["developer"]},{"name":"Securing Your App","src":"../framework/doc/article/en-US/securing-your-app.md","dest":"docs/fundamentals/security","personas":["developer"]},{"name":"Cheat Sheet","src":"../framework/doc/article/en-US/cheat-sheet.md","dest":"docs/fundamentals/cheat-sheet","personas":["developer","new-developer"]}]},{"name":"Binding","description":"Learn all about Aurelia's powerful data-binding engine.","dest":"docs/binding","items":[{"name":"Binding Basics","src":"../binding/doc/article/en-US/binding-basics.md","dest":"docs/binding/basics","personas":["developer"]},{"name":"Class and Style","src":"../binding/doc/article/en-US/binding-class-and-style.md","dest":"docs/binding/class-and-style","personas":["developer"]},{"name":"Binding Checkboxes","src":"../binding/doc/article/en-US/binding-checkboxes.md","dest":"docs/binding/checkboxes","personas":["developer"]},{"name":"Binding Radios","src":"../binding/doc/article/en-US/binding-radios.md","dest":"docs/binding/radios","personas":["developer"]},{"name":"Binding Selects","src":"../binding/doc/article/en-US/binding-selects.md","dest":"docs/binding/selects","personas":["developer"]},{"name":"Delegate vs. Trigger","src":"../binding/doc/article/en-US/binding-delegate-vs-trigger.md","dest":"docs/binding/delegate-vs-trigger","personas":["developer"]},{"name":"Computed Properties","src":"../binding/doc/article/en-US/binding-computed-properties.md","dest":"docs/binding/computed-properties","personas":["developer"]},{"name":"Value Converters","src":"../binding/doc/article/en-US/binding-value-converters.md","dest":"docs/binding/value-converters","personas":["developer"]},{"name":"Binding Behaviors","src":"../binding/doc/article/en-US/binding-binding-behaviors.md","dest":"docs/binding/binding-behaviors","personas":["developer"]},{"name":"Observable Properties","src":"../binding/doc/article/en-US/binding-observable-properties.md","dest":"docs/binding/binding-observable-properties","personas":["developer"]},{"name":"How it Works","src":"../binding/doc/article/en-US/binding-how-it-works.md","dest":"docs/binding/how-it-works","personas":["developer"]}]},{"name":"Templating","description":"Learn all about Aurelia's powerful templating engine.","dest":"docs/templating","items":[{"name":"Templating Basics","src":"../templating/doc/article/en-US/templating-basics.md","dest":"docs/templating/basics","personas":["developer"]},{"name":"HTML Behaviors","src":"../templating/doc/article/en-US/templating-html-behaviors-introduction.md","dest":"docs/templating/html-behaviors-introduction","personas":["developer"]},{"name":"Custom Attributes","src":"../templating/doc/article/en-US/templating-custom-attributes.md","dest":"docs/templating/custom-attributes","personas":["developer"]},{"name":"Custom Elements","src":"../templating/doc/article/en-US/templating-custom-elements.md","dest":"docs/templating/custom-elements","personas":["developer"]},{"name":"Content Projection","src":"../templating/doc/article/en-US/templating-content-projection.md","dest":"docs/templating/content-projection","personas":["developer"]},{"name":"Dynamic UI Composition","src":"../templating/doc/article/en-US/templating-dynamic-ui-composition.md","dest":"docs/templating/dynamic-ui-composition","personas":["developer"]}]},{"name":"Routing","description":"Learn how to setup and configure Aurelia's router.","dest":"docs/routing","items":[{"name":"Router Configuration","src":"../router/doc/article/en-US/router-configuration.md","dest":"docs/routing/configuration","personas":["developer"]}]},{"name":"Plugins","description":"Learn about Aurelia's officially supported plugins and how to use them.","dest":"docs/plugins","items":[{"name":"HTTP","src":"../fetch-client/doc/article/en-US/http-services.md","dest":"docs/plugins/http-services","personas":["developer"]},{"name":"Validation","src":"../validation/doc/article/en-US/validation-basics.md","dest":"docs/plugins/validation","personas":["developer"]},{"name":"I18N","src":"../i18n/doc/article/en-US/i18n-with-aurelia.md","dest":"docs/plugins/i18n","personas":["developer"]},{"name":"Dialog","src":"../dialog/doc/article/en-US/dialog-basics.md","dest":"docs/plugins/dialog","personas":["developer"]}]},{"name":"Integration","description":"Learn how to integrate Aurelia with various other libraries and frameworks.","dest":"docs/integration","items":[{"name":"Integrating with Polymer","src":"../framework/doc/article/en-US/integrating-with-polymer.md","dest":"docs/integration/polymer","personas":["developer"]}]},{"name":"Testing","description":"Learn all about testing Aurelia apps, including component testing and e2e testing.","dest":"docs/testing","items":[{"name":"Testing Components","src":"../testing/doc/article/en-US/testing-components.md","dest":"docs/testing/components","personas":["developer"]},{"name":"End-to-End Testing","src":"../testing/doc/article/en-US/end-to-end-testing.md","dest":"docs/testing/end-to-end","personas":["developer"]}]},{"name":"Build Systems","description":"Learn about the various build setups that Aurelia supports out-of-the-box.","dest":"docs/build-systems","items":[{"name":"The Aurelia CLI","src":"../framework/doc/article/en-US/the-aurelia-cli.md","dest":"docs/build-systems/aurelia-cli","personas":["developer","new-developer"]},{"name":"Webpack","description":"Setup and bundling using the Webapck system.","dest":"docs/build-systems/webpack","items":[{"name":"Webpack Setup","src":"../framework/doc/article/en-US/setup-webpack.md","dest":"docs/build-systems/webpack/setup","personas":["developer"]},{"name":"Webpack Bundling","src":"../framework/doc/article/en-US/bundling-webpack.md","dest":"docs/build-systems/webpack/bundling","personas":["developer","new-developer"]}]},{"name":"JSPM","description":"Setup and bundling using the JSPM system.","dest":"docs/build-systems/jspm","items":[{"name":"JSPM Setup","src":"../framework/doc/article/en-US/setup-jspm.md","dest":"docs/build-systems/jspm/setup","personas":["developer"]},{"name":"JSPM Bundling","src":"../framework/doc/article/en-US/bundling-jspm.md","dest":"docs/build-systems/jspm/bundling","personas":["developer"]}]}]}],"api":[{"name":"Binding","package":"../binding/package.json","src":"../binding/dist/aurelia-binding.d.ts","dest":"docs/api/binding","exampleSrc":"../binding/doc/example-dist","exampleDest":"example"},{"name":"Bootstrapper","package":"../bootstrapper/package.json","src":"../bootstrapper/dist/aurelia-bootstrapper.d.ts","dest":"docs/api/bootstrapper"},{"name":"Dependency Injection","package":"../dependency-injection/package.json","src":"../dependency-injection/dist/aurelia-dependency-injection.d.ts","dest":"docs/api/dependency-injection"},{"name":"Event Aggregator","package":"../event-aggregator/package.json","src":"../event-aggregator/dist/aurelia-event-aggregator.d.ts","dest":"docs/api/event-aggregator"},{"name":"Fetch","package":"../fetch-client/package.json","src":"../fetch-client/dist/aurelia-fetch-client.d.ts","dest":"docs/api/fetch-client"},{"name":"Framework","package":"../framework/package.json","src":"../framework/dist/aurelia-framework.d.ts","dest":"docs/api/framework"},{"name":"History","package":"../history/package.json","src":"../history/dist/aurelia-history.d.ts","dest":"docs/api/history"},{"name":"History-Browser","package":"../history-browser/package.json","src":"../history-browser/dist/aurelia-history-browser.d.ts","dest":"docs/api/history-browser"},{"name":"I18N","package":"../i18n/package.json","src":"../i18n/dist/aurelia-i18n.d.ts","dest":"docs/api/i18n"},{"name":"Loader","package":"../loader/package.json","src":"../loader/dist/aurelia-loader.d.ts","dest":"docs/api/loader"},{"name":"Loader-Default","package":"../loader-default/package.json","src":"../loader-default/dist/aurelia-loader-default.d.ts","dest":"docs/api/loader-default"},{"name":"Logging","package":"../logging/package.json","src":"../logging/dist/aurelia-logging.d.ts","dest":"docs/api/logging"},{"name":"Logging-Console","package":"../logging-console/package.json","src":"../logging-console/dist/aurelia-logging-console.d.ts","dest":"docs/api/logging-console"},{"name":"Metadata","package":"../metadata/package.json","src":"../metadata/dist/aurelia-metadata.d.ts","dest":"docs/api/metadata"},{"name":"Platform Abstraction Layer (PAL)","package":"../pal/package.json","src":"../pal/dist/aurelia-pal.d.ts","dest":"docs/api/pal"},{"name":"PAL-Browser","package":"../pal-browser/package.json","src":"../pal-browser/dist/aurelia-pal-browser.d.ts","dest":"docs/api/pal-browser"},{"name":"Path","package":"../path/package.json","src":"../path/dist/aurelia-path.d.ts","dest":"docs/api/path"},{"name":"Router","package":"../router/package.json","src":"../router/dist/aurelia-router.d.ts","dest":"docs/api/router"},{"name":"Task Queue","package":"../task-queue/package.json","src":"../task-queue/dist/aurelia-task-queue.d.ts","dest":"docs/api/task-queue"},{"name":"Templating","package":"../templating/package.json","src":"../templating/dist/aurelia-templating.d.ts","dest":"docs/api/templating"},{"name":"Templating-Binding","package":"../templating-binding/package.json","src":"../templating-binding/dist/aurelia-templating-binding.d.ts","dest":"docs/api/templating-binding"},{"name":"Templating-Resources","package":"../templating-resources/package.json","src":"../templating-resources/dist/aurelia-templating-resources.d.ts","dest":"docs/api/templating-resources"},{"name":"Templating-Router","package":"../templating-router/package.json","src":"../templating-router/dist/aurelia-templating-router.d.ts","dest":"docs/api/templating-router"},{"name":"Testing","package":"../testing/package.json","src":"../testing/dist/commonjs/aurelia-testing.d.ts","dest":"docs/api/testing"}]}};
+  </script>
+
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+</body>
+
+</html>

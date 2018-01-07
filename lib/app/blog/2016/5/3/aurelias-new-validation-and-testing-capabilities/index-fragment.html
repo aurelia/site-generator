@@ -1,0 +1,388 @@
+<section class="article blog">
+  <header>
+    <h1>Aurelia&#x27;s New Validation and Testing Capabilities</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today we've got the initial releases of our new validation overhaul as well as the first release of some new testing capabilities. As usual, we've got a bunch of additional bug fixes and enhancements to performance as well. Read on for the details.</p>
+<section><h2 id="a-new-validation-library">A New Validation Library</h2><p>As mentioned above, we've been working on a new approach to validation for Aurelia. This approach would allow any validation library to be used and combined with any CSS framework. It simplifies validation mechanics while opening up tremendous flexibiity. To tell you a bit about it, I'll let core team member Patrick Walters take it from here.</p>
+<hr />
+<p>I've been contributing for a while now to some of the core Aurelia plugin libraries. With our Validation library, we realized there were some changes that needed to be made. Unfortunately, fixing things required a re-write but it also provided an opportunity to really refine the concepts and implementations.</p>
+<p>I worked heavily with Jeremy Danyow on this and we tried to find the best way to represent validation in an Aurelia plugin.  Instead of starting fresh with a new validation runtime we chose to start with a popular server/browser pure validation library called validate.js. Validate.js has been a great library to work with. <strong>I've really enjoyed how fluid and clean setting up validation</strong> has been and I'm happy to say that our validation integration makes it even nicer.</p>
+<h3>Technical Requirements for Validation</h3>
+<p>We had a few simple requirements from the beginning. Here's a summary:</p>
+<ol>
+<li>Must run on server (node.js) and browser.</li>
+<li>Use existing pure validation library.</li>
+<li>Installable as an Aurelia plugin.</li>
+</ol>
+<p>You can read about more of the technical requirements 
+<a href="https://github.com/aurelia/validation/issues/174" target="_blank">here</a>
+.</p>
+<h3>Today's Alpha Release</h3>
+<p>I think we are at a point where we want to get heavy user feedback on the new validation system, so as of today you can install the alpha release:</p>
+<p>If you are using JSPM:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    $ jspm install aurelia<span class="token operator">-</span>validatejs
+  </code></pre></source-code>
+</code-listing>
+<p>If you are using NPM:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    $ npm install aurelia<span class="token operator">-</span>validatejs <span class="token operator">--</span>save
+  </code></pre></source-code>
+</code-listing>
+<p>Once the package is installed, then install the plugin in your main.js configure method:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configure</span><span class="token punctuation">(</span>aurelia<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      aurelia<span class="token punctuation">.</span>use
+        <span class="token punctuation">.</span><span class="token function">standardConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'aurelia-validatejs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+      aurelia<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> aurelia<span class="token punctuation">.</span><span class="token function">setRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>Applying Validation with Decorators</h3>
+<p>Once the plugin is installed, you can use it in your models and view-models with decorators:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>required<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validatejs'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyModel</span> <span class="token punctuation">{</span>
+      @required name <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Notice that <code>name</code> on instances of MyModel will be required.</p>
+<h3>Applying Validation with the Fluent API</h3>
+<p>If you prefer not to use decorators (or can't), you can also use the fluent API as well:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Validator<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validatejs'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Fluent</span> <span class="token punctuation">{</span>
+      <span class="token keyword">static</span> inject <span class="token operator">=</span> <span class="token punctuation">[</span>Validator<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      
+      <span class="token function">constructor</span><span class="token punctuation">(</span>validator<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>model <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnotherModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>validator <span class="token operator">=</span> validator
+          <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">,</span> <span class="token string">'firstName'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">{</span>minimum<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> maximum<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">,</span> <span class="token string">'lastName'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">required</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p>Note that both the decorator and fluent API take the exact same configuration options.</p>
+<h3>Displaying Errors</h3>
+<p>Currently, to display errors you can use the <code>ValidateBindingBehavior</code> which <strong>watches for changes to the validation properties of the object</strong> and uses a <code>ValidationRenderer</code> to show them. We would like some feedback on the setup so try it out and let us know what you think.</p>
+<p>Use the <code>validate</code> binding behavior in your HTML to show errors like this:</p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">></span></span>Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control<span class="token punctuation">"</span></span> <span class="token attr-name">value.bind</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>model.name &amp; validate<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>By default, the renderer uses the standard Bootstrap error formatting.</p>
+<h4>ValidationReporter</h4>
+<p>In your view-model code you can watch for errors emitted by the error reporter:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>required<span class="token punctuation">,</span> ValidationEngine<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-validatejs'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyModel</span> <span class="token punctuation">{</span>
+      @required name <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyViewModel</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>model <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>reporter <span class="token operator">=</span> ValidationEngine<span class="token punctuation">.</span><span class="token function">getValidationReporter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>reporter<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>result <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// result is array of errors    </span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<h3>What's Next?</h3>
+<h4>Weekly Releases</h4>
+<p>This first release is to get some initial feedback. Next week we plan to release on Tuesday with some nice improvements in renderers.  Right now, for example we are inferring the reporter from the binding engine but we have some planned improvements for the coming week. We hope to continue iteratively releasing improvements and welcome community contribution.</p>
+<h4>More Complex Renderers</h4>
+<p>We plan to add more complex renderers soon. We will include mechanisms for showing validation errors on forms as well as ones that are scoped to the current element. We definitely want to welcome community contributions to enable rendering in other scenarios besides the default Bootstrap ones. Building renderers are really simple and we'll have more information on that soon.</p>
+<h4>Feedback</h4>
+<p>In the 
+<a href="https://github.com/aurelia/validatejs" target="_blank">repository</a>
+ for the validate.js bridge you can track issues or provide feedback. We've added a new tag <code>contribution-welcome</code> to indicate that a particular piece of the code-base is stable and contributions are welcome. You'll also note that we've added some initial issues to indicate what we have planned already.</p>
+<h4>How can you contribute?</h4>
+<p>I've put together another 
+<a href="http://patrickwalters.net/how-aurelia-validatejs-workxs/" target="_blank">blog post</a>
+ detailing how validation is currently structured to give others an idea of how things currently work and what we can do to improve validation as we go forward.</p>
+<p>Here are some ways to get started contributing if you are interested:</p>
+<ol>
+<li>Bug repros / fixes</li>
+<li>Unit test coverage</li>
+<li>Add TypeScript types</li>
+<li>Documentation</li>
+<li>Descriptive errors (I'd like for errors to have links to trouble-shooting sections of docs for developers)</li>
+<li>Make it work with other CSS libraries</li>
+</ol>
+<h4>Custom Renderer</h4>
+<p>Here's a few tips on creating a custom renderer to try out with your CSS framework of choice:</p>
+<p><code>validate-binding-behavior.js</code> currently 
+<a href="https://github.com/aurelia/validatejs/blob/master/src/validate-binding-behavior.js#L2" target="_blank">gets the renderer</a>
+ from 
+<a href="https://github.com/aurelia/validatejs/blob/master/src/validation-renderer.js" target="_blank">validation-renderer.js</a>
+.  To try out your own renderer you can simply copy the <code>validate-binding-behavior</code> and update the name. Change the import to a renderer of your choosing (follow the same patterns in <code>validation-renderer.js</code> of renderErrors / unrenderErrors method signatures for now). We'll have improvements to this and more information soon.</p>
+<p>Thanks again for everyone's patience and help!  Please report any issues you are having!</p>
+<hr />
+<p>As you can see, Patrick has been busy working on the new validation library. I'm excited about what is going to be possible and I hope you'll try it out and help us fill in the missing pieces.</p>
+</section>
+<section><h2 id="new-testing-capabilities">New Testing Capabilities</h2><p>Previously, we announced that we're working on a library for easy testing of components. With today's releases we also have the first version of <code>aurelia-testing</code> available. With it you can easily stage a custom element or custom attribute in isolation inside a mini Aurelia application, assert how it responds to databinding and assert its behavior throughout the component's lifecycle (bind, attached etc). This library is still in an early stage but please take it for a spin, write some tests for your components and give us feedback.</p>
+<p>To get started:</p>
+<p>If you are using JSPM:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    $ jspm install aurelia<span class="token operator">-</span>testing
+  </code></pre></source-code>
+</code-listing>
+<p>If you are using NPM:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    $ npm install aurelia<span class="token operator">-</span>testing <span class="token operator">--</span>save
+  </code></pre></source-code>
+</code-listing>
+<p>Once you've got the library installed, you can use it in a unit test. Here are a few examples of what it can do:</p>
+<p>Given you have following custom element:</p>
+<p><strong>my-component.js</strong></p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>bindable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-framework'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token punctuation">{</span>
+      @bindable name<span class="token punctuation">;</span>
+    
+      <span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>something <span class="token operator">=</span> <span class="token string">'bind'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>something <span class="token operator">=</span> <span class="token string">'attached'</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">unbind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    
+      <span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </code></pre></source-code>
+</code-listing>
+<p><strong>my-component.html</strong></p>
+<code-listing>
+  <source-code lang="HTML"><pre class="language-markup"><code>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>${name} ${something}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  </code></pre></source-code>
+</code-listing>
+<p>Some basic tests could look like:</p>
+<code-listing>
+  <source-code lang="JavaScript"><pre class="language-javascript"><code>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>StageComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'aurelia-testing'</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>MyComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../src/my-component'</span><span class="token punctuation">;</span>
+    
+    <span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'MyComponent'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> component<span class="token punctuation">;</span>
+    
+      <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        component <span class="token operator">=</span> StageComponent
+            <span class="token punctuation">.</span><span class="token function">withResources</span><span class="token punctuation">(</span><span class="token string">'src/my-component'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">inView</span><span class="token punctuation">(</span><span class="token string">'&lt;my-component name.bind="name">&lt;/my-component>'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">boundTo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'Foo'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">afterEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        component<span class="token punctuation">.</span><span class="token function">dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'can render the component'</span><span class="token punctuation">,</span> done <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         component<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token keyword">const</span> nameElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Foo attached'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>done<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'can bind with a new context'</span><span class="token punctuation">,</span> done <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         component<span class="token punctuation">.</span><span class="token function">boundTo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'Bar'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token keyword">const</span> nameElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Bar attached'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>done<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'can manually handle lifecycle'</span><span class="token punctuation">,</span> done <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> nameElement<span class="token punctuation">;</span>
+    
+         component<span class="token punctuation">.</span><span class="token function">manuallyHandleLifecycle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           nameElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Foo bind'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Foo attached'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">detached</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">unbind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>component<span class="token punctuation">.</span>viewModel<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'Bar'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Bar bind'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> component<span class="token punctuation">.</span><span class="token function">attached</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token function">expect</span><span class="token punctuation">(</span>nameElement<span class="token punctuation">.</span>innerHTML<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'Bar attached'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>done<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </code></pre></source-code>
+</code-listing>
+<p>As you see, the test helper lets you easily push components through their lifecycle, testing various aspects of it at each point along the way.</p>
+</section>
+<section><h2 id="all-the-rest">All the Rest</h2><p>As mentioned above, we've had a variety of bug fixes in this set of releases as well. We've even had performance enhancements across the board to our binding engine and in some cases the repeat performance has improved by 10x thanks to some excellent work by community member Bazyli Brzóska.</p>
+<p>As usual, you can find all the details in the change log below.
+Oh, and hang in there, the Release Candidate is right around the corner...</p>
+</section>
+<section><h2 id="change-log">Change Log</h2><h3>aurelia-pal 1.0.0-beta.1.2.1</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>AggregateError:</strong> better surface inner error information (
+<a href="http://github.com/aurelia/pal/commit/d2e0ee70ad790999e61f4d4e31341062146cbcbf" target="_blank">d2e0ee70</a>
+)</li>
+</ul>
+<h3>aurelia-polyfills 1.0.0-beta.1.1.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>reflect:</strong> fix target-is-object check (
+<a href="http://github.com/aurelia/polyfills/commit/841a64b597d320425773b393dfe4366ca0fc22bb" target="_blank">841a64b5</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>reflect:</strong> add polyfill for defineProperty (
+<a href="http://github.com/aurelia/polyfills/commit/c6fbc900e8e62bbf6dd3730e3557de12e10d4f4b" target="_blank">c6fbc900</a>
+)</li>
+</ul>
+<h3>aurelia-binding 1.0.0-beta.1.3.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>Binary:</strong> handle adding undefined (
+<a href="http://github.com/aurelia/binding/commit/d2a88ddc79305d761be1b1efba666da007943cb7" target="_blank">d2a88ddc</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/337" target="_blank">#337</a>
+)</li>
+<li><strong>CheckedObserver:</strong> synchronize on changes to input value (
+<a href="http://github.com/aurelia/binding/commit/f3147440743f5006f4834b63d90d6023a37bb758" target="_blank">f3147440</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/320" target="_blank">#320</a>
+)</li>
+<li><strong>array-observation:</strong> do not notify on pop/shift of empty array (
+<a href="http://github.com/aurelia/binding/commit/d344831bd96e77870c9354f187cfd387be401dc7" target="_blank">d344831b</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>camelCase:</strong> handle hyphenated names (
+<a href="http://github.com/aurelia/binding/commit/315cfaa229c13da8355ee1dec201a09c7df507db" target="_blank">315cfaa2</a>
+)</li>
+<li><strong>logging:</strong> warn when property can't be defined (
+<a href="http://github.com/aurelia/binding/commit/a6457c098e18707ebd4e65448a5d6f984377fac4" target="_blank">a6457c09</a>
+)</li>
+</ul>
+<h3>aurelia-ui-virtualization 0.4.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>utilities:</strong> undefined parentElement in IE11 (
+<a href="http://github.com/aurelia/ui-virtualization/commit/c7bb78576cf584c203cddb2e9374ff9df4284caf" target="_blank">c7bb7857</a>
+)</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.1.2.4 (2016-04-29)</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>templating-engine:</strong> allow for overrideContext in enhance (
+<a href="http://github.com/aurelia/templating/commit/49c99edf254d3102feae8e1cac6f9edb292b109c" target="_blank">49c99edf</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>ViewSlot:</strong>
+<ul>
+<li>allow removal of many views at once to avoid a race condition (
+<a href="http://github.com/aurelia/templating/commit/4b1005b91213a26ff726f9ae29aea7ac09353330" target="_blank">4b1005b9</a>
+)</li>
+<li>moving Views across the slot (
+<a href="http://github.com/aurelia/templating/commit/02e59ef14051a2a03f9d5d2dbd8a0b6e9cb45c17" target="_blank">02e59ef1</a>
+)</li>
+</ul>
+</li>
+<li><strong>view:</strong> reference creator container (
+<a href="http://github.com/aurelia/templating/commit/9431f536e6d57ce8ef654eea872c8d795ea02fd5" target="_blank">9431f536</a>
+)</li>
+</ul>
+<h3>aurelia-templating-binding 1.0.0-beta.1.2.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>SyntaxInterpreter:</strong> one-way default binding mode for checkbox/radio value (
+<a href="http://github.com/aurelia/templating-binding/commit/124498c3ffe7238e1a812586b941fca048d2c8fc" target="_blank">124498c3</a>
+)</li>
+</ul>
+<h3>templating-resources 1.0.0-beta.1.2.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>Repeat:</strong> ignore changes after unsubscribe (
+<a href="http://github.com/aurelia/templating-resources/commit/96b721f9a2ea9662aa514481dd75271f5b4be413" target="_blank">96b721f9</a>
+)</li>
+<li><strong>analyze-view-factory:</strong> analyze type's view-factory (
+<a href="http://github.com/aurelia/templating-resources/commit/3cc65d974cbfc0c7930fd7766f0d4b828de70965" target="_blank">3cc65d97</a>
+)</li>
+<li><strong>focus:</strong> focus on attach (
+<a href="http://github.com/aurelia/templating-resources/commit/3991d99902394bb9f692a83c857727115a6477df" target="_blank">3991d999</a>
+, closes 
+<a href="http://github.com/aurelia/templating-resources/issues/199" target="_blank">#199</a>
+)</li>
+<li><strong>repeat-utilities:</strong> remove unnecessary variable and loop evaluation (
+<a href="http://github.com/aurelia/templating-resources/commit/504c8e6936b034bfdc3556c15817e0c8e8056bf0" target="_blank">504c8e69</a>
+)</li>
+</ul>
+<h3>skeletons</h3>
+<ul>
+<li>Lots of improvements across all skeletons, especially webpack skeletons.</li>
+</ul>
+</section>
+
+  </article>
+</section>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38441871-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+  <meta charset="utf-8">
+  <title>More Aurelia Performance, Bug Fixes, Docs and TypeScript Awesome! | Aurelia</title>
+  <base href="/aurelia-docs-test/">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  
+  <meta name="description" content="Today&#x27;s patch updates come with some really sweet benefits! Also, if you love TypeScript, I&#x27;m sure you&#x27;ll be very happy with something new we are announcing today. To update your libraries, simply run jspm update. Read on to learn the details of what these releases include."/>
+  <meta name="robots" content="index,follow"/>
+  
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:200,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/aurelia-docs.css">
+</head>
+
+<body aurelia-app="main" id="app-host">
+  <header class="app-header"> 
+    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <search-trigger></search-trigger>
+  </header>
+
+  <main ref="main">
+    <div screen-activator.bind="activeScreen" screen-activated.trigger="onScreenActivated()" class="screen-activator">
+      <section class="article blog">
+  <header>
+    <h1>More Aurelia Performance, Bug Fixes, Docs and TypeScript Awesome!</h1>
+  </header>
+
+  <article class="markdown">
+    <p>Today's patch updates come with some really sweet benefits! Also, if you love TypeScript, I'm sure you'll be very happy with something new we are announcing today. To update your libraries, simply run <code>jspm update</code>. Read on to learn the details of what these releases include.</p>
+<section><h2 id="performance">Performance</h2><p>We're constantly working on Aurelia's performance. A couple of weeks ago 
+<a href="http://blog.durandal.io/2015/12/04/aurelia-repaint-performance-rules/" target="_blank">we showed improvements to our repaint performance</a>
+ that left every other framework in the dust. This week we're releasing some fixes that we've benchmarked as improvements against ourselves. Today's release involves a drastic reduction in memory consumption, especially for one-way and one-time bindings. It also comes with a 2-3x performance improvement on initial render time. Yes, view rendering just got 2-3x faster, thanks to Jeremy Danyow's continued performance innovations. Most of this work was done in the binding engine. If you are interested in the details of how that works, you can 
+<a href="https://www.youtube.com/watch?v=NyxGZYgOCuo" target="_blank">watch Jeremy take you on a guided tour of the codebase</a>
+.</p>
+<p>We also have a major performance improvement for Edge. What we discovered (and by we I mean Jeremy) is that the Edge native promise implementation is extremely slow. If you want to see a huge load-time performance boost, simply add 
+<a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank">the bluebird promise library</a>
+ before your system.js script tag. It's quite interesting what the affects of adding bluebird can be. To study this Jeremy ran 20 automated runs of a sample app in four browsers, and took the average load times both with and without bluebird:</p>
+<p>Without bluebird</p>
+<ul>
+<li>Chrome: 340ms</li>
+<li>Firefox: 327ms</li>
+<li>Internet Explorer 11: 311ms</li>
+<li>Edge: 20000ms (seriously)</li>
+</ul>
+<p>With bluebird</p>
+<ul>
+<li>Chrome: 252ms</li>
+<li>Firefox: 361ms</li>
+<li>Internet Explorer 11: 326ms</li>
+<li>Edge: 399ms</li>
+</ul>
+<p>If you'd like to try your own setup out, you can 
+<a href="http://jdanyow.github.io/edge-promise/" target="_blank">go here</a>
+. We're still working on a few additional issues with Edge that appear &quot;in the wild&quot;. They aren't consistent and aren't reproduced by our normal tests. If you are interested in tracking that, you may want to follow 
+<a href="https://github.com/aurelia/framework/issues/254#issuecomment-165562615" target="_blank">this GitHub issue</a>
+.</p>
+<p>We're really happy about how Aurelia's performance is making such large improvements during the beta period. We've got more items we want to address here, so stay tuned for further improvements.</p>
+<blockquote>
+<p><strong>Note:</strong> For those of you who need to support IE9, after updating, you will need to include a <code>requestAnimationFrame</code> polyfill in your page. You can find one 
+<a href="https://github.com/darius/requestAnimationFrame" target="_blank">here</a>
+.</p>
+</blockquote>
+</section>
+<section><h2 id="bug-fixes">Bug Fixes</h2><p>This release contains numerous bug fixes, stability improvements and edge-case handling. As mentioned above, to get the fixes you can run <code>jspm update</code>. You'll be able to continue to run <code>jspm update</code> to get our latest fixes and improvements until we release Beta 2. You also should have no fear of breaking changes. If you encounter anything, then it's an accidental regression and something we would love for you to help us correct by creating an issue with the regression's details.</p>
+<p>You can find the release notes related to today's patches at the end of this post.</p>
+</section>
+<section><h2 id="docs">Docs</h2><p>We're constantly working on improving our docs. We've done some major upgrades to our docs format to make it easier for docs authors and translators to contribute. We'll have more information on that soon...but basically anyone who knows markdown can write docs by just learning about a few extra features we've added to facilitate multi-cultural and multi-language (programming) preferences as well as deep linking and inline, code demos.</p>
+<p>With these improvements in place, we can start pushing out new articles more frequently. Today we're releasing a new article on bundling written by core team member Ahmed Shuhel. Next we'll be adding more detailed articles on binding, templating and docs translation.</p>
+</section>
+<section><h2 id="typescript">TypeScript</h2><p>For months we've seen a growing interest in writing Aurelia apps with TypeScript. We've heard many requests for a TypeScript Skeleton, similar to our existing Babel-based navigation skeleton. I'm happy to announce that today we have an official production-ready navigation skeleton for TypeScript developers! It's designed to parallel our Babel skeleton and will help you to get up and running fast. It features:</p>
+<ul>
+<li>Designed specially for VSCode and Atom (w/ atom-typescript)</li>
+<li>All app source, unit tests and end-to-end tests are written in TypeScript.</li>
+<li>A gulp-based task system supporting:
+<ul>
+<li>Building</li>
+<li>Linting</li>
+<li>Unit Testing</li>
+<li>End-to-End Testing</li>
+<li>Bundling</li>
+</ul>
+</li>
+<li>Fully configured d.ts files that provide intellisense in source, unit tests and e2e tests.</li>
+<li>Configuration of 3rd party libraries via the standard 
+<a href="http://definitelytyped.org/tsd/" target="_blank">tsd</a>
+ tooling.</li>
+<li>Wallaby testing configured.</li>
+</ul>
+<p>You may have noticed that we list VSCode, but not Visual Studio above. That's because the above project does not contain a Visual Studio project or solution file. However, it can be opened as a web site in Visual Studio and all the above features should function correctly. If you are interested in specific Visual Studio support, as always, we invite you to create issues and submit PRs to help us evolve this skeleton in any way that improves that scenario.</p>
+<p>Much thanks to core team member Mike Graham as well as the many community members who put together TS sample projects which helped us in building this.</p>
+</section>
+<section><h2 id="what">What</h2><p>During the beta we're focusing on performance, bug fixes, improvements to our testing and infrastructure...and adding a few additional features we want for the final release. As we've talked about previously, we would like to do a second beta before our release. This is to address changes in various web specifications (decorators, shadow dom, etc.) as well as changes in the JSPM and the system.js loader. We are seeking to shield our community as much as possible from any breaking effects of these changes, but there will be some. Please refer to 
+<a href="http://blog.durandal.io/2015/11/16/aurelia-beta-week-day-1-the-beta-is-here/" target="_blank">our beta announcement</a>
+ for more details. As I'm sure you've come to expect, we'll provide as many details as possible when the time is right. It's important to us that you always know as much as possible about what we are doing and where we are heading.</p>
+</section>
+<section><h2 id="release-notes">Release Notes</h2><h3>aurelia-pal 1.0.0-beta.1.0.1</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>PAL:</strong> requestAnimationFrame and performance APIs (
+<a href="http://github.com/aurelia/pal/commit/09177bffc52f02f9138972c44f4c0082adcad1e9" target="_blank">09177bff</a>
+)</li>
+</ul>
+<h3>aurelia-pal-browser 1.0.0-beta.1.0.1</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>PAL:</strong> requestAnimationFrame and performance APIs (
+<a href="http://github.com/aurelia/pal-browser/commit/8427b1f26c93033973cdfb91c4ec0c57ccf7326c" target="_blank">8427b1f2</a>
+)</li>
+<li><strong>performance:</strong> performance API polyfill (
+<a href="http://github.com/aurelia/pal-browser/commit/9b706b38296a586f7716ae433ec8b603bc678b5e" target="_blank">9b706b38</a>
+)</li>
+</ul>
+<h3>aurelia-binding 1.0.0-beta.1.0.3</h3>
+<ul>
+<li>performance improvements</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>array-observation:</strong> handle push then sort (
+<a href="http://github.com/aurelia/binding/commit/2ae6d0e46f85a865fcf3261ddf0298244573f185" target="_blank">2ae6d0e4</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/233" target="_blank">#233</a>
+)</li>
+<li><strong>binding:</strong> check before assign (
+<a href="http://github.com/aurelia/binding/commit/44b5a669d563d3aeb1268cad8058a8bbf51d21f8" target="_blank">44b5a669</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/258" target="_blank">#258</a>
+)</li>
+<li><strong>file-input:</strong> Firefox issue (
+<a href="http://github.com/aurelia/binding/commit/debed4e5fa71ad99e2b97c3def6d605da4da884f" target="_blank">debed4e5</a>
+, closes 
+<a href="http://github.com/aurelia/binding/issues/256" target="_blank">#256</a>
+)</li>
+</ul>
+<h3>aurelia-templating 1.0.0-beta.1.0.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>content-selector:</strong> incorrect projection in nested scenarios (
+<a href="http://github.com/aurelia/templating/commit/2e248676635b6f7c698894e06056f1bd0e11603e" target="_blank">2e248676</a>
+, closes 
+<a href="http://github.com/aurelia/templating/issues/231" target="_blank">#231</a>
+)</li>
+</ul>
+<h3>aurelia-templating-binding 1.0.0-beta.1.0.2</h3>
+<ul>
+<li>performance improvements</li>
+</ul>
+<h3>aurelia-templating-resources 1.0.0-beta.1.0.3</h3>
+<ul>
+<li>performance</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>plugins:</strong>
+<ul>
+<li>revert file extensions checking (
+<a href="http://github.com/aurelia/templating-resources/commit/c67adfb2549e03a2a94271f20ccced1fea0adf24" target="_blank">c67adfb2</a>
+)</li>
+<li>remove possible duplicate file extensions (
+<a href="http://github.com/aurelia/templating-resources/commit/842a13e7baab62f4c032f6db64cc7661fb69dbf8" target="_blank">842a13e7</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-templating-router 1.0.0-beta.1.0.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>add-nextview-first:</strong> Add the next first on with (
+<a href="http://github.com/aurelia/templating-router/commit/d188112c67bbfd290c046ad11ce95338386024ea" target="_blank">d188112c</a>
+)</li>
+<li><strong>default-swap-order:</strong> Set default swap order to after resolves aurelia/framework#263 (
+<a href="http://github.com/aurelia/templating-router/commit/984aeb1260670a9202dcda0b933608a61b1daade" target="_blank">984aeb12</a>
+)</li>
+<li><strong>spelling:</strong> Miss-Spelled SwapStrategies (
+<a href="http://github.com/aurelia/templating-router/commit/9b9fb9ea1990376d7d0642a39df23eae8700de84" target="_blank">9b9fb9ea</a>
+)</li>
+</ul>
+<h3>aurelia-fetch-client 1.0.0-beta.1.0.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>http-client:</strong>
+<ul>
+<li>work around bug in IE/Edge where Blob types are ignored (
+<a href="http://github.com/aurelia/fetch-client/commit/36407e27c5b1881473151126fed53f74299ad296" target="_blank">36407e27</a>
+)</li>
+<li>correct type check (
+<a href="http://github.com/aurelia/fetch-client/commit/d38d1b34373c50907e7c7673def8ba0ebc5a5427" target="_blank">d38d1b34</a>
+)</li>
+</ul>
+</li>
+</ul>
+<h3>aurelia-animator-css 1.0.0-beta.1.0.2</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>npm-convention:</strong> npm test works (
+<a href="https://github.com/aurelia/animator-css/commit/d44f2ca513ce3a87ff17dbeae191c4ab0c4f28e0" target="_blank">d44f2ca5</a>
+)</li>
+<li><strong>race-condition:</strong>
+<ul>
+<li>fix for missing animationend event under stress (
+<a href="https://github.com/aurelia/animator-css/commit/f7963e3e76871704822408b32bd0caa5f111cd93" target="_blank">f7963e3e</a>
+)</li>
+<li>test for animation occurring without timeout (
+<a href="https://github.com/aurelia/animator-css/commit/3eefc5334556403adb9284b9051187ba27f72939" target="_blank">3eefc533</a>
+)</li>
+</ul>
+</li>
+<li><strong>tests:</strong> Fixed ReferenceError in two tests (
+<a href="https://github.com/aurelia/animator-css/commit/f976e0b09a98136d702144747b4475547c349cb8" target="_blank">f976e0b0</a>
+)</li>
+</ul>
+<h3>aurelia-skeleton-navigation 1.0.0-beta.1.0.3</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>build:</strong> remove the faulty doc task (
+<a href="http://github.com/aurelia/skeleton-navigation/commit/e5119bf4f772033a73dfbd34a9a426a15e358fd3" target="_blank">e5119bf4</a>
+)</li>
+<li><strong>main:</strong> add notes on swap order (
+<a href="http://github.com/aurelia/skeleton-navigation/commit/c051b2cb93f2e8d24b4c224af40f56cba6949955" target="_blank">c051b2cb</a>
+)</li>
+</ul>
+<h3>aurelia-i18n 0.4.4</h3>
+<h4>Bug Fixes</h4>
+<ul>
+<li><strong>all:</strong> add missing dependencies (
+<a href="http://github.com/aurelia/i18n/commit/73370c8fb75cf1e024fd6c22c616752c1b4a11a3" target="_blank">73370c8f</a>
+)</li>
+<li><strong>lint:</strong> fixes linter issues and adds build (
+<a href="http://github.com/aurelia/i18n/commit/1f60c4f522bc4b22225d1b7a4d52ad7028e2873e" target="_blank">1f60c4f5</a>
+)</li>
+<li><strong>tr:</strong> fixes object flattening (
+<a href="http://github.com/aurelia/i18n/commit/2fba7fbb589b4b2e6cfe1216ebc57b6e4eb3cbdf" target="_blank">2fba7fbb</a>
+)</li>
+</ul>
+<h4>Features</h4>
+<ul>
+<li><strong>signaling:</strong> provides TBindingBehavior (
+<a href="http://github.com/aurelia/i18n/commit/d9877eea7f5de73e75f5fa00a6c39a8613ce40ab" target="_blank">d9877eea</a>
+)</li>
+</ul>
+</section>
+
+  </article>
+</section>
+
+    </div>
+
+    <footer class="content-footer" id="app-footer">
+      <div class="links">
+        <div class="link-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/overview/what-is-aurelia">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
+            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
+            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
+          </ul>
+        </div>
+
+        <div class="link-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/aurelia">GitHub</a></li>
+            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
+            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">
+        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+      </p>
+    </footer>
+  </main>
+
+  <side-bar></side-bar>
+
+  <nav>
+    <ul>
+      <li class="home ${activeTab === 'home' ? 'active' : ''}">
+        <a href="home">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+            height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <g>
+              <path d="M20.5,13.5c-0.276,0-0.5,0.224-0.5,0.5v9h-5v-6.5c0-0.276-0.224-0.5-0.5-0.5h-5C9.224,16,9,16.224,9,16.5V23H4v-9.5
+                C4,13.224,3.776,13,3.5,13S3,13.224,3,13.5v10C3,23.777,3.224,24,3.5,24h6c0.276,0,0.5-0.224,0.5-0.5V17h4v6.5
+                c0,0.276,0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5V14C21,13.724,20.776,13.5,20.5,13.5z"/>
+              <path d="M23.854,12.647l-11.5-11.5c-0.195-0.195-0.512-0.195-0.707,0l-11.5,11.5c-0.195,0.195-0.195,0.512,0,0.707
+                s0.512,0.195,0.707,0L12,2.208l11.146,11.146c0.098,0.098,0.226,0.146,0.354,0.146s0.256-0.049,0.354-0.146
+                C24.049,13.159,24.049,12.842,23.854,12.647z"/>
+              <path d="M16,3h3v3c0,0.276,0.224,0.5,0.5,0.5S20,6.277,20,6V2.5C20,2.224,19.776,2,19.5,2H16c-0.276,0-0.5,0.224-0.5,0.5
+                S15.724,3,16,3z"/>
+            </g>
+          </g>
+          <g id="invisible_shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Home</div>
+        </a>
+      </li>
+
+      <li class="article ${activeTab === 'article' ? 'active' : ''}">
+        <a href="docs">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g>
+              <path d="M23.5,1H12V0.5C12,0.224,11.776,0,11.5,0h-8C3.224,0,3,0.224,3,0.5V1H0.5C0.224,1,0,1.224,0,1.5v22
+                C0,23.776,0.224,24,0.5,24h23c0.276,0,0.5-0.224,0.5-0.5v-22C24,1.224,23.776,1,23.5,1z M4,1h7v11.293L7.854,9.146
+                c-0.195-0.195-0.512-0.195-0.707,0L4,12.293V1z M23,23H1V2h2v11.5c0,0.446,0.542,0.668,0.854,0.354L7.5,10.207l3.646,3.646
+                C11.459,14.166,12,13.948,12,13.5V2h11V23z"/>
+              <path d="M14.5,8h6C20.776,8,21,7.776,21,7.5S20.776,7,20.5,7h-6C14.224,7,14,7.224,14,7.5S14.224,8,14.5,8z"/>
+              <path d="M14.5,11h6c0.276,0,0.5-0.224,0.5-0.5S20.776,10,20.5,10h-6c-0.276,0-0.5,0.224-0.5,0.5S14.224,11,14.5,11z"/>
+              <path d="M20.5,13h-6c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h6c0.276,0,0.5-0.224,0.5-0.5S20.776,13,20.5,13z"/>
+              <path d="M20.5,16h-17C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h17c0.276,0,0.5-0.224,0.5-0.5S20.776,16,20.5,16z"/>
+              <path d="M16.5,19h-13C3.224,19,3,19.224,3,19.5S3.224,20,3.5,20h13c0.276,0,0.5-0.224,0.5-0.5S16.776,19,16.5,19z"/>
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Guides</div>
+        </a>
+      </li>
+
+      <li class="api ${activeTab === 'api' ? 'active' : ''}">
+        <a href="docs/api">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons">
+            <path d="M21.945,15.283c-0.009-0.02-0.022-0.034-0.034-0.052c-0.031-0.048-0.068-0.089-0.114-0.123
+              c-0.011-0.008-0.015-0.021-0.026-0.029L17,12.011V7.5c0-0.082-0.024-0.156-0.059-0.224c-0.01-0.02-0.023-0.035-0.036-0.053
+              c-0.033-0.049-0.072-0.089-0.12-0.124c-0.012-0.007-0.017-0.022-0.028-0.029l-5-3c-0.158-0.095-0.355-0.095-0.514,0l-5,3
+              C6.231,7.078,6.227,7.093,6.215,7.1c-0.048,0.035-0.087,0.075-0.12,0.124C6.082,7.241,6.068,7.257,6.059,7.276
+              C6.024,7.344,6,7.418,6,7.5v4.511L1.229,15.08c-0.012,0.007-0.016,0.021-0.026,0.029c-0.046,0.034-0.083,0.075-0.114,0.123
+              c-0.012,0.018-0.025,0.032-0.034,0.052C1.022,15.349,1,15.421,1,15.5v4.784c0,0.17,0.087,0.329,0.229,0.421l5,3.216
+              c0.009,0.006,0.021,0.003,0.029,0.009C6.331,23.971,6.411,24,6.5,24s0.169-0.029,0.241-0.07c0.009-0.006,0.021-0.003,0.029-0.009
+              l4.729-3.042l4.729,3.042c0.009,0.006,0.021,0.003,0.029,0.009C16.331,23.971,16.411,24,16.5,24s0.169-0.029,0.241-0.07
+              c0.009-0.006,0.021-0.003,0.029-0.009l5-3.216C21.913,20.613,22,20.454,22,20.284V15.5C22,15.421,21.978,15.349,21.945,15.283z
+              M16.5,17.917l-4.053-2.432l4.053-2.606l4.053,2.606L16.5,17.917z M7,18.783l4-2.4v3.628l-4,2.573V18.783z M16,12.011l-4,2.573
+              v-3.801l4-2.4V12.011z M11,14.584l-4-2.573V8.383l4,2.4V14.584z M11.5,5.083L15.528,7.5L11.5,9.917L7.472,7.5L11.5,5.083z
+              M6.5,12.879l4.053,2.606L6.5,17.917l-4.053-2.432L6.5,12.879z M2,16.383l4,2.4v3.801l-4-2.573V16.383z M12,16.383l4,2.4v3.801
+              l-4-2.573V16.383z M17,22.584v-3.801l4-2.4v3.628L17,22.584z"/>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">APIs</div>
+        </a>
+      </li>
+
+      <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
+        <a href="https://discourse.aurelia.io">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M7.508,14.318c-0.465-0.063-0.923-0.163-1.362-0.297c-0.109-0.034-0.227-0.029-0.331,0.015l-3.669,1.467l1.289-2.255
+                  c0.122-0.214,0.07-0.484-0.122-0.639C1.843,11.434,1,9.729,1,7.935C1,4.387,4.589,1.5,9,1.5s8,2.887,8,6.435
+                  c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5c0-4.1-4.038-7.435-9-7.435S0,3.835,0,7.935c0,1.962,0.855,3.827,2.36,5.178
+                  l-1.794,3.14c-0.105,0.185-0.083,0.416,0.057,0.576C0.72,16.939,0.858,17,1,17c0.062,0,0.125-0.012,0.186-0.036l4.839-1.936
+                  c0.438,0.124,0.891,0.219,1.348,0.28c0.274,0.048,0.526-0.154,0.563-0.428S7.781,14.355,7.508,14.318z"/>
+                <path d="M22.123,20.627C23.353,19.517,24,18.098,24,16.5c0-3.523-3.435-6.5-7.5-6.5S9,12.977,9,16.5
+                  c0,2.125,1.152,4.144,3.083,5.397c2.073,1.349,4.649,1.582,6.93,0.642l3.812,1.429C22.882,23.989,22.941,24,23,24
+                  c0.139,0,0.275-0.058,0.372-0.165c0.138-0.153,0.167-0.375,0.076-0.559L22.123,20.627z M19.176,21.532
+                  C19.119,21.511,19.06,21.5,19,21.5c-0.069,0-0.139,0.015-0.203,0.043c-2.018,0.898-4.324,0.717-6.169-0.484
+                  C10.982,19.99,10,18.285,10,16.5c0-2.981,2.977-5.5,6.5-5.5s6.5,2.519,6.5,5.5c0,1.433-0.61,2.647-1.812,3.609
+                  c-0.184,0.147-0.24,0.403-0.135,0.614l0.931,1.861L19.176,21.532z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+
+          <div class="label">Discourse</div>
+        </a>
+      </li>
+
+      <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
+        <a href="blog">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M14.5,3h-11C3.224,3,3,3.224,3,3.5S3.224,4,3.5,4h11C14.776,4,15,3.776,15,3.5S14.776,3,14.5,3z"/>
+                <path d="M3.5,13h5C8.776,13,9,12.776,9,12.5v-6C9,6.224,8.776,6,8.5,6h-5C3.224,6,3,6.224,3,6.5v6C3,12.776,3.224,13,3.5,13z
+                  M4,7h4v5H4V7z"/>
+                <path d="M14.5,8h-3C11.224,8,11,8.224,11,8.5S11.224,9,11.5,9h3C14.776,9,15,8.776,15,8.5S14.776,8,14.5,8z"/>
+                <path d="M14.5,10h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,10,14.5,10z"/>
+                <path d="M14.5,12h-4c-0.276,0-0.5,0.224-0.5,0.5s0.224,0.5,0.5,0.5h4c0.276,0,0.5-0.224,0.5-0.5S14.776,12,14.5,12z"/>
+                <path d="M14.5,14h-11C3.224,14,3,14.224,3,14.5S3.224,15,3.5,15h11c0.276,0,0.5-0.224,0.5-0.5S14.776,14,14.5,14z"/>
+                <path d="M14.5,16h-11C3.224,16,3,16.224,3,16.5S3.224,17,3.5,17h11c0.276,0,0.5-0.224,0.5-0.5S14.776,16,14.5,16z"/>
+                <path d="M14.5,18h-11C3.224,18,3,18.224,3,18.5S3.224,19,3.5,19h11c0.276,0,0.5-0.224,0.5-0.5S14.776,18,14.5,18z"/>
+                <path d="M23.5,3H20V2c0-0.276-0.224-0.5-0.5-0.5H18v-1C18,0.224,17.776,0,17.5,0h-17C0.224,0,0,0.224,0,0.5v20
+                  C0,22.43,1.57,24,3.5,24h17c1.93,0,3.5-1.57,3.5-3.5v-17C24,3.224,23.776,3,23.5,3z M20,6h1v14.5c0,0.276-0.225,0.5-0.5,0.5
+                  S20,20.776,20,20.5V6z M3.5,23C2.121,23,1,21.878,1,20.5V1h16v1v2v16.5c0,0.979,0.403,1.865,1.053,2.5H3.5z M23,20.5
+                  c0,1.378-1.121,2.5-2.5,2.5S18,21.878,18,20.5V4V2.5h1v18c0,0.827,0.673,1.5,1.5,1.5s1.5-0.673,1.5-1.5v-15
+                  C22,5.224,21.776,5,21.5,5H20V4h3V20.5z"/>
+              </g>
+            </g>
+            <g id="New_icons_1_">
+            </g>
+          </g>
+          <g id="Invisible_Shape">
+            <rect fill="none" width="24" height="24"/>
+          </g>
+          </svg>
+          <div class="label">Blog</div>
+        </a>
+      </li>
+      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+        <a href="help">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+            height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Outline_Icons_1_">
+            <g id="Outline_Icons">
+              <g>
+                <path d="M11.5,1C5.159,1,0,6.159,0,12.5C0,18.841,5.159,24,11.5,24S23,18.841,23,12.5C23,6.159,17.841,1,11.5,1z M11.5,23
+                  C5.71,23,1,18.29,1,12.5C1,6.71,5.71,2,11.5,2S22,6.71,22,12.5C22,18.29,17.29,23,11.5,23z"/>
+                <path d="M11.5,6.5C9.57,6.5,8,8.07,8,10c0,0.276,0.224,0.5,0.5,0.5S9,10.276,9,10c0-1.378,1.121-2.5,2.5-2.5S14,8.622,14,10
+                  s-1.121,2.5-2.5,2.5c-0.276,0-0.5,0.224-0.5,0.5v3c0,0.276,0.224,0.5,0.5,0.5S12,16.276,12,16v-2.535
+                  c1.694-0.244,3-1.704,3-3.465C15,8.07,13.43,6.5,11.5,6.5z"/>
+                <circle cx="11.5" cy="18.5" r="1"/>
+              </g>
+            </g>
+          </g>
+          </svg>
+          <div class="label">Help</div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <search-panel></search-panel>
+
+  <script>
+    window.aureliaDocConfiguration = {"name":"Aurelia","siteUrl":"http://aurelia.io","baseUrl":"/aurelia-docs-test/","outDir":"./","trackingID":"UA-38441871-6","home":{"dest":"home"},"blog":{"dest":"blog","src":"./src/blog","postsPerPage":7,"author":"AureliaEffect","migration":{"src":"./src/blog/ghost.json"}},"help":{"name":"Help","src":"./src/help.md","dest":"help"},"notFound":{"name":"404","description":"Not Found"},"docs":{"article":[{"name":"Overview","description":"Discover what Aurelia is along with its business and technical advantages.","dest":"docs/overview","items":[{"name":"What is Aurelia?","src":"../framework/doc/article/en-US/what-is-aurelia.md","dest":"docs/overview/what-is-aurelia","featured":true,"personas":["developer","new-developer","architect","manager"]},{"name":"Technical Benefits","src":"../framework/doc/article/en-US/technical-benefits.md","dest":"docs/overview/technical-benefits","personas":["developer","architect","manager"]},{"name":"Business Advantages","src":"../framework/doc/article/en-US/business-advantages.md","dest":"docs/overview/business-advantages","personas":["developer","architect","manager"]}]},{"name":"Tutorials","description":"Step-by-step tutorials teaching you how to build your first Aurelia applications.","dest":"docs/tutorials","items":[{"name":"Creating a Todo App","src":"../framework/doc/article/en-US/quick-start.md","dest":"docs/tutorials/creating-a-todo-app","featured":true,"personas":["developer","new-developer"]},{"name":"Creating a Contact Manager","src":"../framework/doc/article/en-US/contact-manager-tutorial.md","dest":"docs/tutorials/creating-a-contact-manager","featured":true,"personas":["developer","new-developer"]}]},{"name":"Fundamentals","description":"After you've completed the quick starts, learn more about Aurelia's app model, components, dependency injection and more.","dest":"docs/fundamentals","items":[{"name":"App Config and Startup","src":"../framework/doc/article/en-US/app-configuration-and-startup.md","dest":"docs/fundamentals/app-configuration-and-startup","personas":["developer"]},{"name":"Creating Components","src":"../framework/doc/article/en-US/creating-components.md","dest":"docs/fundamentals/components","personas":["developer"]},{"name":"Dependency Injection","src":"../dependency-injection/doc/article/en-US/dependency-injection-basics.md","dest":"docs/fundamentals/dependency-injection","personas":["developer"]},{"name":"Securing Your App","src":"../framework/doc/article/en-US/securing-your-app.md","dest":"docs/fundamentals/security","personas":["developer"]},{"name":"Cheat Sheet","src":"../framework/doc/article/en-US/cheat-sheet.md","dest":"docs/fundamentals/cheat-sheet","personas":["developer","new-developer"]}]},{"name":"Binding","description":"Learn all about Aurelia's powerful data-binding engine.","dest":"docs/binding","items":[{"name":"Binding Basics","src":"../binding/doc/article/en-US/binding-basics.md","dest":"docs/binding/basics","personas":["developer"]},{"name":"Class and Style","src":"../binding/doc/article/en-US/binding-class-and-style.md","dest":"docs/binding/class-and-style","personas":["developer"]},{"name":"Binding Checkboxes","src":"../binding/doc/article/en-US/binding-checkboxes.md","dest":"docs/binding/checkboxes","personas":["developer"]},{"name":"Binding Radios","src":"../binding/doc/article/en-US/binding-radios.md","dest":"docs/binding/radios","personas":["developer"]},{"name":"Binding Selects","src":"../binding/doc/article/en-US/binding-selects.md","dest":"docs/binding/selects","personas":["developer"]},{"name":"Delegate vs. Trigger","src":"../binding/doc/article/en-US/binding-delegate-vs-trigger.md","dest":"docs/binding/delegate-vs-trigger","personas":["developer"]},{"name":"Computed Properties","src":"../binding/doc/article/en-US/binding-computed-properties.md","dest":"docs/binding/computed-properties","personas":["developer"]},{"name":"Value Converters","src":"../binding/doc/article/en-US/binding-value-converters.md","dest":"docs/binding/value-converters","personas":["developer"]},{"name":"Binding Behaviors","src":"../binding/doc/article/en-US/binding-binding-behaviors.md","dest":"docs/binding/binding-behaviors","personas":["developer"]},{"name":"Observable Properties","src":"../binding/doc/article/en-US/binding-observable-properties.md","dest":"docs/binding/binding-observable-properties","personas":["developer"]},{"name":"How it Works","src":"../binding/doc/article/en-US/binding-how-it-works.md","dest":"docs/binding/how-it-works","personas":["developer"]}]},{"name":"Templating","description":"Learn all about Aurelia's powerful templating engine.","dest":"docs/templating","items":[{"name":"Templating Basics","src":"../templating/doc/article/en-US/templating-basics.md","dest":"docs/templating/basics","personas":["developer"]},{"name":"HTML Behaviors","src":"../templating/doc/article/en-US/templating-html-behaviors-introduction.md","dest":"docs/templating/html-behaviors-introduction","personas":["developer"]},{"name":"Custom Attributes","src":"../templating/doc/article/en-US/templating-custom-attributes.md","dest":"docs/templating/custom-attributes","personas":["developer"]},{"name":"Custom Elements","src":"../templating/doc/article/en-US/templating-custom-elements.md","dest":"docs/templating/custom-elements","personas":["developer"]},{"name":"Content Projection","src":"../templating/doc/article/en-US/templating-content-projection.md","dest":"docs/templating/content-projection","personas":["developer"]},{"name":"Dynamic UI Composition","src":"../templating/doc/article/en-US/templating-dynamic-ui-composition.md","dest":"docs/templating/dynamic-ui-composition","personas":["developer"]}]},{"name":"Routing","description":"Learn how to setup and configure Aurelia's router.","dest":"docs/routing","items":[{"name":"Router Configuration","src":"../router/doc/article/en-US/router-configuration.md","dest":"docs/routing/configuration","personas":["developer"]}]},{"name":"Plugins","description":"Learn about Aurelia's officially supported plugins and how to use them.","dest":"docs/plugins","items":[{"name":"HTTP","src":"../fetch-client/doc/article/en-US/http-services.md","dest":"docs/plugins/http-services","personas":["developer"]},{"name":"Validation","src":"../validation/doc/article/en-US/validation-basics.md","dest":"docs/plugins/validation","personas":["developer"]},{"name":"I18N","src":"../i18n/doc/article/en-US/i18n-with-aurelia.md","dest":"docs/plugins/i18n","personas":["developer"]},{"name":"Dialog","src":"../dialog/doc/article/en-US/dialog-basics.md","dest":"docs/plugins/dialog","personas":["developer"]}]},{"name":"Integration","description":"Learn how to integrate Aurelia with various other libraries and frameworks.","dest":"docs/integration","items":[{"name":"Integrating with Polymer","src":"../framework/doc/article/en-US/integrating-with-polymer.md","dest":"docs/integration/polymer","personas":["developer"]}]},{"name":"Testing","description":"Learn all about testing Aurelia apps, including component testing and e2e testing.","dest":"docs/testing","items":[{"name":"Testing Components","src":"../testing/doc/article/en-US/testing-components.md","dest":"docs/testing/components","personas":["developer"]},{"name":"End-to-End Testing","src":"../testing/doc/article/en-US/end-to-end-testing.md","dest":"docs/testing/end-to-end","personas":["developer"]}]},{"name":"Build Systems","description":"Learn about the various build setups that Aurelia supports out-of-the-box.","dest":"docs/build-systems","items":[{"name":"The Aurelia CLI","src":"../framework/doc/article/en-US/the-aurelia-cli.md","dest":"docs/build-systems/aurelia-cli","personas":["developer","new-developer"]},{"name":"Webpack","description":"Setup and bundling using the Webapck system.","dest":"docs/build-systems/webpack","items":[{"name":"Webpack Setup","src":"../framework/doc/article/en-US/setup-webpack.md","dest":"docs/build-systems/webpack/setup","personas":["developer"]},{"name":"Webpack Bundling","src":"../framework/doc/article/en-US/bundling-webpack.md","dest":"docs/build-systems/webpack/bundling","personas":["developer","new-developer"]}]},{"name":"JSPM","description":"Setup and bundling using the JSPM system.","dest":"docs/build-systems/jspm","items":[{"name":"JSPM Setup","src":"../framework/doc/article/en-US/setup-jspm.md","dest":"docs/build-systems/jspm/setup","personas":["developer"]},{"name":"JSPM Bundling","src":"../framework/doc/article/en-US/bundling-jspm.md","dest":"docs/build-systems/jspm/bundling","personas":["developer"]}]}]}],"api":[{"name":"Binding","package":"../binding/package.json","src":"../binding/dist/aurelia-binding.d.ts","dest":"docs/api/binding","exampleSrc":"../binding/doc/example-dist","exampleDest":"example"},{"name":"Bootstrapper","package":"../bootstrapper/package.json","src":"../bootstrapper/dist/aurelia-bootstrapper.d.ts","dest":"docs/api/bootstrapper"},{"name":"Dependency Injection","package":"../dependency-injection/package.json","src":"../dependency-injection/dist/aurelia-dependency-injection.d.ts","dest":"docs/api/dependency-injection"},{"name":"Event Aggregator","package":"../event-aggregator/package.json","src":"../event-aggregator/dist/aurelia-event-aggregator.d.ts","dest":"docs/api/event-aggregator"},{"name":"Fetch","package":"../fetch-client/package.json","src":"../fetch-client/dist/aurelia-fetch-client.d.ts","dest":"docs/api/fetch-client"},{"name":"Framework","package":"../framework/package.json","src":"../framework/dist/aurelia-framework.d.ts","dest":"docs/api/framework"},{"name":"History","package":"../history/package.json","src":"../history/dist/aurelia-history.d.ts","dest":"docs/api/history"},{"name":"History-Browser","package":"../history-browser/package.json","src":"../history-browser/dist/aurelia-history-browser.d.ts","dest":"docs/api/history-browser"},{"name":"I18N","package":"../i18n/package.json","src":"../i18n/dist/aurelia-i18n.d.ts","dest":"docs/api/i18n"},{"name":"Loader","package":"../loader/package.json","src":"../loader/dist/aurelia-loader.d.ts","dest":"docs/api/loader"},{"name":"Loader-Default","package":"../loader-default/package.json","src":"../loader-default/dist/aurelia-loader-default.d.ts","dest":"docs/api/loader-default"},{"name":"Logging","package":"../logging/package.json","src":"../logging/dist/aurelia-logging.d.ts","dest":"docs/api/logging"},{"name":"Logging-Console","package":"../logging-console/package.json","src":"../logging-console/dist/aurelia-logging-console.d.ts","dest":"docs/api/logging-console"},{"name":"Metadata","package":"../metadata/package.json","src":"../metadata/dist/aurelia-metadata.d.ts","dest":"docs/api/metadata"},{"name":"Platform Abstraction Layer (PAL)","package":"../pal/package.json","src":"../pal/dist/aurelia-pal.d.ts","dest":"docs/api/pal"},{"name":"PAL-Browser","package":"../pal-browser/package.json","src":"../pal-browser/dist/aurelia-pal-browser.d.ts","dest":"docs/api/pal-browser"},{"name":"Path","package":"../path/package.json","src":"../path/dist/aurelia-path.d.ts","dest":"docs/api/path"},{"name":"Router","package":"../router/package.json","src":"../router/dist/aurelia-router.d.ts","dest":"docs/api/router"},{"name":"Task Queue","package":"../task-queue/package.json","src":"../task-queue/dist/aurelia-task-queue.d.ts","dest":"docs/api/task-queue"},{"name":"Templating","package":"../templating/package.json","src":"../templating/dist/aurelia-templating.d.ts","dest":"docs/api/templating"},{"name":"Templating-Binding","package":"../templating-binding/package.json","src":"../templating-binding/dist/aurelia-templating-binding.d.ts","dest":"docs/api/templating-binding"},{"name":"Templating-Resources","package":"../templating-resources/package.json","src":"../templating-resources/dist/aurelia-templating-resources.d.ts","dest":"docs/api/templating-resources"},{"name":"Templating-Router","package":"../templating-router/package.json","src":"../templating-router/dist/aurelia-templating-router.d.ts","dest":"docs/api/templating-router"},{"name":"Testing","package":"../testing/package.json","src":"../testing/dist/commonjs/aurelia-testing.d.ts","dest":"docs/api/testing"}]}};
+  </script>
+
+  <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
+</body>
+
+</html>
