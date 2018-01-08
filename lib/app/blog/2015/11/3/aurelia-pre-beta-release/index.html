@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>The Aurelia beta is fast approaching (as in coming next week). We're waiting on some tooling fixes before we launch. In the mean time, we thought we'd give you an &quot;almost beta&quot; release so you can start to update your code and provide us with feedback. Read on for the details...</p>
+    <div class="content">
+      <p>The Aurelia beta is fast approaching (as in coming next week). We're waiting on some tooling fixes before we launch. In the mean time, we thought we'd give you an &quot;almost beta&quot; release so you can start to update your code and provide us with feedback. Read on for the details...</p>
 <section><h2 id="breaking-changes">Breaking Changes</h2><p>Though this looks like a large list of breaking changes, in reality it should not affect most of you. Those who are more likely to be affected are those who have created custom navigation pipeline steps, are workinging without decorators, have customized the DI in an advanced way, customized view location or been using our unit test helpers provided by the binding or templating engines. Updating should be relatively straight forward regardless.</p>
 <ul>
 <li>The decorator helpers for those not using ES 2016 have changed. WE have done this in order to provide a more &quot;correct&quot; way of applying decorator functions for languages that don't support them. As a result the static <code>metadata</code> method is no longer supported. Instead, use our <code>decorators</code> helper to apply decorators to an ES 2015 class or ES 5 quasi-class. To see what this looks like, have a look at 
@@ -109,7 +110,11 @@
 <section><h2 id="same-beta-channel">Same Beta Channel</h2><p>You are going to want to be tuning in here next week. The Beta cometh...</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>

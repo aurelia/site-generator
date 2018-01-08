@@ -464,6 +464,23 @@ section.article.blog, section.article-group.blog {
   margin-left: 0; }
   section.article.blog p.group-item-count, section.article-group.blog p.group-item-count {
     margin: 0; }
+  section.article.blog .content, section.article-group.blog .content {
+    width: calc(100% - 288px); }
+  section.article.blog blog-sidebar, section.article-group.blog blog-sidebar {
+    display: block;
+    height: 200px;
+    position: absolute;
+    top: 164px;
+    right: 32px; }
+    section.article.blog blog-sidebar a, section.article-group.blog blog-sidebar a {
+      text-decoration: none; }
+    section.article.blog blog-sidebar h3, section.article-group.blog blog-sidebar h3 {
+      font-size: 24px;
+      line-height: 1.225;
+      padding-bottom: .3em;
+      margin-bottom: 16px;
+      margin-top: 0;
+      font-weight: normal; }
 
 section.article-group-root {
   margin-left: 325px; }
@@ -610,6 +627,10 @@ section.article article {
   margin: 32px 48px; }
 
 @media only screen and (max-width: 710px) {
+  section.article.blog .content, section.article-group.blog .content {
+    width: auto; }
+  section.article.blog blog-sidebar, section.article-group.blog blog-sidebar {
+    display: none; }
   section.article header h1, section.article-group header h1 {
     padding: 16px 0 16px 32px; }
   section.article header h2, section.article-group header h2 {

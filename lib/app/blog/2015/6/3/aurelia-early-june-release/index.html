@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>We've been working hard on Aurelia and this release brings a number of bug fixes, improvements and new features. There are a few breaking changes, but those are relatively minor and easy to fix. Read on for the details...</p>
+    <div class="content">
+      <p>We've been working hard on Aurelia and this release brings a number of bug fixes, improvements and new features. There are a few breaking changes, but those are relatively minor and easy to fix. Read on for the details...</p>
 <section><h2 id="breaking-changes">Breaking Changes</h2><ul>
 <li>You can now access all the parent router parameters directly through the <code>params</code> object in the activate callback. As a result, the <code>params</code> of the activate callback now contains all parent route parameters, the current route parameters and all query string values.The parent params are no longer available via the $parent property. Parent params can be accessed via navigationInstruction.parentInstruction.params in the odd case where this is needed. The injected *childRoute param is no longer available on the params object either.</li>
 <li><code>ref</code> bindings now work differently. Rather than <code>ref.*</code>, the pattern is now <code>*.ref</code> which improves consistency and makes the <code>ref</code> binding work like all the rest of Aurelia's binding commands. Here are the available options:
@@ -114,7 +115,11 @@
 . Newsletter subscribers will get the first opportunity to participate in some of our upcoming online events. You won't want to miss out!</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>

@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>Yesterday 
+    <div class="content">
+      <p>Yesterday 
 <a href="http://blog.durandal.io/2015/03/16/aurelia-and-angular-2-code-side-by-side/" target="_blank">I showed an example of Angular 2.0 code side-by-side with Aurelia</a>
 . I showed the &quot;reverse binding&quot; technique for Angular 2.0. Today I'm going to show how the 
 <a href="https://docs.google.com/document/d/1US9h0ORqBltl71TlEU6s76ix8SUnOLE2jabHVg9xxEA/" target="_blank">Angular 2.0 Forms Model</a>
@@ -111,5 +112,9 @@
 <h4>Summary of Aurelia Binding Approaches</h4>
 <p>Aurelia uses a single technique in all cases: binding commands. Whenever you see the dot, you know that's a binding. You can use <code>.bind</code> to invoke the default binding mode: one-way binding for everything except input controls, which are bound two-way by default. There's no need to use special models or manually wire events. Code is minimal and clean.</p>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

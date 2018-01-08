@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>The spec for the standard JS module loader has recently been changing. The JSPM and SystemJS teams have been working hard to align with the new specs. And as of this release, Aurelia is now aligned with the new JSPM and SystemJS Beta.</p>
+    <div class="content">
+      <p>The spec for the standard JS module loader has recently been changing. The JSPM and SystemJS teams have been working hard to align with the new specs. And as of this release, Aurelia is now aligned with the new JSPM and SystemJS Beta.</p>
 <section><h2 id="breaking-changes">Breaking Changes</h2><p>The new module loader spec treats module ids differently. As a result, you may need to update some of your import statements in your code. This mostly affects relative ids. For example <code>System.import('./x')</code> is no longer baseURL-relative. It is baseURI-relative instead in order to enable matching URLs, per the new spec.</p>
 <p>Due to some of these changes, you will need to update your path config. Here's the config block from the skeleton app:</p>
 <code-listing>
@@ -80,5 +81,9 @@
 <p>We're trying hard to stabilize the API. If you've been following our progress, you can see that there are still some changes, but they are usually pretty easy to fix. Nothing major. Today's breaking changes are related entirely to changes in web standards. As we move forward, we want to try to provide as stable of a platform as we can. But bear in mind that several specs such as the loader and web components specs are still in flux. As they change, we will have to adapt, and this may result in some breaking changes on our end. We'll do our best to communicate those and when possible to shield you from those side effects.</template></p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

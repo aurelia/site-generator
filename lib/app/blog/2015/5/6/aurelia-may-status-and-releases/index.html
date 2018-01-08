@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>Today's release comes with what we believe is the final set of big breaking changes. We've also got new features, improvements and a few other goodies.</p>
+    <div class="content">
+      <p>Today's release comes with what we believe is the final set of big breaking changes. We've also got new features, improvements and a few other goodies.</p>
 <section><h2 id="changes">Changes</h2><h3>ES2016 Metadata</h3>
 <p>There's currently work being done to standardize how <em>metadata</em> is attached to classes, members, etc. In this release, we remove Aurelia's metadata implementation and replace it with the emerging ES2016 standard. This causes breaking changes if you were working directly with metadata. However, if you were using Aurelia's decorators or the fallback apis, you should not see any changes, since this is mostly an implementation detail. If you are interested in the emerging Metadata Reflection API, you can read 
 <a href="https://github.com/jonathandturner/decorators/blob/master/specs/metadata.md" target="_blank">the detailed spec</a>
@@ -160,7 +161,11 @@ The generation mechanism understands whether you are running in hash change or p
  and selecting &quot;show all&quot; in the upper left corner of the board.</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>

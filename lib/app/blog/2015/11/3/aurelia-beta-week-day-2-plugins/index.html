@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>Yesterday, after months of work, we launched the Beta 1 release of Aurelia. From the beginning, one of the most important aspects of Aurelia's architecture has been its modularity and its pluggable design. In light of that, we wanted to dedicate one of this week's posts to plugins: What are they? What is available? and What are our plans?</p>
+    <div class="content">
+      <p>Yesterday, after months of work, we launched the Beta 1 release of Aurelia. From the beginning, one of the most important aspects of Aurelia's architecture has been its modularity and its pluggable design. In light of that, we wanted to dedicate one of this week's posts to plugins: What are they? What is available? and What are our plans?</p>
 <section><h2 id="what-is-a-plugin">What is a Plugin?</h2><p>Aurelia integrates well with 3rd party libraries. Just <code>jspm install</code> the library you want to use, <code>import</code> it in your JavaScript module and then start coding with it. Some libraries may be built specifically for Aurelia. As a developer, you use those in the same way: install, import and code. However, the author of an Aurelia-specific library may choose to take advantage of our plugin model. By implementing a library as a plugin, the plugin author has the opportunity to run code as part of Aurelia's startup sequence, before anything is rendered. A plugin is provided with the same <code>FrameworkConfiguration</code> instance that is available to the app developer during the bootstrapping phase. As a result, a plugin can configure Aurelia in any way it wants. Typical tasks for a plugin might be to register services in the dependency injection container or customize some part of Aurelia's configuration. They might even do feature detection and install polyfills where appropriate.</p>
 </section>
 <section><h2 id="what-is-available">What is available?</h2><p>We have a set of plugins that we release regularly with Aurelia and wanted to share a little more information about them. We'll discuss the purpose each plugin serves as well the direction we foresee each going in.</p>
@@ -139,7 +140,11 @@ To activate: in <em>main.js</em> <code>configure</code>, call <code>aurelia.use.
 <section><h2 id="where-we-are-going">Where we are going...</h2><p>Plugins are an important part of the Aurelia ecosystem. In the future, you'll see additional, officially supported plugins as well as new ones from the community. We hope you'll consider whether you've got some cool tech that might make a nice Aurelia plugin. Since the list of plugins is growing steadily, we want to provide a nice way for you to search, find, install and configure useful plugins into your project. Be on the lookout for our online plugin explorer and deep integration with jspm in the future.</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>

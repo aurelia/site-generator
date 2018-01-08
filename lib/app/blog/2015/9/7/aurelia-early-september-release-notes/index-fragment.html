@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>We've got new releases for you today! This update brings significant new capabilities to the view engine as well as making Aurelia smaller and faster. Read on for the details and how to update.</p>
+    <div class="content">
+      <p>We've got new releases for you today! This update brings significant new capabilities to the view engine as well as making Aurelia smaller and faster. Read on for the details and how to update.</p>
 <section><h2 id="breaking-changes">Breaking Changes</h2><ul>
 <li>We are constantly tracking various browser specs. Web Components represents a critical set of specs that Aurelia has particular interest in. Recently it has become clear that the HTML Imports part of the specs is not going to become standardized. We have felt for a long time that there were significant problems with the spec and it turns out that several browser vendors agree. In light of that we have changed how views are loaded in Aurelia. Previously we used HTML Imports to load all views. With this new release we have removed that and replaced it with a simple text-based loader. What are the implications of this upon your code? Firstly, if you had previously used <code>link</code> tags with <code>rel=&quot;import&quot;</code>, those will no longer work. That is part of HTML Imports and is not going to be standardized. How should you then import css? See below in the &quot;New Features&quot; section for a better, more powerful alternative that we have introduced via the <code>require</code> element you already know. That said, you can still opt in to using HTML Imports for view loading if you desire. In fact, if you are using Polymer extensively, you may prefer this. To do that, we've authored a new plugin which swaps out the text-based loading with the original HTML Import-based loading. The plugin you need to install to accomplish this is called 
 <a href="https://github.com/aurelia/html-import-template-loader" target="_blank">aurelia-html-import-template-loader</a>
@@ -111,5 +112,9 @@ If you need more than one bindable property on your element, you just provide a 
 <p>All this is leading up to our official Beta. Probably the most important part of that is the documentation I just mentioned. Once we feel that has a good solid start, and the first version is deployed, we'll announce our public beta. We hope that will be in about 4 weeks.</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

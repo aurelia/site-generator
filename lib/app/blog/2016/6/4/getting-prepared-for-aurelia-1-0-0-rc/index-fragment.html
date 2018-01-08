@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>The release candidate of Aurelia is fast approaching. We're just wrapping up a few final things now, so we wanted to give you a quick update on how to get ready.</p>
+    <div class="content">
+      <p>The release candidate of Aurelia is fast approaching. We're just wrapping up a few final things now, so we wanted to give you a quick update on how to get ready.</p>
 <section><h2 id="breaking-changes">Breaking Changes</h2><p>We will re-iterate the breaking change info when we actually release, but we wanted to give you this information in advance.</p>
 <h3>Shadow DOM</h3>
 <p>Many of you know that our custom element content projection system was originally based on what has come to be known as &quot;Shadow DOM v0&quot;. This involved using the <code>&lt;content&gt;&lt;/content&gt;</code> element to designate content projection sites within the view of a component. The v0 version of the spec was not fully agreed upon by all the major players and underwent a series of design changes, resulting in the &quot;Shadow DOM v1&quot; spec, which has gained consensus and is being implemented by browser manufacturers now. In response to this, we've taken the beta period to update our own Shadow DOM and fallback support to match the new spec. You can read more about the changes on 
@@ -26,5 +27,9 @@
 <section><h2 id="after-the-release-candidate">After the Release Candidate</h2><p>After we get the RC out, we'll have a brief period to address any last minute critical issues and improve tooling. We've been in Beta for about 7 months but we don't intend RC to extend to a period of time anywhere near that. It is our desire to turn around RTM very quickly.</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

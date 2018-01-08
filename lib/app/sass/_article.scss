@@ -29,6 +29,31 @@ section.article.blog, section.article-group.blog {
   p.group-item-count {
     margin: 0;
   }
+
+  .content {
+    width: calc(100% - 288px);
+  }
+
+  blog-sidebar {
+    display: block;
+    height: 200px;
+    position: absolute;
+    top: 164px;
+    right: 32px;
+
+    a {
+      text-decoration: none;
+    }
+
+    h3 {
+      font-size: 24px;
+      line-height: 1.225;
+      padding-bottom: .3em;
+      margin-bottom: 16px;
+      margin-top: 0;
+      font-weight: normal;
+    }
+  }
 }
 
 section.article-group-root {
@@ -207,7 +232,6 @@ section.article-group, section.article-group-root {
 
         a {
           @include button();
-
           float: right;
           margin-top: 16px;
         }
@@ -224,6 +248,16 @@ section.article {
 
 @media only screen and (max-width : $sidebar-max-width) {
   section.article, section.article-group {
+    &.blog {
+      .content {
+        width: auto;
+      }
+    
+      blog-sidebar { 
+        display: none;
+      }
+    }
+
     header {
       h1 {
         padding: 16px 0 16px $small-side-margin;

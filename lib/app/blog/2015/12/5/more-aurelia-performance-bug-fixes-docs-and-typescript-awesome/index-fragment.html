@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>Today's patch updates come with some really sweet benefits! Also, if you love TypeScript, I'm sure you'll be very happy with something new we are announcing today. To update your libraries, simply run <code>jspm update</code>. Read on to learn the details of what these releases include.</p>
+    <div class="content">
+      <p>Today's patch updates come with some really sweet benefits! Also, if you love TypeScript, I'm sure you'll be very happy with something new we are announcing today. To update your libraries, simply run <code>jspm update</code>. Read on to learn the details of what these releases include.</p>
 <section><h2 id="performance">Performance</h2><p>We're constantly working on Aurelia's performance. A couple of weeks ago 
 <a href="http://blog.durandal.io/2015/12/04/aurelia-repaint-performance-rules/" target="_blank">we showed improvements to our repaint performance</a>
  that left every other framework in the dust. This week we're releasing some fixes that we've benchmarked as improvements against ourselves. Today's release involves a drastic reduction in memory consumption, especially for one-way and one-time bindings. It also comes with a 2-3x performance improvement on initial render time. Yes, view rendering just got 2-3x faster, thanks to Jeremy Danyow's continued performance innovations. Most of this work was done in the binding engine. If you are interested in the details of how that works, you can 
@@ -219,5 +220,9 @@
 </ul>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>Today, we've got a major set of release for Aurelia, fixing many issues and adding new and more powerful features to the lineup.</p>
+    <div class="content">
+      <p>Today, we've got a major set of release for Aurelia, fixing many issues and adding new and more powerful features to the lineup.</p>
 <section><h2 id="changes">Changes</h2><p>We've updated many of Aurelia's libraries to newer versions. As part of this series of updates, we've made several breaking changes. The details follow this post, but here is a brief summary for those who need to update their code:</p>
 <ul>
 <li>The Loader now maintains a registry of loaded views along with knowledge of their dependencies. Views no longer use the <code>&lt;import&gt;</code> element for importing view behaviors and other resources. You must now use the <code>&lt;require&gt;</code> element. This change was made in order to enable future support for IE9.</li>
@@ -336,5 +337,9 @@
 </ul>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

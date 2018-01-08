@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>The open web and web standards have always been an important part of Aurelia. We don't want to abstract the web away from you, but rather enable you to use cutting edge web technology in a practical way while building applications. Our commitment to these principles brings the Aurelia community the first implementation of Shadow DOM v1 Slots. It's an awesome piece of technology and we look forward to seeing how you leverage it to build amazing apps.</p>
+    <div class="content">
+      <p>The open web and web standards have always been an important part of Aurelia. We don't want to abstract the web away from you, but rather enable you to use cutting edge web technology in a practical way while building applications. Our commitment to these principles brings the Aurelia community the first implementation of Shadow DOM v1 Slots. It's an awesome piece of technology and we look forward to seeing how you leverage it to build amazing apps.</p>
 <section><h2 id="what-is-shadow-dom-v1-slots">What is Shadow DOM v1 Slots?</h2><p>The <em>slot</em> mechanism of 
 <a href="http://w3c.github.io/webcomponents/spec/shadow/" target="_blank">the Shadow DOM v1 spec</a>
  is used to declare how two separate DOM trees can be merged together to produce a single visual representation. Why is this important? Well, when creating custom elements, your custom element often has a set of DOM nodes that represent the view of the element. Then, when a developer uses the custom element, that developer may also place HTML inside the content of the element. This results in two DOM trees that must be merged together to produce the final visual.</p>
@@ -372,7 +373,11 @@
 <section><h2 id="summary">Summary</h2><p>Today we're excited to announce a pre-release version of our templating engine which includes a full working version of Web Components Shadow DOM v1 Slots. This is the first full implementation in any framework or library and it's our last major milestone on the journey towards Release Candidate.</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>

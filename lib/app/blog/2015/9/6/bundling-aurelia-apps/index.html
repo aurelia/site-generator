@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>Our latest Aurelia release has made significant advances, with more on the horizon. Today, Core Team Member Ahmed Shuhel will share how our bundling strategy is evolving to support the framework and our community.</p>
+    <div class="content">
+      <p>Our latest Aurelia release has made significant advances, with more on the horizon. Today, Core Team Member Ahmed Shuhel will share how our bundling strategy is evolving to support the framework and our community.</p>
 <hr />
 <p>Previously, Aurelia Loader used HTML Imports to load all views. Now, as it is apparent that HTML Imports is not going to be standardized in its current form, we have replaced our default view loading mechanism with a SystemJS text-based solution. The same solution has been applied to CSS loading as well. To learn more about this change, you can read 
 <a href="http://blog.durandal.io/2015/09/05/aurelia-early-september-release-notes/" target="_blank">our recent release notes post</a>
@@ -302,7 +303,11 @@ The above pattern will bundle all the views in `dist` and it's child folders exc
 <a href="https://github.com/aurelia/bundler/issues" target="_blank">here</a>
 . Thanks and we look forward to seeing what great things you will build!</p>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>

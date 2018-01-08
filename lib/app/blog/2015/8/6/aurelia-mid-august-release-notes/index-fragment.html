@@ -5,7 +5,8 @@
   </header>
 
   <article class="markdown">
-    <p>Today we've got a host of updates to Aurelia, many of which involve opening up additional extensibility and power in the platform. Read on for the details...</p>
+    <div class="content">
+      <p>Today we've got a host of updates to Aurelia, many of which involve opening up additional extensibility and power in the platform. Read on for the details...</p>
 <section><h2 id="breaking-changes">Breaking Changes</h2><ul>
 <li>FrameworkConfiguration - The way that Aurelia is configured during custom bootstrapping has changed. This also affects how plugins interact with Aurelia during their configuration phase. The Plugins object has been renamed to FrameworkConfiguration. It still hangs off of the <code>use</code> property of the Aurelia object. All configuration methods have been moved to this object. Before some, such as those for the container and resources, were on the Aurelia object and some were on the Plugins object. Now, they are all in the same place. The best way to see the API changes is to take a look at the d.ts files for the 
 <a href="https://github.com/aurelia/framework/blob/master/dist/aurelia-framework.d.ts#L181" target="_blank">Aurelia</a>
@@ -42,5 +43,9 @@
 <p>Stay tuned...more great stuff coming.</template></p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>

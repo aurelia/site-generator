@@ -38,7 +38,8 @@
   </header>
 
   <article class="markdown">
-    <p>You've been diligent in keeping up with Aurelia updates, and so today you update your libraries. Or perhaps you just started using Aurelia today and are pulling down the latest release...but something's not right. Some d.ts files are missing. Things aren't compiling correctly and your app is broken. What do you do now!?</p>
+    <div class="content">
+      <p>You've been diligent in keeping up with Aurelia updates, and so today you update your libraries. Or perhaps you just started using Aurelia today and are pulling down the latest release...but something's not right. Some d.ts files are missing. Things aren't compiling correctly and your app is broken. What do you do now!?</p>
 <section><h2 id="the-explanation">The Explanation</h2><p>For a long time the way that Aurelia has handled d.ts files for TypeScript users has been what you would call &quot;unorthodox.&quot; To be fair, the TypeScript ecosystem and its recommended approaches to library d.ts distribution have changed several times since we started our project. In preparation for our Release Candidate, we really wanted to get this fixed. Doing so would enable Visual Studio and Visual Studio Code to work better, a streamlined more standardized approach for typings and even better intellisense in supporting tools for vanilla JS users.</p>
 <p>Unfortunately, making these changes causes some incompatibilities between d.ts formats while the work is in progress and it changes the way projects are configured. We've started to push out these changes today and will continue the work a little while longer, so you may encounter some unexpected issues. Once we're all done, things will &quot;just work&quot; but for now you may need to make some quick fixes.</p>
 </section>
@@ -57,7 +58,11 @@
 <section><h2 id="thank-you">Thank You</h2><p>We really appreciate you bearing with us in these final days as we prepare for our Release Candidate. As always, there are a few hiccups along the way. We're working hard to address the issues so that your tooling is automatically configured properly. We think these changes will make a big difference for you and we thank you in supporting us in our work.</p>
 </section>
 
+    </div>
+    <blog-sidebar></blog-sidebar>
   </article>
+
+  <blog-footer></blog-footer>
 </section>
 
     </div>
