@@ -23,8 +23,12 @@ section.article, section.article-group {
   }
 }
 
-section.article.blog {
+section.article.blog, section.article-group.blog {
   margin-left: 0;
+
+  p.group-item-count {
+    margin: 0;
+  }
 }
 
 section.article-group-root {
@@ -101,6 +105,73 @@ section.article-group-root {
       }
     }
   }
+}
+
+section.article-group {
+  section {
+    ul.article-list {
+      li {
+        margin: 32px $standard-side-margin;
+        box-shadow: $box-shadow;
+        border-radius: $border-radius;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        display: flex;
+
+        &:hover {
+          border: 1px solid $primary-color;
+        }
+
+        a {
+          text-decoration: none;
+          display: inline-block;
+          width: 100%;
+          padding: 32px;
+
+          h3 {
+            font-size: 22px;
+            line-height: 26px;
+            font-weight: bold;
+            color: $black;
+          }
+
+          p {
+            margin: 24px 0;
+            font-weight: lighter;
+            line-height: 24px;
+            color: $primary-text-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+section.article-group.blog {
+  .button-bar {
+    margin: $standard-side-margin;
+    
+    a {
+      @include button();
+      border-color: $accent-color;
+      color: $accent-color;
+
+      &.next {
+        float: right;
+      }
+
+      &.prev {
+        float: left;
+      }
+    }
+  }
+}
+
+section.article-group, section.article-group-root {
+  .group-item-count {
+    color: $primary-text-color;
+    margin-bottom: 5px;
+    font-size: 12px; 
+  }
 
   .carousel {
     margin-bottom: 24px;
@@ -139,45 +210,6 @@ section.article-group-root {
 
           float: right;
           margin-top: 16px;
-        }
-      }
-    }
-  }
-}
-
-section.article-group {
-  section {
-    ul.article-list {
-      li {
-        margin: 32px $standard-side-margin;
-        box-shadow: $box-shadow;
-        border-radius: $border-radius;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        display: flex;
-
-        &:hover {
-          border: 1px solid $primary-color;
-        }
-
-        a {
-          text-decoration: none;
-          display: inline-block;
-          width: 100%;
-          padding: 32px;
-
-          h3 {
-            font-size: 22px;
-            line-height: 26px;
-            font-weight: bold;
-            color: $black;
-          }
-
-          p {
-            margin: 24px 0;
-            font-weight: lighter;
-            line-height: 24px;
-            color: $primary-text-color;
-          }
         }
       }
     }

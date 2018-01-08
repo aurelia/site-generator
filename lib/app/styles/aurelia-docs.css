@@ -460,8 +460,10 @@ section.article, section.article-group {
     background: #f4f4f4;
     box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
 
-section.article.blog {
+section.article.blog, section.article-group.blog {
   margin-left: 0; }
+  section.article.blog p.group-item-count, section.article-group.blog p.group-item-count {
+    margin: 0; }
 
 section.article-group-root {
   margin-left: 325px; }
@@ -511,46 +513,6 @@ section.article-group-root {
             color: inherit; }
           section.article-group-root .group .group-details .group-items li a:hover {
             text-decoration: underline; }
-  section.article-group-root .carousel {
-    margin-bottom: 24px; }
-    section.article-group-root .carousel .carousel-inner {
-      position: relative;
-      width: 100%;
-      white-space: nowrap;
-      transition: all .2s; }
-      section.article-group-root .carousel .carousel-inner .carousel-item {
-        background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%);
-        transition: transform .6s ease-in-out;
-        backface-visibility: hidden;
-        position: relative;
-        display: inline-block;
-        padding: 32px 48px;
-        color: #fff;
-        width: 100%;
-        white-space: normal;
-        vertical-align: top; }
-        section.article-group-root .carousel .carousel-inner .carousel-item h2 {
-          font-size: 48px;
-          text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7); }
-        section.article-group-root .carousel .carousel-inner .carousel-item p {
-          margin: 16px 0;
-          font-size: 22px;
-          line-height: 24px; }
-        section.article-group-root .carousel .carousel-inner .carousel-item a {
-          padding: 10px 13px;
-          text-align: center;
-          font-size: 16px;
-          text-decoration: none;
-          color: #fff;
-          border: 1px solid #fff;
-          border-radius: 4px;
-          transition: box-shadow .3s;
-          float: right;
-          margin-top: 16px; }
-          section.article-group-root .carousel .carousel-inner .carousel-item a:hover {
-            box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
-          section.article-group-root .carousel .carousel-inner .carousel-item a:active {
-            box-shadow: none; }
 
 section.article-group section ul.article-list li {
   margin: 32px 48px;
@@ -575,6 +537,74 @@ section.article-group section ul.article-list li {
       font-weight: lighter;
       line-height: 24px;
       color: #646464; }
+
+section.article-group.blog .button-bar {
+  margin: 48px; }
+  section.article-group.blog .button-bar a {
+    padding: 10px 13px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    transition: box-shadow .3s;
+    border-color: #ed2b88;
+    color: #ed2b88; }
+    section.article-group.blog .button-bar a:hover {
+      box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+    section.article-group.blog .button-bar a:active {
+      box-shadow: none; }
+    section.article-group.blog .button-bar a.next {
+      float: right; }
+    section.article-group.blog .button-bar a.prev {
+      float: left; }
+
+section.article-group .group-item-count, section.article-group-root .group-item-count {
+  color: #646464;
+  margin-bottom: 5px;
+  font-size: 12px; }
+
+section.article-group .carousel, section.article-group-root .carousel {
+  margin-bottom: 24px; }
+  section.article-group .carousel .carousel-inner, section.article-group-root .carousel .carousel-inner {
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    transition: all .2s; }
+    section.article-group .carousel .carousel-inner .carousel-item, section.article-group-root .carousel .carousel-inner .carousel-item {
+      background: linear-gradient(135deg, #6d50a2 0%, #ed2b88 100%);
+      transition: transform .6s ease-in-out;
+      backface-visibility: hidden;
+      position: relative;
+      display: inline-block;
+      padding: 32px 48px;
+      color: #fff;
+      width: 100%;
+      white-space: normal;
+      vertical-align: top; }
+      section.article-group .carousel .carousel-inner .carousel-item h2, section.article-group-root .carousel .carousel-inner .carousel-item h2 {
+        font-size: 48px;
+        text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7); }
+      section.article-group .carousel .carousel-inner .carousel-item p, section.article-group-root .carousel .carousel-inner .carousel-item p {
+        margin: 16px 0;
+        font-size: 22px;
+        line-height: 24px; }
+      section.article-group .carousel .carousel-inner .carousel-item a, section.article-group-root .carousel .carousel-inner .carousel-item a {
+        padding: 10px 13px;
+        text-align: center;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        transition: box-shadow .3s;
+        float: right;
+        margin-top: 16px; }
+        section.article-group .carousel .carousel-inner .carousel-item a:hover, section.article-group-root .carousel .carousel-inner .carousel-item a:hover {
+          box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+        section.article-group .carousel .carousel-inner .carousel-item a:active, section.article-group-root .carousel .carousel-inner .carousel-item a:active {
+          box-shadow: none; }
 
 section.article article {
   margin: 32px 48px; }
@@ -717,300 +747,306 @@ section.api {
   .markdown section {
     margin-bottom: 16px;
     padding: 16px 0; }
-    .markdown section h2 {
-      color: #ed2b88;
-      font-size: 24px;
-      line-height: 1.225;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      padding-bottom: .3em;
+  .markdown h2 {
+    color: #ed2b88;
+    font-size: 24px;
+    line-height: 1.225;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding-bottom: .3em;
+    margin-bottom: 16px; }
+  .markdown h3 {
+    font-size: 1.2em;
+    line-height: 1.43;
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 16px; }
+  .markdown > p {
+    margin-top: 0;
+    margin-bottom: 16px; }
+  .markdown blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "“" "”" "‘" "’"; }
+  .markdown blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.1em;
+    vertical-align: -0.4em; }
+  .markdown blockquote:after {
+    color: #ccc;
+    content: close-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-left: 0.1em;
+    vertical-align: -0.4em; }
+  .markdown blockquote p {
+    display: inline; }
+  .markdown code {
+    color: #0086b3;
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 3px;
+    font-family: 'Source Code Pro'; }
+  .markdown a {
+    color: #ed2b88;
+    font-family: 'Source Code Pro'; }
+  .markdown img {
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 6pt solid #fff;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+  .markdown strong {
+    font-weight: 700; }
+  .markdown ul {
+    padding: 0 0 0 2em;
+    list-style-type: disc;
+    margin-bottom: 16px; }
+    .markdown ul li {
+      display: list-item; }
+  .markdown ol {
+    padding: 0 0 0 2em;
+    list-style-type: decimal;
+    margin-bottom: 16px; }
+    .markdown ol li {
+      display: list-item; }
+  .markdown pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal; }
+  .markdown pre code {
+    display: inline;
+    max-width: initial;
+    padding: 0;
+    margin: 0;
+    overflow: initial;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0; }
+  .markdown .info, .markdown .warning, .markdown .danger {
+    padding: 16px 20px;
+    font-size: 18px;
+    box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+    border-radius: 6px;
+    margin: 48px 0 24px 0;
+    text-align: center; }
+    .markdown .info .icon, .markdown .warning .icon, .markdown .danger .icon {
+      border-radius: 100%;
+      width: 45px;
+      height: 45px;
+      margin: -40px 0 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: -42px auto 8px; }
+      .markdown .info .icon i, .markdown .warning .icon i, .markdown .danger .icon i {
+        width: 25px;
+        height: 25px;
+        background-repeat: no-repeat; }
+    .markdown .info h4, .markdown .warning h4, .markdown .danger h4 {
+      font-size: 20px;
       margin-bottom: 16px; }
-    .markdown section h3 {
-      font-size: 1.2em;
-      line-height: 1.43;
-      font-weight: 600;
-      margin-top: 1em;
-      margin-bottom: 16px; }
-    .markdown section > p {
-      margin-top: 0;
-      margin-bottom: 16px; }
-    .markdown section blockquote {
-      background: #f9f9f9;
-      border-left: 10px solid #ccc;
-      margin: 1.5em 10px;
-      padding: 0.5em 10px;
-      quotes: "“" "”" "‘" "’"; }
-    .markdown section blockquote:before {
-      color: #ccc;
-      content: open-quote;
-      font-size: 4em;
-      line-height: 0.1em;
-      margin-right: 0.1em;
-      vertical-align: -0.4em; }
-    .markdown section blockquote:after {
-      color: #ccc;
-      content: close-quote;
-      font-size: 4em;
-      line-height: 0.1em;
-      margin-left: 0.1em;
-      vertical-align: -0.4em; }
-    .markdown section blockquote p {
-      display: inline; }
-    .markdown section code {
-      color: #0086b3;
-      padding: .2em .4em;
-      margin: 0;
-      font-size: 85%;
-      background-color: rgba(0, 0, 0, 0.04);
-      border-radius: 3px;
-      font-family: 'Source Code Pro'; }
-    .markdown section a {
-      color: #ed2b88;
-      font-family: 'Source Code Pro'; }
-    .markdown section img {
-      max-width: 100%;
-      box-sizing: content-box;
-      background-color: #fff;
-      border-radius: 4px;
-      border: 6pt solid #fff;
-      overflow: hidden;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
-    .markdown section strong {
-      font-weight: 700; }
-    .markdown section ul {
-      padding: 0 0 0 2em;
-      list-style-type: disc;
-      margin-bottom: 16px; }
-      .markdown section ul li {
-        display: list-item; }
-    .markdown section pre {
-      padding: 16px;
-      overflow: auto;
-      font-size: 85%;
-      line-height: 1.45;
-      background-color: #f7f7f7;
-      border-radius: 3px;
-      margin-top: 0;
-      margin-bottom: 16px;
-      word-wrap: normal; }
-    .markdown section pre code {
-      display: inline;
-      max-width: initial;
-      padding: 0;
-      margin: 0;
-      overflow: initial;
-      line-height: inherit;
-      word-wrap: normal;
-      background-color: transparent;
-      border: 0; }
-    .markdown section .info, .markdown section .warning, .markdown section .danger {
-      padding: 16px 20px;
-      font-size: 18px;
-      box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
-      border-radius: 6px;
-      margin: 48px 0 24px 0;
-      text-align: center; }
-      .markdown section .info .icon, .markdown section .warning .icon, .markdown section .danger .icon {
-        border-radius: 100%;
-        width: 45px;
-        height: 45px;
-        margin: -40px 0 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: -42px auto 8px; }
-        .markdown section .info .icon i, .markdown section .warning .icon i, .markdown section .danger .icon i {
-          width: 25px;
-          height: 25px;
-          background-repeat: no-repeat; }
-      .markdown section .info h4, .markdown section .warning h4, .markdown section .danger h4 {
-        font-size: 20px;
-        margin-bottom: 16px; }
-      .markdown section .info p, .markdown section .warning p, .markdown section .danger p {
-        font-style: italic;
-        font-weight: 200;
-        line-height: 23px; }
-    .markdown section .info {
-      background: #F0EDF5;
+    .markdown .info p, .markdown .warning p, .markdown .danger p {
+      font-style: italic;
+      font-weight: 200;
+      line-height: 23px; }
+  .markdown .info {
+    background: #F0EDF5;
+    border: 2px solid #BDA9DA; }
+    .markdown .info .icon {
+      background: #FFF;
       border: 2px solid #BDA9DA; }
-      .markdown section .info .icon {
-        background: #FFF;
-        border: 2px solid #BDA9DA; }
-        .markdown section .info .icon i {
-          background-image: url("./images/alert/info.svg"); }
-      .markdown section .info h4 {
-        color: #70519E; }
-    .markdown section .warning {
-      background: #FCF9E4;
+      .markdown .info .icon i {
+        background-image: url("./images/alert/info.svg"); }
+    .markdown .info h4 {
+      color: #70519E; }
+  .markdown .warning {
+    background: #FCF9E4;
+    border: 2px solid #E6D55B; }
+    .markdown .warning .icon {
+      background: #FFF;
       border: 2px solid #E6D55B; }
-      .markdown section .warning .icon {
-        background: #FFF;
-        border: 2px solid #E6D55B; }
-        .markdown section .warning .icon i {
-          background-image: url("./images/alert/warning.svg"); }
-      .markdown section .warning h4 {
-        color: #B9810B; }
-    .markdown section .danger {
-      background: #F9E9E8;
+      .markdown .warning .icon i {
+        background-image: url("./images/alert/warning.svg"); }
+    .markdown .warning h4 {
+      color: #B9810B; }
+  .markdown .danger {
+    background: #F9E9E8;
+    border: 2px solid #DFA29F; }
+    .markdown .danger .icon {
+      background: #FFF;
       border: 2px solid #DFA29F; }
-      .markdown section .danger .icon {
-        background: #FFF;
-        border: 2px solid #DFA29F; }
-        .markdown section .danger .icon i {
-          background-image: url("./images/alert/danger.svg"); }
-      .markdown section .danger h4 {
-        color: #A31F07; }
-    .markdown section table {
-      display: block;
-      width: 100%;
-      overflow: auto;
-      word-break: normal;
-      word-break: keep-all; }
-    .markdown section table th {
-      font-weight: bold;
-      text-align: left; }
-    .markdown section table th,
-    .markdown section table td {
-      padding: 6px 13px;
-      border: 1px solid #ddd; }
-    .markdown section table tr {
-      background-color: #fff;
-      border-top: 1px solid #ccc; }
-    .markdown section table tr:nth-child(2n) {
-      background-color: #f8f8f8; }
-    .markdown section code-listing {
-      background-color: #fff;
-      display: block;
-      border-radius: 6px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06); }
-      .markdown section code-listing .title-bar {
-        padding: 0;
-        z-index: 1;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-        display: flex; }
-        .markdown section code-listing .title-bar h4 {
-          font-size: 18px;
-          color: #5B5B5B;
-          line-height: 40px;
-          margin: 0 16px;
-          flex: 1; }
-        .markdown section code-listing .title-bar .src-lang {
-          display: flex;
-          align-items: center;
-          border-left: 1px solid rgba(0, 0, 0, 0.12);
-          padding: 0 16px; }
-        .markdown section code-listing .title-bar drop-down {
-          display: inline-block; }
-          .markdown section code-listing .title-bar drop-down > .container {
-            position: relative;
-            height: 100%; }
-            .markdown section code-listing .title-bar drop-down > .container > .button {
+      .markdown .danger .icon i {
+        background-image: url("./images/alert/danger.svg"); }
+    .markdown .danger h4 {
+      color: #A31F07; }
+  .markdown table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all; }
+  .markdown table th {
+    font-weight: bold;
+    text-align: left; }
+  .markdown table th,
+  .markdown table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd; }
+  .markdown table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc; }
+  .markdown table tr:nth-child(2n) {
+    background-color: #f8f8f8; }
+  .markdown code-listing {
+    background-color: #fff;
+    display: block;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06); }
+    .markdown code-listing .title-bar {
+      padding: 0;
+      z-index: 1;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      display: flex; }
+      .markdown code-listing .title-bar h4 {
+        font-size: 18px;
+        color: #5B5B5B;
+        line-height: 40px;
+        margin: 0 16px;
+        flex: 1; }
+      .markdown code-listing .title-bar .src-lang {
+        display: flex;
+        align-items: center;
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+        padding: 0 16px; }
+      .markdown code-listing .title-bar drop-down {
+        display: inline-block; }
+        .markdown code-listing .title-bar drop-down > .container {
+          position: relative;
+          height: 100%; }
+          .markdown code-listing .title-bar drop-down > .container > .button {
+            display: inline-block;
+            border-left: 1px solid rgba(0, 0, 0, 0.12);
+            padding: 6px 16px;
+            height: 100%;
+            cursor: pointer; }
+            .markdown code-listing .title-bar drop-down > .container > .button > .selected-item-container {
               display: inline-block;
-              border-left: 1px solid rgba(0, 0, 0, 0.12);
-              padding: 6px 16px;
-              height: 100%;
-              cursor: pointer; }
-              .markdown section code-listing .title-bar drop-down > .container > .button > .selected-item-container {
-                display: inline-block;
-                margin-right: 16px; }
-              .markdown section code-listing .title-bar drop-down > .container > .button::after {
-                content: '▾';
-                display: inline-block;
-                color: black;
-                position: absolute;
-                right: 8px; }
-              .markdown section code-listing .title-bar drop-down > .container > .button.open::after {
-                top: 8px;
-                transform: rotate(180deg); }
-            .markdown section code-listing .title-bar drop-down > .container > .options-container {
-              position: relative;
-              left: 1px; }
-              .markdown section code-listing .title-bar drop-down > .container > .options-container > .options {
-                position: absolute;
-                top: 1px;
-                right: 0px;
-                border: 1px solid rgba(0, 0, 0, 0.12);
-                border-top: 0;
-                box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
-                background: #fff;
-                z-index: 10000;
-                list-style-type: none;
-                padding: 0; }
-                .markdown section code-listing .title-bar drop-down > .container > .options-container > .options > li {
-                  cursor: pointer;
-                  padding: 6px 12px; }
-                  .markdown section code-listing .title-bar drop-down > .container > .options-container > .options > li:hover {
-                    background: #f6f6f6; }
-      .markdown section code-listing .code-container pre {
-        background-color: #FCFCFC;
-        margin: 0;
-        padding: 0; }
-        .markdown section code-listing .code-container pre code {
-          background-color: #FCFCFC; }
-    .markdown section au-demo {
-      background-color: #9A84BA;
-      color: white;
-      font-size: 1em;
-      display: block;
-      position: relative;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-      padding: 20px;
-      min-width: 100%;
+              margin-right: 16px; }
+            .markdown code-listing .title-bar drop-down > .container > .button::after {
+              content: '▾';
+              display: inline-block;
+              color: black;
+              position: absolute;
+              right: 8px; }
+            .markdown code-listing .title-bar drop-down > .container > .button.open::after {
+              top: 8px;
+              transform: rotate(180deg); }
+          .markdown code-listing .title-bar drop-down > .container > .options-container {
+            position: relative;
+            left: 1px; }
+            .markdown code-listing .title-bar drop-down > .container > .options-container > .options {
+              position: absolute;
+              top: 1px;
+              right: 0px;
+              border: 1px solid rgba(0, 0, 0, 0.12);
+              border-top: 0;
+              box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+              background: #fff;
+              z-index: 10000;
+              list-style-type: none;
+              padding: 0; }
+              .markdown code-listing .title-bar drop-down > .container > .options-container > .options > li {
+                cursor: pointer;
+                padding: 6px 12px; }
+                .markdown code-listing .title-bar drop-down > .container > .options-container > .options > li:hover {
+                  background: #f6f6f6; }
+    .markdown code-listing .code-container pre {
+      background-color: #FCFCFC;
+      margin: 0;
+      padding: 0; }
+      .markdown code-listing .code-container pre code {
+        background-color: #FCFCFC; }
+  .markdown au-demo {
+    background-color: #9A84BA;
+    color: white;
+    font-size: 1em;
+    display: block;
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 20px;
+    min-width: 100%;
+    border-radius: 6px;
+    border: 2px solid #70509D;
+    box-shadow: 0 10px 40px -10px #6d50a2; }
+    .markdown au-demo > h4:first-child {
+      margin: -20px -20px 15px;
+      padding: 10px 0;
+      text-align: center;
+      background-color: #70509D;
+      color: white; }
+    .markdown au-demo > h2, .markdown au-demo > h3, .markdown au-demo > h4, .markdown au-demo > h5, .markdown au-demo > h6 {
+      font-weight: 400 !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+    .markdown au-demo p {
+      color: #fff;
+      font-weight: 600; }
+    .markdown au-demo label {
+      font-size: 0.9em;
+      margin-bottom: -5px;
+      color: rgba(255, 255, 255, 0.8); }
+    .markdown au-demo input.au-target,
+    .markdown au-demo select.au-target {
+      color: #222;
+      margin: 5px 0; }
+    .markdown au-demo input[type="text"],
+    .markdown au-demo input[type="color"] {
+      padding: 5px 10px;
       border-radius: 6px;
-      border: 2px solid #70509D;
-      box-shadow: 0 10px 40px -10px #6d50a2; }
-      .markdown section au-demo > h4:first-child {
-        margin: -20px -20px 15px;
-        padding: 10px 0;
-        text-align: center;
-        background-color: #70509D;
-        color: white; }
-      .markdown section au-demo > h2, .markdown section au-demo > h3, .markdown section au-demo > h4, .markdown section au-demo > h5, .markdown section au-demo > h6 {
-        font-weight: 400 !important;
-        color: rgba(255, 255, 255, 0.8) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
-      .markdown section au-demo p {
-        color: #fff;
-        font-weight: 600; }
-      .markdown section au-demo label {
-        font-size: 0.9em;
-        margin-bottom: -5px;
-        color: rgba(255, 255, 255, 0.8); }
-      .markdown section au-demo input.au-target,
-      .markdown section au-demo select.au-target {
-        color: #222;
-        margin: 5px 0; }
-      .markdown section au-demo input[type="text"],
-      .markdown section au-demo input[type="color"] {
-        padding: 5px 10px;
-        border-radius: 6px;
-        border: 1px solid #6d50a2;
-        box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 1px 0 0 rgba(255, 255, 255, 0.2); }
-      .markdown section au-demo input[type="color"] {
-        padding: 0; }
-      .markdown section au-demo button {
-        padding: 3px 10px 5px;
-        border-radius: 6px;
-        background-color: #ed2b88;
-        color: #fff;
-        border: 1px solid #A1478C;
-        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.2); }
-      .markdown section au-demo button:active {
-        box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4); }
-      .markdown section au-demo table.table {
-        color: #222; }
-      .markdown section au-demo a.au-target {
-        color: #fff !important; }
-      .markdown section au-demo output {
-        background-color: #f7f7f7;
-        border-radius: 6px;
-        padding: 16px;
-        display: block;
-        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 0 10px 0 rgba(154, 132, 186, 0.2); }
+      border: 1px solid #6d50a2;
+      box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 1px 0 0 rgba(255, 255, 255, 0.2); }
+    .markdown au-demo input[type="color"] {
+      padding: 0; }
+    .markdown au-demo button {
+      padding: 3px 10px 5px;
+      border-radius: 6px;
+      background-color: #ed2b88;
+      color: #fff;
+      border: 1px solid #A1478C;
+      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.2); }
+    .markdown au-demo button:active {
+      box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4); }
+    .markdown au-demo table.table {
+      color: #222; }
+    .markdown au-demo a.au-target {
+      color: #fff !important; }
+    .markdown au-demo output {
+      background-color: #f7f7f7;
+      border-radius: 6px;
+      padding: 16px;
+      display: block;
+      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 0 10px 0 rgba(154, 132, 186, 0.2); }
 
 @media only screen and (max-width: 710px) {
   .markdown section code-listing .title-bar {

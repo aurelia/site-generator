@@ -1,7 +1,19 @@
-<section class="article-group">
+<section class="article-group blog">
+  {{#if isFirstPage}}
+  <div class="carousel slide">
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item">
+        <h2>{{name}}</h2>
+        <p>{{description}}</p>
+        <a href="{{posts.0.links.static}}">Read the Latest &#65515;</a>
+      </div>
+    </div>
+  </div>
+  {{else}}
   <header>
     <h1>{{name}}</h1>
   </header>
+  {{/if}}
 
   <section>
     <ul class="article-list">
@@ -9,10 +21,21 @@
       <li>
         <a href="{{links.static}}">
           <h3>{{name}}</h3>
+          <p class="group-item-count">Posted by {{author.name}} on {{formatDate publishedAt}}</p>
           <p>{{description}}</p>
         </a>
       </li>
       {{/each}}
     </ul>
   </section>
+
+  <div class="button-bar">
+    {{#if hasPrevPage}}
+    <a class="prev" href="{{links.prev.static}}">Newer Posts</a>
+    {{/if}}
+
+    {{#if hasNextPage}}
+    <a class="next" href="{{links.next.static}}">Older Posts</a>
+    {{/if}}
+  </div>
 </section>
