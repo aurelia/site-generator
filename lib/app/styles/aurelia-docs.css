@@ -240,7 +240,7 @@ html, body {
 hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.75), transparent); }
+  background-image: linear-gradient(to right, rgba(53, 53, 53, 0), rgba(53, 53, 53, 0.75), rgba(53, 53, 53, 0)); }
 
 header.app-header {
   position: absolute;
