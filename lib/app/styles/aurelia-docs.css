@@ -466,6 +466,9 @@ section.article.blog, section.article-group.blog {
     margin: 0; }
   section.article.blog .content, section.article-group.blog .content {
     width: calc(100% - 288px); }
+  section.article.blog span.author, section.article.blog span.date, section.article-group.blog span.author, section.article-group.blog span.date {
+    color: #6d50a2;
+    font-weight: normal; }
   section.article.blog blog-sidebar, section.article-group.blog blog-sidebar {
     display: block;
     height: 200px;
@@ -554,6 +557,12 @@ section.article-group section ul.article-list li {
       font-weight: lighter;
       line-height: 24px;
       color: #646464; }
+
+section.article.blog .markdown > .content > p:first-of-type {
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 32px;
+  margin-bottom: 32px; }
 
 section.article-group.blog .button-bar {
   margin: 48px; }

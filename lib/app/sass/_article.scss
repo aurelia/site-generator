@@ -34,6 +34,11 @@ section.article.blog, section.article-group.blog {
     width: calc(100% - 288px);
   }
 
+  span.author, span.date {
+    color: $primary-color;
+    font-weight: normal;
+  }
+
   blog-sidebar {
     display: block;
     height: 200px;
@@ -168,6 +173,15 @@ section.article-group {
         }
       }
     }
+  }
+}
+
+section.article.blog {
+  .markdown > .content > p:first-of-type {
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 32px;
+    margin-bottom: 32px;
   }
 }
 
