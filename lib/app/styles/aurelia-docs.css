@@ -237,6 +237,11 @@ html, body {
   height: 100%;
   overflow: hidden; }
 
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.75), transparent); }
+
 header.app-header {
   position: absolute;
   top: 0;
@@ -469,6 +474,32 @@ section.article.blog, section.article-group.blog {
   section.article.blog span.author, section.article.blog span.date, section.article-group.blog span.author, section.article-group.blog span.date {
     color: #6d50a2;
     font-weight: normal; }
+  section.article.blog blog-footer, section.article-group.blog blog-footer {
+    padding: 48px;
+    display: block;
+    text-align: center; }
+    section.article.blog blog-footer > .twitter, section.article.blog blog-footer > .facebook, section.article.blog blog-footer > .gplus, section.article-group.blog blog-footer > .twitter, section.article-group.blog blog-footer > .facebook, section.article-group.blog blog-footer > .gplus {
+      padding: 10px 13px;
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      transition: box-shadow .3s;
+      border-color: #ed2b88;
+      margin: 48px;
+      color: #353535;
+      display: inline-block;
+      width: 128px; }
+      section.article.blog blog-footer > .twitter:hover, section.article.blog blog-footer > .facebook:hover, section.article.blog blog-footer > .gplus:hover, section.article-group.blog blog-footer > .twitter:hover, section.article-group.blog blog-footer > .facebook:hover, section.article-group.blog blog-footer > .gplus:hover {
+        box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+      section.article.blog blog-footer > .twitter:active, section.article.blog blog-footer > .facebook:active, section.article.blog blog-footer > .gplus:active, section.article-group.blog blog-footer > .twitter:active, section.article-group.blog blog-footer > .facebook:active, section.article-group.blog blog-footer > .gplus:active {
+        box-shadow: none; }
+      section.article.blog blog-footer > .twitter > svg, section.article.blog blog-footer > .facebook > svg, section.article.blog blog-footer > .gplus > svg, section.article-group.blog blog-footer > .twitter > svg, section.article-group.blog blog-footer > .facebook > svg, section.article-group.blog blog-footer > .gplus > svg {
+        position: relative;
+        top: 2px;
+        margin-right: 8px; }
   section.article.blog blog-sidebar, section.article-group.blog blog-sidebar {
     display: block;
     height: 200px;

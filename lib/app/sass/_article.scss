@@ -39,6 +39,27 @@ section.article.blog, section.article-group.blog {
     font-weight: normal;
   }
 
+  blog-footer {
+    padding: $standard-side-margin;
+    display: block;
+    text-align: center;
+
+    > .twitter, > .facebook, > .gplus {
+      @include button();
+      border-color: $accent-color;
+      margin:  $standard-side-margin;
+      color: $black;
+      display: inline-block;
+      width: 128px;
+
+      > svg {
+        position: relative;
+        top: 2px;
+        margin-right: 8px; 
+      }
+    }
+  }
+
   blog-sidebar {
     display: block;
     height: 200px;
