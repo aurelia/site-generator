@@ -40,14 +40,13 @@ section.article.blog, section.article-group.blog {
   }
 
   blog-footer {
-    padding: $standard-side-margin;
+    padding: $standard-side-margin $standard-side-margin 0 $standard-side-margin;
     display: block;
-    text-align: center;
 
     > .twitter, > .facebook, > .gplus {
       @include button();
       border-color: $accent-color;
-      margin:  $standard-side-margin;
+      margin: $standard-side-margin $standard-side-margin  $standard-side-margin 0;
       color: $black;
       display: inline-block;
       width: 128px;
@@ -57,6 +56,11 @@ section.article.blog, section.article-group.blog {
         top: 2px;
         margin-right: 8px; 
       }
+    }
+
+    > hr {
+      background-image: linear-gradient(to right, rgba(53, 53, 53, 0.75), rgba(53, 53, 53, 0));
+      margin-right: 25%;
     }
   }
 

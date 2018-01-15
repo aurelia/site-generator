@@ -475,9 +475,8 @@ section.article.blog, section.article-group.blog {
     color: #6d50a2;
     font-weight: normal; }
   section.article.blog blog-footer, section.article-group.blog blog-footer {
-    padding: 48px;
-    display: block;
-    text-align: center; }
+    padding: 48px 48px 0 48px;
+    display: block; }
     section.article.blog blog-footer > .twitter, section.article.blog blog-footer > .facebook, section.article.blog blog-footer > .gplus, section.article-group.blog blog-footer > .twitter, section.article-group.blog blog-footer > .facebook, section.article-group.blog blog-footer > .gplus {
       padding: 10px 13px;
       text-align: center;
@@ -488,7 +487,7 @@ section.article.blog, section.article-group.blog {
       border-radius: 4px;
       transition: box-shadow .3s;
       border-color: #ed2b88;
-      margin: 48px;
+      margin: 48px 48px 48px 0;
       color: #353535;
       display: inline-block;
       width: 128px; }
@@ -500,6 +499,9 @@ section.article.blog, section.article-group.blog {
         position: relative;
         top: 2px;
         margin-right: 8px; }
+    section.article.blog blog-footer > hr, section.article-group.blog blog-footer > hr {
+      background-image: linear-gradient(to right, rgba(53, 53, 53, 0.75), rgba(53, 53, 53, 0));
+      margin-right: 25%; }
   section.article.blog blog-sidebar, section.article-group.blog blog-sidebar {
     display: block;
     height: 200px;
