@@ -27,7 +27,7 @@ export class SideBar {
         select: (item) => this.select(item)
       };
 
-      if (newItems !== oldItems) {
+      if (!oldItems || newItems !== oldItems) {
         this.showMenu(this.menu, backward, !this.isActive && this.$currentView !== null);
       } else {
         this.$currentView['au'].controller.viewModel.menu = this.menu;
