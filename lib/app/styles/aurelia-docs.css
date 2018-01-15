@@ -813,17 +813,31 @@ section.api {
   .markdown h2 {
     color: #ed2b88;
     font-size: 24px;
-    line-height: 1.225;
+    line-height: 26px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     padding-bottom: .3em;
     margin-bottom: 16px; }
   .markdown h3 {
-    font-size: 1.2em;
-    line-height: 1.43;
+    font-size: 20px;
+    line-height: 22px;
     font-weight: 600;
-    margin-top: 1em;
+    margin-top: 16px;
     margin-bottom: 16px; }
-  .markdown > p {
+  .markdown h4 {
+    color: #6d50a2;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: normal;
+    margin-top: 12px;
+    margin-bottom: 12px; }
+  .markdown h5 {
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 8px; }
+  .markdown p {
     margin-top: 0;
     margin-bottom: 16px; }
   .markdown blockquote {
@@ -982,6 +996,7 @@ section.api {
     background-color: #fff;
     display: block;
     border-radius: 6px;
+    margin-top: 16px;
     margin-bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06); }

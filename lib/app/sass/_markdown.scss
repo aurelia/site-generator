@@ -13,21 +13,39 @@
   h2 {
     color: $accent-color;
     font-size: 24px;
-    line-height: 1.225;
+    line-height: 26px;
     border-bottom: 1px solid rgba(0,0,0,.12);
     padding-bottom: .3em;
     margin-bottom: 16px;
   }
 
   h3 {
-    font-size: 1.2em;
-    line-height: 1.43;
+    font-size: 20px;
+    line-height: 22px;
     font-weight: 600;
-    margin-top: 1em;
+    margin-top: 16px;
     margin-bottom: 16px;
   }
 
-  > p {
+  h4 {
+    color: $primary-color;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: normal;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  h5 {
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  p {
     margin-top: 0;
     margin-bottom: 16px;
   }
@@ -260,6 +278,7 @@
     background-color: #fff;
     display: block;
     border-radius: $border-radius;
+    margin-top: 16px;
     margin-bottom: 16px;
     border: 1px solid rgba(0,0,0,.12);
     box-shadow: $box-shadow;
