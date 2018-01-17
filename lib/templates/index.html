@@ -10,7 +10,7 @@
   </script>
 
   <meta charset="utf-8">
-  <title>{{title}} | Aurelia</title>
+  <title>{{title}} | {{project.name}}</title>
   {{{baseTag}}}
   <meta name="msapplication-tap-highlight" content="no" />
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -25,8 +25,11 @@
 
 <body aurelia-app="main" id="app-host">
   <header class="app-header"> 
-    <img src="styles/images/logo.svg" class="aurelia-logo">
+    <img src="{{logoSrc}}" class="logo">
+
+    {{#if project.search}}
     <search-trigger></search-trigger>
+    {{/if}}
   </header>
 
   <main ref="main">
@@ -36,36 +39,20 @@
 
     <footer class="content-footer" id="app-footer">
       <div class="links">
+        {{#each project.footer.columns}}
         <div class="link-column">
-          <h4>Resources</h4>
+          <h4>{{name}}</h4>
           <ul>
-            <li><a href="docs/overview/what-is-aurelia">About</a></li>
-            <li><a href="blog">Blog</a></li>
-            <li><a href="http://eepurl.com/ces50j">Newsletter</a></li>
+            {{#each links}}
+            <li><a href="{{{href}}}">{{text}}</a></li>
+            {{/each}}
           </ul>
         </div>
-
-        <div class="link-column">
-          <h4>Help</h4>
-          <ul>
-            <li><a href="https://discourse.aurelia.io/">Discourse</a></li>
-            <li><a href="https://gitter.im/aurelia/Discuss">Gitter</a></li>
-            <li><a href="https://stackoverflow.com/search?q=aurelia">Stack Overflow</a></li>
-          </ul>
-        </div>
-
-        <div class="link-column">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="https://github.com/aurelia">GitHub</a></li>
-            <li><a href="https://twitter.com/aureliaeffect">Twitter</a></li>
-            <li><a href="https://github.com/orgs/aurelia/people">Team</a></li>
-          </ul>
-        </div>
+        {{/each}}
       </div>
 
       <p class="copyright">
-        Copyright © 2010 - 2018 <a href="http://www.bluespire.com">Blue Spire Inc.</a> Code licensed under the MIT License. Content licensed under CC0.
+        {{{project.footer.copyright}}}
       </p>
     </footer>
   </main>
@@ -74,8 +61,9 @@
 
   <nav>
     <ul>
+      {{#if project.home}}
       <li class="home ${activeTab === 'home' ? 'active' : ''}">
-        <a href="home">
+        <a href="{{project.home.dest}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
             height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons">
@@ -94,10 +82,12 @@
             <rect fill="none" width="24" height="24"/>
           </g>
           </svg>
-          <div class="label">Home</div>
+          <div class="label">{{project.home.name}}</div>
         </a>
       </li>
+      {{/if}}
 
+      {{#if project.docs.article}}
       <li class="article ${activeTab === 'article' ? 'active' : ''}">
         <a href="docs">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
@@ -122,7 +112,9 @@
           <div class="label">Guides</div>
         </a>
       </li>
+      {{/if}}
 
+      {{#if project.docs.api}}
       <li class="api ${activeTab === 'api' ? 'active' : ''}">
         <a href="docs/api">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
@@ -150,9 +142,11 @@
           <div class="label">APIs</div>
         </a>
       </li>
+      {{/if}}
 
+      {{#if project.forum}}
       <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
-        <a href="https://discourse.aurelia.io">
+        <a href="{{project.forum.url}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons_1_">
             <g id="Outline_Icons">
@@ -178,12 +172,14 @@
           </g>
           </svg>
 
-          <div class="label">Discourse</div>
+          <div class="label">{{project.forum.name}}</div>
         </a>
       </li>
+      {{/if}}
 
+      {{#if project.blog}}
       <li class="blog ${activeTab === 'blog' ? 'active' : ''}">
-        <a href="blog">
+        <a href="{{project.blog.dest}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons_1_">
             <g id="Outline_Icons">
@@ -214,8 +210,11 @@
           <div class="label">Blog</div>
         </a>
       </li>
+      {{/if}}
+
+      {{#if project.help}}
       <li class="help ${activeTab === 'help' ? 'active' : ''}">
-        <a href="help">
+        <a href="{{project.help.dest}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
             height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons_1_">
@@ -231,16 +230,19 @@
             </g>
           </g>
           </svg>
-          <div class="label">Help</div>
+          <div class="label">{{project.help.name}}</div>
         </a>
       </li>
+      {{/if}}
     </ul>
   </nav>
 
+  {{#if project.search}}
   <search-panel></search-panel>
+  {{/if}}
 
   <script>
-    window.aureliaDocConfiguration = {{{project}}};
+    window.aureliaDocConfiguration = {{{projectJSON}}};
   </script>
 
   <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>
