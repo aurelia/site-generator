@@ -1,7 +1,7 @@
 <section class="not-found article">
-  <!-- ==== SEARCH SUGGESTION ==== -->
+  {{#if search}}
   <p class="au-try-search">Try searching what you're looking for.<span class="up-arrow">⤴</span></p>
-  <!-- =========================== -->
+  {{/if}}
 
   <header>
     <h1>404</h1>
@@ -11,10 +11,9 @@
   <article class="markdown">
     <h3>Here's some helpful content...</h3>
     <ul>
-      <li><a href="/docs/tutorials/creating-a-todo-app">Getting Started with Aurelia</a></li>
-      <li><a href="/docs">Aurelia Guides</a></li>
-      <li><a href="/docs/api">Aurelia APIs</a></li>
-      <li><a href="/help">Help</a></li>
+      {{#each links}}
+      <li><a href="{{href}}">{{text}}</a></li>
+      {{/each}}
     </ul>
   </article>
-</section>  
+</section>
