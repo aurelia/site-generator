@@ -15,34 +15,31 @@ const activeLanguageKey = 'activeLanguage';
 
 @autoinject
 export class Configuration {
-  private config = window['aureliaDocConfiguration'];
+  private config = window['siteConfig'];
   private apiRoot;
   private articleRoot;
 
-  availableLanguages = [
-    'ES Next',
-    'TypeScript'
-  ];
-
-  @observable activeLanguage: string = this.retrieveLanguagePreference();  
-
-  public help: DocItem;
-  public blog: DocItem;
-  public home: DocItem;
+  public name: string = this.config.name;
   public trackingID: string = this.config.trackingID;
+  public help: DocItem = this.config.help;
+  public blog: DocItem = this.config.blog;
+  public home: DocItem = this.config.home;
+  public search: boolean = this.config.search;
+
+  public availableLanguages = ['ES Next', 'TypeScript'];
+  @observable public activeLanguage: string = this.retrieveLanguagePreference();  
 
   constructor(private ea: EventAggregator) {
-    this.home = this.config.home;
-    this.blog = this.config.blog;
-    this.help = this.config.help;
-    this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
-    this.articleRoot = { items: this.config.docs.article, name: 'Guides', dest: 'docs' };
- 
-    associateParents(this.apiRoot, this.config.docs.api);
-    associateParents(this.articleRoot, this.config.docs.article);
+    if (this.config.docs) {
+      this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
+      this.articleRoot = { items: this.config.docs.article, name: 'Guides', dest: 'docs' };
+  
+      associateParents(this.apiRoot, this.config.docs.api);
+      associateParents(this.articleRoot, this.config.docs.article);
+    }
   }
 
-  public get API():DocItem[] {
+  public get API(): DocItem[] {
     return this.config.docs.api;
   }
 

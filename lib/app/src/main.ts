@@ -2,6 +2,7 @@ import {Aurelia} from 'aurelia-framework'
 import environment from './environment';
 import {App} from './app';
 import {SearchEngine} from './backend/search-engine';
+import {Configuration} from './configuration';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
@@ -29,10 +30,14 @@ export function configure(aurelia: Aurelia) {
   
   aurelia.start().then(() => {
     let container = aurelia.container;
-    let searchEngine = <SearchEngine>container.get(SearchEngine);
     let app = <App>container.get(App);
+    let configuration = <Configuration>container.get(Configuration);
 
-    searchEngine.getIndexes(); //pre-load the search index as soon as possible, but do not block
+    if (configuration.search) {
+      let searchEngine = <SearchEngine>container.get(SearchEngine);
+      searchEngine.getIndexes(); //pre-load the search index as soon as possible, but do not block
+    }
+
     aurelia.enhance(app, 'app-host').then(() => app.activate());
   });
 }

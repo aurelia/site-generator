@@ -38,7 +38,7 @@ side-bar {
         position: absolute;
         left: 8px;
         top: 9px;
-        fill: #70509D;
+        fill: $primary-color;
       }
 
       a {
@@ -46,7 +46,7 @@ side-bar {
         width: 100%;
         text-align: center;
         text-decoration: none;
-        color: #70509D;
+        color: $primary-color;
       }
     }
 

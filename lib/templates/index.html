@@ -213,7 +213,7 @@
       {{/if}}
 
       {{#if project.help}}
-      <li class="help ${activeTab === 'help' ? 'active' : ''}">
+      <li class="help ${activeTab === '{{project.help.dest}}' ? 'active' : ''}">
         <a href="{{project.help.dest}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
             height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
@@ -242,7 +242,7 @@
   {{/if}}
 
   <script>
-    window.aureliaDocConfiguration = {{{projectJSON}}};
+    window.siteConfig = {{{projectJSON}}};
   </script>
 
   <script src="scripts/aurelia-docs.js" data-main="aurelia-bootstrapper"></script>

@@ -68,19 +68,19 @@ export class Router {
     let fragment = this.fragment = window.location.hash.substring(1) || '';
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
-    if (url === 'help') {
+    if (url === this.config.help.dest) {
       let helpToc = this.config.help;
-      this.ea.publish(new ActivateTab('help'));
+      this.ea.publish(new ActivateTab(helpToc.dest));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
-      this.history.setTitle('Help | Aurelia');
+      this.history.setTitle(`${helpToc.name} | ${this.config.name}`);
       this.trackPageView(url);
     } else if (url.indexOf('blog') === 0) {
       var blogItem = { dest: url };
       this.ea.publish(new ActivateTab('blog'));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(blogItem)), fragment);
       this.ea.publish(new HideMenu());
-      this.history.setTitle('Blog | Aurelia');
+      this.history.setTitle(`Blog | ${this.config.name}`);
       this.trackPageView(url);
     } else if (url === '' || url === 'home') {
       this.navigateToHome(url);
@@ -91,7 +91,7 @@ export class Router {
           this.ea.publish(new ActivateTab('api'));
           this.ea.publish(new ActivateScreen(this.container.get(APIScreen).withItem(matchedAPI, url)));
           this.ea.publish(new ShowMenu(matchedAPI));
-          this.history.setTitle(`${matchedAPI.name} | Aurelia`);
+          this.history.setTitle(`${matchedAPI.name} | ${this.config.name}`);
           this.trackPageView(url);
         } else {
           this.navigateToNotFound(url);
@@ -102,7 +102,7 @@ export class Router {
           this.ea.publish(new ActivateTab('article'));
           this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(matchedToCItem), fragment));
           this.ea.publish(new ShowMenu(matchedToCItem));
-          this.history.setTitle(`${matchedToCItem.name} | Aurelia`);
+          this.history.setTitle(`${matchedToCItem.name} | ${this.config.name}`);
           this.trackPageView(url);
         } else {
           this.navigateToNotFound(url);
@@ -131,7 +131,7 @@ export class Router {
     this.ea.publish(new ActivateTab(''));
     this.ea.publish(new ActivateScreen(this.container.get(NotFoundScreen)));
     this.ea.publish(new HideMenu());
-    this.history.setTitle('404 - Not Found | Aurelia');
+    this.history.setTitle(`404 - Not Found | ${this.config.name}`);
     this.trackPageView(url);
   }
 
@@ -139,7 +139,7 @@ export class Router {
     this.ea.publish(new ActivateTab('home'));
     this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem(this.config.home)));
     this.ea.publish(new HideMenu());
-    this.history.setTitle('Home | Aurelia');
+    this.history.setTitle(`Home | ${this.config.name}`);
     this.trackPageView(url);
   }
 

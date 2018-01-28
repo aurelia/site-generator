@@ -341,9 +341,9 @@ nav {
     nav ul li.active {
       background-color: #2e2e30; }
       nav ul li.active svg {
-        fill: #EC2685; }
+        fill: #ed2b88; }
       nav ul li.active .label {
-        color: #EC2685; }
+        color: #ed2b88; }
 
 main {
   position: absolute;
@@ -405,13 +405,13 @@ side-bar {
         position: absolute;
         left: 8px;
         top: 9px;
-        fill: #70509D; }
+        fill: #6d50a2; }
       side-bar side-bar-view .nav-button a {
         display: inline-block;
         width: 100%;
         text-align: center;
         text-decoration: none;
-        color: #70509D; }
+        color: #6d50a2; }
     side-bar side-bar-view .nav-button.personas .arrow {
       position: absolute;
       right: 16px;
