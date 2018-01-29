@@ -75,10 +75,9 @@ export class Router {
       this.ea.publish(new ShowMenu(helpToc));
       this.history.setTitle(`${helpToc.name} | ${this.config.name}`);
       this.trackPageView(url);
-    } else if (url.indexOf('blog') === 0) {
-      var blogItem = { dest: url };
-      this.ea.publish(new ActivateTab('blog'));
-      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(blogItem)), fragment);
+    } else if (url.indexOf(this.config.blog.dest) === 0) {
+      this.ea.publish(new ActivateTab(this.config.blog.dest));
+      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem({ dest: url })), fragment);
       this.ea.publish(new HideMenu());
       this.history.setTitle(`Blog | ${this.config.name}`);
       this.trackPageView(url);
