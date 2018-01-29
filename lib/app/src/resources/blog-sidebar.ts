@@ -1,19 +1,17 @@
 import {inject} from 'aurelia-dependency-injection';
+import {Configuration} from '../configuration';
 
 const headerHeight = 164;
 const margin = 32;
 
-@inject(Element)
+@inject(Element, Configuration)
 export class BlogSidebar {
-  name = 'Aurelia';
-  twitterHref = 'https://twitter.com/aureliaeffect';
-  githubHref = 'https://github.com/aurelia/framework';
-  vimeoHref = 'https://vimeo.com/channels/867847';
-  gitterHref = 'https://gitter.im/aurelia/Discuss';
-
+  blog: any;
   mainElement: Element;
 
-  constructor(private element: HTMLElement) {}
+  constructor(private element: HTMLElement, private config: Configuration) {
+    this.blog = config.blog;
+  }
 
   onScroll = () => {
     let top = headerHeight;
