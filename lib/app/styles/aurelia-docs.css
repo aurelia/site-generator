@@ -339,7 +339,8 @@ nav {
     nav ul li:hover .label {
       color: white; }
     nav ul li.active {
-      background-color: #2e2e30; }
+      background-color: #2e2e30;
+      box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5); }
       nav ul li.active svg {
         fill: #ed2b88; }
       nav ul li.active .label {
@@ -871,8 +872,7 @@ section.api {
     border-radius: 3px;
     font-family: 'Source Code Pro'; }
   .markdown a {
-    color: #ed2b88;
-    font-family: 'Source Code Pro'; }
+    color: #ed2b88; }
   .markdown img {
     max-width: 100%;
     box-sizing: content-box;
