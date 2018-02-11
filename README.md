@@ -10,7 +10,7 @@ Currently, this library isn't officially published on NPM. Perhaps at some futur
 
 ### `au-site generate`
 
-Run this command to generate a site. You must run it from a folder with an 'au-site.json' file, which contains the configuration for the site to generate. An example configuration file is below.
+Run this command to generate a site. You must run it from a folder with an `au-site.json` file, which contains the configuration for the site to generate. An example configuration file is below.
 
 ### `au-site blog publish [file]`
 
