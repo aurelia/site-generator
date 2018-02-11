@@ -2,11 +2,11 @@
 "use strict";
 const resolve = require('../lib/resolve');
 
-process.title = 'aurelia';
+process.title = 'aurelia site';
 
 let originalBaseDir = process.cwd();
 
-resolve('aurelia-cli', {
+resolve('aurelia-site-generator', {
   basedir: originalBaseDir
 }, function(error, projectLocalCli) {
   let cli;
