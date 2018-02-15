@@ -1412,10 +1412,10 @@ pre[class*="language-"] {
 
 .home-screen .video-zone {
   background-image: linear-gradient(to top, #6d50a2, #ed2b88);
-  padding: 32px;
-  display: flex; }
+  padding: 32px; }
   .home-screen .video-zone .video-wrapper {
     width: 50%;
+    margin-left: 50%;
     position: relative;
     padding-bottom: 28.125%;
     /* 16:9 */
@@ -1428,6 +1428,7 @@ pre[class*="language-"] {
       height: 100%;
       box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2); }
   .home-screen .video-zone .quote-wrapper {
+    float: left;
     width: 50%;
     padding: 32px;
     align-self: center;
@@ -1504,7 +1505,8 @@ pre[class*="language-"] {
     display: none; }
   .home-screen .video-zone .video-wrapper {
     width: 100%;
-    padding-bottom: 54%; }
+    padding-bottom: 54%;
+    margin-left: 0; }
   .home-screen .feature-zone {
     margin: 64px 32px; }
     .home-screen .feature-zone .features {
