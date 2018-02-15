@@ -484,9 +484,10 @@ section.article.blog, section.article-group.blog {
       font-size: 16px;
       text-decoration: none;
       color: #fff;
-      border: 1px solid #fff;
-      border-radius: 4px;
+      border: 2px solid #fff;
+      border-radius: 7px;
       transition: box-shadow .3s;
+      cursor: pointer;
       border-color: #ed2b88;
       margin: 48px 48px 48px 0;
       color: #353535;
@@ -606,9 +607,10 @@ section.article-group.blog .button-bar {
     font-size: 16px;
     text-decoration: none;
     color: #fff;
-    border: 1px solid #fff;
-    border-radius: 4px;
+    border: 2px solid #fff;
+    border-radius: 7px;
     transition: box-shadow .3s;
+    cursor: pointer;
     border-color: #ed2b88;
     color: #ed2b88; }
     section.article-group.blog .button-bar a:hover {
@@ -656,9 +658,10 @@ section.article-group .carousel, section.article-group-root .carousel {
         font-size: 16px;
         text-decoration: none;
         color: #fff;
-        border: 1px solid #fff;
-        border-radius: 4px;
+        border: 2px solid #fff;
+        border-radius: 7px;
         transition: box-shadow .3s;
+        cursor: pointer;
         float: right;
         margin-top: 16px; }
         section.article-group .carousel .carousel-inner .carousel-item a:hover, section.article-group-root .carousel .carousel-inner .carousel-item a:hover {
@@ -1398,9 +1401,10 @@ pre[class*="language-"] {
     font-size: 16px;
     text-decoration: none;
     color: #fff;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    transition: box-shadow .3s; }
+    border: 2px solid #fff;
+    border-radius: 7px;
+    transition: box-shadow .3s;
+    cursor: pointer; }
     .home-screen .get-started-banner a:hover {
       box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
     .home-screen .get-started-banner a:active {
@@ -1450,8 +1454,8 @@ pre[class*="language-"] {
   .home-screen .feature-zone .feature-header {
     text-align: center;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 48px;
-    padding-bottom: 48px; }
+    margin-bottom: 24px;
+    padding-bottom: 24px; }
     .home-screen .feature-zone .feature-header h1 {
       color: #353535;
       font-weight: bold;
@@ -1465,6 +1469,24 @@ pre[class*="language-"] {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between; }
+    .home-screen .feature-zone .features .become-a-sponsor {
+      padding: 10px 13px;
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 7px;
+      transition: box-shadow .3s;
+      cursor: pointer;
+      border-color: #ed2b88;
+      color: #353535;
+      display: inline-block;
+      margin-top: 48px; }
+      .home-screen .feature-zone .features .become-a-sponsor:hover {
+        box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+      .home-screen .feature-zone .features .become-a-sponsor:active {
+        box-shadow: none; }
     .home-screen .feature-zone .features .feature {
       width: 50%;
       margin-bottom: 32px;

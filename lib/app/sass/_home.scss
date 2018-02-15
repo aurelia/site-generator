@@ -86,8 +86,8 @@
     .feature-header {
       text-align: center;
       border-bottom: 1px solid $panel-border;
-      margin-bottom: 48px;
-      padding-bottom: 48px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
       
       h1 {
         color: $black;
@@ -107,6 +107,14 @@
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
+
+      .become-a-sponsor {
+        @include button();
+        border-color: $accent-color;
+        color: $black;
+        display: inline-block;
+        margin-top: 48px;
+      }
 
       .feature {
         width: 50%;
