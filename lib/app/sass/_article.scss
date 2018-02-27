@@ -75,13 +75,22 @@ section.article.blog, section.article-group.blog {
       text-decoration: none;
     }
 
+    img {
+      box-shadow: none;
+      max-width: 128px;
+      margin: 0;
+      border: none;
+    }
+
     h3 {
       font-size: 24px;
       line-height: 1.225;
-      padding-bottom: .3em;
-      margin-bottom: 16px;
       margin-top: 0;
       font-weight: normal;
+    }
+
+    h3.level {
+      margin-top: 24px;
     }
   }
 }

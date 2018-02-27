@@ -512,13 +512,18 @@ section.article.blog, section.article-group.blog {
     right: 32px; }
     section.article.blog blog-sidebar a, section.article-group.blog blog-sidebar a {
       text-decoration: none; }
+    section.article.blog blog-sidebar img, section.article-group.blog blog-sidebar img {
+      box-shadow: none;
+      max-width: 128px;
+      margin: 0;
+      border: none; }
     section.article.blog blog-sidebar h3, section.article-group.blog blog-sidebar h3 {
       font-size: 24px;
       line-height: 1.225;
-      padding-bottom: .3em;
-      margin-bottom: 16px;
       margin-top: 0;
       font-weight: normal; }
+    section.article.blog blog-sidebar h3.level, section.article-group.blog blog-sidebar h3.level {
+      margin-top: 24px; }
 
 section.article-group-root {
   margin-left: 325px; }
