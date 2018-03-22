@@ -2,6 +2,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {autoinject} from 'aurelia-dependency-injection';
 import {observable} from 'aurelia-binding';
 import {ActiveLanguageChanged} from './messages/shell';
+import {parseQueryString} from 'aurelia-path';
 
 export interface DocItem extends Location {
   name: string;
@@ -72,6 +73,16 @@ export class Configuration {
   }
 
   private retrieveLanguagePreference(): string {
+    //First we check the query string to see if someone linked to a particular language.
+    if (location !== undefined) {
+      let qs = <any>parseQueryString(location.search);
+
+      if (qs.language && qs.language.toLowerCase() === 'typescript') {
+        return this.availableLanguages[1];
+      }
+    }
+
+    //If no QS, we check to see if the user has previously made a selection.
     if (localStorage !== undefined) {
       let value = localStorage.getItem(activeLanguageKey);
   
@@ -80,6 +91,7 @@ export class Configuration {
       }
     }
   
+    //If no QS and no previous selection, we default to the first available language.
     return this.availableLanguages[0];
   }
   
