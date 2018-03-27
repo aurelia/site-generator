@@ -157,7 +157,6 @@
   .info, .warning, .danger {
     padding: 16px 20px;
     font-size: 18px;
-    box-shadow: $box-shadow;
     border-radius: $border-radius;
     margin: 48px 0 24px 0;
     text-align: center;
@@ -279,13 +278,12 @@
     border-radius: $border-radius;
     margin-top: 16px;
     margin-bottom: 16px;
-    border: 1px solid rgba(0,0,0,.12);
-    box-shadow: $box-shadow;
+    border: 2px solid rgba(0,0,0,.12);
 
     .title-bar {
       padding: 0;
       z-index: 1;
-      border-bottom: 1px solid rgba(0,0,0,.12);
+      border-bottom: 2px solid rgba(0,0,0,.12);
       display: flex;
       
       h4 {
@@ -299,7 +297,7 @@
       .src-lang {
         display: flex;
         align-items: center;
-        border-left: 1px solid rgba(0,0,0,.12);
+        border-left: 2px solid rgba(0,0,0,.12);
         padding: 0 16px;
       }
 
@@ -312,7 +310,7 @@
 
           > .button {
             display: inline-block;
-            border-left: 1px solid rgba(0,0,0,.12);
+            border-left: 2px solid rgba(0,0,0,.12);
             padding: 6px 16px;
             height: 100%;
             cursor: pointer;
@@ -342,9 +340,8 @@
 
             > .options {
               position: absolute;
-              top: 1px;
-              right: 0px;
-              border: 1px solid rgba(0,0,0,.12);
+              top: 2px;
+              border: 2px solid rgba(0,0,0,.12);
               border-top: 0;
               box-shadow: $box-shadow;
               background: $white;
@@ -395,7 +392,6 @@
     min-width: 100%;
     border-radius: $border-radius;
     border: 2px solid $primary-dark-color;
-    box-shadow: 0 10px 40px -10px $primary-color;
 
     > h4:first-child {
       margin: -20px -20px 15px;
@@ -480,7 +476,7 @@
           display: block;
       
           .src-lang {
-            border-top: 1px solid rgba(0,0,0,.12);
+            border-top: 2px solid rgba(0,0,0,.12);
             border-left: none;
             line-height: 40px;
           }
