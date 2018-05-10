@@ -67,11 +67,11 @@ export class Router {
   loadUrl(url: string) {
     let fragment = this.fragment = window.location.hash.substring(1) || '';
 
-    url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
-
     if (url.indexOf('?') !== -1) {
       url = url.substring(0, url.indexOf('?'));   
     }
+
+    url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
     if (url === this.config.help.dest) {
       let helpToc = this.config.help;
