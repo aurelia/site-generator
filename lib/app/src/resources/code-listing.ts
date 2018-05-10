@@ -42,6 +42,7 @@ export class CodeListing {
       'ES Next',
       'ES 2016',
       'ES 2015',
+      'JavaScript',
       'TypeScript',
       'HTML'
     ];
