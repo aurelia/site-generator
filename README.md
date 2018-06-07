@@ -58,6 +58,28 @@ The site generator requires an `au-site.json` file in the folder from which you 
       "vimeo": "https://vimeo.com/channels/867847",
       "gitter": "https://gitter.im/aurelia/Discuss"
     },
+    "sponsorLevels": [
+      {
+        "name": "Gold Sponsors",
+        "sponsors": [
+          {
+            "name": "Hogia",
+            "href": "https://www.hogia.com/",
+            "imageSrc": "styles/images/logos/hogia.svg"
+          }
+        ]
+      },
+      {
+        "name": "Silver Sponsors",
+        "sponsors": [
+          {
+            "name": "Simployer",
+            "href": "https://www.simployer.no/",
+            "imageSrc": "styles/images/logos/simployer-small.jpg"
+          }
+        ]
+      }
+    ],
     "migration": {
       "src": "../blog/aurelia.ghost.2018-01-15.json"
     }
@@ -221,7 +243,7 @@ The site generator requires an `au-site.json` file in the folder from which you 
           },
           {
             "name": "Observable Properties",
-            "src": "../binding/doc/article/en-US/binding-observable-properties.md",
+            "src": "../binding/doc/article/en-US/binding-observables.md",
             "dest": "docs/binding/binding-observable-properties"
           },
           {
@@ -291,6 +313,11 @@ The site generator requires an `au-site.json` file in the folder from which you 
             "dest": "docs/plugins/http-services"
           },
           {
+            "name": "Store",
+            "src": "../store/doc/article/en-US/aurelia-store-plugin.md",
+            "dest": "docs/plugins/store"
+          },
+          {
             "name": "Validation",
             "src": "../validation/doc/article/en-US/validation-basics.md",
             "dest": "docs/plugins/validation"
@@ -316,35 +343,6 @@ The site generator requires an `au-site.json` file in the folder from which you 
             "name": "Integrating with Polymer",
             "src": "../framework/doc/article/en-US/integrating-with-polymer.md",
             "dest": "docs/integration/polymer"
-          }
-        ]
-      },
-      {
-        "name": "Testing",
-        "description": "Learn all about testing Aurelia apps, including component testing and e2e testing.",
-        "dest": "docs/testing",
-        "items": [
-          {
-            "name": "Testing Components",
-            "src": "../testing/doc/article/en-US/testing-components.md",
-            "dest": "docs/testing/components"
-          },
-          {
-            "name": "End-to-End Testing",
-            "src": "../testing/doc/article/en-US/end-to-end-testing.md",
-            "dest": "docs/testing/end-to-end"
-          }
-        ]
-      },
-      {
-        "name": "Build Systems",
-        "description": "Learn about the various build setups that Aurelia supports out-of-the-box.",
-        "dest": "docs/build-systems",
-        "items": [
-          {
-            "name": "The Aurelia CLI",
-            "src": "../framework/doc/article/en-US/the-aurelia-cli.md",
-            "dest": "docs/build-systems/aurelia-cli"
           },
           {
             "name": "Webpack",
@@ -379,6 +377,77 @@ The site generator requires an `au-site.json` file in the folder from which you 
                 "dest": "docs/build-systems/jspm/bundling"
               }
             ]
+          }
+        ]
+      },
+      {
+        "name": "Testing",
+        "description": "Learn all about testing Aurelia apps, including component testing and e2e testing.",
+        "dest": "docs/testing",
+        "items": [
+          {
+            "name": "Testing Components",
+            "src": "../testing/doc/article/en-US/testing-components.md",
+            "dest": "docs/testing/components"
+          },
+          {
+            "name": "End-to-End Testing",
+            "src": "../testing/doc/article/en-US/end-to-end-testing.md",
+            "dest": "docs/testing/end-to-end"
+          }
+        ]
+      },
+      {
+        "name": "Server Side Rendering",
+        "description": "Learn about Server Side Rendering with Aurelia and how to configure your project.",
+        "dest": "docs/ssr",
+        "items": [
+          {
+            "name": "Introduction to SSR",
+            "src": "../ssr-engine/doc/article/en-US/aurelia-server-render.md",
+            "dest": "docs/ssr/introduction"
+          }
+        ]
+      },
+      {
+        "name": "The Aurelia CLI",
+        "description": "Learn how to create, build, bundle and test your apps using all your favorite tools, facilitated by the Aurelia CLI.",
+        "dest": "docs/cli",
+        "items": [
+          {
+            "name": "Basics",
+            "src": "../cli/doc/article/en-US/basics.md",
+            "dest": "docs/cli/basics"
+          },
+          {
+            "name": "Tasks",
+            "src": "../cli/doc/article/en-US/gulp-tasks.md",
+            "dest": "docs/cli/tasks"
+          },
+          {
+            "name": "Aurelia-CLI Bundler",
+            "src": "../cli/doc/article/en-US/aurelia-cli-bundler.md",
+            "dest": "docs/cli/bundler"
+          },
+          {
+            "name": "Webpack",
+            "src": "../cli/doc/article/en-US/webpack.md",
+            "dest": "docs/cli/webpack"
+          },
+          {
+            "name": "Migrating",
+            "src": "../cli/doc/article/en-US/migrating.md",
+            "dest": "docs/cli/migrating"
+          },
+          {
+            "name": "Updating",
+            "src": "../cli/doc/article/en-US/updating.md",
+            "dest": "docs/cli/updating"
+          },
+          {
+            "name": "Recipes & Known Issues",
+            "src": "../cli/doc/article/en-US/recipes.md",
+            "dest": "docs/cli/recipes"
           }
         ]
       }
@@ -487,6 +556,12 @@ The site generator requires an `au-site.json` file in the folder from which you 
         "package": "../path/package.json",
         "src": "../path/dist/aurelia-path.d.ts",
         "dest": "docs/api/path"
+      },
+      {
+        "name": "Route Recognizer",
+        "package": "../route-recognizer/package.json",
+        "src": "../route-recognizer/dist/aurelia-route-recognizer.d.ts",
+        "dest": "docs/api/route-recognizer"
       },
       {
         "name": "Router",
