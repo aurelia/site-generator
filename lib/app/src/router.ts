@@ -27,10 +27,10 @@ export class Router {
   activate(main: HTMLElement) {
     this.main = main;
 
-    this.history.activate({ 
+    this.history.activate({
       pushState: true,
       root: document.getElementsByTagName('base')[0].getAttribute('href'),
-      routeHandler: this.loadUrl.bind(this) 
+      routeHandler: this.loadUrl.bind(this)
     });
 
     this.ea.subscribe(ActivateSection, (msg: ActivateSection) => {
@@ -68,17 +68,24 @@ export class Router {
     let fragment = this.fragment = window.location.hash.substring(1) || '';
 
     if (url.indexOf('?') !== -1) {
-      url = url.substring(0, url.indexOf('?'));   
+      url = url.substring(0, url.indexOf('?'));
     }
 
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
-    if (url === this.config.help.dest) {
-      let helpToc = this.config.help;
+    if (url === this.config.support.dest) {
+      let helpToc = this.config.support;
       this.ea.publish(new ActivateTab(helpToc.dest));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
       this.history.setTitle(`${helpToc.name} | ${this.config.name}`);
+      this.trackPageView(url);
+    } else if (url === this.config.learn.dest) {
+      let learnToc = this.config.learn;
+      this.ea.publish(new ActivateTab(learnToc.dest));
+      this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(learnToc), fragment));
+      this.ea.publish(new ShowMenu(learnToc));
+      this.history.setTitle(`${learnToc.name} | ${this.config.name}`);
       this.trackPageView(url);
     } else if (url.indexOf(this.config.blog.dest) === 0) {
       this.ea.publish(new ActivateTab(this.config.blog.dest));
@@ -113,7 +120,20 @@ export class Router {
         }
       }
     } else {
-      this.navigateToNotFound(url);
+      let page;
+      if (this.config.pages) {
+        page = this.config.pages.find((page) => url === page.dest);
+      }
+
+      if (page) {
+        this.ea.publish(new ActivateTab(page));
+        this.ea.publish(new ActivateScreen(this.container.get(HomeScreen).withItem({ dest: url })), fragment);
+        this.ea.publish(new HideMenu());
+        this.history.setTitle(`Page | ${this.config.name}`);
+        this.trackPageView(url);
+      } else {
+        this.navigateToNotFound(url);
+      }
     }
   }
 
@@ -175,17 +195,17 @@ export class Router {
     if (!this.items || !this.items.length) {
       return;
     }
-  
+
     for (var i = 0, l = this.items.length; i < l; i++) {
       if (this.main.scrollTop > this.items[i].top - offset) {
         find = i;
       }
     }
-  
+
     for (let j = 0, l = this.items.length; j < l; j++) {
       this.items[j].elem.parentElement.classList.remove('active');
     }
-  
+
     if (find !== -1) {
       this.items[find].elem.parentElement.classList.add('active');
       this.replaceFragment(this.items[find].id);
@@ -243,10 +263,10 @@ function getItems(ary) {
     let $target = $element.parentElement;
     let offsetTop = getOffsetTop($target);
 
-    items[i] = { 
+    items[i] = {
       id: id,
-      top: offsetTop, 
-      elem: ary[i] 
+      top: offsetTop,
+      elem: ary[i]
     };
   }
 

@@ -1,0 +1,60 @@
+.contact {
+  .banner {
+    padding-top: 10vh;
+    margin-bottom: -10vh;
+    text-align: center;
+    height: 30vh;
+    background-image: linear-gradient(to top, $primary-color, $accent-color);
+    color: white;
+    font-size: 36px;
+  }
+
+  form {
+    width: 40vw;
+    background: white;
+    border: 1px solid $panel-border;
+    margin: auto;
+    padding: 5vh 5vw;
+  }
+
+  form label {
+    display: flex;
+    margin-bottom: 2vh;
+  }
+
+  form label span {
+    width: 150px;
+    margin-right: 1em;
+  }
+
+  form label input {
+    flex: 1;
+  }
+
+  fieldset legend {
+    margin-bottom: 1vh;
+  }
+
+  fieldset label {
+    display: block;
+    margin-bottom: 1vh;
+  }
+
+  button {
+    margin: auto;
+    display: block;
+    margin-top: 2vh;
+    font-size: 28px;
+    background-color: $primary-color;
+    color: white;
+    padding: 0.5em 0.75em;
+    border: 0;
+    border-radius: 8px;
+    transition: background-color 250ms;
+
+    &:active,
+    &:hover {
+      background-color: $accent-color;
+    }
+  }
+}

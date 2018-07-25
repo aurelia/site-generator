@@ -9,7 +9,7 @@ export interface DocItem extends Location {
   dest: string;
   parent?: DocItem;
   items?: DocItem[];
-  id: string;  
+  id: string;
 }
 
 const activeLanguageKey = 'activeLanguage';
@@ -22,19 +22,21 @@ export class Configuration {
 
   public name: string = this.config.name;
   public trackingID: string = this.config.trackingID;
-  public help: DocItem = this.config.help;
+  public support: DocItem = this.config.support;
+  public learn: DocItem = this.config.learn;
   public blog: DocItem = this.config.blog;
   public home: DocItem = this.config.home;
+  public pages: DocItem[] = this.config.pages;
   public search: boolean = this.config.search;
 
   public availableLanguages = ['ES Next', 'TypeScript'];
-  @observable public activeLanguage: string = this.retrieveLanguagePreference();  
+  @observable public activeLanguage: string = this.retrieveLanguagePreference();
 
   constructor(private ea: EventAggregator) {
     if (this.config.docs) {
       this.apiRoot = { items: this.config.docs.api, name: 'APIs', dest: 'docs/api', hideWhenParent: true };
       this.articleRoot = { items: this.config.docs.article, name: 'Guides', dest: 'docs' };
-  
+
       associateParents(this.apiRoot, this.config.docs.api);
       associateParents(this.articleRoot, this.config.docs.article);
     }
@@ -85,16 +87,16 @@ export class Configuration {
     //If no QS, we check to see if the user has previously made a selection.
     if (localStorage !== undefined) {
       let value = localStorage.getItem(activeLanguageKey);
-  
+
       if (this.availableLanguages.indexOf(value) !== -1) {
         return value;
       }
     }
-  
+
     //If no QS and no previous selection, we default to the first available language.
     return this.availableLanguages[0];
   }
-  
+
   private saveLanguagePreference() {
     if (localStorage !== undefined) {
       return localStorage.setItem(activeLanguageKey, this.activeLanguage);
