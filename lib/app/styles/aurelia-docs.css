@@ -1556,4 +1556,52 @@ section.not-found.article {
   section.not-found.article a {
     color: #ed2b88; }
 
+.contact .banner {
+  padding-top: 10vh;
+  margin-bottom: -10vh;
+  text-align: center;
+  height: 30vh;
+  background-image: linear-gradient(to top, #6d50a2, #ed2b88);
+  color: white;
+  font-size: 36px; }
+
+.contact form {
+  width: 40vw;
+  background: white;
+  border: 1px solid #ccc;
+  margin: auto;
+  padding: 5vh 5vw; }
+
+.contact form label {
+  display: flex;
+  margin-bottom: 2vh; }
+
+.contact form label span {
+  width: 150px;
+  margin-right: 1em; }
+
+.contact form label input {
+  flex: 1; }
+
+.contact fieldset legend {
+  margin-bottom: 1vh; }
+
+.contact fieldset label {
+  display: block;
+  margin-bottom: 1vh; }
+
+.contact button {
+  margin: auto;
+  display: block;
+  margin-top: 2vh;
+  font-size: 28px;
+  background-color: #6d50a2;
+  color: white;
+  padding: 0.5em 0.75em;
+  border: 0;
+  border-radius: 8px;
+  transition: background-color 250ms; }
+  .contact button:active, .contact button:hover {
+    background-color: #ed2b88; }
+
 /*# sourceMappingURL=aurelia-docs.css.map */
