@@ -2,6 +2,7 @@ import {DOM} from 'aurelia-pal';
 import {Container, autoinject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import * as throttle from 'lodash.throttle';
 import {ShowMenu, HideMenu, ActivateScreen, ActivateTab, ActivateSection} from './messages/shell';
 import {ArticleScreen} from './screens/article-screen';
 import {APIScreen} from './screens/api-screen';
@@ -55,13 +56,15 @@ export class Router {
 
     this.scrollHooked = true;
 
-    this.main.addEventListener('scroll', () => {
+    const spy = throttle(() => {
       if (this.scrollGuard) {
         return;
       }
 
       this.spy();
-    });
+    }, 300);
+
+    this.main.addEventListener('scroll', spy);
   }
 
   loadUrl(url: string) {

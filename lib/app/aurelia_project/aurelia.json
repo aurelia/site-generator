@@ -138,7 +138,8 @@
             "main": "aurelia-http-client",
             "path": "../node_modules/aurelia-http-client/dist/amd",
             "resources": []
-          }
+          },
+          "lodash.throttle"
         ]
       }
     ]
