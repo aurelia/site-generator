@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/aurelia/site-generator#readme",
   "dependencies": {
-    "commonmark": "^0.27.0",
-    "dateformat": "^3.0.2",
-    "handlebars": "^4.0.6",
-    "html-to-text": "^3.3.0",
-    "js-yaml": "^3.10.0",
+    "commonmark": "^0.28.1",
+    "dateformat": "^3.0.3",
+    "handlebars": "^4.0.12",
+    "html-to-text": "^4.0.0",
+    "js-yaml": "^3.12.0",
     "parse-author": "^2.0.0",
-    "prismjs": "^1.6.0",
-    "typedoc": "^0.9.0"
+    "prismjs": "^1.15.0",
+    "typedoc": "^0.12.0"
   }
 }
