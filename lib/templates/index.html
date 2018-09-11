@@ -26,7 +26,9 @@
 <body aurelia-app="main" id="app-host">
   <header class="app-header">
     <img src="{{logoSrc}}" class="logo">
-
+    {{#each project.header.buttons}}
+      <a class="header-button" title="{{text}}" href="{{{url}}}">{{text}}</a>
+    {{/each}}
     {{#if project.search}}
     <search-trigger></search-trigger>
     {{/if}}
