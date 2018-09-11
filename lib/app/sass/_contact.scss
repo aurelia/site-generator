@@ -1,4 +1,13 @@
 .contact {
+
+  .required > :first-child::after {
+    content: "*";
+    vertical-align: super;
+    color: red;
+    font-weight: bold;
+    font-size: 0.75em;
+  }
+
   .banner {
     padding-top: 10vh;
     margin-bottom: -10vh;
@@ -27,8 +36,13 @@
     margin-right: 1em;
   }
 
-  form label input {
+  form label input,
+  form label textarea {
     flex: 1;
+  }
+
+  fieldset {
+    margin-bottom: 2vh;
   }
 
   fieldset legend {
