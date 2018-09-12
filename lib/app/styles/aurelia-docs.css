@@ -250,6 +250,23 @@ header.app-header {
   height: 60px;
   background-color: #f4f4f4;
   box-shadow: -20px 0 14px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); }
+  header.app-header .header-button {
+    padding: 10px 13px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 7px;
+    transition: box-shadow .3s;
+    cursor: pointer;
+    margin-left: 32px;
+    color: #646464;
+    border-color: #6d50a2; }
+    header.app-header .header-button:hover {
+      box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+    header.app-header .header-button:active {
+      box-shadow: none; }
   header.app-header img.logo {
     position: relative;
     left: 12px;
@@ -1556,6 +1573,13 @@ section.not-found.article {
   section.not-found.article a {
     color: #ed2b88; }
 
+.contact .required > :first-child::after {
+  content: "*";
+  vertical-align: super;
+  color: red;
+  font-weight: bold;
+  font-size: 0.75em; }
+
 .contact .banner {
   padding-top: 10vh;
   margin-bottom: -10vh;
@@ -1580,8 +1604,12 @@ section.not-found.article {
   width: 150px;
   margin-right: 1em; }
 
-.contact form label input {
+.contact form label input,
+.contact form label textarea {
   flex: 1; }
+
+.contact fieldset {
+  margin-bottom: 2vh; }
 
 .contact fieldset legend {
   margin-bottom: 1vh; }
