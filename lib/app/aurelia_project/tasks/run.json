@@ -6,11 +6,6 @@
       "name": "env",
       "description": "Sets the build environment.",
       "type": "string"
-    },
-    {
-      "name": "watch",
-      "description": "Watches source files for changes and refreshes the app automatically.",
-      "type": "boolean"
     }
   ]
 }

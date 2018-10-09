@@ -5,3 +5,4 @@ bower_components
 .DS_STORE
 *.swp
 .blog
+/lib/app/src/environment.ts

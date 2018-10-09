@@ -70,7 +70,8 @@
     },
     "options": {
       "minify": "stage & prod",
-      "sourcemaps": "dev & stage"
+      "sourcemaps": "dev & stage",
+      "cache": "dev & stage"
     },
     "bundles": [
       {
@@ -78,68 +79,17 @@
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
           "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird.js",
-          "node_modules/whatwg-fetch/fetch.js",
+          "node_modules/whatwg-fetch/dist/fetch.umd.js",
           "node_modules/requirejs/require.js"
         ],
         "source": [
-          "[**/*.js]",
-          "**/*.{css,html}"
+          "**/*.{js,css,html}"
         ],
         "dependencies": [
-          "aurelia-binding",
           "aurelia-bootstrapper",
-          "aurelia-dependency-injection",
-          "aurelia-event-aggregator",
-          "aurelia-framework",
-          "aurelia-history",
-          "aurelia-history-browser",
-          "aurelia-loader",
           "aurelia-loader-default",
-          "aurelia-logging",
-          "aurelia-metadata",
-          "aurelia-pal",
           "aurelia-pal-browser",
-          "aurelia-path",
-          "aurelia-polyfills",
-          "aurelia-task-queue",
-          "aurelia-templating",
-          "aurelia-templating-binding",
-          "text",
-          {
-            "name": "aurelia-templating-resources",
-            "path": "../node_modules/aurelia-templating-resources/dist/amd",
-            "main": "aurelia-templating-resources"
-          },
-          {
-            "name": "aurelia-fetch-client",
-            "main": "aurelia-fetch-client",
-            "path": "../node_modules/aurelia-fetch-client/dist/amd",
-            "resources": []
-          },
-          {
-            "name": "aurelia-logging-console",
-            "main": "aurelia-logging-console",
-            "path": "../node_modules/aurelia-logging-console/dist/amd",
-            "env": "dev"
-          },
-          {
-            "name": "lunr",
-            "path": "../node_modules/lunr/lunr"
-          },
-          "numeral",
-          {
-            "name": "moment",
-            "main": "./moment.js",
-            "path": "../node_modules/moment",
-            "resources": []
-          },
-          {
-            "name": "aurelia-http-client",
-            "main": "aurelia-http-client",
-            "path": "../node_modules/aurelia-http-client/dist/amd",
-            "resources": []
-          },
-          "lodash.throttle"
+          "text"
         ]
       }
     ]
