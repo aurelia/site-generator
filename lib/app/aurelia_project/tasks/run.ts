@@ -19,7 +19,7 @@ let serve = gulp.series(
   done => {
     browserSync({
       online: false,
-      open: false,
+      open: CLIOptions.hasFlag('open'),
       port: 9000,
       logLevel: 'silent',
       server: {
@@ -57,16 +57,10 @@ let watch = function(refreshCb, onChangeCb) {
   };
 };
 
-let run;
-
-if (CLIOptions.hasFlag('watch')) {
-  run = gulp.series(
-    serve,
-    watch(refresh, onChange)
-  );
-} else {
-  run = serve;
-}
+let run = gulp.series(
+  serve,
+  watch(refresh, onChange)
+);
 
 export { run as default, watch };
 

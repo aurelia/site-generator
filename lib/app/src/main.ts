@@ -24,10 +24,8 @@ export function configure(aurelia: Aurelia) {
       './resources/blog-footer.html'
     ]);
 
-  if (environment.debug) {
-    aurelia.use.developmentLogging();
-  }
-  
+  aurelia.use.developmentLogging(environment.debug ? 'info' : 'warn');
+
   aurelia.start().then(() => {
     let container = aurelia.container;
     let app = <App>container.get(App);
