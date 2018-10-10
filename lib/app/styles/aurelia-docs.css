@@ -388,6 +388,10 @@ main {
   footer.content-footer > .copyright {
     text-align: left; } }
 
+@media only screen and (max-width: 500px) {
+  .header-button {
+    display: none; } }
+
 side-bar {
   position: absolute;
   top: 60px;
