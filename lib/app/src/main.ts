@@ -21,7 +21,8 @@ export function configure(aurelia: Aurelia) {
       './resources/code-listing',
       './resources/au-demo',
       './resources/blog-sidebar',
-      './resources/blog-footer.html'
+      './resources/blog-footer.html',
+      './resources/au-sandbox'
     ]);
 
   aurelia.use.developmentLogging(environment.debug ? 'info' : 'warn');

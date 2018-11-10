@@ -76,21 +76,21 @@ export class Router {
 
     url = this.url = trimStart('/', trimEnd('/', url)).replace('#' + fragment, '');
 
-    if (url === this.config.support.dest) {
+    if (this.config.support && url === this.config.support.dest) {
       let helpToc = this.config.support;
       this.ea.publish(new ActivateTab(helpToc.dest));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(helpToc), fragment));
       this.ea.publish(new ShowMenu(helpToc));
       this.history.setTitle(`${helpToc.name} | ${this.config.name}`);
       this.trackPageView(url);
-    } else if (url === this.config.learn.dest) {
+    } else if (this.config.learn && url === this.config.learn.dest) {
       let learnToc = this.config.learn;
       this.ea.publish(new ActivateTab(learnToc.dest));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem(learnToc), fragment));
       this.ea.publish(new ShowMenu(learnToc));
       this.history.setTitle(`${learnToc.name} | ${this.config.name}`);
       this.trackPageView(url);
-    } else if (url.indexOf(this.config.blog.dest) === 0) {
+    } else if (this.config.blog && url.indexOf(this.config.blog.dest) === 0) {
       this.ea.publish(new ActivateTab(this.config.blog.dest));
       this.ea.publish(new ActivateScreen(this.container.get(ArticleScreen).withItem({ dest: url })), fragment);
       this.ea.publish(new HideMenu());
