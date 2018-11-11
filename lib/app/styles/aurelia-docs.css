@@ -1085,11 +1085,14 @@ section.api {
                 .markdown code-listing .title-bar drop-down > .container > .options-container > .options > li:hover {
                   background: #f6f6f6; }
     .markdown code-listing .code-container pre {
+      overflow-y: hidden;
       background-color: #FCFCFC;
       margin: 0;
       padding: 0; }
       .markdown code-listing .code-container pre code {
-        background-color: #FCFCFC; }
+        background-color: #FCFCFC;
+        display: block;
+        margin: -2em 0 -4em 0; }
   .markdown au-demo {
     background-color: #9A84BA;
     color: white;
