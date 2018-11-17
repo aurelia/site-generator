@@ -28,14 +28,18 @@ export class Cache {
     let content = null;
 
     try {
-      let stored = localStorage.getItem(key);
+      const stored = localStorage.getItem(key);
+      
       if (stored) {
-        let data = JSON.parse(stored);
+        const data = JSON.parse(stored);
+
         if (data.expires - Date.now() > 0) {
           content = data.content;
         }
       }
-    } finally {
+
+      return content;
+    } catch(error) {
       return content;
     }
   }
@@ -48,7 +52,9 @@ export class Cache {
       };
 
       localStorage.setItem(key, JSON.stringify(toStore));
-    } finally {
+
+      return content;
+    } catch(error) {
       return content;
     }
   }
