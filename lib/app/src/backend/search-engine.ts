@@ -1,6 +1,5 @@
 import {autoinject} from 'aurelia-dependency-injection';
 import {HttpClient} from 'aurelia-fetch-client';
-import {join} from 'aurelia-path';
 import * as lunr from 'lunr';
 import {Cache} from './cache';
 
@@ -81,23 +80,28 @@ export class SearchEngine {
   }
 
   getIndexes() {
-    let existing = this.cache.getItem(searchStorageKey);
+    try {
+      let existing = this.cache.getItem(searchStorageKey);
 
-    if (existing) {
-      this.indexData = JSON.parse(existing);
-      this.loadIndexes(); //go check for an updated version
-      return Promise.resolve();
+      if (existing) {
+        this.indexData = JSON.parse(existing);
+        this.loadIndexes(); //go check for an updated version
+        return Promise.resolve();
+      }
+
+      return this.loadIndexes();
+    } catch (error) {
+      return this.loadIndexes();
     }
-
-    return this.loadIndexes();
   }
 
   loadIndexes() {
     return this.http.fetch('scripts/search-index.json')
       .then(response => response.text())
       .then(text => {
+        const data = JSON.parse(text);
         this.cache.setItem(searchStorageKey, text, this.cache.farFuture());
-        return this.indexData = JSON.parse(text);
+        return this.indexData = data;
     });
   }
 }
