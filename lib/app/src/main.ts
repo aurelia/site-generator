@@ -19,7 +19,6 @@ export function configure(aurelia: Aurelia) {
       './resources/no-search-results.html',
       './resources/api-search-results.html',
       './resources/code-listing',
-      './resources/au-demo',
       './resources/blog-sidebar',
       './resources/blog-footer.html',
       './resources/au-sandbox'

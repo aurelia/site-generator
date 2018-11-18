@@ -1,29 +1,4 @@
 .home-screen {
-  .get-started-banner {
-    background: $accent-color;
-    min-height: 64px;
-    padding: 8px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    h1 {
-      text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0px;
-      color: $white;
-      font-size: 16px;
-      display: inline-block;
-      margin-right: 8px;
-
-      strong {
-        font-weight: bold;
-      }
-    }
-
-    a {
-      @include button();
-    }
-  }
-
   .video-zone {
     background-image: linear-gradient(to top, $primary-color, $accent-color);
     padding: 32px;
@@ -45,44 +20,119 @@
         box-shadow: 0 40px 40px rgba(0,0,0,.2);
       }
     }
+  }
 
-    .quote-wrapper {
-      float: left;
-      width: 50%;
-      padding: 32px;
-      align-self: center;
-      color: white;
+  .hero {
+    padding: 40px 40px 30px;
+    background-color: $white;
 
-      blockquote {
-        font-size: 36px;
-        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-        letter-spacing: 4px;
-        text-align: center;
+    .left {
+      width: 47%;
+      display: inline-block;
+
+      .logo-icon {
+        width: 256px;
+        height: 256px;
+        float: right;
+        margin-right: 60px;
+      }
+    }
+
+    .right {
+      display: inline-block;
+      vertical-align: top;
+
+      .aurelia {
+        font-weight: 500;
+        font-size: 2.4em;
+        margin: 0 0 10px;
+        display: none;
+      }
+
+      h1 {
         font-weight: lighter;
-        font-variant: small-caps;
+        margin: 0;
+        font-size: 3.2em;
+      }
 
-        &::before {
-          content: "\""
+      a {
+        @include button();
+
+        &.start {
+          padding: 0.75em 2em;
+          display: inline-block;
+          color: $white;
+          background: $accent-color;
+          border: none;
+          
+          margin: 1em 0.5em;
+          font-size: 1.05em;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          min-width: 8em;
+          text-align: center;
         }
 
-        small {
-          font-size: 20px;
+        &.github {
+          padding: 0.75em 2em;
+          display: inline-block;
+          color: $white;
+          background: $panel-color;
+          color: $primary-text-color;
+          border: none;
+          position: relative;
+          text-indent: 1.4em;
 
-          &::before {
-            content: '\2014 \00A0';
+          margin: 1em 0;
+          font-size: 1.05em;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          min-width: 8em;
+          text-align: center;
+
+          svg {
+            position: absolute;
+            left: 0.4em;
+            top: 0.2em;
+            width: 2em;
           }
         }
+      }
+    }
+  }
 
-        &::after {
-          content: "\""
+  .article-group-root.sandbox-zone {
+    margin: 0;
+
+    .feature-header {
+      border: 0;
+    }
+
+    .group {
+      margin-top: 32px;
+      margin-bottom: 64px;
+
+      .group-summary {
+        max-width: 25%;
+        min-width: 25%;
+        padding-right: 48px;
+
+        .group-description {
+          font-weight: normal;
+          line-height: 32px;
         }
+      }
+
+      .group-details {
+        padding: 0;
+        background: transparent;
       }
     }
   }
 
   .feature-zone {
     color: $primary-text-color;
-    margin: 64px 128px;
+    margin: 32px 128px;
 
     .feature-header {
       text-align: center;
@@ -139,8 +189,38 @@
   }
 }
 
+@media only screen and (max-width : 800px) {
+  .home-screen {
+    .hero { 
+      .left {
+        display: none;
+      }
+
+      .right {
+        .aurelia {
+          display: block;
+        }
+      }
+    }
+
+    .article-group-root.sandbox-zone {
+      display: none;
+    }
+  }
+}
+
 @media only screen and (max-width : 1100px) {
   .home-screen {
+    .hero {
+      .left {
+        width: 37%;
+
+        .logo-icon {
+          margin-right: 30px;
+        }
+      }
+    }
+
     .video-zone {
       .quote-wrapper {
         display: none;

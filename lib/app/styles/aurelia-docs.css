@@ -1093,66 +1093,6 @@ section.api {
         background-color: #FCFCFC;
         display: block;
         margin: -2em 0 -4em 0; }
-  .markdown au-demo {
-    background-color: #9A84BA;
-    color: white;
-    font-size: 1em;
-    display: block;
-    position: relative;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    padding: 20px;
-    min-width: 100%;
-    border-radius: 6px;
-    border: 2px solid #70509D; }
-    .markdown au-demo > h4:first-child {
-      margin: -20px -20px 15px;
-      padding: 10px 0;
-      text-align: center;
-      background-color: #70509D;
-      color: white; }
-    .markdown au-demo > h2, .markdown au-demo > h3, .markdown au-demo > h4, .markdown au-demo > h5, .markdown au-demo > h6 {
-      font-weight: 400 !important;
-      color: rgba(255, 255, 255, 0.8) !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
-    .markdown au-demo p {
-      color: #fff;
-      font-weight: 600; }
-    .markdown au-demo label {
-      font-size: 0.9em;
-      margin-bottom: -5px;
-      color: rgba(255, 255, 255, 0.8); }
-    .markdown au-demo input.au-target,
-    .markdown au-demo select.au-target {
-      color: #222;
-      margin: 5px 0; }
-    .markdown au-demo input[type="text"],
-    .markdown au-demo input[type="color"] {
-      padding: 5px 10px;
-      border-radius: 6px;
-      border: 1px solid #6d50a2;
-      box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 1px 0 0 rgba(255, 255, 255, 0.2); }
-    .markdown au-demo input[type="color"] {
-      padding: 0; }
-    .markdown au-demo button {
-      padding: 3px 10px 5px;
-      border-radius: 6px;
-      background-color: #ed2b88;
-      color: #fff;
-      border: 1px solid #A1478C;
-      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.2); }
-    .markdown au-demo button:active {
-      box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4); }
-    .markdown au-demo table.table {
-      color: #222; }
-    .markdown au-demo a.au-target {
-      color: #fff !important; }
-    .markdown au-demo output {
-      background-color: #f7f7f7;
-      border-radius: 6px;
-      padding: 16px;
-      display: block;
-      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), inset 0 0 10px 0 rgba(154, 132, 186, 0.2); }
 
 @media only screen and (max-width: 710px) {
   .markdown section code-listing .title-bar {
@@ -1405,36 +1345,6 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help; }
 
-.home-screen .get-started-banner {
-  background: #ed2b88;
-  min-height: 64px;
-  padding: 8px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; }
-  .home-screen .get-started-banner h1 {
-    text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0px;
-    color: #fff;
-    font-size: 16px;
-    display: inline-block;
-    margin-right: 8px; }
-    .home-screen .get-started-banner h1 strong {
-      font-weight: bold; }
-  .home-screen .get-started-banner a {
-    padding: 10px 13px;
-    text-align: center;
-    font-size: 16px;
-    text-decoration: none;
-    color: #fff;
-    border: 2px solid #fff;
-    border-radius: 7px;
-    transition: box-shadow .3s;
-    cursor: pointer; }
-    .home-screen .get-started-banner a:hover {
-      box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
-    .home-screen .get-started-banner a:active {
-      box-shadow: none; }
-
 .home-screen .video-zone {
   background-image: linear-gradient(to top, #6d50a2, #ed2b88);
   padding: 32px; }
@@ -1452,31 +1362,98 @@ pre[class*="language-"] {
       width: 100%;
       height: 100%;
       box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2); }
-  .home-screen .video-zone .quote-wrapper {
-    float: left;
-    width: 50%;
-    padding: 32px;
-    align-self: center;
-    color: white; }
-    .home-screen .video-zone .quote-wrapper blockquote {
-      font-size: 36px;
-      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-      letter-spacing: 4px;
-      text-align: center;
+
+.home-screen .hero {
+  padding: 40px 40px 30px;
+  background-color: #fff; }
+  .home-screen .hero .left {
+    width: 47%;
+    display: inline-block; }
+    .home-screen .hero .left .logo-icon {
+      width: 256px;
+      height: 256px;
+      float: right;
+      margin-right: 60px; }
+  .home-screen .hero .right {
+    display: inline-block;
+    vertical-align: top; }
+    .home-screen .hero .right .aurelia {
+      font-weight: 500;
+      font-size: 2.4em;
+      margin: 0 0 10px;
+      display: none; }
+    .home-screen .hero .right h1 {
       font-weight: lighter;
-      font-variant: small-caps; }
-      .home-screen .video-zone .quote-wrapper blockquote::before {
-        content: "\""; }
-      .home-screen .video-zone .quote-wrapper blockquote small {
-        font-size: 20px; }
-        .home-screen .video-zone .quote-wrapper blockquote small::before {
-          content: '\2014 \00A0'; }
-      .home-screen .video-zone .quote-wrapper blockquote::after {
-        content: "\""; }
+      margin: 0;
+      font-size: 3.2em; }
+    .home-screen .hero .right a {
+      padding: 10px 13px;
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 7px;
+      transition: box-shadow .3s;
+      cursor: pointer; }
+      .home-screen .hero .right a:hover {
+        box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); }
+      .home-screen .hero .right a:active {
+        box-shadow: none; }
+      .home-screen .hero .right a.start {
+        padding: 0.75em 2em;
+        display: inline-block;
+        color: #fff;
+        background: #ed2b88;
+        border: none;
+        margin: 1em 0.5em;
+        font-size: 1.05em;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        min-width: 8em;
+        text-align: center; }
+      .home-screen .hero .right a.github {
+        padding: 0.75em 2em;
+        display: inline-block;
+        color: #fff;
+        background: #f4f4f4;
+        color: #646464;
+        border: none;
+        position: relative;
+        text-indent: 1.4em;
+        margin: 1em 0;
+        font-size: 1.05em;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        min-width: 8em;
+        text-align: center; }
+        .home-screen .hero .right a.github svg {
+          position: absolute;
+          left: 0.4em;
+          top: 0.2em;
+          width: 2em; }
+
+.home-screen .article-group-root.sandbox-zone {
+  margin: 0; }
+  .home-screen .article-group-root.sandbox-zone .feature-header {
+    border: 0; }
+  .home-screen .article-group-root.sandbox-zone .group {
+    margin-top: 32px;
+    margin-bottom: 64px; }
+    .home-screen .article-group-root.sandbox-zone .group .group-summary {
+      max-width: 25%;
+      min-width: 25%;
+      padding-right: 48px; }
+      .home-screen .article-group-root.sandbox-zone .group .group-summary .group-description {
+        font-weight: normal;
+        line-height: 32px; }
+    .home-screen .article-group-root.sandbox-zone .group .group-details {
+      padding: 0;
+      background: transparent; }
 
 .home-screen .feature-zone {
   color: #646464;
-  margin: 64px 128px; }
+  margin: 32px 128px; }
   .home-screen .feature-zone .feature-header {
     text-align: center;
     border-bottom: 1px solid #ccc;
@@ -1525,7 +1502,19 @@ pre[class*="language-"] {
       .home-screen .feature-zone .features .feature .feature-detail .feature-description {
         line-height: 32px; }
 
+@media only screen and (max-width: 800px) {
+  .home-screen .hero .left {
+    display: none; }
+  .home-screen .hero .right .aurelia {
+    display: block; }
+  .home-screen .article-group-root.sandbox-zone {
+    display: none; } }
+
 @media only screen and (max-width: 1100px) {
+  .home-screen .hero .left {
+    width: 37%; }
+    .home-screen .hero .left .logo-icon {
+      margin-right: 30px; }
   .home-screen .video-zone .quote-wrapper {
     display: none; }
   .home-screen .video-zone .video-wrapper {

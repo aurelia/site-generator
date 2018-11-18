@@ -30,109 +30,178 @@
       <!--Start of test content-->
 
       <section class="home-screen">
-        <section class="get-started-banner">
-          <h1>
-            <strong>Aurelia</strong> is a JavaScript client framework for web, mobile and desktop that leverages simple conventions
-            to empower your creativity.
-          </h1>
-          <a title="Get Started" href="/docs/tutorials/creating-a-todo-app">
-            Get Started
-          </a>
-        </section>
+        <div class="hero">
+          <div class="left">
+              <img class="logo-icon" src="styles/images/aurelia-icon.svg">
+          </div>
 
-        <section class="video-zone">
-          <div class="quote-wrapper">
-            <blockquote class="bigTitle">Aurelia allows us to focus on business logic, not on the framework - so concise and simple, yet so powerful and flexible!<br><small>Ats Uiboupin</small></blockquote>
-          </div>
-          <div class="video-wrapper">
-            <iframe src="https://player.vimeo.com/video/117778145" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-          </div>
-        </section>
+          <div class="right">
+              <h2 class="aurelia">Aurelia</h2>
+              <h1>
+                Simple.<br>Powerful.<br>Unobtrusive.
+              </h1>
+              <p>
+                <a class="start" href="/docs/tutorials/creating-a-todo-app">GET STARTED</a>
+                <a class="github" href="https://github.com/aurelia/framework" target="_blank">
+                  <svg aria-labelledby="simpleicons-github-dark-icon" lang="" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-github-icon" lang="en">GitHub Dark icon</title><path fill="#7F8C8D" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                  GITHUB</a>
+              </p>
+            </div>
+        </div>
 
         <section class="feature-zone">
           <div class="feature-header">
-            <h1>Features</h1>
-            <h2>Create next generation JavaScript apps today.</h2>
+            <h1>Why Aurelia?</h1>
+            <h2>Join thousands creating next-generation apps.</h2>
+          </div>
+      
+          <div class="features">
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h3 class="feature-name">Easy to Learn</h3>
+                <p class="feature-description">
+                  Aurelia's standards-based, unobtrusive style makes it the only
+                  framework that empowers you to build components using vanilla JavaScript or TypeScript. If you know modern JS and HTML,
+                  there's little more to learn to build even the most complex apps.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">High Performance</h2>
+                <p class="feature-description">
+                  At the core of Aurelia is a high-performance, reactive system,
+                  capable of batching DOM updates in a way that leaves other
+                  frameworks, and their virtual DOMs, in the dust. Experience consistent, scalable performance, no matter how complex your UI.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">Extensive Ecosystem</h2>
+                <p class="feature-description">
+                  State management, internationalization and validation - all official plugins from the core team. CLI, VS Code plugin, and Chrome debugger - optional tools to enhance development. Aurelia is not just a framework, but a powerful platform and ecosystem, designed to ensure your rapid success.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">Reactive Binding</h2>
+                <p class="feature-description">
+                  Aurelia enables powerful reactive binding to any object. By using adaptive techniques Aurelia selects the most efficient way to observe each property in your model and automatically syncs your UI and your state with best-in-class performance.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">Simple Testing</h2>
+                <p class="feature-description">
+                  By combining modern JS modules with an unobtrusive
+                  approach, Aurelia makes unit testing as simple as testing
+                  vanilla JS. Need to write integration tests? A powerful Dependency Injection Container and testing library make it quick and easy. You benefit from highly maintainable and longer-lived apps.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">Unmatched Extensibility</h2>
+                <p class="feature-description">
+                  Nothing in the industry can match Aurelia's extensibility. You can create custom elements, add custom attributes to existing elements, control template generation, customize template syntax, create new reactive binding types, extend the DI, and just about anything else you can think of.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">Effortless Coding with Conventions</h2>
+                <p class="feature-description">
+                  Conventions let you focus on your code and your business logic. Aurelia stands out as the only framework today that situates your code at the center of your app, rather than the framework. Don't like the conventions? Plug in your own or drop them altogether. You are in control.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">
+              </div>
+              <div class="feature-detail">
+                <h2 class="feature-name">Routing, Composition &amp; Progressive Enhancement</h2>
+                <p class="feature-description">
+                  Leverage Aurelia's advanced client-side router with its pluggable pipeline and child routers. Don't need a router but need dynamic, data-driven UI composition? We do that too. Have a legacy app? Aurelia's progressive enhancement and script-tag build make it easy to incrementally adopt too.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="feature-zone article-group-root sandbox-zone">
+          <div class="feature-header">
+            <h1>See It in Action</h1>
+            <h2>The simplicity, power, and unobtrusiveness of Aurelia on display.</h2>
           </div>
 
-          <div class="features">
-            <div class="feature">
-              <div class="feature-icon">
+          <div class="groups">
+            <div class="group">
+              <div class="group-summary">
+                <div class="group-header">
+                  <h2 class="group-name">A Simple Component</h2>
+                </div>
+                <p class="group-description">
+                  Building a component with Aurelia is as simple as creating a
+                  vanilla JavaScript or TypeScript class with normal properties and methods.
+                </p>
               </div>
-              <div class="feature-detail">
-                <h3 class="feature-name">Forward-thinking</h3>
-                <p class="feature-description">Written with next-generation EcmaScript. Integrates with Web Components. No external dependencies. Leverage the
-                  technology of the future but target today's mobile, desktop and browser environments.</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-              </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">Modern Architecture</h2>
-                <p class="feature-description">Rather than taking the monolithic framework approach, Aurelia is composed of smaller, focused modules. Use them
-                  together as a full-featured framework or pick and choose to build a custom solution.</p>
+              <div class="group-details">
+                <au-sandbox src="https://codesandbox.io/embed/849oxmjm82?autoresize=1&hidenavigation=1&module=%2Fsrc%2Fapp.js"></au-sandbox>
               </div>
             </div>
-            <div class="feature">
-              <div class="feature-icon">
+
+            <div class="group">
+              <div class="group-summary">
+                <div class="group-header">
+                  <h2 class="group-name">Reactive Binding</h2>
+                </div>
+                <p class="group-description">
+                  Aurelia's reactive binding system knows exactly what changes, when it changes, and uses this knowledge to update your UI in the most efficient way possible.
+                </p>
               </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">Two-Way Databinding</h2>
-                <p class="feature-description">Our technology enables powerful two-way binding to any object. By using adaptive techniques we can select the
-                  most efficient way to observe each property in your model and automatically sync your UI with best-in-class
-                  performance.</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-              </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">Extensible HTML</h2>
-                <p class="feature-description">Aurelia's extensible HTML compiler lets you create custom HTML elements, add custom attributes to existing elements
-                  and control template generation, all with full support for dynamic loading, databinding and high-performance
-                  batched rendering.</p>
+              <div class="group-details">
+                <au-sandbox src="https://codesandbox.io/embed/24mo8975oj?autoresize=1&hidenavigation=1&module=%2Fsrc%2Fapp.js"></au-sandbox>
               </div>
             </div>
-            <div class="feature">
-              <div class="feature-icon">
+
+            <div class="group">
+              <div class="group-summary">
+                <div class="group-header">
+                  <h2 class="group-name">An Application</h2>
+                </div>
+                <p class="group-description">
+                    By using simple classes with properties and methods, we can assemble a full application. This Todo examples uses a vanilla JS array to track the list of todos. It also tracks the text that you enter to create new todo. Despite that fact that this is a simple app, the basic patterns shown here with vanilla JS can scale to apps containing hundreds of thousands of lines of code.
+                </p>
+                <a class="group-learn" href="docs/tutorials/creating-a-todo-app">Read the Todo App Tutorial &#65515;</a>
               </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">Routing &amp; UI Composition</h2>
-                <p class="feature-description">Leverage our advanced client-side router with its pluggable pipeline, dynamic route patterns, child routers and
-                  asynchronous screen activation. Don't need a router but need dynamic, data-driven UI composition? We do that
-                  too.</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-              </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">MV* with Conventions</h2>
-                <p class="feature-description">Who wants to waste time writing tons of configuration code for their MV* architecture? Simply leverage conventions
-                  to make constructing your app effortless. Don't like the conventions? Plug in your own or drop them altogether.</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-              </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">Broad Language Support</h2>
-                <p class="feature-description">Use ES5, ES 2015, ES 2016 and TypeScript. Aurelia's APIs were carefully designed to be consumed naturally from
-                  both today's and tomorrow's popular web programming languages.</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-              </div>
-              <div class="feature-detail">
-                <h2 class="feature-name">Testable</h2>
-                <p class="feature-description">By combining ES 2015 modules with a simple, yet powerful Dependency Injection Container, we make it easy for
-                  you to create highly cohesive, yet minimally coupled code, making unit testing a snap.</p>
+              <div class="group-details">
+                <au-sandbox src="https://codesandbox.io/embed/ppmy26opw7?autoresize=1&hidenavigation=1&module=%2Fsrc%2Fapp.js"></au-sandbox>
               </div>
             </div>
           </div>
         </section>
+
+        
 
         <section class="feature-zone">
           <div class="feature-header">
