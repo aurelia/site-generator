@@ -31,9 +31,9 @@ export class AuSandbox {
           if (record.target === element) {
             if (record.isIntersecting) {
               iframe.src = this.src;
+              observer.disconnect();
+              this.visibilityObserver = observer = undefined;
             }
-            observer.disconnect();
-            this.visibilityObserver = observer = undefined;
           }
         });
       });
