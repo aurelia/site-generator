@@ -2,10 +2,12 @@ export class SourceCode {
   src: string;
   lang: string;
   code: string;
+  heading: string;
 
   constructor(element: Element) {
     this.src = element.getAttribute('src');
     this.lang = element.getAttribute('lang');
+    this.heading = element.getAttribute('heading');
     this.code = element.innerHTML;
   }
 

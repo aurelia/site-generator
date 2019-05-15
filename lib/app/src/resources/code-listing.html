@@ -1,7 +1,7 @@
 <template>
   <div class="title-bar">
     <h4>
-      ${heading || '&nbsp;'}
+      ${selectedSource.heading || originalHeading || '&nbsp;'}
     </h4>
 
     <drop-down if.bind="availableSources.length > 1"

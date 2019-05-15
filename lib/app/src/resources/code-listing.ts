@@ -12,6 +12,7 @@ export class CodeListing {
   availableSources: SourceCode[] = null;
   selectedSource: SourceCode = null;
   subscription;
+  originalHeading;
 
   constructor(private config: Configuration, private element: Element, instruction: TargetInstruction) {
     this.availableSources = instruction.elementInstruction['availableSources'];
@@ -23,6 +24,7 @@ export class CodeListing {
       previousSibling.classList.add('group-next-sibling');
     }
 
+    this.originalHeading = this.heading;
     this.selectSourceForLanguage();
     this.subscription = this.config.subscribeToActiveLanguageChanged(() => this.selectSourceForLanguage()); 
   }
