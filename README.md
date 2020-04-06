@@ -2,6 +2,8 @@
 
 This repository contains the code that generates the aurelia.io site. It is not meant to be a general-purpose site generator, but was made (quick and dirty) for needs specific to the Aurelia site. It uses a combination of traditional static site generation via Handlebars as well as progressive enhancement via Aurelia. The general techniques used in this generator are widely-applicable and can be used with other server-side frameworks. However, you may not want to mirror all implementations exactly, due to the specific nature of the needs being addressed here, and the hasty way in which things were implemented. In other words, this may not be the best code you've ever seen before. In fact, there be dragons lurking in a few places...
 
+> **NOTE:** If you are looking for the Aurelia's site's documentation content, that is located [in the documentation repo](https://github.com/aurelia/documentation).
+
 ## Installation
 
 Currently, this library isn't officially published on NPM. Perhaps at some future time, if this were to be made a bit more generalizable, then it would make sense to do so. For now, if you want to use this library yourself (no guarantees there won't be random breaking changes) then you can clone it locally and from within the repo run `npm install` and then `npm link` to setup the `au-site` command on your local machine.
