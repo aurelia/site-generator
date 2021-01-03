@@ -24,7 +24,6 @@
   "homepage": "https://github.com/aurelia/site-generator#readme",
   "dependencies": {
     "commonmark": "^0.28.1",
-    "dateformat": "^3.0.3",
     "handlebars": "^4.0.12",
     "html-to-text": "^4.0.0",
     "js-yaml": "^3.12.0",
