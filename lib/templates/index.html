@@ -28,7 +28,7 @@
   <header class="app-header">
     <img src="{{logoSrc}}" class="logo">
     {{#each project.header.buttons}}
-      <a class="header-button" title="{{text}}" href="{{{url}}}">{{text}}</a>
+      <a class="header-button" title="{{text}}" href="{{{normalizeHref url}}}">{{text}}</a>
     {{/each}}
     {{#if project.search}}
     <search-trigger></search-trigger>
@@ -47,7 +47,7 @@
           <h4>{{name}}</h4>
           <ul>
             {{#each links}}
-            <li><a href="{{{href}}}">{{text}}</a></li>
+            <li><a href="{{{normalizeHref href}}}">{{text}}</a></li>
             {{/each}}
           </ul>
         </div>
@@ -66,7 +66,7 @@
     <ul>
       {{#if project.home}}
       <li class="home ${activeTab === 'home' ? 'active' : ''}">
-        <a href="{{project.home.dest}}">
+        <a href="{{normalizeHref project.home.dest}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
             height="32px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons">
@@ -149,7 +149,7 @@
 
       {{#if project.forum}}
       <li class="discuss ${activeTab === 'discuss' ? 'active' : ''}">
-        <a href="{{project.forum.url}}">
+        <a href="{{normalizeHref project.forum.url}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons_1_">
             <g id="Outline_Icons">
@@ -182,7 +182,7 @@
 
       {{#if project.blog}}
       <li class="blog ${activeTab === '{{project.blog.dest}}' ? 'active' : ''}">
-        <a href="{{project.blog.dest}}">
+        <a href="{{normalizeHref project.blog.dest}}">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
           <g id="Outline_Icons_1_">
             <g id="Outline_Icons">
@@ -217,7 +217,7 @@
 
       {{#if project.support}}
       <li class="help ${activeTab === '{{project.support.dest}}' ? 'active' : ''}">
-        <a href="{{project.support.dest}}">
+        <a href="{{normalizeHref project.support.dest}}">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
               <g id="Filled_Icons_1_">
                   <g id="Filled_Icons"></g>
@@ -242,7 +242,7 @@
 
       {{#if project.learn}}
       <li class="help ${activeTab === '{{project.learn.dest}}' ? 'active' : ''}">
-        <a href="{{project.learn.dest}}">
+        <a href="{{normalizeHref project.learn.dest}}">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
               <g id="Filled_Icons">
                   <path d="M22.5,1.001h-21c-0.827,0-1.5,0.672-1.5,1.5V17.5C0,18.327,0.673,19,1.5,19H10v2H7c-0.276,0-0.5,0.224-0.5,0.5   S6.724,22,7,22h10c0.276,0,0.5-0.224,0.5-0.5S17.276,21,17,21h-3v-2h8.5c0.827,0,1.5-0.673,1.5-1.5V2.501   C24,1.673,23.327,1.001,22.5,1.001z M17,13c0,0.189-0.107,0.362-0.276,0.447l-4,2c-0.07,0.035-0.147,0.053-0.224,0.053   s-0.153-0.018-0.224-0.053l-4-2C8.107,13.362,8,13.189,8,13v-2.297l3.909,1.676c0.189,0.081,0.39,0.121,0.591,0.121   s0.402-0.04,0.591-0.121L17,10.703V13z M19.697,8.46l-7,3c-0.064,0.026-0.13,0.04-0.197,0.04s-0.134-0.014-0.197-0.04L6,8.758v2.66   l0.975,2.924c0.051,0.152,0.025,0.32-0.069,0.451C6.812,14.923,6.661,15,6.5,15h-2c-0.161,0-0.312-0.077-0.405-0.207   C4,14.662,3.975,14.494,4.025,14.342L5,11.418V8c0-0.091,0.031-0.172,0.074-0.246c0.01-0.018,0.02-0.033,0.033-0.051   C5.159,7.636,5.221,7.577,5.3,7.543L5.303,7.54h0.002l0.002-0.001l6.996-2.998c0.127-0.054,0.268-0.054,0.395,0l7,2.999   C19.881,7.619,20,7.8,20,8S19.881,8.381,19.697,8.46z"></path>

@@ -15,8 +15,8 @@
 
       <ul class="api-category-list">
         {{#each properties}}
-          <li class="constant-item"><a href="{{../links.static}}/property/{{name}}">{{name}}</a></li>
-        {{/each}} 
+          <li class="constant-item"><a href="{{normalizeHref ../links.static}}/property/{{name}}">{{name}}</a></li>
+        {{/each}}
       </ul>
     {{/if}}
 
@@ -25,7 +25,7 @@
 
       <ul class="api-category-list">
         {{#each methods}}
-          <li class="function-item"><a href="{{../links.static}}/method/{{name}}">{{name}}</a></li>
+          <li class="function-item"><a href="{{normalizeHref ../links.static}}/method/{{name}}">{{name}}</a></li>
         {{/each}}
       </ul>
     {{/if}}

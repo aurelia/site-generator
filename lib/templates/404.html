@@ -12,7 +12,7 @@
     <h3>Here's some helpful content...</h3>
     <ul>
       {{#each links}}
-      <li><a href="{{href}}">{{text}}</a></li>
+      <li><a href="{{normalizeHref href}}">{{text}}</a></li>
       {{/each}}
     </ul>
   </article>

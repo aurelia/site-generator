@@ -5,7 +5,7 @@
       <div class="carousel-item">
         <h2>{{name}}</h2>
         <p>{{description}}</p>
-        <a href="{{posts.0.links.static}}">Read the Latest &#65515;</a>
+        <a href="{{normalizeHref posts.0.links.static}}">Read the Latest &#65515;</a>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
     <ul class="article-list">
       {{#each posts}}
       <li>
-        <a href="{{links.static}}">
+        <a href="{{normalizeHref links.static}}">
           <h3>{{name}}</h3>
           <p class="group-item-count">Posted by <span class="author">{{author.name}}</span> on <span class="date">{{formatDate publishedAt}}</span>
           <p>{{description}}</p>
@@ -31,11 +31,11 @@
 
   <div class="button-bar">
     {{#if hasPrevPage}}
-    <a class="prev" href="{{links.prev.static}}">Newer Posts</a>
+    <a class="prev" href="{{normalizeHref links.prev.static}}">Newer Posts</a>
     {{/if}}
 
     {{#if hasNextPage}}
-    <a class="next" href="{{links.next.static}}">Older Posts</a>
+    <a class="next" href="{{normalizeHref links.next.static}}">Older Posts</a>
     {{/if}}
   </div>
 </section>

@@ -10,8 +10,8 @@
 
       <ul class="api-category-list">
         {{#each classes}}
-          <li class="class-item"><a href="{{../links.static}}/class/{{name}}">{{name}}</a></li>
-        {{/each}} 
+          <li class="class-item"><a href="{{normalizeHref ../links.static}}/class/{{name}}">{{name}}</a></li>
+        {{/each}}
       </ul>
     {{/if}}
 
@@ -20,8 +20,8 @@
 
       <ul class="api-category-list">
         {{#each interfaces}}
-          <li class="interface-item"><a href="{{../links.static}}/interface/{{name}}">{{name}}</a></li>
-        {{/each}} 
+          <li class="interface-item"><a href="{{normalizeHref ../links.static}}/interface/{{name}}">{{name}}</a></li>
+        {{/each}}
       </ul>
     {{/if}}
 
@@ -30,8 +30,8 @@
 
       <ul class="api-category-list">
         {{#each constants}}
-          <li class="constant-item"><a href="{{../links.static}}/constant/{{name}}">{{name}}</a></li>
-        {{/each}} 
+          <li class="constant-item"><a href="{{normalizeHref ../links.static}}/constant/{{name}}">{{name}}</a></li>
+        {{/each}}
       </ul>
     {{/if}}
 
@@ -40,7 +40,7 @@
 
       <ul class="api-category-list">
         {{#each functions}}
-          <li class="function-item"><a href="{{../links.static}}/function/{{name}}">{{name}}</a></li>
+          <li class="function-item"><a href="{{normalizeHref ../links.static}}/function/{{name}}">{{name}}</a></li>
         {{/each}}
       </ul>
     {{/if}}

@@ -4,7 +4,7 @@
       <div class="carousel-item">
         <h2>{{name}}</h2>
         <p>{{featured.0.description}}</p>
-        <a href="{{featured.0.links.static}}">Learn More &#65515;</a>
+        <a href="{{normalizeHref featured.0.links.static}}">Learn More &#65515;</a>
       </div>
     </div>
 
@@ -26,14 +26,14 @@
             <h2 class="group-name">{{name}}</h2>
           </div>
           <p class="group-description">{{description}}</p>
-          <a class="group-learn" href="{{links.static}}">Learn More &#65515;</a>
+          <a class="group-learn" href="{{normalizeHref links.static}}">Learn More &#65515;</a>
         </div>
 
         <div class="group-details">
           <ul class="group-items">
             {{#each items}}
             <li class="item">
-              <a class="item-link" href="{{links.static}}">{{name}}</a>
+              <a class="item-link" href="{{normalizeHref links.static}}">{{name}}</a>
             </li>
             {{/each}}
           </ul>
