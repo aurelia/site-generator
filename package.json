@@ -4,8 +4,7 @@
   "description": "The static site generator for Aurelia.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "1preblog:publish": "cd ../blog && git add ./drafts && git commit -m 'feature(blog): prepare blog draft'",
-    "blog:publish": "node blog.mjs"
+    "blog": "node blog.mjs"
   },
   "repository": {
     "type": "git",
